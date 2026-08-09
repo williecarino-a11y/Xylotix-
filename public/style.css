@@ -1,23 +1,24 @@
-* {
+*, *::before, *::after {
     box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
 body {
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     background-color: #0f172a;
-    color: #f8fafc;
-    padding: 10px;
+    color: #fffffc;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 0;
+    width: 100%;
 }
 
 .app-container {
     width: 100%;
     max-width: 480px;
+    margin: 0 auto;
+    padding: 20px;
     display: flex;
     flex-direction: column;
 }
@@ -25,16 +26,19 @@ body {
 .header {
     margin-bottom: 20px;
     text-align: center;
+    width: 100%;
 }
 
 .header h1 {
     font-size: 24px;
-    color: #38bdf8;
+    color: #3b8df8;
+    margin: 0 0 8px 0;
 }
 
 .subtitle {
-    font-size: 12px;
+    font-size: 14px;
     color: #94a3b8;
+    margin: 0;
 }
 
 .card {
@@ -43,119 +47,49 @@ body {
     border-radius: 12px;
     padding: 20px;
     margin-bottom: 16px;
-}
-
-/* Fix lesson view layout and prevent overlapping */
-.lesson-view {
+    width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 16px;
-    padding: 20px;
-    width: 100%;
-    box-sizing: border-box;
+    align-items: flex-start;
+    text-align: left;
 }
 
-.lesson-view h2 {
-    font-size: 1.5rem;
-    margin-bottom: 8px;
-    color: #ffffff;
-}
-
-.lesson-body {
-    background: rgba(255, 255, 255, 0.05);
-    padding: 16px;
-    border-radius: 8px;
-    margin-bottom: 16px;
-}
-
-.lesson-view .action-btn, 
-.lesson-view .back-btn {
+.lesson-view {
     position: relative;
+    font-size: 1.5rem;
+    color: #fffffc;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid #334155;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 16px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+}
+
+.lesson-item {
     display: block;
     width: 100%;
     margin-top: 10px;
 }
 
-const express = require('express');
-const path = require('path');
-const app = express();
-const mongoose = require('mongoose');
+.action-btn {
+    background: #3b8df8;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 20px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 12px;
+    text-align: center;
+}
 
-// Import Models
-const Course = require('./models/Course');
-const UserProgress = require('./models/UserProgress');
-
-mongoose.connect('mongodb+srv://williecarino23_db_user:williecarino09035884124@expense...')
-.then(() => console.log('Mongodb connected successfully'))
-.catch(err => console.error('Mongodb connection error:', err));
-
-app.use(express.json());
-app.use(express.static(path.join(__dirname, 'public')));
-
-// API Routes - Get all courses from MongoDB
-app.get('/api/learn/courses', async (req, res) => {
-    try {
-        const courses = await Course.find();
-        res.json(courses);
-    } catch (err) {
-        res.status(500).json({ error: 'Failed to fetch courses' });
-    }
-});
-
-// API Routes - Get single course by ID
-app.get('/api/learn/courses/:id', async (req, res) => {
-    try {
-        const course = await Course.findById(req.params.id);
-        if (!course) return res.status(404).json({ error: 'Course not found' });
-        res.json(course);
-    } catch (err) {
-        res.status(500).json({ error: 'Failed to fetch course' });
-    }
-});
-
-// API Routes - Get individual lesson content by ID (THIS IS THE FIX)
-app.get('/api/learn/courses/:courseId/lessons/:lessonId', async (req, res) => {
-    try {
-        const course = await Course.findById(req.params.courseId);
-        if (!course) return res.status(404).json({ error: 'Course not found' });
-        
-        const lesson = course.lessons.id(req.params.lessonId);
-        if (!lesson) return res.status(404).json({ error: 'Lesson not found' });
-
-        res.json(lesson);
-    } catch (err) {
-        res.status(500).json({ error: 'Server error' });
-    }
-});
-
-// API Routes - Save real lesson progress
-app.post('/api/learn/progress', async (req, res) => {
-    try {
-        const { userId, courseId, lessonId } = req.body;
-        
-        let progress = await UserProgress.findOne({ userId, courseId });
-        if (!progress) {
-            progress = new UserProgress({ userId, courseId, completedLessons: [] });
-        }
-
-        if (!progress.completedLessons.includes(lessonId)) {
-            progress.completedLessons.push(lessonId);
-        }
-
-        // Calculate progress percentage based on total course lessons
-        const course = await Course.findById(courseId);
-        if (course && course.lessons.length > 0) {
-            progress.progressPercentage = Math.round((progress.completedLessons.length / course.lessons.length) * 100);
-        }
-
-        await progress.save();
-        res.json({ success: true, message: 'Progress saved successfully', progress });
-    } catch (err) {
-        res.status(500).json({ error: 'Failed to save progress' });
-    }
-});
-
-const PORT = 3000;
-app.listen(PORT, () => {
-    console.log(`Xylotix server running on port ${PORT}`);
-});
+.action-btn:hover {
+    background: #2563eb;
+}
