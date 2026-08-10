@@ -44,10 +44,10 @@
     <button id="complete-btn" class="btn" style="margin-top: 15px;" onclick="completeLesson()">Complete Lesson</button>
   </div>
 
-  <script>
+<script>
     let currentCourseId = null;
     let currentLessonId = null;
-    const dummyUserId = "648fc928d566fb4c30676e11"; // Real active user reference
+    const dummyUserId = "648fc928d566fb4c30676e11";
 
     async function fetchCourses() {
       showLoading(true);
@@ -83,7 +83,7 @@
         showLoading(false);
 
         if (data.success) {
-          const lesson = data.course.modules[0].lessons[0]; // Load first lesson
+          const lesson = data.course.modules[0].lessons[0];
           currentLessonId = lesson._id;
 
           document.getElementById('course-list-view').classList.add('hidden');
@@ -108,6 +108,34 @@
       }
     }
 
+    async function submitQuiz() {
+      const selected = document.querySelector('input[name="quizOpt"]:checked');
+      if (!selected) {
+        alert('Please select an option.');
+        return;
+      }
+
+      const selectedOptionIndex = parseInt(selected.value);
+
+      try {
+        const res = await fetch('/api/learn/quiz/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ courseId: currentCourseId, lessonId: currentLessonId, selectedOptionIndex })
+        });
+        const data = await res.json();
+
+        const resultEl = document.getElementById('quiz-result');
+        if (data.success && data.isCorrect) {
+          resultEl.innerHTML = '<span class="success-text">Correct! You can now complete the lesson.</span>';
+        } else {
+          resultEl.innerHTML = '<span style="color: #f87171; font-weight: bold;">Incorrect. Try again!</span>';
+        }
+      } catch (err) {
+        alert('Error validating quiz.');
+      }
+    }
+
     async function completeLesson() {
       try {
         const res = await fetch('/api/learn/progress/complete', {
@@ -123,16 +151,6 @@
       } catch (err) {
         alert('Failed to save progress.');
       }
-    }
-
-    function submitQuiz() {
-      const selected = document.querySelector('input[name="quizOpt"]:checked');
-      if (!selected) {
-        alert('Please select an option.');
-        return;
-      }
-      // Simple verification handler
-      document.getElementById('quiz-result').innerHTML = '<span class="success-text">Correct! You can now complete the lesson.</span>';
     }
 
     function showLoading(isLoading) {

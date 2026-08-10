@@ -65,4 +65,29 @@ router.post('/progress/complete', async (req, res) => {
   }
 });
 
+// 5. Submit & Validate Quiz Answer
+router.post('/quiz/submit', async (req, res) => {
+  try {
+    const { courseId, lessonId, selectedOptionIndex } = req.body;
+    const course = await Course.findById(courseId);
+    if (!course) return res.status(404).json({ success: false, error: 'Course not found' });
+
+    let foundLesson = null;
+    for (const mod of course.modules) {
+      const lesson = mod.lessons.id(lessonId);
+      if (lesson) {
+        foundLesson = lesson;
+        break;
+      }
+    }
+
+    if (!foundLesson) return res.status(404).json({ success: false, error: 'Lesson not found' });
+
+    const isCorrect = foundLesson.quiz.correctAnswerIndex === Number(selectedOptionIndex);
+    res.json({ success: true, isCorrect });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
 module.exports = router;
