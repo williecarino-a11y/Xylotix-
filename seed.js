@@ -1,43 +1,52 @@
 require('dotenv').config();
 const mongoose = require('mongoose');
+const Course = require('./models/Course');
 
-// Define a simple Course schema matching your backend model
-const courseSchema = new mongoose.Schema({
-    title: String,
-    description: String,
-    category: String,
-    modules: Array
-});
+const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/xylotix';
 
-const Course = mongoose.model('Course', courseSchema);
+async function seedDatabase() {
+  try {
+    await mongoose.connect(MONGO_URI);
+    console.log('Connected to MongoDB for seeding...');
 
-async function seedDB() {
-    try {
-        await mongoose.connect(process.env.MONGODB_URI);
-        console.log('Connected to MongoDB for seeding...');
+    // Clear any old test data
+    await Course.deleteMany({});
+    console.log('Cleared old courses.');
 
-        // Clear existing courses to prevent duplicates
-        await Course.deleteMany({});
-
-        // Add real initial data
-        const sampleCourses = [
+    // Create a real course record
+    const newCourse = new Course({
+      title: "Money Basics",
+      category: "Personal Finance",
+      description: "Master the fundamentals of budgeting, saving, and understanding income.",
+      modules: [
+        {
+          title: "Module 1: Saving & Growth",
+          order: 1,
+          lessons: [
             {
-                title: "Introduction to Crypto & Finance",
-                description: "Learn the fundamentals of traditional and digital assets.",
-                category: "Finance",
-                modules: [
-                    { title: "Understanding Compound Interest", content: "Compound interest is the addition of interest to the principal sum of a loan or deposit." }
-                ]
+              title: "Understanding Compound Interest",
+              content: "Compound interest is when you earn interest on both the money you've saved and the interest you earn. If you save ₦10,000 and it grows over time, your growth itself starts earning growth!",
+              durationMinutes: 5,
+              order: 1,
+              quiz: {
+                question: "If you save ₦10,000 and it grows over time, what happens when the growth itself starts earning growth?",
+                options: ["Nothing", "The growth can compound", "Your money disappears"],
+                correctAnswerIndex: 1
+              }
             }
-        ];
+          ]
+        }
+      ]
+    });
 
-        await Course.insertMany(sampleCourses);
-        console.log('Database seeded successfully!');
-        process.exit(0);
-    } catch (err) {
-        console.error('Error seeding database:', err);
-        process.exit(1);
-    }
+    await newCourse.save();
+    console.log('Success! Real course data inserted into Xylotix Database.');
+    
+    process.exit(); // Close the script
+  } catch (err) {
+    console.error('Error seeding database:', err);
+    process.exit(1);
+  }
 }
 
-seedDB();
+seedDatabase();

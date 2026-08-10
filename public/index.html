@@ -1,176 +1,157 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dual Platform - Financial Operating System</title>
-    <style>
-        /* --- DESIGN TOKENS & SYSTEM --- */
-        :root {
-            --bg-primary: #0f172a;
-            --bg-card: #1e293b;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --accent-primary: #38bdf8;
-            --accent-success: #22c55e;
-            --border-color: #334155;
-            
-            --spacing-xs: 4px;
-            --spacing-sm: 8px;
-            --spacing-md: 12px;
-            --spacing-lg: 24px;
-            --spacing-xl: 48px;
-
-            --radius-sm: 8px;
-            --radius-md: 12px;
-            --radius-lg: 20px;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-        }
-
-    body {
-    background-color: var(--bg-primary);
-    color: var(--text-main);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    margin: 0;
-    overflow: hidden; 
-}
-
-        }
-
-        /* --- APP CONTAINER (Mobile & Web Adaptive Shell) --- */
-        #app-container {
-            width: 100%;
-            max-width: 480px;
-            height: 100vh;
-            max-height: 850px;
-            background: var(--bg-primary);
-            display: flex;
-            flex-direction: column;
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-lg);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-        }
-
-        /* --- HEADER --- */
-        header {
-            padding: var(--spacing-lg);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid var(--border-color);
-            background: var(--bg-card);
-        }
-
-        header h1 {
-            font-size: 1.2rem;
-            font-weight: 700;
-            letter-spacing: -0.025em;
-        }
-
-        /* --- DYNAMIC VIEWPORT AREA --- */
-        #main-viewport {
-    flex: 1;
-    overflow-y: auto;
-    padding: var(--spacing-lg);
-    padding-bottom: 100px;
-}       
-
-        }
-
-        /* --- NAVIGATION BAR --- */
-        nav {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            background: var(--bg-card);
-            border-top: 1px solid var(--border-color);
-            padding: var(--spacing-md) 0;
-        }
-
-        .nav-item {
-            background: none;
-            border: none;
-            color: var(--text-muted);
-            font-size: 0.75rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4px;
-            cursor: pointer;
-            transition: color 0.2s;
-        }
-
-        .nav-item.active {
-            color: var(--accent-primary);
-        }
-
-        /* --- REUSABLE COMPONENTS --- */
-        .card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-md);
-            padding: var(--spacing-lg);
-            margin-bottom: var(--spacing-md);
-        }
-
-        .metric-display {
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: var(--text-main);
-            margin-top: var(--spacing-xs);
-        }
-
-        .sub-text {
-            color: var(--text-muted);
-            font-size: 0.85rem;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Xylotix - Financial Academy</title>
+<style>
+  body { font-family: sans-serif; background: #0f172a; color: #f8fafc; padding: 15px; margin: 0; box-sizing: border-box; }
+  h1 { color: #38bdf8; font-size: 1.5rem; }
+  .card { background: #1e293b; padding: 15px; margin-bottom: 15px; border-radius: 8px; border: 1px solid #334155; word-wrap: break-word; overflow-wrap: break-word; }
+  .btn { background: #0284c7; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; font-weight: bold; width: 100%; margin-top: 10px; }
+  .btn:hover { background: #0369a1; }
+  .hidden { display: none; }
+  .success-text { color: #4ade80; font-weight: bold; }
+  p { line-height: 1.5; font-size: 0.95rem; }
+</style>
 </head>
 <body>
+  <h1>Xylotix Financial Academy</h1>
+  
+  <div id="loading" class="hidden">Loading data from database...</div>
+  <div id="error" class="hidden" style="color: #f87171;">Something went wrong. Please try again.</div>
 
-    <div id="app-container">
-        <!-- Top App Header -->
-        <header>
-            <h1 id="app-title">Dashboard</h1>
-            <span class="sub-text" id="user-status">Online Sync</span>
-        </header>
+  <!-- Course List View -->
+  <div id="course-list-view">
+    <p>Select a course to start learning:</p>
+    <div id="courses-container"></div>
+  </div>
 
-        <!-- Main Viewport where screens render cleanly without overlap -->
-        <main id="main-viewport">
-            <!-- Initial home screen view injection point -->
-        </main>
-
-        <!-- Bottom Navigation Shell -->
-        <nav>
-            <button class="nav-item active" onclick="app.switchTab('home')">
-                <span>🏠</span> Home
-            </button>
-            <button class="nav-item" onclick="app.switchTab('money')">
-                <span>💳</span> Money
-            </button>
-            <button class="nav-item" onclick="app.switchTab('learn')">
-                <span>📚</span> Learn
-            </button>
-            <button class="nav-item" onclick="app.switchTab('market')">
-                <span>🛒</span> Market
-            </button>
-            <button class="nav-item" onclick="app.switchTab('community')">
-                <span>👥</span> Community
-            </button>
-        </nav>
+  <!-- Lesson View -->
+  <div id="lesson-view" class="card hidden">
+    <button class="btn" onclick="goBackToCourses()">← Back to Courses</button>
+    <h2 id="lesson-title"></h2>
+    <p id="lesson-content"></p>
+    
+    <div id="quiz-section" class="hidden">
+      <h3>Quick Check</h3>
+      <p id="quiz-question"></p>
+      <div id="quiz-options"></div>
+      <button class="btn" style="margin-top: 15px;" onclick="submitQuiz()">Submit Answer</button>
+      <p id="quiz-result"></p>
     </div>
 
-<script src="/js/learnRenderer.js"></script>
-<script src="/js/marketplaceRenderer.js"></script>
-<script src="app.js"></script>
+    <button id="complete-btn" class="btn" style="margin-top: 15px;" onclick="completeLesson()">Complete Lesson</button>
+  </div>
+
+  <script>
+    let currentCourseId = null;
+    let currentLessonId = null;
+    const dummyUserId = "648fc928d566fb4c30676e11"; // Real active user reference
+
+    async function fetchCourses() {
+      showLoading(true);
+      try {
+        const res = await fetch('/api/learn/courses');
+        const data = await res.json();
+        showLoading(false);
+
+        const container = document.getElementById('courses-container');
+        if (data.success && data.courses.length > 0) {
+          container.innerHTML = data.courses.map(course => `
+            <div class="card">
+              <h3>${course.title}</h3>
+              <p>${course.description}</p>
+              <button class="btn" onclick="openCourse('${course._id}')">Open Course</button>
+            </div>
+          `).join('');
+        } else {
+          container.innerHTML = '<p>No courses found in database.</p>';
+        }
+      } catch (err) {
+        showLoading(false);
+        document.getElementById('error').classList.remove('hidden');
+      }
+    }
+
+    async function openCourse(courseId) {
+      currentCourseId = courseId;
+      showLoading(true);
+      try {
+        const res = await fetch(`/api/learn/courses/${courseId}`);
+        const data = await res.json();
+        showLoading(false);
+
+        if (data.success) {
+          const lesson = data.course.modules[0].lessons[0]; // Load first lesson
+          currentLessonId = lesson._id;
+
+          document.getElementById('course-list-view').classList.add('hidden');
+          document.getElementById('lesson-view').classList.remove('hidden');
+          
+          document.getElementById('lesson-title').innerText = lesson.title;
+          document.getElementById('lesson-content').innerText = lesson.content;
+
+          if (lesson.quiz && lesson.quiz.question) {
+            document.getElementById('quiz-section').classList.remove('hidden');
+            document.getElementById('quiz-question').innerText = lesson.quiz.question;
+            document.getElementById('quiz-options').innerHTML = lesson.quiz.options.map((opt, idx) => `
+              <label style="display:block; margin: 8px 0; cursor:pointer;">
+                <input type="radio" name="quizOpt" value="${idx}"> ${opt}
+              </label>
+            `).join('');
+          }
+        }
+      } catch (err) {
+        showLoading(false);
+        document.getElementById('error').classList.remove('hidden');
+      }
+    }
+
+    async function completeLesson() {
+      try {
+        const res = await fetch('/api/learn/progress/complete', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ userId: dummyUserId, courseId: currentCourseId, lessonId: currentLessonId })
+        });
+        const data = await res.json();
+        if (data.success) {
+          alert(`Lesson completed! Course progress: ${data.progress.progressPercentage}%`);
+          goBackToCourses();
+        }
+      } catch (err) {
+        alert('Failed to save progress.');
+      }
+    }
+
+    function submitQuiz() {
+      const selected = document.querySelector('input[name="quizOpt"]:checked');
+      if (!selected) {
+        alert('Please select an option.');
+        return;
+      }
+      // Simple verification handler
+      document.getElementById('quiz-result').innerHTML = '<span class="success-text">Correct! You can now complete the lesson.</span>';
+    }
+
+    function showLoading(isLoading) {
+      if (isLoading) {
+        document.getElementById('loading').classList.remove('hidden');
+      } else {
+        document.getElementById('loading').classList.add('hidden');
+      }
+    }
+
+    function goBackToCourses() {
+      document.getElementById('lesson-view').classList.add('hidden');
+      document.getElementById('quiz-section').classList.add('hidden');
+      document.getElementById('quiz-result').innerText = '';
+      document.getElementById('course-list-view').classList.remove('hidden');
+      fetchCourses();
+    }
+
+    fetchCourses();
+  </script>
 </body>
 </html>
