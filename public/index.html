@@ -4,16 +4,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Xylotix - Financial Academy</title>
-<style>
-  body { font-family: sans-serif; background: #0f172a; color: #f8fafc; padding: 15px; margin: 0; box-sizing: border-box; }
-  h1 { color: #38bdf8; font-size: 1.5rem; }
-  .card { background: #1e293b; padding: 15px; margin-bottom: 15px; border-radius: 8px; border: 1px solid #334155; word-wrap: break-word; overflow-wrap: break-word; }
-  .btn { background: #0284c7; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; font-weight: bold; width: 100%; margin-top: 10px; }
-  .btn:hover { background: #0369a1; }
-  .hidden { display: none; }
-  .success-text { color: #4ade80; font-weight: bold; }
-  p { line-height: 1.5; font-size: 0.95rem; }
-</style>
+  <style>
+    body { font-family: sans-serif; background: #0f172a; color: #f8fafc; padding: 15px; margin: 0; box-sizing: border-box; }
+    h1 { color: #38bdf8; font-size: 1.5rem; }
+    h3 { margin-top: 0; color: #f1f5f9; }
+    .card { background: #1e293b; padding: 15px; margin-bottom: 15px; border-radius: 8px; border: 1px solid #334155; word-wrap: break-word; overflow-wrap: break-word; }
+    .btn { background: #0284c7; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; font-weight: bold; width: 100%; margin-top: 10px; }
+    .btn:hover { background: #0369a1; }
+    .btn-sm { width: auto; padding: 6px 12px; font-size: 0.85rem; margin-top: 5px; }
+    .hidden { display: none; }
+    .success-text { color: #4ade80; font-weight: bold; }
+    p { line-height: 1.5; font-size: 0.95rem; }
+    ul { padding-left: 20px; }
+    li { margin-bottom: 10px; }
+  </style>
 </head>
 <body>
   <h1>Xylotix Financial Academy</h1>
@@ -23,30 +27,39 @@
 
   <!-- Course List View -->
   <div id="course-list-view">
-    <p>Select a course to start learning:</p>
+    <p>Select a course to explore modules and lessons:</p>
     <div id="courses-container"></div>
   </div>
 
-  <!-- Lesson View -->
+  <!-- Module & Lesson Directory View -->
+  <div id="course-detail-view" class="hidden">
+    <button class="btn btn-sm" onclick="goBackToCourses()">← Back to Courses</button>
+    <h2 id="detail-course-title" style="color: #38bdf8; margin-top: 15px;"></h2>
+    <p id="detail-course-desc"></p>
+    <div id="modules-container"></div>
+  </div>
+
+  <!-- Individual Lesson View -->
   <div id="lesson-view" class="card hidden">
-    <button class="btn" onclick="goBackToCourses()">← Back to Courses</button>
-    <h2 id="lesson-title"></h2>
+    <button class="btn btn-sm" onclick="openCourse(currentCourseId)">← Back to Course Modules</button>
+    <h2 id="lesson-title" style="color: #38bdf8; margin-top: 15px;"></h2>
     <p id="lesson-content"></p>
     
     <div id="quiz-section" class="hidden">
       <h3>Quick Check</h3>
       <p id="quiz-question"></p>
       <div id="quiz-options"></div>
-      <button class="btn" style="margin-top: 15px;" onclick="submitQuiz()">Submit Answer</button>
+      <button class="btn" onclick="submitQuiz()">Submit Answer</button>
       <p id="quiz-result"></p>
     </div>
 
-    <button id="complete-btn" class="btn" style="margin-top: 15px;" onclick="completeLesson()">Complete Lesson</button>
+    <button id="complete-btn" class="btn" onclick="completeLesson()">Complete Lesson</button>
   </div>
 
-<script>
+  <script>
     let currentCourseId = null;
     let currentLessonId = null;
+    let courseDataCache = null;
     const dummyUserId = "648fc928d566fb4c30676e11";
 
     async function fetchCourses() {
@@ -83,28 +96,67 @@
         showLoading(false);
 
         if (data.success) {
-          const lesson = data.course.modules[0].lessons[0];
-          currentLessonId = lesson._id;
-
+          courseDataCache = data.course;
           document.getElementById('course-list-view').classList.add('hidden');
-          document.getElementById('lesson-view').classList.remove('hidden');
-          
-          document.getElementById('lesson-title').innerText = lesson.title;
-          document.getElementById('lesson-content').innerText = lesson.content;
+          document.getElementById('lesson-view').classList.add('hidden');
+          document.getElementById('course-detail-view').classList.remove('hidden');
 
-          if (lesson.quiz && lesson.quiz.question) {
-            document.getElementById('quiz-section').classList.remove('hidden');
-            document.getElementById('quiz-question').innerText = lesson.quiz.question;
-            document.getElementById('quiz-options').innerHTML = lesson.quiz.options.map((opt, idx) => `
-              <label style="display:block; margin: 8px 0; cursor:pointer;">
-                <input type="radio" name="quizOpt" value="${idx}"> ${opt}
-              </label>
-            `).join('');
-          }
+          document.getElementById('detail-course-title').innerText = data.course.title;
+          document.getElementById('detail-course-desc').innerText = data.course.description;
+
+          const modContainer = document.getElementById('modules-container');
+          modContainer.innerHTML = data.course.modules.map((mod, mIndex) => `
+            <div class="card">
+              <h3>Module ${mIndex + 1}: ${mod.title}</h3>
+              <ul>
+                ${mod.lessons.map((les, lIndex) => `
+                  <li>
+                    <span>${les.title}</span>
+                    <button class="btn btn-sm" onclick="openLesson('${les._id}')">Start Lesson</button>
+                  </li>
+                `).join('')}
+              </ul>
+            </div>
+          `).join('');
         }
       } catch (err) {
         showLoading(false);
         document.getElementById('error').classList.remove('hidden');
+      }
+    }
+
+    function openLesson(lessonId) {
+      currentLessonId = lessonId;
+      let targetLesson = null;
+
+      // Find lesson from cached course data
+      for (const mod of courseDataCache.modules) {
+        const found = mod.lessons.id(lessonId) || mod.lessons.find(l => l._id.toString() === lessonId);
+        if (found) {
+          targetLesson = found;
+          break;
+        }
+      }
+
+      if (!targetLesson) return;
+
+      document.getElementById('course-detail-view').classList.add('hidden');
+      document.getElementById('lesson-view').classList.remove('hidden');
+      document.getElementById('quiz-result').innerText = '';
+
+      document.getElementById('lesson-title').innerText = targetLesson.title;
+      document.getElementById('lesson-content').innerText = targetLesson.content;
+
+      if (targetLesson.quiz && targetLesson.quiz.question) {
+        document.getElementById('quiz-section').classList.remove('hidden');
+        document.getElementById('quiz-question').innerText = targetLesson.quiz.question;
+        document.getElementById('quiz-options').innerHTML = targetLesson.quiz.options.map((opt, idx) => `
+          <label style="display:block; margin: 8px 0; cursor:pointer;">
+            <input type="radio" name="quizOpt" value="${idx}"> ${opt}
+          </label>
+        `).join('');
+      } else {
+        document.getElementById('quiz-section').classList.add('hidden');
       }
     }
 
@@ -146,7 +198,7 @@
         const data = await res.json();
         if (data.success) {
           alert(`Lesson completed! Course progress: ${data.progress.progressPercentage}%`);
-          goBackToCourses();
+          openCourse(currentCourseId);
         }
       } catch (err) {
         alert('Failed to save progress.');
@@ -162,9 +214,8 @@
     }
 
     function goBackToCourses() {
+      document.getElementById('course-detail-view').classList.add('hidden');
       document.getElementById('lesson-view').classList.add('hidden');
-      document.getElementById('quiz-section').classList.add('hidden');
-      document.getElementById('quiz-result').innerText = '';
       document.getElementById('course-list-view').classList.remove('hidden');
       fetchCourses();
     }
