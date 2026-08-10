@@ -1,30 +1,14 @@
 const mongoose = require('mongoose');
 
-const lessonSchema = new mongoose.Schema({
-  title: { type: String, required: true },
-  content: { type: String, required: true },
-  durationMinutes: { type: Number, default: 5 },
-  order: { type: Number, required: true },
-  quiz: {
-    question: String,
-    options: [String],
-    correctAnswerIndex: Number
-  }
-});
-
-const moduleSchema = new mongoose.Schema({
-  title: { type: String, required: true },
-  description: String,
-  order: { type: Number, required: true },
-  lessons: [lessonSchema]
-});
-
 const courseSchema = new mongoose.Schema({
+  slug: { type: String, required: true, unique: true, lowercase: true, trim: true },
   title: { type: String, required: true },
-  category: { type: String, required: true }, // e.g., 'Money Basics', 'Saving', 'Credit & Debt'
   description: { type: String, required: true },
-  modules: [moduleSchema],
-  createdAt: { type: Date, default: Date.now }
-});
+  category: { type: String, required: true },
+  difficulty: { type: String, enum: ['Beginner', 'Intermediate', 'Advanced'], default: 'Beginner' },
+  estimatedDuration: { type: Number, required: true }, // in minutes
+  order: { type: Number, required: true },
+  published: { type: Boolean, default: false }
+}, { timestamps: true });
 
 module.exports = mongoose.model('Course', courseSchema);
