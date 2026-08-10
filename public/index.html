@@ -129,16 +129,19 @@
       currentLessonId = lessonId;
       let targetLesson = null;
 
-      // Find lesson from cached course data
+      // Find lesson from cached course data using string comparison
       for (const mod of courseDataCache.modules) {
-        const found = mod.lessons.id(lessonId) || mod.lessons.find(l => l._id.toString() === lessonId);
+        const found = mod.lessons.find(l => l._id.toString() === lessonId.toString());
         if (found) {
           targetLesson = found;
           break;
         }
       }
 
-      if (!targetLesson) return;
+      if (!targetLesson) {
+        alert('Lesson not found');
+        return;
+      }
 
       document.getElementById('course-detail-view').classList.add('hidden');
       document.getElementById('lesson-view').classList.remove('hidden');
