@@ -62,30 +62,36 @@
     let courseDataCache = null;
     const dummyUserId = "648fc928d566fb4c30676e11";
 
-    async function fetchCourses() {
-      showLoading(true);
-      try {
-        const res = await fetch('/api/learn/courses');
-        const data = await res.json();
-        showLoading(false);
+async function fetchCourses() {
+  showLoading(true);
 
-        const container = document.getElementById('courses-container');
-        if (data.success && data.courses.length > 0) {
-          container.innerHTML = data.courses.map(course => `
-            <div class="card">
-              <h3>${course.title}</h3>
-              <p>${course.description}</p>
-              <button class="btn" onclick="openCourse('${course._id}')">Open Course</button>
-            </div>
-          `).join('');
-        } else {
-          container.innerHTML = '<p>No courses found in database.</p>';
-        }
-      } catch (err) {
-        showLoading(false);
-        document.getElementById('error').classList.remove('hidden');
-      }
+  try {
+    const res = await fetch('/api/learn/courses');
+    const data = await res.json();
+
+    showLoading(false);
+
+    const container = document.getElementById('courses-container');
+
+    if (data.status === 'success' && data.data && data.data.length > 0) {
+      container.innerHTML = data.data.map(course => `
+        <div class="card">
+          <h3>${course.title}</h3>
+          <p>${course.description}</p>
+          <button class="btn" onclick="openCourse('${course._id}')">
+            Open Course
+          </button>
+        </div>
+      `).join('');
+    } else {
+      container.innerHTML = '<p>No courses found in database.</p>';
     }
+  } catch (err) {
+    showLoading(false);
+    console.error('Error fetching courses:', err);
+    document.getElementById('error').classList.remove('hidden');
+  }
+}
 
     async function openCourse(courseId) {
       currentCourseId = courseId;
