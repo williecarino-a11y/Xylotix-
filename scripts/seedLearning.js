@@ -9,28 +9,60 @@ const Quiz = require('../models/Quiz');
 
 const learningData = require('./learningData/moneyBasics');
 
+/*
+ * =========================================================
+ * DATABASE
+ * =========================================================
+ */
+
 async function connectDatabase() {
-  const mongoUri =
-    process.env.MONGO_URI || 'mongodb://localhost:27017/xylotix';
+const mongoUri =
+  process.env.MONGO_URL ||
+  process.env.MONGO_URI ||
+  'mongodb://localhost:27017/xylotix';
 
   await mongoose.connect(mongoUri);
 
   console.log('Connected to MongoDB.');
 }
 
+/*
+ * =========================================================
+ * COURSE
+ * =========================================================
+ */
+
 async function seedCourse(courseData) {
   return Course.findOneAndUpdate(
-    { slug: courseData.slug },
     {
-      $set: courseData
+      slug: courseData.slug
+    },
+    {
+      $set: {
+        slug: courseData.slug,
+        title: courseData.title,
+        description: courseData.description,
+        category: courseData.category,
+        difficulty: courseData.difficulty,
+        estimatedDuration: courseData.estimatedDuration,
+        order: courseData.order,
+        published: courseData.published
+      }
     },
     {
       upsert: true,
-      new: true,
-      setDefaultsOnInsert: true
+      returnDocument: 'after',
+      setDefaultsOnInsert: true,
+      runValidators: true
     }
   );
 }
+
+/*
+ * =========================================================
+ * MODULE
+ * =========================================================
+ */
 
 async function seedModule(courseId, moduleData) {
   return Module.findOneAndUpdate(
@@ -49,11 +81,18 @@ async function seedModule(courseId, moduleData) {
     },
     {
       upsert: true,
-      new: true,
-      setDefaultsOnInsert: true
+      returnDocument: 'after',
+      setDefaultsOnInsert: true,
+      runValidators: true
     }
   );
 }
+
+/*
+ * =========================================================
+ * LESSON
+ * =========================================================
+ */
 
 async function seedLesson(moduleId, lessonData) {
   return Lesson.findOneAndUpdate(
@@ -74,11 +113,24 @@ async function seedLesson(moduleId, lessonData) {
     },
     {
       upsert: true,
-      new: true,
-      setDefaultsOnInsert: true
+      returnDocument: 'after',
+      setDefaultsOnInsert: true,
+      runValidators: true
     }
   );
 }
+
+/*
+ * =========================================================
+ * QUIZ
+ * =========================================================
+ *
+ * A quiz is uniquely identified within a lesson by:
+ *
+ * lessonId + order
+ *
+ * This matches the unique index in Quiz.js.
+ */
 
 async function seedQuiz(lessonId, quizData) {
   return Quiz.findOneAndUpdate(
@@ -100,49 +152,268 @@ async function seedQuiz(lessonId, quizData) {
     },
     {
       upsert: true,
-      new: true,
-      setDefaultsOnInsert: true
+      returnDocument: 'after',
+      setDefaultsOnInsert: true,
+      runValidators: true
     }
   );
 }
+
+/*
+ * =========================================================
+ * REMOVE STALE QUIZZES
+ * =========================================================
+ */
+
+async function syncQuizzes(lessonId, quizzes) {
+  const validOrders = quizzes.map(
+    (quiz) => quiz.order
+  );
+
+  const filter = {
+    lessonId
+  };
+
+  if (validOrders.length > 0) {
+    filter.order = {
+      $nin: validOrders
+    };
+  }
+
+  const result = await Quiz.deleteMany(filter);
+
+  if (result.deletedCount > 0) {
+    console.log(
+      `      Removed ${result.deletedCount} stale quiz record(s).`
+    );
+  }
+}
+
+/*
+ * =========================================================
+ * REMOVE STALE LESSONS
+ * =========================================================
+ */
+
+async function syncLessons(moduleId, lessons) {
+  const validSlugs = lessons.map(
+    (lesson) => lesson.slug
+  );
+
+  const filter = {
+    moduleId
+  };
+
+  if (validSlugs.length > 0) {
+    filter.slug = {
+      $nin: validSlugs
+    };
+  }
+
+  const staleLessons = await Lesson.find(filter)
+    .select('_id')
+    .lean();
+
+  if (staleLessons.length === 0) {
+    return;
+  }
+
+  const staleLessonIds = staleLessons.map(
+    (lesson) => lesson._id
+  );
+
+  await Quiz.deleteMany({
+    lessonId: {
+      $in: staleLessonIds
+    }
+  });
+
+  const result = await Lesson.deleteMany({
+    _id: {
+      $in: staleLessonIds
+    }
+  });
+
+  if (result.deletedCount > 0) {
+    console.log(
+      `    Removed ${result.deletedCount} stale lesson record(s).`
+    );
+  }
+}
+
+/*
+ * =========================================================
+ * REMOVE STALE MODULES
+ * =========================================================
+ */
+
+async function syncModules(courseId, modules) {
+  const validSlugs = modules.map(
+    (module) => module.slug
+  );
+
+  const filter = {
+    courseId
+  };
+
+  if (validSlugs.length > 0) {
+    filter.slug = {
+      $nin: validSlugs
+    };
+  }
+
+  const staleModules = await Module.find(filter)
+    .select('_id')
+    .lean();
+
+  if (staleModules.length === 0) {
+    return;
+  }
+
+  const staleModuleIds = staleModules.map(
+    (module) => module._id
+  );
+
+  /*
+   * Find lessons belonging to stale modules.
+   */
+
+  const staleLessons = await Lesson.find({
+    moduleId: {
+      $in: staleModuleIds
+    }
+  })
+    .select('_id')
+    .lean();
+
+  const staleLessonIds = staleLessons.map(
+    (lesson) => lesson._id
+  );
+
+  /*
+   * Remove quizzes belonging to those lessons.
+   */
+
+  if (staleLessonIds.length > 0) {
+    await Quiz.deleteMany({
+      lessonId: {
+        $in: staleLessonIds
+      }
+    });
+
+    await Lesson.deleteMany({
+      _id: {
+        $in: staleLessonIds
+      }
+    });
+  }
+
+  /*
+   * Remove the stale modules.
+   */
+
+  const result = await Module.deleteMany({
+    _id: {
+      $in: staleModuleIds
+    }
+  });
+
+  if (result.deletedCount > 0) {
+    console.log(
+      `  Removed ${result.deletedCount} stale module record(s).`
+    );
+  }
+}
+
+/*
+ * =========================================================
+ * MAIN SEED
+ * =========================================================
+ */
 
 async function seedLearning() {
   try {
     await connectDatabase();
 
     /*
-     * 1. Course
+     * Validate the seed structure.
      */
-    const course = await seedCourse(learningData.course);
 
-    console.log(`Course seeded: ${course.title}`);
+    if (!learningData || !learningData.course) {
+      throw new Error(
+        'learningData.course is missing.'
+      );
+    }
+
+    if (!Array.isArray(learningData.modules)) {
+      throw new Error(
+        'learningData.modules must be an array.'
+      );
+    }
 
     /*
-     * 2. Modules
+     * -------------------------------------------------------
+     * 1. COURSE
+     * -------------------------------------------------------
      */
+
+    const course = await seedCourse(
+      learningData.course
+    );
+
+    console.log(
+      `Course synced: ${course.title} (${course.slug})`
+    );
+
+    /*
+     * -------------------------------------------------------
+     * 2. MODULES
+     * -------------------------------------------------------
+     */
+
     for (const moduleData of learningData.modules) {
       const module = await seedModule(
         course._id,
         moduleData
       );
 
-      console.log(`  Module seeded: ${module.title}`);
+      console.log(
+        `  Module synced: ${module.title} (${module.slug})`
+      );
+
+      const lessons = Array.isArray(
+        moduleData.lessons
+      )
+        ? moduleData.lessons
+        : [];
 
       /*
-       * 3. Lessons
+       * -----------------------------------------------------
+       * 3. LESSONS
+       * -----------------------------------------------------
        */
-      for (const lessonData of moduleData.lessons) {
+
+      for (const lessonData of lessons) {
         const lesson = await seedLesson(
           module._id,
           lessonData
         );
 
-        console.log(`    Lesson seeded: ${lesson.title}`);
+        console.log(
+          `    Lesson synced: ${lesson.title} (${lesson.slug})`
+        );
+
+        const quizzes = Array.isArray(
+          lessonData.quizzes
+        )
+          ? lessonData.quizzes
+          : [];
 
         /*
-         * 4. Quizzes
+         * ---------------------------------------------------
+         * 4. QUIZZES
+         * ---------------------------------------------------
          */
-        const quizzes = lessonData.quizzes || [];
 
         for (const quizData of quizzes) {
           const quiz = await seedQuiz(
@@ -151,26 +422,67 @@ async function seedLearning() {
           );
 
           console.log(
-            `      Quiz seeded: ${quiz.question}`
+            `      Quiz synced: ${quiz.question}`
           );
         }
+
+        /*
+         * Remove quizzes that are no longer
+         * present in the seed data.
+         */
+
+        await syncQuizzes(
+          lesson._id,
+          quizzes
+        );
       }
+
+      /*
+       * Remove lessons that are no longer
+       * present in the seed data.
+       */
+
+      await syncLessons(
+        module._id,
+        lessons
+      );
     }
 
+    /*
+     * -------------------------------------------------------
+     * 5. REMOVE STALE MODULES
+     * -------------------------------------------------------
+     */
+
+    await syncModules(
+      course._id,
+      learningData.modules
+    );
+
     console.log(
-      'Learning database seeding completed successfully.'
+      '\nLearning database synchronization completed successfully.'
     );
   } catch (error) {
     console.error(
-      'Learning database seeding failed:',
-      error
+      '\nLearning database synchronization failed:'
     );
+
+    console.error(error);
 
     process.exitCode = 1;
   } finally {
     await mongoose.disconnect();
-    console.log('MongoDB connection closed.');
+
+    console.log(
+      'MongoDB connection closed.'
+    );
   }
 }
+
+/*
+ * =========================================================
+ * START
+ * =========================================================
+ */
 
 seedLearning();
