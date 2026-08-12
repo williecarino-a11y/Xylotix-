@@ -434,31 +434,73 @@ const moneyBasics = {
               data: {
                 title: 'Simple Example',
                 text:
-                  'Suppose ₦10,000 can purchase a particular basket of goods today. If those goods later cost ₦12,000, the same ₦10,000 no longer purchases the entire basket. The numerical amount has not changed, but its purchasing power has.'
+                  'Suppose $100 can purchase a particular basket of goods today. If those goods later cost $120, the same $100 no longer purchases the entire basket. The numerical amount has not changed, but its purchasing power has.'
               }
             },
 
             {
               order: 7,
-              type: 'callout',
+              type: 'heading',
               data: {
-                variant: 'warning',
-                title: 'Think Beyond the Number',
-                text:
-                  'A financial decision should not be judged only by the amount of money involved. Consider what the money can accomplish, what opportunity is being given up, and how the decision affects future options.'
+                level: 2,
+                text: 'The Sunk Cost Fallacy'
               }
             },
 
             {
               order: 8,
+              type: 'text',
+              data: {
+                text:
+                  'A sunk cost is a resource that has already been spent and cannot be recovered. The sunk cost fallacy occurs when people allow past, unrecoverable spending to influence a current decision, even when that spending should no longer determine what happens next. A better financial decision focuses on the future costs, benefits, risks, and alternatives that are still within your control.'
+              }
+            },
+
+            {
+              order: 9,
+              type: 'example',
+              data: {
+                title: 'Real-Life Example',
+                text:
+                  'Imagine you paid $200 for an online course but later realize that the course is not useful for your goals. Continuing to spend dozens of hours on it simply because you already paid $200 may be an example of the sunk cost fallacy. The $200 is already gone. A better question is whether continuing the course is worthwhile from this point forward.'
+              }
+            },
+
+            {
+              order: 10,
+              type: 'callout',
+              data: {
+                variant: 'info',
+                title: 'Decision-Making Principle',
+                text:
+                  'When making a new financial decision, focus on the costs, benefits, risks, and opportunities that still exist. Money or time that has already been spent and cannot be recovered should not, by itself, determine what you do next.'
+              }
+            },
+
+            {
+              order: 11,
+              type: 'callout',
+              data: {
+                variant: 'warning',
+                title: 'Think Beyond the Number',
+                text:
+                  'Look beyond the price tag. Consider what the money can accomplish, what opportunity you may give up, how purchasing power may change, and whether a past cost is influencing your decision even though it cannot be recovered.'
+              }
+            },
+
+            {
+              order: 12,
               type: 'summary',
               data: {
                 title: 'Lesson Summary',
                 points: [
-                  'Money is a tool for exchanging and measuring value.',
+                  'Money is a tool for exchanging and measuring economic value.',
                   'Money and wealth are related but not identical.',
-                  'Purchasing power describes what money can actually buy.',
-                  'Financial decisions should consider both present and future options.'
+                  'Purchasing power describes what a given amount of money can actually buy.',
+                  'The value of a financial decision depends on more than the amount of money involved.',
+                  'Opportunity cost helps us consider what we give up when choosing one use of money over another.',
+                  'A sunk cost is a past cost that cannot be recovered and should not automatically control future decisions.',
+                  'Strong financial decisions focus on future consequences, available alternatives, and long-term goals.'
                 ]
               }
             }
@@ -494,6 +536,23 @@ const moneyBasics = {
               correctAnswer: 1,
               explanation:
                 'Financial wealth depends on the broader relationship between resources, assets, obligations, income, spending, and long-term financial position.',
+              points: 10
+            },
+
+            {
+              order: 3,
+              questionType: 'multiple-choice',
+              question:
+                'Which situation best demonstrates the sunk cost fallacy?',
+              options: [
+                'Stopping an unhelpful course because the remaining time could be used for a more valuable opportunity.',
+                'Continuing an unhelpful course only because you already paid for it.',
+                'Comparing two courses based on their future benefits and costs.',
+                'Changing a spending decision after discovering a better alternative.'
+              ],
+              correctAnswer: 1,
+              explanation:
+                'The sunk cost fallacy occurs when a person allows a past cost that cannot be recovered to influence a current decision, instead of focusing on future costs, benefits, and alternatives.',
               points: 10
             }
           ]
