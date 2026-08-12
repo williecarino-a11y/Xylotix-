@@ -2,7 +2,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Xylotix - Financial Academy</title>  <style>
+  <title>Miimiid</title>  <style>
     * {
       box-sizing: border-box;
     }
@@ -179,13 +179,44 @@
       margin-top: 10px;
     }
 
-    .content-video {
-      display: block;
-      width: 100%;
-      max-width: 800px;
-      border-radius: 8px;
-      margin-top: 10px;
-    }
+.content-video {
+  display: block;
+  width: 100%;
+  max-width: 800px;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+  border-radius: 10px;
+  margin: 15px auto 0;
+  background: #000;
+}
+
+.video-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.video-watermark {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 14px;
+  font-weight: 600;
+
+  padding: 5px 8px;
+  border-radius: 4px;
+
+  background: rgba(0, 0, 0, 0.35);
+
+  pointer-events: none;
+  user-select: none;
+
+  z-index: 2;
+}
 
     .content-caption {
       color: #94a3b8;
@@ -214,7 +245,40 @@
     .quiz-option input {
       margin-right: 8px;
     }
-  </style></head><body>  <h1>Xylotix Financial Academy</h1>  <div id="loading" class="hidden">
+
+/* ================================
+   CALCULATION ANSWER INPUT
+   ================================ */
+
+.calculation-input {
+  width: 100%;
+  padding: 14px 16px;
+  margin-top: 10px;
+
+  background: #ffffff;
+  color: #111827;
+
+  border: 2px solid #cbd5e1;
+  border-radius: 8px;
+
+  font-size: 16px;
+  font-weight: 500;
+
+  box-sizing: border-box;
+  outline: none;
+}
+
+.calculation-input:focus {
+  background: #ffffff;
+  color: #111827;
+  border-color: #2563eb;
+}
+
+.calculation-input::placeholder {
+  color: #64748b;
+  opacity: 1;
+}
+  </style></head><body>  <h1>Miimiid</h1>  <div id="loading" class="hidden">
     Loading...
   </div>  <div id="error" class="hidden"></div>  <!-- ================================
        COURSE LIST
@@ -290,12 +354,13 @@
        APPLICATION STATE
        ========================================= */
 
-    let currentQuizzes = [];
-    let selectedQuizAnswers = [];
-    let quizSubmitted = false;
-    let currentLessonId = null;
-    let currentQuiz = null;
-    let courseDataCache = null;
+let currentQuizzes = [];
+let selectedQuizAnswers = [];
+let quizSubmitted = false;
+let currentCourseId = null;
+let currentLessonId = null;
+let currentQuiz = null;
+let courseDataCache = null;
 
     /*
      * Temporary user ID.
@@ -308,239 +373,157 @@
        FETCH ALL COURSES
        ========================================= */
 
-    async function fetchCourses() {
+async function fetchCourses() {
+  showLoading(true);
+  hideError();
 
-      showLoading(true);
-      hideError();
+  try {
+    const response = await fetch("/api/learn/courses");
+    const data = await response.json();
 
-      try {
+    const container =
+      document.getElementById("courses-container");
 
-        const response = await fetch(
-          "/api/learn/courses"
-        );
+    if (
+      response.ok &&
+      data.status === "success" &&
+      Array.isArray(data.data) &&
+      data.data.length > 0
+    ) {
+      container.innerHTML = data.data
+        .map(
+          course => `
+            <div class="card">
 
-        const data = await response.json();
+              <h3>
+                ${escapeHtml(
+                  course.title || "Untitled Course"
+                )}
+              </h3>
 
-        showLoading(false);
+              <p>
+                ${escapeHtml(
+                  course.description ||
+                  "No description available."
+                )}
+              </p>
 
-        const container =
-          document.getElementById(
-            "courses-container"
-          );
+              <button
+                class="btn"
+                onclick="openCourse('${course._id}')"
+              >
+                Open Course
+              </button>
 
-        /*
-         * Support both possible backend formats:
-         *
-         * {
-         *   status: "success",
-         *   data: [...]
-         * }
-         *
-         * OR
-         *
-         * {
-         *   success: true,
-         *   courses: [...]
-         * }
-         */
-
-        const courses =
-          Array.isArray(data.data)
-            ? data.data
-            : Array.isArray(data.courses)
-              ? data.courses
-              : [];
-
-        if (
-          response.ok &&
-          courses.length > 0
-        ) {
-
-          container.innerHTML =
-            courses.map(course => `
-
-              <div class="card">
-
-                <h3>
-                  ${escapeHtml(
-                    course.title ||
-                    "Untitled Course"
-                  )}
-                </h3>
-
-                <p>
-                  ${escapeHtml(
-                    course.description ||
-                    "No description available."
-                  )}
-                </p>
-
-                <button
-                  class="btn"
-                  onclick="openCourse('${course._id}')"
-                >
-                  Open Course
-                </button>
-
-              </div>
-
-            `).join("");
-
-        } else {
-
-          container.innerHTML = `
-            <p>
-              No courses found in database.
-            </p>
-          `;
-
-        }
-
-      } catch (error) {
-
-        showLoading(false);
-
-        console.error(
-          "fetchCourses error:",
-          error
-        );
-
-        showError(
-          "Unable to load courses."
-        );
-
-      }
-
+            </div>
+          `
+        )
+        .join("");
+    } else {
+      container.innerHTML = `
+        <div class="card">
+          <p>
+            No courses available yet.
+          </p>
+        </div>
+      `;
     }
 
+  } catch (error) {
+    console.error("fetchCourses error:", error);
+
+    showError(
+      "Unable to load courses."
+    );
+
+  } finally {
+    showLoading(false);
+  }
+}
 
     /* =========================================
        OPEN COURSE
        ========================================= */
 
-    async function openCourse(courseId) {
+async function openCourse(courseId) {
+  if (!courseId) {
+    showError("Invalid course ID.");
+    return;
+  }
 
-      if (!courseId) {
+  currentCourseId = courseId;
 
-        showError(
-          "Invalid course ID."
-        );
+  showLoading(true);
+  hideError();
 
-        return;
-      }
+  try {
+    const response = await fetch(
+      `/api/learn/courses/${courseId}`
+    );
 
-      currentCourseId = courseId;
+    const data = await response.json();
 
-      showLoading(true);
-      hideError();
+    if (
+      response.ok &&
+      data.status === "success" &&
+      data.data
+    ) {
+      courseDataCache = data.data;
 
-      try {
+      document
+        .getElementById("course-list-view")
+        .classList.add("hidden");
 
-        const response = await fetch(
-          `/api/learn/courses/${courseId}`
-        );
+      document
+        .getElementById("lesson-view")
+        .classList.add("hidden");
 
-        const data = await response.json();
+      document
+        .getElementById("course-detail-view")
+        .classList.remove("hidden");
 
-        showLoading(false);
+      document
+        .getElementById("detail-course-title")
+        .innerText =
+          courseDataCache.title ||
+          "Untitled Course";
 
-        /*
-         * Support both:
-         *
-         * data.data
-         *
-         * and
-         *
-         * data.course
-         */
+      document
+        .getElementById("detail-course-desc")
+        .innerText =
+          courseDataCache.description ||
+          "No description available.";
 
-        const course =
-          data.data ||
-          data.course ||
-          null;
+      renderModules(
+        courseDataCache.modules
+      );
 
-        if (
-          response.ok &&
-          course
-        ) {
+    } else {
+      console.error(
+        "Course loading failed:",
+        data
+      );
 
-          courseDataCache = course;
-
-          document
-            .getElementById(
-              "course-list-view"
-            )
-            .classList.add(
-              "hidden"
-            );
-
-          document
-            .getElementById(
-              "lesson-view"
-            )
-            .classList.add(
-              "hidden"
-            );
-
-          document
-            .getElementById(
-              "course-detail-view"
-            )
-            .classList.remove(
-              "hidden"
-            );
-
-          document
-            .getElementById(
-              "detail-course-title"
-            )
-            .innerText =
-              course.title ||
-              "Untitled Course";
-
-          document
-            .getElementById(
-              "detail-course-desc"
-            )
-            .innerText =
-              course.description ||
-              "No description available.";
-
-          renderModules(
-            course.modules
-          );
-
-        } else {
-
-          console.error(
-            "Course loading failed:",
-            data
-          );
-
-          showError(
-            data.message ||
-            "Unable to load course."
-          );
-
-        }
-
-      } catch (error) {
-
-        showLoading(false);
-
-        console.error(
-          "openCourse error:",
-          error
-        );
-
-        showError(
-          "Unable to connect to the server."
-        );
-
-      }
-
+      showError(
+        data.message ||
+        "Unable to load course."
+      );
     }
 
+  } catch (error) {
+    console.error(
+      "openCourse error:",
+      error
+    );
+
+    showError(
+      "Unable to connect to the server."
+    );
+
+  } finally {
+    showLoading(false);
+  }
+}
 
     /* =========================================
        RENDER MODULES
@@ -584,13 +567,12 @@
 
               <div class="card">
 
-                <h3>
-                  Module ${moduleIndex + 1}:
-                  ${escapeHtml(
-                    module.title ||
-                    "Untitled Module"
-                  )}
-                </h3>
+              <h3>
+              ${escapeHtml(
+              module.title ||
+             `Module ${moduleIndex + 1}`
+             )}
+          </h3> 
 
                 ${
                   lessons.length === 0
@@ -991,47 +973,49 @@
        EXTRACT TEXT FROM CONTENT DATA
        ========================================= */
 
-    function getBlockText(data) {
+function getBlockText(data) {
 
-      if (
-        data === null ||
-        data === undefined
-      ) {
-        return "";
-      }
+  if (
+    data === null ||
+    data === undefined
+  ) {
+    return "";
+  }
 
-      if (
-        typeof data === "string"
-      ) {
-        return data;
-      }
+  if (
+    typeof data === "string"
+  ) {
+    return data;
+  }
 
-      if (
-        typeof data === "number" ||
-        typeof data === "boolean"
-      ) {
-        return String(data);
-      }
+  if (
+    typeof data === "number" ||
+    typeof data === "boolean"
+  ) {
+    return String(data);
+  }
 
-      if (
-        typeof data === "object"
-      ) {
+  if (
+    typeof data === "object"
+  ) {
 
-        return (
-          data.text ??
-          data.content ??
-          data.value ??
-          data.description ??
-          data.body ??
-          ""
-        );
+    return (
+      data.text ??
+      data.content ??
+      data.value ??
+      data.description ??
+      data.body ??
+      data.formula ??
+      data.equation ??
+      data.expression ??
+      data.title ??
+      ""
+    );
 
-      }
+  }
 
-      return String(data);
-
-    }
-
+  return String(data);
+}
 
     /* =========================================
        IMAGE BLOCK
@@ -1099,50 +1083,59 @@ const caption =
 
 
     /* =========================================
-       VIDEO BLOCK
-       ========================================= */
+   VIDEO BLOCK
+   ========================================= */
 
-    function renderVideoBlock(data) {
+function renderVideoBlock(data) {
 
-      const source =
-        getMediaSource(data);
+  const source =
+    getMediaSource(data);
 
-      if (!source) {
+  if (!source) {
 
-        return `
-          <div class="content-block">
-            <p>
-              Video unavailable.
-            </p>
-          </div>
-        `;
+    return `
+      <div class="content-block">
+        <p>
+          Video unavailable.
+        </p>
+      </div>
+    `;
 
-      }
+  }
 
-      return `
+  return `
 
-        <div class="content-block">
+    <div class="content-block">
 
-          <video
-            class="content-video"
-            controls
-            preload="metadata"
+      <div class="video-wrapper">
+
+        <video
+          class="content-video"
+          controls
+          preload="metadata"
+          playsinline
+        >
+
+          <source
+            src="${escapeAttribute(source)}"
           >
 
-            <source
-              src="${escapeAttribute(source)}"
-            >
+          Your browser does not support
+          video playback.
 
-            Your browser does not support
-            video playback.
+        </video>
 
-          </video>
-
+        <div class="video-watermark">
+          Miimiid AI Tutor
         </div>
 
-      `;
+      </div>
 
-    }
+    </div>
+
+  `;
+
+}
 
 
     /* =========================================
@@ -1179,27 +1172,19 @@ const caption =
        QUIZ
        ========================================= */
 
-     function renderQuiz(lesson) {
+function renderQuiz(lesson) {
 
   const section =
-    document.getElementById(
-      "quiz-section"
-    );
+    document.getElementById("quiz-section");
 
   const question =
-    document.getElementById(
-      "quiz-question"
-    );
+    document.getElementById("quiz-question");
 
   const options =
-    document.getElementById(
-      "quiz-options"
-    );
+    document.getElementById("quiz-options");
 
   const result =
-    document.getElementById(
-      "quiz-result"
-    );
+    document.getElementById("quiz-result");
 
   result.innerHTML = "";
 
@@ -1215,32 +1200,37 @@ const caption =
 
   if (currentQuizzes.length === 0) {
 
-    section.classList.add(
-      "hidden"
-    );
-
+    section.classList.add("hidden");
     options.innerHTML = "";
 
     return;
   }
 
-  section.classList.remove(
-    "hidden"
-  );
+  section.classList.remove("hidden");
 
   /*
-   * Render all quizzes belonging
-   * to this lesson.
+   * Render every question according
+   * to its question type.
    */
   options.innerHTML =
     currentQuizzes
-      .map(
-        (quiz, quizIndex) => {
+      .map((quiz, quizIndex) => {
+
+        const questionType =
+          quiz.questionType || "multiple-choice";
+
+        /*
+         * -----------------------------------------
+         * MULTIPLE-CHOICE / TRUE-FALSE
+         * -----------------------------------------
+         */
+        if (
+          questionType === "multiple-choice" ||
+          questionType === "true-false"
+        ) {
 
           const quizOptions =
-            Array.isArray(
-              quiz.options
-            )
+            Array.isArray(quiz.options)
               ? quiz.options
               : [];
 
@@ -1261,68 +1251,174 @@ const caption =
               </p>
 
               ${
-                quizOptions
-                  .map(
-                    (option, optionIndex) => `
-                      <label
-                        class="quiz-option"
-                      >
+                quizOptions.length > 0
 
-                        <input
-                          type="radio"
-                          name="quiz-${quizIndex}"
-                          value="${optionIndex}"
-                          onchange="
-                            selectedQuizAnswers[${quizIndex}]
-                            = ${optionIndex};
-                          "
-                        >
+                  ? quizOptions
+                      .map(
+                        (option, optionIndex) => `
+                          <label
+                            class="quiz-option"
+                          >
 
-                        ${escapeHtml(option)}
+                            <input
+                              type="radio"
+                              name="quiz-${quizIndex}"
+                              value="${optionIndex}"
+                              onchange="
+                                selectedQuizAnswers[${quizIndex}]
+                                = ${optionIndex};
+                              "
+                            >
 
-                      </label>
-                    `
-                  )
-                  .join("")
+                            ${escapeHtml(option)}
+
+                          </label>
+                        `
+                      )
+                      .join("")
+
+                  : `
+                    <p class="error-text">
+                      No answer options available
+                      for this question.
+                    </p>
+                  `
               }
 
             </div>
           `;
         }
-      )
+
+        /*
+         * -----------------------------------------
+         * CALCULATION QUESTION
+         * -----------------------------------------
+         */
+        if (questionType === "calculate") {
+
+          return `
+            <div
+              class="card"
+              style="margin-top: 15px;"
+            >
+
+              <p>
+                <strong>
+                  ${quizIndex + 1}.
+                  ${escapeHtml(
+                    quiz.question ||
+                    "Calculation question unavailable."
+                  )}
+                </strong>
+              </p>
+
+              <label>
+                <strong>
+                  Your answer:
+                </strong>
+              </label>
+
+               <input
+               type="number"
+               class="quiz-option calculation-input"
+               id="calculation-answer-${quizIndex}"
+                placeholder="Enter your answer"
+                step="any"
+                oninput="
+                  selectedQuizAnswers[${quizIndex}]
+                  = this.value;
+                "
+              >
+
+              ${
+                quiz.hint
+                  ? `
+                    <p>
+                      <small>
+                        Hint:
+                        ${escapeHtml(quiz.hint)}
+                      </small>
+                    </p>
+                  `
+                  : ""
+              }
+
+            </div>
+          `;
+        }
+
+        /*
+         * -----------------------------------------
+         * UNKNOWN QUESTION TYPE
+         * -----------------------------------------
+         */
+        return `
+          <div
+            class="card"
+            style="margin-top: 15px;"
+          >
+
+            <p>
+              <strong>
+                ${quizIndex + 1}.
+                ${escapeHtml(
+                  quiz.question ||
+                  "Question unavailable."
+                )}
+              </strong>
+            </p>
+
+            <p class="error-text">
+              Unsupported question type:
+              ${escapeHtml(questionType)}
+            </p>
+
+          </div>
+        `;
+
+      })
       .join("");
 
   question.innerText =
     "Answer the questions below before completing the lesson.";
 }
 
-
     /* =========================================
        SUBMIT QUIZ
        ========================================= */
 
-    async function submitQuiz() {
+async function submitQuiz() {
 
   if (
     !currentLessonId ||
     currentQuizzes.length === 0
   ) {
-    alert(
-      "No quiz is available."
-    );
+
+    alert("No quiz is available.");
 
     return;
   }
 
   /*
-   * Make sure every quiz has
-   * an answer.
+   * Make sure every question has an answer.
    */
   const unanswered =
     currentQuizzes.findIndex(
-      (_, index) =>
-        selectedQuizAnswers[index] ===
-        undefined
+      (quiz, index) => {
+
+        const answer =
+          selectedQuizAnswers[index];
+
+        if (
+          answer === undefined ||
+          answer === null ||
+          answer === ""
+        ) {
+          return true;
+        }
+
+        return false;
+      }
     );
 
   if (unanswered !== -1) {
@@ -1336,6 +1432,32 @@ const caption =
     return;
   }
 
+  /*
+   * Convert calculation answers
+   * from strings to numbers.
+   *
+   * Multiple-choice and true-false
+   * answers remain option indexes.
+   */
+  const answersForSubmission =
+    currentQuizzes.map(
+      (quiz, index) => {
+
+        if (
+          quiz.questionType === "calculate"
+        ) {
+
+          return Number(
+            selectedQuizAnswers[index]
+          );
+
+        }
+
+        return selectedQuizAnswers[index];
+
+      }
+    );
+
   const button =
     document.getElementById(
       "quiz-submit-btn"
@@ -1347,8 +1469,7 @@ const caption =
     );
 
   button.disabled = true;
-  button.innerText =
-    "Checking...";
+  button.innerText = "Checking...";
 
   try {
 
@@ -1364,11 +1485,13 @@ const caption =
           },
 
           body: JSON.stringify({
+
             lessonId:
               currentLessonId,
 
             submittedAnswers:
-              selectedQuizAnswers
+              answersForSubmission
+
           })
         }
       );
@@ -1384,13 +1507,11 @@ const caption =
       const quizResult =
         data.data;
 
-      if (
-        quizResult.passed
-      ) {
+      if (quizResult.passed) {
 
         result.innerHTML = `
           <span class="success-text">
-            Quiz complete! 
+            Quiz complete!
             Score: ${quizResult.score}%.
             You got
             ${quizResult.correctAnswers}
@@ -1449,12 +1570,10 @@ const caption =
   } finally {
 
     button.disabled = false;
-    button.innerText =
-      "Submit Answer";
+    button.innerText = "Submit Answer";
 
   }
 }
-
 
     /* =========================================
        COMPLETE LESSON
