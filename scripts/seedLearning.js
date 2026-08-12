@@ -16,10 +16,10 @@ const learningData = require('./learningData/moneyBasics');
  */
 
 async function connectDatabase() {
-const mongoUri =
-  process.env.MONGO_URL ||
-  process.env.MONGO_URI ||
-  'mongodb://localhost:27017/xylotix';
+  const mongoUri =
+    process.env.MONGO_URL ||
+    process.env.MONGO_URI ||
+    'mongodb://localhost:27017/xylotix';
 
   await mongoose.connect(mongoUri);
 
@@ -42,9 +42,17 @@ async function seedCourse(courseData) {
         slug: courseData.slug,
         title: courseData.title,
         description: courseData.description,
+        longDescription: courseData.longDescription,
         category: courseData.category,
         difficulty: courseData.difficulty,
         estimatedDuration: courseData.estimatedDuration,
+
+        prerequisites: courseData.prerequisites || [],
+        targetAudience: courseData.targetAudience || [],
+        learningObjectives: courseData.learningObjectives || [],
+        skillsGained: courseData.skillsGained || [],
+        outcomes: courseData.outcomes || [],
+
         order: courseData.order,
         published: courseData.published
       }
@@ -124,12 +132,6 @@ async function seedLesson(moduleId, lessonData) {
  * =========================================================
  * QUIZ
  * =========================================================
- *
- * A quiz is uniquely identified within a lesson by:
- *
- * lessonId + order
- *
- * This matches the unique index in Quiz.js.
  */
 
 async function seedQuiz(lessonId, quizData) {
@@ -144,10 +146,40 @@ async function seedQuiz(lessonId, quizData) {
         order: quizData.order,
         questionType: quizData.questionType,
         question: quizData.question,
+        context: quizData.context || '',
         options: quizData.options || [],
         correctAnswer: quizData.correctAnswer,
         explanation: quizData.explanation,
-        points: quizData.points
+
+        hint: quizData.hint || '',
+
+        correctFeedback:
+          quizData.correctFeedback ||
+          'Excellent! 🎉 Your answer is correct.',
+
+        incorrectFeedback:
+          quizData.incorrectFeedback ||
+          'Not quite! Review the lesson and try again.',
+
+        difficulty:
+          quizData.difficulty || 'Easy',
+
+        skills: quizData.skills || [],
+
+        learningObjectives:
+          quizData.learningObjectives || [],
+
+        isPractical:
+          quizData.isPractical || false,
+
+        media: quizData.media || undefined,
+
+        points: quizData.points || 10,
+
+        published:
+          quizData.published !== undefined
+            ? quizData.published
+            : true
       }
     },
     {
@@ -336,7 +368,7 @@ async function seedLearning() {
     await connectDatabase();
 
     /*
-     * Validate the seed structure.
+     * Validate course structure.
      */
 
     if (!learningData || !learningData.course) {
@@ -428,7 +460,7 @@ async function seedLearning() {
 
         /*
          * Remove quizzes that are no longer
-         * present in the seed data.
+         * present in seed data.
          */
 
         await syncQuizzes(
@@ -439,7 +471,7 @@ async function seedLearning() {
 
       /*
        * Remove lessons that are no longer
-       * present in the seed data.
+       * present in seed data.
        */
 
       await syncLessons(

@@ -22,6 +22,13 @@ const courseSchema = new mongoose.Schema(
       trim: true
     },
 
+    // Longer introduction displayed on the course page
+    longDescription: {
+      type: String,
+      required: true,
+      trim: true
+    },
+
     category: {
       type: String,
       required: true,
@@ -38,6 +45,36 @@ const courseSchema = new mongoose.Schema(
       type: Number,
       required: true,
       min: 1
+    },
+
+    // What students should already know before starting
+    prerequisites: {
+      type: [String],
+      default: []
+    },
+
+    // Who the course is designed for
+    targetAudience: {
+      type: [String],
+      default: []
+    },
+
+    // Main things students will learn
+    learningObjectives: {
+      type: [String],
+      default: []
+    },
+
+    // Practical abilities students should gain
+    skillsGained: {
+      type: [String],
+      default: []
+    },
+
+    // Expected results after completing the course
+    outcomes: {
+      type: [String],
+      default: []
     },
 
     order: {

@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
 
-// Structured Content Block Schema
+// =========================================================
+// STRUCTURED CONTENT BLOCK
+// =========================================================
+
 const contentBlockSchema = new mongoose.Schema(
   {
     order: {
@@ -14,8 +17,16 @@ const contentBlockSchema = new mongoose.Schema(
       enum: [
         'text',
         'heading',
+        'subheading',
         'example',
         'callout',
+        'key-concept',
+        'comparison',
+        'scenario',
+        'activity',
+        'reflection',
+        'tip',
+        'warning',
         'image',
         'video',
         'interactive',
@@ -35,6 +46,10 @@ const contentBlockSchema = new mongoose.Schema(
   }
 );
 
+// =========================================================
+// LESSON SCHEMA
+// =========================================================
+
 const lessonSchema = new mongoose.Schema(
   {
     moduleId: {
@@ -52,7 +67,21 @@ const lessonSchema = new mongoose.Schema(
 
     title: {
       type: String,
-      required: true
+      required: true,
+      trim: true
+    },
+
+    // Short description displayed before opening the lesson
+    description: {
+      type: String,
+      required: true,
+      trim: true
+    },
+
+    // What the student should understand after completing the lesson
+    learningObjectives: {
+      type: [String],
+      default: []
     },
 
     estimatedDuration: {
@@ -72,6 +101,7 @@ const lessonSchema = new mongoose.Schema(
       default: false
     },
 
+    // Main educational content
     contentBlocks: {
       type: [contentBlockSchema],
       default: []
@@ -81,6 +111,10 @@ const lessonSchema = new mongoose.Schema(
     timestamps: true
   }
 );
+
+// =========================================================
+// INDEXES
+// =========================================================
 
 // Slug must be unique within a module
 lessonSchema.index(

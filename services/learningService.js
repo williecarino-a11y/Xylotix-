@@ -20,8 +20,6 @@ class LearningService {
    *   └── Modules
    *        └── Lessons
    *             └── Quizzes
-   *
-   * Everything is loaded dynamically from MongoDB.
    */
   async getCourseDetails(courseId) {
     const course = await Course.findById(courseId);
@@ -50,13 +48,15 @@ class LearningService {
       const moduleLessons = lessons
         .filter(
           lesson =>
-            lesson.moduleId.toString() === module._id.toString()
+            lesson.moduleId.toString() ===
+            module._id.toString()
         )
         .map(lesson => {
           const lessonQuizzes = quizzes
             .filter(
               quiz =>
-                quiz.lessonId.toString() === lesson._id.toString()
+                quiz.lessonId.toString() ===
+                lesson._id.toString()
             )
             .map(quiz => quiz.toObject());
 
@@ -93,17 +93,19 @@ class LearningService {
 
     return {
       lesson,
-      quiz: quizzes
+      quizzes
     };
   }
 
   /**
-   * Record lesson progress and evaluate submitted quiz answers.
+   * Validate quiz answers for a lesson.
    *
-   * UserProgress is the single source of truth for lesson completion.
+   * Supports:
+   * - numeric correctAnswerIndex
+   * - numeric correctAnswer
+   * - string correctAnswer
    */
-  async recordLessonProgress(
-    userId,
+  async submitQuizAnswers(
     lessonId,
     submittedAnswers
   ) {
@@ -116,62 +118,126 @@ class LearningService {
     const quizzes = await Quiz.find({ lessonId })
       .sort({ order: 1 });
 
-    let score = null;
-
-    if (
-      quizzes.length > 0 &&
-      submittedAnswers &&
-      Array.isArray(submittedAnswers)
-    ) {
-      let correctPoints = 0;
-      let totalPoints = 0;
-
-      quizzes.forEach((quiz, index) => {
-        totalPoints += quiz.points;
-
-        if (
-          submittedAnswers[index] !== undefined &&
-          submittedAnswers[index] === quiz.correctAnswer
-        ) {
-          correctPoints += quiz.points;
-        }
-      });
-
-      if (totalPoints > 0) {
-        score = Math.round(
-          (correctPoints / totalPoints) * 100
-        );
-      }
+    if (!quizzes.length) {
+      return {
+        score: 0,
+        totalQuestions: 0,
+        correctAnswers: 0,
+        passed: true,
+        results: []
+      };
     }
 
-    const progress = await UserProgress.findOneAndUpdate(
-      {
-        userId,
-        lessonId
-      },
-      {
-        completed: true,
-        quizScore: score,
-        completedAt: new Date()
-      },
-      {
-        new: true,
-        upsert: true,
-        runValidators: true,
-        setDefaultsOnInsert: true
+    if (!Array.isArray(submittedAnswers)) {
+      submittedAnswers = [];
+    }
+
+    let correctAnswers = 0;
+
+    const results = quizzes.map((quiz, index) => {
+      const submitted = submittedAnswers[index];
+
+      const correctIndex =
+        quiz.correctAnswerIndex !== undefined
+          ? Number(quiz.correctAnswerIndex)
+          : (
+              typeof quiz.correctAnswer === 'number'
+                ? Number(quiz.correctAnswer)
+                : null
+            );
+
+      let isCorrect = false;
+
+      if (
+        correctIndex !== null &&
+        submitted !== undefined &&
+        Number(submitted) === correctIndex
+      ) {
+        isCorrect = true;
       }
+
+      if (
+        typeof quiz.correctAnswer === 'string' &&
+        typeof submitted === 'string' &&
+        submitted.trim().toLowerCase() ===
+          quiz.correctAnswer.trim().toLowerCase()
+      ) {
+        isCorrect = true;
+      }
+
+      if (isCorrect) {
+        correctAnswers++;
+      }
+
+      return {
+        quizId: quiz._id,
+        correct: isCorrect
+      };
+    });
+
+    const score = Math.round(
+      (correctAnswers / quizzes.length) * 100
     );
 
     return {
-      success: true,
-      progress,
-      message: 'Lesson progress recorded successfully'
+      score,
+      totalQuestions: quizzes.length,
+      correctAnswers,
+      passed: score >= 50,
+      results
     };
   }
 
   /**
-   * Get dynamically calculated dashboard statistics
-   * from the user's stored lesson progress.
+   * Record lesson completion and quiz score.
+   */
+  async recordLessonProgress(
+    userId,
+    lessonId,
+    submittedAnswers
+  ) {
+    const lesson = await Lesson.findById(lessonId);
+
+    if (!lesson) {
+      throw new Error('Lesson not found');
+    }
+
+    const quizResult =
+      await this.submitQuizAnswers(
+        lessonId,
+        submittedAnswers
+      );
+
+    const progress =
+      await UserProgress.findOneAndUpdate(
+        {
+          userId,
+          lessonId
+        },
+        {
+          completed: true,
+          quizScore: quizResult.score,
+          completedAt: new Date()
+        },
+        {
+          new: true,
+          upsert: true,
+          runValidators: true,
+          setDefaultsOnInsert: true
+        }
+      );
+
+    return {
+      success: true,
+      progress,
+      quizResult,
+      message:
+        'Lesson progress recorded successfully'
+    };
+  }
+
+  /**
+   * Get dynamically calculated dashboard statistics.
    */
   async getUserDashboardStats(userId) {
     const allProgress = await UserProgress.find({
@@ -181,13 +247,15 @@ class LearningService {
       completedAt: 1
     });
 
-    const totalLessonsCompleted = allProgress.length;
+    const totalLessonsCompleted =
+      allProgress.length;
 
-    const scoredQuizzes = allProgress.filter(
-      progress =>
-        progress.quizScore !== null &&
-        progress.quizScore !== undefined
-    );
+    const scoredQuizzes =
+      allProgress.filter(
+        progress =>
+          progress.quizScore !== null &&
+          progress.quizScore !== undefined
+      );
 
     const averageQuizScore =
       scoredQuizzes.length > 0
@@ -200,14 +268,11 @@ class LearningService {
           )
         : 0;
 
-    const streak = this.calculateStreak(allProgress);
+    const streak =
+      this.calculateStreak(allProgress);
 
-    /*
-     * XP is currently derived from completed lessons.
-     * This keeps it dynamic and avoids storing duplicate
-     * calculated XP in UserProgress.
-     */
-    const totalXP = totalLessonsCompleted * 50;
+    const totalXP =
+      totalLessonsCompleted * 50;
 
     return {
       totalLessonsCompleted,
@@ -218,15 +283,13 @@ class LearningService {
   }
 
   /**
-   * Calculate the user's current consecutive-day streak.
-   *
-   * Example:
-   * Today + yesterday + two days ago = 3
-   *
-   * A gap breaks the current streak.
+   * Calculate current consecutive-day streak.
    */
   calculateStreak(progressRecords) {
-    if (!progressRecords || progressRecords.length === 0) {
+    if (
+      !progressRecords ||
+      progressRecords.length === 0
+    ) {
       return 0;
     }
 
@@ -237,17 +300,19 @@ class LearningService {
         return;
       }
 
-      const date = new Date(progress.completedAt);
+      const date =
+        new Date(progress.completedAt);
 
       if (Number.isNaN(date.getTime())) {
         return;
       }
 
-      const dateKey = new Date(
-        date.getFullYear(),
-        date.getMonth(),
-        date.getDate()
-      ).getTime();
+      const dateKey =
+        new Date(
+          date.getFullYear(),
+          date.getMonth(),
+          date.getDate()
+        ).getTime();
 
       completedDates.add(dateKey);
     });
@@ -256,30 +321,33 @@ class LearningService {
       return 0;
     }
 
-    const dates = Array.from(completedDates).sort(
-      (a, b) => b - a
-    );
+    const dates =
+      Array.from(completedDates).sort(
+        (a, b) => b - a
+      );
 
     const today = new Date();
 
-    const todayKey = new Date(
-      today.getFullYear(),
-      today.getMonth(),
-      today.getDate()
-    ).getTime();
+    const todayKey =
+      new Date(
+        today.getFullYear(),
+        today.getMonth(),
+        today.getDate()
+      ).getTime();
 
-    /*
-     * If the user has not completed anything today,
-     * the current streak can still continue from yesterday.
-     */
-    const yesterday = new Date(today);
-    yesterday.setDate(yesterday.getDate() - 1);
+    const yesterday =
+      new Date(today);
 
-    const yesterdayKey = new Date(
-      yesterday.getFullYear(),
-      yesterday.getMonth(),
-      yesterday.getDate()
-    ).getTime();
+    yesterday.setDate(
+      yesterday.getDate() - 1
+    );
+
+    const yesterdayKey =
+      new Date(
+        yesterday.getFullYear(),
+        yesterday.getMonth(),
+        yesterday.getDate()
+      ).getTime();
 
     let currentDate = dates[0];
 
@@ -292,7 +360,11 @@ class LearningService {
 
     let streak = 1;
 
-    for (let i = 1; i < dates.length; i++) {
+    for (
+      let i = 1;
+      i < dates.length;
+      i++
+    ) {
       const previousDate = dates[i - 1];
       const current = dates[i];
 

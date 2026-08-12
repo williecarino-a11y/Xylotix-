@@ -1,8 +1,10 @@
 const express = require('express');
 const mongoose = require('mongoose');
+
 const router = express.Router();
 
-const learningService = require('../services/learningService');
+const learningService =
+  require('../services/learningService');
 
 /**
  * GET /api/learn/courses
@@ -11,7 +13,8 @@ const learningService = require('../services/learningService');
  */
 router.get('/courses', async (req, res) => {
   try {
-    const courses = await learningService.getAllCourses();
+    const courses =
+      await learningService.getAllCourses();
 
     if (!courses.length) {
       return res.status(200).json({
@@ -26,7 +29,10 @@ router.get('/courses', async (req, res) => {
       data: courses
     });
   } catch (error) {
-    console.error('Get courses error:', error);
+    console.error(
+      'Get courses error:',
+      error
+    );
 
     return res.status(500).json({
       status: 'error',
@@ -35,187 +41,343 @@ router.get('/courses', async (req, res) => {
   }
 });
 
+
 /**
  * GET /api/learn/courses/:courseId
  *
- * Get a complete course tree:
+ * Get complete course tree:
  * Course -> Modules -> Lessons -> Quizzes
  */
-router.get('/courses/:courseId', async (req, res) => {
-  try {
-    const { courseId } = req.params;
+router.get(
+  '/courses/:courseId',
+  async (req, res) => {
+    try {
+      const { courseId } = req.params;
 
-    if (!mongoose.Types.ObjectId.isValid(courseId)) {
-      return res.status(400).json({
+      if (
+        !mongoose.Types.ObjectId.isValid(
+          courseId
+        )
+      ) {
+        return res.status(400).json({
+          status: 'error',
+          message: 'Invalid course ID.'
+        });
+      }
+
+      const courseData =
+        await learningService.getCourseDetails(
+          courseId
+        );
+
+      return res.status(200).json({
+        status: 'success',
+        data: courseData
+      });
+    } catch (error) {
+      console.error(
+        'Get course details error:',
+        error
+      );
+
+      if (
+        error.message ===
+        'Course not found'
+      ) {
+        return res.status(404).json({
+          status: 'error',
+          message: 'Course not found.'
+        });
+      }
+
+      return res.status(500).json({
         status: 'error',
-        message: 'Invalid course ID.'
+        message:
+          'Unable to load course details.'
       });
     }
-
-    const courseData =
-      await learningService.getCourseDetails(courseId);
-
-    return res.status(200).json({
-      status: 'success',
-      data: courseData
-    });
-  } catch (error) {
-    console.error('Get course details error:', error);
-
-    if (error.message === 'Course not found') {
-      return res.status(404).json({
-        status: 'error',
-        message: 'Course not found.'
-      });
-    }
-
-    return res.status(500).json({
-      status: 'error',
-      message: 'Unable to load course details.'
-    });
   }
-});
+);
+
 
 /**
  * GET /api/learn/lessons/:lessonId
  *
- * Get lesson content and its quizzes.
+ * Get lesson content and quizzes.
  */
-router.get('/lessons/:lessonId', async (req, res) => {
-  try {
-    const { lessonId } = req.params;
+router.get(
+  '/lessons/:lessonId',
+  async (req, res) => {
+    try {
+      const { lessonId } = req.params;
 
-    if (!mongoose.Types.ObjectId.isValid(lessonId)) {
-      return res.status(400).json({
+      if (
+        !mongoose.Types.ObjectId.isValid(
+          lessonId
+        )
+      ) {
+        return res.status(400).json({
+          status: 'error',
+          message: 'Invalid lesson ID.'
+        });
+      }
+
+      const lessonData =
+        await learningService.getLessonWithQuiz(
+          lessonId
+        );
+
+      return res.status(200).json({
+        status: 'success',
+        data: lessonData
+      });
+    } catch (error) {
+      console.error(
+        'Get lesson error:',
+        error
+      );
+
+      if (
+        error.message ===
+        'Lesson not found'
+      ) {
+        return res.status(404).json({
+          status: 'error',
+          message: 'Lesson not found.'
+        });
+      }
+
+      return res.status(500).json({
         status: 'error',
-        message: 'Invalid lesson ID.'
+        message:
+          'Unable to load lesson.'
       });
     }
-
-    const lessonData =
-      await learningService.getLessonWithQuiz(lessonId);
-
-    return res.status(200).json({
-      status: 'success',
-      data: lessonData
-    });
-  } catch (error) {
-    console.error('Get lesson error:', error);
-
-    if (error.message === 'Lesson not found') {
-      return res.status(404).json({
-        status: 'error',
-        message: 'Lesson not found.'
-      });
-    }
-
-    return res.status(500).json({
-      status: 'error',
-      message: 'Unable to load lesson.'
-    });
   }
-});
+);
+
+
+/**
+ * POST /api/learn/quiz/submit
+ *
+ * Validate quiz answers.
+ *
+ * Body:
+ * {
+ *   lessonId: "...",
+ *   submittedAnswers: [0, 2, 1]
+ * }
+ */
+router.post(
+  '/quiz/submit',
+  async (req, res) => {
+    try {
+      const {
+        lessonId,
+        submittedAnswers
+      } = req.body;
+
+      if (!lessonId) {
+        return res.status(400).json({
+          status: 'error',
+          message: 'Lesson ID is required.'
+        });
+      }
+
+      if (
+        !mongoose.Types.ObjectId.isValid(
+          lessonId
+        )
+      ) {
+        return res.status(400).json({
+          status: 'error',
+          message: 'Invalid lesson ID.'
+        });
+      }
+
+      if (
+        !Array.isArray(submittedAnswers)
+      ) {
+        return res.status(400).json({
+          status: 'error',
+          message:
+            'submittedAnswers must be an array.'
+        });
+      }
+
+      const result =
+        await learningService.submitQuizAnswers(
+          lessonId,
+          submittedAnswers
+        );
+
+      return res.status(200).json({
+        status: 'success',
+        data: result
+      });
+    } catch (error) {
+      console.error(
+        'Quiz submission error:',
+        error
+      );
+
+      if (
+        error.message ===
+        'Lesson not found'
+      ) {
+        return res.status(404).json({
+          status: 'error',
+          message: 'Lesson not found.'
+        });
+      }
+
+      return res.status(500).json({
+        status: 'error',
+        message:
+          'Unable to validate quiz answers.'
+      });
+    }
+  }
+);
+
 
 /**
  * POST /api/learn/lessons/:lessonId/complete
  *
- * Complete a lesson and optionally submit quiz answers.
+ * Complete a lesson and save quiz score.
  */
-router.post('/lessons/:lessonId/complete', async (req, res) => {
-  try {
-    const { lessonId } = req.params;
-    const { userId, submittedAnswers } = req.body;
+router.post(
+  '/lessons/:lessonId/complete',
+  async (req, res) => {
+    try {
+      const { lessonId } = req.params;
 
-    if (!mongoose.Types.ObjectId.isValid(lessonId)) {
-      return res.status(400).json({
-        status: 'error',
-        message: 'Invalid lesson ID.'
-      });
-    }
-
-    if (!userId) {
-      return res.status(400).json({
-        status: 'error',
-        message: 'User ID is required.'
-      });
-    }
-
-    if (!mongoose.Types.ObjectId.isValid(userId)) {
-      return res.status(400).json({
-        status: '400',
-        message: 'Invalid user ID.'
-      });
-    }
-
-    if (
-      submittedAnswers !== undefined &&
-      !Array.isArray(submittedAnswers)
-    ) {
-      return res.status(400).json({
-        status: 'error',
-        message: 'submittedAnswers must be an array.'
-      });
-    }
-
-    const result =
-      await learningService.recordLessonProgress(
+      const {
         userId,
-        lessonId,
         submittedAnswers
+      } = req.body;
+
+      if (
+        !mongoose.Types.ObjectId.isValid(
+          lessonId
+        )
+      ) {
+        return res.status(400).json({
+          status: 'error',
+          message: 'Invalid lesson ID.'
+        });
+      }
+
+      if (!userId) {
+        return res.status(400).json({
+          status: 'error',
+          message: 'User ID is required.'
+        });
+      }
+
+      if (
+        !mongoose.Types.ObjectId.isValid(
+          userId
+        )
+      ) {
+        return res.status(400).json({
+          status: 'error',
+          message: 'Invalid user ID.'
+        });
+      }
+
+      if (
+        submittedAnswers !== undefined &&
+        !Array.isArray(submittedAnswers)
+      ) {
+        return res.status(400).json({
+          status: 'error',
+          message:
+            'submittedAnswers must be an array.'
+        });
+      }
+
+      const result =
+        await learningService.recordLessonProgress(
+          userId,
+          lessonId,
+          submittedAnswers || []
+        );
+
+      return res.status(200).json({
+        status: 'success',
+        data: result
+      });
+    } catch (error) {
+      console.error(
+        'Record lesson progress error:',
+        error
       );
 
-    return res.status(200).json({
-      status: 'success',
-      data: result
-    });
-  } catch (error) {
-    console.error('Record lesson progress error:', error);
+      if (
+        error.message ===
+        'Lesson not found'
+      ) {
+        return res.status(404).json({
+          status: 'error',
+          message: 'Lesson not found.'
+        });
+      }
 
-    if (error.message === 'Lesson not found') {
-      return res.status(404).json({
+      return res.status(500).json({
         status: 'error',
-        message: 'Lesson not found.'
+        message:
+          'Failed to record lesson progress.'
       });
     }
-
-    return res.status(500).json({
-      status: 'error',
-      message: 'Failed to record lesson progress.'
-    });
   }
-});
+);
+
 
 /**
  * GET /api/learn/dashboard/:userId
  *
- * Get dynamically calculated learning statistics.
+ * Get learning statistics.
  */
-router.get('/dashboard/:userId', async (req, res) => {
-  try {
-    const { userId } = req.params;
+router.get(
+  '/dashboard/:userId',
+  async (req, res) => {
+    try {
+      const { userId } = req.params;
 
-    if (!mongoose.Types.ObjectId.isValid(userId)) {
-     return res.status(400).json({
-     status: 'error',
-     message: 'Invalid user ID.'
-   });
- }
+      if (
+        !mongoose.Types.ObjectId.isValid(
+          userId
+        )
+      ) {
+        return res.status(400).json({
+          status: 'error',
+          message: 'Invalid user ID.'
+        });
+      }
 
-    const stats =
-      await learningService.getUserDashboardStats(userId);
+      const stats =
+        await learningService
+          .getUserDashboardStats(userId);
 
-    return res.status(200).json({
-      status: 'success',
-      data: stats
-    });
-  } catch (error) {
-    console.error('Get dashboard stats error:', error);
+      return res.status(200).json({
+        status: 'success',
+        data: stats
+      });
+    } catch (error) {
+      console.error(
+        'Get dashboard stats error:',
+        error
+      );
 
-    return res.status(500).json({
-      status: 'error',
-      message: 'Unable to load dashboard stats.'
-    });
+      return res.status(500).json({
+        status: 'error',
+        message:
+          'Unable to load dashboard stats.'
+      });
+    }
   }
-});
+);
+
 
 module.exports = router;

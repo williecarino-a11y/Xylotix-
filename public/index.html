@@ -290,7 +290,9 @@
        APPLICATION STATE
        ========================================= */
 
-    let currentCourseId = null;
+    let currentQuizzes = [];
+    let selectedQuizAnswers = [];
+    let quizSubmitted = false;
     let currentLessonId = null;
     let currentQuiz = null;
     let courseDataCache = null;
@@ -1177,105 +1179,122 @@ const caption =
        QUIZ
        ========================================= */
 
-    function renderQuiz(lesson) {
+     function renderQuiz(lesson) {
 
-      const section =
-        document.getElementById(
-          "quiz-section"
-        );
+  const section =
+    document.getElementById(
+      "quiz-section"
+    );
 
-      const question =
-        document.getElementById(
-          "quiz-question"
-        );
+  const question =
+    document.getElementById(
+      "quiz-question"
+    );
 
-      const options =
-        document.getElementById(
-          "quiz-options"
-        );
+  const options =
+    document.getElementById(
+      "quiz-options"
+    );
 
-      const result =
-        document.getElementById(
-          "quiz-result"
-        );
+  const result =
+    document.getElementById(
+      "quiz-result"
+    );
 
-      result.innerHTML = "";
+  result.innerHTML = "";
 
-      currentQuiz = null;
+  currentQuizzes =
+    Array.isArray(lesson.quizzes)
+      ? lesson.quizzes
+      : [];
 
-      /*
-       * Your LearningService returns:
-       *
-       * quizzes: [...]
-       */
+  selectedQuizAnswers =
+    new Array(currentQuizzes.length);
 
-      const quizzes =
-        Array.isArray(
-          lesson.quizzes
-        )
-          ? lesson.quizzes
-          : [];
+  quizSubmitted = false;
 
-      if (
-        quizzes.length === 0
-      ) {
+  if (currentQuizzes.length === 0) {
 
-        section.classList.add(
-          "hidden"
-        );
+    section.classList.add(
+      "hidden"
+    );
 
-        options.innerHTML = "";
+    options.innerHTML = "";
 
-        return;
-      }
+    return;
+  }
 
-      /*
-       * Currently display the first
-       * quiz associated with the lesson.
-       */
+  section.classList.remove(
+    "hidden"
+  );
 
-      currentQuiz =
-        quizzes[0];
+  /*
+   * Render all quizzes belonging
+   * to this lesson.
+   */
+  options.innerHTML =
+    currentQuizzes
+      .map(
+        (quiz, quizIndex) => {
 
-      section.classList.remove(
-        "hidden"
-      );
+          const quizOptions =
+            Array.isArray(
+              quiz.options
+            )
+              ? quiz.options
+              : [];
 
-      question.innerText =
-        currentQuiz.question ||
-        "Question unavailable.";
+          return `
+            <div
+              class="card"
+              style="margin-top: 15px;"
+            >
 
-      const quizOptions =
-        Array.isArray(
-          currentQuiz.options
-        )
-          ? currentQuiz.options
-          : [];
+              <p>
+                <strong>
+                  ${quizIndex + 1}.
+                  ${escapeHtml(
+                    quiz.question ||
+                    "Question unavailable."
+                  )}
+                </strong>
+              </p>
 
-      options.innerHTML =
-        quizOptions
-          .map(
-            (option, index) => `
+              ${
+                quizOptions
+                  .map(
+                    (option, optionIndex) => `
+                      <label
+                        class="quiz-option"
+                      >
 
-              <label
-                class="quiz-option"
-              >
+                        <input
+                          type="radio"
+                          name="quiz-${quizIndex}"
+                          value="${optionIndex}"
+                          onchange="
+                            selectedQuizAnswers[${quizIndex}]
+                            = ${optionIndex};
+                          "
+                        >
 
-                <input
-                  type="radio"
-                  name="quizOpt"
-                  value="${index}"
-                >
+                        ${escapeHtml(option)}
 
-                ${escapeHtml(option)}
+                      </label>
+                    `
+                  )
+                  .join("")
+              }
 
-              </label>
+            </div>
+          `;
+        }
+      )
+      .join("");
 
-            `
-          )
-          .join("");
-
-    }
+  question.innerText =
+    "Answer the questions below before completing the lesson.";
+}
 
 
     /* =========================================
@@ -1284,116 +1303,157 @@ const caption =
 
     async function submitQuiz() {
 
-      const selected =
-        document.querySelector(
-          'input[name="quizOpt"]:checked'
-        );
+  if (
+    !currentLessonId ||
+    currentQuizzes.length === 0
+  ) {
+    alert(
+      "No quiz is available."
+    );
 
-      if (!selected) {
+    return;
+  }
 
-        alert(
-          "Please select an option."
-        );
+  /*
+   * Make sure every quiz has
+   * an answer.
+   */
+  const unanswered =
+    currentQuizzes.findIndex(
+      (_, index) =>
+        selectedQuizAnswers[index] ===
+        undefined
+    );
 
-        return;
-      }
+  if (unanswered !== -1) {
 
-      if (!currentQuiz) {
+    alert(
+      `Please answer question ${
+        unanswered + 1
+      } before submitting.`
+    );
 
-        alert(
-          "No quiz is available."
-        );
+    return;
+  }
 
-        return;
-      }
+  const button =
+    document.getElementById(
+      "quiz-submit-btn"
+    );
 
-      const selectedOptionIndex =
-        Number(
-          selected.value
-        );
+  const result =
+    document.getElementById(
+      "quiz-result"
+    );
 
-      /*
-       * We first try the existing quiz
-       * endpoint used by the previous
-       * frontend.
-       */
+  button.disabled = true;
+  button.innerText =
+    "Checking...";
 
-      try {
+  try {
 
-        const response =
-          await fetch(
-            "/api/learn/quiz/submit",
-            {
-              method: "POST",
+    const response =
+      await fetch(
+        "/api/learn/quiz/submit",
+        {
+          method: "POST",
 
-              headers: {
-                "Content-Type":
-                  "application/json"
-              },
+          headers: {
+            "Content-Type":
+              "application/json"
+          },
 
-              body: JSON.stringify({
-                courseId:
-                  currentCourseId,
+          body: JSON.stringify({
+            lessonId:
+              currentLessonId,
 
-                lessonId:
-                  currentLessonId,
-
-                selectedOptionIndex:
-                  selectedOptionIndex
-              })
-            }
-          );
-
-        const data =
-          await response.json();
-
-        const result =
-          document.getElementById(
-            "quiz-result"
-          );
-
-        const isCorrect =
-          data.isCorrect === true ||
-          data.data?.isCorrect === true;
-
-        if (
-          response.ok &&
-          isCorrect
-        ) {
-
-          result.innerHTML = `
-            <span class="success-text">
-              Correct! You can now complete the lesson.
-            </span>
-          `;
-
-        } else {
-
-          result.innerHTML = `
-            <span class="error-text">
-              ${
-                data.message ||
-                "Incorrect. Try again!"
-              }
-            </span>
-          `;
-
+            submittedAnswers:
+              selectedQuizAnswers
+          })
         }
+      );
 
-      } catch (error) {
+    const data =
+      await response.json();
 
-        console.error(
-          "Quiz submission error:",
-          error
-        );
+    if (
+      response.ok &&
+      data.status === "success"
+    ) {
 
-        alert(
-          "Unable to validate quiz answer."
-        );
+      const quizResult =
+        data.data;
 
+      if (
+        quizResult.passed
+      ) {
+
+        result.innerHTML = `
+          <span class="success-text">
+            Quiz complete! 
+            Score: ${quizResult.score}%.
+            You got
+            ${quizResult.correctAnswers}
+            out of
+            ${quizResult.totalQuestions}
+            correct.
+            You can now complete the lesson.
+          </span>
+        `;
+
+        quizSubmitted = true;
+
+      } else {
+
+        result.innerHTML = `
+          <span class="error-text">
+            Score: ${quizResult.score}%.
+            You got
+            ${quizResult.correctAnswers}
+            out of
+            ${quizResult.totalQuestions}
+            correct.
+            Review the lesson and try again.
+          </span>
+        `;
+
+        quizSubmitted = false;
       }
+
+    } else {
+
+      result.innerHTML = `
+        <span class="error-text">
+          ${
+            data.message ||
+            "Unable to validate quiz."
+          }
+        </span>
+      `;
 
     }
+
+  } catch (error) {
+
+    console.error(
+      "Quiz submission error:",
+      error
+    );
+
+    result.innerHTML = `
+      <span class="error-text">
+        Unable to connect to the server.
+      </span>
+    `;
+
+  } finally {
+
+    button.disabled = false;
+    button.innerText =
+      "Submit Answer";
+
+  }
+}
 
 
     /* =========================================
@@ -1402,99 +1462,114 @@ const caption =
 
     async function completeLesson() {
 
-      if (!currentLessonId) {
+  if (!currentLessonId) {
 
-        alert(
-          "No lesson is currently selected."
-        );
+    alert(
+      "No lesson is currently selected."
+    );
 
-        return;
-      }
+    return;
+  }
 
-      const button =
-        document.getElementById(
-          "complete-btn"
-        );
+  /*
+   * If the lesson has quizzes,
+   * require the quiz to be submitted first.
+   */
+  if (
+    currentQuizzes.length > 0 &&
+    !quizSubmitted
+  ) {
 
-      button.disabled = true;
+    alert(
+      "Please complete and submit the quiz before completing this lesson."
+    );
 
-      button.innerText =
-        "Saving...";
+    return;
+  }
 
-      try {
+  const button =
+    document.getElementById(
+      "complete-btn"
+    );
 
-        const response =
-          await fetch(
-            `/api/learn/lessons/${currentLessonId}/complete`,
-            {
-              method: "POST",
+  button.disabled = true;
 
-              headers: {
-                "Content-Type":
-                  "application/json"
-              },
+  button.innerText =
+    "Saving...";
 
-              body: JSON.stringify({
+  try {
 
-                userId:
-                  dummyUserId,
+    const response =
+      await fetch(
+        `/api/learn/lessons/${currentLessonId}/complete`,
+        {
+          method: "POST",
 
-                submittedAnswers:
-                  []
+          headers: {
+            "Content-Type":
+              "application/json"
+          },
 
-              })
-            }
-          );
+          body: JSON.stringify({
 
-        const data =
-          await response.json();
+            userId:
+              dummyUserId,
 
-        if (
-          response.ok &&
-          (
-            data.status === "success" ||
-            data.success === true
-          )
-        ) {
+            submittedAnswers:
+              selectedQuizAnswers
 
-          alert(
-            "Lesson completed successfully!"
-          );
-
-          await openCourse(
-            currentCourseId
-          );
-
-        } else {
-
-          alert(
-            data.message ||
-            "Failed to save lesson progress."
-          );
-
+          })
         }
+      );
 
-      } catch (error) {
+    const data =
+      await response.json();
 
-        console.error(
-          "Complete lesson error:",
-          error
-        );
+    if (
+      response.ok &&
+      data.status === "success"
+    ) {
 
-        alert(
-          "Failed to save progress."
-        );
+      alert(
+        "Lesson completed successfully!"
+      );
 
-      } finally {
+      /*
+       * Reload the course so the
+       * frontend has fresh data.
+       */
+      await openCourse(
+        currentCourseId
+      );
 
-        button.disabled = false;
+    } else {
 
-        button.innerText =
-          "Complete Lesson";
-
-      }
+      alert(
+        data.message ||
+        "Failed to save lesson progress."
+      );
 
     }
+
+  } catch (error) {
+
+    console.error(
+      "Complete lesson error:",
+      error
+    );
+
+    alert(
+      "Failed to save progress."
+    );
+
+  } finally {
+
+    button.disabled = false;
+
+    button.innerText =
+      "Complete Lesson";
+  }
+}
 
 
     /* =========================================
