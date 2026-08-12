@@ -69,7 +69,7 @@ const moneyBasics = {
       'Students will be able to establish realistic financial goals.',
       'Students will understand how saving creates financial resilience.',
       'Students will be able to design a simple personal money-management routine.',
-      'Students will have the foundation required for more advanced Xylotix Financial Academy courses.'
+      'Students will have the foundation required for more advanced Miimiid courses.'
     ],
 
     order: 1,
@@ -100,7 +100,7 @@ const moneyBasics = {
 
           title: 'Lesson 1 — What Is Money?',
 
-          estimatedDuration: 12,
+          estimatedDuration: 15,
 
           order: 1,
 
@@ -112,7 +112,7 @@ const moneyBasics = {
               type: 'text',
               data: {
                 text:
-                  'Money is one of the most important tools in modern economic life. We use it to buy food, pay for transportation, receive salaries, operate businesses, save for future goals, and exchange value with other people. Yet many people use money every day without clearly understanding what money is or what functions it performs. Financial literacy begins with understanding the role money plays in our lives.'
+                  'Money is one of the most important tools in modern economic life. We use it to buy goods and services, pay for transportation, receive income, operate businesses, save for future goals, and exchange value with other people. Yet many people use money every day without clearly understanding what money is or why it is useful. Financial literacy begins with understanding the role money plays in our lives.'
               }
             },
 
@@ -121,7 +121,7 @@ const moneyBasics = {
               type: 'heading',
               data: {
                 level: 2,
-                text: 'The Three Traditional Functions of Money'
+                text: 'What Is Money?'
               }
             },
 
@@ -130,7 +130,7 @@ const moneyBasics = {
               type: 'text',
               data: {
                 text:
-                  'Money traditionally performs three major functions. First, it acts as a medium of exchange. Instead of directly exchanging one product for another, people can use money to purchase goods and services. Second, money acts as a unit of account. This gives people a common way to measure and compare economic value. Third, money acts as a store of value, allowing people to hold purchasing power for future use.'
+                  'Money is a generally accepted tool used to exchange, measure, and preserve economic value. It allows people to participate in economic activity without having to rely entirely on direct barter. Money can take different physical or digital forms, but its usefulness comes from its ability to function within an economic system.'
               }
             },
 
@@ -139,7 +139,7 @@ const moneyBasics = {
               type: 'heading',
               data: {
                 level: 2,
-                text: 'Money as a Medium of Exchange'
+                text: 'The Three Traditional Functions of Money'
               }
             },
 
@@ -148,7 +148,7 @@ const moneyBasics = {
               type: 'text',
               data: {
                 text:
-                  'Imagine that a farmer has rice and wants a phone, while a phone seller wants shoes. In a barter system, both sides must find an exchange that satisfies everyone. Money makes this process easier. The farmer can sell the rice for money and later use the money to purchase the phone. The phone seller does not need to want rice directly. Money separates the act of selling from the act of buying.'
+                  'Money traditionally performs three major functions: medium of exchange, unit of account, and store of value. These functions explain why money makes economic activity easier and why understanding money is an important foundation of financial literacy.'
               }
             },
 
@@ -157,7 +157,7 @@ const moneyBasics = {
               type: 'heading',
               data: {
                 level: 2,
-                text: 'Money as a Unit of Account'
+                text: '1. Money as a Medium of Exchange'
               }
             },
 
@@ -166,36 +166,35 @@ const moneyBasics = {
               type: 'text',
               data: {
                 text:
-                  'A unit of account allows us to express different economic values using a common measurement. If one phone costs ₦200,000 and another costs ₦350,000, we can compare their prices because both are expressed in the same monetary unit. The same principle allows us to compare income, rent, food costs, transportation, education, and other expenses.'
+                  'A medium of exchange is something people generally accept in exchange for goods and services. Without money, people could have to rely on barter, where two people must find an exchange that both sides want. Imagine that a farmer has rice and wants a phone, while a phone seller wants shoes. The farmer would have difficulty buying the phone directly unless the seller wanted the rice or accepted something the farmer could provide. Money makes the process easier because the farmer can sell the rice for money and later use that money to purchase the phone. The phone seller does not need to want rice directly. Money separates the act of selling from the act of buying.'
               }
             },
 
             {
               order: 8,
-              type: 'heading',
+              type: 'example',
               data: {
-                level: 2,
-                text: 'Money as a Store of Value'
+                title: 'Real-Life Example',
+                text:
+                  'Imagine you want to buy headphones costing $80. You do not need the store owner to want something you own. You provide $80, and the seller provides the headphones. Money makes the exchange possible without requiring a direct barter arrangement.'
               }
             },
 
             {
               order: 9,
-              type: 'text',
+              type: 'heading',
               data: {
-                text:
-                  'Money can also allow people to transfer purchasing power from the present into the future. For example, someone may receive income today but decide not to spend all of it immediately. They can retain part of that purchasing power for a future need. However, money is not guaranteed to preserve exactly the same purchasing power forever because prices can change over time.'
+                level: 2,
+                text: '2. Money as a Unit of Account'
               }
             },
 
             {
               order: 10,
-              type: 'callout',
+              type: 'text',
               data: {
-                variant: 'info',
-                title: 'Key Idea',
                 text:
-                  'Financial literacy is not simply knowing how to earn money. It is understanding how money is received, allocated, protected, saved, and used to achieve goals.'
+                  'A unit of account provides a common way to measure and compare economic value. If one phone costs $200 and another costs $350, we can compare their prices because both are expressed in the same monetary unit. The same principle allows people to compare income, rent, food costs, transportation, education, products, services, and other expenses.'
               }
             },
 
@@ -203,23 +202,118 @@ const moneyBasics = {
               order: 11,
               type: 'example',
               data: {
-                title: 'Real-World Example',
+                title: 'Real-Life Example',
                 text:
-                  'Imagine receiving ₦150,000. You could spend the entire amount immediately, save part of it, use part to pay an important obligation, or divide it among several goals. The amount is only the starting point. Your financial decision determines what the money accomplishes.'
+                  'Suppose a student is considering two courses. Course A costs $100 and Course B costs $250. Because both prices use the same monetary unit, the student can compare the financial cost and then consider whether the additional $150 is justified by the difference in value.'
               }
             },
 
             {
               order: 12,
+              type: 'heading',
+              data: {
+                level: 2,
+                text: '3. Money as a Store of Value'
+              }
+            },
+
+            {
+              order: 13,
+              type: 'text',
+              data: {
+                text:
+                  'Money can also serve as a store of value by allowing people to preserve purchasing power for future use. Someone may receive $1,000 today but decide not to spend all of it immediately. They can retain part of that money and use it later for an emergency, purchase, education, or another financial goal. However, money does not guarantee that exactly the same amount of goods and services can be purchased in the future because prices can change over time.'
+              }
+            },
+
+            {
+              order: 14,
+              type: 'example',
+              data: {
+                title: 'Real-Life Example',
+                text:
+                  'Suppose $100 is enough to purchase a particular group of goods today. If those same goods later cost $120, your $100 has not disappeared, but its purchasing power has decreased because it now buys less than before.'
+              }
+            },
+
+            {
+              order: 15,
+              type: 'heading',
+              data: {
+                level: 2,
+                text: 'What Money Is Not'
+              }
+            },
+
+            {
+              order: 16,
+              type: 'text',
+              data: {
+                text:
+                  'Money is not the same thing as wealth. Wealth can include valuable assets, productive resources, investments, business interests, property, and other resources that contribute to a person’s overall financial position. Someone can have a high income and still build little wealth if they consistently spend everything they earn or accumulate significant obligations.'
+              }
+            },
+
+            {
+              order: 17,
+              type: 'text',
+              data: {
+                text:
+                  'Money is also not the same thing as income. Income describes money or economic value received, while money is the resource that can be spent, saved, allocated, or used for other purposes. For example, receiving a $3,000 salary represents income. What happens to that money afterward is a separate financial decision.'
+              }
+            },
+
+            {
+              order: 18,
+              type: 'text',
+              data: {
+                text:
+                  'Money does not guarantee investment profits. Having money available does not mean that every investment will produce a positive return. Investments can involve uncertainty and risk, so financial decisions should not be based on the assumption that profit is guaranteed.'
+              }
+            },
+
+            {
+              order: 19,
+              type: 'callout',
+              data: {
+                variant: 'info',
+                title: 'Purchasing Power',
+                text:
+                  'The numerical amount of money can remain unchanged while its purchasing power changes. If prices rise, the same amount of money may buy fewer goods and services. This is why financial literacy involves understanding not only how much money you have, but also what that money can accomplish.'
+              }
+            },
+
+            {
+              order: 20,
+              type: 'heading',
+              data: {
+                level: 2,
+                text: 'Why Understanding Money Matters'
+              }
+            },
+
+            {
+              order: 21,
+              type: 'text',
+              data: {
+                text:
+                  'Understanding money helps you think more clearly about how you earn, spend, save, protect, and allocate financial resources. The goal is not simply to accumulate money. The goal is to understand how money works so you can make more informed decisions about the resources available to you.'
+              }
+            },
+
+            {
+              order: 22,
               type: 'summary',
               data: {
                 title: 'Lesson Summary',
                 points: [
-                  'Money is used as a medium of exchange.',
-                  'Money provides a common unit for measuring economic value.',
-                  'Money can hold purchasing power for future use.',
-                  'Understanding money is the foundation of financial literacy.',
-                  'The usefulness of money depends partly on how intentionally it is managed.'
+                  'Money functions as a medium of exchange.',
+                  'Money provides a common unit for measuring and comparing economic value.',
+                  'Money can serve as a store of value for future use.',
+                  'Money is not the same thing as wealth or income.',
+                  'Money does not guarantee investment profits.',
+                  'The purchasing power of money can change over time.',
+                  'Understanding money is a foundation of financial literacy.'
                 ]
               }
             }
