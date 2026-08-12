@@ -36,5 +36,5 @@ app.get('/api/health', (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`Xylotix server running on port ${PORT}`);
+  console.log(`Miimiid server running on port ${PORT}`);
 });

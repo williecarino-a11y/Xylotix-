@@ -40,7 +40,7 @@ async function seedDatabase() {
     });
 
     await newCourse.save();
-    console.log('Success! Real course data inserted into Xylotix Database.');
+    console.log('Success! Real course data inserted into Miimiid Database.');
     
     process.exit(); // Close the script
   } catch (err) {

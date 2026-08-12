@@ -434,73 +434,31 @@ const moneyBasics = {
               data: {
                 title: 'Simple Example',
                 text:
-                  'Suppose $100 can purchase a particular basket of goods today. If those goods later cost $120, the same $100 no longer purchases the entire basket. The numerical amount has not changed, but its purchasing power has.'
+                  'Suppose ₦10,000 can purchase a particular basket of goods today. If those goods later cost ₦12,000, the same ₦10,000 no longer purchases the entire basket. The numerical amount has not changed, but its purchasing power has.'
               }
             },
 
             {
               order: 7,
-              type: 'heading',
-              data: {
-                level: 2,
-                text: 'The Sunk Cost Fallacy'
-              }
-            },
-
-            {
-              order: 8,
-              type: 'text',
-              data: {
-                text:
-                  'A sunk cost is a resource that has already been spent and cannot be recovered. The sunk cost fallacy occurs when people allow past, unrecoverable spending to influence a current decision, even when that spending should no longer determine what happens next. A better financial decision focuses on the future costs, benefits, risks, and alternatives that are still within your control.'
-              }
-            },
-
-            {
-              order: 9,
-              type: 'example',
-              data: {
-                title: 'Real-Life Example',
-                text:
-                  'Imagine you paid $200 for an online course but later realize that the course is not useful for your goals. Continuing to spend dozens of hours on it simply because you already paid $200 may be an example of the sunk cost fallacy. The $200 is already gone. A better question is whether continuing the course is worthwhile from this point forward.'
-              }
-            },
-
-            {
-              order: 10,
-              type: 'callout',
-              data: {
-                variant: 'info',
-                title: 'Decision-Making Principle',
-                text:
-                  'When making a new financial decision, focus on the costs, benefits, risks, and opportunities that still exist. Money or time that has already been spent and cannot be recovered should not, by itself, determine what you do next.'
-              }
-            },
-
-            {
-              order: 11,
               type: 'callout',
               data: {
                 variant: 'warning',
                 title: 'Think Beyond the Number',
                 text:
-                  'Look beyond the price tag. Consider what the money can accomplish, what opportunity you may give up, how purchasing power may change, and whether a past cost is influencing your decision even though it cannot be recovered.'
+                  'A financial decision should not be judged only by the amount of money involved. Consider what the money can accomplish, what opportunity is being given up, and how the decision affects future options.'
               }
             },
 
             {
-              order: 12,
+              order: 8,
               type: 'summary',
               data: {
                 title: 'Lesson Summary',
                 points: [
-                  'Money is a tool for exchanging and measuring economic value.',
+                  'Money is a tool for exchanging and measuring value.',
                   'Money and wealth are related but not identical.',
-                  'Purchasing power describes what a given amount of money can actually buy.',
-                  'The value of a financial decision depends on more than the amount of money involved.',
-                  'Opportunity cost helps us consider what we give up when choosing one use of money over another.',
-                  'A sunk cost is a past cost that cannot be recovered and should not automatically control future decisions.',
-                  'Strong financial decisions focus on future consequences, available alternatives, and long-term goals.'
+                  'Purchasing power describes what money can actually buy.',
+                  'Financial decisions should consider both present and future options.'
                 ]
               }
             }
@@ -537,23 +495,6 @@ const moneyBasics = {
               explanation:
                 'Financial wealth depends on the broader relationship between resources, assets, obligations, income, spending, and long-term financial position.',
               points: 10
-            },
-
-            {
-              order: 3,
-              questionType: 'multiple-choice',
-              question:
-                'Which situation best demonstrates the sunk cost fallacy?',
-              options: [
-                'Stopping an unhelpful course because the remaining time could be used for a more valuable opportunity.',
-                'Continuing an unhelpful course only because you already paid for it.',
-                'Comparing two courses based on their future benefits and costs.',
-                'Changing a spending decision after discovering a better alternative.'
-              ],
-              correctAnswer: 1,
-              explanation:
-                'The sunk cost fallacy occurs when a person allows a past cost that cannot be recovered to influence a current decision, instead of focusing on future costs, benefits, and alternatives.',
-              points: 10
             }
           ]
         },
@@ -563,7 +504,7 @@ const moneyBasics = {
 
           title: 'Lesson 3 — Essential Financial Vocabulary',
 
-          estimatedDuration: 10,
+          estimatedDuration: 25,
 
           order: 3,
 
@@ -575,7 +516,7 @@ const moneyBasics = {
               type: 'text',
               data: {
                 text:
-                  'Before learning advanced personal finance, it helps to understand the language used to describe financial decisions. Words such as income, expense, savings, assets, liabilities, cash flow, budget, debt, and investment describe different parts of a person’s financial life.'
+                  'Financial vocabulary is not just a collection of definitions. These concepts describe what enters your financial life, what leaves it, what you own, what you owe, and how strong or fragile your financial position may be. Understanding these ideas gives you a framework for making better financial decisions.'
               }
             },
 
@@ -584,7 +525,7 @@ const moneyBasics = {
               type: 'heading',
               data: {
                 level: 2,
-                text: 'Core Terms'
+                text: 'Income — What Comes In'
               }
             },
 
@@ -593,40 +534,287 @@ const moneyBasics = {
               type: 'text',
               data: {
                 text:
-                  'Income is money or economic value received. An expense is money spent or an obligation incurred. Savings are resources intentionally set aside for future use. An asset is something with economic value that a person or organization owns or controls. A liability is an obligation that requires payment or settlement. Cash flow describes money moving into and out of a financial system.'
+                  'Income is money or economic value received from a source such as employment, self-employment, business activity, investments, property, royalties, or other legitimate economic activity. Income is a major financial resource, but income alone does not determine financial strength. A person can earn a high income and still struggle financially when expenses, debt payments, taxes, and other obligations consume most of what is received.'
               }
             },
 
             {
               order: 4,
-              type: 'heading',
+              type: 'example',
               data: {
-                level: 2,
-                text: 'Why Vocabulary Matters'
+                title: 'High Income Does Not Automatically Mean Wealth',
+                text:
+                  'Imagine two people who each receive $5,000 per month. One spends $4,800 on lifestyle expenses and debt payments. The other spends $3,000 and consistently saves and invests part of the difference. Their income is identical, but their financial positions can develop very differently.'
               }
             },
 
             {
               order: 5,
-              type: 'text',
+              type: 'heading',
               data: {
-                text:
-                  'Financial vocabulary is not just academic terminology. When you understand the words, financial information becomes easier to interpret. You can understand a bank statement, discuss a budget, compare financial products, evaluate a business, or follow an investment explanation more confidently.'
+                level: 2,
+                text: 'Expenses — What Goes Out'
               }
             },
 
             {
               order: 6,
+              type: 'text',
+              data: {
+                text:
+                  'An expense is money spent to obtain goods, services, experiences, or other benefits, or a cost that must be recognized as part of financial activity. Expenses can include housing, food, transportation, education, healthcare, communication, entertainment, subscriptions, and many other categories. Expenses are not automatically bad. The important questions are whether they are necessary or valuable, whether they are affordable, and whether they fit your priorities and available resources.'
+              }
+            },
+
+            {
+              order: 7,
+              type: 'callout',
+              data: {
+                variant: 'warning',
+                title: 'Lifestyle Can Consume Income',
+                text:
+                  'When income increases, increasing expenses at the same pace can prevent financial progress. Earning more money does not automatically create wealth if most of the additional income is immediately absorbed by a more expensive lifestyle.'
+              }
+            },
+
+            {
+              order: 8,
+              type: 'heading',
+              data: {
+                level: 2,
+                text: 'Assets — Resources With Economic Value'
+              }
+            },
+
+            {
+              order: 9,
+              type: 'text',
+              data: {
+                text:
+                  'An asset is a valuable economic resource that a person or organization owns or has a legitimate right to, and that can provide present or future financial benefit. An asset is not simply something you possess. It has economic value or the capacity to contribute value to your financial position.'
+              }
+            },
+
+            {
+              order: 10,
+              type: 'callout',
+              data: {
+                variant: 'info',
+                title: 'Depreciation Does Not Automatically Stop Something From Being an Asset',
+                text:
+                  'An asset can increase in value, maintain value, or decrease in value over time. Depreciation describes a decline in value; it does not automatically mean that the item is no longer an asset. A car can be an asset even though it normally depreciates.'
+              }
+            },
+
+            {
+              order: 11,
+              type: 'example',
+              data: {
+                title: 'House, Car, and Investment Examples',
+                text:
+                  'A house can be an asset because it can have significant economic value. A car can also be an asset even though it may depreciate. Cash, savings, investments, and ownership in a business can also be assets. However, the asset itself must be considered alongside any debt or other obligation attached to it.'
+              }
+            },
+
+            {
+              order: 12,
+              type: 'heading',
+              data: {
+                level: 2,
+                text: 'Liabilities — Claims on Future Resources'
+              }
+            },
+
+            {
+              order: 13,
+              type: 'text',
+              data: {
+                text:
+                  'A liability is a financial obligation that requires future payment, settlement, or another form of economic sacrifice. Liabilities can include loans, credit-card balances, mortgages, unpaid bills, taxes owed, and other obligations. A liability matters because it represents a claim on future financial resources.'
+              }
+            },
+
+            {
+              order: 14,
+              type: 'callout',
+              data: {
+                variant: 'warning',
+                title: 'Do Not Look Only at What You Own',
+                text:
+                  'A person can appear wealthy because they own an expensive house, car, or business while owing large amounts of money. Looking only at assets can create a misleading picture. Financial position becomes clearer when assets and liabilities are considered together.'
+              }
+            },
+
+            {
+              order: 15,
+              type: 'example',
+              data: {
+                title: 'House vs Mortgage',
+                text:
+                  'Suppose someone owns a house worth $300,000 but still owes $220,000 on the mortgage. The house is an asset. The mortgage is a liability. The person does not simply have $300,000 of financial wealth from the house because the $220,000 obligation must also be considered.'
+              }
+            },
+
+            {
+              order: 16,
+              type: 'heading',
+              data: {
+                level: 2,
+                text: 'Debt — Borrowing That Creates an Obligation'
+              }
+            },
+
+            {
+              order: 17,
+              type: 'text',
+              data: {
+                text:
+                  'Debt is money borrowed that creates an obligation to repay. Common examples include personal loans, mortgages, student loans, business loans, and credit-card balances. Debt can sometimes help someone acquire an asset, fund education, build a business, or handle a temporary financial need. But borrowing also commits future income to repayment and may create interest, fees, and other costs.'
+              }
+            },
+
+            {
+              order: 18,
+              type: 'callout',
+              data: {
+                variant: 'warning',
+                title: 'The Monthly Payment Is Not the Whole Story',
+                text:
+                  'A borrowing decision should not be judged only by whether the monthly payment looks affordable. Consider the amount borrowed, interest rate, fees, repayment period, total repayment cost, purpose of the debt, and what would happen if your income decreased.'
+              }
+            },
+
+            {
+              order: 19,
+              type: 'example',
+              data: {
+                title: 'The Cost of Borrowing',
+                text:
+                  'Someone may receive $10,000 from a loan but repay considerably more than $10,000 after interest and fees. The important question is not only how much money enters your account today, but how much the borrowing will ultimately cost and whether the repayment will remain manageable.'
+              }
+            },
+
+            {
+              order: 20,
+              type: 'heading',
+              data: {
+                level: 2,
+                text: 'Why Excessive Liabilities Can Become Dangerous'
+              }
+            },
+
+            {
+              order: 21,
+              type: 'text',
+              data: {
+                text:
+                  'Liabilities can become dangerous when too much of a person’s future income is already committed to repayments and other obligations. When obligations consume most available income, there may be little room for saving, investing, emergencies, or unexpected changes in circumstances. This is one reason people can have impressive possessions while still being financially fragile.'
+              }
+            },
+
+            {
+              order: 22,
+              type: 'callout',
+              data: {
+                variant: 'warning',
+                title: 'Financial Freedom Requires Future Flexibility',
+                text:
+                  'The more of your future income that is already committed to debt and other obligations, the less flexibility you may have when life changes. Before taking on a liability, think beyond today’s purchase and consider the effect on your future choices.'
+              }
+            },
+
+            {
+              order: 23,
+              type: 'heading',
+              data: {
+                level: 2,
+                text: 'Net Worth — Assets Minus Liabilities'
+              }
+            },
+
+            {
+              order: 24,
+              type: 'text',
+              data: {
+                text:
+                  'Net worth provides a simplified picture of financial position by comparing what you own with what you owe. The basic formula is: Net Worth = Assets − Liabilities. This does not measure every part of financial health, but it helps explain why possessions, income, and wealth are not the same thing.'
+              }
+            },
+
+            {
+              order: 25,
+              type: 'example',
+              data: {
+                title: 'Simple Net Worth Example',
+                text:
+                  'If someone has assets worth $80,000 and liabilities of $30,000, their simplified net worth is $50,000. If their liabilities increase substantially while their assets do not increase accordingly, their net worth can fall.'
+              }
+            },
+
+            {
+              order: 26,
+              type: 'heading',
+              data: {
+                level: 2,
+                text: 'Cash Flow — The Movement of Money'
+              }
+            },
+
+            {
+              order: 27,
+              type: 'text',
+              data: {
+                text:
+                  'Cash flow describes money moving into and out of a financial system over a period. A simple personal framework is: Net Cash Flow = Income − Expenses. Positive cash flow means more money came in than went out during the period. Negative cash flow means more money went out than came in.'
+              }
+            },
+
+            {
+              order: 28,
+              type: 'heading',
+              data: {
+                level: 2,
+                text: 'Budget — Giving Your Money a Job'
+              }
+            },
+
+            {
+              order: 29,
+              type: 'text',
+              data: {
+                text:
+                  'A budget is a plan for allocating available financial resources. It helps a person intentionally direct money toward necessities, discretionary spending, saving, debt repayment, investing, and other goals. A budget is not simply about restricting spending. It is about making financial choices visible and intentional.'
+              }
+            },
+
+            {
+              order: 30,
+              type: 'callout',
+              data: {
+                variant: 'info',
+                title: 'Put the Concepts Together',
+                text:
+                  'Income provides resources. Expenses consume resources. Cash flow shows what happens to money over time. Assets represent valuable economic resources. Liabilities represent obligations. Debt is a common form of liability. Net worth compares assets with liabilities. A budget helps organize how available resources are used.'
+              }
+            },
+
+            {
+              order: 31,
               type: 'summary',
               data: {
                 title: 'Lesson Summary',
                 points: [
-                  'Income is money coming in.',
-                  'Expenses represent money going out or obligations incurred.',
-                  'Savings are resources set aside for future use.',
-                  'Assets have economic value.',
-                  'Liabilities are financial obligations.',
-                  'Cash flow describes movement of money.'
+                  'Income is money or economic value received.',
+                  'Expenses are costs associated with spending or financial activity.',
+                  'Assets are valuable economic resources that can provide present or future financial benefit.',
+                  'An asset can depreciate and still remain an asset.',
+                  'A house can be an asset while its mortgage is a liability.',
+                  'Liabilities represent claims on future financial resources.',
+                  'Debt is borrowed money that creates a repayment obligation.',
+                  'High income does not automatically mean wealth.',
+                  'Net worth can be simplified as Assets − Liabilities.',
+                  'Net cash flow can be simplified as Income − Expenses.',
+                  'A budget helps allocate available resources intentionally.'
                 ]
               }
             }
@@ -637,22 +825,137 @@ const moneyBasics = {
               order: 1,
               questionType: 'multiple-choice',
               question:
-                'Which term describes money moving into and out of a financial system?',
+                'Which statement best describes an asset?',
               options: [
-                'Cash flow',
-                'Interest rate',
-                'Inflation',
-                'Profit margin'
+                'A valuable economic resource that can provide present or future financial benefit',
+                'Any item that a person happens to possess',
+                'Money borrowed from another person',
+                'A payment obligation'
               ],
               correctAnswer: 0,
               explanation:
-                'Cash flow describes the movement of money into and out of a person, household, business, or other financial system.',
+                'An asset is a valuable economic resource that can contribute present or future financial benefit.',
+              points: 10
+            },
+
+            {
+              order: 2,
+              questionType: 'multiple-choice',
+              question:
+                'Which statement about depreciation is correct?',
+              options: [
+                'Anything that depreciates automatically stops being an asset',
+                'Depreciation describes a decline in value and does not automatically stop something from being an asset',
+                'Only investments can depreciate',
+                'A depreciating item is always a liability'
+              ],
+              correctAnswer: 1,
+              explanation:
+                'Depreciation describes a decline in value. An item can depreciate while still being an asset.',
+              points: 10
+            },
+
+            {
+              order: 3,
+              questionType: 'multiple-choice',
+              question:
+                'Which statement best describes a liability?',
+              options: [
+                'A resource that always produces income',
+                'A financial obligation requiring future payment or settlement',
+                'Any valuable possession',
+                'Money that has already been saved'
+              ],
+              correctAnswer: 1,
+              explanation:
+                'A liability represents an obligation that requires future payment, settlement, or another economic sacrifice.',
+              points: 10
+            },
+
+            {
+              order: 4,
+              questionType: 'multiple-choice',
+              question:
+                'Someone owns a house worth $300,000 and owes $220,000 on the mortgage. Which statement is correct?',
+              options: [
+                'The house is a liability and the mortgage is an asset',
+                'Both the house and mortgage are assets',
+                'The house is an asset and the mortgage is a liability',
+                'Neither has financial value'
+              ],
+              correctAnswer: 2,
+              explanation:
+                'The house is an asset because it has economic value. The mortgage is a liability because it creates an obligation to repay.',
+              points: 10
+            },
+
+            {
+              order: 5,
+              questionType: 'multiple-choice',
+              question:
+                'Why can a person with a high income still experience financial difficulty?',
+              options: [
+                'Income is always harmful',
+                'Expenses, debt payments, and other obligations may consume most of the income',
+                'High income prevents saving',
+                'Assets disappear when income increases'
+              ],
+              correctAnswer: 1,
+              explanation:
+                'High income does not guarantee financial strength when expenses and obligations consume most of the resources received.',
+              points: 10
+            },
+
+            {
+              order: 6,
+              questionType: 'multiple-choice',
+              question:
+                'What should someone consider before taking on significant debt?',
+              options: [
+                'Only the amount received',
+                'Only the monthly payment',
+                'Total repayment cost, interest, fees, purpose, payment burden, and ability to handle changes in income',
+                'Whether other people are borrowing'
+              ],
+              correctAnswer: 2,
+              explanation:
+                'Responsible borrowing requires looking beyond the amount received or monthly payment and considering the complete financial commitment.',
+              points: 10
+            },
+
+            {
+              order: 7,
+              questionType: 'multiple-choice',
+              question:
+                'Which formula represents simplified net worth?',
+              options: [
+                'Income − Expenses',
+                'Assets − Liabilities',
+                'Expenses − Income',
+                'Debt + Expenses'
+              ],
+              correctAnswer: 1,
+              explanation:
+                'Simplified net worth is calculated as Assets − Liabilities.',
+              points: 10
+            },
+
+            {
+              order: 8,
+              questionType: 'true-false',
+              question:
+                'Owning an expensive asset automatically means a person is financially wealthy.',
+              options: [
+                'True',
+                'False'
+              ],
+              correctAnswer: 1,
+              explanation:
+                'The complete picture also requires considering liabilities, expenses, cash flow, and other financial obligations.',
               points: 10
             }
           ]
-        }
-      ]
-    },
+        },
 
     /*
      * =======================================================

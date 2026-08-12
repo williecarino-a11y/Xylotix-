@@ -6,117 +6,247 @@ const UserProgress = require('../models/UserProgress');
 
 class LearningService {
   /**
-   * Get all published courses.
+   * =========================================================
+   * SAFE QUIZ RESPONSE
+   * =========================================================
+   *
+   * Converts a Quiz document into the version that is safe
+   * to send to the browser.
+   *
+   * IMPORTANT:
+   * correctAnswer is intentionally NOT included.
+   *
+   * The server keeps the correct answer private and uses it
+   * when the learner submits the quiz.
    */
-  async getAllCourses() {
-    return await Course.find({ published: true })
-      .sort({ order: 1 });
+  sanitizeQuiz(quiz) {
+    const data =
+      typeof quiz.toObject === 'function'
+        ? quiz.toObject()
+        : quiz;
+
+    return {
+      _id: data._id,
+      lessonId: data.lessonId,
+      order: data.order,
+      questionType: data.questionType,
+      question: data.question,
+      context: data.context || '',
+      options: Array.isArray(data.options)
+        ? data.options
+        : [],
+      explanation: data.explanation || '',
+      hint: data.hint || '',
+      correctFeedback:
+        data.correctFeedback ||
+        'Excellent! 🎉 Your answer is correct.',
+      incorrectFeedback:
+        data.incorrectFeedback ||
+        'Not quite! Review the lesson and try again.',
+      difficulty: data.difficulty || 'Easy',
+      skills: Array.isArray(data.skills)
+        ? data.skills
+        : [],
+      learningObjectives:
+        Array.isArray(data.learningObjectives)
+          ? data.learningObjectives
+          : [],
+      isPractical:
+        data.isPractical === true,
+      media: data.media || null,
+      points:
+        typeof data.points === 'number'
+          ? data.points
+          : 10,
+      published:
+        data.published !== false
+    };
   }
 
   /**
-   * Get a complete course tree:
+   * =========================================================
+   * GET ALL PUBLISHED COURSES
+   * =========================================================
+   */
+  async getAllCourses() {
+    return await Course.find({
+      published: true
+    }).sort({
+      order: 1
+    });
+  }
+
+  /**
+   * =========================================================
+   * GET COMPLETE COURSE TREE
    *
    * Course
    *   └── Modules
    *        └── Lessons
    *             └── Quizzes
+   * =========================================================
    */
   async getCourseDetails(courseId) {
-    const course = await Course.findById(courseId);
+    const course =
+      await Course.findOne({
+        _id: courseId,
+        published: true
+      });
 
     if (!course) {
       throw new Error('Course not found');
     }
 
-    const modules = await Module.find({ courseId })
-      .sort({ order: 1 });
+    const modules =
+      await Module.find({
+        courseId
+      }).sort({
+        order: 1
+      });
 
-    const moduleIds = modules.map(module => module._id);
+    const moduleIds =
+      modules.map(
+        module => module._id
+      );
 
-    const lessons = await Lesson.find({
-      moduleId: { $in: moduleIds },
-      published: true
-    }).sort({ order: 1 });
+    const lessons =
+      await Lesson.find({
+        moduleId: {
+          $in: moduleIds
+        },
+        published: true
+      }).sort({
+        order: 1
+      });
 
-    const lessonIds = lessons.map(lesson => lesson._id);
+    const lessonIds =
+      lessons.map(
+        lesson => lesson._id
+      );
 
-    const quizzes = await Quiz.find({
-      lessonId: { $in: lessonIds }
-    }).sort({ order: 1 });
+    const quizzes =
+      await Quiz.find({
+        lessonId: {
+          $in: lessonIds
+        },
+        published: true
+      }).sort({
+        order: 1
+      });
 
-    const structuredModules = modules.map(module => {
-      const moduleLessons = lessons
-        .filter(
-          lesson =>
-            lesson.moduleId.toString() ===
-            module._id.toString()
-        )
-        .map(lesson => {
-          const lessonQuizzes = quizzes
+    const structuredModules =
+      modules.map(module => {
+        const moduleLessons =
+          lessons
             .filter(
-              quiz =>
-                quiz.lessonId.toString() ===
-                lesson._id.toString()
+              lesson =>
+                lesson.moduleId.toString() ===
+                module._id.toString()
             )
-            .map(quiz => quiz.toObject());
+            .map(lesson => {
+              const lessonQuizzes =
+                quizzes
+                  .filter(
+                    quiz =>
+                      quiz.lessonId.toString() ===
+                      lesson._id.toString()
+                  )
+                  .map(quiz =>
+                    this.sanitizeQuiz(quiz)
+                  );
 
-          return {
-            ...lesson.toObject(),
-            quizzes: lessonQuizzes
-          };
-        });
+              return {
+                ...lesson.toObject(),
+                quizzes:
+                  lessonQuizzes
+              };
+            });
 
-      return {
-        ...module.toObject(),
-        lessons: moduleLessons
-      };
-    });
+        return {
+          ...module.toObject(),
+          lessons:
+            moduleLessons
+        };
+      });
 
     return {
       ...course.toObject(),
-      modules: structuredModules
+      modules:
+        structuredModules
     };
   }
 
   /**
-   * Get a single lesson together with its quizzes.
+   * =========================================================
+   * GET SINGLE LESSON + QUIZZES
+   * =========================================================
    */
-  async getLessonWithQuiz(lessonId) {
-    const lesson = await Lesson.findById(lessonId);
+  async getLessonWithQuiz(
+    lessonId
+  ) {
+    const lesson =
+      await Lesson.findOne({
+        _id: lessonId,
+        published: true
+      });
 
     if (!lesson) {
-      throw new Error('Lesson not found');
+      throw new Error(
+        'Lesson not found'
+      );
     }
 
-    const quizzes = await Quiz.find({ lessonId })
-      .sort({ order: 1 });
+    const quizzes =
+      await Quiz.find({
+        lessonId,
+        published: true
+      }).sort({
+        order: 1
+      });
 
     return {
       lesson,
-      quizzes
+      quizzes:
+        quizzes.map(quiz =>
+          this.sanitizeQuiz(quiz)
+        )
     };
   }
 
   /**
-   * Validate quiz answers for a lesson.
+   * =========================================================
+   * VALIDATE QUIZ ANSWERS
+   * =========================================================
+   *
+   * The correct answer remains on the server.
    *
    * Supports:
-   * - numeric correctAnswerIndex
-   * - numeric correctAnswer
-   * - string correctAnswer
+   * - multiple-choice
+   * - true-false
+   * - calculate
    */
   async submitQuizAnswers(
     lessonId,
     submittedAnswers
   ) {
-    const lesson = await Lesson.findById(lessonId);
+    const lesson =
+      await Lesson.findById(
+        lessonId
+      );
 
     if (!lesson) {
-      throw new Error('Lesson not found');
+      throw new Error(
+        'Lesson not found'
+      );
     }
 
-    const quizzes = await Quiz.find({ lessonId })
-      .sort({ order: 1 });
+    const quizzes =
+      await Quiz.find({
+        lessonId,
+        published: true
+      }).sort({
+        order: 1
+      });
 
     if (!quizzes.length) {
       return {
@@ -128,78 +258,151 @@ class LearningService {
       };
     }
 
-    if (!Array.isArray(submittedAnswers)) {
+    if (
+      !Array.isArray(
+        submittedAnswers
+      )
+    ) {
       submittedAnswers = [];
     }
 
     let correctAnswers = 0;
 
-    const results = quizzes.map((quiz, index) => {
-      const submitted = submittedAnswers[index];
+    const results =
+      quizzes.map(
+        (quiz, index) => {
+          const submitted =
+            submittedAnswers[index];
 
-      const correctIndex =
-        quiz.correctAnswerIndex !== undefined
-          ? Number(quiz.correctAnswerIndex)
-          : (
-              typeof quiz.correctAnswer === 'number'
-                ? Number(quiz.correctAnswer)
-                : null
-            );
+          let isCorrect =
+            false;
 
-      let isCorrect = false;
+          /*
+           * -----------------------------------------------
+           * MULTIPLE-CHOICE
+           * -----------------------------------------------
+           */
+          if (
+            quiz.questionType ===
+            'multiple-choice'
+          ) {
+            if (
+              submitted !==
+                undefined &&
+              Number.isInteger(
+                Number(submitted)
+              ) &&
+              Number(submitted) ===
+                Number(
+                  quiz.correctAnswer
+                )
+            ) {
+              isCorrect = true;
+            }
+          }
 
-      if (
-        correctIndex !== null &&
-        submitted !== undefined &&
-        Number(submitted) === correctIndex
-      ) {
-        isCorrect = true;
-      }
+          /*
+           * -----------------------------------------------
+           * TRUE / FALSE
+           * -----------------------------------------------
+           */
+          else if (
+            quiz.questionType ===
+            'true-false'
+          ) {
+            if (
+              submitted !==
+                undefined &&
+              Number(submitted) ===
+                Number(
+                  quiz.correctAnswer
+                )
+            ) {
+              isCorrect = true;
+            }
+          }
 
-      if (
-        typeof quiz.correctAnswer === 'string' &&
-        typeof submitted === 'string' &&
-        submitted.trim().toLowerCase() ===
-          quiz.correctAnswer.trim().toLowerCase()
-      ) {
-        isCorrect = true;
-      }
+          /*
+           * -----------------------------------------------
+           * CALCULATION
+           * -----------------------------------------------
+           */
+          else if (
+            quiz.questionType ===
+            'calculate'
+          ) {
+            const submittedNumber =
+              Number(submitted);
 
-      if (isCorrect) {
-        correctAnswers++;
-      }
+            const correctNumber =
+              Number(
+                quiz.correctAnswer
+              );
 
-      return {
-        quizId: quiz._id,
-        correct: isCorrect
-      };
-    });
+            if (
+              Number.isFinite(
+                submittedNumber
+              ) &&
+              Number.isFinite(
+                correctNumber
+              ) &&
+              submittedNumber ===
+                correctNumber
+            ) {
+              isCorrect = true;
+            }
+          }
 
-    const score = Math.round(
-      (correctAnswers / quizzes.length) * 100
-    );
+          if (isCorrect) {
+            correctAnswers++;
+          }
+
+          return {
+            quizId:
+              quiz._id,
+            correct:
+              isCorrect
+          };
+        }
+      );
+
+    const score =
+      Math.round(
+        (correctAnswers /
+          quizzes.length) *
+          100
+      );
 
     return {
       score,
-      totalQuestions: quizzes.length,
+      totalQuestions:
+        quizzes.length,
       correctAnswers,
-      passed: score >= 50,
+      passed:
+        score >= 50,
       results
     };
   }
 
   /**
-   * Record lesson completion and quiz score.
+   * =========================================================
+   * RECORD LESSON COMPLETION
+   * =========================================================
    */
   async recordLessonProgress(
     userId,
     lessonId,
     submittedAnswers
   ) {
-    const lesson = await Lesson.findById(lessonId);
+    const lesson =
+      await Lesson.findById(
+        lessonId
+      );
 
     if (!lesson) {
-      throw new Error('Lesson not found');
+      throw new Error(
+        'Lesson not found'
+      );
     }
 
     const quizResult =
@@ -216,14 +419,17 @@ class LearningService {
         },
         {
           completed: true,
-          quizScore: quizResult.score,
-          completedAt: new Date()
+          quizScore:
+            quizResult.score,
+          completedAt:
+            new Date()
         },
         {
           new: true,
           upsert: true,
           runValidators: true,
-          setDefaultsOnInsert: true
+          setDefaultsOnInsert:
+            true
         }
       );
 
@@ -237,15 +443,20 @@ class LearningService {
   }
 
   /**
-   * Get dynamically calculated dashboard statistics.
+   * =========================================================
+   * GET USER DASHBOARD STATISTICS
+   * =========================================================
    */
-  async getUserDashboardStats(userId) {
-    const allProgress = await UserProgress.find({
-      userId,
-      completed: true
-    }).sort({
-      completedAt: 1
-    });
+  async getUserDashboardStats(
+    userId
+  ) {
+    const allProgress =
+      await UserProgress.find({
+        userId,
+        completed: true
+      }).sort({
+        completedAt: 1
+      });
 
     const totalLessonsCompleted =
       allProgress.length;
@@ -253,23 +464,32 @@ class LearningService {
     const scoredQuizzes =
       allProgress.filter(
         progress =>
-          progress.quizScore !== null &&
-          progress.quizScore !== undefined
+          progress.quizScore !==
+            null &&
+          progress.quizScore !==
+            undefined
       );
 
     const averageQuizScore =
       scoredQuizzes.length > 0
         ? Math.round(
             scoredQuizzes.reduce(
-              (total, progress) =>
-                total + progress.quizScore,
+              (
+                total,
+                progress
+              ) =>
+                total +
+                progress.quizScore,
               0
-            ) / scoredQuizzes.length
+            ) /
+              scoredQuizzes.length
           )
         : 0;
 
     const streak =
-      this.calculateStreak(allProgress);
+      this.calculateStreak(
+        allProgress
+      );
 
     const totalXP =
       totalLessonsCompleted * 50;
@@ -283,50 +503,73 @@ class LearningService {
   }
 
   /**
-   * Calculate current consecutive-day streak.
+   * =========================================================
+   * CALCULATE CURRENT CONSECUTIVE-DAY STREAK
+   * =========================================================
    */
-  calculateStreak(progressRecords) {
+  calculateStreak(
+    progressRecords
+  ) {
     if (
       !progressRecords ||
-      progressRecords.length === 0
+      progressRecords.length ===
+        0
     ) {
       return 0;
     }
 
-    const completedDates = new Set();
+    const completedDates =
+      new Set();
 
-    progressRecords.forEach(progress => {
-      if (!progress.completedAt) {
-        return;
+    progressRecords.forEach(
+      progress => {
+        if (
+          !progress.completedAt
+        ) {
+          return;
+        }
+
+        const date =
+          new Date(
+            progress.completedAt
+          );
+
+        if (
+          Number.isNaN(
+            date.getTime()
+          )
+        ) {
+          return;
+        }
+
+        const dateKey =
+          new Date(
+            date.getFullYear(),
+            date.getMonth(),
+            date.getDate()
+          ).getTime();
+
+        completedDates.add(
+          dateKey
+        );
       }
+    );
 
-      const date =
-        new Date(progress.completedAt);
-
-      if (Number.isNaN(date.getTime())) {
-        return;
-      }
-
-      const dateKey =
-        new Date(
-          date.getFullYear(),
-          date.getMonth(),
-          date.getDate()
-        ).getTime();
-
-      completedDates.add(dateKey);
-    });
-
-    if (completedDates.size === 0) {
+    if (
+      completedDates.size === 0
+    ) {
       return 0;
     }
 
     const dates =
-      Array.from(completedDates).sort(
+      Array.from(
+        completedDates
+      ).sort(
         (a, b) => b - a
       );
 
-    const today = new Date();
+    const today =
+      new Date();
 
     const todayKey =
       new Date(
@@ -349,11 +592,14 @@ class LearningService {
         yesterday.getDate()
       ).getTime();
 
-    let currentDate = dates[0];
+    let currentDate =
+      dates[0];
 
     if (
-      currentDate !== todayKey &&
-      currentDate !== yesterdayKey
+      currentDate !==
+        todayKey &&
+      currentDate !==
+        yesterdayKey
     ) {
       return 0;
     }
@@ -365,14 +611,23 @@ class LearningService {
       i < dates.length;
       i++
     ) {
-      const previousDate = dates[i - 1];
-      const current = dates[i];
+      const previousDate =
+        dates[i - 1];
+
+      const current =
+        dates[i];
 
       const differenceInDays =
-        (previousDate - current) /
-        (1000 * 60 * 60 * 24);
+        (previousDate -
+          current) /
+        (1000 *
+          60 *
+          60 *
+          24);
 
-      if (differenceInDays === 1) {
+      if (
+        differenceInDays === 1
+      ) {
         streak++;
       } else {
         break;
@@ -383,4 +638,5 @@ class LearningService {
   }
 }
 
-module.exports = new LearningService();
+module.exports =
+  new LearningService();
