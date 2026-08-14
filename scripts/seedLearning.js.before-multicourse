@@ -7,10 +7,7 @@ const Module = require('../models/Module');
 const Lesson = require('../models/Lesson');
 const Quiz = require('../models/Quiz');
 
-const learningDataSets = [
-  require('./learningData/moneyBasics.new'),
-  require('./learningData/investingFundamentals')
-];
+const learningData = require('./learningData/moneyBasics');
 
 /*
  * =========================================================
@@ -105,36 +102,6 @@ async function seedModule(courseId, moduleData) {
  * =========================================================
  */
 
-function normalizeContentBlocks(contentBlocks) {
-  if (!Array.isArray(contentBlocks)) {
-    return [];
-  }
-
-  return contentBlocks.map((block, index) => {
-    const { type, content, ...rest } = block || {};
-
-    let data;
-
-    if (content !== undefined && Object.keys(rest).length === 0) {
-      data = content;
-    } else {
-      data = {
-        ...rest
-      };
-
-      if (content !== undefined) {
-        data.content = content;
-      }
-    }
-
-    return {
-      order: index + 1,
-      type,
-      data
-    };
-  });
-}
-
 async function seedLesson(moduleId, lessonData) {
   return Lesson.findOneAndUpdate(
     {
@@ -149,9 +116,7 @@ async function seedLesson(moduleId, lessonData) {
         estimatedDuration: lessonData.estimatedDuration,
         order: lessonData.order,
         published: lessonData.published,
-        contentBlocks: normalizeContentBlocks(
-          lessonData.contentBlocks
-        )
+        contentBlocks: lessonData.contentBlocks || []
       }
     },
     {
@@ -402,131 +367,129 @@ async function seedLearning() {
   try {
     await connectDatabase();
 
-    for (const learningData of learningDataSets) {
-      /*
-       * Validate course structure.
-       */
+    /*
+     * Validate course structure.
+     */
 
-      if (!learningData || !learningData.course) {
-        throw new Error(
-          'learningData.course is missing.'
-        );
-      }
+    if (!learningData || !learningData.course) {
+      throw new Error(
+        'learningData.course is missing.'
+      );
+    }
 
-      if (!Array.isArray(learningData.modules)) {
-        throw new Error(
-          'learningData.modules must be an array.'
-        );
-      }
+    if (!Array.isArray(learningData.modules)) {
+      throw new Error(
+        'learningData.modules must be an array.'
+      );
+    }
 
-      /*
-       * -------------------------------------------------------
-       * 1. COURSE
-       * -------------------------------------------------------
-       */
+    /*
+     * -------------------------------------------------------
+     * 1. COURSE
+     * -------------------------------------------------------
+     */
 
-      const course = await seedCourse(
-        learningData.course
+    const course = await seedCourse(
+      learningData.course
+    );
+
+    console.log(
+      `Course synced: ${course.title} (${course.slug})`
+    );
+
+    /*
+     * -------------------------------------------------------
+     * 2. MODULES
+     * -------------------------------------------------------
+     */
+
+    for (const moduleData of learningData.modules) {
+      const module = await seedModule(
+        course._id,
+        moduleData
       );
 
       console.log(
-        `Course synced: ${course.title} (${course.slug})`
+        `  Module synced: ${module.title} (${module.slug})`
       );
 
+      const lessons = Array.isArray(
+        moduleData.lessons
+      )
+        ? moduleData.lessons
+        : [];
+
       /*
-       * -------------------------------------------------------
-       * 2. MODULES
-       * -------------------------------------------------------
+       * -----------------------------------------------------
+       * 3. LESSONS
+       * -----------------------------------------------------
        */
 
-      for (const moduleData of learningData.modules) {
-        const module = await seedModule(
-          course._id,
-          moduleData
+      for (const lessonData of lessons) {
+        const lesson = await seedLesson(
+          module._id,
+          lessonData
         );
 
         console.log(
-          `  Module synced: ${module.title} (${module.slug})`
+          `    Lesson synced: ${lesson.title} (${lesson.slug})`
         );
 
-        const lessons = Array.isArray(
-          moduleData.lessons
+        const quizzes = Array.isArray(
+          lessonData.quizzes
         )
-          ? moduleData.lessons
+          ? lessonData.quizzes
           : [];
 
         /*
-         * -----------------------------------------------------
-         * 3. LESSONS
-         * -----------------------------------------------------
+         * ---------------------------------------------------
+         * 4. QUIZZES
+         * ---------------------------------------------------
          */
 
-        for (const lessonData of lessons) {
-          const lesson = await seedLesson(
-            module._id,
-            lessonData
+        for (const quizData of quizzes) {
+          const quiz = await seedQuiz(
+            lesson._id,
+            quizData
           );
 
           console.log(
-            `    Lesson synced: ${lesson.title} (${lesson.slug})`
-          );
-
-          const quizzes = Array.isArray(
-            lessonData.quizzes
-          )
-            ? lessonData.quizzes
-            : [];
-
-          /*
-           * ---------------------------------------------------
-           * 4. QUIZZES
-           * ---------------------------------------------------
-           */
-
-          for (const quizData of quizzes) {
-            const quiz = await seedQuiz(
-              lesson._id,
-              quizData
-            );
-
-            console.log(
-              `      Quiz synced: ${quiz.question}`
-            );
-          }
-
-          /*
-           * Remove quizzes that are no longer
-           * present in seed data.
-           */
-
-          await syncQuizzes(
-            lesson._id,
-            quizzes
+            `      Quiz synced: ${quiz.question}`
           );
         }
 
         /*
-         * Remove lessons that are no longer
+         * Remove quizzes that are no longer
          * present in seed data.
          */
 
-        await syncLessons(
-          module._id,
-          lessons
+        await syncQuizzes(
+          lesson._id,
+          quizzes
         );
       }
 
       /*
-       * -------------------------------------------------------
-       * 5. REMOVE STALE MODULES
-       * -------------------------------------------------------
+       * Remove lessons that are no longer
+       * present in seed data.
        */
 
-      await syncModules(
-        course._id,
-        learningData.modules
+      await syncLessons(
+        module._id,
+        lessons
       );
     }
+
+    /*
+     * -------------------------------------------------------
+     * 5. REMOVE STALE MODULES
+     * -------------------------------------------------------
+     */
+
+    await syncModules(
+      course._id,
+      learningData.modules
+    );
 
     console.log(
       '\nLearning database synchronization completed successfully.'

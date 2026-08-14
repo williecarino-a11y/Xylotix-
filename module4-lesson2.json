@@ -1,0 +1,618 @@
+{
+  "slug": "emergency-funds-how-much-do-you-really-need",
+  "title": "Emergency Funds: How Much Do You Really Need?",
+  "estimatedDuration": 35,
+  "order": 2,
+  "published": true,
+  "contentBlocks": [
+    {
+      "order": 1,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "An emergency fund is money kept for problems you did not plan for"
+      }
+    },
+    {
+      "order": 2,
+      "type": "text",
+      "data": {
+        "text": "Unexpected expenses can appear even when you manage your money carefully. An emergency fund gives you money that can help you handle certain unexpected situations without immediately depending on new debt."
+      }
+    },
+    {
+      "order": 3,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "There is no single perfect emergency-fund number"
+      }
+    },
+    {
+      "order": 4,
+      "type": "text",
+      "data": {
+        "text": "A person with stable income, low essential expenses, and strong support may need a different amount from someone whose income changes frequently or who has many people depending on them."
+      }
+    },
+    {
+      "order": 5,
+      "type": "example",
+      "data": {
+        "title": "Two people, two different situations",
+        "text": "Alex has essential monthly expenses of $1,200 and very stable income. Jordan has essential expenses of $2,000 and income that changes from month to month. It would not make sense to assume that the same emergency-fund amount is equally suitable for both."
+      }
+    },
+    {
+      "order": 6,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Start by understanding your essential expenses"
+      }
+    },
+    {
+      "order": 7,
+      "type": "text",
+      "data": {
+        "text": "A useful starting point is to identify expenses you would still need to cover if your income suddenly became lower or stopped temporarily."
+      }
+    },
+    {
+      "order": 8,
+      "type": "example",
+      "data": {
+        "title": "Finding the essentials",
+        "text": "Suppose your monthly essentials are $900 for housing, $300 for food, $150 for transportation, and $150 for necessary bills. Your essential monthly expenses total $1,500."
+      }
+    },
+    {
+      "order": 9,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Use your real life instead of copying someone else's number"
+      }
+    },
+    {
+      "order": 10,
+      "type": "text",
+      "data": {
+        "text": "A common mistake is choosing an emergency-fund target simply because someone online says everyone needs exactly the same amount. Your target should reflect your own circumstances."
+      }
+    },
+    {
+      "order": 11,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "One simple way to estimate a starting target"
+      }
+    },
+    {
+      "order": 12,
+      "type": "text",
+      "data": {
+        "text": "You can multiply your essential monthly expenses by a number of months you want your emergency savings to cover."
+      }
+    },
+    {
+      "order": 13,
+      "type": "formula",
+      "data": {
+        "text": "Emergency-fund target = essential monthly expenses × number of months"
+      }
+    },
+    {
+      "order": 14,
+      "type": "example",
+      "data": {
+        "title": "A three-month example",
+        "text": "If your essential monthly expenses are $1,500 and you choose a three-month target, the calculation is $1,500 × 3 = $4,500."
+      }
+    },
+    {
+      "order": 15,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "The calculation is a planning tool, not a law"
+      }
+    },
+    {
+      "order": 16,
+      "type": "text",
+      "data": {
+        "text": "A calculated target can help you plan, but it does not guarantee that the amount will cover every possible emergency. Some situations cost much more, while some require less."
+      }
+    },
+    {
+      "order": 17,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Your first target can be smaller"
+      }
+    },
+    {
+      "order": 18,
+      "type": "text",
+      "data": {
+        "text": "If you currently have no emergency savings, you do not need to wait until you can build a large fund before starting. A smaller first target can create useful protection while you work toward a larger amount."
+      }
+    },
+    {
+      "order": 19,
+      "type": "example",
+      "data": {
+        "title": "Starting with $300",
+        "text": "If a full emergency-fund target feels impossible, you might first aim for $300. Once you reach it, you can continue building instead of treating the first target as the final destination."
+      }
+    },
+    {
+      "order": 20,
+      "type": "callout",
+      "data": {
+        "title": "Do not let the final target stop you from starting",
+        "text": "A smaller amount saved today can still be more useful than a perfect target that you never begin building."
+      }
+    },
+    {
+      "order": 21,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Your income stability matters"
+      }
+    },
+    {
+      "order": 22,
+      "type": "text",
+      "data": {
+        "text": "Someone whose income is highly predictable may face a different level of income risk from someone whose earnings fluctuate significantly. That difference can influence how much emergency savings feels appropriate."
+      }
+    },
+    {
+      "order": 23,
+      "type": "example",
+      "data": {
+        "title": "Stable income versus variable income",
+        "text": "A salaried worker who has predictable monthly income may have a different emergency-savings strategy from a freelancer whose income can vary significantly between months."
+      }
+    },
+    {
+      "order": 24,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "People who depend on you can change the calculation"
+      }
+    },
+    {
+      "order": 25,
+      "type": "text",
+      "data": {
+        "text": "If other people depend on your income, an interruption can affect more than one person. Your emergency planning may therefore need to account for responsibilities that someone without dependents does not have."
+      }
+    },
+    {
+      "order": 26,
+      "type": "example",
+      "data": {
+        "title": "A larger responsibility",
+        "text": "A person supporting a household may need to think about housing, food, transportation, and necessary expenses for several people when deciding how much emergency savings would provide meaningful protection."
+      }
+    },
+    {
+      "order": 27,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "What should an emergency fund actually help with?"
+      }
+    },
+    {
+      "order": 28,
+      "type": "text",
+      "data": {
+        "text": "The purpose is generally to help with unexpected and necessary financial problems rather than routine spending that you could reasonably plan for."
+      }
+    },
+    {
+      "order": 29,
+      "type": "example",
+      "data": {
+        "title": "A genuine unexpected expense",
+        "text": "Your essential appliance suddenly breaks and replacing it costs $400. If the expense is necessary and you did not reasonably expect it, emergency savings may be appropriate."
+      }
+    },
+    {
+      "order": 30,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Not every unexpected purchase is an emergency"
+      }
+    },
+    {
+      "order": 31,
+      "type": "text",
+      "data": {
+        "text": "Something being surprising does not automatically make it an emergency. A sale on a product you want may be unexpected, but that does not make it a reason to use emergency savings."
+      }
+    },
+    {
+      "order": 32,
+      "type": "interactive",
+      "data": {
+        "title": "Emergency or want?",
+        "text": "You see a laptop you have wanted for months suddenly discounted by 20%. Ask yourself whether this is an urgent financial problem or simply an attractive opportunity to spend money."
+      }
+    },
+    {
+      "order": 33,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Emergency savings should be accessible"
+      }
+    },
+    {
+      "order": 34,
+      "type": "text",
+      "data": {
+        "text": "Emergency money needs to be available when a genuine need appears. The exact account or product you use depends on your location and financial circumstances, but access matters."
+      }
+    },
+    {
+      "order": 35,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Do not make the money so easy to spend that it disappears"
+      }
+    },
+    {
+      "order": 36,
+      "type": "text",
+      "data": {
+        "text": "Accessibility and temptation are different issues. Emergency money should be accessible when genuinely needed while still being separated enough from everyday spending that you do not casually use it."
+      }
+    },
+    {
+      "order": 37,
+      "type": "example",
+      "data": {
+        "title": "Separate but accessible",
+        "text": "Keeping emergency savings in a separate savings account may make it easier to protect the money from everyday spending while still allowing you to access it when a real need occurs."
+      }
+    },
+    {
+      "order": 38,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Emergency savings are not the same as long-term investing"
+      }
+    },
+    {
+      "order": 39,
+      "type": "text",
+      "data": {
+        "text": "Emergency money may be needed at an inconvenient time. That makes easy access and stability important. Money intended for long-term growth can have a different purpose and different risks."
+      }
+    },
+    {
+      "order": 40,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "What if you have debt?"
+      }
+    },
+    {
+      "order": 41,
+      "type": "text",
+      "data": {
+        "text": "Having debt does not automatically mean you should keep zero emergency savings. Without any cash reserve, a new unexpected expense may force you to add even more debt."
+      }
+    },
+    {
+      "order": 42,
+      "type": "example",
+      "data": {
+        "title": "Why a small buffer can matter",
+        "text": "You have $2,000 of existing debt and no savings. An unexpected $500 expense appears. Without savings, you may need to borrow another $500. A small emergency reserve could reduce the need for additional borrowing."
+      }
+    },
+    {
+      "order": 43,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Rebuild the fund after using it"
+      }
+    },
+    {
+      "order": 44,
+      "type": "text",
+      "data": {
+        "text": "Using emergency savings for a genuine emergency is not failure. The important next step is to rebuild the amount when your situation allows."
+      }
+    },
+    {
+      "order": 45,
+      "type": "example",
+      "data": {
+        "title": "Rebuilding after an emergency",
+        "text": "You have $2,000 saved and use $600 for an unexpected necessary expense. Your remaining emergency savings are $1,400. Your next goal can be to rebuild the missing $600 over time."
+      }
+    },
+    {
+      "order": 46,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Do not feel like you failed because you used the fund"
+      }
+    },
+    {
+      "order": 47,
+      "type": "callout",
+      "data": {
+        "title": "That is what the fund is for",
+        "text": "If a genuine emergency happens and you use money that you deliberately saved for that purpose, the system worked."
+      }
+    },
+    {
+      "order": 48,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Review your target when your life changes"
+      }
+    },
+    {
+      "order": 49,
+      "type": "text",
+      "data": {
+        "text": "Your emergency-fund target does not have to remain unchanged forever. A new job, higher expenses, a new dependent, a move, or a major change in income can affect how much protection you want."
+      }
+    },
+    {
+      "order": 50,
+      "type": "example",
+      "data": {
+        "title": "Your expenses increase",
+        "text": "Your essential monthly expenses rise from $1,500 to $1,800. If you were targeting three months of essentials, the old target was $4,500 while the new calculation would be $1,800 × 3 = $5,400."
+      }
+    },
+    {
+      "order": 51,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Use your emergency fund for protection, not lifestyle upgrades"
+      }
+    },
+    {
+      "order": 52,
+      "type": "text",
+      "data": {
+        "text": "A larger television, expensive holiday, or impulse purchase may be something you want, but using money reserved for financial emergencies can weaken the protection you built."
+      }
+    },
+    {
+      "order": 53,
+      "type": "interactive",
+      "data": {
+        "title": "Make the decision",
+        "text": "You have $2,500 in emergency savings. You want to spend $900 on a holiday. Before using the money, consider what would happen if a genuine emergency appeared immediately afterward."
+      }
+    },
+    {
+      "order": 54,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Build the fund gradually"
+      }
+    },
+    {
+      "order": 55,
+      "type": "text",
+      "data": {
+        "text": "You can build emergency savings through regular contributions. The important part is creating a process that fits your financial situation."
+      }
+    },
+    {
+      "order": 56,
+      "type": "example",
+      "data": {
+        "title": "A gradual plan",
+        "text": "If your first target is $1,000 and you save $50 each week, you would need 20 weeks to reach $1,000, assuming every contribution is made."
+      }
+    },
+    {
+      "order": 57,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "The goal is financial breathing room"
+      }
+    },
+    {
+      "order": 58,
+      "type": "summary",
+      "data": {
+        "title": "What to remember",
+        "points": [
+          "There is no single emergency-fund amount that fits everyone.",
+          "Start by understanding your essential monthly expenses.",
+          "A simple target can be calculated using essential expenses and a number of months.",
+          "Your income stability and responsibilities can affect the amount you choose.",
+          "A smaller first target is better than waiting for a perfect target.",
+          "Emergency savings are intended for genuine unexpected needs.",
+          "An attractive purchase is not automatically an emergency.",
+          "Emergency money should be accessible but protected from casual spending.",
+          "Using emergency savings for a genuine emergency is not failure.",
+          "Rebuild the fund after using it and review the target when your circumstances change."
+        ]
+      }
+    },
+    {
+      "order": 59,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Think in terms of protection, not perfection"
+      }
+    },
+    {
+      "order": 60,
+      "type": "callout",
+      "data": {
+        "title": "Build the protection you can",
+        "text": "The best emergency fund is not the one with a perfect number. It is the one you can realistically build, protect, use when genuinely needed, and rebuild afterward."
+      }
+    }
+  ],
+  "quizzes": [
+    {
+      "order": 1,
+      "questionType": "multiple-choice",
+      "question": "What is the main purpose of an emergency fund?",
+      "options": [
+        "To help handle unexpected and necessary financial problems",
+        "To pay for every purchase you want",
+        "To make you rich immediately",
+        "To avoid saving for future goals"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Emergency savings are intended to provide financial protection when unexpected necessary costs or income disruptions occur.",
+      "points": 10
+    },
+    {
+      "order": 2,
+      "questionType": "multiple-choice",
+      "question": "Your essential monthly expenses are $1,500. If you choose a three-month emergency-fund target, what is the target?",
+      "options": [
+        "$4,500",
+        "$3,000",
+        "$5,000",
+        "$1,500"
+      ],
+      "correctAnswer": 0,
+      "explanation": "$1,500 × 3 = $4,500.",
+      "points": 10
+    },
+    {
+      "order": 3,
+      "questionType": "true-false",
+      "question": "Everyone should have exactly the same emergency-fund amount.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Emergency-fund needs can differ based on expenses, income stability, responsibilities, and other circumstances.",
+      "points": 10
+    },
+    {
+      "order": 4,
+      "questionType": "multiple-choice",
+      "question": "If you currently have no emergency savings, what is a sensible approach?",
+      "options": [
+        "Start with a realistic smaller target and build from there",
+        "Wait until you can save a huge amount",
+        "Borrow money to create the fund",
+        "Spend all available money first"
+      ],
+      "correctAnswer": 0,
+      "explanation": "A smaller starting target can provide useful protection while you continue building.",
+      "points": 10
+    },
+    {
+      "order": 5,
+      "questionType": "multiple-choice",
+      "question": "Which situation is most likely to justify using emergency savings?",
+      "options": [
+        "An unexpected necessary repair",
+        "A discounted holiday you suddenly want",
+        "A new entertainment subscription",
+        "A planned shopping trip"
+      ],
+      "correctAnswer": 0,
+      "explanation": "An unexpected necessary repair is more consistent with the purpose of emergency savings than a discretionary purchase.",
+      "points": 10
+    },
+    {
+      "order": 6,
+      "questionType": "multiple-choice",
+      "question": "You have $2,000 in emergency savings and use $600 for a genuine emergency. What should you consider doing next?",
+      "options": [
+        "Rebuilding the $600 over time",
+        "Spending the remaining $1,400 immediately",
+        "Assuming you no longer need emergency savings",
+        "Borrowing another $600 immediately"
+      ],
+      "correctAnswer": 0,
+      "explanation": "After using emergency savings for a genuine need, rebuilding the amount helps restore your financial protection.",
+      "points": 10
+    },
+    {
+      "order": 7,
+      "questionType": "true-false",
+      "question": "Using emergency savings for a genuine emergency means the savings system failed.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Using the fund for a genuine emergency is one of the reasons the fund exists.",
+      "points": 10
+    },
+    {
+      "order": 8,
+      "questionType": "multiple-choice",
+      "question": "Your essential monthly expenses rise from $1,500 to $1,800. What happens to a three-month target?",
+      "options": [
+        "It rises from $4,500 to $5,400",
+        "It falls to $3,000",
+        "It stays at $1,500",
+        "It automatically becomes $10,000"
+      ],
+      "correctAnswer": 0,
+      "explanation": "$1,800 × 3 = $5,400, compared with the previous $1,500 × 3 = $4,500 target.",
+      "points": 10
+    },
+    {
+      "order": 9,
+      "questionType": "multiple-choice",
+      "question": "You want to save $1,000 and can save $50 each week. Approximately how many weeks of contributions are needed?",
+      "options": [
+        "20 weeks",
+        "10 weeks",
+        "25 weeks",
+        "50 weeks"
+      ],
+      "correctAnswer": 0,
+      "explanation": "$1,000 ÷ $50 = 20 weeks.",
+      "points": 10
+    },
+    {
+      "order": 10,
+      "questionType": "multiple-choice",
+      "question": "What is the best general approach to deciding how much emergency savings you need?",
+      "options": [
+        "Consider your essential expenses, income stability, responsibilities, and circumstances",
+        "Copy exactly what another person saves",
+        "Choose the largest possible number regardless of your situation",
+        "Keep no savings because emergencies are impossible to predict"
+      ],
+      "correctAnswer": 0,
+      "explanation": "A useful emergency-fund target should reflect your own financial situation rather than a universal number.",
+      "points": 10
+    }
+  ]
+}

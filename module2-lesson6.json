@@ -1,0 +1,364 @@
+{
+  "slug": "where-did-my-money-go",
+  "title": "Where Did My Money Go?",
+  "estimatedDuration": 35,
+  "order": 6,
+  "published": true,
+  "contentBlocks": [
+    {
+      "type": "heading",
+      "content": "The amount you earn is not always the amount you can spend"
+    },
+    {
+      "type": "text",
+      "content": "Have you ever expected a certain amount of money but received less? That does not necessarily mean someone took your money by mistake. Money can be removed from your earnings before it reaches your account. The important skill is knowing what happened so you can plan with the amount you actually have."
+    },
+    {
+      "type": "example",
+      "title": "The confusing paycheck",
+      "content": "Alex expects to earn $3,000 from a job. When the money arrives, only $2,450 reaches the bank account. Instead of assuming something is wrong, Alex checks the pay statement and discovers that several amounts were deducted before the payment was made."
+    },
+    {
+      "type": "heading",
+      "content": "Start with the amount you earned"
+    },
+    {
+      "type": "text",
+      "content": "The first number you see when looking at earnings may not be the amount available for everyday spending. A useful habit is to distinguish between the amount earned before deductions and the amount that actually reaches your account."
+    },
+    {
+      "type": "example",
+      "title": "Three different numbers",
+      "content": "Suppose a job lists monthly earnings of $3,500. After required deductions and other selected deductions, $2,800 reaches the worker's account. The $3,500 is not the same as the $2,800 that can immediately be used for groceries, transportation, saving, or bills."
+    },
+    {
+      "type": "heading",
+      "content": "Why money can disappear before you receive it"
+    },
+    {
+      "type": "text",
+      "content": "Different systems and workplaces can remove different amounts from earnings. Taxes, retirement contributions, insurance, benefit costs, and other deductions can reduce the amount that reaches your account. The exact rules depend on where you live and how you are paid."
+    },
+    {
+      "type": "callout",
+      "title": "The practical lesson",
+      "content": "You do not need to become a tax expert to manage your money well. You do need to know what you earned, what was deducted, what reached your account, and which deductions you are responsible for understanding."
+    },
+    {
+      "type": "heading",
+      "content": "Required deductions and chosen deductions are not always the same"
+    },
+    {
+      "type": "text",
+      "content": "Some deductions may be required by law or by the system through which you are paid. Others may come from choices you made, such as certain benefits, savings arrangements, or other workplace programs. Knowing the difference helps you understand which amounts are unavoidable and which may be connected to decisions you control."
+    },
+    {
+      "type": "example",
+      "title": "A useful question to ask",
+      "content": "If your pay is lower than expected, do not simply ask, 'Why did I lose money?' Ask, 'What are all the deductions, what is each one for, and which ones can I change?' That question turns confusion into something you can investigate."
+    },
+    {
+      "type": "heading",
+      "content": "Your pay statement is a financial tool"
+    },
+    {
+      "type": "text",
+      "content": "A pay statement is not just paperwork. It can show how your earnings were calculated and where the money went before the final payment. Learning to read it can help you spot unexpected changes, understand deductions, and avoid building a budget around money you never actually receive."
+    },
+    {
+      "type": "interactive",
+      "title": "Read the money trail",
+      "content": "Imagine your earnings are $3,200 and your account receives $2,600. Before deciding that $600 has simply disappeared, list the questions you would ask: What deductions were made? Which are required? Which are optional? Did anything change from the previous payment? Can I explain every major difference?"
+    },
+    {
+      "type": "heading",
+      "content": "Why budgeting from the wrong number causes problems"
+    },
+    {
+      "type": "text",
+      "content": "If you build your spending plan around money you earn before deductions, you may commit yourself to expenses you cannot comfortably afford. A safer starting point is the money that actually becomes available to you, while also understanding what is being deducted before it gets there."
+    },
+    {
+      "type": "example",
+      "title": "The budget that was too large",
+      "content": "Morgan thinks they have $3,000 available each month because that is the amount stated in their employment offer. Their actual monthly payment is $2,400. Morgan plans rent, entertainment, subscriptions, transportation, and other spending around $3,000 and repeatedly runs short. The problem begins with budgeting from the wrong number."
+    },
+    {
+      "type": "heading",
+      "content": "Take-home pay is useful, but it is not the same as free money"
+    },
+    {
+      "type": "text",
+      "content": "Even after money reaches your account, it is not automatically safe to spend. Bills, food, transportation, debt payments, saving, investing, and other priorities still have to come from it. Take-home pay tells you what reached you; it does not tell you how much you should spend."
+    },
+    {
+      "type": "heading",
+      "content": "A raise can change both earnings and deductions"
+    },
+    {
+      "type": "text",
+      "content": "When earnings increase, the amount reaching your account may also increase, but not necessarily by the full amount of the raise. Some deductions may change as earnings change. This is another reason to judge a raise by its real effect on your available money rather than focusing only on the headline increase."
+    },
+    {
+      "type": "example",
+      "title": "The $500 raise",
+      "content": "Taylor receives a $500 monthly increase in earnings. After changes in deductions, only $360 more reaches the account. The raise still improves Taylor's income, but the useful question is what can actually be done with the additional $360."
+    },
+    {
+      "type": "heading",
+      "content": "Do not ignore small deductions"
+    },
+    {
+      "type": "text",
+      "content": "A small deduction may not matter much by itself. But several recurring deductions can add up. Understanding recurring amounts helps you see the full cost of benefits, services, or other arrangements connected to your earnings."
+    },
+    {
+      "type": "example",
+      "title": "Small amounts can become meaningful",
+      "content": "A worker notices several deductions of $15, $20, and $25 each month. None looks large alone, but together they reduce the monthly payment by $60. Knowing this does not mean every deduction should be removed; it means the worker understands where the money is going."
+    },
+    {
+      "type": "heading",
+      "content": "Do not assume every deduction is bad"
+    },
+    {
+      "type": "text",
+      "content": "A deduction is not automatically a financial loss. Some deductions may pay for valuable benefits or put money toward future needs. The useful question is whether you understand what the deduction provides and whether it makes sense for your situation."
+    },
+    {
+      "type": "example",
+      "title": "A deduction that serves a purpose",
+      "content": "Suppose $100 is deducted from someone's earnings each month for a workplace benefit or long-term savings arrangement. The person should understand the cost and benefit rather than automatically treating the $100 as wasted money."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: take-home pay is your wealth"
+    },
+    {
+      "type": "text",
+      "content": "Take-home pay is the money that reaches you after deductions. It is income available for your financial decisions, not the same thing as accumulated wealth. What you save, invest, owe, and own still matters."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: every difference between earnings and payment means money was stolen"
+    },
+    {
+      "type": "text",
+      "content": "A difference between earnings and the amount received can result from legitimate deductions. The responsible response is to check the details rather than immediately assume wrongdoing. If something does not make sense, investigate it and ask the appropriate person or organization for clarification."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: a bigger salary means you can spend the full advertised amount"
+    },
+    {
+      "type": "text",
+      "content": "The amount advertised for a job may not be the amount that reaches your account. Your spending plan should be based on realistic available money, not on an income number you cannot actually use."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: deductions should always be eliminated"
+    },
+    {
+      "type": "text",
+      "content": "Some deductions may provide important benefits or support future financial goals. The goal is not to eliminate every deduction. The goal is to understand them and make sensible decisions where choices are available."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: you only need to check your pay once"
+    },
+    {
+      "type": "text",
+      "content": "Amounts can change because of raises, benefits, workplace changes, tax changes, corrections, or other circumstances. Reviewing your pay when something changes can help you notice problems early."
+    },
+    {
+      "type": "heading",
+      "content": "What to do when your payment changes unexpectedly"
+    },
+    {
+      "type": "text",
+      "content": "Pause before changing your entire budget. Compare the new payment with the previous one, check the pay statement, identify what changed, and ask for clarification if necessary. Once you understand the difference, you can decide whether your spending plan needs to change."
+    },
+    {
+      "type": "example",
+      "title": "A practical investigation",
+      "content": "Jamie normally receives $2,700 but receives $2,450 this month. Instead of immediately borrowing money, Jamie compares the two pay statements and discovers a new deduction. Jamie can now investigate the deduction and decide how to respond."
+    },
+    {
+      "type": "heading",
+      "content": "Your real income is the income you can actually plan around"
+    },
+    {
+      "type": "text",
+      "content": "A strong financial habit is to know the difference between what you earn on paper and what actually becomes available to you. This makes budgeting more realistic and helps you understand the true effect of raises, job offers, and changes in deductions."
+    },
+    {
+      "type": "heading",
+      "content": "A simple money trail to remember"
+    },
+    {
+      "type": "text",
+      "content": "Think of your earnings as a journey. You earn money. Some amounts may be removed before payment. The remainder reaches your account. From there, your financial choices determine how much goes toward spending, saving, investing, debt repayment, and other goals."
+    },
+    {
+      "type": "interactive",
+      "title": "Make the money trail visible",
+      "content": "Take a recent income payment and write down four things: the amount you expected, the amount you earned before deductions, the major deductions, and the amount that actually reached your account. If you cannot explain a major difference, make finding the answer your next financial task."
+    },
+    {
+      "type": "heading",
+      "content": "Why this habit matters beyond employment"
+    },
+    {
+      "type": "text",
+      "content": "The same thinking applies beyond regular jobs. Freelancers, business owners, creators, and other earners also need to distinguish money coming in from money actually available after costs and obligations. Seeing the full money trail prevents income numbers from creating a false sense of financial progress."
+    },
+    {
+      "type": "example",
+      "title": "A freelancer's version",
+      "content": "A freelancer receives $4,000 from clients during a month. That does not automatically mean $4,000 is available for personal spending. Business expenses, taxes, tools, fees, and other obligations may reduce what can safely be treated as personal income."
+    },
+    {
+      "type": "heading",
+      "content": "The habit to build"
+    },
+    {
+      "type": "text",
+      "content": "Whenever money comes in, learn to follow it. Do not stop at the biggest number. Find out what the number means, what was removed, what remains, and what obligations still have to be paid. Understanding the money trail gives you better control over your financial decisions."
+    },
+    {
+      "type": "summary",
+      "title": "What to remember",
+      "content": "The amount you earn is not always the amount that reaches your account, and the amount that reaches your account is not automatically the amount you should spend. Learn to follow the money from earnings to deductions to take-home pay and then to your financial priorities. When something changes, investigate it instead of guessing."
+    }
+  ],
+  "quiz": [
+    {
+      "order": 1,
+      "questionType": "multiple-choice",
+      "question": "Why might the amount you receive be lower than the amount you earned?",
+      "options": [
+        "Deductions may be taken before the payment reaches your account",
+        "Your income disappears randomly",
+        "All employers keep part of your money without explanation",
+        "Take-home pay is always supposed to equal earnings"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Taxes, benefits, contributions, and other deductions can reduce the amount that reaches your account."
+    },
+    {
+      "order": 2,
+      "questionType": "multiple-choice",
+      "question": "What is the best starting point when building a spending plan?",
+      "options": [
+        "Use realistic money that actually reaches you while understanding what was deducted",
+        "Spend the full amount listed in a job advertisement",
+        "Assume every raise is fully available to spend",
+        "Ignore deductions until the end of the year"
+      ],
+      "correctAnswer": 0,
+      "explanation": "A realistic spending plan needs to reflect the money you actually receive."
+    },
+    {
+      "order": 3,
+      "questionType": "multiple-choice",
+      "question": "What should you do if your payment suddenly becomes much smaller?",
+      "options": [
+        "Check the pay details, identify what changed, and ask for clarification if necessary",
+        "Immediately borrow money",
+        "Assume someone stole it",
+        "Ignore the difference"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Checking the details helps you determine whether the change came from a legitimate deduction, correction, or another issue."
+    },
+    {
+      "order": 4,
+      "questionType": "multiple-choice",
+      "question": "Are all deductions automatically bad?",
+      "options": [
+        "No. Some may pay for useful benefits or support future financial goals",
+        "Yes. Every deduction is wasted money",
+        "Yes. You should remove every deduction",
+        "No. Deductions never affect your money"
+      ],
+      "correctAnswer": 0,
+      "explanation": "A deduction should be understood and evaluated rather than automatically treated as bad."
+    },
+    {
+      "order": 5,
+      "questionType": "multiple-choice",
+      "question": "Taylor receives a $500 raise but only gets $360 more in take-home pay. What is the useful lesson?",
+      "options": [
+        "The real effect of a raise should be judged by what actually becomes available after deductions",
+        "The raise had no value",
+        "The employer stole $140",
+        "Taylor should immediately increase spending by $500"
+      ],
+      "correctAnswer": 0,
+      "explanation": "A raise can increase earnings without increasing take-home pay by the exact same amount."
+    },
+    {
+      "order": 6,
+      "questionType": "multiple-choice",
+      "question": "Why is a pay statement useful?",
+      "options": [
+        "It can help you understand earnings, deductions, and the amount paid to you",
+        "It guarantees that your income will increase",
+        "It tells you exactly how much you should spend",
+        "It replaces the need for a budget"
+      ],
+      "correctAnswer": 0,
+      "explanation": "A pay statement provides information that helps you understand the money trail from earnings to payment."
+    },
+    {
+      "order": 7,
+      "questionType": "multiple-choice",
+      "question": "Morgan earns $3,000 but only receives $2,400. What mistake would be most likely if Morgan budgets using $3,000 as available spending money?",
+      "options": [
+        "Morgan may commit to expenses that cannot comfortably be paid",
+        "Morgan will automatically become wealthier",
+        "Morgan will pay fewer bills",
+        "Morgan's deductions will disappear"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Budgeting with money that does not actually reach you can lead to overspending and shortfalls."
+    },
+    {
+      "order": 8,
+      "questionType": "multiple-choice",
+      "question": "Which question is most useful when you see an unfamiliar deduction?",
+      "options": [
+        "What is this deduction for, is it required, and can I change it?",
+        "How quickly can I spend the remaining money?",
+        "Why should I ignore it?",
+        "Can every deduction be removed immediately?"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Understanding the purpose and flexibility of a deduction helps you make an informed decision."
+    },
+    {
+      "order": 9,
+      "questionType": "multiple-choice",
+      "question": "Which statement best describes take-home pay?",
+      "options": [
+        "It is the amount that reaches you after deductions, not automatically the amount you should spend",
+        "It is the same as accumulated wealth",
+        "It is always the same as advertised earnings",
+        "It is money that has no future obligations attached to it"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Take-home pay is what reaches you, but it still needs to cover spending, saving, debt, and other financial priorities."
+    },
+    {
+      "order": 10,
+      "questionType": "true-false",
+      "question": "If the amount reaching your account changes, it is useful to investigate why.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Changes can have legitimate reasons, but understanding them helps you plan accurately and catch unexpected problems."
+    }
+  ]
+}

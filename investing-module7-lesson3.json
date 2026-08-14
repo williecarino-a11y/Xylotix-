@@ -1,0 +1,480 @@
+{
+  "slug": "due-diligence-how-to-verify-an-investment-before-you-trust-it",
+  "title": "Due Diligence: How to Verify an Investment Before You Trust It",
+  "estimatedDuration": 45,
+  "order": 3,
+  "published": true,
+  "contentBlocks": [
+    {
+      "type": "heading",
+      "content": "Do not invest first and investigate later"
+    },
+    {
+      "type": "text",
+      "content": "Due diligence means checking an investment carefully before committing your money. It is not about predicting the future perfectly. It is about gathering enough reliable information to understand what you are buying, who you are dealing with, how the investment is supposed to make money, and what could go wrong."
+    },
+    {
+      "type": "callout",
+      "title": "The basic rule",
+      "content": "If you cannot explain what you are investing in, who provides it, where your money goes, and what could cause you to lose money, you are not ready to invest."
+    },
+    {
+      "type": "heading",
+      "content": "Why verification matters"
+    },
+    {
+      "type": "text",
+      "content": "A convincing website, polished presentation, impressive logo, large social-media following, or confident salesperson does not prove that an investment is legitimate. Good due diligence focuses on evidence rather than appearance."
+    },
+    {
+      "type": "heading",
+      "content": "Start with the investment itself"
+    },
+    {
+      "type": "text",
+      "content": "First identify exactly what you are buying. Is it a share of a company, a bond, a fund, a property interest, or something else? If the answer is vague, stop and investigate before sending money."
+    },
+    {
+      "type": "example",
+      "title": "A vague investment pitch",
+      "content": "Someone tells you that you can earn 15% every month through a proprietary wealth system but cannot clearly explain what asset you own or what activity generates the return. The attractive percentage is not enough. The missing explanation is itself a warning sign."
+    },
+    {
+      "type": "heading",
+      "content": "Find out who is offering it"
+    },
+    {
+      "type": "text",
+      "content": "Identify the company, fund manager, broker, platform, issuer, or other provider responsible for the investment. Look for a real legal identity rather than relying only on a brand name or social-media profile."
+    },
+    {
+      "type": "heading",
+      "content": "Verify the identity independently"
+    },
+    {
+      "type": "text",
+      "content": "Do not rely entirely on contact information supplied by the promoter. Find the organization's official website or other authoritative records independently and compare the details."
+    },
+    {
+      "type": "heading",
+      "content": "Check regulatory information where relevant"
+    },
+    {
+      "type": "text",
+      "content": "Depending on the investment and jurisdiction, a provider may need to be registered, licensed, or otherwise authorized. Verify claims through the relevant regulator or official source rather than trusting a certificate, screenshot, or registration number shown by the promoter."
+    },
+    {
+      "type": "callout",
+      "title": "Important",
+      "content": "Being registered or licensed does not mean an investment will make money. Regulation can help verify who is operating and what they are authorized to do, but it does not eliminate investment risk."
+    },
+    {
+      "type": "heading",
+      "content": "Read the actual documents"
+    },
+    {
+      "type": "text",
+      "content": "Important investments normally come with documents explaining what you are buying, the risks, fees, rules, and rights involved. Do not make a major decision based only on a short advertisement or sales presentation."
+    },
+    {
+      "type": "heading",
+      "content": "Do not ignore the risk section"
+    },
+    {
+      "type": "text",
+      "content": "Investors naturally focus on potential gains, but the risk information may reveal what can actually go wrong. Look for information about possible losses, liquidity restrictions, fees, defaults, market movements, and other relevant risks."
+    },
+    {
+      "type": "heading",
+      "content": "Understand how you make money"
+    },
+    {
+      "type": "text",
+      "content": "Ask what has to happen for you to earn a return. A stock investor may benefit if the business grows and the market values it more highly. A bond investor expects interest and repayment subject to the issuer's ability to pay. A rental property depends on tenants, expenses, and property value."
+    },
+    {
+      "type": "heading",
+      "content": "Ask what would make you lose money"
+    },
+    {
+      "type": "text",
+      "content": "A strong investment review includes a clear downside case. Ask what events could cause the investment to fall in value, stop producing income, become difficult to sell, or lose most or all of its value."
+    },
+    {
+      "type": "interactive",
+      "title": "The two-sided test",
+      "content": "Write down two answers before investing: 'How could I make money?' and 'How could I lose money?' If you can describe the upside but cannot explain the downside, your research is incomplete."
+    },
+    {
+      "type": "heading",
+      "content": "Check where your money goes"
+    },
+    {
+      "type": "text",
+      "content": "Understand whether your money purchases an asset, goes to an issuer, is held by a custodian, is transferred through a broker, or is sent directly to an individual or unrelated account. The payment path matters."
+    },
+    {
+      "type": "heading",
+      "content": "Be careful with personal payment requests"
+    },
+    {
+      "type": "text",
+      "content": "An investment provider asking you to send money to an unrelated person's personal account should receive careful scrutiny. The payment destination should make sense for the investment and provider."
+    },
+    {
+      "type": "heading",
+      "content": "Understand ownership"
+    },
+    {
+      "type": "text",
+      "content": "Ask what legal or economic rights you receive after paying. If someone says you own an asset, determine how that ownership is recorded and how you can prove it."
+    },
+    {
+      "type": "heading",
+      "content": "Check how you can sell or withdraw"
+    },
+    {
+      "type": "text",
+      "content": "An investment may be attractive on paper but unsuitable if you cannot access the money when needed. Understand withdrawal rules, trading hours, lock-up periods, settlement times, penalties, and other restrictions that apply."
+    },
+    {
+      "type": "example",
+      "title": "A liquidity problem",
+      "content": "You invest $10,000 in an opportunity that promises attractive returns, but the money cannot be withdrawn for three years. If you need the $10,000 next year for an important expense, the investment may be inappropriate even if the promised return sounds attractive."
+    },
+    {
+      "type": "formula",
+      "content": "$10,000 locked for 3 years = money unavailable for your near-term needs"
+    },
+    {
+      "type": "heading",
+      "content": "Check the fees"
+    },
+    {
+      "type": "text",
+      "content": "Fees can reduce the return you actually receive. Look beyond a headline return and identify management fees, transaction costs, commissions, account fees, withdrawal charges, performance fees, and other expenses."
+    },
+    {
+      "type": "example",
+      "title": "Why fees matter"
+    },
+    {
+      "type": "text",
+      "content": "Suppose an investment earns $500 before fees and you pay $100 in investment costs. Your amount after those costs is $400, not $500."
+    },
+    {
+      "type": "formula",
+      "content": "$500 − $100 = $400"
+    },
+    {
+      "type": "heading",
+      "content": "Check whether the return is realistic"
+    },
+    {
+      "type": "text",
+      "content": "A promised return should make you ask what level of risk is required to produce it. Claims of unusually high, consistent returns with little or no risk deserve serious skepticism."
+    },
+    {
+      "type": "heading",
+      "content": "Guaranteed returns need careful attention"
+    },
+    {
+      "type": "text",
+      "content": "The word 'guaranteed' can sound reassuring, but investors should determine exactly who provides the guarantee, what conditions apply, and whether the guarantee is legally and financially meaningful."
+    },
+    {
+      "type": "heading",
+      "content": "Separate evidence from testimonials"
+    },
+    {
+      "type": "text",
+      "content": "Testimonials tell you what someone claims happened to them. They do not independently establish that the investment is legitimate or that the same result is likely for you."
+    },
+    {
+      "type": "heading",
+      "content": "Be careful with screenshots"
+    },
+    {
+      "type": "text",
+      "content": "Screenshots of profits, account balances, withdrawals, certificates, or successful trades can be edited or taken out of context. Treat them as claims that require verification, not as proof."
+    },
+    {
+      "type": "heading",
+      "content": "Search for complaints and warnings"
+    },
+    {
+      "type": "text",
+      "content": "Independent research can reveal complaints, regulatory warnings, lawsuits, withdrawal problems, or other concerns. Look across multiple reliable sources instead of relying on a single review."
+    },
+    {
+      "type": "heading",
+      "content": "But do not trust every online review either"
+    },
+    {
+      "type": "text",
+      "content": "Positive reviews can be fabricated, and negative reviews can sometimes be misleading. Use reviews as signals that deserve investigation rather than as final proof."
+    },
+    {
+      "type": "heading",
+      "content": "Watch for changing stories"
+    },
+    {
+      "type": "text",
+      "content": "If the explanation of how the investment works changes when you ask questions, or different representatives give conflicting answers, pause before investing."
+    },
+    {
+      "type": "heading",
+      "content": "Ask simple questions"
+    },
+    {
+      "type": "text",
+      "content": "You do not need to sound like a professional analyst. Simple questions can reveal major problems: What do I own? Who holds it? Where does my money go? How is the return generated? What can make me lose money? What are the fees? How do I get my money back?"
+    },
+    {
+      "type": "heading",
+      "content": "A refusal to answer is information"
+    },
+    {
+      "type": "text",
+      "content": "If a promoter avoids basic questions, becomes aggressive, or tells you that asking questions means you do not understand investing, treat that behavior as a warning sign."
+    },
+    {
+      "type": "heading",
+      "content": "Do not let urgency destroy your research"
+    },
+    {
+      "type": "text",
+      "content": "Limited-time offers, countdown timers, exclusive access, and claims that only a few spaces remain are designed to create pressure. Pressure is especially dangerous when you are being asked to transfer money before completing your checks."
+    },
+    {
+      "type": "heading",
+      "content": "Independently verify important claims"
+    },
+    {
+      "type": "text",
+      "content": "If someone claims that a company is licensed, owns a certain asset, has a particular partnership, or achieved a particular financial result, try to confirm the claim through a source that is independent of the promoter."
+    },
+    {
+      "type": "heading",
+      "content": "Use more than one source"
+    },
+    {
+      "type": "text",
+      "content": "One source can be wrong or incomplete. Important decisions should be checked against multiple credible sources when practical."
+    },
+    {
+      "type": "heading",
+      "content": "Understand what you cannot verify"
+    },
+    {
+      "type": "text",
+      "content": "Sometimes the information needed to evaluate an investment is unavailable. That is not a reason to guess. It is a reason to recognize uncertainty and consider walking away."
+    },
+    {
+      "type": "heading",
+      "content": "Do not confuse complexity with quality"
+    },
+    {
+      "type": "text",
+      "content": "A complicated explanation can make an opportunity sound sophisticated without making it safer. If the promoter uses technical language but cannot explain the basic idea clearly, the complexity may be hiding important gaps."
+    },
+    {
+      "type": "heading",
+      "content": "Do not confuse familiarity with safety"
+    },
+    {
+      "type": "text",
+      "content": "Knowing the brand name, seeing many advertisements, or having a friend recommend something does not eliminate risk. Familiarity can reduce your skepticism when you should still be checking the facts."
+    },
+    {
+      "type": "heading",
+      "content": "Do not invest because someone you trust invested"
+    },
+    {
+      "type": "text",
+      "content": "A friend or family member may genuinely believe an investment is good and may have invested their own money. Their confidence does not replace your own research."
+    },
+    {
+      "type": "heading",
+      "content": "Create your own investment checklist"
+    },
+    {
+      "type": "interactive",
+      "title": "Before-you-invest checklist",
+      "content": "1. What exactly am I buying? 2. Who provides it? 3. What do I own? 4. How is the return generated? 5. What can cause a loss? 6. What are the fees? 7. How liquid is it? 8. How can I independently verify important claims? 9. Who regulates or oversees the provider where applicable? 10. What would make me decide not to invest?"
+    },
+    {
+      "type": "heading",
+      "content": "A simple scoring exercise"
+    },
+    {
+      "type": "text",
+      "content": "For an important investment, rate your understanding from 1 to 5 on the asset, provider, return source, risks, fees, liquidity, and ownership. A low score in an important category is a reason to research further rather than invest immediately."
+    },
+    {
+      "type": "example",
+      "title": "Turning research into a decision"
+    },
+    {
+      "type": "text",
+      "content": "Suppose you understand the asset at 5 out of 5, the provider at 4, the risks at 4, but liquidity at 1 because you cannot determine when you can withdraw. Instead of focusing only on the attractive return, the low liquidity score tells you that more investigation is needed."
+    },
+    {
+      "type": "heading",
+      "content": "Know when to walk away"
+    },
+    {
+      "type": "text",
+      "content": "Not investing is a valid financial decision. If the opportunity cannot be independently verified, the risks are unclear, the provider is difficult to identify, or the terms do not make sense for your situation, walking away can be better than forcing yourself to find a reason to invest."
+    },
+    {
+      "type": "heading",
+      "content": "The bigger lesson"
+    },
+    {
+      "type": "text",
+      "content": "Due diligence is not about becoming an expert in every investment. It is about developing the habit of checking before trusting. A good investor learns to slow down, ask clear questions, verify important facts, understand the downside, and recognize when there is not enough reliable information to proceed."
+    },
+    {
+      "type": "summary",
+      "content": "Due diligence means investigating an investment before committing money. Identify what you are buying, who provides it, how returns are generated, what can cause losses, what fees apply, how you can access your money, and how important claims can be independently verified. Professional-looking platforms, testimonials, screenshots, urgency, and confident salespeople are not substitutes for evidence."
+    },
+    {
+      "type": "callout",
+      "title": "Remember",
+      "content": "You do not have to prove that an investment is a scam before deciding not to invest. If you cannot verify it well enough to understand what you are buying, walking away is a legitimate decision."
+    }
+  ],
+  "quizzes": [
+    {
+      "order": 1,
+      "questionType": "multiple-choice",
+      "question": "What does due diligence mean when investing?",
+      "options": [
+        "Buying immediately before the opportunity disappears",
+        "Carefully checking an investment before committing money",
+        "Following whatever a successful investor recommends",
+        "Choosing the investment with the highest advertised return"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Due diligence means investigating an investment carefully before making the decision to invest."
+    },
+    {
+      "order": 2,
+      "questionType": "multiple-choice",
+      "question": "Which question should you ask first when an investment opportunity is unclear?",
+      "options": [
+        "How many followers does the promoter have?",
+        "What exactly am I buying?",
+        "How quickly can I become wealthy?",
+        "Who else has invested?"
+      ],
+      "correctAnswer": 1,
+      "explanation": "You need to understand what you are actually buying before evaluating whether it is appropriate."
+    },
+    {
+      "order": 3,
+      "questionType": "multiple-choice",
+      "question": "Why should regulatory claims be verified independently?",
+      "options": [
+        "Because promoters can display false or misleading registration information",
+        "Because regulators never publish information",
+        "Because every investment must be illegal",
+        "Because regulation guarantees profits"
+      ],
+      "correctAnswer": 0,
+      "explanation": "A promoter can display fake certificates or registration numbers, so important claims should be checked through authoritative sources."
+    },
+    {
+      "order": 4,
+      "questionType": "multiple-choice",
+      "question": "An investment earns $500 before fees and charges $100 in costs. How much remains after those costs?",
+      "options": [
+        "$100",
+        "$400",
+        "$500",
+        "$600"
+      ],
+      "correctAnswer": 1,
+      "explanation": "$500 − $100 = $400."
+    },
+    {
+      "order": 5,
+      "questionType": "multiple-choice",
+      "question": "Why should an investor understand how an investment can lose money?",
+      "options": [
+        "Because every investment has exactly the same risk",
+        "Because understanding the downside helps you judge whether the investment fits you",
+        "Because losses are always guaranteed",
+        "Because investors should never consider potential returns"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Understanding possible losses helps you evaluate whether the investment is appropriate for your goals and risk capacity."
+    },
+    {
+      "order": 6,
+      "questionType": "multiple-choice",
+      "question": "Why can a professional-looking investment website be misleading?",
+      "options": [
+        "A polished appearance does not prove that the underlying investment is legitimate",
+        "Legitimate investments never have websites",
+        "All websites are fraudulent",
+        "Professional websites guarantee higher returns"
+      ],
+      "correctAnswer": 0,
+      "explanation": "A website can look convincing while still providing false information."
+    },
+    {
+      "order": 7,
+      "questionType": "multiple-choice",
+      "question": "What should you do if you cannot determine how an investment generates its returns?",
+      "options": [
+        "Invest a small amount immediately",
+        "Trust the promoter",
+        "Research further or walk away",
+        "Borrow money to test it"
+      ],
+      "correctAnswer": 2,
+      "explanation": "If the source of returns cannot be understood or verified, investing would involve unnecessary uncertainty."
+    },
+    {
+      "order": 8,
+      "questionType": "multiple-choice",
+      "question": "Why is liquidity important when evaluating an investment?",
+      "options": [
+        "It determines whether you can access or sell your money when needed",
+        "It guarantees profit",
+        "It eliminates market risk",
+        "It determines how popular the investment is"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Liquidity affects how easily and quickly you can access your money."
+    },
+    {
+      "order": 9,
+      "questionType": "multiple-choice",
+      "question": "Which is the strongest reason to walk away from an investment opportunity?",
+      "options": [
+        "The advertisement is not colorful enough",
+        "You cannot independently verify important claims and do not understand what you are buying",
+        "Nobody on social media mentioned it",
+        "The investment does not promise to make you rich quickly"
+      ],
+      "correctAnswer": 1,
+      "explanation": "If important facts cannot be verified and the investment is not understood, walking away can be the sensible choice."
+    },
+    {
+      "order": 10,
+      "questionType": "multiple-choice",
+      "question": "Which statement best describes good due diligence?",
+      "options": [
+        "It guarantees that an investment will make money",
+        "It allows investors to predict every future price movement",
+        "It helps investors understand what they are buying, the risks, and whether important claims can be verified",
+        "It removes the need to think about risk"
+      ],
+      "correctAnswer": 2,
+      "explanation": "Due diligence improves the quality of an investment decision but cannot eliminate investment risk or guarantee returns."
+    }
+  ]
+}

@@ -1,0 +1,620 @@
+{
+  "slug": "how-credit-works-and-why-credit-matters",
+  "title": "How Credit Works and Why Credit Matters",
+  "estimatedDuration": 35,
+  "order": 6,
+  "published": true,
+  "contentBlocks": [
+    {
+      "order": 1,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Credit is basically trust around borrowed money"
+      }
+    },
+    {
+      "order": 2,
+      "type": "text",
+      "data": {
+        "text": "Credit allows you to use money, goods, or services now and pay later. When a lender, bank, store, or other provider gives you something with the expectation that you will pay later, they are taking a risk that you might not pay as promised. Your credit history can help them decide how much risk they believe they are taking."
+      }
+    },
+    {
+      "order": 3,
+      "type": "example",
+      "data": {
+        "title": "Credit creates a future obligation",
+        "text": "You buy a $600 phone using credit. You do not have a free $600 phone simply because you did not pay everything immediately. You have created an obligation to repay the money, potentially with interest and fees."
+      }
+    },
+    {
+      "order": 4,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Your credit history tells a story"
+      }
+    },
+    {
+      "order": 5,
+      "type": "text",
+      "data": {
+        "text": "Depending on your country and credit system, your credit history can include information such as accounts you have borrowed through, whether you made payments on time, missed or late payments, how much debt you have, how long you have had credit, and other information reported by lenders. The important idea is that how you handle borrowed money today can affect your ability to borrow tomorrow."
+      }
+    },
+    {
+      "order": 6,
+      "type": "example",
+      "data": {
+        "title": "Two borrowers",
+        "text": "Imagine two people apply for similar loans. One has a history of consistently making payments on time. The other has a history of missed payments and unpaid debt. A lender may view the first person as less risky. This does not guarantee approval or a lower rate because lenders consider many factors."
+      }
+    },
+    {
+      "order": 7,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "A good credit record can make borrowing easier"
+      }
+    },
+    {
+      "order": 8,
+      "type": "text",
+      "data": {
+        "text": "A responsible credit history can help when you later apply for borrowing. Depending on the lender and local system, your history may influence whether you are approved and what terms you are offered. Credit history is only one factor, so never assume a particular result is guaranteed."
+      }
+    },
+    {
+      "order": 9,
+      "type": "callout",
+      "data": {
+        "title": "Remember",
+        "text": "How you handle borrowed money today can affect your future borrowing options."
+      }
+    },
+    {
+      "order": 10,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Credit does not mean free money"
+      }
+    },
+    {
+      "order": 11,
+      "type": "text",
+      "data": {
+        "text": "When you use credit, you are creating a future obligation. Interest and fees can make the total amount you repay larger than the original purchase or amount borrowed."
+      }
+    },
+    {
+      "order": 12,
+      "type": "example",
+      "data": {
+        "title": "The $600 purchase",
+        "text": "You buy a $600 phone using credit. If interest and fees add another $120, your total financial cost becomes $600 + $120 = $720. Paying later did not make the phone cheaper."
+      }
+    },
+    {
+      "order": 13,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "I can make the monthly payment is not enough"
+      }
+    },
+    {
+      "order": 14,
+      "type": "text",
+      "data": {
+        "text": "A monthly payment can look affordable while the complete commitment is expensive. Before using credit, find out how many payments you will make, the total amount you will repay, and what fees or other charges apply."
+      }
+    },
+    {
+      "order": 15,
+      "type": "example",
+      "data": {
+        "title": "The $150 monthly payment",
+        "text": "A credit agreement requires $150 per month for 12 months. The scheduled payments total $150 × 12 = $1,800. The monthly payment is only one part of the decision."
+      }
+    },
+    {
+      "order": 16,
+      "type": "interactive",
+      "data": {
+        "title": "Find the total commitment",
+        "text": "A purchase requires $80 per month for 15 months. Calculate the scheduled payments by multiplying $80 × 15."
+      }
+    },
+    {
+      "order": 17,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Credit can be useful"
+      }
+    },
+    {
+      "order": 18,
+      "type": "text",
+      "data": {
+        "text": "Credit is not automatically bad. It can be useful when you understand the cost, can realistically make the payments, have a worthwhile reason for borrowing, understand the consequences of missing payments, and have considered how the debt fits into your wider financial situation."
+      }
+    },
+    {
+      "order": 19,
+      "type": "example",
+      "data": {
+        "title": "Using credit intentionally",
+        "text": "Someone needs equipment that is genuinely necessary for their work. They compare financing options, understand the total cost, confirm that the payment fits their budget, and have a realistic repayment plan. Credit may be useful in this situation because the person understands the commitment rather than borrowing automatically."
+      }
+    },
+    {
+      "order": 20,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Credit can also make overspending easier"
+      }
+    },
+    {
+      "order": 21,
+      "type": "text",
+      "data": {
+        "text": "When you spend money you already have, your available cash can create an immediate limit. Credit can make it easier to think about spending first and repayment later. Several purchases that each seem manageable can become a large monthly obligation."
+      }
+    },
+    {
+      "order": 22,
+      "type": "example",
+      "data": {
+        "title": "Small payments can add up",
+        "text": "Someone takes on a $200 monthly payment, then another $150 payment, another $100 payment, and another $250 payment. Together those commitments equal $200 + $150 + $100 + $250 = $700 every month."
+      }
+    },
+    {
+      "order": 23,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "The future-paycheck trap"
+      }
+    },
+    {
+      "order": 24,
+      "type": "text",
+      "data": {
+        "text": "Every debt payment uses part of future income. This means borrowing today can reduce the amount of money you have available for tomorrow's needs and goals."
+      }
+    },
+    {
+      "order": 25,
+      "type": "example",
+      "data": {
+        "title": "Committing future income",
+        "text": "Someone earns $2,500 per month and has debt payments of $700. That means $700 of their monthly income is already committed to those debts before they decide how to use the rest."
+      }
+    },
+    {
+      "order": 26,
+      "type": "callout",
+      "data": {
+        "title": "Think ahead",
+        "text": "Before borrowing, ask what part of your future income you are committing."
+      }
+    },
+    {
+      "order": 27,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Credit limits are not spending targets"
+      }
+    },
+    {
+      "order": 28,
+      "type": "text",
+      "data": {
+        "text": "If a credit card gives you a $5,000 limit, that does not mean you have $5,000 of income or savings. It means you may have access to up to $5,000 of borrowed money under the account's terms."
+      }
+    },
+    {
+      "order": 29,
+      "type": "example",
+      "data": {
+        "title": "A $5,000 credit limit",
+        "text": "You have $2,000 in your bank account and an $8,000 credit limit. You do not have $10,000 of your own money. You have $2,000 of your money and access to borrowed money."
+      }
+    },
+    {
+      "order": 30,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "A higher credit limit does not mean you can afford more"
+      }
+    },
+    {
+      "order": 31,
+      "type": "text",
+      "data": {
+        "text": "A lender increasing your credit limit does not automatically increase your income. If your spending rises simply because you have more available credit, your financial situation can become more difficult."
+      }
+    },
+    {
+      "order": 32,
+      "type": "example",
+      "data": {
+        "title": "The limit increase",
+        "text": "Your credit limit rises from $2,000 to $5,000. You have not received $3,000 of income. You simply have access to more borrowing."
+      }
+    },
+    {
+      "order": 33,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Paying on time matters"
+      }
+    },
+    {
+      "order": 34,
+      "type": "text",
+      "data": {
+        "text": "Credit agreements usually include payment schedules. Missing payments can have consequences such as late fees, additional charges, damage to your credit history, collection activity, or difficulty obtaining credit in the future. The exact consequences depend on the product, agreement, and local rules."
+      }
+    },
+    {
+      "order": 35,
+      "type": "example",
+      "data": {
+        "title": "Why one missed payment matters",
+        "text": "Someone misses a payment because they do not have enough money. Depending on the agreement and local rules, the missed payment may lead to fees or other consequences. Repeated missed payments can make the situation much harder to fix."
+      }
+    },
+    {
+      "order": 36,
+      "type": "interactive",
+      "data": {
+        "title": "The difficult-month test",
+        "text": "Imagine your income falls for several months. Would you still be able to make your credit payments while covering essential expenses? If not, reconsider whether the new credit commitment is too large."
+      }
+    },
+    {
+      "order": 37,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Do not borrow based only on your best month"
+      }
+    },
+    {
+      "order": 38,
+      "type": "text",
+      "data": {
+        "text": "A temporary increase in income can make a payment look affordable. But debt lasts beyond one unusually good month. A safer decision considers realistic income and what could happen if your earnings fall."
+      }
+    },
+    {
+      "order": 39,
+      "type": "example",
+      "data": {
+        "title": "The good-income month",
+        "text": "You normally earn $3,000 per month but earn $4,000 because of overtime one month. Taking on a $500 monthly payment because of that unusually high income could create problems when your income returns to $3,000."
+      }
+    },
+    {
+      "order": 40,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Credit can affect future opportunities"
+      }
+    },
+    {
+      "order": 41,
+      "type": "text",
+      "data": {
+        "text": "In some countries and credit systems, credit information can be considered when evaluating applications for loans, credit cards, housing, or other financial products. The exact rules differ by country, but responsible credit behavior can matter beyond today's purchase."
+      }
+    },
+    {
+      "order": 42,
+      "type": "example",
+      "data": {
+        "title": "Today's borrowing can affect tomorrow",
+        "text": "Someone consistently makes agreed payments and manages debt responsibly. Later, when they apply for another financial product, their credit history may be one factor considered by the provider."
+      }
+    },
+    {
+      "order": 43,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Do not obsess over a credit score"
+      }
+    },
+    {
+      "order": 44,
+      "type": "text",
+      "data": {
+        "text": "A credit score can be useful, but it is not your financial identity. Different countries and scoring systems work differently. What matters more is understanding the behavior behind the number: whether you borrow responsibly, pay what you owe, and avoid taking on debt you cannot realistically handle."
+      }
+    },
+    {
+      "order": 45,
+      "type": "callout",
+      "data": {
+        "title": "A score is not the whole story",
+        "text": "A number can summarize parts of your credit history, but it cannot replace good financial judgment."
+      }
+    },
+    {
+      "order": 46,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "A high credit score does not make an unaffordable loan affordable"
+      }
+    },
+    {
+      "order": 47,
+      "type": "text",
+      "data": {
+        "text": "Someone can have a strong credit history and still take on debt that is too large for their income. A lender approving a loan does not change the basic mathematics of whether the payment fits the person's financial life."
+      }
+    },
+    {
+      "order": 48,
+      "type": "example",
+      "data": {
+        "title": "Approved does not mean affordable",
+        "text": "You qualify for a large loan because your credit history is strong. The monthly payment would consume most of the money you normally have available. Approval does not mean you should accept the loan."
+      }
+    },
+    {
+      "order": 49,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Be careful with easy approval"
+      }
+    },
+    {
+      "order": 50,
+      "type": "text",
+      "data": {
+        "text": "Fast approval can feel attractive when you need money quickly, but speed does not make borrowing cheaper. Before accepting an offer, calculate how much you receive, how much you repay, what fees apply, how long you are committed, and what happens if you miss a payment."
+      }
+    },
+    {
+      "order": 51,
+      "type": "example",
+      "data": {
+        "title": "Easy money can still be expensive",
+        "text": "A lender gives you $1,000 quickly, but you eventually repay $1,350. Your borrowing cost is $1,350 − $1,000 = $350. The fact that getting the money was easy does not remove the $350 cost."
+      }
+    },
+    {
+      "order": 52,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Compare the complete credit offer"
+      }
+    },
+    {
+      "order": 53,
+      "type": "text",
+      "data": {
+        "text": "Do not compare credit offers using only the monthly payment. Compare the amount received or financed, total repayment, number of payments, interest, fees, and important terms."
+      }
+    },
+    {
+      "order": 54,
+      "type": "example",
+      "data": {
+        "title": "Two different payment plans",
+        "text": "Offer A requires $110 per month for 10 months, totaling $1,100. Offer B requires $90 per month for 14 months, totaling $1,260. Offer B looks cheaper each month, but it costs $160 more overall: $1,260 − $1,100 = $160."
+      }
+    },
+    {
+      "order": 55,
+      "type": "interactive",
+      "data": {
+        "title": "Your credit decision test",
+        "text": "Before using credit, write down: amount received or financed, total repayment, interest, fees, monthly payment, number of payments, existing monthly debt payments, and new total monthly debt payments. Then ask whether you would still be comfortable with the commitment during a difficult month."
+      }
+    },
+    {
+      "order": 56,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Credit is a tool, not extra income"
+      }
+    },
+    {
+      "order": 57,
+      "type": "text",
+      "data": {
+        "text": "If you earn $3,000 and borrow $1,000, you have not earned $4,000. You have $3,000 of income plus a $1,000 debt obligation. Treating borrowed money like income can cause spending to grow faster than your actual financial capacity."
+      }
+    },
+    {
+      "order": 58,
+      "type": "example",
+      "data": {
+        "title": "The difference between income and borrowing",
+        "text": "You earn $3,000 this month and borrow another $1,000. The $1,000 must eventually be repaid, potentially with interest and fees. It should not be treated as if it were additional income."
+      }
+    },
+    {
+      "order": 59,
+      "type": "summary",
+      "data": {
+        "title": "What to remember",
+        "points": [
+          "Credit gives you access to money or purchases now while creating a future payment obligation.",
+          "Your credit history can affect future borrowing opportunities depending on your country and credit system.",
+          "A credit limit is not income, savings, or free money.",
+          "A lower monthly payment does not automatically mean a cheaper credit offer.",
+          "Missing payments can have financial and credit consequences.",
+          "A high credit score does not make an unaffordable debt affordable.",
+          "Always compare the total cost, fees, repayment period, and monthly commitment before using credit.",
+          "Credit can be useful when it is intentional, affordable, and understood."
+        ]
+      }
+    },
+    {
+      "order": 60,
+      "type": "callout",
+      "data": {
+        "title": "The question to ask before using credit",
+        "text": "Do not only ask, 'Can I get this?' Ask, 'Can I comfortably afford the full commitment, including the possibility that my circumstances change?'"
+      }
+    }
+  ],
+  "quizzes": [
+    {
+      "order": 1,
+      "questionType": "multiple-choice",
+      "question": "What is the most important thing to remember about credit?",
+      "options": [
+        "Credit creates a future obligation to repay what you borrow or spend",
+        "Credit is free money",
+        "A credit limit is the same as income",
+        "Borrowing never affects future finances"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Credit gives you access to money or purchases now while creating a future repayment obligation.",
+      "points": 10
+    },
+    {
+      "order": 2,
+      "questionType": "multiple-choice",
+      "question": "You buy something for $600 using credit and pay $120 in interest and fees. What is the total financial cost?",
+      "options": [
+        "$720",
+        "$600",
+        "$120",
+        "$480"
+      ],
+      "correctAnswer": 0,
+      "explanation": "$600 + $120 = $720.",
+      "points": 10
+    },
+    {
+      "order": 3,
+      "questionType": "multiple-choice",
+      "question": "A credit card has a $5,000 limit. What does that limit mean?",
+      "options": [
+        "You may have access to up to $5,000 of borrowed money under the account terms",
+        "You have $5,000 of income",
+        "You have $5,000 in savings",
+        "You have received $5,000 as free money"
+      ],
+      "correctAnswer": 0,
+      "explanation": "A credit limit is access to borrowing, not income or savings.",
+      "points": 10
+    },
+    {
+      "order": 4,
+      "questionType": "multiple-choice",
+      "question": "Why can several small credit payments become a problem?",
+      "options": [
+        "They can combine into a large monthly obligation",
+        "Small payments are never real debt",
+        "Credit payments disappear after a few months",
+        "Lenders do not count multiple payments"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Separate payments can add up and significantly reduce the amount of future income available for other needs.",
+      "points": 10
+    },
+    {
+      "order": 5,
+      "questionType": "multiple-choice",
+      "question": "You normally earn $3,000 per month but earn $4,000 once because of overtime. Why should you be careful about using the $4,000 month to justify new debt?",
+      "options": [
+        "The debt will continue even after your income returns to normal",
+        "Overtime income is never real income",
+        "Lenders automatically reject overtime",
+        "A higher income month makes all debt free"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Debt payments continue after the unusually high income month, so affordability should be based on realistic and sustainable income.",
+      "points": 10
+    },
+    {
+      "order": 6,
+      "questionType": "multiple-choice",
+      "question": "A lender approves you for a large loan. Does that automatically mean you can afford it?",
+      "options": [
+        "No, approval does not guarantee that the payment fits your financial situation",
+        "Yes, approval always means affordability",
+        "Yes, because lenders know your budget better than you do",
+        "No, because loans never require repayment"
+      ],
+      "correctAnswer": 0,
+      "explanation": "A lender's approval does not replace your own assessment of whether the debt fits your income, expenses, goals, and risks.",
+      "points": 10
+    },
+    {
+      "order": 7,
+      "questionType": "multiple-choice",
+      "question": "Offer A requires $110 for 10 months. Offer B requires $90 for 14 months. Which has the lower total scheduled repayment?",
+      "options": [
+        "Offer A",
+        "Offer B",
+        "They are equal",
+        "There is not enough information to multiply the payments"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Offer A totals $110 × 10 = $1,100. Offer B totals $90 × 14 = $1,260. Offer A is $160 cheaper before considering other charges.",
+      "points": 10
+    },
+    {
+      "order": 8,
+      "questionType": "true-false",
+      "question": "A higher credit limit means you have more income available to spend.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctAnswer": 1,
+      "explanation": "A higher credit limit gives you access to more borrowing. It does not increase your income.",
+      "points": 10
+    },
+    {
+      "order": 9,
+      "questionType": "multiple-choice",
+      "question": "Which question is most useful before accepting a new credit commitment?",
+      "options": [
+        "Can I comfortably afford the full commitment, even if my circumstances change?",
+        "What is the largest amount the lender will give me?",
+        "How quickly can I spend the credit?",
+        "Can I make the first payment today?"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Good borrowing decisions consider the full commitment and whether it remains manageable when circumstances change.",
+      "points": 10
+    },
+    {
+      "order": 10,
+      "questionType": "multiple-choice",
+      "question": "What is the best general lesson about credit?",
+      "options": [
+        "Use credit intentionally, understand its full cost, and make sure the commitment fits your financial life",
+        "Always use the maximum credit available",
+        "Avoid all credit under every circumstance",
+        "Choose the offer with the smallest monthly payment"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Credit can be useful, but responsible use requires understanding the cost, risks, repayment commitment, and effect on future financial flexibility.",
+      "points": 10
+    }
+  ]
+}

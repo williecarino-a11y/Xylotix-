@@ -105,36 +105,6 @@ async function seedModule(courseId, moduleData) {
  * =========================================================
  */
 
-function normalizeContentBlocks(contentBlocks) {
-  if (!Array.isArray(contentBlocks)) {
-    return [];
-  }
-
-  return contentBlocks.map((block, index) => {
-    const { type, content, ...rest } = block || {};
-
-    let data;
-
-    if (content !== undefined && Object.keys(rest).length === 0) {
-      data = content;
-    } else {
-      data = {
-        ...rest
-      };
-
-      if (content !== undefined) {
-        data.content = content;
-      }
-    }
-
-    return {
-      order: index + 1,
-      type,
-      data
-    };
-  });
-}
-
 async function seedLesson(moduleId, lessonData) {
   return Lesson.findOneAndUpdate(
     {
@@ -149,9 +119,7 @@ async function seedLesson(moduleId, lessonData) {
         estimatedDuration: lessonData.estimatedDuration,
         order: lessonData.order,
         published: lessonData.published,
-        contentBlocks: normalizeContentBlocks(
-          lessonData.contentBlocks
-        )
+        contentBlocks: lessonData.contentBlocks || []
       }
     },
     {

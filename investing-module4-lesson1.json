@@ -1,0 +1,412 @@
+{
+  "slug": "investment-risk-what-can-make-you-lose-money",
+  "title": "Investment Risk: What Can Make You Lose Money?",
+  "estimatedDuration": 50,
+  "order": 1,
+  "published": true,
+  "contentBlocks": [
+    {
+      "type": "heading",
+      "content": "What is investment risk?"
+    },
+    {
+      "type": "text",
+      "content": "Investment risk is the possibility that an investment will produce a worse outcome than expected, including losing some or all of the money invested. Risk is not limited to the chance of a falling price. It can also involve inflation, changing interest rates, default, lack of liquidity, currency movements, and other factors."
+    },
+    {
+      "type": "callout",
+      "title": "The key idea",
+      "content": "Investing always involves uncertainty. The goal is not to find an investment with zero risk, but to understand the risks and decide whether they are appropriate for the goal."
+    },
+    {
+      "type": "heading",
+      "content": "Risk does not mean an investment will lose money"
+    },
+    {
+      "type": "text",
+      "content": "Risk describes the possibility of an unfavorable outcome. An investment can be risky even if it eventually produces a positive return. What matters is that the future result is uncertain."
+    },
+    {
+      "type": "example",
+      "title": "A simple example",
+      "content": "You invest $1,000 in an asset. After one year it could be worth $1,200, $1,000, $900, or another amount. The uncertainty around the outcome is part of the investment's risk."
+    },
+    {
+      "type": "heading",
+      "content": "Market risk"
+    },
+    {
+      "type": "text",
+      "content": "Market risk is the possibility that the value of an investment will decline because the broader market or economic environment changes. Stock markets, for example, can fall because of economic weakness, changing expectations, geopolitical events, interest rates, or investor sentiment."
+    },
+    {
+      "type": "heading",
+      "content": "Company-specific risk"
+    },
+    {
+      "type": "text",
+      "content": "A company can experience problems that hurt its value even when the broader market is doing well. Poor management, declining sales, lawsuits, competition, fraud, technological disruption, or excessive debt can all create company-specific risk."
+    },
+    {
+      "type": "example",
+      "title": "Why concentration can hurt",
+      "content": "Suppose you invest your entire $10,000 portfolio in one company. If that company falls 40%, your investment could fall to about $6,000. If your money had been spread across many investments, the effect of one company's decline could be smaller."
+    },
+    {
+      "type": "formula",
+      "content": "$10,000 × 40% = $4,000 loss"
+    },
+    {
+      "type": "formula",
+      "content": "$10,000 − $4,000 = $6,000 remaining"
+    },
+    {
+      "type": "heading",
+      "content": "Credit or default risk"
+    },
+    {
+      "type": "text",
+      "content": "Credit risk is the possibility that a borrower will fail to make required payments. This is particularly relevant to bonds and other investments where an investor is lending money to a borrower."
+    },
+    {
+      "type": "heading",
+      "content": "Interest-rate risk"
+    },
+    {
+      "type": "text",
+      "content": "Interest-rate changes can affect the value of investments, particularly bonds. When market interest rates rise, existing bonds with lower fixed interest payments can become less attractive compared with newly issued bonds, which can put downward pressure on their market prices."
+    },
+    {
+      "type": "heading",
+      "content": "Inflation risk"
+    },
+    {
+      "type": "text",
+      "content": "Inflation risk is the possibility that rising prices reduce the purchasing power of your money. An investment can increase in dollar value while still failing to preserve as much purchasing power as expected."
+    },
+    {
+      "type": "example",
+      "title": "Nominal return versus purchasing power",
+      "content": "Suppose your investment grows from $10,000 to $10,500, a 5% increase. If prices rise by roughly 4%, the increase in your purchasing power is much smaller than the 5% headline growth suggests."
+    },
+    {
+      "type": "heading",
+      "content": "Liquidity risk"
+    },
+    {
+      "type": "text",
+      "content": "Liquidity risk is the possibility that you cannot quickly sell an investment at a reasonable price when you need the money. An investment may be valuable on paper but difficult or expensive to convert into cash."
+    },
+    {
+      "type": "example",
+      "title": "Why liquidity matters",
+      "content": "Imagine you need $5,000 urgently but most of your money is invested in something that takes time to sell or has very few buyers. You may have to accept an unfavorable price or wait for the transaction to complete."
+    },
+    {
+      "type": "heading",
+      "content": "Currency risk"
+    },
+    {
+      "type": "text",
+      "content": "Currency risk occurs when an investment is exposed to changes in exchange rates. If your home currency changes significantly against the currency of an investment, the value of your investment measured in your home currency can change even if the underlying asset's local price does not."
+    },
+    {
+      "type": "heading",
+      "content": "Reinvestment risk"
+    },
+    {
+      "type": "text",
+      "content": "Reinvestment risk is the possibility that money received from an investment cannot be reinvested at the same attractive rate. This can matter when bonds mature or when investments generate regular interest or other cash payments."
+    },
+    {
+      "type": "heading",
+      "content": "Business risk"
+    },
+    {
+      "type": "text",
+      "content": "Businesses can become less profitable or fail. When you own shares in a company, you participate in the company's economic results. Strong companies can grow, but businesses also face uncertainty."
+    },
+    {
+      "type": "heading",
+      "content": "Political and regulatory risk"
+    },
+    {
+      "type": "text",
+      "content": "Government policies, regulations, taxes, trade restrictions, political instability, or changes in laws can affect businesses, industries, markets, and investments."
+    },
+    {
+      "type": "heading",
+      "content": "Operational risk"
+    },
+    {
+      "type": "text",
+      "content": "Operational problems can affect an investment or financial institution. Examples include technology failures, cyber incidents, poor internal controls, supply disruptions, or serious management failures."
+    },
+    {
+      "type": "heading",
+      "content": "Fraud and scam risk"
+    },
+    {
+      "type": "text",
+      "content": "Some investment losses do not come from normal market movements at all. Fraudulent investment schemes can cause people to lose money by promising unrealistic or guaranteed returns."
+    },
+    {
+      "type": "callout",
+      "title": "Warning sign",
+      "content": "Be extremely cautious when someone claims an investment has high returns with little or no risk. Genuine investments involve uncertainty."
+    },
+    {
+      "type": "heading",
+      "content": "Total loss risk"
+    },
+    {
+      "type": "text",
+      "content": "Some investments can lose most or all of their value. This is one reason investors should understand what they own rather than investing simply because an asset is popular."
+    },
+    {
+      "type": "heading",
+      "content": "Risk is not the same for every investment"
+    },
+    {
+      "type": "text",
+      "content": "Different investments have different risk profiles. A government bond, a highly speculative company, a diversified stock fund, and a cryptocurrency can have very different risks. Even investments within the same category can differ substantially."
+    },
+    {
+      "type": "heading",
+      "content": "Risk is not the same for every investor"
+    },
+    {
+      "type": "text",
+      "content": "An investment that may be reasonable for one person can be inappropriate for another. Goals, time horizon, income stability, emergency savings, debt, financial responsibilities, and the need for liquidity can all affect how much risk an investor can reasonably take."
+    },
+    {
+      "type": "heading",
+      "content": "Risk versus uncertainty"
+    },
+    {
+      "type": "text",
+      "content": "In everyday financial decisions, risk is often used to describe uncertain outcomes that could cause loss or other harm. Investors should remember that not every risk can be predicted precisely or measured perfectly."
+    },
+    {
+      "type": "heading",
+      "content": "Can diversification reduce risk?"
+    },
+    {
+      "type": "text",
+      "content": "Diversification can reduce certain risks, especially the risk of relying too heavily on one company or investment. However, it cannot eliminate broad market risk, inflation risk, or every other type of risk."
+    },
+    {
+      "type": "example",
+      "title": "Diversification in practice",
+      "content": "Suppose a portfolio contains 100 companies rather than one. If one company collapses, the direct effect on the overall portfolio may be much smaller. But if the entire stock market falls, many holdings may decline together."
+    },
+    {
+      "type": "heading",
+      "content": "Why risk matters when setting goals"
+    },
+    {
+      "type": "text",
+      "content": "The closer you are to needing money for an important goal, the more important it becomes to consider whether a major loss at that time would create a problem. Investment risk should therefore be considered alongside the timing of the goal."
+    },
+    {
+      "type": "heading",
+      "content": "Common misconceptions"
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: Risk means you will lose money"
+    },
+    {
+      "type": "text",
+      "content": "Reality: Risk means an unfavorable outcome is possible. A risky investment can still produce a profit."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: Diversification eliminates risk"
+    },
+    {
+      "type": "text",
+      "content": "Reality: Diversification can reduce concentration risk, but diversified investments can still lose value."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: High returns with no risk are normal"
+    },
+    {
+      "type": "text",
+      "content": "Reality: Higher potential returns generally come with uncertainty, and claims of guaranteed high returns should be treated with caution."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: Only stocks are risky"
+    },
+    {
+      "type": "text",
+      "content": "Reality: Bonds, currencies, real estate, funds, and other investments can also have different types of risk."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: A rising investment is a risk-free investment"
+    },
+    {
+      "type": "text",
+      "content": "Reality: Past price increases do not remove future uncertainty."
+    },
+    {
+      "type": "heading",
+      "content": "Practical risk checklist"
+    },
+    {
+      "type": "interactive",
+      "title": "Before investing, ask these questions",
+      "content": "What could make this investment lose value? Could I lose some or all of my money? How quickly could I sell it? Could inflation reduce its purchasing power? Could interest rates affect it? Could a borrower or company fail? Is my money diversified? What happens if the investment falls sharply when I need the money?"
+    },
+    {
+      "type": "heading",
+      "content": "A simple way to think about risk"
+    },
+    {
+      "type": "text",
+      "content": "Think of risk as the collection of things that could cause your actual financial outcome to be worse than expected. Good investing does not mean pretending those risks do not exist. It means identifying them and deciding whether they are acceptable."
+    },
+    {
+      "type": "summary",
+      "content": "Investment risk is the possibility of an unfavorable financial outcome. Important risks include market risk, company-specific risk, credit risk, interest-rate risk, inflation risk, liquidity risk, currency risk, reinvestment risk, political and regulatory risk, operational risk, and fraud risk. Diversification can reduce some risks but cannot eliminate investment risk."
+    },
+    {
+      "type": "callout",
+      "title": "Remember",
+      "content": "Before asking how much an investment could make, ask what could make you lose money and whether you could handle that outcome."
+    }
+  ],
+  "quiz": [
+    {
+      "order": 1,
+      "questionType": "multiple-choice",
+      "question": "What does investment risk mainly describe?",
+      "options": [
+        "A guarantee that an investment will lose money",
+        "The possibility of an unfavorable outcome",
+        "The amount of money an investor earns every month",
+        "The number of investments in a portfolio"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Risk is about uncertainty and the possibility of an unfavorable outcome."
+    },
+    {
+      "order": 2,
+      "questionType": "multiple-choice",
+      "question": "You invest $10,000 and the investment falls by 40%. Approximately how much is the loss?",
+      "options": [
+        "$400",
+        "$2,000",
+        "$4,000",
+        "$6,000"
+      ],
+      "correctAnswer": 2,
+      "explanation": "$10,000 × 40% = $4,000."
+    },
+    {
+      "order": 3,
+      "questionType": "multiple-choice",
+      "question": "What is credit or default risk?",
+      "options": [
+        "The possibility that a borrower fails to make required payments",
+        "The possibility that prices rise",
+        "The possibility that an investment becomes easier to sell",
+        "The possibility that a company changes its logo"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Credit risk is the possibility that a borrower fails to meet its payment obligations."
+    },
+    {
+      "order": 4,
+      "questionType": "multiple-choice",
+      "question": "What is inflation risk?",
+      "options": [
+        "The risk that your investment becomes impossible to sell",
+        "The risk that rising prices reduce the purchasing power of your money",
+        "The risk that interest rates never change",
+        "The risk that a company pays too much tax"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Inflation can reduce what your money can buy."
+    },
+    {
+      "order": 5,
+      "questionType": "true-false",
+      "question": "Diversification completely eliminates investment risk.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Diversification can reduce certain risks but cannot eliminate all investment risk."
+    },
+    {
+      "order": 6,
+      "questionType": "multiple-choice",
+      "question": "What is liquidity risk?",
+      "options": [
+        "The possibility that an investment cannot be quickly sold at a reasonable price",
+        "The possibility that an investment earns too much",
+        "The possibility that a company grows rapidly",
+        "The possibility that inflation falls"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Liquidity risk concerns difficulty selling an investment quickly at a reasonable price."
+    },
+    {
+      "order": 7,
+      "questionType": "multiple-choice",
+      "question": "Why can a diversified portfolio still lose money?",
+      "options": [
+        "Because diversification guarantees losses",
+        "Because broad market movements can affect many investments at the same time",
+        "Because diversified portfolios contain only one investment",
+        "Because diversification removes all risk except fraud"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Diversification reduces concentration risk but broad market declines can affect many holdings together."
+    },
+    {
+      "order": 8,
+      "questionType": "multiple-choice",
+      "question": "Which statement should make an investor cautious?",
+      "options": [
+        "This investment involves uncertainty.",
+        "Returns can vary.",
+        "You will receive very high returns with absolutely no risk.",
+        "The investment's value can fall."
+      ],
+      "correctAnswer": 2,
+      "explanation": "Promises of high guaranteed returns with no risk are a major warning sign."
+    },
+    {
+      "order": 9,
+      "questionType": "multiple-choice",
+      "question": "Why can the same investment be appropriate for one investor but inappropriate for another?",
+      "options": [
+        "Investments automatically behave differently for each person",
+        "Investors have different goals, time horizons, financial situations, and risk capacities",
+        "Only wealthy people can invest",
+        "Risk disappears when an investor has a long name"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Suitability depends partly on the investor's circumstances and goals."
+    },
+    {
+      "order": 10,
+      "questionType": "multiple-choice",
+      "question": "What is a useful question to ask before investing?",
+      "options": [
+        "How can I guarantee a profit?",
+        "What could cause this investment to lose value?",
+        "How can I avoid learning about the investment?",
+        "Why is this investment popular?"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Understanding what could cause a loss is an important part of evaluating investment risk."
+    }
+  ]
+}

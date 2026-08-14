@@ -1,0 +1,429 @@
+{
+  "slug": "bonds-lending-money-for-a-return",
+  "title": "Bonds: Lending Money for a Return",
+  "estimatedDuration": 45,
+  "order": 1,
+  "published": true,
+  "contentBlocks": [
+    {
+      "type": "heading",
+      "content": "What is a bond?"
+    },
+    {
+      "type": "text",
+      "content": "A bond is essentially a loan that an investor provides to a government, company, or other organization. In return, the issuer generally promises to make interest payments and repay the principal according to the bond's terms."
+    },
+    {
+      "type": "callout",
+      "title": "The key idea",
+      "content": "Buying a stock generally means becoming an owner. Buying a bond generally means becoming a lender."
+    },
+    {
+      "type": "heading",
+      "content": "Who issues bonds?"
+    },
+    {
+      "type": "text",
+      "content": "Governments issue bonds to help finance spending and projects. Companies can issue bonds to raise money for operations, expansion, acquisitions, or other business needs."
+    },
+    {
+      "type": "heading",
+      "content": "The basic parts of a bond"
+    },
+    {
+      "type": "text",
+      "content": "A bond normally has several important features: a face value or principal amount, an interest rate, a maturity date, and an issuer."
+    },
+    {
+      "type": "heading",
+      "content": "Principal or face value"
+    },
+    {
+      "type": "text",
+      "content": "The principal is the amount the issuer agrees to repay at maturity, subject to the issuer meeting its obligations."
+    },
+    {
+      "type": "example",
+      "title": "A simple bond",
+      "content": "Imagine you buy a bond with a face value of $1,000. The bond has a 5% annual coupon and matures in five years. If the issuer makes all required payments, you would receive $50 in annual interest and the $1,000 principal at maturity."
+    },
+    {
+      "type": "formula",
+      "content": "Annual interest = face value × coupon rate"
+    },
+    {
+      "type": "formula",
+      "content": "$1,000 × 5% = $50 per year"
+    },
+    {
+      "type": "heading",
+      "content": "Coupon or interest payment"
+    },
+    {
+      "type": "text",
+      "content": "The coupon rate is the stated annual interest rate applied to the bond's face value. The actual amount an investor receives depends on the bond's terms and payment schedule."
+    },
+    {
+      "type": "heading",
+      "content": "Maturity"
+    },
+    {
+      "type": "text",
+      "content": "Maturity is the date when the bond reaches the end of its stated term. At maturity, the issuer generally repays the bond's principal if it has met its obligations."
+    },
+    {
+      "type": "heading",
+      "content": "A bond is not automatically risk-free"
+    },
+    {
+      "type": "text",
+      "content": "The fact that a bond promises interest and repayment does not guarantee that those payments will happen. The issuer can face financial difficulties and fail to make payments."
+    },
+    {
+      "type": "heading",
+      "content": "Credit or default risk"
+    },
+    {
+      "type": "text",
+      "content": "Credit risk is the possibility that the issuer cannot make required interest or principal payments. Generally, investors demand greater compensation when they believe an issuer carries greater credit risk."
+    },
+    {
+      "type": "example",
+      "title": "Why risk can affect interest rates",
+      "content": "Suppose a financially strong issuer can borrow at 4%, while a riskier issuer may need to offer 8% to attract investors. The higher rate can compensate investors for taking on greater perceived risk, although it does not eliminate the possibility of loss."
+    },
+    {
+      "type": "heading",
+      "content": "Government bonds and corporate bonds"
+    },
+    {
+      "type": "text",
+      "content": "Government bonds are issued by governments, while corporate bonds are issued by companies. Their risks and potential returns can differ depending on the issuer, maturity, economic conditions, and other factors."
+    },
+    {
+      "type": "heading",
+      "content": "Bond prices can change"
+    },
+    {
+      "type": "text",
+      "content": "If a bond can be traded before maturity, its market price can move above or below its face value. This means an investor who sells before maturity may receive more or less than the amount originally paid."
+    },
+    {
+      "type": "heading",
+      "content": "Why interest rates affect existing bond prices"
+    },
+    {
+      "type": "text",
+      "content": "When market interest rates rise, existing bonds with lower fixed coupon rates can become less attractive compared with newly issued bonds offering higher rates. Their market prices may therefore fall. When market rates fall, existing bonds with higher coupon rates can become more attractive and their market prices may rise."
+    },
+    {
+      "type": "example",
+      "title": "A simple interest-rate example",
+      "content": "Imagine you own a bond paying a fixed 3% rate. If newly issued bonds begin offering 5% for similar risk and maturity, investors may be less willing to pay the same price for your 3% bond. Its market price could fall until its overall return becomes more competitive."
+    },
+    {
+      "type": "callout",
+      "title": "Important relationship",
+      "content": "For many fixed-rate bonds, market interest rates and existing bond prices generally move in opposite directions."
+    },
+    {
+      "type": "heading",
+      "content": "Yield is different from the coupon rate"
+    },
+    {
+      "type": "text",
+      "content": "The coupon rate is based on the bond's face value. Yield considers what an investor actually pays for the bond and the income that investment may generate. This is why a bond's yield can differ from its stated coupon rate."
+    },
+    {
+      "type": "heading",
+      "content": "Buying a bond above or below face value"
+    },
+    {
+      "type": "text",
+      "content": "A bond can trade at a premium, meaning above face value, or at a discount, meaning below face value. The market price reflects current supply, demand, interest rates, credit conditions, and expectations."
+    },
+    {
+      "type": "example",
+      "title": "Buying below face value",
+      "content": "Suppose a $1,000 bond trades for $950. If the issuer later repays $1,000 at maturity and all payments are made, the investor could receive a $50 difference in addition to any interest payments received during ownership."
+    },
+    {
+      "type": "formula",
+      "content": "Capital gain at maturity = $1,000 − $950 = $50"
+    },
+    {
+      "type": "heading",
+      "content": "Bond return is more than just interest"
+    },
+    {
+      "type": "text",
+      "content": "If you buy a bond at a price different from its face value, your overall return can include interest income plus a gain or loss from the bond's price changing before you sell or from receiving the face value at maturity."
+    },
+    {
+      "type": "heading",
+      "content": "A simple return calculation"
+    },
+    {
+      "type": "example",
+      "title": "Interest plus price gain",
+      "content": "Suppose you buy a bond for $950. Over the period you receive $50 of interest, and the bond is later worth $1,000. Your total dollar gain is $100."
+    },
+    {
+      "type": "formula",
+      "content": "Total gain = interest received + price gain"
+    },
+    {
+      "type": "formula",
+      "content": "$50 + ($1,000 − $950) = $100"
+    },
+    {
+      "type": "formula",
+      "content": "Simple return = $100 ÷ $950 × 100 ≈ 10.5%"
+    },
+    {
+      "type": "heading",
+      "content": "Duration and interest-rate sensitivity"
+    },
+    {
+      "type": "text",
+      "content": "Bonds with longer maturities and certain other characteristics can be more sensitive to changes in interest rates. A larger price movement can therefore occur when rates change."
+    },
+    {
+      "type": "heading",
+      "content": "Inflation can reduce purchasing power"
+    },
+    {
+      "type": "text",
+      "content": "Even if a bond pays exactly what it promises, inflation can reduce the purchasing power of those payments. A 4% nominal return is not necessarily a 4% increase in what your money can buy."
+    },
+    {
+      "type": "example",
+      "title": "Nominal return versus purchasing power",
+      "content": "If an investment earns 4% while prices rise by roughly 3%, the investor's purchasing power has increased by much less than 4%. This is why investors consider inflation when evaluating fixed-income investments."
+    },
+    {
+      "type": "heading",
+      "content": "Liquidity risk"
+    },
+    {
+      "type": "text",
+      "content": "Some bonds are easier to buy or sell than others. If a bond has limited trading activity, an investor may have difficulty selling quickly at a desirable price."
+    },
+    {
+      "type": "heading",
+      "content": "Why would someone invest in bonds?"
+    },
+    {
+      "type": "text",
+      "content": "Investors may use bonds to generate income, diversify a portfolio, preserve capital relative to riskier investments, or match investments with a future financial need. The appropriate role depends on the investor's goals and circumstances."
+    },
+    {
+      "type": "heading",
+      "content": "Bonds versus stocks"
+    },
+    {
+      "type": "text",
+      "content": "A stock represents an ownership interest in a company. A bond represents a lending relationship with an issuer. Stockholders may benefit from business growth through price appreciation and dividends, while bondholders generally receive contractual interest and principal payments if the issuer meets its obligations."
+    },
+    {
+      "type": "heading",
+      "content": "Bondholders and shareholders have different positions"
+    },
+    {
+      "type": "text",
+      "content": "If a company experiences severe financial problems, creditors and shareholders do not have the same legal claim. Bondholders are creditors, while shareholders are owners. The exact outcome in a failure depends on the type and priority of the debt and the company's remaining assets."
+    },
+    {
+      "type": "heading",
+      "content": "Common misconceptions"
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: All bonds are safe"
+    },
+    {
+      "type": "text",
+      "content": "Reality: Bonds can carry default risk, interest-rate risk, inflation risk, liquidity risk, and other risks."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: A bond always pays the same return"
+    },
+    {
+      "type": "text",
+      "content": "Reality: The coupon may be fixed, but an investor's overall return can differ depending on the purchase price, sale price, maturity, and other factors."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: Bond prices always rise when interest rates rise"
+    },
+    {
+      "type": "text",
+      "content": "Reality: Existing fixed-rate bond prices generally move in the opposite direction to market interest rates."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: A higher bond yield means a better investment"
+    },
+    {
+      "type": "text",
+      "content": "Reality: A higher yield may reflect greater credit risk, longer maturity, lower liquidity, or other risks. Higher potential return does not mean lower risk."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: Holding a bond means you can never lose money"
+    },
+    {
+      "type": "text",
+      "content": "Reality: An investor can lose money if the issuer defaults, if the bond is sold for less than it cost, or if inflation significantly reduces purchasing power."
+    },
+    {
+      "type": "heading",
+      "content": "Practical investor exercise"
+    },
+    {
+      "type": "interactive",
+      "title": "Before buying a bond",
+      "content": "Ask: Who issued the bond? What is the interest rate? When does it mature? What price am I paying? What is the yield? How strong is the issuer financially? How could interest rates affect the price? How could inflation affect my purchasing power? How easy would it be to sell?"
+    },
+    {
+      "type": "summary",
+      "content": "A bond is generally a loan made by an investor to an issuer. Bonds can provide interest income and repayment of principal, but they are not automatically risk-free. Investors should understand coupon rates, maturity, yield, bond prices, credit risk, interest-rate risk, inflation, and liquidity before investing."
+    },
+    {
+      "type": "callout",
+      "title": "Remember",
+      "content": "When you buy a bond, you are generally lending money rather than buying ownership. The return you receive depends on the bond's terms, the price you pay, and whether the issuer meets its obligations."
+    }
+  ],
+  "quiz": [
+    {
+      "order": 1,
+      "questionType": "multiple-choice",
+      "question": "What does buying a bond generally mean?",
+      "options": [
+        "You become a part-owner of the issuer",
+        "You lend money to the issuer",
+        "You receive guaranteed stock ownership",
+        "You automatically receive company profits"
+      ],
+      "correctAnswer": 1,
+      "explanation": "A bond generally represents a lending relationship between the investor and the issuer."
+    },
+    {
+      "order": 2,
+      "questionType": "multiple-choice",
+      "question": "A $1,000 bond has a 5% annual coupon rate. How much annual coupon interest does it pay?",
+      "options": [
+        "$5",
+        "$25",
+        "$50",
+        "$500"
+      ],
+      "correctAnswer": 2,
+      "explanation": "$1,000 × 5% = $50 per year."
+    },
+    {
+      "order": 3,
+      "questionType": "multiple-choice",
+      "question": "What is the maturity date of a bond?",
+      "options": [
+        "The date the bond is first advertised",
+        "The date the issuer generally repays the principal if obligations are met",
+        "The date the investor receives their first paycheck",
+        "The date the stock market closes"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Maturity is the end of the bond's stated term, when principal is generally repaid if the issuer meets its obligations."
+    },
+    {
+      "order": 4,
+      "questionType": "multiple-choice",
+      "question": "What generally happens to existing fixed-rate bond prices when market interest rates rise?",
+      "options": [
+        "They generally become more attractive and rise automatically",
+        "They generally fall as newer bonds offer higher rates",
+        "They cannot change",
+        "They are guaranteed to double"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Existing bonds with lower fixed coupon rates can become less attractive when new bonds offer higher rates."
+    },
+    {
+      "order": 5,
+      "questionType": "true-false",
+      "question": "All bonds are risk-free investments.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Bonds can carry default, interest-rate, inflation, liquidity, and other risks."
+    },
+    {
+      "order": 6,
+      "questionType": "multiple-choice",
+      "question": "A $1,000 bond is purchased for $950 and later repaid at $1,000 at maturity. Ignoring interest, what is the price gain?",
+      "options": [
+        "$25",
+        "$40",
+        "$50",
+        "$100"
+      ],
+      "correctAnswer": 2,
+      "explanation": "$1,000 − $950 = $50."
+    },
+    {
+      "order": 7,
+      "questionType": "multiple-choice",
+      "question": "What does credit or default risk refer to?",
+      "options": [
+        "The risk that an issuer cannot make required payments",
+        "The risk that stock prices become too high",
+        "The risk that inflation disappears",
+        "The risk that every bond pays too much interest"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Credit risk is the possibility that an issuer fails to make required interest or principal payments."
+    },
+    {
+      "order": 8,
+      "questionType": "multiple-choice",
+      "question": "Why can inflation be a problem for bond investors?",
+      "options": [
+        "It can reduce the purchasing power of future payments",
+        "It guarantees higher bond prices",
+        "It eliminates all interest payments",
+        "It automatically increases the bond's face value"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Inflation can make fixed future payments buy less than they would have previously."
+    },
+    {
+      "order": 9,
+      "questionType": "multiple-choice",
+      "question": "An investor buys a bond for $950, receives $50 in interest, and later receives $1,000. What is the total dollar gain?",
+      "options": [
+        "$50",
+        "$75",
+        "$100",
+        "$150"
+      ],
+      "correctAnswer": 2,
+      "explanation": "The $50 interest plus the $50 price gain equals a total gain of $100."
+    },
+    {
+      "order": 10,
+      "questionType": "multiple-choice",
+      "question": "Which statement best describes a bond?",
+      "options": [
+        "It is always a risk-free way to earn money",
+        "It generally represents lending money to an issuer in exchange for agreed payments",
+        "It always produces higher returns than stocks",
+        "It gives every investor ownership of the issuer"
+      ],
+      "correctAnswer": 1,
+      "explanation": "A bond generally represents a loan to an issuer, with payments determined by the bond's terms and subject to the issuer meeting its obligations."
+    }
+  ]
+}

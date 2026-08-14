@@ -1,0 +1,602 @@
+{
+  "slug": "rich-vs-wealthy-whats-the-difference",
+  "title": "Rich vs. Wealthy: What's the Difference?",
+  "estimatedDuration": 40,
+  "order": 1,
+  "published": true,
+  "contentBlocks": [
+    {
+      "type": "heading",
+      "content": "Rich and wealthy are not the same thing"
+    },
+    {
+      "type": "text",
+      "content": "People often use the words rich and wealthy as if they mean exactly the same thing. In everyday conversation, they can overlap, but financially they can describe different situations."
+    },
+    {
+      "type": "text",
+      "content": "Someone may have a high income and live an expensive lifestyle without having much financial security. Another person may earn less, spend less than they earn, own valuable assets, and have substantial financial flexibility."
+    },
+    {
+      "type": "callout",
+      "title": "The simple idea",
+      "content": "Rich is often associated with having a high level of income or spending power. Wealth is more closely connected to what you own, what you owe, what you keep, and how much financial freedom your resources can provide."
+    },
+    {
+      "type": "heading",
+      "content": "Income tells you what comes in"
+    },
+    {
+      "type": "text",
+      "content": "Income is money you receive, such as salary, business income, freelance earnings, rent, interest, or other sources."
+    },
+    {
+      "type": "example",
+      "title": "High income",
+      "content": "Suppose someone earns $12,000 per month. That is a high income compared with many people's incomes."
+    },
+    {
+      "type": "heading",
+      "content": "Income alone does not tell the whole story"
+    },
+    {
+      "type": "text",
+      "content": "If that person spends $11,900 every month, carries large debts, and has little savings or invested assets, the high income does not automatically mean strong financial security."
+    },
+    {
+      "type": "formula",
+      "content": "$12,000 − $11,900 = $100"
+    },
+    {
+      "type": "text",
+      "content": "Only $100 remains from that month's income before considering whether other financial commitments exist."
+    },
+    {
+      "type": "heading",
+      "content": "Wealth looks at what you have built"
+    },
+    {
+      "type": "text",
+      "content": "A practical way to think about wealth is to look at your assets, debts, and the financial resources you have accumulated over time."
+    },
+    {
+      "type": "heading",
+      "content": "Assets and liabilities matter"
+    },
+    {
+      "type": "text",
+      "content": "Assets are things with financial value that you own. Liabilities are debts or obligations you owe. The difference between your assets and liabilities is your net worth."
+    },
+    {
+      "type": "formula",
+      "content": "Net worth = Assets − Liabilities"
+    },
+    {
+      "type": "example",
+      "title": "A simple net-worth example",
+      "content": "Suppose you own $250,000 in assets and owe $100,000 in debts. Your net worth is $150,000."
+    },
+    {
+      "type": "formula",
+      "content": "$250,000 − $100,000 = $150,000"
+    },
+    {
+      "type": "heading",
+      "content": "A high income can coexist with low wealth"
+    },
+    {
+      "type": "text",
+      "content": "A person can earn a large income while accumulating little wealth if most of the money is consumed by spending, taxes, debt payments, and lifestyle costs."
+    },
+    {
+      "type": "example",
+      "title": "Person A",
+      "content": "Person A earns $12,000 per month but spends $11,500. After years of high spending and debt, they have $40,000 of net worth."
+    },
+    {
+      "type": "heading",
+      "content": "A lower income can still build wealth"
+    },
+    {
+      "type": "text",
+      "content": "A person with a more modest income can build meaningful wealth by consistently spending below their income, managing debt, saving, and acquiring assets."
+    },
+    {
+      "type": "example",
+      "title": "Person B",
+      "content": "Person B earns $5,000 per month, spends $3,800, and consistently directs part of the remaining money toward savings and investments. Over time, those accumulated resources can become substantial."
+    },
+    {
+      "type": "heading",
+      "content": "The comparison is not about who is better"
+    },
+    {
+      "type": "text",
+      "content": "Income and wealth depend on many factors, including opportunity, time, responsibilities, location, economic conditions, and personal circumstances. The goal is not to label people as better or worse."
+    },
+    {
+      "type": "heading",
+      "content": "Look beyond appearances"
+    },
+    {
+      "type": "text",
+      "content": "A person may drive an expensive car, wear expensive clothes, travel frequently, or live in a large home. Those things can indicate spending power, but they do not prove how much wealth the person actually has."
+    },
+    {
+      "type": "example",
+      "title": "The expensive car",
+      "content": "Two people drive the same $70,000 car. One owns it outright and has substantial savings. The other financed it with a large loan and has very little savings. Their financial positions are very different even though they look similar from the outside."
+    },
+    {
+      "type": "heading",
+      "content": "Spending power is not the same as financial strength"
+    },
+    {
+      "type": "text",
+      "content": "Being able to spend a lot today does not necessarily mean you have strong finances tomorrow."
+    },
+    {
+      "type": "heading",
+      "content": "Wealth creates options"
+    },
+    {
+      "type": "text",
+      "content": "Financial resources can create choices. Having savings, manageable debt, and valuable assets can make it easier to handle unexpected costs, change jobs, pursue opportunities, or reduce dependence on every paycheck."
+    },
+    {
+      "type": "heading",
+      "content": "Why keeping money matters"
+    },
+    {
+      "type": "text",
+      "content": "Income creates an opportunity to build wealth, but wealth grows from what you are able to retain and build after your spending and obligations."
+    },
+    {
+      "type": "example",
+      "title": "Same income, different outcome",
+      "content": "Two people each earn $6,000 per month. One spends $5,900. The other spends $4,500 and consistently uses the remaining $1,500 for financial goals and asset building."
+    },
+    {
+      "type": "formula",
+      "content": "$6,000 − $5,900 = $100"
+    },
+    {
+      "type": "formula",
+      "content": "$6,000 − $4,500 = $1,500"
+    },
+    {
+      "type": "text",
+      "content": "Their incomes are identical, but the amount available to build financial resources is very different."
+    },
+    {
+      "type": "heading",
+      "content": "Wealth is usually built over time"
+    },
+    {
+      "type": "text",
+      "content": "Wealth generally develops through repeated financial decisions rather than one impressive month of income."
+    },
+    {
+      "type": "heading",
+      "content": "Think in years, not just months"
+    },
+    {
+      "type": "text",
+      "content": "A single month's income tells you little about long-term financial strength. Look at what someone is able to keep, invest, own, and build over many years."
+    },
+    {
+      "type": "example",
+      "title": "A simple long-term calculation",
+      "content": "If someone consistently sets aside $500 each month, they direct $6,000 toward saving or investing over one year before considering any growth."
+    },
+    {
+      "type": "formula",
+      "content": "$500 × 12 = $6,000"
+    },
+    {
+      "type": "heading",
+      "content": "Assets can change the picture"
+    },
+    {
+      "type": "text",
+      "content": "Money that is saved or invested can become part of a person's accumulated financial resources. Productive assets may also generate income or appreciate over time, although returns are never guaranteed."
+    },
+    {
+      "type": "heading",
+      "content": "Debt can change the picture too"
+    },
+    {
+      "type": "text",
+      "content": "Owning something valuable does not automatically mean you are wealthy if a large amount is owed against it."
+    },
+    {
+      "type": "example",
+      "title": "A valuable property with a large debt",
+      "content": "Suppose a property is worth $400,000 but the owner still owes $350,000 on it. The property is valuable, but only $50,000 of its value contributes to net worth before considering other assets or liabilities."
+    },
+    {
+      "type": "formula",
+      "content": "$400,000 − $350,000 = $50,000"
+    },
+    {
+      "type": "heading",
+      "content": "Wealth is not simply about owning expensive things"
+    },
+    {
+      "type": "text",
+      "content": "An expensive possession can be useful, enjoyable, or valuable, but wealth is better understood by looking at the overall financial position rather than the price tags around you."
+    },
+    {
+      "type": "heading",
+      "content": "Financial breathing room matters"
+    },
+    {
+      "type": "text",
+      "content": "Someone with manageable expenses, savings, and low financial obligations may have more breathing room than someone with a much larger income but heavy commitments."
+    },
+    {
+      "type": "heading",
+      "content": "The freedom test"
+    },
+    {
+      "type": "text",
+      "content": "One practical question is: if your income stopped temporarily, how long could your existing resources support important expenses without forcing you into a financial crisis?"
+    },
+    {
+      "type": "interactive",
+      "title": "Think about financial strength",
+      "content": "Consider your savings, important assets, debts, and essential monthly expenses. Do not focus only on income. Think about how much financial breathing room your current position provides."
+    },
+    {
+      "type": "heading",
+      "content": "Do not confuse lifestyle with net worth"
+    },
+    {
+      "type": "text",
+      "content": "Lifestyle describes how someone lives and spends. Net worth describes the financial value remaining after subtracting liabilities from assets. They can move in very different directions."
+    },
+    {
+      "type": "heading",
+      "content": "A wealthy-looking lifestyle can be expensive to maintain"
+    },
+    {
+      "type": "text",
+      "content": "High recurring costs can require continuous high income. If the income falls, the lifestyle may become difficult to maintain."
+    },
+    {
+      "type": "heading",
+      "content": "Wealth can be less visible"
+    },
+    {
+      "type": "text",
+      "content": "Savings, investments, business ownership, retirement assets, and other financial resources are often less visible than cars, clothes, homes, and vacations."
+    },
+    {
+      "type": "heading",
+      "content": "The goal is not to look wealthy"
+    },
+    {
+      "type": "text",
+      "content": "Trying to appear financially successful can lead to spending decisions that weaken your actual financial position."
+    },
+    {
+      "type": "callout",
+      "title": "A useful question",
+      "content": "Instead of asking, 'Can people see that I have money?', ask, 'Is my financial position getting stronger?'"
+    },
+    {
+      "type": "heading",
+      "content": "Income can help you build wealth"
+    },
+    {
+      "type": "text",
+      "content": "A higher income can make wealth building easier because it may create more room after essential expenses. But higher income only becomes useful for wealth building when some of that additional capacity is actually retained and directed toward financial goals."
+    },
+    {
+      "type": "heading",
+      "content": "More income can also lead to more spending"
+    },
+    {
+      "type": "text",
+      "content": "When income rises, people sometimes increase their lifestyle at the same time. If spending rises as quickly as income, the additional income may create less improvement in financial strength than expected."
+    },
+    {
+      "type": "example",
+      "title": "A raise that disappears",
+      "content": "Someone receives a $1,000 monthly raise but increases monthly spending by $950. Their income increased significantly, but only $50 of additional monthly cash flow remains."
+    },
+    {
+      "type": "formula",
+      "content": "$1,000 − $950 = $50"
+    },
+    {
+      "type": "heading",
+      "content": "Financial strength is about the whole picture"
+    },
+    {
+      "type": "text",
+      "content": "Income, spending, savings, debt, assets, and financial habits all interact. No single number tells the complete story."
+    },
+    {
+      "type": "heading",
+      "content": "Use net worth as one useful measurement"
+    },
+    {
+      "type": "text",
+      "content": "Tracking net worth over time can show whether the value of what you own is increasing relative to what you owe."
+    },
+    {
+      "type": "example",
+      "title": "Tracking progress",
+      "content": "If your net worth rises from $20,000 to $30,000 over a period of time, your financial position has improved by $10,000, assuming the figures are calculated consistently."
+    },
+    {
+      "type": "formula",
+      "content": "$30,000 − $20,000 = $10,000"
+    },
+    {
+      "type": "heading",
+      "content": "Do not obsess over one number"
+    },
+    {
+      "type": "text",
+      "content": "Net worth can change because of markets, property values, debt, and other factors. It is useful as a measure of progress, but it should be considered alongside cash flow, liquidity, and your ability to meet current obligations."
+    },
+    {
+      "type": "heading",
+      "content": "Rich today versus wealthy over time"
+    },
+    {
+      "type": "text",
+      "content": "A person can have substantial spending power today without having built lasting financial resources. Wealth is more closely associated with what remains and grows after income is earned and expenses are paid."
+    },
+    {
+      "type": "heading",
+      "content": "Build strength, not just appearance"
+    },
+    {
+      "type": "text",
+      "content": "The practical lesson is not that enjoying money is wrong. It is that financial decisions should balance today's enjoyment with tomorrow's financial strength."
+    },
+    {
+      "type": "heading",
+      "content": "Common misconceptions"
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: A high salary automatically means you are wealthy"
+    },
+    {
+      "type": "text",
+      "content": "Reality: A high income creates greater earning and spending power, but wealth depends on what you keep, what you own, what you owe, and what you build over time."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: If someone looks rich, they must be wealthy"
+    },
+    {
+      "type": "text",
+      "content": "Reality: Expensive cars, designer clothes, large homes, and frequent travel reveal spending or lifestyle choices, not necessarily savings, assets, or net worth. Some purchases may also be financed with debt."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: Being wealthy means never spending money"
+    },
+    {
+      "type": "text",
+      "content": "Reality: Wealth is not about refusing to enjoy money. It is about having enough financial strength that today's spending does not constantly undermine tomorrow's position."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: Rich people cannot have financial problems"
+    },
+    {
+      "type": "text",
+      "content": "Reality: High earners can still have heavy debt, high fixed expenses, weak cash flow, or little financial cushion."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: You need a huge income before you can build wealth"
+    },
+    {
+      "type": "text",
+      "content": "Reality: Higher income can help, but consistently keeping part of what you earn, managing debt, saving, and building assets can matter greatly over time."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: Owning a $500,000 house means you are $500,000 richer"
+    },
+    {
+      "type": "text",
+      "content": "Reality: Debt matters. If the house is worth $500,000 but you owe $450,000, only $50,000 of its value contributes to net worth before considering other assets and liabilities."
+    },
+    {
+      "type": "formula",
+      "content": "$500,000 − $450,000 = $50,000"
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: Net worth is the same thing as cash"
+    },
+    {
+      "type": "text",
+      "content": "Reality: Net worth includes assets and liabilities. Someone can have substantial net worth while having relatively little immediately available cash."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: Wealth happens quickly"
+    },
+    {
+      "type": "text",
+      "content": "Reality: For many people, meaningful wealth is built gradually through repeated decisions, saving, asset ownership, debt management, and time."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: Someone with a lower income cannot become wealthy"
+    },
+    {
+      "type": "text",
+      "content": "Reality: Income and wealth are related but not identical. A person with moderate income can accumulate significant financial resources over many years."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: The goal is to look wealthy"
+    },
+    {
+      "type": "text",
+      "content": "Reality: The goal of financial education is not to teach you how to look rich. It is to help you build a stronger financial position and more choices."
+    },
+    {
+      "type": "interactive",
+      "title": "Challenge the misconception",
+      "content": "Someone earns $15,000 per month and spends $14,800. Another person earns $6,000 and spends $3,800. Which person has more monthly room to build financial resources, and why?"
+    },
+    {
+      "type": "heading",
+      "content": "The key distinction"
+    },
+    {
+      "type": "text",
+      "content": "High income can provide spending power. Wealth represents accumulated financial resources and the capacity they provide. A person can have one without having much of the other."
+    },
+    {
+      "type": "summary",
+      "content": "Rich and wealthy are often used interchangeably, but they can describe different financial realities. High income can create spending power, while wealth is more closely connected to accumulated assets, manageable liabilities, net worth, financial resilience, and the ability to make choices without depending entirely on the next paycheck."
+    },
+    {
+      "type": "callout",
+      "title": "Remember",
+      "content": "Do not measure financial success only by what someone earns or what someone owns visibly. Look at what they keep, what they owe, what they have built, and how much financial freedom their resources provide."
+    }
+  ],
+  "quizzes": [
+    {
+      "order": 1,
+      "questionType": "multiple-choice",
+      "question": "Which statement best describes the practical distinction between being rich and being wealthy?",
+      "options": [
+        "Rich is often associated with high income or spending power, while wealth is more closely connected to accumulated financial resources",
+        "Rich and wealthy always mean exactly the same thing",
+        "Wealth only means owning expensive clothes",
+        "Rich people never have debt"
+      ],
+      "correctAnswer": 0,
+      "explanation": "High income and spending power are different from accumulated assets, net worth, and financial resilience."
+    },
+    {
+      "order": 2,
+      "questionType": "multiple-choice",
+      "question": "What does income tell you?",
+      "options": [
+        "How much money comes in",
+        "Exactly how wealthy someone is",
+        "How much someone owes",
+        "How much someone will have in retirement"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Income measures money received. It does not by itself measure wealth."
+    },
+    {
+      "order": 3,
+      "questionType": "multiple-choice",
+      "question": "Someone earns $12,000 per month and spends $11,900. How much remains before other considerations?",
+      "options": [
+        "$100",
+        "$1,100",
+        "$900",
+        "$12,100"
+      ],
+      "correctAnswer": 0,
+      "explanation": "$12,000 − $11,900 = $100."
+    },
+    {
+      "order": 4,
+      "questionType": "multiple-choice",
+      "question": "If someone has $250,000 in assets and $100,000 in liabilities, what is their net worth?",
+      "options": [
+        "$150,000",
+        "$350,000",
+        "$100,000",
+        "$250,000"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Net worth = assets − liabilities = $250,000 − $100,000 = $150,000."
+    },
+    {
+      "order": 5,
+      "questionType": "multiple-choice",
+      "question": "Why can an expensive lifestyle be misleading when judging someone's wealth?",
+      "options": [
+        "Visible possessions do not reveal the person's savings, assets, or debts",
+        "Expensive things have no financial value",
+        "Everyone with an expensive car is wealthy",
+        "Lifestyle and net worth are always identical"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Two people can have similar lifestyles while having very different financial positions."
+    },
+    {
+      "order": 6,
+      "questionType": "multiple-choice",
+      "question": "Two people each earn $6,000 per month. One spends $5,900 and the other spends $4,500. What is the key difference?",
+      "options": [
+        "The second person has $1,400 more monthly income",
+        "The second person has $1,400 more monthly cash flow available after spending",
+        "They have exactly the same amount available",
+        "The first person earns more"
+      ],
+      "correctAnswer": 1,
+      "explanation": "The first has $100 remaining, while the second has $1,500 remaining. The difference is $1,400."
+    },
+    {
+      "order": 7,
+      "questionType": "true-false",
+      "question": "A high income automatically means someone has high wealth.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Income can be high while spending and liabilities remain high and accumulated wealth remains low."
+    },
+    {
+      "order": 8,
+      "questionType": "multiple-choice",
+      "question": "Why can net worth be useful for tracking financial progress?",
+      "options": [
+        "It compares what you own with what you owe",
+        "It measures your salary only",
+        "It measures how expensive your lifestyle looks",
+        "It guarantees future investment returns"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Net worth provides a snapshot of assets minus liabilities."
+    },
+    {
+      "order": 9,
+      "questionType": "multiple-choice",
+      "question": "Someone gets a $1,000 monthly raise but increases spending by $950. How much additional monthly cash flow remains?",
+      "options": [
+        "$50",
+        "$950",
+        "$100",
+        "$1,950"
+      ],
+      "correctAnswer": 0,
+      "explanation": "$1,000 − $950 = $50."
+    },
+    {
+      "order": 10,
+      "questionType": "multiple-choice",
+      "question": "What is the strongest practical question to ask when thinking about financial progress?",
+      "options": [
+        "Is my financial position getting stronger?",
+        "Do other people think I look rich?",
+        "Can I buy the most expensive version?",
+        "Can I make my lifestyle look impressive?"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Financial strength is more useful to measure than appearances."
+    }
+  ]
+}

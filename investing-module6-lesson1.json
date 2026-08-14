@@ -1,0 +1,481 @@
+{
+  "slug": "investor-psychology-why-smart-people-make-bad-investment-decisions",
+  "title": "Investor Psychology: Why Smart People Make Bad Investment Decisions",
+  "estimatedDuration": 45,
+  "order": 1,
+  "published": true,
+  "contentBlocks": [
+    {
+      "type": "heading",
+      "content": "Investing is not only about numbers"
+    },
+    {
+      "type": "text",
+      "content": "Investing involves money, uncertainty, and decisions about the future. That means emotions and habits can influence what investors do. A person can understand investing very well and still make poor decisions when fear, excitement, pressure, or overconfidence takes control."
+    },
+    {
+      "type": "callout",
+      "title": "The key idea",
+      "content": "Knowing what you should do and actually doing it are different skills. Investor psychology helps explain why people sometimes abandon sensible plans when money is at stake."
+    },
+    {
+      "type": "heading",
+      "content": "Fear can change good decisions"
+    },
+    {
+      "type": "text",
+      "content": "When an investment falls sharply, seeing your money decline can trigger fear. The instinct may be to sell immediately just to stop the discomfort. But a decision made mainly to escape fear may not match the investor's original goal or plan."
+    },
+    {
+      "type": "example",
+      "title": "A falling investment"
+    },
+    {
+      "type": "text",
+      "content": "Imagine you invest $10,000 in a diversified portfolio for a long-term goal. The market falls and the portfolio becomes worth $8,000. Seeing a $2,000 decline can feel painful. Selling immediately may feel safer, but the decision should depend on the reason for the investment, the time horizon, and whether the underlying plan has actually changed."
+    },
+    {
+      "type": "formula",
+      "content": "$10,000 − $8,000 = $2,000 decline"
+    },
+    {
+      "type": "heading",
+      "content": "Greed can create the opposite problem"
+    },
+    {
+      "type": "text",
+      "content": "Fear can push investors to sell during declines, while excitement and greed can encourage investors to take excessive risk during periods of rising prices. Strong recent performance can make an investment appear safer or more certain than it really is."
+    },
+    {
+      "type": "example",
+      "title": "When a rising price becomes tempting"
+    },
+    {
+      "type": "text",
+      "content": "Suppose an investment rises from $50 to $100. Seeing other people make money may create pressure to buy immediately. But the fact that the price has already risen does not prove that it will continue rising."
+    },
+    {
+      "type": "heading",
+      "content": "FOMO: fear of missing out"
+    },
+    {
+      "type": "text",
+      "content": "FOMO happens when investors feel they must act because other people appear to be making money. Social media, headlines, friends, influencers, and rapidly rising prices can intensify this feeling."
+    },
+    {
+      "type": "callout",
+      "title": "Remember",
+      "content": "An opportunity does not become a good investment simply because other people are buying it."
+    },
+    {
+      "type": "heading",
+      "content": "Herd behavior"
+    },
+    {
+      "type": "text",
+      "content": "People often look at what others are doing when they are uncertain. In markets, this can create herd behavior, where many investors buy or sell for similar reasons at the same time."
+    },
+    {
+      "type": "example",
+      "title": "Following the crowd"
+    },
+    {
+      "type": "text",
+      "content": "If everyone around you is talking about the same investment and showing screenshots of profits, you may feel that you are missing something. The crowd may be correct, but popularity alone is not evidence that an investment is suitable or fairly priced."
+    },
+    {
+      "type": "heading",
+      "content": "Overconfidence"
+    },
+    {
+      "type": "text",
+      "content": "Successful decisions can make investors believe they have more skill or predictive ability than they actually do. After making several profitable trades, someone may begin taking larger risks or believing they can consistently predict market movements."
+    },
+    {
+      "type": "example",
+      "title": "A lucky streak"
+    },
+    {
+      "type": "text",
+      "content": "An investor makes five profitable trades in a row. They may conclude that they have developed a reliable ability to predict prices. But five successful outcomes do not prove that the investor can consistently predict the future."
+    },
+    {
+      "type": "heading",
+      "content": "Confirmation bias"
+    },
+    {
+      "type": "text",
+      "content": "Confirmation bias happens when people give more attention to information that supports what they already believe and less attention to information that challenges it."
+    },
+    {
+      "type": "example",
+      "title": "When you already want to buy"
+    },
+    {
+      "type": "text",
+      "content": "Suppose you already believe a company will become extremely successful. You may search for positive news about its future while ignoring evidence that competition is increasing or profits are weakening. That can make your research look convincing while leaving important risks unexplored."
+    },
+    {
+      "type": "heading",
+      "content": "Anchoring"
+    },
+    {
+      "type": "text",
+      "content": "Anchoring happens when an investor gives too much importance to a particular number or reference point. A previous price, a target price, or a purchase price can become an anchor that influences decisions even when circumstances have changed."
+    },
+    {
+      "type": "example",
+      "title": "The old price anchor"
+    },
+    {
+      "type": "text",
+      "content": "You buy a stock at $100 and it falls to $60. You may think, 'I will not sell because it used to be worth $100.' But the old price does not by itself prove that $60 is cheap or that the stock will return to $100."
+    },
+    {
+      "type": "heading",
+      "content": "Loss aversion"
+    },
+    {
+      "type": "text",
+      "content": "People often experience losses more strongly than gains of a similar size. Losing $1,000 can feel more painful than gaining $1,000 feels satisfying. This can influence investors to hold losing investments too long or avoid reasonable investments because the possibility of loss feels uncomfortable."
+    },
+    {
+      "type": "heading",
+      "content": "The sunk-cost trap"
+    },
+    {
+      "type": "text",
+      "content": "Money already lost should not automatically determine what you do next. The important question is what makes sense from today onward, not how much you previously paid."
+    },
+    {
+      "type": "example",
+      "title": "Do not invest just to get back to zero"
+    },
+    {
+      "type": "text",
+      "content": "You invest $5,000 and it falls to $3,000. You might keep holding only because you want to recover the original $5,000. But the better question is whether you would still choose that investment today if you had $3,000 in cash instead."
+    },
+    {
+      "type": "heading",
+      "content": "Recency bias"
+    },
+    {
+      "type": "text",
+      "content": "Recency bias occurs when investors give too much weight to recent events when thinking about the future. A market that has risen for several years can make investors assume prices will keep rising. A recent crash can create the opposite belief."
+    },
+    {
+      "type": "heading",
+      "content": "Availability bias"
+    },
+    {
+      "type": "text",
+      "content": "Events that are vivid or easy to remember can feel more likely than they actually are. A dramatic story about someone becoming wealthy from one investment may influence decisions more strongly than less exciting but more representative information."
+    },
+    {
+      "type": "heading",
+      "content": "Action bias"
+    },
+    {
+      "type": "text",
+      "content": "Sometimes investors feel that they must do something whenever markets move. But constant buying and selling is not automatically better than following a well-designed plan."
+    },
+    {
+      "type": "heading",
+      "content": "The danger of constant checking"
+    },
+    {
+      "type": "text",
+      "content": "Checking investment prices constantly can increase emotional reactions to ordinary market movements. An investor who rarely checks may experience a market decline differently from someone who watches every price change."
+    },
+    {
+      "type": "heading",
+      "content": "Trading can become emotional entertainment"
+    },
+    {
+      "type": "text",
+      "content": "Frequent buying and selling can sometimes feel productive or exciting even when it does not improve the investment plan. Activity is not the same thing as progress."
+    },
+    {
+      "type": "callout",
+      "title": "A useful question",
+      "content": "Am I making this decision because it improves my financial plan, or because I want to feel like I am doing something?"
+    },
+    {
+      "type": "heading",
+      "content": "Regret can influence future decisions"
+    },
+    {
+      "type": "text",
+      "content": "Investors may change their behavior because of previous mistakes. Someone who sold too early may later refuse to sell when selling would actually make sense. Someone who missed a large gain may take excessive risks trying to make up for the missed opportunity."
+    },
+    {
+      "type": "heading",
+      "content": "Outcome does not always prove decision quality"
+    },
+    {
+      "type": "text",
+      "content": "A good decision can sometimes produce a bad short-term outcome, and a poor decision can sometimes produce a profitable result. Investing involves uncertainty, so judging decisions only by the immediate outcome can teach the wrong lesson."
+    },
+    {
+      "type": "example",
+      "title": "Good process, bad outcome"
+    },
+    {
+      "type": "text",
+      "content": "You research an investment carefully, understand its risks, limit its position size, and invest an amount you can afford to lose. The investment unexpectedly falls. The loss does not automatically mean the decision was irrational."
+    },
+    {
+      "type": "heading",
+      "content": "Create rules before emotions become intense"
+    },
+    {
+      "type": "text",
+      "content": "One way to reduce emotional decision-making is to establish rules before markets become stressful. Your plan can define how much risk you will take, how diversified you want to be, when you will review investments, and what circumstances would cause you to reconsider an investment."
+    },
+    {
+      "type": "heading",
+      "content": "Use a written investment thesis"
+    },
+    {
+      "type": "text",
+      "content": "Before making a significant investment, write down why you are buying it, what you expect to happen, what could prove you wrong, and what risks concern you. This creates a reference point that can be reviewed later instead of relying entirely on memory."
+    },
+    {
+      "type": "interactive",
+      "title": "Write your reason before you invest",
+      "content": "Complete these statements: I am buying this because... I expect... The biggest risk is... I would reconsider if... I expect to hold it for... This investment represents approximately... of my portfolio."
+    },
+    {
+      "type": "heading",
+      "content": "Separate information from emotion"
+    },
+    {
+      "type": "text",
+      "content": "When a price moves sharply, first identify what actually changed. Then identify how you feel about the change. Separating the facts from the emotional reaction can create space for better reasoning."
+    },
+    {
+      "type": "heading",
+      "content": "Slow down important decisions"
+    },
+    {
+      "type": "text",
+      "content": "Urgency can make people accept weaker reasoning. When possible, give yourself time to investigate major investment decisions rather than acting immediately because of fear, excitement, or social pressure."
+    },
+    {
+      "type": "heading",
+      "content": "Use checklists"
+    },
+    {
+      "type": "text",
+      "content": "A checklist can reduce the chance that emotion causes you to skip important questions. Before investing, check the goal, time horizon, risks, valuation, fees, liquidity, diversification, and downside."
+    },
+    {
+      "type": "heading",
+      "content": "Understand that you cannot control the market"
+    },
+    {
+      "type": "text",
+      "content": "Investors cannot control market prices or guarantee outcomes. What they can control includes how much they invest, what they buy, how diversified they are, how much risk they take, their costs, and how they respond to uncertainty."
+    },
+    {
+      "type": "heading",
+      "content": "The goal is not to remove emotion"
+    },
+    {
+      "type": "text",
+      "content": "Fear and excitement are normal human responses. The goal is not to become emotionless. The goal is to prevent temporary emotions from repeatedly overriding a sensible long-term plan."
+    },
+    {
+      "type": "heading",
+      "content": "Common misconceptions"
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: Smart investors do not make emotional mistakes"
+    },
+    {
+      "type": "text",
+      "content": "Reality: Intelligence does not make someone immune to fear, overconfidence, FOMO, confirmation bias, or other decision-making traps."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: Following the crowd is safer"
+    },
+    {
+      "type": "text",
+      "content": "Reality: A large number of investors can be wrong at the same time. Popularity does not eliminate risk."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: A profitable decision was automatically a good decision"
+    },
+    {
+      "type": "text",
+      "content": "Reality: A poor decision can sometimes produce a lucky profit. Evaluate the quality of the reasoning and process, not only the result."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: The best way to control emotions is to ignore them"
+    },
+    {
+      "type": "text",
+      "content": "Reality: Recognizing emotions can help you understand when they may be influencing your decisions."
+    },
+    {
+      "type": "heading",
+      "content": "A practical psychology checklist"
+    },
+    {
+      "type": "interactive",
+      "title": "Before making an emotional investment decision",
+      "content": "Ask: Am I afraid? Am I excited? Am I buying because other people are buying? Am I trying to recover a previous loss? Am I focusing only on information that supports my opinion? Am I assuming recent performance will continue? Am I overconfident? Has anything fundamental actually changed?"
+    },
+    {
+      "type": "heading",
+      "content": "Putting it all together"
+    },
+    {
+      "type": "text",
+      "content": "Good investing requires more than knowing financial concepts. It requires managing yourself when prices move, information changes, and uncertainty increases. Understanding your own psychological tendencies can help you recognize when a decision is being driven by a useful change in information and when it is being driven mainly by emotion."
+    },
+    {
+      "type": "summary",
+      "content": "Investor psychology explains why people can make poor investment decisions even when they understand the basics. Fear can cause panic selling, excitement can encourage excessive risk, FOMO can create impulsive buying, overconfidence can lead to oversized bets, and biases can distort how information is interpreted. Written plans, checklists, diversification, position limits, and slowing down important decisions can help investors make more deliberate choices."
+    },
+    {
+      "type": "callout",
+      "title": "Remember",
+      "content": "You cannot control every market movement, but you can control how you prepare for uncertainty and how you respond to it."
+    }
+  ],
+  "quizzes": [
+    {
+      "order": 1,
+      "questionType": "multiple-choice",
+      "question": "Why can smart and knowledgeable investors still make poor decisions?",
+      "options": [
+        "Because financial knowledge has no value",
+        "Because emotions and psychological biases can influence decisions",
+        "Because markets always behave randomly",
+        "Because intelligent investors cannot understand risk"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Knowledge does not make investors immune to fear, excitement, overconfidence, or other psychological influences."
+    },
+    {
+      "order": 2,
+      "questionType": "multiple-choice",
+      "question": "What is FOMO in investing?",
+      "options": [
+        "Fear of making any investment",
+        "Fear of missing out when other people appear to be making money",
+        "A method for calculating investment returns",
+        "A type of investment account"
+      ],
+      "correctAnswer": 1,
+      "explanation": "FOMO can pressure investors to buy because they fear missing an opportunity that others seem to be benefiting from."
+    },
+    {
+      "order": 3,
+      "questionType": "multiple-choice",
+      "question": "An investor buys a stock because everyone around them is buying it. Which behavior is this most closely associated with?",
+      "options": [
+        "Diversification",
+        "Herd behavior",
+        "Risk management",
+        "Rebalancing"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Herd behavior occurs when people follow the actions of a larger group, especially when they are uncertain."
+    },
+    {
+      "order": 4,
+      "questionType": "multiple-choice",
+      "question": "What is confirmation bias?",
+      "options": [
+        "Giving equal attention to every possible opinion",
+        "Looking mainly for information that supports what you already believe",
+        "Selling every investment during a decline",
+        "Automatically diversifying a portfolio"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Confirmation bias can cause investors to favor evidence that supports their existing view while overlooking evidence that challenges it."
+    },
+    {
+      "order": 5,
+      "questionType": "multiple-choice",
+      "question": "You bought an investment for $5,000 and it is now worth $3,000. Which question is more useful than simply asking when it will return to $5,000?",
+      "options": [
+        "Would I still choose this investment today if I had $3,000 in cash?",
+        "How can I guarantee it returns to $5,000?",
+        "How many people online own it?",
+        "Can I ignore everything that has changed?"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Thinking from today's position can help reduce the influence of sunk costs and the old purchase price."
+    },
+    {
+      "order": 6,
+      "questionType": "true-false",
+      "question": "A profitable investment decision is always proof that the investor made a good decision.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctAnswer": 1,
+      "explanation": "A poor decision can sometimes produce a profitable outcome by luck. Decision quality should be judged by the reasoning and process as well as the result."
+    },
+    {
+      "order": 7,
+      "questionType": "multiple-choice",
+      "question": "Which is a useful way to reduce emotional investment decisions?",
+      "options": [
+        "Check prices every few minutes",
+        "Create rules and a plan before emotions become intense",
+        "Always follow the crowd",
+        "Invest more whenever you feel excited"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Predefined rules and a written plan can make it easier to respond deliberately when markets become stressful."
+    },
+    {
+      "order": 8,
+      "questionType": "multiple-choice",
+      "question": "What is overconfidence in investing?",
+      "options": [
+        "Understanding that the future is uncertain",
+        "Believing your knowledge or ability to predict outcomes is greater than it actually is",
+        "Diversifying across several assets",
+        "Accepting that losses are possible"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Overconfidence can cause investors to underestimate uncertainty and take more risk than intended."
+    },
+    {
+      "order": 9,
+      "questionType": "multiple-choice",
+      "question": "When an investment price suddenly falls, which response is generally most useful before acting?",
+      "options": [
+        "Sell immediately because falling prices always mean permanent losses",
+        "Buy more automatically because the investment is cheaper",
+        "Identify what changed and separate the facts from your emotional reaction",
+        "Follow whatever decision is most popular online"
+      ],
+      "correctAnswer": 2,
+      "explanation": "Understanding what actually changed can help prevent fear or excitement from becoming the main reason for a decision."
+    },
+    {
+      "order": 10,
+      "questionType": "multiple-choice",
+      "question": "What can investors control more directly?",
+      "options": [
+        "Exactly where the market will move tomorrow",
+        "Whether every investment produces a profit",
+        "Their investment choices, diversification, risk level, costs, and response to uncertainty",
+        "The actions of every other investor"
+      ],
+      "correctAnswer": 2,
+      "explanation": "Investors cannot control markets, but they can control many parts of their own investment process."
+    }
+  ]
+}

@@ -1,0 +1,623 @@
+{
+  "slug": "how-to-get-out-of-debt-without-making-the-problem-worse",
+  "title": "How to Get Out of Debt Without Making the Problem Worse",
+  "estimatedDuration": 40,
+  "order": 10,
+  "published": true,
+  "contentBlocks": [
+    {
+      "order": 1,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Getting out of debt starts with knowing what you actually owe"
+      }
+    },
+    {
+      "order": 2,
+      "type": "text",
+      "data": {
+        "text": "When several debts are spread across cards, loans, payment plans, or other accounts, it is easy to lose track of the real total. Start by listing every balance, payment, interest rate, fee, and due date you can verify."
+      }
+    },
+    {
+      "order": 3,
+      "type": "example",
+      "data": {
+        "title": "The debts on different accounts",
+        "text": "You owe $1,200 on one card, $2,500 on a loan, and $600 on a payment plan. Your total outstanding debt is $1,200 + $2,500 + $600 = $4,300."
+      }
+    },
+    {
+      "order": 4,
+      "type": "callout",
+      "data": {
+        "title": "You cannot manage what you cannot see",
+        "text": "Write down the actual numbers before deciding how to repay. Guessing can lead to unrealistic plans."
+      }
+    },
+    {
+      "order": 5,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Separate the balance from the monthly payment"
+      }
+    },
+    {
+      "order": 6,
+      "type": "text",
+      "data": {
+        "text": "A debt may have a small monthly payment but a large outstanding balance. Looking only at the payment can hide how much you still owe and how long repayment may take."
+      }
+    },
+    {
+      "order": 7,
+      "type": "example",
+      "data": {
+        "title": "The small payment illusion",
+        "text": "A $3,000 balance with a $90 required payment may look manageable. But the balance, interest, and repayment period matter just as much as the $90 monthly figure."
+      }
+    },
+    {
+      "order": 8,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Make sure essential expenses are covered"
+      }
+    },
+    {
+      "order": 9,
+      "type": "text",
+      "data": {
+        "text": "Getting out of debt does not mean sending every available dollar to creditors while leaving yourself unable to pay for basic needs. A repayment plan has to fit real life."
+      }
+    },
+    {
+      "order": 10,
+      "type": "example",
+      "data": {
+        "title": "The aggressive repayment plan",
+        "text": "You earn $2,500 per month and decide to put $1,900 toward debt. That leaves only $600 for essential living costs. If your basic expenses are higher than $600, the plan is unlikely to last."
+      }
+    },
+    {
+      "order": 11,
+      "type": "callout",
+      "data": {
+        "title": "A plan that cannot survive is not a good plan",
+        "text": "A slightly slower repayment plan that you can consistently maintain may be better than an extreme plan that forces you to borrow again."
+      }
+    },
+    {
+      "order": 12,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Know your minimum required payments"
+      }
+    },
+    {
+      "order": 13,
+      "type": "text",
+      "data": {
+        "text": "Before making extra payments, calculate the total minimum or required payments across your debts. These obligations need to be included in your monthly cash-flow plan."
+      }
+    },
+    {
+      "order": 14,
+      "type": "interactive",
+      "data": {
+        "title": "Add the minimums",
+        "text": "Suppose your required payments are $120, $180, $75, and $95. Your total required monthly debt payment is $120 + $180 + $75 + $95 = $470."
+      }
+    },
+    {
+      "order": 15,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Then decide how much extra you can realistically pay"
+      }
+    },
+    {
+      "order": 16,
+      "type": "text",
+      "data": {
+        "text": "After covering essential expenses and required payments, determine whether there is a reliable amount you can put toward reducing debt faster."
+      }
+    },
+    {
+      "order": 17,
+      "type": "example",
+      "data": {
+        "title": "Finding the extra amount",
+        "text": "You have $3,000 of monthly income, $1,900 of essential expenses, and $500 of required debt payments. That leaves $600 before other flexible spending, savings, or additional obligations are considered. Do not automatically send all $600 to debt without checking the rest of your financial situation."
+      }
+    },
+    {
+      "order": 18,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Do not keep adding new debt while trying to repay old debt"
+      }
+    },
+    {
+      "order": 19,
+      "type": "text",
+      "data": {
+        "text": "If you keep borrowing while making repayments, progress can become difficult to see. The balance may fall in one account while new borrowing increases another."
+      }
+    },
+    {
+      "order": 20,
+      "type": "example",
+      "data": {
+        "title": "Paying down one balance while adding another",
+        "text": "You pay $400 toward an old credit-card balance but then use another credit account for $350 of new spending. Your effort may produce much less overall progress than expected."
+      }
+    },
+    {
+      "order": 21,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Choose a repayment strategy you can actually follow"
+      }
+    },
+    {
+      "order": 22,
+      "type": "text",
+      "data": {
+        "text": "Two common ways to organize extra debt payments are focusing on the smallest balance first or focusing on the debt with the highest cost. The important thing is to understand the trade-off and follow a strategy consistently."
+      }
+    },
+    {
+      "order": 23,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "The smallest-balance approach"
+      }
+    },
+    {
+      "order": 24,
+      "type": "text",
+      "data": {
+        "text": "With a smallest-balance approach, you make required payments on all debts while directing extra money toward the smallest balance. Once it is cleared, you redirect that payment toward the next debt."
+      }
+    },
+    {
+      "order": 25,
+      "type": "example",
+      "data": {
+        "title": "Three balances",
+        "text": "You owe $300, $1,000, and $2,500. If you choose the smallest-balance approach, you would direct extra repayment toward the $300 balance first while continuing the required payments on the others."
+      }
+    },
+    {
+      "order": 26,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "The highest-cost approach"
+      }
+    },
+    {
+      "order": 27,
+      "type": "text",
+      "data": {
+        "text": "With a highest-cost approach, you make required payments on all debts while directing extra money toward the debt with the highest applicable borrowing cost, such as a higher interest rate."
+      }
+    },
+    {
+      "order": 28,
+      "type": "example",
+      "data": {
+        "title": "Different borrowing costs",
+        "text": "You owe $800 at a high interest rate and $2,000 at a lower rate. If the agreements allow extra payments without problematic charges, targeting the higher-cost debt first may reduce the amount of interest that accumulates over time."
+      }
+    },
+    {
+      "order": 29,
+      "type": "callout",
+      "data": {
+        "title": "The right method depends on your situation",
+        "text": "A strategy should make financial sense and be realistic enough that you can keep using it."
+      }
+    },
+    {
+      "order": 30,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Compare the total cost, not just the balance"
+      }
+    },
+    {
+      "order": 31,
+      "type": "text",
+      "data": {
+        "text": "Two debts with the same balance can cost very different amounts if their interest rates, fees, or repayment terms differ."
+      }
+    },
+    {
+      "order": 32,
+      "type": "example",
+      "data": {
+        "title": "Same balance, different cost",
+        "text": "Debt A and Debt B both have a $1,000 balance. Debt A has a much higher borrowing cost than Debt B. The balances are equal today, but carrying Debt A may become more expensive."
+      }
+    },
+    {
+      "order": 33,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Check whether extra payments are allowed and how they are applied"
+      }
+    },
+    {
+      "order": 34,
+      "type": "text",
+      "data": {
+        "text": "Before making large extra payments, check the agreement. Some debts may have specific rules about early repayment, fees, or how extra money is applied."
+      }
+    },
+    {
+      "order": 35,
+      "type": "example",
+      "data": {
+        "title": "Ask before paying extra",
+        "text": "You have $1,000 available and want to make an extra debt payment. Before sending it, confirm whether there are any early-payment charges and whether the extra amount reduces the balance as you expect."
+      }
+    },
+    {
+      "order": 36,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Build a repayment timeline"
+      }
+    },
+    {
+      "order": 37,
+      "type": "text",
+      "data": {
+        "text": "A timeline helps turn an abstract debt balance into a concrete goal. It also helps you see whether your planned payment is realistic."
+      }
+    },
+    {
+      "order": 38,
+      "type": "interactive",
+      "data": {
+        "title": "A simple payoff estimate",
+        "text": "If you owe $2,400 and, ignoring interest and fees for a simple estimate, can consistently put $200 per month toward the balance, $2,400 ÷ $200 = 12 months. Real repayment may take longer because interest and fees can change the numbers."
+      }
+    },
+    {
+      "order": 39,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Look six months ahead"
+      }
+    },
+    {
+      "order": 40,
+      "type": "interactive",
+      "data": {
+        "title": "Six-month progress",
+        "text": "If you can consistently make $300 of additional debt payments each month, six months of extra payments would equal $300 × 6 = $1,800 before accounting for interest, fees, or changes in the balance."
+      }
+    },
+    {
+      "order": 41,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Look one year ahead"
+      }
+    },
+    {
+      "order": 42,
+      "type": "interactive",
+      "data": {
+        "title": "One-year progress",
+        "text": "At $300 of additional payments per month, one year would produce $300 × 12 = $3,600 of additional payments before interest, fees, and other account changes."
+      }
+    },
+    {
+      "order": 43,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Do not destroy your emergency cushion to make a payment"
+      }
+    },
+    {
+      "order": 44,
+      "type": "text",
+      "data": {
+        "text": "Paying debt is important, but using every last dollar you have can leave you vulnerable to the next unexpected expense. If an emergency forces you to borrow again, your progress can reverse."
+      }
+    },
+    {
+      "order": 45,
+      "type": "example",
+      "data": {
+        "title": "The empty bank account",
+        "text": "You use your entire $1,000 cash reserve to reduce debt. Two weeks later, an urgent $700 expense appears. If you have no other resources, you may need new borrowing to cover it."
+      }
+    },
+    {
+      "order": 46,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Reduce the spending that keeps recreating the debt"
+      }
+    },
+    {
+      "order": 47,
+      "type": "text",
+      "data": {
+        "text": "If new debt is caused by repeated discretionary spending, simply making payments will not solve the underlying problem. Identify the spending pattern that keeps pushing you back into borrowing."
+      }
+    },
+    {
+      "order": 48,
+      "type": "example",
+      "data": {
+        "title": "The recurring purchase",
+        "text": "You repay $200 each month but repeatedly use the same credit account for restaurant meals, shopping, and entertainment. The balance may keep returning because the spending behavior has not changed."
+      }
+    },
+    {
+      "order": 49,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Consider whether a lower-cost option is genuinely better"
+      }
+    },
+    {
+      "order": 50,
+      "type": "text",
+      "data": {
+        "text": "Debt consolidation or refinancing can sometimes simplify payments or reduce borrowing costs, but it is not automatically better. Compare the total cost, fees, repayment period, and whether the new arrangement actually improves your situation."
+      }
+    },
+    {
+      "order": 51,
+      "type": "example",
+      "data": {
+        "title": "A lower monthly payment",
+        "text": "A new loan lowers your monthly payment from $500 to $350 but extends repayment by several years and adds fees. The lower payment may improve monthly cash flow while increasing the total amount paid."
+      }
+    },
+    {
+      "order": 52,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Watch the total cost when comparing repayment options"
+      }
+    },
+    {
+      "order": 53,
+      "type": "interactive",
+      "data": {
+        "title": "Monthly payment versus total payment",
+        "text": "Option A requires $450 for 12 months: $450 × 12 = $5,400. Option B requires $300 for 24 months: $300 × 24 = $7,200. Option B has the lower monthly payment but costs $1,800 more before considering other charges."
+      }
+    },
+    {
+      "order": 54,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Know when debt has become too difficult to handle alone"
+      }
+    },
+    {
+      "order": 55,
+      "type": "text",
+      "data": {
+        "text": "If you are repeatedly missing essential payments, using new borrowing to cover old debts, receiving collection notices, or unable to meet basic living costs because of debt, the problem may require more than a simple budgeting adjustment."
+      }
+    },
+    {
+      "order": 56,
+      "type": "callout",
+      "data": {
+        "title": "Getting help is a financial decision, not a failure",
+        "text": "Qualified debt or financial advice may help you understand your options when the situation has become too difficult to manage alone."
+      }
+    },
+    {
+      "order": 57,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Measure progress by what you owe, not just what you paid"
+      }
+    },
+    {
+      "order": 58,
+      "type": "text",
+      "data": {
+        "text": "Paying $3,000 toward debt sounds impressive, but if you borrowed another $2,500 during the same period, your overall debt may have fallen by only $500. Track your balances as well as your payments."
+      }
+    },
+    {
+      "order": 59,
+      "type": "summary",
+      "data": {
+        "title": "A practical debt-repayment plan",
+        "points": [
+          "List every debt and its current balance.",
+          "Know the required payments, borrowing costs, fees, and due dates.",
+          "Protect essential living expenses.",
+          "Choose a realistic amount for extra repayment.",
+          "Avoid adding new debt while trying to reduce old debt.",
+          "Compare repayment strategies instead of choosing blindly.",
+          "Look at six-month and one-year progress.",
+          "Compare total cost, not just monthly payment.",
+          "Keep enough financial flexibility to handle unexpected expenses.",
+          "Get qualified help when the debt problem becomes too difficult to manage alone."
+        ]
+      }
+    },
+    {
+      "order": 60,
+      "type": "callout",
+      "data": {
+        "title": "The debt rule",
+        "text": "The goal is not to make the biggest payment today. The goal is to reduce debt consistently without creating a new financial problem."
+      }
+    }
+  ],
+  "quizzes": [
+    {
+      "order": 1,
+      "questionType": "multiple-choice",
+      "question": "What should you do before choosing a debt-repayment strategy?",
+      "options": [
+        "List your debts, balances, required payments, costs, and due dates",
+        "Pay whichever lender contacts you first",
+        "Borrow more money immediately",
+        "Ignore the smaller balances"
+      ],
+      "correctAnswer": 0,
+      "explanation": "You need a clear picture of your debts before choosing a realistic repayment strategy.",
+      "points": 10
+    },
+    {
+      "order": 2,
+      "questionType": "multiple-choice",
+      "question": "You owe $1,200, $2,500, and $600. What is the total debt?",
+      "options": [
+        "$4,300",
+        "$3,700",
+        "$4,100",
+        "$4,500"
+      ],
+      "correctAnswer": 0,
+      "explanation": "$1,200 + $2,500 + $600 = $4,300.",
+      "points": 10
+    },
+    {
+      "order": 3,
+      "questionType": "multiple-choice",
+      "question": "Why can an extremely aggressive debt-payment plan be a bad idea?",
+      "options": [
+        "It may leave too little money for essential expenses and force you to borrow again",
+        "Debt should never be repaid quickly",
+        "It automatically increases interest",
+        "It makes every debt more expensive"
+      ],
+      "correctAnswer": 0,
+      "explanation": "A plan that cannot cover real-life needs may not be sustainable and can cause new borrowing.",
+      "points": 10
+    },
+    {
+      "order": 4,
+      "questionType": "multiple-choice",
+      "question": "If four required debt payments are $120, $180, $75, and $95, what is the monthly total?",
+      "options": [
+        "$470",
+        "$450",
+        "$490",
+        "$520"
+      ],
+      "correctAnswer": 0,
+      "explanation": "$120 + $180 + $75 + $95 = $470.",
+      "points": 10
+    },
+    {
+      "order": 5,
+      "questionType": "true-false",
+      "question": "A lower monthly payment always means a lower total cost.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctAnswer": 1,
+      "explanation": "A lower monthly payment can result from extending the repayment period, which may increase the total amount paid.",
+      "points": 10
+    },
+    {
+      "order": 6,
+      "questionType": "multiple-choice",
+      "question": "Option A costs $450 for 12 months. Option B costs $300 for 24 months. Which has the lower scheduled total?",
+      "options": [
+        "Option A",
+        "Option B",
+        "They are equal",
+        "There is not enough information to multiply the payments"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Option A totals $5,400. Option B totals $7,200. Option A is $1,800 lower before other charges.",
+      "points": 10
+    },
+    {
+      "order": 7,
+      "questionType": "multiple-choice",
+      "question": "Why can continuing to borrow while repaying debt slow your progress?",
+      "options": [
+        "New borrowing can offset the payments you are making toward existing debt",
+        "New borrowing automatically clears old debt",
+        "Borrowing always increases income",
+        "New debt does not require repayment"
+      ],
+      "correctAnswer": 0,
+      "explanation": "If new debt replaces the debt you are paying down, your overall balance may fall very slowly or even increase.",
+      "points": 10
+    },
+    {
+      "order": 8,
+      "questionType": "multiple-choice",
+      "question": "Ignoring interest and fees, how long would $2,400 take to repay at $200 per month?",
+      "options": [
+        "12 months",
+        "10 months",
+        "14 months",
+        "24 months"
+      ],
+      "correctAnswer": 0,
+      "explanation": "$2,400 ÷ $200 = 12 months. Actual repayment can take longer when interest and fees apply.",
+      "points": 10
+    },
+    {
+      "order": 9,
+      "questionType": "multiple-choice",
+      "question": "What should you compare when considering debt consolidation or refinancing?",
+      "options": [
+        "Total cost, fees, repayment period, and whether it actually improves your situation",
+        "Only the new monthly payment",
+        "Only how quickly the application is approved",
+        "Only the advertised interest rate"
+      ],
+      "correctAnswer": 0,
+      "explanation": "A lower payment alone does not prove that a new debt arrangement is cheaper or better overall.",
+      "points": 10
+    },
+    {
+      "order": 10,
+      "questionType": "multiple-choice",
+      "question": "What is the best general lesson about getting out of debt?",
+      "options": [
+        "Build a realistic repayment plan that reduces debt without creating another financial problem",
+        "Send every dollar to debt immediately",
+        "Borrow more whenever repayment becomes difficult",
+        "Focus only on the monthly payment"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Sustainable progress requires realistic payments, control of new borrowing, attention to total cost, and protection of essential financial needs.",
+      "points": 10
+    }
+  ]
+}

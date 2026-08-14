@@ -1,0 +1,622 @@
+{
+  "slug": "spending-triggers-and-habits",
+  "title": "Spending Triggers and Habits",
+  "estimatedDuration": 35,
+  "order": 3,
+  "published": true,
+  "contentBlocks": [
+    {
+      "order": 1,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Why do we spend money?"
+      }
+    },
+    {
+      "order": 2,
+      "type": "text",
+      "data": {
+        "text": "Not every purchase starts with a careful decision. Sometimes we spend because we are hungry, bored, stressed, excited, curious, tired, influenced by someone else, or simply used to buying something. Understanding what triggers your spending can help you make better choices."
+      }
+    },
+    {
+      "order": 3,
+      "type": "example",
+      "data": {
+        "title": "The purchase you did not plan",
+        "text": "You open an app intending to check one item. You see a limited-time discount, add two more items to your cart, and spend $45 instead of the $10 you originally planned to spend. The discount did not necessarily save you $35; you may have spent $35 you never planned to spend."
+      }
+    },
+    {
+      "order": 4,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "A spending trigger is a reason that pushes you toward spending"
+      }
+    },
+    {
+      "order": 5,
+      "type": "text",
+      "data": {
+        "text": "A spending trigger can be an emotion, situation, person, advertisement, habit, convenience, or opportunity that makes buying feel attractive or urgent. The trigger is not automatically bad. The important skill is noticing it before making the decision."
+      }
+    },
+    {
+      "order": 6,
+      "type": "example",
+      "data": {
+        "title": "Common spending triggers",
+        "text": "You may spend because you are celebrating, because your friends are buying something, because an item is on sale, because you are bored, because you feel stressed, because delivery is convenient, or because you keep seeing the product advertised."
+      }
+    },
+    {
+      "order": 7,
+      "type": "callout",
+      "data": {
+        "title": "Pause before you purchase",
+        "text": "The goal is not to stop yourself from enjoying money. The goal is to notice when something is influencing your decision so you can choose instead of reacting automatically."
+      }
+    },
+    {
+      "order": 8,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Planned spending and reactive spending are different"
+      }
+    },
+    {
+      "order": 9,
+      "type": "text",
+      "data": {
+        "text": "Planned spending happens when you decide in advance that something is worth paying for. Reactive spending happens when the decision is made mainly because of what is happening in the moment. A reactive purchase can still be useful, but it deserves a quick check before you pay."
+      }
+    },
+    {
+      "order": 10,
+      "type": "example",
+      "data": {
+        "title": "Two similar purchases",
+        "text": "You planned to spend $30 on a meal with friends, and you included it in your budget. Later, you see a $30 jacket you had never considered buying and purchase it because it is on sale. Both purchases cost $30, but only one was planned."
+      }
+    },
+    {
+      "order": 11,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Impulse buying can happen very quickly"
+      }
+    },
+    {
+      "order": 12,
+      "type": "text",
+      "data": {
+        "text": "Impulse buying is when you make a purchase with little planning or reflection. The problem is not simply that the purchase was unexpected. The bigger problem is that you may not have checked whether you need it, can afford it, or would still want it after the excitement disappears."
+      }
+    },
+    {
+      "order": 13,
+      "type": "example",
+      "data": {
+        "title": "The five-minute decision",
+        "text": "You see headphones for $80 and immediately want them. Instead of buying them immediately, you wait until the next day. The next morning, you still want them, you can afford them, and you know what you would use them for. The pause did not prevent the purchase; it helped you make the decision more deliberately."
+      }
+    },
+    {
+      "order": 14,
+      "type": "interactive",
+      "data": {
+        "title": "The pause test",
+        "text": "Before an unplanned purchase, ask: Do I need this? Do I have room for it in my money plan? Would I still buy it if there were no discount or countdown timer? What else could this money do?"
+      }
+    },
+    {
+      "order": 15,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Discounts can change how a purchase feels"
+      }
+    },
+    {
+      "order": 16,
+      "type": "text",
+      "data": {
+        "text": "A discount can be useful when you already planned to buy something. But a discount can also make an unnecessary purchase feel like an opportunity you must not miss. The amount you save is only meaningful if the purchase itself is useful to you."
+      }
+    },
+    {
+      "order": 17,
+      "type": "example",
+      "data": {
+        "title": "Save $20 or spend $80?",
+        "text": "An item originally costs $100 and is marked down to $80. The discount is $20. If you needed the item and planned to spend up to $100, paying $80 may be a good deal. If you did not need it and would not have bought it at $100, you did not create $20 of income by buying it."
+      }
+    },
+    {
+      "order": 18,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Free shipping is not free if it causes extra spending"
+      }
+    },
+    {
+      "order": 19,
+      "type": "text",
+      "data": {
+        "text": "Stores sometimes encourage customers to spend more to qualify for free delivery or another reward. The reward can be useful, but adding unnecessary items just to reach a threshold can increase your total spending."
+      }
+    },
+    {
+      "order": 20,
+      "type": "example",
+      "data": {
+        "title": "The free-shipping threshold",
+        "text": "You planned to spend $25, but free shipping starts at $50. You add $30 of items you do not really need. You may have avoided a $5 delivery charge, but your total spending increased by $25."
+      }
+    },
+    {
+      "order": 21,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Small purchases can become a big number"
+      }
+    },
+    {
+      "order": 22,
+      "type": "text",
+      "data": {
+        "text": "A purchase can feel small when you look at it by itself. Repeated spending is different. A small amount spent regularly can become a meaningful amount over a month or year."
+      }
+    },
+    {
+      "order": 23,
+      "type": "example",
+      "data": {
+        "title": "The $5 habit",
+        "text": "You spend $5 on an unplanned purchase five times each week. That is $25 per week. Over four weeks, that is about $100. Over 12 months at the same weekly rate, it is about $1,300: $5 × 5 × 52."
+      }
+    },
+    {
+      "order": 24,
+      "type": "interactive",
+      "data": {
+        "title": "Turn a small habit into a yearly number",
+        "text": "Suppose you spend $8 on an unplanned purchase three times each week. Calculate the weekly cost, then estimate the yearly cost using 52 weeks. Weekly: $8 × 3 = $24. Yearly: $24 × 52 = $1,248."
+      }
+    },
+    {
+      "order": 25,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Convenience can become a spending habit"
+      }
+    },
+    {
+      "order": 26,
+      "type": "text",
+      "data": {
+        "text": "Convenience is valuable, and paying for it is not automatically a bad choice. The important question is whether the convenience is worth the cost for you and whether you are using it deliberately or simply because it has become automatic."
+      }
+    },
+    {
+      "order": 27,
+      "type": "example",
+      "data": {
+        "title": "Paying for convenience",
+        "text": "You regularly pay an extra $4 for delivery instead of collecting an item yourself. If you use the service twice a week, that is about $8 per week and roughly $416 over 52 weeks. The question is whether the time and convenience are worth about $416 a year to you."
+      }
+    },
+    {
+      "order": 28,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Social pressure can influence spending"
+      }
+    },
+    {
+      "order": 29,
+      "type": "text",
+      "data": {
+        "text": "People sometimes spend money to fit in, keep up with friends, look successful, or avoid feeling left out. You can enjoy social activities without automatically matching someone else's spending level."
+      }
+    },
+    {
+      "order": 30,
+      "type": "example",
+      "data": {
+        "title": "Keeping up with the group",
+        "text": "Your friends choose a restaurant where a meal costs $50. You can afford a $20 meal but feel pressured to order the same thing. Spending $50 instead of $20 means an extra $30 for one outing. If that happens four times a month, the difference is $120."
+      }
+    },
+    {
+      "order": 31,
+      "type": "interactive",
+      "data": {
+        "title": "Your own spending trigger",
+        "text": "Think about one purchase you made recently that was not planned. What happened immediately before you bought it? Identify the trigger: emotion, advertisement, discount, social pressure, convenience, boredom, habit, or something else."
+      }
+    },
+    {
+      "order": 32,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Emotions can affect spending"
+      }
+    },
+    {
+      "order": 33,
+      "type": "text",
+      "data": {
+        "text": "Spending can sometimes become a quick response to emotions. A person may shop when stressed, reward themselves after a difficult day, or buy something to create excitement. The purchase may provide a short-term feeling while creating a longer-term financial consequence."
+      }
+    },
+    {
+      "order": 34,
+      "type": "example",
+      "data": {
+        "title": "The stressful day purchase",
+        "text": "After a difficult day, someone spends $60 online because shopping makes them feel better for a while. The next day, they realize they did not need the items. The useful question is not whether they were wrong to enjoy themselves; it is whether spending money has become their automatic response to stress."
+      }
+    },
+    {
+      "order": 35,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Habits can run without much thought"
+      }
+    },
+    {
+      "order": 36,
+      "type": "text",
+      "data": {
+        "text": "A spending habit becomes easier to repeat when the same situation repeatedly leads to the same purchase. Because the behavior feels normal, you may not notice how much it costs until you add it up."
+      }
+    },
+    {
+      "order": 37,
+      "type": "example",
+      "data": {
+        "title": "The automatic purchase",
+        "text": "Every morning, you buy a $4 snack on the way to work. You rarely think about the purchase because it has become routine. Five days a week is $20, which is about $80 in four weeks."
+      }
+    },
+    {
+      "order": 38,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Do not confuse a habit with a need"
+      }
+    },
+    {
+      "order": 39,
+      "type": "text",
+      "data": {
+        "text": "Doing something regularly does not automatically mean you need it. A repeated purchase may be useful, enjoyable, or worth the cost, but frequency alone does not make it necessary."
+      }
+    },
+    {
+      "order": 40,
+      "type": "example",
+      "data": {
+        "title": "The daily purchase",
+        "text": "You buy a $6 drink every day because you have always done so. If you reduced the purchase to three days a week, you would spend $18 instead of $42 each week, freeing up $24 weekly without eliminating the habit completely."
+      }
+    },
+    {
+      "order": 41,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "You do not have to eliminate every enjoyable purchase"
+      }
+    },
+    {
+      "order": 42,
+      "type": "text",
+      "data": {
+        "text": "Good money management is not about refusing everything you enjoy. The goal is to spend intentionally. If something brings you real value and fits your financial situation, it can be a perfectly reasonable purchase."
+      }
+    },
+    {
+      "order": 43,
+      "type": "example",
+      "data": {
+        "title": "Spending intentionally",
+        "text": "You enjoy meeting friends for coffee twice a month and set aside $30 for it. Because the spending is planned and affordable, you can enjoy it without wondering later where the money went."
+      }
+    },
+    {
+      "order": 44,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Use a pause instead of relying only on willpower"
+      }
+    },
+    {
+      "order": 45,
+      "type": "text",
+      "data": {
+        "text": "You do not need perfect self-control. A simple pause can create enough space to reconsider a purchase. Waiting a few minutes, leaving an online cart, comparing alternatives, or waiting until tomorrow can break an automatic reaction."
+      }
+    },
+    {
+      "order": 46,
+      "type": "example",
+      "data": {
+        "title": "The overnight rule",
+        "text": "For purchases above an amount you choose, you wait until the next day before buying. This does not mean the purchase is forbidden. It simply gives you time to check whether you still want it and whether the money has a better use."
+      }
+    },
+    {
+      "order": 47,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Make the better choice easier"
+      }
+    },
+    {
+      "order": 48,
+      "type": "text",
+      "data": {
+        "text": "Changing your environment can make better spending decisions easier. Removing saved payment details, unsubscribing from unnecessary promotions, avoiding shopping when bored, or setting a spending limit can reduce opportunities for automatic purchases."
+      }
+    },
+    {
+      "order": 49,
+      "type": "example",
+      "data": {
+        "title": "Changing the environment",
+        "text": "Someone notices that promotional messages cause frequent unplanned purchases. They stop receiving those promotions and remove their saved payment information from the shopping app. The goal is not to make buying impossible; it is to add a deliberate step before spending."
+      }
+    },
+    {
+      "order": 50,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Track patterns, not just individual purchases"
+      }
+    },
+    {
+      "order": 51,
+      "type": "text",
+      "data": {
+        "text": "Looking at one purchase may not reveal a problem. Looking at several weeks can reveal a pattern. When reviewing your spending, look for repeated triggers, repeated purchases, and situations where you regularly spend more than planned."
+      }
+    },
+    {
+      "order": 52,
+      "type": "interactive",
+      "data": {
+        "title": "Find your pattern",
+        "text": "Review your recent spending and identify three unplanned purchases. For each one, write down what triggered it, how much it cost, whether you still value the purchase, and what you could do differently next time."
+      }
+    },
+    {
+      "order": 53,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Ask what the money could do instead"
+      }
+    },
+    {
+      "order": 54,
+      "type": "text",
+      "data": {
+        "text": "A useful spending question is not only 'Do I want this?' but also 'What else could this money do?' The alternative might be saving for a goal, paying down debt, covering an upcoming bill, investing, or simply keeping more financial breathing room."
+      }
+    },
+    {
+      "order": 55,
+      "type": "example",
+      "data": {
+        "title": "The $40 decision",
+        "text": "You are about to spend $40 on an unplanned purchase. You could buy it, save the $40, put it toward a debt payment, or keep it available for an upcoming expense. None of these choices is automatically correct. The important thing is making the choice deliberately."
+      }
+    },
+    {
+      "order": 56,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Small changes can create useful results"
+      }
+    },
+    {
+      "order": 57,
+      "type": "text",
+      "data": {
+        "text": "You do not have to completely change your lifestyle to improve your spending. Reducing one repeated purchase or adding one pause before buying can make a meaningful difference when the change is repeated."
+      }
+    },
+    {
+      "order": 58,
+      "type": "example",
+      "data": {
+        "title": "A small monthly change",
+        "text": "You identify $15 of unnecessary spending each week and redirect it toward a financial goal. At $15 per week, that is about $780 over 52 weeks: $15 × 52 = $780."
+      }
+    },
+    {
+      "order": 59,
+      "type": "callout",
+      "data": {
+        "title": "The goal is awareness, not guilt",
+        "text": "Everyone makes purchases they later question. The useful response is to learn from the pattern, not to feel guilty. Better money habits come from noticing what happens and changing what you can."
+      }
+    },
+    {
+      "order": 60,
+      "type": "summary",
+      "data": {
+        "title": "What to remember",
+        "points": [
+          "Spending is often influenced by emotions, habits, convenience, advertising, discounts, and social pressure.",
+          "An unplanned purchase deserves a pause before you decide.",
+          "A discount is only useful if the purchase itself is useful to you.",
+          "Small repeated purchases can become a large amount over a month or year.",
+          "Convenience can be worth paying for, but you should know what it costs you.",
+          "You do not need to eliminate enjoyable spending; the goal is to spend intentionally.",
+          "Tracking repeated patterns can reveal where your money is going and what triggers your spending.",
+          "Before spending, consider what else the same money could do.",
+          "Small changes repeated consistently can make a meaningful difference.",
+          "The goal is better decisions, not guilt about spending."
+        ]
+      }
+    }
+  ],
+  "quiz": [
+    {
+      "order": 1,
+      "questionType": "multiple-choice",
+      "question": "What is a spending trigger?",
+      "options": [
+        "Something that can push you toward spending money",
+        "A rule that prevents all spending",
+        "Only an unexpected bill",
+        "The amount of money in a bank account"
+      ],
+      "correctAnswer": 0,
+      "explanation": "A spending trigger can be an emotion, situation, advertisement, habit, social pressure, convenience, or other factor that pushes you toward spending.",
+      "points": 10
+    },
+    {
+      "order": 2,
+      "questionType": "multiple-choice",
+      "question": "An item is reduced from $100 to $80. What is the most useful question before buying it?",
+      "options": [
+        "Would I still want or need it if it were not on sale?",
+        "How quickly can I buy it?",
+        "How many other people are buying it?",
+        "Can I tell someone about the discount?"
+      ],
+      "correctAnswer": 0,
+      "explanation": "A discount does not automatically make a purchase worthwhile. First decide whether the item is useful and affordable for you.",
+      "points": 10
+    },
+    {
+      "order": 3,
+      "questionType": "multiple-choice",
+      "question": "You spend $5 on an unplanned purchase five times each week. About how much is that over 52 weeks?",
+      "options": [
+        "$1,300",
+        "$260",
+        "$520",
+        "$2,600"
+      ],
+      "correctAnswer": 0,
+      "explanation": "$5 × 5 purchases × 52 weeks = $1,300.",
+      "points": 10
+    },
+    {
+      "order": 4,
+      "questionType": "multiple-choice",
+      "question": "Why can social pressure affect spending?",
+      "options": [
+        "People may spend more to fit in or keep up with others",
+        "Friends automatically pay all your bills",
+        "Social activities never cost money",
+        "Everyone always spends the same amount"
+      ],
+      "correctAnswer": 0,
+      "explanation": "People can feel pressure to match the spending choices of friends or other people around them.",
+      "points": 10
+    },
+    {
+      "order": 5,
+      "questionType": "multiple-choice",
+      "question": "You pay an extra $4 for delivery twice a week. About how much is that over 52 weeks?",
+      "options": [
+        "$416",
+        "$104",
+        "$208",
+        "$832"
+      ],
+      "correctAnswer": 0,
+      "explanation": "$4 × 2 × 52 = $416.",
+      "points": 10
+    },
+    {
+      "order": 6,
+      "questionType": "multiple-choice",
+      "question": "What is one useful reason to pause before an unplanned purchase?",
+      "options": [
+        "It gives you time to check whether you actually want, need, and can afford it",
+        "It guarantees that the item will become cheaper",
+        "It means you can never buy anything enjoyable",
+        "It makes every purchase unnecessary"
+      ],
+      "correctAnswer": 0,
+      "explanation": "A pause creates space to make a deliberate decision instead of reacting automatically.",
+      "points": 10
+    },
+    {
+      "order": 7,
+      "questionType": "true-false",
+      "question": "A good money habit means you should never spend money on things you enjoy.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Good money habits are about intentional spending. Enjoyable purchases can be reasonable when they fit your financial situation and priorities.",
+      "points": 10
+    },
+    {
+      "order": 8,
+      "questionType": "multiple-choice",
+      "question": "You identify $15 of unnecessary spending each week and redirect it toward a goal. About how much could that add up to in 52 weeks?",
+      "options": [
+        "$780",
+        "$180",
+        "$520",
+        "$1,560"
+      ],
+      "correctAnswer": 0,
+      "explanation": "$15 × 52 weeks = $780.",
+      "points": 10
+    },
+    {
+      "order": 9,
+      "questionType": "multiple-choice",
+      "question": "What should you look for when reviewing your spending over several weeks?",
+      "options": [
+        "Repeated purchases and the situations or emotions that trigger them",
+        "Only your largest single purchase",
+        "Only purchases made on weekends",
+        "Whether every purchase was made with cash"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Patterns are often easier to see when you look across multiple purchases and identify repeated triggers.",
+      "points": 10
+    },
+    {
+      "order": 10,
+      "questionType": "multiple-choice",
+      "question": "What is the main goal of understanding your spending triggers and habits?",
+      "options": [
+        "To make more deliberate money decisions",
+        "To stop spending completely",
+        "To feel guilty about past purchases",
+        "To avoid every discount"
+      ],
+      "correctAnswer": 0,
+      "explanation": "The goal is awareness and better decision-making, not eliminating all spending or feeling guilty about money.",
+      "points": 10
+    }
+  ]
+}

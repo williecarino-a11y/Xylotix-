@@ -1,0 +1,621 @@
+{
+  "slug": "co-signing-guarantees-and-borrowing-for-someone-else",
+  "title": "Co-Signing, Guarantees, and Borrowing for Someone Else",
+  "estimatedDuration": 40,
+  "order": 12,
+  "published": true,
+  "contentBlocks": [
+    {
+      "order": 1,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Helping someone borrow can become your financial responsibility"
+      }
+    },
+    {
+      "order": 2,
+      "type": "text",
+      "data": {
+        "text": "Co-signing or guaranteeing another person's borrowing can feel like a simple way to help. But it can create a financial obligation or risk for the person providing the support."
+      }
+    },
+    {
+      "order": 3,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "What is a co-signer?"
+      }
+    },
+    {
+      "order": 4,
+      "type": "text",
+      "data": {
+        "text": "A co-signer is someone who agrees to share responsibility for a borrowing arrangement according to the contract. The exact legal responsibility depends on the agreement and applicable law."
+      }
+    },
+    {
+      "order": 5,
+      "type": "example",
+      "data": {
+        "title": "A simple co-signing example",
+        "text": "A lender requires two people to sign a loan agreement. One person receives the borrowed money, while the other agrees to the obligations described in the contract. The second person should understand the agreement before signing."
+      }
+    },
+    {
+      "order": 6,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "What is a guarantee?"
+      }
+    },
+    {
+      "order": 7,
+      "type": "text",
+      "data": {
+        "text": "A guarantee is a promise to meet another person's debt obligation if specified conditions occur. The scope of responsibility depends on the guarantee and the applicable legal rules."
+      }
+    },
+    {
+      "order": 8,
+      "type": "callout",
+      "data": {
+        "title": "Do not rely on verbal promises",
+        "text": "Before signing anything, understand the written agreement. A statement such as 'I will pay it myself' does not necessarily remove the obligations created by the contract."
+      }
+    },
+    {
+      "order": 9,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Why people agree to co-sign"
+      }
+    },
+    {
+      "order": 10,
+      "type": "text",
+      "data": {
+        "text": "People may co-sign because they want to help family members, friends, business partners, or other people who cannot qualify for borrowing on their own."
+      }
+    },
+    {
+      "order": 11,
+      "type": "example",
+      "data": {
+        "title": "Helping someone qualify",
+        "text": "A person may have insufficient credit history or income for a lender's requirements. A co-signer may help the applicant qualify, but the co-signer takes on risk by entering the arrangement."
+      }
+    },
+    {
+      "order": 12,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "The key question is who is responsible if payments are missed"
+      }
+    },
+    {
+      "order": 13,
+      "type": "text",
+      "data": {
+        "text": "Before signing, determine exactly what happens if the primary borrower misses payments, stops paying, or defaults."
+      }
+    },
+    {
+      "order": 14,
+      "type": "interactive",
+      "data": {
+        "title": "Think before signing",
+        "text": "Ask yourself: If the other person stopped paying tomorrow, could I financially handle the obligation described in the agreement?"
+      }
+    },
+    {
+      "order": 15,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "You should understand the entire debt"
+      }
+    },
+    {
+      "order": 16,
+      "type": "text",
+      "data": {
+        "text": "Do not focus only on the monthly payment. Understand the amount borrowed, interest, fees, repayment period, total scheduled payments, and consequences of missed payments."
+      }
+    },
+    {
+      "order": 17,
+      "type": "example",
+      "data": {
+        "title": "The monthly-payment trap",
+        "text": "A loan requires $350 per month for 36 months. The scheduled payments alone total $350 × 36 = $12,600. The person considering co-signing should understand the full obligation rather than focusing only on $350."
+      }
+    },
+    {
+      "order": 18,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Ask whether the debt fits your own finances"
+      }
+    },
+    {
+      "order": 19,
+      "type": "text",
+      "data": {
+        "text": "If you could become responsible for payments, evaluate the debt against your own income, essential expenses, savings, existing obligations, and financial goals."
+      }
+    },
+    {
+      "order": 20,
+      "type": "example",
+      "data": {
+        "title": "A payment you cannot afford",
+        "text": "Someone asks you to guarantee a $600 monthly obligation. If your budget has no realistic room for $600, signing may expose you to a commitment you cannot safely handle."
+      }
+    },
+    {
+      "order": 21,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Trust does not remove financial risk"
+      }
+    },
+    {
+      "order": 22,
+      "type": "text",
+      "data": {
+        "text": "You may completely trust the person asking for help and still recognize that circumstances can change. Job loss, illness, business problems, relationship changes, or unexpected expenses can affect someone's ability to repay."
+      }
+    },
+    {
+      "order": 23,
+      "type": "callout",
+      "data": {
+        "title": "Good intentions are not a risk-management strategy",
+        "text": "A decision should be based on the actual contract and your ability to handle the financial consequences, not only on your confidence that the other person intends to pay."
+      }
+    },
+    {
+      "order": 24,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Consider what happens if income changes"
+      }
+    },
+    {
+      "order": 25,
+      "type": "text",
+      "data": {
+        "text": "Stress-test the arrangement against realistic financial setbacks. Ask whether you could cope if the primary borrower lost income or if your own income changed at the same time."
+      }
+    },
+    {
+      "order": 26,
+      "type": "interactive",
+      "data": {
+        "title": "Stress-test the commitment",
+        "text": "If the other person's payment is $500 per month, do not ask only whether they can pay $500 today. Consider whether you could manage the commitment during a period when their income falls and they cannot pay."
+      }
+    },
+    {
+      "order": 27,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Understand the effect on your financial flexibility"
+      }
+    },
+    {
+      "order": 28,
+      "type": "text",
+      "data": {
+        "text": "A co-signed or guaranteed debt can reduce your ability to take on other obligations because the arrangement may affect your financial position and, depending on the jurisdiction and reporting system, your credit profile."
+      }
+    },
+    {
+      "order": 29,
+      "type": "example",
+      "data": {
+        "title": "A future borrowing decision",
+        "text": "You plan to apply for your own loan next year. Before supporting someone else's debt, consider whether the existing commitment could affect your future borrowing capacity."
+      }
+    },
+    {
+      "order": 30,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Understand the credit-reporting implications"
+      }
+    },
+    {
+      "order": 31,
+      "type": "text",
+      "data": {
+        "text": "Depending on the country, lender, and arrangement, the debt or payment history may be reported in ways that affect the people connected to the borrowing."
+      }
+    },
+    {
+      "order": 32,
+      "type": "callout",
+      "data": {
+        "title": "Check the local rules",
+        "text": "Credit reporting and co-signer rights differ across countries and lenders. Do not assume that another person's experience applies to your situation."
+      }
+    },
+    {
+      "order": 33,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Understand whether you can leave the agreement"
+      }
+    },
+    {
+      "order": 34,
+      "type": "text",
+      "data": {
+        "text": "Do not assume you can simply remove yourself later because the relationship changes or the borrower begins paying reliably."
+      }
+    },
+    {
+      "order": 35,
+      "type": "example",
+      "data": {
+        "title": "The difficult exit",
+        "text": "A co-signer may want to leave the arrangement after two years. Whether that is possible depends on the agreement, lender, refinancing, release process, and applicable law."
+      }
+    },
+    {
+      "order": 36,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Ask whether the lender can release you"
+      }
+    },
+    {
+      "order": 37,
+      "type": "text",
+      "data": {
+        "text": "If release is possible, understand the exact conditions. It may require the borrower to qualify independently or satisfy other requirements."
+      }
+    },
+    {
+      "order": 38,
+      "type": "example",
+      "data": {
+        "title": "Do not assume automatic release",
+        "text": "A borrower making payments on time for several months does not necessarily mean the co-signer is automatically removed. Check the written terms."
+      }
+    },
+    {
+      "order": 39,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Never sign documents you do not understand"
+      }
+    },
+    {
+      "order": 40,
+      "type": "text",
+      "data": {
+        "text": "If a lender provides a contract, read it carefully. If a term is unclear or the financial consequences are significant, consider obtaining qualified financial or legal advice before signing."
+      }
+    },
+    {
+      "order": 41,
+      "type": "interactive",
+      "data": {
+        "title": "Questions to ask",
+        "text": "What exactly am I promising? What happens after a missed payment? What is the maximum amount I could become responsible for? Can fees be added? Can I be released? What happens if the borrower defaults?"
+      }
+    },
+    {
+      "order": 42,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Do not let urgency replace understanding"
+      }
+    },
+    {
+      "order": 43,
+      "type": "text",
+      "data": {
+        "text": "Pressure to sign immediately is a reason to slow down, not a reason to skip important questions."
+      }
+    },
+    {
+      "order": 44,
+      "type": "callout",
+      "data": {
+        "title": "A safe response to pressure",
+        "text": "You can say that you need time to read the agreement and understand the financial consequences before making a decision."
+      }
+    },
+    {
+      "order": 45,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Consider alternatives to co-signing"
+      }
+    },
+    {
+      "order": 46,
+      "type": "text",
+      "data": {
+        "text": "Helping someone does not always require taking on their debt. Depending on the situation, alternatives might include helping them create a budget, build savings, improve their financial readiness, or find a less risky solution."
+      }
+    },
+    {
+      "order": 47,
+      "type": "example",
+      "data": {
+        "title": "Helping without borrowing",
+        "text": "Instead of guaranteeing a large debt, you might help someone compare options, prepare a realistic budget, or build a savings plan. The appropriate alternative depends on the circumstances."
+      }
+    },
+    {
+      "order": 48,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Never borrow for someone else without understanding the full arrangement"
+      }
+    },
+    {
+      "order": 49,
+      "type": "text",
+      "data": {
+        "text": "If you borrow money in your own name and give the money to someone else, the lender may still treat you as the borrower. The private agreement between you and the other person may not change your responsibility to the lender."
+      }
+    },
+    {
+      "order": 50,
+      "type": "example",
+      "data": {
+        "title": "Borrowing in your own name",
+        "text": "You borrow $8,000 and give it to another person with an agreement that they will repay you. The lender's contract is still with you. If the other person stops paying you, you may still owe the lender."
+      }
+    },
+    {
+      "order": 51,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Calculate the potential commitment"
+      }
+    },
+    {
+      "order": 52,
+      "type": "interactive",
+      "data": {
+        "title": "A simple calculation",
+        "text": "A guaranteed payment is $450 per month for 30 months. The scheduled payments equal $450 × 30 = $13,500. This does not necessarily represent the maximum possible financial exposure because fees, interest changes, default costs, or other contractual terms may apply."
+      }
+    },
+    {
+      "order": 53,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Ask whether you could survive the worst realistic outcome"
+      }
+    },
+    {
+      "order": 54,
+      "type": "text",
+      "data": {
+        "text": "A useful decision test is whether you could handle the obligation if the person you are helping could not pay. If the answer is no, the risk may be too high for your financial situation."
+      }
+    },
+    {
+      "order": 55,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "A practical checklist before signing"
+      }
+    },
+    {
+      "order": 56,
+      "type": "text",
+      "data": {
+        "text": "Identify the debt amount, interest, fees, payment schedule, total cost, default consequences, your exact responsibility, credit implications, release conditions, and what happens if the borrower stops paying."
+      }
+    },
+    {
+      "order": 57,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Helping someone should not put your own finances at risk"
+      }
+    },
+    {
+      "order": 58,
+      "type": "summary",
+      "data": {
+        "title": "What to remember",
+        "points": [
+          "Co-signing or guaranteeing debt can create financial responsibility.",
+          "Always read the complete agreement.",
+          "Do not rely only on trust or verbal promises.",
+          "Understand the full debt, not just the monthly payment.",
+          "Consider how missed payments could affect you.",
+          "Check credit-reporting implications where applicable.",
+          "Do not assume you can leave the agreement later.",
+          "Consider safer ways to help before accepting debt risk.",
+          "If you borrow in your own name, the lender may still hold you responsible.",
+          "Only accept a commitment you could realistically handle."
+        ]
+      }
+    },
+    {
+      "order": 59,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "The most important question"
+      }
+    },
+    {
+      "order": 60,
+      "type": "callout",
+      "data": {
+        "title": "Before you sign",
+        "text": "If the other person could not make the payments, would you be financially and practically prepared to handle the obligation created by this agreement?"
+      }
+    }
+  ],
+  "quizzes": [
+    {
+      "order": 1,
+      "questionType": "multiple-choice",
+      "question": "What is an important reason to understand a co-signing agreement before signing?",
+      "options": [
+        "It may create financial responsibilities for the co-signer",
+        "It guarantees that the borrower will never miss a payment",
+        "It makes the debt disappear",
+        "It means the co-signer receives the borrowed money"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Co-signing can create financial responsibility depending on the agreement and applicable law.",
+      "points": 10
+    },
+    {
+      "order": 2,
+      "questionType": "multiple-choice",
+      "question": "Why should you not rely only on a borrower's promise that they will repay?",
+      "options": [
+        "Circumstances can change, and the written agreement determines important obligations",
+        "Promises automatically cancel contracts",
+        "Borrowers can never lose income",
+        "Lenders ignore written agreements"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Even trustworthy people can experience financial setbacks, so the actual agreement and your ability to handle the risk matter.",
+      "points": 10
+    },
+    {
+      "order": 3,
+      "questionType": "true-false",
+      "question": "A co-signer should focus only on the monthly payment.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctAnswer": 1,
+      "explanation": "The co-signer should understand the full debt, including interest, fees, repayment period, and consequences of default.",
+      "points": 10
+    },
+    {
+      "order": 4,
+      "questionType": "multiple-choice",
+      "question": "A debt requires $350 per month for 36 months. What is the scheduled payment total before considering additional charges?",
+      "options": [
+        "$12,600",
+        "$10,500",
+        "$13,600",
+        "$8,400"
+      ],
+      "correctAnswer": 0,
+      "explanation": "$350 × 36 = $12,600.",
+      "points": 10
+    },
+    {
+      "order": 5,
+      "questionType": "multiple-choice",
+      "question": "What should someone check before assuming they can leave a co-signing arrangement?",
+      "options": [
+        "The agreement, lender requirements, release conditions, and applicable law",
+        "Only the borrower's verbal promise",
+        "Only how long the loan has existed",
+        "Nothing, because co-signers are automatically released"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Release conditions vary, so they must be confirmed rather than assumed.",
+      "points": 10
+    },
+    {
+      "order": 6,
+      "questionType": "multiple-choice",
+      "question": "Why can co-signing affect your future financial flexibility?",
+      "options": [
+        "The commitment may affect your financial position or credit profile depending on the arrangement and jurisdiction",
+        "Co-signing always increases your income",
+        "It automatically gives you more savings",
+        "It removes all future debt obligations"
+      ],
+      "correctAnswer": 0,
+      "explanation": "A co-signed commitment can affect financial capacity and, depending on reporting rules, credit information.",
+      "points": 10
+    },
+    {
+      "order": 7,
+      "questionType": "multiple-choice",
+      "question": "A guaranteed payment is $450 per month for 30 months. What is the scheduled payment total?",
+      "options": [
+        "$13,500",
+        "$12,000",
+        "$14,500",
+        "$9,000"
+      ],
+      "correctAnswer": 0,
+      "explanation": "$450 × 30 = $13,500, before any additional charges or changes allowed by the agreement.",
+      "points": 10
+    },
+    {
+      "order": 8,
+      "questionType": "multiple-choice",
+      "question": "What is a safer question to ask before co-signing?",
+      "options": [
+        "Could I handle the obligation if the borrower could not make the payments?",
+        "How quickly can I sign?",
+        "What is the largest amount the lender will approve?",
+        "Can I avoid reading the agreement?"
+      ],
+      "correctAnswer": 0,
+      "explanation": "The ability to handle the obligation if the borrower cannot pay is a key risk test.",
+      "points": 10
+    },
+    {
+      "order": 9,
+      "questionType":                                                                                      "multiple-choice",
+      "question": "If you borrow $8,000 in your own name and give it to someone else, who does the lender's agreement generally make responsible for repayment?",
+      "options": [
+        "The person who signed the borrowing agreement",
+        "Only the person who received the money",
+        "Nobody",
+        "The lender"
+      ],
+      "correctAnswer": 0,
+      "explanation": "The lender's contract is with the person who borrowed the money, even if that person gives the funds to someone else.",
+      "points": 10
+    },
+    {
+      "order": 10,
+      "questionType": "multiple-choice",
+      "question": "What is the best general lesson about co-signing and guarantees?",
+      "options": [
+        "Treat the commitment as a serious financial risk and understand the agreement before signing",
+        "Always co-sign for close friends",
+        "Trust is enough to eliminate financial risk",
+        "The borrower is always solely responsible"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Good financial decisions require understanding the contract, potential responsibility, and ability to handle the consequences.",
+      "points": 10
+    }
+  ]
+}

@@ -1,0 +1,494 @@
+{
+  "slug": "how-stocks-make-and-lose-money",
+  "title": "How Stocks Make and Lose Money",
+  "estimatedDuration": 45,
+  "order": 2,
+  "published": true,
+  "contentBlocks": [
+    {
+      "type": "heading",
+      "content": "How can a stock make you money?"
+    },
+    {
+      "type": "text",
+      "content": "A stock investment can potentially produce a return in more than one way. The share price may rise, the company may pay dividends, or both can happen. Your overall result depends on what happens to the investment during the period you own it."
+    },
+    {
+      "type": "callout",
+      "title": "The two main sources of stock return",
+      "content": "For many stocks, investors may earn returns through price appreciation and dividends. Neither is guaranteed."
+    },
+    {
+      "type": "heading",
+      "content": "1. Capital gain"
+    },
+    {
+      "type": "text",
+      "content": "A capital gain occurs when you sell an investment for more than you paid for it, before considering fees and taxes."
+    },
+    {
+      "type": "example",
+      "title": "A simple capital gain",
+      "content": "You buy 20 shares for $50 each. Later, you sell them for $70 each. You made $20 per share before fees and taxes."
+    },
+    {
+      "type": "formula",
+      "content": "Gain per share = selling price − purchase price"
+    },
+    {
+      "type": "formula",
+      "content": "$70 − $50 = $20"
+    },
+    {
+      "type": "formula",
+      "content": "Total gain = $20 × 20 shares = $400"
+    },
+    {
+      "type": "heading",
+      "content": "A gain is not always realized immediately"
+    },
+    {
+      "type": "text",
+      "content": "If a stock rises while you still own it, the increase is generally called an unrealized gain. It becomes a realized gain when you sell at a higher price than your purchase price."
+    },
+    {
+      "type": "example",
+      "title": "Unrealized versus realized",
+      "content": "You buy a stock for $1,000. Its market value later becomes $1,300. You currently have a $300 unrealized gain. If you sell it for $1,300, the $300 gain becomes realized, before fees and taxes."
+    },
+    {
+      "type": "heading",
+      "content": "2. Dividends"
+    },
+    {
+      "type": "text",
+      "content": "Some companies distribute part of their cash to shareholders through dividends. A dividend is usually expressed as an amount per share."
+    },
+    {
+      "type": "example",
+      "title": "Dividend income",
+      "content": "If a company pays $0.80 per share and you own 250 shares, your dividend would be $200 before applicable taxes or adjustments."
+    },
+    {
+      "type": "formula",
+      "content": "Dividend income = dividend per share × shares owned"
+    },
+    {
+      "type": "formula",
+      "content": "$0.80 × 250 = $200"
+    },
+    {
+      "type": "heading",
+      "content": "Dividends are not guaranteed"
+    },
+    {
+      "type": "text",
+      "content": "A company can change its dividend policy. It may increase a dividend, reduce it, suspend it, or stop paying one altogether. Investors should not treat a historical dividend as a permanent promise."
+    },
+    {
+      "type": "heading",
+      "content": "Total return"
+    },
+    {
+      "type": "text",
+      "content": "Total return considers both changes in the investment's value and income received from the investment. For a simplified stock example, total return can be thought of as the price gain or loss plus dividends, compared with the amount originally invested."
+    },
+    {
+      "type": "formula",
+      "content": "Total return = price gain or loss + dividends received"
+    },
+    {
+      "type": "example",
+      "title": "Combining price growth and dividends",
+      "content": "You invest $5,000. The investment later becomes worth $5,500, and you received $150 in dividends. Ignoring fees and taxes, your total gain is $650."
+    },
+    {
+      "type": "formula",
+      "content": "$5,500 − $5,000 + $150 = $650"
+    },
+    {
+      "type": "formula",
+      "content": "Total return = $650 ÷ $5,000 × 100 = 13%"
+    },
+    {
+      "type": "heading",
+      "content": "A stock can produce a negative total return"
+    },
+    {
+      "type": "text",
+      "content": "Receiving dividends does not guarantee that you made money overall. The share price can fall by more than the value of the dividends received."
+    },
+    {
+      "type": "example",
+      "title": "Dividend does not erase a large loss",
+      "content": "You invest $5,000. The investment falls to $4,400, but you receive $100 in dividends. Your overall gain or loss is negative $500 before fees and taxes."
+    },
+    {
+      "type": "formula",
+      "content": "$4,400 − $5,000 + $100 = −$500"
+    },
+    {
+      "type": "formula",
+      "content": "Total return = −$500 ÷ $5,000 × 100 = −10%"
+    },
+    {
+      "type": "heading",
+      "content": "Percentage return matters"
+    },
+    {
+      "type": "text",
+      "content": "The same dollar gain can represent very different percentage returns depending on how much money was invested."
+    },
+    {
+      "type": "example",
+      "title": "Same gain, different return",
+      "content": "A $500 gain on a $5,000 investment is a 10% return. A $500 gain on a $10,000 investment is a 5% return."
+    },
+    {
+      "type": "formula",
+      "content": "$500 ÷ $5,000 × 100 = 10%"
+    },
+    {
+      "type": "formula",
+      "content": "$500 ÷ $10,000 × 100 = 5%"
+    },
+    {
+      "type": "heading",
+      "content": "Losses work the same way"
+    },
+    {
+      "type": "text",
+      "content": "A $1,000 loss is more significant for someone who invested $2,000 than for someone who invested $100,000. Percentage loss gives better context."
+    },
+    {
+      "type": "heading",
+      "content": "Why recovering from a loss can be difficult"
+    },
+    {
+      "type": "text",
+      "content": "Investment losses and gains are not symmetrical. After a large percentage loss, a larger percentage gain is required to return to the original amount."
+    },
+    {
+      "type": "example",
+      "title": "The 50% loss problem",
+      "content": "Suppose you invest $10,000 and the investment falls 50%. Your investment becomes $5,000. To return from $5,000 to $10,000, you need a 100% gain."
+    },
+    {
+      "type": "formula",
+      "content": "$10,000 × 50% = $5,000 loss"
+    },
+    {
+      "type": "formula",
+      "content": "$5,000 × 100% = $5,000 gain"
+    },
+    {
+      "type": "callout",
+      "title": "Important",
+      "content": "A 50% loss requires a 100% gain to recover. This is one reason managing downside risk matters."
+    },
+    {
+      "type": "heading",
+      "content": "What if the stock rises before you sell?"
+    },
+    {
+      "type": "text",
+      "content": "A rising market price increases the current market value of your shares, but the final result depends on what happens by the time you sell or otherwise exit the investment."
+    },
+    {
+      "type": "heading",
+      "content": "What if you buy more later?"
+    },
+    {
+      "type": "text",
+      "content": "Buying additional shares at different prices changes the average amount you paid per share. This is sometimes described as your average cost basis, although the exact tax treatment can vary by jurisdiction and account type."
+    },
+    {
+      "type": "example",
+      "title": "Average purchase price",
+      "content": "You buy 10 shares at $20 and later buy another 10 shares at $30. You spent $200 + $300 = $500 for 20 shares. Your simple average purchase price is $25 per share."
+    },
+    {
+      "type": "formula",
+      "content": "$500 ÷ 20 = $25 per share"
+    },
+    {
+      "type": "heading",
+      "content": "Buying more after a fall is not automatically smart"
+    },
+    {
+      "type": "text",
+      "content": "Buying more shares after a price decline lowers your average purchase price if the new shares are cheaper. But the lower average price does not make the underlying investment safer. If the business is deteriorating, buying more can increase your exposure to the problem."
+    },
+    {
+      "type": "heading",
+      "content": "Reinvesting dividends"
+    },
+    {
+      "type": "text",
+      "content": "Instead of taking dividends as cash, an investor may be able to reinvest them by purchasing additional shares or fractional shares. Over long periods, reinvested returns can potentially contribute to compounding."
+    },
+    {
+      "type": "example",
+      "title": "Why reinvestment can matter",
+      "content": "Suppose a dividend buys an additional fraction of a share. That additional ownership can potentially generate future dividends or participate in future price changes, creating another layer of compounding."
+    },
+    {
+      "type": "heading",
+      "content": "Compounding in stock investing"
+    },
+    {
+      "type": "text",
+      "content": "Compounding occurs when returns remain invested and can themselves contribute to future returns. Reinvested dividends and long-term growth can both contribute to compounding."
+    },
+    {
+      "type": "heading",
+      "content": "Taxes and fees reduce the amount you keep"
+    },
+    {
+      "type": "text",
+      "content": "Real-world investment results can differ from simple examples because commissions, platform fees, taxes, spreads, and other costs may reduce what an investor ultimately keeps."
+    },
+    {
+      "type": "example",
+      "title": "Why a simple return is not always your final result",
+      "content": "If an investment produces a $500 gain but you pay $50 in applicable costs and taxes, your amount kept would be lower than $500. The exact treatment depends on the investment and jurisdiction."
+    },
+    {
+      "type": "heading",
+      "content": "Stock splits do not automatically create wealth"
+    },
+    {
+      "type": "text",
+      "content": "A stock split changes the number of shares and the price per share according to the split ratio. By itself, a split does not create additional economic value for shareholders."
+    },
+    {
+      "type": "example",
+      "title": "A simple stock split",
+      "content": "If you own 10 shares priced at $100 and the company completes a 2-for-1 split, you may end up with 20 shares priced around $50 each immediately after the split, all else equal. Your total market value remains around $1,000."
+    },
+    {
+      "type": "formula",
+      "content": "10 × $100 = $1,000"
+    },
+    {
+      "type": "formula",
+      "content": "20 × $50 = $1,000"
+    },
+    {
+      "type": "heading",
+      "content": "A rising stock is not automatically a good investment"
+    },
+    {
+      "type": "text",
+      "content": "A stock can rise because investors expect strong future performance. But a high price does not guarantee that future expectations will be met. Investors should consider the underlying business, valuation, and risk."
+    },
+    {
+      "type": "heading",
+      "content": "A falling stock is not automatically a bargain"
+    },
+    {
+      "type": "text",
+      "content": "A stock that falls from $100 to $40 may appear cheap, but the decline may reflect serious problems in the business. A lower price does not automatically mean better value."
+    },
+    {
+      "type": "heading",
+      "content": "Common misconceptions"
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: If a stock pays a dividend, you cannot lose money on it"
+    },
+    {
+      "type": "text",
+      "content": "Reality: The stock price can fall by more than the value of the dividends received."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: A stock must be sold before you can have any gain"
+    },
+    {
+      "type": "text",
+      "content": "Reality: A price increase while you still own the stock is generally an unrealized gain. Selling turns it into a realized gain."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: A 50% loss only requires a 50% gain to recover"
+    },
+    {
+      "type": "text",
+      "content": "Reality: A 50% loss requires a 100% gain on the remaining amount to return to the starting value."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: Reinvesting dividends guarantees wealth"
+    },
+    {
+      "type": "text",
+      "content": "Reality: Reinvestment can support compounding, but the underlying investment can still lose value."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: Buying more of a falling stock always improves your position"
+    },
+    {
+      "type": "text",
+      "content": "Reality: Buying more lowers your average purchase price in many situations, but it also increases exposure to the investment and does not fix a weakening business."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: A stock split makes shareholders richer"
+    },
+    {
+      "type": "text",
+      "content": "Reality: A split changes the number of shares and price per share. By itself, it does not create economic value."
+    },
+    {
+      "type": "heading",
+      "content": "Practical investor check"
+    },
+    {
+      "type": "interactive",
+      "title": "Calculate your total result",
+      "content": "When reviewing a stock investment, ask: What did I originally invest? What is it worth now? How much income have I received? What fees and taxes apply? What is my total gain or loss? What percentage return does that represent?"
+    },
+    {
+      "type": "summary",
+      "content": "Stocks can make or lose money through changes in share price and, for some investments, dividends. Understanding capital gains, unrealized and realized gains, total return, percentage returns, losses, dividends, reinvestment, compounding, fees, taxes, and stock splits helps investors evaluate what is actually happening to their money."
+    },
+    {
+      "type": "callout",
+      "title": "Remember",
+      "content": "Do not judge an investment only by whether its price went up or down. Look at the complete result: price change, income received, costs, and the amount originally invested."
+    }
+  ],
+  "quiz": [
+    {
+      "order": 1,
+      "questionType": "multiple-choice",
+      "question": "You buy 20 shares for $50 each and later sell them for $70 each. Ignoring fees and taxes, what is your total capital gain?",
+      "options": [
+        "$20",
+        "$200",
+        "$400",
+        "$1,400"
+      ],
+      "correctAnswer": 2,
+      "explanation": "The gain is $20 per share. $20 × 20 shares = $400."
+    },
+    {
+      "order": 2,
+      "questionType": "multiple-choice",
+      "question": "You invest $5,000. The investment becomes worth $5,500 and you receive $150 in dividends. Ignoring fees and taxes, what is your total gain?",
+      "options": [
+        "$150",
+        "$500",
+        "$650",
+        "$5,650"
+      ],
+      "correctAnswer": 2,
+      "explanation": "Price gain = $500. Adding $150 in dividends gives a total gain of $650."
+    },
+    {
+      "order": 3,
+      "questionType": "multiple-choice",
+      "question": "You invest $5,000. The investment falls to $4,400 and you receive $100 in dividends. What is your total return before fees and taxes?",
+      "options": [
+        "10% gain",
+        "5% gain",
+        "10% loss",
+        "20% loss"
+      ],
+      "correctAnswer": 2,
+      "explanation": "The overall loss is $500. $500 ÷ $5,000 × 100 = 10% loss."
+    },
+    {
+      "order": 4,
+      "questionType": "multiple-choice",
+      "question": "An investment falls 50% from $10,000 to $5,000. What gain is required on the remaining $5,000 to return to $10,000?",
+      "options": [
+        "25%",
+        "50%",
+        "75%",
+        "100%"
+      ],
+      "correctAnswer": 3,
+      "explanation": "A $5,000 gain is required on the remaining $5,000, which is a 100% gain."
+    },
+    {
+      "order": 5,
+      "questionType": "multiple-choice",
+      "question": "You buy 10 shares at $20 and 10 more at $30. What is your simple average purchase price per share?",
+      "options": [
+        "$20",
+        "$25",
+        "$30",
+        "$50"
+      ],
+      "correctAnswer": 1,
+      "explanation": "You spent $500 on 20 shares. $500 ÷ 20 = $25 per share."
+    },
+    {
+      "order": 6,
+      "questionType": "true-false",
+      "question": "Reinvesting dividends can potentially contribute to compounding.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Reinvested dividends can purchase additional ownership, which may itself generate future returns."
+    },
+    {
+      "order": 7,
+      "questionType": "multiple-choice",
+      "question": "What is an unrealized gain?",
+      "options": [
+        "A gain that has already been taxed",
+        "A gain from a stock whose current value is above your purchase price while you still own it",
+        "A guaranteed dividend",
+        "A loss caused by fees"
+      ],
+      "correctAnswer": 1,
+      "explanation": "An unrealized gain is an increase in value while the investment is still held."
+    },
+    {
+      "order": 8,
+      "questionType": "multiple-choice",
+      "question": "If a stock undergoes a 2-for-1 split, what happens in a simplified example where the price adjusts proportionally?",
+      "options": [
+        "The number of shares doubles and the price per share roughly halves",
+        "The number of shares halves and the price doubles",
+        "The investor automatically doubles their wealth",
+        "The company automatically doubles its profits"
+      ],
+      "correctAnswer": 0,
+      "explanation": "A 2-for-1 split can double the shares and approximately halve the price per share, leaving the overall value roughly unchanged immediately after the split, all else equal."
+    },
+    {
+      "order": 9,
+      "questionType": "multiple-choice",
+      "question": "Why can a $500 gain represent different percentage returns for different investors?",
+      "options": [
+        "Because percentage return depends on the amount originally invested",
+        "Because gains always have the same percentage",
+        "Because dividends determine every return",
+        "Because stock prices cannot be compared"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Percentage return is calculated relative to the amount originally invested."
+    },
+    {
+      "order": 10,
+      "questionType": "multiple-choice",
+      "question": "Which statement is most accurate?",
+      "options": [
+        "A dividend guarantees a positive total return",
+        "A rising stock is automatically a good investment",
+        "A falling stock is automatically a bargain",
+        "A complete investment result should consider price change, income, costs, and the original investment"
+      ],
+      "correctAnswer": 3,
+      "explanation": "Evaluating the complete result provides a more useful picture than looking at price movement alone."
+    }
+  ]
+}

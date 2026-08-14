@@ -1,0 +1,621 @@
+{
+  "slug": "secured-vs-unsecured-debt-and-collateral",
+  "title": "Secured vs. Unsecured Debt and Collateral",
+  "estimatedDuration": 40,
+  "order": 11,
+  "published": true,
+  "contentBlocks": [
+    {
+      "order": 1,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Not all debt carries the same kind of risk"
+      }
+    },
+    {
+      "order": 2,
+      "type": "text",
+      "data": {
+        "text": "Debt can be structured in different ways. One important difference is whether the lender has a specific asset as security for the borrowing."
+      }
+    },
+    {
+      "order": 3,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "What is secured debt?"
+      }
+    },
+    {
+      "order": 4,
+      "type": "text",
+      "data": {
+        "text": "Secured debt is borrowing backed by collateral. Collateral is an asset that gives the lender additional protection if the borrower fails to meet the agreement."
+      }
+    },
+    {
+      "order": 5,
+      "type": "example",
+      "data": {
+        "title": "A simple secured-loan example",
+        "text": "Suppose you borrow $20,000 using an eligible asset as collateral. The agreement explains what happens to that asset if you fail to meet the required obligations."
+      }
+    },
+    {
+      "order": 6,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "What is unsecured debt?"
+      }
+    },
+    {
+      "order": 7,
+      "type": "text",
+      "data": {
+        "text": "Unsecured debt does not use a specific asset as collateral. The lender still expects repayment, and the agreement may contain consequences for missed payments or default."
+      }
+    },
+    {
+      "order": 8,
+      "type": "example",
+      "data": {
+        "title": "An unsecured balance",
+        "text": "A credit-card balance is generally unsecured. You owe the money even though the lender does not normally have a specific item such as your car pledged as collateral."
+      }
+    },
+    {
+      "order": 9,
+      "type": "callout",
+      "data": {
+        "title": "Unsecured does not mean consequence-free",
+        "text": "The absence of collateral does not remove the obligation to repay. Missed payments can still lead to fees, collection activity, legal consequences, or other effects depending on the agreement and applicable law."
+      }
+    },
+    {
+      "order": 10,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "What is collateral?"
+      }
+    },
+    {
+      "order": 11,
+      "type": "text",
+      "data": {
+        "text": "Collateral is an asset pledged to secure a debt. The specific asset, the lender's rights, and the consequences of default depend on the agreement and applicable law."
+      }
+    },
+    {
+      "order": 12,
+      "type": "example",
+      "data": {
+        "title": "Why collateral matters",
+        "text": "If a loan is secured by an asset and the borrower defaults, the lender may have rights to take action against that asset under the agreement and applicable law."
+      }
+    },
+    {
+      "order": 13,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "The key difference is risk, not whether repayment is required"
+      }
+    },
+    {
+      "order": 14,
+      "type": "text",
+      "data": {
+        "text": "Both secured and unsecured debt create repayment obligations. Secured debt adds another layer of risk because a particular asset may be exposed if the borrower defaults."
+      }
+    },
+    {
+      "order": 15,
+      "type": "interactive",
+      "data": {
+        "title": "Compare the risk",
+        "text": "Imagine two debts of $10,000. Debt A is unsecured. Debt B is secured by an asset you depend on. The balances are identical, but Debt B creates an additional risk involving the pledged asset."
+      }
+    },
+    {
+      "order": 16,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "A lower interest rate does not automatically make a secured debt safer"
+      }
+    },
+    {
+      "order": 17,
+      "type": "text",
+      "data": {
+        "text": "Secured borrowing may sometimes have a lower borrowing cost because the collateral can reduce the lender's risk. But the borrower must consider the asset at risk as well as the interest rate."
+      }
+    },
+    {
+      "order": 18,
+      "type": "example",
+      "data": {
+        "title": "Rate versus consequences",
+        "text": "Loan A has a higher interest rate but no specific collateral. Loan B has a lower interest rate but is secured by an important asset. Comparing only the rates ignores the different consequences of default."
+      }
+    },
+    {
+      "order": 19,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Ask what asset is being pledged"
+      }
+    },
+    {
+      "order": 20,
+      "type": "text",
+      "data": {
+        "text": "Before accepting secured debt, identify exactly what asset is being used as collateral and understand the conditions under which the lender can enforce its rights."
+      }
+    },
+    {
+      "order": 21,
+      "type": "example",
+      "data": {
+        "title": "Do not overlook the collateral",
+        "text": "A borrower focuses on a $350 monthly payment but does not investigate what asset secures the loan. The payment may look manageable while the consequences of default could be significant."
+      }
+    },
+    {
+      "order": 22,
+      "type": "callout",
+      "data": {
+        "title": "Read the security terms",
+        "text": "Know what is pledged, what events count as default, what notices may be required, and what the lender may legally do after default."
+      }
+    },
+    {
+      "order": 23,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Think about whether the asset is essential"
+      }
+    },
+    {
+      "order": 24,
+      "type": "text",
+      "data": {
+        "text": "The importance of the collateral should be part of the borrowing decision. Losing an asset that is essential for work, housing, or basic needs can create consequences beyond the debt itself."
+      }
+    },
+    {
+      "order": 25,
+      "type": "example",
+      "data": {
+        "title": "An essential asset",
+        "text": "If an asset is needed to earn income, putting it at risk requires careful consideration because financial difficulty could affect both the debt repayment and your ability to earn."
+      }
+    },
+    {
+      "order": 26,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Understand the difference between the loan balance and the asset value"
+      }
+    },
+    {
+      "order": 27,
+      "type": "text",
+      "data": {
+        "text": "The amount you owe and the value of collateral are not necessarily the same. Asset values can change, while the debt balance follows the repayment agreement."
+      }
+    },
+    {
+      "order": 28,
+      "type": "interactive",
+      "data": {
+        "title": "A simple comparison",
+        "text": "Suppose a debt balance is $12,000 and the pledged asset is currently worth about $15,000. The asset's value is $3,000 higher than the debt balance, but that does not mean the borrower can treat the $3,000 difference as available cash."
+      }
+    },
+    {
+      "order": 29,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Asset values can change"
+      }
+    },
+    {
+      "order": 30,
+      "type": "text",
+      "data": {
+        "text": "A pledged asset may lose value, so borrowers should not assume that today's estimated value will remain unchanged."
+      }
+    },
+    {
+      "order": 31,
+      "type": "example",
+      "data": {
+        "title": "Changing value",
+        "text": "An asset valued at $18,000 today could be worth less later. Its changing market value can affect the financial situation surrounding secured borrowing."
+      }
+    },
+    {
+      "order": 32,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Understand what happens if you default"
+      }
+    },
+    {
+      "order": 33,
+      "type": "text",
+      "data": {
+        "text": "Default means failing to meet the obligations required under a debt agreement. The exact consequences vary by contract, lender, debt type, and applicable law."
+      }
+    },
+    {
+      "order": 34,
+      "type": "example",
+      "data": {
+        "title": "Why the agreement matters",
+        "text": "Two different secured loans can have different notices, fees, enforcement processes, and repayment terms. Never assume the consequences are identical."
+      }
+    },
+    {
+      "order": 35,
+      "type": "callout",
+      "data": {
+        "title": "Never guess about default",
+        "text": "Read the agreement or obtain qualified advice so you understand the actual rules that apply to your borrowing."
+      }
+    },
+    {
+      "order": 36,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Unsecured debt still depends on the agreement"
+      }
+    },
+    {
+      "order": 37,
+      "type": "text",
+      "data": {
+        "text": "Because unsecured debt has no specific collateral, borrowers sometimes underestimate it. But the debt remains legally and financially important, and missed payments can still create serious consequences."
+      }
+    },
+    {
+      "order": 38,
+      "type": "example",
+      "data": {
+        "title": "A missed unsecured payment",
+        "text": "If you miss a payment on an unsecured debt, the account may accumulate fees or other charges, and the lender may take collection or legal action depending on the agreement and applicable law."
+      }
+    },
+    {
+      "order": 39,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Do not choose debt based only on the advertised rate"
+      }
+    },
+    {
+      "order": 40,
+      "type": "text",
+      "data": {
+        "text": "Compare the full borrowing cost, fees, repayment period, required payment, collateral, default consequences, and flexibility before deciding."
+      }
+    },
+    {
+      "order": 41,
+      "type": "interactive",
+      "data": {
+        "title": "A fuller comparison",
+        "text": "Loan A costs $500 per month for 24 months, giving a scheduled payment total of $500 × 24 = $12,000. Loan B costs $420 per month for 30 months, giving $420 × 30 = $12,600. Loan B has the lower monthly payment but the higher scheduled total, before other charges."
+      }
+    },
+    {
+      "order": 42,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Check whether the debt fits your income"
+      }
+    },
+    {
+      "order": 43,
+      "type": "text",
+      "data": {
+        "text": "Even if a lender approves a secured or unsecured loan, you still need to decide whether the payment fits your own financial situation."
+      }
+    },
+    {
+      "order": 44,
+      "type": "example",
+      "data": {
+        "title": "Approval is not affordability",
+        "text": "A lender approves a $25,000 loan with a $600 monthly payment. That approval does not prove that $600 fits comfortably alongside your essential expenses, savings needs, and other obligations."
+      }
+    },
+    {
+      "order": 45,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Consider the purpose of the borrowing"
+      }
+    },
+    {
+      "order": 46,
+      "type": "text",
+      "data": {
+        "text": "The purpose of borrowing matters. Taking significant risk with an important asset for a nonessential purchase deserves especially careful consideration."
+      }
+    },
+    {
+      "order": 47,
+      "type": "example",
+      "data": {
+        "title": "Essential versus optional borrowing",
+        "text": "Using secured borrowing for an important productive purpose may be evaluated differently from risking an essential asset to fund a temporary discretionary purchase."
+      }
+    },
+    {
+      "order": 48,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Ask whether you could handle an income drop"
+      }
+    },
+    {
+      "order": 49,
+      "type": "text",
+      "data": {
+        "text": "A debt that is affordable only during your best income months may become dangerous when income falls. Stress-test the payment against realistic changes in your circumstances."
+      }
+    },
+    {
+      "order": 50,
+      "type": "interactive",
+      "data": {
+        "title": "Stress-test the payment",
+        "text": "If your monthly income is normally $3,000 and a debt payment is $700, consider whether you could still manage the payment if income temporarily fell to $2,400. The $700 payment would consume about 29.2% of the lower income before other expenses."
+      }
+    },
+    {
+      "order": 51,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Ask what flexibility exists"
+      }
+    },
+    {
+      "order": 52,
+      "type": "text",
+      "data": {
+        "text": "Before borrowing, understand whether payments can be changed, whether early repayment is allowed, what fees apply, and what happens during financial hardship."
+      }
+    },
+    {
+      "order": 53,
+      "type": "example",
+      "data": {
+        "title": "Flexibility matters",
+        "text": "Two loans may have similar interest rates, but one may have more restrictive terms or higher fees when circumstances change. The more restrictive agreement may create greater practical risk."
+      }
+    },
+    {
+      "order": 54,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Questions to ask before accepting secured debt"
+      }
+    },
+    {
+      "order": 55,
+      "type": "text",
+      "data": {
+        "text": "Ask: What exactly secures the debt? What is the total cost? What fees apply? What happens after a missed payment? What happens after default? Can the asset be taken? Are there early repayment charges? Can the payment change?"
+      }
+    },
+    {
+      "order": 56,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "A practical decision framework"
+      }
+    },
+    {
+      "order": 57,
+      "type": "text",
+      "data": {
+        "text": "Before accepting secured or unsecured debt, compare the purpose, total cost, monthly commitment, borrowing terms, collateral risk, default consequences, flexibility, and ability to keep paying if circumstances change."
+      }
+    },
+    {
+      "order": 58,
+      "type": "summary",
+      "data": {
+        "title": "What to remember",
+        "points": [
+          "Secured debt uses collateral.",
+          "Unsecured debt does not use a specific asset as collateral.",
+          "Both types create repayment obligations.",
+          "Collateral can increase the consequences of default.",
+          "A lower interest rate does not automatically mean lower overall risk.",
+          "Always identify the asset being pledged.",
+          "Understand the agreement's default and enforcement terms.",
+          "Compare total cost rather than only the monthly payment.",
+          "Make sure the debt fits realistic income and expenses.",
+          "Consider how the debt would affect your financial flexibility."
+        ]
+      }
+    },
+    {
+      "order": 59,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "The most important question"
+      }
+    },
+    {
+      "order": 60,
+      "type": "callout",
+      "data": {
+        "title": "Borrowing decision",
+        "text": "Do not ask only, 'Can I get this loan?' Ask, 'What exactly am I risking, what will this really cost me, and can I comfortably handle the obligation if my circumstances change?'"
+      }
+    }
+  ],
+  "quizzes": [
+    {
+      "order": 1,
+      "questionType": "multiple-choice",
+      "question": "What makes debt secured?",
+      "options": [
+        "It is backed by specific collateral under the agreement",
+        "It has no repayment requirement",
+        "It always has a zero interest rate",
+        "It can never result in default"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Secured debt is backed by collateral that gives the lender additional protection if the borrower defaults.",
+      "points": 10
+    },
+    {
+      "order": 2,
+      "questionType": "multiple-choice",
+      "question": "What is collateral?",
+      "options": [
+        "An asset pledged to secure a debt",
+        "A monthly salary",
+        "A type of interest rate",
+        "A repayment reminder"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Collateral is an asset pledged as security for borrowing.",
+      "points": 10
+    },
+    {
+      "order": 3,
+      "questionType": "true-false",
+      "question": "Unsecured debt means the borrower has no obligation to repay the money.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Unsecured debt does not use specific collateral, but the borrower still has an obligation to repay.",
+      "points": 10
+    },
+    {
+      "order": 4,
+      "questionType": "multiple-choice",
+      "question": "Why should a borrower consider the importance of an asset before pledging it as collateral?",
+      "options": [
+        "Losing an important asset could create consequences beyond the debt itself",
+        "Important assets can never be used as collateral",
+        "Collateral automatically increases income",
+        "The asset's value never changes"
+      ],
+      "correctAnswer": 0,
+      "explanation": "If an important asset is exposed to enforcement after default, losing it can create additional financial problems.",
+      "points": 10
+    },
+    {
+      "order": 5,
+      "questionType": "multiple-choice",
+      "question": "Loan A costs $500 for 24 months. Loan B costs $420 for 30 months. Which has the lower scheduled payment total?",
+      "options": [
+        "Loan A",
+        "Loan B",
+        "They are equal",
+        "The totals cannot be calculated"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Loan A totals $500 × 24 = $12,000. Loan B totals $420 × 30 = $12,600.",
+      "points": 10
+    },
+    {
+      "order": 6,
+      "questionType": "multiple-choice",
+      "question": "Does a lower interest rate automatically mean a secured loan is safer?",
+      "options": [
+        "No, the borrower must also consider collateral and the consequences of default",
+        "Yes, interest rate is the only important factor",
+        "Yes, because secured debt cannot be defaulted on",
+        "No, because interest rates never matter"
+      ],
+      "correctAnswer": 0,
+      "explanation": "The interest rate is important, but secured borrowing also exposes collateral to risk.",
+      "points": 10
+    },
+    {
+      "order": 7,
+      "questionType": "multiple-choice",
+      "question": "Why should borrowers understand what happens after default?",
+      "options": [
+        "The consequences can differ by agreement, lender, debt type, and applicable law",
+        "Default always has exactly the same consequences everywhere",
+        "Default automatically cancels the debt",
+        "Default means the lender must forgive the balance"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Default rules and enforcement consequences depend on the agreement and applicable legal framework.",
+      "points": 10
+    },
+    {
+      "order": 8,
+      "questionType": "multiple-choice",
+      "question": "A borrower's normal income is $3,000 and temporarily falls to $2,400. A debt payment is $700. Approximately what percentage of the lower income is the payment?",
+      "options": [
+        "29.2%",
+        "20.0%",
+        "35.0%",
+        "42.5%"
+      ],
+      "correctAnswer": 0,
+      "explanation": "$700 ÷ $2,400 × 100 ≈ 29.2%. Stress-testing the payment against lower income can reveal affordability risks.",
+      "points": 10
+    },
+    {
+      "order": 9,
+      "questionType": "multiple-choice",
+      "question": "Which is the best approach when comparing secured and unsecured borrowing?",
+      "options": [
+        "Compare total cost, payment, terms, collateral risk, default consequences, and flexibility",
+        "Choose whichever has the biggest approved amount",
+        "Look only at the advertised interest rate",
+        "Choose whichever has the shortest application"
+      ],
+      "correctAnswer": 0,
+      "explanation": "A responsible comparison considers both financial cost and the risks attached to the borrowing structure.",
+      "points": 10
+    },
+    {
+      "order": 10,
+      "questionType": "multiple-choice",
+      "question": "What is the best general lesson about secured and unsecured debt?",
+      "options": [
+        "Understand the full cost, repayment obligation, risks, and consequences before borrowing",
+        "Secured debt is always better",
+        "Unsecured debt is always harmless",
+        "The monthly payment is the only thing that matters"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Good borrowing decisions require understanding both the financial cost and the risks associated with the debt.",
+      "points": 10
+    }
+  ]
+}

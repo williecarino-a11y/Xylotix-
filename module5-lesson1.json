@@ -1,0 +1,483 @@
+{
+  "slug": "how-to-know-if-you-can-actually-afford-something",
+  "title": "How to Know If You Can Actually Afford Something",
+  "estimatedDuration": 35,
+  "order": 1,
+  "published": true,
+  "contentBlocks": [
+    {
+      "type": "heading",
+      "content": "Having enough money is not the same as being able to afford something"
+    },
+    {
+      "type": "text",
+      "content": "You can have enough money in your account to pay for something and still not be able to comfortably afford it. The real question is what the purchase will do to the rest of your financial situation."
+    },
+    {
+      "type": "example",
+      "title": "The $100 purchase",
+      "content": "You have $120 available and find something that costs $100. Technically, you can pay for it. But if you need $80 for food and transportation before your next income arrives, the purchase is not comfortably affordable."
+    },
+    {
+      "type": "heading",
+      "content": "Look beyond the price tag"
+    },
+    {
+      "type": "text",
+      "content": "The advertised price is not always the final cost. Delivery charges, taxes, accessories, maintenance, subscriptions, or other fees can increase what you actually spend."
+    },
+    {
+      "type": "example",
+      "title": "The checkout surprise",
+      "content": "You plan to spend $60 on an item. At checkout, delivery adds $8 and a required accessory adds $12. Your actual cost is $80, not $60."
+    },
+    {
+      "type": "formula",
+      "content": "Total cost = item price + required extra costs"
+    },
+    {
+      "type": "heading",
+      "content": "Ask what happens after you buy it"
+    },
+    {
+      "type": "text",
+      "content": "A purchase does not exist in isolation. Before buying, consider what money will remain for bills, food, transportation, saving, debt payments, and unexpected needs."
+    },
+    {
+      "type": "example",
+      "title": "Two choices",
+      "content": "You have $500 available. Spending $450 on a purchase leaves only $50. Spending $200 leaves $300. Both purchases may be technically possible, but they create very different levels of financial breathing room."
+    },
+    {
+      "type": "heading",
+      "content": "Your future expenses matter"
+    },
+    {
+      "type": "text",
+      "content": "Money that looks available today may already be needed for something happening later. Check upcoming expenses before deciding what you can safely spend."
+    },
+    {
+      "type": "example",
+      "title": "The upcoming bill",
+      "content": "You have $700 today, but a $400 necessary bill is due next week. Treating the entire $700 as available spending money could create a problem."
+    },
+    {
+      "type": "heading",
+      "content": "A discount does not automatically make something affordable"
+    },
+    {
+      "type": "text",
+      "content": "A lower price is still spending. If you did not need or plan for the item, the discount may simply make an unnecessary purchase feel easier to justify."
+    },
+    {
+      "type": "example",
+      "title": "50% off",
+      "content": "An item falls from $100 to $50. You saved $50 only if you already intended to buy it. If you would not have spent the $50 otherwise, you still spent $50."
+    },
+    {
+      "type": "heading",
+      "content": "Watch the upgrade trap"
+    },
+    {
+      "type": "text",
+      "content": "A small upgrade can seem harmless, especially when the original purchase was already planned. Several small upgrades can turn a controlled purchase into an expensive one."
+    },
+    {
+      "type": "example",
+      "title": "A purchase grows",
+      "content": "You plan to spend $75. An upgrade adds $10, an accessory adds $8, and delivery adds $7. The final cost becomes $100."
+    },
+    {
+      "type": "formula",
+      "content": "$75 + $10 + $8 + $7 = $100"
+    },
+    {
+      "type": "heading",
+      "content": "Set your limit before shopping"
+    },
+    {
+      "type": "text",
+      "content": "A spending limit is easier to protect when you decide it before you become emotionally attached to a product."
+    },
+    {
+      "type": "callout",
+      "title": "Decide before the temptation",
+      "content": "Choose what you can comfortably spend before shopping. Do not let the checkout page decide your budget for you."
+    },
+    {
+      "type": "heading",
+      "content": "Leave room for unexpected costs"
+    },
+    {
+      "type": "text",
+      "content": "If buying something would leave you with almost nothing available, the purchase may be too expensive even if you can technically pay for it."
+    },
+    {
+      "type": "example",
+      "title": "Almost zero left",
+      "content": "You have $300 available and want to spend $290. You would have only $10 remaining. Unless you have a strong reason and no upcoming needs, that purchase creates very little breathing room."
+    },
+    {
+      "type": "heading",
+      "content": "Consider what the money could do instead"
+    },
+    {
+      "type": "text",
+      "content": "Every purchase means choosing one use for your money instead of another. The question is not only whether you can buy the item, but whether it is the best use of that money right now."
+    },
+    {
+      "type": "example",
+      "title": "Spend or save?",
+      "content": "You have $200 available. You can spend it on an optional purchase or keep it available for an upcoming expense. Neither choice is automatically correct, but the trade-off should be clear."
+    },
+    {
+      "type": "heading",
+      "content": "Do not confuse wanting something with needing it"
+    },
+    {
+      "type": "text",
+      "content": "Strong desire can make a purchase feel urgent. Give yourself enough time to decide whether the item is genuinely useful or simply exciting in the moment."
+    },
+    {
+      "type": "heading",
+      "content": "The pause can protect your money"
+    },
+    {
+      "type": "text",
+      "content": "A short pause before a non-essential purchase can interrupt impulse spending and give you time to reconsider."
+    },
+    {
+      "type": "interactive",
+      "title": "The 24-hour test",
+      "content": "You see something you want for $90. Ask yourself: If I wait until tomorrow, will I still want it? If the answer is no, the pause may have saved you from an unnecessary purchase."
+    },
+    {
+      "type": "heading",
+      "content": "Ask whether you can afford the ongoing cost"
+    },
+    {
+      "type": "text",
+      "content": "Some purchases create future expenses. A product may require subscriptions, maintenance, replacements, fuel, accessories, or other recurring costs."
+    },
+    {
+      "type": "example",
+      "title": "The cheap device",
+      "content": "A device costs $100 but requires a $15 monthly subscription. Over 12 months, the subscription alone costs $180."
+    },
+    {
+      "type": "formula",
+      "content": "$15 × 12 = $180"
+    },
+    {
+      "type": "heading",
+      "content": "The real cost can be bigger than the first payment"
+    },
+    {
+      "type": "text",
+      "content": "When a purchase has recurring costs, consider the total amount you expect to spend rather than focusing only on the first payment."
+    },
+    {
+      "type": "heading",
+      "content": "Be careful with buy-now-pay-later offers"
+    },
+    {
+      "type": "text",
+      "content": "Splitting a purchase into smaller payments can make an expensive item feel affordable. Before agreeing, consider the total cost and whether the future payments will fit comfortably alongside your other obligations."
+    },
+    {
+      "type": "example",
+      "title": "Four payments",
+      "content": "An item costs $400 and is divided into four $100 payments. The smaller payments may feel easier, but you are still committing to $400 in total before considering any applicable fees."
+    },
+    {
+      "type": "heading",
+      "content": "Do not let a small payment hide a large commitment"
+    },
+    {
+      "type": "text",
+      "content": "A payment can look manageable by itself while several similar commitments become difficult when added together."
+    },
+    {
+      "type": "example",
+      "title": "Three small commitments",
+      "content": "You already have two $50 monthly payment commitments. Adding another $50 means $150 of future monthly payments before considering your normal expenses."
+    },
+    {
+      "type": "heading",
+      "content": "Check your current commitments"
+    },
+    {
+      "type": "text",
+      "content": "Before taking on another payment, look at what you already owe. The new commitment needs to fit with the existing ones."
+    },
+    {
+      "type": "heading",
+      "content": "Affordability is personal"
+    },
+    {
+      "type": "text",
+      "content": "A purchase that is comfortable for one person may be a bad decision for another person. Income, expenses, savings, debt, responsibilities, and upcoming needs all matter."
+    },
+    {
+      "type": "example",
+      "title": "Same price, different situations",
+      "content": "A $300 purchase may be manageable for someone with $5,000 of available savings and stable income but stressful for someone with $400 available and several upcoming bills."
+    },
+    {
+      "type": "heading",
+      "content": "Your savings should not automatically be treated as spending money"
+    },
+    {
+      "type": "text",
+      "content": "If your savings are meant to protect you from emergencies, using them for an optional purchase can weaken that protection."
+    },
+    {
+      "type": "heading",
+      "content": "Ask three questions before buying"
+    },
+    {
+      "type": "text",
+      "content": "Before a significant purchase, ask: What is the total cost? What will I have left afterward? What important thing could this money need to do instead?"
+    },
+    {
+      "type": "callout",
+      "title": "A simple affordability check",
+      "content": "If you cannot explain how the purchase fits into your income, expenses, savings, and upcoming needs, pause before buying."
+    },
+    {
+      "type": "heading",
+      "content": "Do not shop from the maximum amount you can spend"
+    },
+    {
+      "type": "text",
+      "content": "Knowing that you could technically spend $500 does not mean you should spend $500. Leaving room between your maximum ability and your actual spending can provide protection."
+    },
+    {
+      "type": "heading",
+      "content": "Use a target, not a maximum"
+    },
+    {
+      "type": "text",
+      "content": "Instead of asking how much you can possibly spend, decide how much you are comfortable spending and treat that number as your target."
+    },
+    {
+      "type": "example",
+      "title": "Maximum versus target",
+      "content": "You could technically spend $400, but you decide your comfortable target is $250. The $150 difference stays available for other priorities."
+    },
+    {
+      "type": "heading",
+      "content": "Watch emotional spending"
+    },
+    {
+      "type": "text",
+      "content": "Stress, boredom, celebration, anger, loneliness, and excitement can all influence spending decisions. Recognizing the emotion can help you slow down."
+    },
+    {
+      "type": "example",
+      "title": "The bad-day purchase",
+      "content": "After a difficult day, you suddenly want to spend $120 on something you had not planned to buy. Waiting until the emotion settles can produce a different decision."
+    },
+    {
+      "type": "heading",
+      "content": "Do not let social pressure set your budget"
+    },
+    {
+      "type": "text",
+      "content": "Friends, trends, influencers, and social media can make expensive purchases seem normal. Your financial situation is still your responsibility."
+    },
+    {
+      "type": "heading",
+      "content": "A purchase can be affordable and still not be worthwhile"
+    },
+    {
+      "type": "text",
+      "content": "Affordability answers whether you can reasonably handle the cost. Value answers whether the purchase is worth that cost to you."
+    },
+    {
+      "type": "example",
+      "title": "Affordable but poor value",
+      "content": "You can comfortably spend $100 on something you expect to use once. You may be able to afford it, but you might decide that the money would be more useful elsewhere."
+    },
+    {
+      "type": "heading",
+      "content": "Think about how often you will use it"
+    },
+    {
+      "type": "text",
+      "content": "Frequency of use can help you evaluate whether a purchase provides enough value for its cost."
+    },
+    {
+      "type": "example",
+      "title": "Cost per use",
+      "content": "An item costs $120 and you expect to use it 60 times. Ignoring other factors, that is $2 per use."
+    },
+    {
+      "type": "formula",
+      "content": "Cost per use = total cost ÷ expected uses"
+    },
+    {
+      "type": "heading",
+      "content": "Do not use calculations to justify everything"
+    },
+    {
+      "type": "text",
+      "content": "A calculation can help you think clearly, but it should not be used to convince yourself to buy something you do not actually need or value."
+    },
+    {
+      "type": "heading",
+      "content": "Know when to walk away"
+    },
+    {
+      "type": "text",
+      "content": "Sometimes the smartest financial decision is not buying. Leaving a purchase behind is not failure. It can be a deliberate decision to protect your priorities."
+    },
+    {
+      "type": "heading",
+      "content": "Your budget is a decision tool"
+    },
+    {
+      "type": "text",
+      "content": "A budget should not simply tell you that you cannot spend. It should help you decide what deserves your money."
+    },
+    {
+      "type": "summary",
+      "content": "Before buying, check the total cost, upcoming expenses, remaining money, existing commitments, future costs, and what else the money could accomplish. A purchase is more comfortably affordable when it fits your real financial situation without putting important priorities at risk."
+    },
+    {
+      "type": "callout",
+      "title": "The goal is not to stop spending",
+      "content": "Good money management is not about never buying things you enjoy. It is about making sure the things you buy fit your situation and are worth the money you give up."
+    }
+  ],
+  "quizzes": [
+    {
+      "order": 1,
+      "questionType": "multiple-choice",
+      "question": "What is the difference between having enough money to pay for something and comfortably affording it?",
+      "options": [
+        "Affording it means the purchase fits your wider financial situation, not just the current account balance",
+        "There is no difference",
+        "Affording it means buying the most expensive option",
+        "Affording it means using credit"
+      ],
+      "correctAnswer": 0,
+      "explanation": "A purchase should be considered alongside upcoming expenses, savings, debt, and other priorities."
+    },
+    {
+      "order": 2,
+      "questionType": "multiple-choice",
+      "question": "An item costs $60, delivery costs $8, and a required accessory costs $12. What is the total cost?",
+      "options": [
+        "$80",
+        "$68",
+        "$72",
+        "$60"
+      ],
+      "correctAnswer": 0,
+      "explanation": "$60 + $8 + $12 = $80."
+    },
+    {
+      "order": 3,
+      "questionType": "multiple-choice",
+      "question": "Why can a discount still lead to unnecessary spending?",
+      "options": [
+        "A discount can make an unplanned purchase feel more attractive even though you still spend money",
+        "Discounts always increase income",
+        "Discounts mean something is free",
+        "Discounts eliminate opportunity cost"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Paying less than the original price is still spending money."
+    },
+    {
+      "order": 4,
+      "questionType": "multiple-choice",
+      "question": "You planned to spend $75, then add a $10 upgrade, an $8 accessory, and $7 delivery. What is the final cost?",
+      "options": [
+        "$100",
+        "$90",
+        "$85",
+        "$110"
+      ],
+      "correctAnswer": 0,
+      "explanation": "$75 + $10 + $8 + $7 = $100."
+    },
+    {
+      "order": 5,
+      "questionType": "true-false",
+      "question": "If you can technically pay for something, that automatically means you can comfortably afford it.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Upcoming expenses, savings needs, debt payments, and other priorities can make a technically affordable purchase financially uncomfortable."
+    },
+    {
+      "order": 6,
+      "questionType": "multiple-choice",
+      "question": "An item costs $100 and requires a $15 monthly subscription. How much do the subscriptions cost over 12 months?",
+      "options": [
+        "$180",
+        "$115",
+        "$150",
+        "$300"
+      ],
+      "correctAnswer": 0,
+      "explanation": "$15 × 12 = $180."
+    },
+    {
+      "order": 7,
+      "questionType": "multiple-choice",
+      "question": "What is one reason to pause before an impulse purchase?",
+      "options": [
+        "The pause gives you time to decide whether the purchase actually fits your priorities",
+        "It guarantees the price will increase",
+        "It makes every purchase necessary",
+        "It removes all financial risk"
+      ],
+      "correctAnswer": 0,
+      "explanation": "A pause can interrupt emotional or impulsive spending and give you time to reconsider."
+    },
+    {
+      "order": 8,
+      "questionType": "multiple-choice",
+      "question": "You could technically spend $400, but choose a comfortable target of $250. How much remains available for other priorities?",
+      "options": [
+        "$150",
+        "$250",
+        "$400",
+        "$50"
+      ],
+      "correctAnswer": 0,
+      "explanation": "$400 − $250 = $150."
+    },
+    {
+      "order": 9,
+      "questionType": "multiple-choice",
+      "question": "An item costs $120 and you expect to use it 60 times. What is the cost per use?",
+      "options": [
+        "$2",
+        "$60",
+        "$120",
+        "$20"
+      ],
+      "correctAnswer": 0,
+      "explanation": "$120 ÷ 60 uses = $2 per use."
+    },
+    {
+      "order": 10,
+      "questionType": "multiple-choice",
+      "question": "What is one of the best questions to ask before a significant purchase?",
+      "options": [
+        "What will this purchase do to my finances after I pay for it?",
+        "How quickly can I buy it?",
+        "Can I find a way to ignore the total cost?",
+        "Can I make someone else think I can afford it?"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Looking at the effect of the purchase on your remaining money and priorities leads to better decisions."
+    }
+  ]
+}

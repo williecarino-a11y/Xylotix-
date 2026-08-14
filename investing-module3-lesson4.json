@@ -1,0 +1,388 @@
+{
+  "slug": "how-to-choose-an-investment-vehicle",
+  "title": "How to Choose an Investment Vehicle",
+  "estimatedDuration": 45,
+  "order": 4,
+  "published": true,
+  "contentBlocks": [
+    {
+      "type": "heading",
+      "content": "Choosing the investment is only half the decision"
+    },
+    {
+      "type": "text",
+      "content": "Knowing about stocks, bonds, ETFs, and mutual funds is useful, but real investing also requires deciding which type of investment vehicle fits your goal. The right choice depends on what you are trying to accomplish, how long you can invest, how much risk you can handle, and how easily you may need to access the money."
+    },
+    {
+      "type": "callout",
+      "title": "The key idea",
+      "content": "Do not start with 'What investment should I buy?' Start with 'What am I trying to accomplish with this money?'"
+    },
+    {
+      "type": "heading",
+      "content": "Step 1: Identify the goal"
+    },
+    {
+      "type": "text",
+      "content": "An investment decision should begin with the purpose of the money. A goal might be long-term wealth building, retirement, a future purchase, education, or another financial objective."
+    },
+    {
+      "type": "example",
+      "title": "Same person, different goals",
+      "content": "Imagine someone has $20,000. They may not want to invest all of it in the same way. Money needed soon for an important expense has a different job from money intended for a long-term wealth-building goal."
+    },
+    {
+      "type": "heading",
+      "content": "Step 2: Consider the time horizon"
+    },
+    {
+      "type": "text",
+      "content": "Time horizon is how long the money can remain invested before it is needed. A longer time horizon can give an investor more ability to withstand temporary market declines. A shorter time horizon generally gives less time to recover from a major decline."
+    },
+    {
+      "type": "heading",
+      "content": "Short-term money and long-term money have different jobs"
+    },
+    {
+      "type": "text",
+      "content": "Money that may be needed soon should not automatically be exposed to substantial market risk simply because an investment has historically produced attractive long-term returns."
+    },
+    {
+      "type": "callout",
+      "title": "Important",
+      "content": "An investment can be excellent for a long-term goal and still be inappropriate for money that must be available soon."
+    },
+    {
+      "type": "heading",
+      "content": "Step 3: Understand your risk capacity"
+    },
+    {
+      "type": "text",
+      "content": "Risk capacity is the amount of financial loss or volatility your situation can realistically withstand without putting an important goal in danger."
+    },
+    {
+      "type": "heading",
+      "content": "Risk tolerance is different"
+    },
+    {
+      "type": "text",
+      "content": "Risk tolerance is how comfortable you are with investment losses and price fluctuations. Someone may psychologically tolerate large swings but still have a low financial capacity for losses if the money is needed soon."
+    },
+    {
+      "type": "example",
+      "title": "Tolerance versus capacity",
+      "content": "Two investors may both say they can tolerate a 30% decline. If one needs the money next year while the other has decades before needing it, their financial capacity for that decline may be very different."
+    },
+    {
+      "type": "heading",
+      "content": "Step 4: Decide how much diversification you need"
+    },
+    {
+      "type": "text",
+      "content": "Diversification means spreading exposure across investments rather than relying heavily on one company, asset, industry, or market."
+    },
+    {
+      "type": "text",
+      "content": "A diversified ETF or mutual fund can make diversification easier, but investors should still examine what the fund actually owns. A fund can contain many investments while remaining heavily concentrated in one sector or theme."
+    },
+    {
+      "type": "heading",
+      "content": "Step 5: Think about liquidity"
+    },
+    {
+      "type": "text",
+      "content": "Liquidity refers to how easily an investment can be converted into cash without a major loss caused by the transaction itself. Different investments and markets can have different levels of liquidity."
+    },
+    {
+      "type": "heading",
+      "content": "Step 6: Compare costs"
+    },
+    {
+      "type": "text",
+      "content": "Costs reduce the money that remains invested. Investors should look beyond a fund's advertised label and examine expense ratios, trading costs, account fees, taxes, and other applicable charges."
+    },
+    {
+      "type": "example",
+      "title": "A simple fee comparison",
+      "content": "Suppose $30,000 is invested in Fund A with a 0.20% expense ratio and Fund B with a 0.80% expense ratio. Ignoring changes in account value and other factors, Fund A represents about $60 in annual expenses while Fund B represents about $240."
+    },
+    {
+      "type": "formula",
+      "content": "$30,000 × 0.20% = $60"
+    },
+    {
+      "type": "formula",
+      "content": "$30,000 × 0.80% = $240"
+    },
+    {
+      "type": "formula",
+      "content": "$240 − $60 = $180 difference"
+    },
+    {
+      "type": "heading",
+      "content": "Step 7: Understand simplicity"
+    },
+    {
+      "type": "text",
+      "content": "A good investment strategy does not need to be complicated. If a diversified investment vehicle can achieve the purpose of a portfolio without unnecessary complexity, simplicity may make it easier to understand, maintain, and stick with."
+    },
+    {
+      "type": "heading",
+      "content": "Step 8: Understand what you are actually buying"
+    },
+    {
+      "type": "text",
+      "content": "Before investing, know what the investment owns, how it attempts to make money, what could cause it to lose value, what it costs, and what could make it unsuitable for your goal."
+    },
+    {
+      "type": "interactive",
+      "title": "The five-question investment test",
+      "content": "Before buying an investment, ask: What is my goal? When will I need the money? How much loss can my situation realistically withstand? What exactly does this investment own or represent? What are the total costs and major risks?"
+    },
+    {
+      "type": "heading",
+      "content": "A practical comparison"
+    },
+    {
+      "type": "example",
+      "title": "Three investors, three situations",
+      "content": "Investor A needs money for a major expense in six months. Investor B is investing for a long-term goal several decades away. Investor C wants exposure to a particular industry because they have researched it carefully. These investors should not automatically choose the same investment vehicle."
+    },
+    {
+      "type": "heading",
+      "content": "Do not confuse an investment vehicle with an investment goal"
+    },
+    {
+      "type": "text",
+      "content": "An ETF, mutual fund, stock, or bond is a way to hold or access an investment. It is not itself a financial goal. The vehicle should serve the goal rather than becoming the goal."
+    },
+    {
+      "type": "heading",
+      "content": "Do not choose based on price alone"
+    },
+    {
+      "type": "text",
+      "content": "A $20 share is not automatically cheaper or better than a $200 share. The share price alone tells you very little about whether an investment is attractive. Investors need to understand the underlying assets, valuation where relevant, costs, risks, and expected purpose."
+    },
+    {
+      "type": "heading",
+      "content": "Do not choose based on recent performance alone"
+    },
+    {
+      "type": "text",
+      "content": "An investment that performed extremely well recently may not continue doing so. Past performance does not guarantee future results."
+    },
+    {
+      "type": "heading",
+      "content": "Do not invest simply because everyone else is doing it"
+    },
+    {
+      "type": "text",
+      "content": "Popular investments can still lose money. A decision should be based on the investor's goal, risk, time horizon, and understanding rather than social pressure or fear of missing out."
+    },
+    {
+      "type": "heading",
+      "content": "Common misconceptions"
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: The highest-return investment is always the best choice"
+    },
+    {
+      "type": "text",
+      "content": "Reality: An investment must be judged against the investor's goal, risk, time horizon, costs, and ability to withstand losses."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: Diversification means an investment cannot lose money"
+    },
+    {
+      "type": "text",
+      "content": "Reality: Diversification can reduce concentration risk, but diversified portfolios can still fall in value."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: A complicated portfolio is a smarter portfolio"
+    },
+    {
+      "type": "text",
+      "content": "Reality: Complexity does not automatically improve investment results. A simpler strategy can sometimes be easier to understand and maintain."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: Risk tolerance and risk capacity are the same"
+    },
+    {
+      "type": "text",
+      "content": "Reality: Risk tolerance describes psychological comfort with losses, while risk capacity describes how much financial loss your situation can realistically withstand."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: If an investment is popular, it must be suitable"
+    },
+    {
+      "type": "text",
+      "content": "Reality: Suitability depends on the individual investor's circumstances and objective."
+    },
+    {
+      "type": "heading",
+      "content": "A simple decision process"
+    },
+    {
+      "type": "text",
+      "content": "Start with the goal. Determine the time horizon. Assess risk capacity and risk tolerance. Decide how much diversification is appropriate. Examine liquidity and costs. Understand the investment. Then decide whether it fits the plan."
+    },
+    {
+      "type": "example",
+      "title": "Putting the process together",
+      "content": "Suppose an investor is building a long-term portfolio and wants broad diversification with relatively simple management. A broadly diversified index-tracking fund might fit the desired characteristics. The investor would still need to examine the specific fund, fees, risks, tax considerations, and available investment platform."
+    },
+    {
+      "type": "heading",
+      "content": "The bigger lesson"
+    },
+    {
+      "type": "text",
+      "content": "Good investing is not about finding one magical investment. It is about matching an investment approach to a real financial objective while understanding risk, diversification, costs, liquidity, and time."
+    },
+    {
+      "type": "summary",
+      "content": "Choose an investment vehicle based on the job the money needs to perform. Start with the goal, then consider time horizon, risk capacity, diversification, liquidity, costs, simplicity, and suitability. Understand the investment before buying it, and avoid choosing investments simply because they are popular or recently performed well."
+    },
+    {
+      "type": "callout",
+      "title": "Remember",
+      "content": "The best investment is not automatically the one with the highest recent return. It is the one that appropriately fits the job your money needs to do."
+    }
+  ],
+  "quiz": [
+    {
+      "order": 1,
+      "questionType": "multiple-choice",
+      "question": "What should an investor identify first when choosing an investment vehicle?",
+      "options": [
+        "The investment's recent price",
+        "The financial goal",
+        "What everyone else is buying",
+        "The most complicated strategy available"
+      ],
+      "correctAnswer": 1,
+      "explanation": "The investment should serve a financial goal, so the goal should come first."
+    },
+    {
+      "order": 2,
+      "questionType": "multiple-choice",
+      "question": "What is a time horizon?",
+      "options": [
+        "How much money an investor earns",
+        "How long the money can remain invested before it is needed",
+        "How many investments someone owns",
+        "The number of trading days in a year"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Time horizon is the period before the money is expected to be needed."
+    },
+    {
+      "order": 3,
+      "questionType": "multiple-choice",
+      "question": "What is risk capacity?",
+      "options": [
+        "How excited someone feels about investing",
+        "How much financial loss a person's situation can realistically withstand",
+        "The return an investment guarantees",
+        "The number of stocks in a fund"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Risk capacity is about the financial ability to withstand losses."
+    },
+    {
+      "order": 4,
+      "questionType": "true-false",
+      "question": "Risk tolerance and risk capacity mean exactly the same thing.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Risk tolerance is psychological comfort with risk, while risk capacity is the financial ability to withstand losses."
+    },
+    {
+      "order": 5,
+      "questionType": "multiple-choice",
+      "question": "Why does diversification matter?",
+      "options": [
+        "It guarantees profits",
+        "It can reduce the impact of one investment performing poorly",
+        "It eliminates every type of investment risk",
+        "It guarantees that a portfolio will rise"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Diversification reduces concentration risk but does not eliminate investment losses."
+    },
+    {
+      "order": 6,
+      "questionType": "multiple-choice",
+      "question": "An investor has $30,000 in a fund with a 0.80% expense ratio. Approximately what annual expense does that represent?",
+      "options": [
+        "$24",
+        "$80",
+        "$240",
+        "$800"
+      ],
+      "correctAnswer": 2,
+      "explanation": "$30,000 × 0.80% = $240."
+    },
+    {
+      "order": 7,
+      "questionType": "multiple-choice",
+      "question": "Why can a complicated portfolio be a poor choice?",
+      "options": [
+        "Complexity automatically causes losses",
+        "Complexity can make a strategy harder to understand, maintain, and follow",
+        "All simple investments are guaranteed to outperform",
+        "Complicated portfolios cannot contain ETFs"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Unnecessary complexity can make it harder for an investor to understand and stick with a strategy."
+    },
+    {
+      "order": 8,
+      "questionType": "multiple-choice",
+      "question": "Which statement is most accurate about recent investment performance?",
+      "options": [
+        "Recent winners are guaranteed to keep winning",
+        "Recent performance alone is enough to choose an investment",
+        "Past performance does not guarantee future results",
+        "The highest recent return is always the safest"
+      ],
+      "correctAnswer": 2,
+      "explanation": "Past performance does not guarantee future results."
+    },
+    {
+      "order": 9,
+      "questionType": "multiple-choice",
+      "question": "Which question is most useful before buying an investment?",
+      "options": [
+        "Is everyone talking about it?",
+        "What job does this investment perform in my financial plan?",
+        "Is its share price lower than another investment?",
+        "Did it rise a lot last month?"
+      ],
+      "correctAnswer": 1,
+      "explanation": "An investment should have a clear role in the investor's financial plan."
+    },
+    {
+      "order": 10,
+      "questionType": "multiple-choice",
+      "question": "What is the main principle of choosing an investment vehicle?",
+      "options": [
+        "Choose the investment with the highest recent return",
+        "Choose the most complicated investment",
+        "Match the investment approach to the goal, time horizon, risk, costs, and other relevant factors",
+        "Always choose an ETF"
+      ],
+      "correctAnswer": 2,
+      "explanation": "A suitable investment approach should match the investor's objective and circumstances."
+    }
+  ]
+}

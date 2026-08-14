@@ -1,0 +1,571 @@
+{
+  "slug": "how-to-build-a-simple-spending-plan-that-actually-works",
+  "title": "How to Build a Simple Spending Plan That Actually Works",
+  "estimatedDuration": 35,
+  "order": 3,
+  "published": true,
+  "contentBlocks": [
+    {
+      "type": "heading",
+      "content": "A spending plan gives your money direction"
+    },
+    {
+      "type": "text",
+      "content": "A spending plan is a simple decision about where your money should go before you spend it. It helps you balance current needs, wants, future goals, and unexpected expenses."
+    },
+    {
+      "type": "text",
+      "content": "The purpose is not to predict every purchase perfectly. The purpose is to give your money a useful direction."
+    },
+    {
+      "type": "heading",
+      "content": "A plan is different from a restriction"
+    },
+    {
+      "type": "text",
+      "content": "A spending plan does not mean you can never enjoy your money. It means you decide how much room different priorities should have."
+    },
+    {
+      "type": "example",
+      "title": "A simple monthly plan",
+      "content": "Suppose you expect $2,500 of income. You might plan $1,400 for essential expenses, $300 for saving, $400 for flexible spending, and $400 for debt payments or other priorities."
+    },
+    {
+      "type": "formula",
+      "content": "$1,400 + $300 + $400 + $400 = $2,500"
+    },
+    {
+      "type": "heading",
+      "content": "Start with realistic income"
+    },
+    {
+      "type": "text",
+      "content": "Use an income amount you can reasonably expect. If your income changes, use a conservative estimate rather than assuming your highest possible month will repeat."
+    },
+    {
+      "type": "heading",
+      "content": "If your income is irregular"
+    },
+    {
+      "type": "text",
+      "content": "When income varies, a plan can be built around a lower dependable amount, with stronger months providing extra room for savings, goals, or other priorities."
+    },
+    {
+      "type": "example",
+      "title": "Variable income",
+      "content": "If your recent monthly income has ranged from $2,000 to $3,000, using $2,000 as the basic planning level can reduce the risk of committing to expenses that depend on a higher month."
+    },
+    {
+      "type": "heading",
+      "content": "List the expenses that must be covered"
+    },
+    {
+      "type": "text",
+      "content": "Start with important commitments such as housing, essential utilities, food, transportation, required insurance, and minimum debt payments."
+    },
+    {
+      "type": "heading",
+      "content": "Do not forget irregular expenses"
+    },
+    {
+      "type": "text",
+      "content": "A good spending plan includes costs that do not happen every month. You can estimate their yearly cost and set aside part of the amount regularly."
+    },
+    {
+      "type": "example",
+      "title": "Turning an annual expense into a monthly plan",
+      "content": "Suppose an expense costs $600 once a year. Setting aside $50 per month prepares you for it."
+    },
+    {
+      "type": "formula",
+      "content": "$600 ÷ 12 = $50 per month"
+    },
+    {
+      "type": "heading",
+      "content": "Give future expenses a place in today's plan"
+    },
+    {
+      "type": "text",
+      "content": "Planning for future costs prevents them from becoming emergencies simply because you did not expect them."
+    },
+    {
+      "type": "heading",
+      "content": "Include saving intentionally"
+    },
+    {
+      "type": "text",
+      "content": "If saving depends entirely on whatever happens to be left over, it may repeatedly lose to other spending. Including saving in the plan gives it a defined place."
+    },
+    {
+      "type": "example",
+      "title": "Planned saving",
+      "content": "If you earn $2,500 and decide that $250 should go toward savings, you can treat that amount as one of the planned destinations for your income."
+    },
+    {
+      "type": "formula",
+      "content": "$2,500 − $250 = $2,250 available for other planned uses"
+    },
+    {
+      "type": "heading",
+      "content": "Separate needs from flexible spending"
+    },
+    {
+      "type": "text",
+      "content": "After accounting for essential commitments, give flexible spending a realistic amount. This can include entertainment, eating out, hobbies, shopping, and other wants."
+    },
+    {
+      "type": "heading",
+      "content": "A realistic plan includes enjoyment"
+    },
+    {
+      "type": "text",
+      "content": "If a plan removes every enjoyable expense, it may be difficult to maintain. A realistic amount for wants can make the overall system easier to follow."
+    },
+    {
+      "type": "example",
+      "title": "Room for enjoyment",
+      "content": "You plan $100 for optional spending during the month. You can use it intentionally without wondering whether every small purchase will destroy the entire plan."
+    },
+    {
+      "type": "heading",
+      "content": "Do not give every dollar a perfect category"
+    },
+    {
+      "type": "text",
+      "content": "Your plan needs enough detail to guide decisions, but not so much detail that managing it becomes a burden."
+    },
+    {
+      "type": "heading",
+      "content": "Use broad categories first"
+    },
+    {
+      "type": "text",
+      "content": "A simple plan might start with essential expenses, flexible spending, saving, debt, and irregular expenses. You can create more categories later if they help you make better decisions."
+    },
+    {
+      "type": "heading",
+      "content": "Give yourself a buffer"
+    },
+    {
+      "type": "text",
+      "content": "A plan that uses every dollar with no room for variation can break easily. A small buffer can absorb minor changes without forcing you to rebuild everything."
+    },
+    {
+      "type": "example",
+      "title": "A $100 buffer",
+      "content": "If your expected income is $2,500, you might deliberately leave $100 uncommitted for small changes, price increases, or decisions that were difficult to predict."
+    },
+    {
+      "type": "heading",
+      "content": "A buffer is not wasted money"
+    },
+    {
+      "type": "text",
+      "content": "A buffer is part of the plan. Its purpose is to give your financial system some flexibility."
+    },
+    {
+      "type": "heading",
+      "content": "Plan before the month gets busy"
+    },
+    {
+      "type": "text",
+      "content": "Making decisions before money starts moving can reduce the number of decisions you need to make under pressure."
+    },
+    {
+      "type": "interactive",
+      "title": "Build your first plan",
+      "content": "Write down your expected income, essential expenses, saving target, debt payments, flexible spending, and expected irregular expenses."
+    },
+    {
+      "type": "heading",
+      "content": "Check the total"
+    },
+    {
+      "type": "text",
+      "content": "After assigning amounts, add them together. Your planned uses should not casually exceed the income you expect to receive."
+    },
+    {
+      "type": "example",
+      "title": "A plan that fits",
+      "content": "With $2,500 of expected income, planned uses totaling $2,350 leave $150 of flexibility."
+    },
+    {
+      "type": "formula",
+      "content": "$2,500 − $2,350 = $150"
+    },
+    {
+      "type": "heading",
+      "content": "What if the plan is bigger than your income?"
+    },
+    {
+      "type": "text",
+      "content": "If your planned spending is $2,700 but expected income is $2,500, the plan has a $200 gap. Something needs to change before the spending happens."
+    },
+    {
+      "type": "formula",
+      "content": "$2,500 − $2,700 = −$200"
+    },
+    {
+      "type": "heading",
+      "content": "Fix the gap deliberately"
+    },
+    {
+      "type": "text",
+      "content": "You can review flexible spending, adjust certain expenses, postpone a lower-priority purchase, use available savings when appropriate, or look for ways to increase income. The right response depends on the situation."
+    },
+    {
+      "type": "heading",
+      "content": "Do not hide the gap"
+    },
+    {
+      "type": "text",
+      "content": "Ignoring a shortfall does not make it disappear. A spending plan is useful because it shows problems before they become harder to manage."
+    },
+    {
+      "type": "heading",
+      "content": "Separate planned money from available money"
+    },
+    {
+      "type": "text",
+      "content": "Money can be in your account while already being committed to an upcoming expense. Your plan should account for those commitments."
+    },
+    {
+      "type": "example",
+      "title": "An upcoming bill",
+      "content": "You have $800 in your account and know that $500 is needed for a bill next week. Your spending plan should treat that $500 as committed rather than freely available."
+    },
+    {
+      "type": "heading",
+      "content": "Review the plan during the month"
+    },
+    {
+      "type": "text",
+      "content": "A spending plan is not something you create once and forget. Check it as the month develops and adjust when reality differs from your original expectations."
+    },
+    {
+      "type": "heading",
+      "content": "Plans need flexibility"
+    },
+    {
+      "type": "text",
+      "content": "A good plan can change without becoming useless. If groceries cost more than expected, you may need to reduce another flexible category or adjust the plan."
+    },
+    {
+      "type": "example",
+      "title": "Moving money between categories",
+      "content": "You planned $150 for entertainment but spent $30 less on transportation than expected. You could choose to move some of that unused amount toward another priority."
+    },
+    {
+      "type": "heading",
+      "content": "An adjustment is not a failure"
+    },
+    {
+      "type": "text",
+      "content": "Real life does not follow forecasts perfectly. Updating your plan when circumstances change is part of good money management."
+    },
+    {
+      "type": "heading",
+      "content": "Avoid the reset mentality"
+    },
+    {
+      "type": "text",
+      "content": "One unexpected purchase does not mean the entire month is ruined. Recalculate what remains and continue from there."
+    },
+    {
+      "type": "example",
+      "title": "A $75 surprise expense",
+      "content": "If you originally had $200 of flexible money remaining and an unexpected $75 cost appears, you now have $125 left. You do not need to abandon the entire plan."
+    },
+    {
+      "type": "formula",
+      "content": "$200 − $75 = $125"
+    },
+    {
+      "type": "heading",
+      "content": "Use weekly check-ins when monthly planning feels too distant"
+    },
+    {
+      "type": "text",
+      "content": "Some people find it easier to check their spending once a week. A short review can reveal whether the current pace is likely to fit the monthly plan."
+    },
+    {
+      "type": "heading",
+      "content": "Do not divide everything by four blindly"
+    },
+    {
+      "type": "text",
+      "content": "A month is not exactly four weeks, and some expenses happen at specific times. Weekly numbers can be useful for flexible spending, but major bills still need to be considered on their actual schedule."
+    },
+    {
+      "type": "heading",
+      "content": "Plan for changing priorities"
+    },
+    {
+      "type": "text",
+      "content": "Your spending plan should change when your priorities change. A new job, move, family responsibility, debt, savings goal, or other life event may require a different allocation."
+    },
+    {
+      "type": "heading",
+      "content": "A plan should reflect your real life"
+    },
+    {
+      "type": "text",
+      "content": "Copying someone else's spending plan is unlikely to work perfectly because their income, responsibilities, location, goals, and priorities may be different."
+    },
+    {
+      "type": "heading",
+      "content": "Use percentages carefully"
+    },
+    {
+      "type": "text",
+      "content": "Percentages can help compare spending, but they should not replace judgment. A percentage that works for one person may be unrealistic for another."
+    },
+    {
+      "type": "example",
+      "title": "A simple percentage calculation",
+      "content": "If you earn $2,500 and spend $750 on housing, housing represents 30% of that income."
+    },
+    {
+      "type": "formula",
+      "content": "$750 ÷ $2,500 × 100 = 30%"
+    },
+    {
+      "type": "heading",
+      "content": "Focus on what the numbers tell you"
+    },
+    {
+      "type": "text",
+      "content": "The purpose of percentages and categories is to help you understand trade-offs, not to make you chase an arbitrary perfect number."
+    },
+    {
+      "type": "heading",
+      "content": "A plan should help you answer practical questions"
+    },
+    {
+      "type": "text",
+      "content": "Can I afford this purchase? How much can I save? What happens if a bill increases? Can I take on another payment? A useful plan should make these questions easier to answer."
+    },
+    {
+      "type": "heading",
+      "content": "Give important goals a place"
+    },
+    {
+      "type": "text",
+      "content": "If a goal matters, give it a place in the plan. Waiting for whatever happens to remain may make important goals compete with every other expense."
+    },
+    {
+      "type": "example",
+      "title": "A specific savings target",
+      "content": "If you want to save $600 over six months, planning for $100 per month gives the goal a clear path."
+    },
+    {
+      "type": "formula",
+      "content": "$600 ÷ 6 = $100 per month"
+    },
+    {
+      "type": "heading",
+      "content": "Protect essential priorities first"
+    },
+    {
+      "type": "text",
+      "content": "When money is limited, make sure essential obligations and important financial commitments are accounted for before allocating large amounts to optional spending."
+    },
+    {
+      "type": "heading",
+      "content": "But do not make the plan miserable"
+    },
+    {
+      "type": "text",
+      "content": "A plan that leaves no room for reasonable enjoyment may encourage people to abandon it. Sustainable money management includes both responsibility and room for life."
+    },
+    {
+      "type": "heading",
+      "content": "Use the plan to improve decisions"
+    },
+    {
+      "type": "text",
+      "content": "When a purchase comes up, compare it with the plan. The question is not simply whether you have money today, but whether the purchase fits the money you have already assigned to other priorities."
+    },
+    {
+      "type": "heading",
+      "content": "The plan is a guide, not a prison"
+    },
+    {
+      "type": "text",
+      "content": "You are allowed to change your mind. The value of the plan is that changes become conscious decisions rather than accidental spending."
+    },
+    {
+      "type": "callout",
+      "title": "Simple spending-plan process",
+      "content": "Estimate income → list essential commitments → plan saving and future expenses → set flexible spending limits → leave some room for change → review and adjust."
+    },
+    {
+      "type": "heading",
+      "content": "The plan gets better with practice"
+    },
+    {
+      "type": "text",
+      "content": "Your first spending plan may be inaccurate. That is normal. Each month gives you information that can make the next plan more realistic."
+    },
+    {
+      "type": "heading",
+      "content": "Use reality to improve the plan"
+    },
+    {
+      "type": "text",
+      "content": "If groceries consistently cost more than you planned, update the number. If a category repeatedly has money left over, consider whether that money should be redirected."
+    },
+    {
+      "type": "interactive",
+      "title": "Improve your next plan",
+      "content": "Look at your previous month and identify one number you underestimated, one category you overestimated, and one priority you want to fund more intentionally."
+    },
+    {
+      "type": "heading",
+      "content": "The best plan is one you can use"
+    },
+    {
+      "type": "text",
+      "content": "A simple plan that you review and adjust is more useful than a detailed plan that you abandon after a few days."
+    },
+    {
+      "type": "summary",
+      "content": "Build your spending plan from realistic income, essential commitments, saving, future expenses, flexible spending, and a small amount of breathing room. Check the totals, review the plan during the month, and adjust it when reality changes."
+    },
+    {
+      "type": "callout",
+      "title": "Remember",
+      "content": "A spending plan is not about predicting the future perfectly. It is about deciding what matters before your money disappears."
+    }
+  ],
+  "quizzes": [
+    {
+      "order": 1,
+      "questionType": "multiple-choice",
+      "question": "What is the main purpose of a spending plan?",
+      "options": [
+        "To give your money direction before you spend it",
+        "To prevent all enjoyable spending",
+        "To make every purchase complicated",
+        "To guarantee that nothing unexpected happens"
+      ],
+      "correctAnswer": 0,
+      "explanation": "A spending plan helps you intentionally assign money to current and future priorities."
+    },
+    {
+      "order": 2,
+      "questionType": "multiple-choice",
+      "question": "Why can using a conservative income estimate help someone with irregular income?",
+      "options": [
+        "It reduces the risk of committing to expenses that depend on an unusually high month",
+        "It guarantees higher income",
+        "It eliminates all variable expenses",
+        "It makes irregular income fixed"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Planning around a dependable lower amount can reduce the risk of overcommitting."
+    },
+    {
+      "order": 3,
+      "questionType": "multiple-choice",
+      "question": "An annual expense costs $600. How much would you need to set aside each month to prepare for it?",
+      "options": [
+        "$50",
+        "$60",
+        "$100",
+        "$25"
+      ],
+      "correctAnswer": 0,
+      "explanation": "$600 ÷ 12 = $50 per month."
+    },
+    {
+      "order": 4,
+      "questionType": "multiple-choice",
+      "question": "If expected income is $2,500 and planned uses total $2,350, how much flexibility remains?",
+      "options": [
+        "$150",
+        "$100",
+        "$250",
+        "$350"
+      ],
+      "correctAnswer": 0,
+      "explanation": "$2,500 − $2,350 = $150."
+    },
+    {
+      "order": 5,
+      "questionType": "multiple-choice",
+      "question": "What should you do if your planned spending is higher than your expected income?",
+      "options": [
+        "Identify the gap and adjust the plan before spending",
+        "Ignore the difference",
+        "Spend anyway and hope it works",
+        "Delete your income from the calculation"
+      ],
+      "correctAnswer": 0,
+      "explanation": "A spending plan should reveal a shortfall early enough for you to make a deliberate adjustment."
+    },
+    {
+      "order": 6,
+      "questionType": "true-false",
+      "question": "A good spending plan should never change during the month.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Real life changes. A useful plan should be reviewed and adjusted when circumstances change."
+    },
+    {
+      "order": 7,
+      "questionType": "multiple-choice",
+      "question": "You planned $200 of flexible money and an unexpected $75 expense occurs. How much remains if nothing else changes?",
+      "options": [
+        "$125",
+        "$175",
+        "$100",
+        "$275"
+      ],
+      "correctAnswer": 0,
+      "explanation": "$200 − $75 = $125."
+    },
+    {
+      "order": 8,
+      "questionType": "multiple-choice",
+      "question": "If you earn $2,500 and spend $750 on housing, what percentage of income goes to housing?",
+      "options": [
+        "30%",
+        "25%",
+        "35%",
+        "40%"
+      ],
+      "correctAnswer": 0,
+      "explanation": "$750 ÷ $2,500 × 100 = 30%."
+    },
+    {
+      "order": 9,
+      "questionType": "multiple-choice",
+      "question": "Why can including reasonable enjoyable spending make a plan more sustainable?",
+      "options": [
+        "It gives wants a controlled place instead of pretending they do not exist",
+        "It guarantees you will never overspend",
+        "It removes all financial responsibilities",
+        "It makes every purchase necessary"
+      ],
+      "correctAnswer": 0,
+      "explanation": "A realistic plan can include enjoyment while still protecting important priorities."
+    },
+    {
+      "order": 10,
+      "questionType": "multiple-choice",
+      "question": "What makes a spending plan genuinely useful?",
+      "options": [
+        "It is realistic enough to follow and flexible enough to adjust",
+        "It contains as many categories as possible",
+        "It never changes",
+        "It eliminates every optional expense"
+      ],
+      "correctAnswer": 0,
+      "explanation": "A practical plan should work in real life and improve as you learn from experience."
+    }
+  ]
+}

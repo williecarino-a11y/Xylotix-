@@ -1,0 +1,620 @@
+{
+  "slug": "how-to-borrow-safely-and-avoid-predatory-debt",
+  "title": "How to Borrow Safely and Avoid Predatory Debt",
+  "estimatedDuration": 35,
+  "order": 7,
+  "published": true,
+  "contentBlocks": [
+    {
+      "order": 1,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Getting approved does not mean the borrowing is a good deal"
+      }
+    },
+    {
+      "order": 2,
+      "type": "text",
+      "data": {
+        "text": "A lender may approve you quickly, but approval only means the lender is willing to provide money under its terms. You still need to decide whether the borrowing is affordable, reasonably priced, and worth the risk."
+      }
+    },
+    {
+      "order": 3,
+      "type": "example",
+      "data": {
+        "title": "The fast approval",
+        "text": "You apply for a $2,000 loan and receive approval within minutes. The payment looks manageable, but the agreement includes high fees and a long repayment period. Fast approval does not tell you whether the loan is a good deal."
+      }
+    },
+    {
+      "order": 4,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Start with what you actually need"
+      }
+    },
+    {
+      "order": 5,
+      "type": "text",
+      "data": {
+        "text": "Before looking at loans, determine how much money you genuinely need. Borrowing more than necessary can create a larger repayment obligation and increase the total cost."
+      }
+    },
+    {
+      "order": 6,
+      "type": "example",
+      "data": {
+        "title": "Borrowing more than necessary",
+        "text": "You need $800 for an essential expense, but a lender offers up to $2,000. Taking the full $2,000 simply because it is available creates a larger debt than the situation requires."
+      }
+    },
+    {
+      "order": 7,
+      "type": "callout",
+      "data": {
+        "title": "A bigger loan is not a bigger opportunity",
+        "text": "The amount a lender is willing to give you is not the amount you necessarily need or should borrow."
+      }
+    },
+    {
+      "order": 8,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Know how much money you will actually receive"
+      }
+    },
+    {
+      "order": 9,
+      "type": "text",
+      "data": {
+        "text": "A stated loan amount and the cash you actually receive can be different when fees are deducted upfront. Always find out exactly how much money will reach you."
+      }
+    },
+    {
+      "order": 10,
+      "type": "example",
+      "data": {
+        "title": "The $1,000 loan that gives you $950",
+        "text": "A lender approves $1,000 but deducts a $50 fee before paying you. You receive $950. If you must repay the full $1,000 plus other charges, the real cost should be assessed against the $950 you actually received."
+      }
+    },
+    {
+      "order": 11,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Find the total amount you will repay"
+      }
+    },
+    {
+      "order": 12,
+      "type": "text",
+      "data": {
+        "text": "Do not judge a borrowing offer from the amount of the monthly payment alone. Find out how many payments you will make and calculate the total scheduled repayment."
+      }
+    },
+    {
+      "order": 13,
+      "type": "example",
+      "data": {
+        "title": "The small payment trap",
+        "text": "A loan requires $90 per month for 24 months. The scheduled payments total $90 × 24 = $2,160. The monthly payment may look manageable, but the full commitment is $2,160 before considering additional fees."
+      }
+    },
+    {
+      "order": 14,
+      "type": "interactive",
+      "data": {
+        "title": "Calculate the commitment",
+        "text": "A lender offers a loan requiring $125 per month for 18 months. What is the total scheduled repayment? Calculate $125 × 18."
+      }
+    },
+    {
+      "order": 15,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Check every fee"
+      }
+    },
+    {
+      "order": 16,
+      "type": "text",
+      "data": {
+        "text": "Interest may not be the only cost. Depending on the agreement, you may encounter application, processing, service, late-payment, early-repayment, insurance, or other charges. The important question is what the complete agreement will cost you."
+      }
+    },
+    {
+      "order": 17,
+      "type": "example",
+      "data": {
+        "title": "The extra charges",
+        "text": "A loan requires $1,100 in scheduled repayments on $1,000 received, but also has a $40 processing fee and a $30 service fee. The total financial cost is $1,170, making the additional cost $170."
+      }
+    },
+    {
+      "order": 18,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Watch for pressure to decide immediately"
+      }
+    },
+    {
+      "order": 19,
+      "type": "text",
+      "data": {
+        "text": "A trustworthy financial decision should give you enough time to understand the terms. Messages such as 'act now,' 'today only,' or 'you will lose this offer if you wait' can pressure you into accepting terms before you have checked the details."
+      }
+    },
+    {
+      "order": 20,
+      "type": "example",
+      "data": {
+        "title": "The urgent offer",
+        "text": "A lender says you must accept within ten minutes to receive a special rate. Instead of rushing, you should check the total repayment, fees, penalties, and whether you can afford the commitment."
+      }
+    },
+    {
+      "order": 21,
+      "type": "callout",
+      "data": {
+        "title": "Pressure is a reason to slow down",
+        "text": "If someone wants you to commit before you understand what you are agreeing to, stop and review the offer."
+      }
+    },
+    {
+      "order": 22,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Be careful with 'easy money' language"
+      }
+    },
+    {
+      "order": 23,
+      "type": "text",
+      "data": {
+        "text": "Words such as 'instant cash,' 'guaranteed approval,' or 'no questions asked' describe how easy the money may appear to access, not whether the borrowing is affordable or safe."
+      }
+    },
+    {
+      "order": 24,
+      "type": "example",
+      "data": {
+        "title": "Easy access, expensive debt",
+        "text": "You find two borrowing options. One requires more documentation but has transparent terms and a lower total cost. Another promises instant approval but has substantial fees. Convenience alone should not decide which one you choose."
+      }
+    },
+    {
+      "order": 25,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Never ignore what happens if you pay late"
+      }
+    },
+    {
+      "order": 26,
+      "type": "text",
+      "data": {
+        "text": "Before borrowing, understand the consequences of a missed or late payment. The agreement may specify additional fees, increased costs, collection actions, or other consequences. The exact rules depend on the product and jurisdiction."
+      }
+    },
+    {
+      "order": 27,
+      "type": "example",
+      "data": {
+        "title": "A payment that becomes more expensive",
+        "text": "Suppose a $200 payment is late and a $25 late fee applies. The immediate amount due can become $225. Repeated fees can make an already difficult debt harder to manage."
+      }
+    },
+    {
+      "order": 28,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Check whether the interest rate can change"
+      }
+    },
+    {
+      "order": 29,
+      "type": "text",
+      "data": {
+        "text": "Some borrowing products have fixed rates while others can have rates that change according to their terms. If the rate can change, understand what could cause the payment or total cost to increase."
+      }
+    },
+    {
+      "order": 30,
+      "type": "example",
+      "data": {
+        "title": "The payment that can change",
+        "text": "You choose a borrowing product because the initial payment fits your budget. If its terms allow the rate or payment to increase later, you need to know whether your finances could handle the higher amount."
+      }
+    },
+    {
+      "order": 31,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Compare more than one option"
+      }
+    },
+    {
+      "order": 32,
+      "type": "text",
+      "data": {
+        "text": "If possible, compare multiple legitimate borrowing options using the same information: amount received, interest, fees, repayment period, payment amount, and total repayment. A comparison can reveal large differences that are easy to miss when looking at one offer alone."
+      }
+    },
+    {
+      "order": 33,
+      "type": "interactive",
+      "data": {
+        "title": "Compare two offers",
+        "text": "Offer A requires $140 for 12 months. Offer B requires $100 for 18 months. Calculate the scheduled repayment for each. Which one has the lower total before other charges?"
+      }
+    },
+    {
+      "order": 34,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Do not confuse a low rate with a low total cost"
+      }
+    },
+    {
+      "order": 35,
+      "type": "text",
+      "data": {
+        "text": "A headline interest rate is useful information, but it may not capture every cost. Compare the complete borrowing terms rather than choosing based on one advertised number."
+      }
+    },
+    {
+      "order": 36,
+      "type": "example",
+      "data": {
+        "title": "Lower rate, higher overall cost",
+        "text": "Offer A has a slightly lower advertised rate but $200 in additional fees. Offer B has a slightly higher rate but only $30 in fees. You need the actual total costs for your specific terms before deciding which is cheaper."
+      }
+    },
+    {
+      "order": 37,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Be careful when borrowing to repay other debt"
+      }
+    },
+    {
+      "order": 38,
+      "type": "text",
+      "data": {
+        "text": "Using new borrowing to pay old debt can sometimes be part of a legitimate restructuring strategy, but it can also create a cycle where one debt is replaced by another. Before doing this, compare the complete costs and understand whether the underlying problem has actually been solved."
+      }
+    },
+    {
+      "order": 39,
+      "type": "example",
+      "data": {
+        "title": "Moving the debt around",
+        "text": "You owe $1,500 and take another $1,500 loan to clear it. If the new loan has high fees and a long repayment period, you may have moved the debt rather than reduced its financial burden."
+      }
+    },
+    {
+      "order": 40,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Watch for borrowing that depends on more borrowing"
+      }
+    },
+    {
+      "order": 41,
+      "type": "text",
+      "data": {
+        "text": "A dangerous pattern occurs when someone needs another loan simply to make payments on existing debt. If new borrowing is repeatedly required to keep old obligations going, the debt may be becoming unsustainable."
+      }
+    },
+    {
+      "order": 42,
+      "type": "example",
+      "data": {
+        "title": "The borrowing cycle",
+        "text": "Someone borrows $300 to make an existing $300 payment, then later borrows another $350 to cover the new obligation. The immediate problem may appear solved, but the total debt burden has grown."
+      }
+    },
+    {
+      "order": 43,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Protect your personal information"
+      }
+    },
+    {
+      "order": 44,
+      "type": "text",
+      "data": {
+        "text": "Borrowing applications may involve sensitive financial and identity information. Only provide information through legitimate, secure channels and understand who you are dealing with before submitting documents or account details."
+      }
+    },
+    {
+      "order": 45,
+      "type": "example",
+      "data": {
+        "title": "The suspicious application",
+        "text": "A person receives a message promising a large loan but is asked to send identity documents and account credentials to an unknown contact through an informal channel. The promise of money should not override basic safety checks."
+      }
+    },
+    {
+      "order": 46,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Never pay blindly just because someone promises a loan"
+      }
+    },
+    {
+      "order": 47,
+      "type": "text",
+      "data": {
+        "text": "A request for an upfront payment should be examined carefully, especially when the lender is unclear, the terms are vague, or the payment is demanded before you have a verifiable agreement. A promise of approval is not proof that an offer is legitimate."
+      }
+    },
+    {
+      "order": 48,
+      "type": "callout",
+      "data": {
+        "title": "If the offer feels unclear, stop",
+        "text": "You should understand who is lending the money, how much you receive, how much you repay, what fees apply, and what happens if something goes wrong."
+      }
+    },
+    {
+      "order": 49,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Use a simple borrowing safety test"
+      }
+    },
+    {
+      "order": 50,
+      "type": "interactive",
+      "data": {
+        "title": "The five-question test",
+        "text": "Before borrowing, ask: 1. How much do I actually need? 2. How much will I actually receive? 3. How much will I repay in total? 4. What fees and penalties apply? 5. Can I still manage the commitment if my circumstances change?"
+      }
+    },
+    {
+      "order": 51,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Know when walking away is the better decision"
+      }
+    },
+    {
+      "order": 52,
+      "type": "text",
+      "data": {
+        "text": "You do not have to accept a loan simply because it is available. If the cost is too high, the terms are unclear, the payment would stretch your finances, or the offer raises serious warning signs, walking away may be the better financial decision."
+      }
+    },
+    {
+      "order": 53,
+      "type": "example",
+      "data": {
+        "title": "The loan you do not need",
+        "text": "You want a non-essential purchase but the available credit has high fees and a payment that would leave little room in your budget. Waiting and saving may cost less than accepting expensive debt."
+      }
+    },
+    {
+      "order": 54,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Ask what happens to your future money"
+      }
+    },
+    {
+      "order": 55,
+      "type": "text",
+      "data": {
+        "text": "A safe borrowing decision considers more than today's payment. Ask how the commitment will affect your future income, savings, emergencies, and other goals. A debt that leaves you with no financial flexibility may be too risky even if the first payment looks manageable."
+      }
+    },
+    {
+      "order": 56,
+      "type": "interactive",
+      "data": {
+        "title": "The future-flexibility test",
+        "text": "Imagine your income becomes lower than expected for three months. Would you still be able to make the debt payment while covering essential expenses? If not, reconsider the size, timing, or need for the borrowing."
+      }
+    },
+    {
+      "order": 57,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Safe borrowing is about understanding before committing"
+      }
+    },
+    {
+      "order": 58,
+      "type": "text",
+      "data": {
+        "text": "Responsible borrowing is not about avoiding every loan. It is about understanding the purpose, total cost, risks, terms, and effect on your future finances before committing."
+      }
+    },
+    {
+      "order": 59,
+      "type": "summary",
+      "data": {
+        "title": "What to remember",
+        "points": [
+          "Approval does not automatically mean a loan is affordable or worthwhile.",
+          "Borrow only what you genuinely need when borrowing is appropriate.",
+          "Find out exactly how much money you will receive and how much you must repay.",
+          "Check interest, fees, penalties, repayment periods, and other terms.",
+          "Do not let pressure or urgency force you into a financial commitment.",
+          "Be cautious when an offer is unusually easy, unclear, or requires questionable upfront payments.",
+          "Consider whether the debt will remain manageable if your circumstances change.",
+          "Walking away from an expensive or unclear borrowing offer can be a smart financial decision."
+        ]
+      }
+    },
+    {
+      "order": 60,
+      "type": "callout",
+      "data": {
+        "title": "The borrowing rule",
+        "text": "Before you borrow, understand what you receive, what you repay, what it really costs, and what could happen if your situation changes."
+      }
+    }
+  ],
+  "quizzes": [
+    {
+      "order": 1,
+      "questionType": "multiple-choice",
+      "question": "Does lender approval automatically mean a loan is affordable for you?",
+      "options": [
+        "No, you still need to decide whether it fits your finances",
+        "Yes, approval always means affordability",
+        "Yes, because lenders know your budget better than you do",
+        "No, because approved loans never need repayment"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Approval means the lender is willing to provide the money under its criteria. You still need to assess whether the debt fits your financial situation.",
+      "points": 10
+    },
+    {
+      "order": 2,
+      "questionType": "multiple-choice",
+      "question": "A lender approves $1,000 but deducts a $50 fee before giving you the money. How much do you actually receive?",
+      "options": [
+        "$950",
+        "$1,000",
+        "$1,050",
+        "$50"
+      ],
+      "correctAnswer": 0,
+      "explanation": "$1,000 − $50 = $950 actually received.",
+      "points": 10
+    },
+    {
+      "order": 3,
+      "questionType": "multiple-choice",
+      "question": "A loan requires $125 per month for 18 months. Ignoring other charges, what is the scheduled repayment?",
+      "options": [
+        "$2,250",
+        "$1,800",
+        "$2,000",
+        "$2,375"
+      ],
+      "correctAnswer": 0,
+      "explanation": "$125 × 18 = $2,250.",
+      "points": 10
+    },
+    {
+      "order": 4,
+      "questionType": "multiple-choice",
+      "question": "Which is a warning sign when considering a borrowing offer?",
+      "options": [
+        "Pressure to decide immediately before you understand the terms",
+        "Being given time to review the agreement",
+        "Being shown the total repayment",
+        "Being told about applicable fees"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Pressure to commit before understanding the agreement can lead to poor financial decisions.",
+      "points": 10
+    },
+    {
+      "order": 5,
+      "questionType": "multiple-choice",
+      "question": "Why should you check the total amount you will repay?",
+      "options": [
+        "It gives you a clearer picture of the full financial commitment",
+        "The monthly payment never matters",
+        "Interest and fees are always zero",
+        "The total repayment is unrelated to borrowing cost"
+      ],
+      "correctAnswer": 0,
+      "explanation": "The total repayment shows the size of the commitment and helps you compare borrowing options.",
+      "points": 10
+    },
+    {
+      "order": 6,
+      "questionType": "true-false",
+      "question": "A larger loan offer is automatically better because you have access to more money.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctAnswer": 1,
+      "explanation": "A larger loan can create a larger repayment obligation and higher borrowing costs. You should borrow based on what you actually need and can manage.",
+      "points": 10
+    },
+    {
+      "order": 7,
+      "questionType": "multiple-choice",
+      "question": "What should you do if a borrowing offer has unclear fees and pressures you to accept immediately?",
+      "options": [
+        "Stop and understand the terms before committing",
+        "Accept immediately because the offer may disappear",
+        "Borrow the maximum amount available",
+        "Ignore the fees"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Unclear costs and pressure are reasons to slow down and review the offer rather than rushing into debt.",
+      "points": 10
+    },
+    {
+      "order": 8,
+      "questionType": "multiple-choice",
+      "question": "Why can repeatedly borrowing to repay existing debt be dangerous?",
+      "options": [
+        "It can create a cycle where debt keeps being replaced by new debt",
+        "It automatically eliminates all interest",
+        "It guarantees higher income",
+        "It means the original debt never existed"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Repeatedly using new borrowing to cover old obligations can increase the overall debt burden and make the situation harder to manage.",
+      "points": 10
+    },
+    {
+      "order": 9,
+      "questionType": "multiple-choice",
+      "question": "Which question is most useful before accepting a loan?",
+      "options": [
+        "Can I still manage the full commitment if my circumstances change?",
+        "What is the maximum amount the lender will give me?",
+        "How quickly can I spend the money?",
+        "Can I accept without reading the agreement?"
+      ],
+      "correctAnswer": 0,
+      "explanation": "A strong borrowing decision considers whether the commitment remains manageable when circumstances change.",
+      "points": 10
+    },
+    {
+      "order": 10,
+      "questionType": "multiple-choice",
+      "question": "What is the best general lesson about borrowing safely?",
+      "options": [
+        "Understand the full cost, risks, terms, and purpose before committing",
+        "Always borrow the maximum amount available",
+        "Choose the smallest monthly payment without checking anything else",
+        "Accept any loan that receives fast approval"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Safe borrowing means understanding what you receive, what you repay, the complete cost, the risks, and how the debt affects your future finances.",
+      "points": 10
+    }
+  ]
+}

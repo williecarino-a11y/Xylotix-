@@ -1,0 +1,484 @@
+{
+  "slug": "income-is-not-the-same-as-wealth",
+  "title": "Income Is Not the Same as Wealth",
+  "estimatedDuration": 40,
+  "order": 2,
+  "published": true,
+  "contentBlocks": [
+    {
+      "type": "heading",
+      "content": "A paycheck is not a wealth statement"
+    },
+    {
+      "type": "text",
+      "content": "Income tells you how much money comes into your life during a period. Wealth tells you more about the financial resources you have accumulated and what remains after considering what you owe."
+    },
+    {
+      "type": "callout",
+      "title": "Think of it this way",
+      "content": "Income is a flow. Wealth is a financial position that builds or changes over time."
+    },
+    {
+      "type": "heading",
+      "content": "Income is measured over time"
+    },
+    {
+      "type": "text",
+      "content": "Salary, wages, business profits, freelance payments, rent, interest, and other earnings are examples of income. We normally describe them over a period such as a month or a year."
+    },
+    {
+      "type": "example",
+      "title": "Monthly income",
+      "content": "If someone earns $5,000 per month, their annual income is $60,000 if that income stays the same for twelve months."
+    },
+    {
+      "type": "formula",
+      "content": "$5,000 × 12 = $60,000"
+    },
+    {
+      "type": "heading",
+      "content": "Wealth is not a paycheck"
+    },
+    {
+      "type": "text",
+      "content": "A person can receive a large paycheck and still have little accumulated wealth. Much depends on what happens to the money after it arrives."
+    },
+    {
+      "type": "heading",
+      "content": "What happens after income arrives?"
+    },
+    {
+      "type": "text",
+      "content": "Income can be used for taxes, housing, food, transportation, debt payments, entertainment, saving, investing, and other priorities. The choices made after earning the money can strongly affect long-term financial outcomes."
+    },
+    {
+      "type": "heading",
+      "content": "The amount you keep matters"
+    },
+    {
+      "type": "example",
+      "title": "Two different outcomes",
+      "content": "Person A earns $10,000 per month and spends $9,500. Person B earns $6,000 per month and spends $4,000."
+    },
+    {
+      "type": "formula",
+      "content": "$10,000 − $9,500 = $500"
+    },
+    {
+      "type": "formula",
+      "content": "$6,000 − $4,000 = $2,000"
+    },
+    {
+      "type": "text",
+      "content": "Person A earns more, but Person B has $1,500 more available each month after those expenses."
+    },
+    {
+      "type": "heading",
+      "content": "A useful number: your savings rate"
+    },
+    {
+      "type": "text",
+      "content": "Your savings rate is the percentage of your income that you keep for saving or other financial goals. It can help you see how much of your income is being retained rather than consumed."
+    },
+    {
+      "type": "formula",
+      "content": "Savings rate = Amount saved ÷ Income × 100"
+    },
+    {
+      "type": "example",
+      "title": "Calculating a savings rate",
+      "content": "If you earn $5,000 and save $1,000, your savings rate is 20%."
+    },
+    {
+      "type": "formula",
+      "content": "$1,000 ÷ $5,000 × 100 = 20%"
+    },
+    {
+      "type": "heading",
+      "content": "A higher income can help"
+    },
+    {
+      "type": "text",
+      "content": "Higher income can create more room for saving, investing, debt repayment, and other financial goals. But that advantage can disappear if spending rises just as quickly."
+    },
+    {
+      "type": "heading",
+      "content": "Lifestyle inflation"
+    },
+    {
+      "type": "text",
+      "content": "Lifestyle inflation happens when spending increases as income increases. A raise can improve your financial position, but it can also become a larger apartment, more expensive transportation, more subscriptions, more travel, or other recurring costs."
+    },
+    {
+      "type": "example",
+      "title": "A raise that changes nothing",
+      "content": "Someone's income increases by $1,500 per month, but their lifestyle becomes $1,400 more expensive each month."
+    },
+    {
+      "type": "formula",
+      "content": "$1,500 − $1,400 = $100"
+    },
+    {
+      "type": "text",
+      "content": "The person received a meaningful raise, but only $100 of additional monthly cash flow remains before other considerations."
+    },
+    {
+      "type": "heading",
+      "content": "Debt can absorb income"
+    },
+    {
+      "type": "text",
+      "content": "Debt payments can take a large portion of income. A person may earn a lot but have little flexibility because large amounts of income are committed to debt obligations."
+    },
+    {
+      "type": "example",
+      "title": "High income, high obligations",
+      "content": "Suppose someone earns $9,000 per month but has $3,000 of debt payments and $4,500 of other monthly expenses."
+    },
+    {
+      "type": "formula",
+      "content": "$9,000 − $3,000 − $4,500 = $1,500"
+    },
+    {
+      "type": "text",
+      "content": "The $9,000 income sounds large by itself, but the person's available cash flow after these commitments is much smaller."
+    },
+    {
+      "type": "heading",
+      "content": "Assets can turn retained income into accumulated resources"
+    },
+    {
+      "type": "text",
+      "content": "Money that is retained can be saved or used to acquire assets. Assets may include cash savings, investments, property, business interests, or other things with financial value."
+    },
+    {
+      "type": "heading",
+      "content": "But not every asset creates wealth in the same way"
+    },
+    {
+      "type": "text",
+      "content": "An asset can have value while also costing money to maintain, or it can be heavily financed with debt. The useful question is not simply whether you own something, but how it affects your overall financial position."
+    },
+    {
+      "type": "heading",
+      "content": "Net worth brings the pieces together"
+    },
+    {
+      "type": "formula",
+      "content": "Net worth = Assets − Liabilities"
+    },
+    {
+      "type": "example",
+      "title": "Income versus net worth",
+      "content": "Person A earns $120,000 per year and has $30,000 of net worth. Person B earns $60,000 per year and has $250,000 of net worth. Person A has higher current income, while Person B has the larger net worth in this example."
+    },
+    {
+      "type": "heading",
+      "content": "Neither number tells the whole story"
+    },
+    {
+      "type": "text",
+      "content": "Income and net worth answer different questions. Income tells you about money coming in. Net worth gives you a snapshot of accumulated assets minus liabilities. Cash flow, liquidity, debt costs, and future earning ability also matter."
+    },
+    {
+      "type": "heading",
+      "content": "Why two people with the same income can become very different financially"
+    },
+    {
+      "type": "text",
+      "content": "Two people can earn the same amount but have different housing costs, family responsibilities, debt, spending habits, savings rates, investment choices, and financial priorities."
+    },
+    {
+      "type": "example",
+      "title": "Same income, different paths",
+      "content": "Two people each earn $7,000 per month. One spends $6,500 and saves $500. The other spends $4,500 and saves or invests $2,500."
+    },
+    {
+      "type": "formula",
+      "content": "$7,000 − $6,500 = $500"
+    },
+    {
+      "type": "formula",
+      "content": "$7,000 − $4,500 = $2,500"
+    },
+    {
+      "type": "text",
+      "content": "If the pattern continues, the second person has much more money available to build financial resources, even though both earn exactly the same income."
+    },
+    {
+      "type": "heading",
+      "content": "Time makes the difference more visible"
+    },
+    {
+      "type": "text",
+      "content": "Small monthly differences can become large differences over years. This is one reason financial habits can matter even when the amounts involved initially seem small."
+    },
+    {
+      "type": "example",
+      "title": "Five-year difference before investment growth",
+      "content": "If one person consistently saves $500 per month and another saves $2,500 per month, their total contributions over five years are very different before considering any investment growth."
+    },
+    {
+      "type": "formula",
+      "content": "$500 × 60 = $30,000"
+    },
+    {
+      "type": "formula",
+      "content": "$2,500 × 60 = $150,000"
+    },
+    {
+      "type": "text",
+      "content": "The difference in contributions alone is $120,000 over five years."
+    },
+    {
+      "type": "formula",
+      "content": "$150,000 − $30,000 = $120,000"
+    },
+    {
+      "type": "heading",
+      "content": "Investment growth can change the numbers"
+    },
+    {
+      "type": "text",
+      "content": "If saved money is invested, it may grow over time, but investment returns are uncertain and losses are possible. The calculations above intentionally ignore investment growth so the effect of saving behavior is easy to see."
+    },
+    {
+      "type": "heading",
+      "content": "High income is an opportunity, not a guarantee"
+    },
+    {
+      "type": "text",
+      "content": "A high income can provide a strong opportunity to build wealth, but it does not guarantee that outcome. Spending, debt, taxes, financial decisions, and circumstances all matter."
+    },
+    {
+      "type": "heading",
+      "content": "Moderate income is not a financial sentence"
+    },
+    {
+      "type": "text",
+      "content": "A moderate income does not automatically prevent someone from becoming financially strong. Progress can come from controlling expenses, increasing income when possible, reducing expensive debt, saving consistently, and building assets."
+    },
+    {
+      "type": "heading",
+      "content": "What should you actually measure?"
+    },
+    {
+      "type": "text",
+      "content": "Instead of focusing only on salary, consider several numbers together: income, essential expenses, savings, debt, net worth, and the amount of financial breathing room you have."
+    },
+    {
+      "type": "interactive",
+      "title": "Try the comparison",
+      "content": "Person A earns $8,000 per month and spends $7,600. Person B earns $5,000 per month and spends $3,500. Calculate how much each person has available after spending."
+    },
+    {
+      "type": "heading",
+      "content": "A simple decision rule"
+    },
+    {
+      "type": "text",
+      "content": "When your income increases, do not automatically increase every expense. First decide how much of the increase should improve your financial position."
+    },
+    {
+      "type": "example",
+      "title": "Using a raise intentionally",
+      "content": "If your income rises by $800 per month, you could choose to direct $500 toward saving, investing, or debt reduction and use the remaining $300 for lifestyle improvements, depending on your circumstances."
+    },
+    {
+      "type": "heading",
+      "content": "The goal is financial progress"
+    },
+    {
+      "type": "text",
+      "content": "The goal is not to have the highest salary in the room. The goal is to improve your financial position over time."
+    },
+    {
+      "type": "heading",
+      "content": "Common misconceptions"
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: The person with the highest salary is the wealthiest"
+    },
+    {
+      "type": "text",
+      "content": "Reality: Salary measures income. Wealth depends on accumulated resources, liabilities, spending, saving, and other factors."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: If your income doubles, your wealth doubles"
+    },
+    {
+      "type": "text",
+      "content": "Reality: Your wealth does not automatically double when your income doubles. If your spending and debt also increase substantially, your financial position may improve very little."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: Saving only matters when you earn a lot"
+    },
+    {
+      "type": "text",
+      "content": "Reality: Saving can matter at almost any income level. The amount may change, but the habit of keeping part of what you earn can help create financial resilience."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: A large bank balance automatically means you are wealthy"
+    },
+    {
+      "type": "text",
+      "content": "Reality: Cash is an asset, but wealth also depends on other assets and liabilities. Someone with $100,000 in cash and $300,000 of debt has a different financial position from someone with $100,000 in cash and no debt."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: Spending everything is fine if your income is high"
+    },
+    {
+      "type": "text",
+      "content": "Reality: A high income can disappear quickly when spending and obligations rise with it. Keeping some of your income creates room to build financial resources."
+    },
+    {
+      "type": "interactive",
+      "title": "Challenge your thinking",
+      "content": "If someone earns twice as much as you but spends almost all of it, does that automatically mean they are financially stronger? Explain your reasoning using income, spending, debt, and accumulated resources."
+    },
+    {
+      "type": "summary",
+      "content": "Income and wealth are connected, but they are not the same. Income is money coming in over time. Wealth is more closely connected to the financial resources you accumulate after considering what you own and what you owe. A higher income can help, but what you keep, how you manage debt, and what you build with your money can determine whether that income turns into lasting financial strength."
+    },
+    {
+      "type": "callout",
+      "title": "Remember",
+      "content": "Don't ask only, 'How much do I earn?' Also ask, 'How much do I keep, what do I owe, what am I building, and is my financial position getting stronger?'"
+    }
+  ],
+  "quizzes": [
+    {
+      "order": 1,
+      "questionType": "multiple-choice",
+      "question": "What does income primarily measure?",
+      "options": [
+        "Money received over a period of time",
+        "Total wealth",
+        "Net worth",
+        "Total assets minus liabilities"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Income measures money coming in over a period such as a month or year."
+    },
+    {
+      "order": 2,
+      "questionType": "multiple-choice",
+      "question": "Person A earns $10,000 and spends $9,500. Person B earns $6,000 and spends $4,000. Who has more available after spending?",
+      "options": [
+        "Person A by $500",
+        "Person B by $1,500",
+        "They have the same amount",
+        "Person A by $2,000"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Person A has $500 remaining. Person B has $2,000 remaining, which is $1,500 more."
+    },
+    {
+      "order": 3,
+      "questionType": "multiple-choice",
+      "question": "If you earn $5,000 and save $1,000, what is your savings rate?",
+      "options": [
+        "10%",
+        "15%",
+        "20%",
+        "25%"
+      ],
+      "correctAnswer": 2,
+      "explanation": "$1,000 ÷ $5,000 × 100 = 20%."
+    },
+    {
+      "order": 4,
+      "questionType": "multiple-choice",
+      "question": "What is lifestyle inflation?",
+      "options": [
+        "Spending less when income rises",
+        "Increasing spending as income increases",
+        "Reducing debt before a raise",
+        "Saving every increase in income"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Lifestyle inflation occurs when spending rises along with income."
+    },
+    {
+      "order": 5,
+      "questionType": "multiple-choice",
+      "question": "Someone earns $9,000, pays $3,000 toward debt, and has $4,500 of other expenses. How much remains?",
+      "options": [
+        "$1,000",
+        "$1,500",
+        "$3,000",
+        "$4,500"
+      ],
+      "correctAnswer": 1,
+      "explanation": "$9,000 − $3,000 − $4,500 = $1,500."
+    },
+    {
+      "order": 6,
+      "questionType": "true-false",
+      "question": "A higher income automatically guarantees greater wealth.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Income can help build wealth, but spending, debt, saving, and asset building also matter."
+    },
+    {
+      "order": 7,
+      "questionType": "multiple-choice",
+      "question": "If someone saves $500 per month for five years, how much do they contribute before investment growth?",
+      "options": [
+        "$6,000",
+        "$15,000",
+        "$30,000",
+        "$60,000"
+      ],
+      "correctAnswer": 2,
+      "explanation": "$500 × 60 months = $30,000."
+    },
+    {
+      "order": 8,
+      "questionType": "multiple-choice",
+      "question": "Two people earn the same income, but one consistently saves much more. What can happen over time?",
+      "options": [
+        "Their financial positions can become very different",
+        "Their wealth must remain identical",
+        "The higher spender automatically becomes wealthier",
+        "Income stops mattering completely"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Consistent differences in saving and investing can create large differences in accumulated financial resources."
+    },
+    {
+      "order": 9,
+      "questionType": "multiple-choice",
+      "question": "Someone receives an $800 monthly raise. Which choice could intentionally improve their financial position?",
+      "options": [
+        "Increase every expense by $800",
+        "Spend the entire raise immediately",
+        "Direct part of the raise toward saving, investing, or debt reduction",
+        "Take on new debt equal to the raise"
+      ],
+      "correctAnswer": 2,
+      "explanation": "Directing part of an income increase toward financial goals can help turn higher income into stronger finances."
+    },
+    {
+      "order": 10,
+      "questionType": "multiple-choice",
+      "question": "Which question is most useful when evaluating whether income is turning into financial progress?",
+      "options": [
+        "How impressive does my lifestyle look?",
+        "How much do I earn compared with everyone else?",
+        "How much do I keep, what do I owe, and what am I building?",
+        "Can I afford the most expensive option?"
+      ],
+      "correctAnswer": 2,
+      "explanation": "Looking at retained income, liabilities, and accumulated resources gives a more useful picture of financial progress."
+    }
+  ]
+}

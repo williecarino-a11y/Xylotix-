@@ -1,0 +1,467 @@
+{
+  "slug": "what-is-a-stock",
+  "title": "What Is a Stock?",
+  "estimatedDuration": 45,
+  "order": 1,
+  "published": true,
+  "contentBlocks": [
+    {
+      "type": "heading",
+      "content": "A stock represents ownership"
+    },
+    {
+      "type": "text",
+      "content": "When you buy a stock, you are generally buying a small ownership interest in a company. That makes you a shareholder. The size of your ownership depends on how many shares you own relative to the company's total shares."
+    },
+    {
+      "type": "callout",
+      "title": "The core idea",
+      "content": "A stock is not simply a number that moves up and down on a screen. It represents an ownership interest in a business."
+    },
+    {
+      "type": "heading",
+      "content": "Why do companies issue stocks?"
+    },
+    {
+      "type": "text",
+      "content": "Companies can raise money by selling shares to investors. The company can use that capital to expand, develop products, hire employees, acquire other businesses, reduce debt, or pursue other business objectives."
+    },
+    {
+      "type": "example",
+      "title": "A simple ownership example",
+      "content": "Imagine a fictional company called BrightTech has 1,000 shares outstanding. If you own 10 shares, you own 1% of the company because 10 ÷ 1,000 = 1%."
+    },
+    {
+      "type": "formula",
+      "content": "Ownership percentage = shares you own ÷ total shares × 100"
+    },
+    {
+      "type": "formula",
+      "content": "10 ÷ 1,000 × 100 = 1%"
+    },
+    {
+      "type": "heading",
+      "content": "Shares are units of ownership"
+    },
+    {
+      "type": "text",
+      "content": "A share is one unit of ownership in a company. Companies can have thousands, millions, or billions of shares outstanding. Owning more shares generally means owning a larger percentage of the company, assuming the total number of shares stays the same."
+    },
+    {
+      "type": "heading",
+      "content": "What does a shareholder actually own?"
+    },
+    {
+      "type": "text",
+      "content": "A shareholder owns shares representing an interest in the company. This does not normally mean the shareholder can walk into a company building and claim a specific desk, computer, product, or piece of equipment. Ownership rights are defined by the shares and the company's legal structure."
+    },
+    {
+      "type": "heading",
+      "content": "Shareholder rights can vary"
+    },
+    {
+      "type": "text",
+      "content": "Different types of shares can have different rights. Depending on the company and share class, shareholders may have voting rights, rights to receive dividends when declared, or other rights."
+    },
+    {
+      "type": "heading",
+      "content": "Common stock"
+    },
+    {
+      "type": "text",
+      "content": "Common stock is a widely used form of company ownership. Common shareholders may have voting rights and may benefit when the company's value grows. They may also receive dividends if the company declares them."
+    },
+    {
+      "type": "heading",
+      "content": "Preferred stock"
+    },
+    {
+      "type": "text",
+      "content": "Preferred stock is a different type of ownership that can have different rights from common stock. Preferred shareholders may have preferential treatment regarding dividends or claims on company assets, depending on the terms of the shares."
+    },
+    {
+      "type": "heading",
+      "content": "A stock price is not the same thing as company value"
+    },
+    {
+      "type": "text",
+      "content": "A company's stock price tells you the current market price of one share. It does not by itself tell you how large or valuable the entire company is."
+    },
+    {
+      "type": "example",
+      "title": "Two companies with different share prices",
+      "content": "Company A has 1 million shares priced at $100 each. Company B has 100 million shares priced at $20 each. Company A's stock price is higher per share, but Company B could still have the larger overall market value."
+    },
+    {
+      "type": "formula",
+      "content": "Market capitalization = share price × shares outstanding"
+    },
+    {
+      "type": "formula",
+      "content": "Company A: $100 × 1,000,000 = $100 million"
+    },
+    {
+      "type": "formula",
+      "content": "Company B: $20 × 100,000,000 = $2 billion"
+    },
+    {
+      "type": "heading",
+      "content": "What is market capitalization?"
+    },
+    {
+      "type": "text",
+      "content": "Market capitalization, often called market cap, is the market value of a company's outstanding shares. It is commonly used to describe the overall size of a publicly traded company."
+    },
+    {
+      "type": "heading",
+      "content": "Why a company can have a low share price and still be large"
+    },
+    {
+      "type": "text",
+      "content": "The number of shares matters. A company with a low price per share can still have a very large market capitalization if it has many shares outstanding."
+    },
+    {
+      "type": "heading",
+      "content": "How shareholders can potentially benefit"
+    },
+    {
+      "type": "text",
+      "content": "There are two major ways shareholders may benefit: the value of their shares may increase, and the company may distribute some of its profits to shareholders through dividends."
+    },
+    {
+      "type": "heading",
+      "content": "Share price growth"
+    },
+    {
+      "type": "text",
+      "content": "If you buy a stock for $50 and later sell it for $65, ignoring fees and taxes, your gain is $15 per share."
+    },
+    {
+      "type": "formula",
+      "content": "Gain per share = $65 − $50 = $15"
+    },
+    {
+      "type": "formula",
+      "content": "Return = $15 ÷ $50 × 100 = 30%"
+    },
+    {
+      "type": "heading",
+      "content": "Dividends"
+    },
+    {
+      "type": "text",
+      "content": "Some companies distribute money to shareholders as dividends. Dividends are not automatic for every stock. A company may choose to pay them, change them, or not pay them."
+    },
+    {
+      "type": "example",
+      "title": "Dividend example",
+      "content": "If a company pays a $1 dividend per share and you own 100 shares, you would receive $100 before any applicable taxes or other adjustments."
+    },
+    {
+      "type": "formula",
+      "content": "Dividend received = dividend per share × shares owned"
+    },
+    {
+      "type": "formula",
+      "content": "$1 × 100 = $100"
+    },
+    {
+      "type": "heading",
+      "content": "Stocks can also lose value"
+    },
+    {
+      "type": "text",
+      "content": "Ownership does not guarantee profit. If you buy shares for $50 and their market price later falls to $35, the investment has declined by $15 per share."
+    },
+    {
+      "type": "formula",
+      "content": "Loss per share = $35 − $50 = −$15"
+    },
+    {
+      "type": "formula",
+      "content": "Return = −$15 ÷ $50 × 100 = −30%"
+    },
+    {
+      "type": "heading",
+      "content": "Why would someone buy a stock?"
+    },
+    {
+      "type": "text",
+      "content": "An investor may buy a stock because they believe the company can grow, generate profits, distribute cash to shareholders, or become more valuable over time. Different investors can have different reasons for owning the same stock."
+    },
+    {
+      "type": "heading",
+      "content": "Buying a stock means accepting business risk"
+    },
+    {
+      "type": "text",
+      "content": "Because a stock represents an ownership interest in a business, shareholders are exposed to the company's performance. If the business struggles, the stock may lose value."
+    },
+    {
+      "type": "heading",
+      "content": "Public companies and stock markets"
+    },
+    {
+      "type": "text",
+      "content": "Publicly traded stocks can be bought and sold through financial markets. Stock exchanges and other market systems provide mechanisms through which buyers and sellers can trade shares."
+    },
+    {
+      "type": "heading",
+      "content": "The stock market is not the company"
+    },
+    {
+      "type": "text",
+      "content": "The stock market is the broader marketplace where shares and other securities can be traded. A company is the underlying business. The market price of its stock reflects what buyers and sellers are currently willing to pay for its shares."
+    },
+    {
+      "type": "heading",
+      "content": "Why stock prices can move even when the company has not changed much"
+    },
+    {
+      "type": "text",
+      "content": "Stock prices are influenced by expectations, investor demand, economic conditions, news, interest rates, and many other factors. As a result, the market price can move significantly even when the underlying business changes more slowly."
+    },
+    {
+      "type": "heading",
+      "content": "Fractional shares"
+    },
+    {
+      "type": "text",
+      "content": "Some investment platforms allow investors to buy fractions of a share rather than a whole share. This can make it possible to invest smaller amounts of money, depending on the platform and investment."
+    },
+    {
+      "type": "example",
+      "title": "Fractional ownership",
+      "content": "If a stock costs $400 per share and a platform allows fractional shares, investing $100 could give you 0.25 of a share before considering fees or other adjustments."
+    },
+    {
+      "type": "formula",
+      "content": "$100 ÷ $400 = 0.25 share"
+    },
+    {
+      "type": "heading",
+      "content": "What happens if a company issues more shares?"
+    },
+    {
+      "type": "text",
+      "content": "If a company creates and sells additional shares, the total number of shares increases. If you do not receive additional shares, your percentage ownership can decrease. This is commonly discussed as dilution."
+    },
+    {
+      "type": "example",
+      "title": "Simple dilution example",
+      "content": "You own 10 shares of a company with 100 shares outstanding, giving you 10% ownership. If the company issues another 100 shares and you buy none, you still own 10 shares, but the total is now 200. Your ownership percentage becomes 5%."
+    },
+    {
+      "type": "formula",
+      "content": "10 ÷ 200 × 100 = 5%"
+    },
+    {
+      "type": "heading",
+      "content": "Stocks are not savings accounts"
+    },
+    {
+      "type": "text",
+      "content": "A stock can rise or fall in value. Money invested in stocks is therefore exposed to market risk and should not automatically be treated like cash needed for immediate expenses."
+    },
+    {
+      "type": "heading",
+      "content": "Common misconceptions"
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: Buying one share means you own a whole company"
+    },
+    {
+      "type": "text",
+      "content": "Reality: One share generally represents only a small fraction of the company's ownership."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: A $5 stock is automatically cheaper than a $500 stock"
+    },
+    {
+      "type": "text",
+      "content": "Reality: Share price alone does not tell you whether a company is cheap or expensive. The number of shares and the company's overall value matter."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: Every stock pays dividends"
+    },
+    {
+      "type": "text",
+      "content": "Reality: Some companies pay dividends, while others do not. Dividend policies can also change."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: Owning stock guarantees profit because you own part of a business"
+    },
+    {
+      "type": "text",
+      "content": "Reality: Shareholders can lose money if the stock falls in value or the business performs poorly."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: A stock price tells you the entire value of the company"
+    },
+    {
+      "type": "text",
+      "content": "Reality: Stock price is the price of one share. Market capitalization considers both share price and shares outstanding."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: You need to buy a whole share to become an investor"
+    },
+    {
+      "type": "text",
+      "content": "Reality: Some platforms offer fractional shares, although availability and terms vary."
+    },
+    {
+      "type": "heading",
+      "content": "Practical stock questions"
+    },
+    {
+      "type": "interactive",
+      "title": "Think like a shareholder",
+      "content": "Before buying a stock, ask: What business am I becoming an owner of? How does the business make money? What could cause the business to grow? What could cause it to struggle? What rights come with the shares? How is the stock valued? What risks am I accepting?"
+    },
+    {
+      "type": "summary",
+      "content": "A stock generally represents an ownership interest in a company. Shareholders may benefit from increases in share value and, when declared, dividends. But stock ownership also involves risk. Understanding shares, ownership percentage, market capitalization, dividends, price movements, and dilution provides the foundation for evaluating stocks."
+    },
+    {
+      "type": "callout",
+      "title": "Remember",
+      "content": "When you buy a stock, you are not simply buying a ticker symbol. You are buying an ownership interest in a business."
+    }
+  ],
+  "quiz": [
+    {
+      "order": 1,
+      "questionType": "multiple-choice",
+      "question": "What does buying a stock generally represent?",
+      "options": [
+        "A guaranteed loan to the government",
+        "An ownership interest in a company",
+        "A guaranteed savings account",
+        "A promise that the company will pay you a fixed amount"
+      ],
+      "correctAnswer": 1,
+      "explanation": "A stock generally represents an ownership interest in a company."
+    },
+    {
+      "order": 2,
+      "questionType": "multiple-choice",
+      "question": "A company has 1,000 shares outstanding and you own 10. Approximately what percentage of the company do you own?",
+      "options": [
+        "0.1%",
+        "1%",
+        "10%",
+        "100%"
+      ],
+      "correctAnswer": 1,
+      "explanation": "10 ÷ 1,000 × 100 = 1%."
+    },
+    {
+      "order": 3,
+      "questionType": "multiple-choice",
+      "question": "Company A has 1 million shares at $100 each. What is its market capitalization?",
+      "options": [
+        "$10 million",
+        "$50 million",
+        "$100 million",
+        "$1 billion"
+      ],
+      "correctAnswer": 2,
+      "explanation": "Market capitalization = share price × shares outstanding = $100 × 1,000,000 = $100 million."
+    },
+    {
+      "order": 4,
+      "questionType": "multiple-choice",
+      "question": "You buy a stock for $50 and sell it for $65. Ignoring fees and taxes, what is your percentage return?",
+      "options": [
+        "15%",
+        "20%",
+        "25%",
+        "30%"
+      ],
+      "correctAnswer": 3,
+      "explanation": "The gain is $15. $15 ÷ $50 × 100 = 30%."
+    },
+    {
+      "order": 5,
+      "questionType": "multiple-choice",
+      "question": "A company pays a $1 dividend per share. How much would an investor with 100 shares receive before applicable taxes or adjustments?",
+      "options": [
+        "$10",
+        "$50",
+        "$100",
+        "$1,000"
+      ],
+      "correctAnswer": 2,
+      "explanation": "$1 × 100 shares = $100."
+    },
+    {
+      "order": 6,
+      "questionType": "true-false",
+      "question": "A stock with a lower share price is automatically cheaper than a stock with a higher share price.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Share price alone does not determine whether a company is cheap or expensive. Shares outstanding and overall company value also matter."
+    },
+    {
+      "order": 7,
+      "questionType": "multiple-choice",
+      "question": "What is dilution?",
+      "options": [
+        "When a company reduces its number of customers",
+        "When additional shares increase the total shares outstanding and can reduce an existing shareholder's ownership percentage",
+        "When a stock pays a dividend",
+        "When an investor sells a stock for a profit"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Issuing additional shares can reduce an existing shareholder's percentage ownership if they do not receive additional shares."
+    },
+    {
+      "order": 8,
+      "questionType": "multiple-choice",
+      "question": "Why might a company issue shares?",
+      "options": [
+        "To raise capital for business purposes",
+        "To guarantee every investor a profit",
+        "To eliminate all business risk",
+        "To prevent its stock price from changing"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Companies can raise capital by issuing shares."
+    },
+    {
+      "order": 9,
+      "questionType": "multiple-choice",
+      "question": "If a stock costs $400 per share and a platform allows fractional shares, what fraction of a share could $100 buy before fees or adjustments?",
+      "options": [
+        "0.10 share",
+        "0.20 share",
+        "0.25 share",
+        "0.50 share"
+      ],
+      "correctAnswer": 2,
+      "explanation": "$100 ÷ $400 = 0.25 share."
+    },
+    {
+      "order": 10,
+      "questionType": "multiple-choice",
+      "question": "Which question is most useful when evaluating a stock?",
+      "options": [
+        "Is the share price the lowest I can find?",
+        "Has everyone online said it will rise?",
+        "What business am I becoming an owner of, and what could cause that business to succeed or struggle?",
+        "Can I guarantee that the stock will increase?"
+      ],
+      "correctAnswer": 2,
+      "explanation": "A stock represents ownership in a business, so understanding the underlying business and its risks is fundamental."
+    }
+  ]
+}

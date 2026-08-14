@@ -1,0 +1,622 @@
+{
+  "slug": "how-to-compare-prices-and-choose-the-better-deal",
+  "title": "How to Compare Prices and Choose the Better Deal",
+  "estimatedDuration": 35,
+  "order": 5,
+  "published": true,
+  "contentBlocks": [
+    {
+      "order": 1,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "The lowest price is not always the best deal"
+      }
+    },
+    {
+      "order": 2,
+      "type": "text",
+      "data": {
+        "text": "A good deal is not simply the product with the smallest price tag. You need to compare what you receive, how much you actually pay, how long the product lasts, and whether you will use everything you buy."
+      }
+    },
+    {
+      "order": 3,
+      "type": "example",
+      "data": {
+        "title": "Two different prices",
+        "text": "Store A sells a product for $18. Store B sells a similar product for $15 but charges $5 for delivery. Store A costs $18 while Store B costs $20. The lower advertised price is not the lower final cost."
+      }
+    },
+    {
+      "order": 4,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Compare the final price"
+      }
+    },
+    {
+      "order": 5,
+      "type": "text",
+      "data": {
+        "text": "When comparing options, include costs that are required to complete the purchase. Depending on what you are buying, these may include delivery, installation, service charges, taxes, accessories, or other required costs."
+      }
+    },
+    {
+      "order": 6,
+      "type": "example",
+      "data": {
+        "title": "The cheaper item with extra costs",
+        "text": "A product costs $100 from one seller with free delivery. Another seller charges $92 but adds a $15 delivery fee. The first option costs $100 and the second costs $107. Comparing the final amounts shows which is actually cheaper."
+      }
+    },
+    {
+      "order": 7,
+      "type": "callout",
+      "data": {
+        "title": "Remember",
+        "text": "Compare what you actually pay, not just the number used in the advertisement."
+      }
+    },
+    {
+      "order": 8,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Different package sizes can make comparison difficult"
+      }
+    },
+    {
+      "order": 9,
+      "type": "text",
+      "data": {
+        "text": "A larger package often has a higher total price but may cost less per unit. To compare fairly, calculate the price for one unit, litre, kilogram, item, or another useful measure."
+      }
+    },
+    {
+      "order": 10,
+      "type": "example",
+      "data": {
+        "title": "Which package is cheaper per unit?",
+        "text": "A pack of 6 costs $9. A pack of 10 costs $14. The first pack costs $1.50 per item. The second costs $1.40 per item. The larger pack has the lower price per item."
+      }
+    },
+    {
+      "order": 11,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Learn to calculate unit price"
+      }
+    },
+    {
+      "order": 12,
+      "type": "text",
+      "data": {
+        "text": "Unit price is a simple way to compare different quantities. Divide the total price by the number of units. The lower unit price is usually the better deal if the products are genuinely comparable and you will use the extra quantity."
+      }
+    },
+    {
+      "order": 13,
+      "type": "example",
+      "data": {
+        "title": "A simple unit-price calculation",
+        "text": "A 5-pack costs $12.50. Divide $12.50 by 5 to get $2.50 per item. Another 8-pack costs $18.40. Divide $18.40 by 8 to get $2.30 per item. The second option has the lower unit price."
+      }
+    },
+    {
+      "order": 14,
+      "type": "interactive",
+      "data": {
+        "title": "Calculate the unit price",
+        "text": "A 12-pack costs $30. What is the price per item? Calculate $30 ÷ 12 = $2.50 per item."
+      }
+    },
+    {
+      "order": 15,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "A lower unit price does not automatically mean you should buy it"
+      }
+    },
+    {
+      "order": 16,
+      "type": "text",
+      "data": {
+        "text": "Buying a larger quantity can reduce the price per unit but still waste money if you do not use everything. The cheapest unit price matters only when the quantity makes sense for your needs."
+      }
+    },
+    {
+      "order": 17,
+      "type": "example",
+      "data": {
+        "title": "The bulk-buy trap",
+        "text": "A small pack costs $5 and a large pack costs $12. The large pack has a lower price per item, but if you only need a few items and some will expire before you use them, buying the larger pack may not save you money."
+      }
+    },
+    {
+      "order": 18,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Discounts can make you spend more, not less"
+      }
+    },
+    {
+      "order": 19,
+      "type": "text",
+      "data": {
+        "text": "A discount is only a saving if you actually needed or wanted the product. Spending $70 instead of $100 is not saving $30 if you would have spent $0 without the sale."
+      }
+    },
+    {
+      "order": 20,
+      "type": "example",
+      "data": {
+        "title": "The 30% discount",
+        "text": "A product normally costs $100 and is discounted by 30%, making the sale price $70. If you already planned to buy it, the discount can reduce the cost. If you bought it only because it was discounted, you still spent $70 that you might otherwise have kept."
+      }
+    },
+    {
+      "order": 21,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Compare the saving with the amount you still spend"
+      }
+    },
+    {
+      "order": 22,
+      "type": "text",
+      "data": {
+        "text": "Marketing often highlights how much you save. Your bank account cares about how much you actually spend. Look at both numbers."
+      }
+    },
+    {
+      "order": 23,
+      "type": "example",
+      "data": {
+        "title": "Saving $20 by spending $80",
+        "text": "A store says you are saving $20 because an item was reduced from $100 to $80. You did save $20 compared with the original price, but you still spent $80. Ask whether the item is worth $80 to you."
+      }
+    },
+    {
+      "order": 24,
+      "type": "interactive",
+      "data": {
+        "title": "Discount reality check",
+        "text": "An item drops from $200 to $150. You save $50 compared with the original price, but you still spend $150. Before buying, ask whether you would choose to spend $150 if there were no discount label."
+      }
+    },
+    {
+      "order": 25,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Buy-one-get-one offers need a second look"
+      }
+    },
+    {
+      "order": 26,
+      "type": "text",
+      "data": {
+        "text": "Buy-one-get-one offers can be useful when you need both items and the terms are genuinely better. But receiving an extra item does not automatically mean you made a good financial decision."
+      }
+    },
+    {
+      "order": 27,
+      "type": "example",
+      "data": {
+        "title": "The extra item you did not need",
+        "text": "A product costs $20 and a promotion gives you two for $20. That is effectively $10 per item if you use both. But if you only wanted one and the second item sits unused, the promotion may not provide much real value."
+      }
+    },
+    {
+      "order": 28,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Compare quality as well as price"
+      }
+    },
+    {
+      "order": 29,
+      "type": "text",
+      "data": {
+        "text": "The cheapest option can become the more expensive choice if it breaks quickly or needs to be replaced. Price should be considered alongside durability, reliability, usefulness, warranty, and expected lifespan."
+      }
+    },
+    {
+      "order": 30,
+      "type": "example",
+      "data": {
+        "title": "Cheap twice versus better once",
+        "text": "A $40 product lasts one year while a $70 alternative lasts three years. The cheaper option costs $40 per year if replaced annually. The $70 option costs about $23.33 per year over three years, assuming both perform as expected."
+      }
+    },
+    {
+      "order": 31,
+      "type": "interactive",
+      "data": {
+        "title": "Compare cost per year",
+        "text": "Option A costs $60 and lasts 2 years. Option B costs $90 and lasts 4 years. Calculate the yearly cost of each: A = $30 per year; B = $22.50 per year."
+      }
+    },
+    {
+      "order": 32,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "A deal is only useful if it solves your actual problem"
+      }
+    },
+    {
+      "order": 33,
+      "type": "text",
+      "data": {
+        "text": "A low price does not create value if the product does not meet your needs. Before comparing prices, make sure the options are actually suitable for the job you need them to do."
+      }
+    },
+    {
+      "order": 34,
+      "type": "example",
+      "data": {
+        "title": "The wrong cheap option",
+        "text": "You need a reliable device for work. One option costs $300 but lacks an important feature you need. Another costs $380 and includes the feature. The $300 option is cheaper, but it may not solve the problem."
+      }
+    },
+    {
+      "order": 35,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Compare the same thing before comparing the price"
+      }
+    },
+    {
+      "order": 36,
+      "type": "text",
+      "data": {
+        "text": "A fair comparison requires similar products or services. Check quantity, quality, features, condition, warranty, delivery, and included extras before deciding that one option is cheaper."
+      }
+    },
+    {
+      "order": 37,
+      "type": "example",
+      "data": {
+        "title": "Why the $50 option may not be cheaper",
+        "text": "One product costs $50 and includes a two-year warranty. Another costs $45 but includes only a three-month warranty and requires a $10 accessory. The second option can end up costing more and providing less protection."
+      }
+    },
+    {
+      "order": 38,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Small price differences can become large over time"
+      }
+    },
+    {
+      "order": 39,
+      "type": "text",
+      "data": {
+        "text": "A difference of a few dollars may seem unimportant for one purchase. But if you make the same choice repeatedly, the difference can add up over months or years."
+      }
+    },
+    {
+      "order": 40,
+      "type": "example",
+      "data": {
+        "title": "The $5 difference",
+        "text": "Suppose one option costs $5 more each week than another comparable option. Over 52 weeks, that difference becomes $260: $5 × 52. A small repeated difference can become meaningful."
+      }
+    },
+    {
+      "order": 41,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Do not let urgency replace comparison"
+      }
+    },
+    {
+      "order": 42,
+      "type": "text",
+      "data": {
+        "text": "Limited-time offers and countdowns can create pressure to decide quickly. If the purchase is not genuinely urgent, taking a little time to compare alternatives can prevent an expensive mistake."
+      }
+    },
+    {
+      "order": 43,
+      "type": "example",
+      "data": {
+        "title": "The countdown timer",
+        "text": "An online store says a price will disappear in 20 minutes. Instead of buying immediately, you check another seller and discover a similar product for less. Taking a few minutes to compare prevented you from paying more."
+      }
+    },
+    {
+      "order": 44,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Compare total cost when payment options differ"
+      }
+    },
+    {
+      "order": 45,
+      "type": "text",
+      "data": {
+        "text": "When two payment options have different terms, compare the total amount you will pay rather than focusing only on the monthly or initial payment. Include interest, fees, and any other required charges."
+      }
+    },
+    {
+      "order": 46,
+      "type": "example",
+      "data": {
+        "title": "Cash versus installments",
+        "text": "A product costs $600 when paid immediately. A payment plan requires $55 per month for 12 months, for total payments of $660. The installment option costs $60 more."
+      }
+    },
+    {
+      "order": 47,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "The best deal may be not buying anything"
+      }
+    },
+    {
+      "order": 48,
+      "type": "text",
+      "data": {
+        "text": "Sometimes comparison shows that none of the available options are worth the money. If the purchase is optional, choosing not to buy can be the strongest financial choice."
+      }
+    },
+    {
+      "order": 49,
+      "type": "example",
+      "data": {
+        "title": "The $150 decision",
+        "text": "You compare three options for an item you do not urgently need. One costs $120, another $150, and another $180. After comparing them, you realize you would rarely use the item. The cheapest option is still $120, while not buying costs $0."
+      }
+    },
+    {
+      "order": 50,
+      "type": "interactive",
+      "data": {
+        "title": "Choose the better deal",
+        "text": "Option A costs $48 for 6 units. Option B costs $70 for 10 units. Calculate the unit price for each. A = $8 per unit. B = $7 per unit. If you will use all 10 units, B provides the lower unit price."
+      }
+    },
+    {
+      "order": 51,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Use a simple comparison checklist"
+      }
+    },
+    {
+      "order": 52,
+      "type": "text",
+      "data": {
+        "text": "Before choosing between similar options, compare the final price, quantity, unit price, quality, lifespan, included features, additional costs, and how likely you are to use what you are buying. This keeps the decision focused on real value rather than advertising."
+      }
+    },
+    {
+      "order": 53,
+      "type": "example",
+      "data": {
+        "title": "A complete comparison",
+        "text": "Option A costs $100 with free delivery and lasts about two years. Option B costs $85, has a $10 delivery fee, and is expected to last one year. A costs $100 total, while B costs $95 initially but may need to be replaced sooner. The better deal depends on the actual use and lifespan, not just the initial price."
+      }
+    },
+    {
+      "order": 54,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Do the calculation before you get attached to the deal"
+      }
+    },
+    {
+      "order": 55,
+      "type": "text",
+      "data": {
+        "text": "It is easy to become emotionally committed to a product after seeing an attractive discount or promotion. Calculate the real numbers before deciding. The calculation can either confirm the deal or reveal that it is not as good as it looked."
+      }
+    },
+    {
+      "order": 56,
+      "type": "example",
+      "data": {
+        "title": "The deal that looked better",
+        "text": "A product is advertised as '50% off' at $75. You compare it with a similar product from another seller for $68 with free delivery. The discounted product is still $7 more expensive. The percentage discount does not automatically make it the better deal."
+      }
+    },
+    {
+      "order": 57,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Good comparison protects your future money"
+      }
+    },
+    {
+      "order": 58,
+      "type": "text",
+      "data": {
+        "text": "The purpose of comparing prices is not to obsess over every dollar. It is to make sure your money buys what you actually need at a reasonable total cost. Better comparisons can leave more money available for savings, goals, and other priorities."
+      }
+    },
+    {
+      "order": 59,
+      "type": "callout",
+      "data": {
+        "title": "Think like a buyer, not a target",
+        "text": "A discount, promotion, or low headline price is an invitation to compare—not an instruction to buy."
+      }
+    },
+    {
+      "order": 60,
+      "type": "summary",
+      "data": {
+        "title": "What to remember",
+        "points": [
+          "The lowest advertised price is not always the lowest final cost.",
+          "Include delivery, fees, required accessories, and other extra costs.",
+          "Use unit price when package sizes are different.",
+          "A lower unit price only helps if you will actually use the extra quantity.",
+          "A discount is not a saving if it causes you to buy something you did not need.",
+          "Compare quality, lifespan, features, and warranty as well as price.",
+          "Small repeated price differences can become significant over time.",
+          "Compare total payments when payment options have different terms.",
+          "Sometimes the best deal is waiting or not buying.",
+          "The goal is not to find the cheapest item. It is to find the option that gives you the best useful value for the money."
+        ]
+      }
+    }
+  ],
+  "quiz": [
+    {
+      "order": 1,
+      "questionType": "multiple-choice",
+      "question": "Why is the lowest advertised price not always the best deal?",
+      "options": [
+        "Extra costs or differences in quality and quantity can make another option better",
+        "Low prices are always scams",
+        "The most expensive option is always best",
+        "Price never matters"
+      ],
+      "correctAnswer": 0,
+      "explanation": "The final cost, quantity, quality, lifespan, and other terms all matter when comparing options.",
+      "points": 10
+    },
+    {
+      "order": 2,
+      "questionType": "multiple-choice",
+      "question": "A 5-pack costs $12.50. What is the price per item?",
+      "options": [
+        "$2.50",
+        "$5.00",
+        "$12.50",
+        "$1.25"
+      ],
+      "correctAnswer": 0,
+      "explanation": "$12.50 ÷ 5 = $2.50 per item.",
+      "points": 10
+    },
+    {
+      "order": 3,
+      "questionType": "multiple-choice",
+      "question": "Why can buying a larger package fail to save you money?",
+      "options": [
+        "You may not use all of it, so the extra quantity can be wasted",
+        "Larger packages always cost more per unit",
+        "Buying in bulk is always a bad decision",
+        "Unit prices cannot be calculated"
+      ],
+      "correctAnswer": 0,
+      "explanation": "A lower unit price only provides real value if you actually use the extra quantity.",
+      "points": 10
+    },
+    {
+      "order": 4,
+      "questionType": "multiple-choice",
+      "question": "An item is reduced from $100 to $70. What does the discount mean?",
+      "options": [
+        "You pay $70 and save $30 compared with the original price",
+        "You receive $100 in cash",
+        "The item costs nothing",
+        "You automatically made a good purchase"
+      ],
+      "correctAnswer": 0,
+      "explanation": "The sale price is $70, which is $30 less than the original $100. Whether it is a good purchase still depends on whether you wanted and valued the item.",
+      "points": 10
+    },
+    {
+      "order": 5,
+      "questionType": "multiple-choice",
+      "question": "Why should you compare a product's lifespan as well as its price?",
+      "options": [
+        "A more expensive product can sometimes cost less per year if it lasts much longer",
+        "Price becomes irrelevant when something lasts longer",
+        "Cheap products always last longer",
+        "Lifespan has no effect on value"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Looking at cost over the useful lifespan can reveal better value than comparing purchase prices alone.",
+      "points": 10
+    },
+    {
+      "order": 6,
+      "questionType": "multiple-choice",
+      "question": "One option costs $5 more each week than another comparable option. How much more does that cost over 52 weeks?",
+      "options": [
+        "$260",
+        "$52",
+        "$100",
+        "$520"
+      ],
+      "correctAnswer": 0,
+      "explanation": "$5 × 52 = $260.",
+      "points": 10
+    },
+    {
+      "order": 7,
+      "questionType": "true-false",
+      "question": "A product advertised as 50% off is automatically the best deal.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctAnswer": 1,
+      "explanation": "The final price and value still need to be compared with other options. A percentage discount does not guarantee the lowest or best deal.",
+      "points": 10
+    },
+    {
+      "order": 8,
+      "questionType": "multiple-choice",
+      "question": "A product costs $600 upfront or $55 per month for 12 months. Which option costs less before other charges?",
+      "options": [
+        "The $600 upfront option",
+        "The $55 monthly option",
+        "They cost exactly the same",
+        "It cannot be calculated"
+      ],
+      "correctAnswer": 0,
+      "explanation": "$55 × 12 = $660, so paying $600 upfront costs $60 less.",
+      "points": 10
+    },
+    {
+      "order": 9,
+      "questionType": "multiple-choice",
+      "question": "What should you do when comparing two similar products?",
+      "options": [
+        "Compare final cost, quantity, quality, lifespan, features, and other relevant terms",
+        "Choose whichever has the biggest discount percentage",
+        "Always choose the larger package",
+        "Choose the option with the highest price"
+      ],
+      "correctAnswer": 0,
+      "explanation": "A useful comparison looks at the complete value rather than one number in an advertisement.",
+      "points": 10
+    },
+    {
+      "order": 10,
+      "questionType": "multiple-choice",
+      "question": "What is one of the strongest lessons about finding a good deal?",
+      "options": [
+        "Compare the real numbers and choose the option that provides useful value for the money",
+        "Always buy during sales",
+        "The lowest price always wins",
+        "Buying more always saves money"
+      ],
+      "correctAnswer": 0,
+      "explanation": "A good deal is about useful value and total cost, not simply the lowest advertised price or biggest discount.",
+      "points": 10
+    }
+  ]
+}

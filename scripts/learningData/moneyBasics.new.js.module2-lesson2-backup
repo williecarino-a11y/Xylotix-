@@ -1,0 +1,1563 @@
+const moneyBasics = {
+  "course": {
+    "slug": "money-basics",
+    "title": "Money Basics",
+    "description": "Build a strong foundation in personal finance by learning how money, income, expenses, cash flow, saving, spending, and financial goals work together.",
+    "longDescription": "Money Basics is a comprehensive beginner-friendly financial education course designed to help learners understand the foundations of personal money management. Rather than focusing on isolated definitions, the course connects money, income, expenses, spending behavior, cash flow, saving, emergency preparation, and financial goals into a practical framework for making better financial decisions.",
+    "category": "Foundations",
+    "difficulty": "Beginner",
+    "estimatedDuration": 240,
+    "order": 1,
+    "published": true,
+    "prerequisites": [
+      "No prior financial knowledge required."
+    ],
+    "targetAudience": [
+      "Students and beginners learning personal finance",
+      "People who want to make better everyday financial decisions",
+      "Learners preparing to study more advanced financial topics"
+    ],
+    "learningObjectives": [
+      "Explain what money is and why it is useful.",
+      "Understand how income enters a personal financial system.",
+      "Identify and classify common expenses.",
+      "Distinguish needs, wants, and discretionary spending.",
+      "Recognize spending triggers and financial habits.",
+      "Understand opportunity cost and financial trade-offs.",
+      "Calculate and interpret basic cash flow.",
+      "Track income and expenses effectively.",
+      "Understand why saving matters.",
+      "Create measurable financial goals.",
+      "Understand the purpose of an emergency fund.",
+      "Build a simple personal money-management system."
+    ],
+    "skillsGained": [
+      "Financial vocabulary and reasoning",
+      "Income identification",
+      "Expense classification",
+      "Spending analysis",
+      "Basic financial calculations",
+      "Cash-flow analysis",
+      "Saving planning",
+      "Financial goal setting",
+      "Practical money management"
+    ],
+    "outcomes": [
+      "Understand the relationship between income, expenses, cash flow, and saving.",
+      "Evaluate everyday financial choices using trade-offs and opportunity cost.",
+      "Perform basic personal-finance calculations.",
+      "Recognize patterns that influence spending.",
+      "Create a practical framework for managing money consistently."
+    ],
+    "currency": {
+      "default": "USD",
+      "symbol": "$",
+      "locale": "en-US"
+    }
+  },
+  "modules": [
+    {
+      "slug": "understanding-money",
+      "title": "Understanding Money",
+      "description": "Learn what money really is, why it matters, how people use it, why earning money is different from building wealth, and how everyday money decisions shape financial outcomes.",
+      "order": 1,
+      "lessons": [
+        {
+          "slug": "what-is-money",
+          "title": "What Is Money?",
+          "estimatedDuration": 30,
+          "order": 1,
+          "published": true,
+          "contentBlocks": [
+            {
+              "type": "heading",
+              "content": "What Is Money?"
+            },
+            {
+              "type": "text",
+              "content": "Imagine waking up tomorrow and discovering that nobody accepts money anymore. Your bank balance still shows a number, but shops, workers, businesses, and other people no longer recognize that number as something they can exchange for goods or services. Suddenly, everyday life becomes much harder."
+            },
+            {
+              "type": "interactive",
+              "title": "Think First",
+              "content": "If you had food, clothes, a phone, or another useful item, but nobody accepted money, how would you get the other things you need? Think about what you would have to trade directly."
+            },
+            {
+              "type": "heading",
+              "content": "The Problem Money Solves"
+            },
+            {
+              "type": "text",
+              "content": "Before money became widely used, people could trade directly with one another. This is called barter. The problem is that barter works best when two people each want what the other person has at the same time."
+            },
+            {
+              "type": "example",
+              "title": "The barter problem",
+              "content": "Imagine you have a bag of rice and want a bicycle. The bicycle owner may not want rice. You would have to find someone who wants your rice and can somehow help you obtain the bicycle. Money makes this much easier because you can exchange your rice or your work for money and then use the money to buy the bicycle."
+            },
+            {
+              "type": "heading",
+              "content": "So, Why Is Money Money?"
+            },
+            {
+              "type": "text",
+              "content": "Money works because people generally trust and accept it as a way to exchange value. Its usefulness comes from widespread acceptance, shared rules, and confidence that other people will accept it from you later."
+            },
+            {
+              "type": "text",
+              "content": "Money does not have to be a physical object. Modern money can exist as cash or as electronic balances recorded by financial institutions and payment systems."
+            },
+            {
+              "type": "callout",
+              "title": "Important idea",
+              "content": "Money is a tool for moving value between people. The number in your account is useful because you can use it within a system where other people and businesses recognize and accept it."
+            },
+            {
+              "type": "heading",
+              "content": "The Three Jobs Money Performs"
+            },
+            {
+              "type": "text",
+              "content": "You do not need to memorize complicated economics language. Just understand the three jobs money performs in everyday life."
+            },
+            {
+              "type": "heading",
+              "content": "Job 1: Money Helps Us Buy and Sell"
+            },
+            {
+              "type": "text",
+              "content": "When you give money to a seller and receive a product or service, money is making the exchange easier. This is traditionally called the medium-of-exchange function."
+            },
+            {
+              "type": "example",
+              "title": "Real-life example",
+              "content": "You want headphones that cost $50. You pay $50 and receive the headphones. You do not need to find a headphone owner who happens to want something you own."
+            },
+            {
+              "type": "interactive",
+              "title": "Your Turn",
+              "content": "You pay $12 for lunch. Which job of money are you seeing most directly? Answer: money is helping you exchange money for a meal."
+            },
+            {
+              "type": "heading",
+              "content": "Job 2: Money Helps Us Compare Prices"
+            },
+            {
+              "type": "text",
+              "content": "Money gives us a common way to put prices on different things. A phone, a meal, a bus ticket, and a monthly rent payment can all be expressed using the same monetary unit. This makes comparison much easier. Economists call this the unit-of-account function."
+            },
+            {
+              "type": "example",
+              "title": "Real-life comparison",
+              "content": "If one phone costs $300 and another costs $500, you immediately know the second phone costs $200 more. Money gives you a common measuring language."
+            },
+            {
+              "type": "heading",
+              "content": "Job 3: Money Can Be Kept for Later"
+            },
+            {
+              "type": "text",
+              "content": "You do not have to spend every dollar the moment you receive it. You can keep some money today and use it later for a goal, emergency, opportunity, or future purchase. This is traditionally called the store-of-value function."
+            },
+            {
+              "type": "example",
+              "title": "Real-life example",
+              "content": "You receive $100 and decide to keep it for a future need. You have moved some of your purchasing power from today toward a future use."
+            },
+            {
+              "type": "callout",
+              "title": "But there is a catch",
+              "content": "Money does not guarantee that your purchasing power will stay exactly the same. If prices rise, the same $100 may buy less later."
+            },
+            {
+              "type": "heading",
+              "content": "Money Is a Tool, Not Wealth"
+            },
+            {
+              "type": "text",
+              "content": "This is one of the most important ideas in the entire course: having money and having wealth are not automatically the same thing."
+            },
+            {
+              "type": "example",
+              "title": "Two people, same money",
+              "content": "Person A receives $10,000 and spends nearly all of it. Person B receives the same $10,000, handles important expenses, builds savings, reduces expensive debt, and uses part of the money to build productive assets. They started with the same amount, but their financial positions can become very different."
+            },
+            {
+              "type": "heading",
+              "content": "Common Misconceptions About Money"
+            },
+            {
+              "type": "text",
+              "content": "Misconception: More money automatically means more wealth. Reality: What matters is also what you keep, what you owe, what you own, and what your money is doing for you."
+            },
+            {
+              "type": "text",
+              "content": "Misconception: A high salary means someone is financially secure. Reality: A person can earn a lot and still have high expenses, heavy debt, little savings, and little financial resilience."
+            },
+            {
+              "type": "text",
+              "content": "Misconception: Spending money means you are enjoying wealth. Reality: Spending is using money. Wealth is about your broader financial position and the resources you have built and can rely on."
+            },
+            {
+              "type": "text",
+              "content": "Misconception: Saving money automatically makes someone wealthy. Reality: Saving is an important foundation, but long-term wealth can also involve controlling expenses, managing debt, building skills, owning productive assets, and making suitable investments."
+            },
+            {
+              "type": "heading",
+              "content": "The Money Mindset Miimiid Wants You to Build"
+            },
+            {
+              "type": "text",
+              "content": "Whenever money comes into your hands, do not ask only, “What can I buy?” Also ask, “What can this money help me accomplish?”"
+            },
+            {
+              "type": "interactive",
+              "title": "Miimiid Money Challenge",
+              "content": "You receive $150. You could spend it all, save it all, pay an important obligation, or divide it among several priorities. Before choosing, identify what you need now, what you may need later, and which choice best supports your goals."
+            },
+            {
+              "type": "summary",
+              "content": "Money makes exchange easier, gives us a common way to compare prices, and allows us to keep purchasing power for future use. But money itself is only a tool. Financial progress depends heavily on what you do with the money you receive."
+            },
+            {
+              "type": "callout",
+              "title": "Remember this",
+              "content": "Do not measure financial success only by how much money passes through your hands. Pay attention to what you keep, what you owe, what you own, and what your money is helping you build."
+            }
+          ],
+          "quiz": [
+            {
+              "order": 1,
+              "questionType": "multiple-choice",
+              "question": "What major problem does money solve compared with direct barter?",
+              "options": [
+                "It removes the need for every trader to want exactly what the other person has.",
+                "It guarantees that everyone becomes wealthy.",
+                "It prevents prices from changing.",
+                "It makes every purchase profitable."
+              ],
+              "correctAnswer": 0,
+              "explanation": "Money makes exchange easier because you do not need to find someone who simultaneously wants what you have and has exactly what you want."
+            },
+            {
+              "order": 2,
+              "questionType": "multiple-choice",
+              "question": "You pay $40 for a pair of shoes. What job of money is most directly happening?",
+              "options": [
+                "Money is helping you exchange for a product.",
+                "Money is guaranteeing future wealth.",
+                "Money is preventing inflation.",
+                "Money is creating an investment return."
+              ],
+              "correctAnswer": 0,
+              "explanation": "Money is acting as a medium of exchange: you give money and receive the shoes."
+            },
+            {
+              "order": 3,
+              "questionType": "multiple-choice",
+              "question": "Why can two people who receive the same amount of money end up in very different financial positions?",
+              "options": [
+                "Because how they spend, save, manage debt, and build assets can be different.",
+                "Because money automatically chooses different outcomes for different people.",
+                "Because receiving money always creates wealth.",
+                "Because income and financial decisions have no connection."
+              ],
+              "correctAnswer": 0,
+              "explanation": "The amount received is only part of the story. What happens to the money afterward can strongly affect financial outcomes."
+            },
+            {
+              "order": 4,
+              "questionType": "multiple-choice",
+              "question": "Which statement is most accurate?",
+              "options": [
+                "A high income can exist without lasting financial security.",
+                "A high income guarantees wealth.",
+                "Anyone with savings is automatically wealthy.",
+                "Spending more is always a sign of greater wealth."
+              ],
+              "correctAnswer": 0,
+              "explanation": "Income is money coming in. Wealth and financial security depend on a broader financial position, including savings, assets, obligations, spending, and resilience."
+            },
+            {
+              "order": 5,
+              "questionType": "true-false",
+              "question": "Money and wealth mean exactly the same thing.",
+              "options": [
+                "True",
+                "False"
+              ],
+              "correctAnswer": 1,
+              "explanation": "Money is a financial tool and resource. Wealth is a broader concept involving what a person owns and owes and the financial resources available to them."
+            }
+          ]
+        },
+        {
+          "slug": "money-value-and-purchasing-power",
+          "title": "Money, Value and Purchasing Power",
+          "estimatedDuration": 30,
+          "order": 2,
+          "published": true,
+          "contentBlocks": [
+            {
+              "type": "heading",
+              "content": "Money, Value and Purchasing Power"
+            },
+            {
+              "type": "text",
+              "content": "A number in your bank account is only part of the story. What really matters is what that money can do for you."
+            },
+            {
+              "type": "interactive",
+              "title": "Start With $100",
+              "content": "Imagine you have $100 today. You could buy groceries, pay a bill, save it, use it for transportation, or combine several choices. The value of the $100 is connected to what it can actually help you obtain or accomplish."
+            },
+            {
+              "type": "heading",
+              "content": "Money Has Purchasing Power"
+            },
+            {
+              "type": "text",
+              "content": "Purchasing power simply means what your money can buy. If your $100 can buy ten items today but prices rise and the same $100 can buy only eight of those items later, your money has less purchasing power."
+            },
+            {
+              "type": "example",
+              "title": "A simple price change",
+              "content": "Suppose your regular basket of items costs $50 today. Later, the same basket costs $60. If you still have only $50, your money cannot buy the same basket anymore."
+            },
+            {
+              "type": "heading",
+              "content": "Why Prices Change"
+            },
+            {
+              "type": "text",
+              "content": "Prices can change for many reasons, including changes in supply and demand, production costs, transportation costs, wages, taxes, currency conditions, and broader economic conditions. When prices rise broadly over time, people often describe this as inflation."
+            },
+            {
+              "type": "callout",
+              "title": "What inflation means for you",
+              "content": "You do not need an economics degree to understand inflation. Think about it this way: if your income stays the same while many of the things you regularly buy become more expensive, your money has less buying power."
+            },
+            {
+              "type": "heading",
+              "content": "Money Is Not Automatically Valuable Forever"
+            },
+            {
+              "type": "text",
+              "content": "Keeping the same number of dollars does not guarantee that you can buy the same amount in the future. This is one reason financial planning must consider time, not just today's balance."
+            },
+            {
+              "type": "example",
+              "title": "Today versus later",
+              "content": "If you set aside $1,000 for a goal that will happen several years from now, you should think about whether the amount you need will remain the same. Future prices may be higher."
+            },
+            {
+              "type": "heading",
+              "content": "Money, Value and Personal Choices"
+            },
+            {
+              "type": "text",
+              "content": "Something can be expensive without being valuable to you, and something inexpensive can be extremely valuable to you. Financial decisions involve more than price. They involve usefulness, priorities, timing, alternatives, and consequences."
+            },
+            {
+              "type": "example",
+              "title": "Price is not the whole decision",
+              "content": "A $20 purchase might be excellent value if it solves an important problem you have. The same $20 might be a poor decision if you buy something you do not need while an important bill is waiting."
+            },
+            {
+              "type": "heading",
+              "content": "The Trade-Off Behind Every Choice"
+            },
+            {
+              "type": "text",
+              "content": "Money is limited. When you use it for one purpose, you usually give up the chance to use at least some of it for another purpose. That trade-off is commonly called opportunity cost."
+            },
+            {
+              "type": "interactive",
+              "title": "Feel the Trade-Off",
+              "content": "You have $100. You can spend it on entertainment today or put it toward a savings goal. If you choose the entertainment, what are you giving up? You are giving up the opportunity to use that $100 toward the savings goal."
+            },
+            {
+              "type": "heading",
+              "content": "Rich Is Not the Same as Wealthy"
+            },
+            {
+              "type": "text",
+              "content": "People often use “rich” and “wealthy” as if they mean exactly the same thing. They can overlap, but they are useful to distinguish."
+            },
+            {
+              "type": "text",
+              "content": "A person may be considered rich because they have a very high income, expensive possessions, or a large amount of money available to spend. A wealthy person generally has substantial financial resources and assets relative to their obligations, giving them greater financial resilience and the ability to support themselves from accumulated resources."
+            },
+            {
+              "type": "example",
+              "title": "High income versus financial strength",
+              "content": "Person A earns $20,000 every month but spends $19,500, has large debts, and has little savings. Person B earns $8,000 every month, lives below their means, has substantial assets, manageable obligations, and strong financial reserves. Income alone does not tell you who has the stronger financial position."
+            },
+            {
+              "type": "callout",
+              "title": "The deeper lesson",
+              "content": "Do not chase the appearance of wealth. Focus on building a financial position that gives you choices, resilience, and control over your future."
+            },
+            {
+              "type": "heading",
+              "content": "Common Misconceptions"
+            },
+            {
+              "type": "text",
+              "content": "Misconception: A person driving an expensive car must be wealthy. Reality: The car could be heavily financed or leased, and the person may have little financial security."
+            },
+            {
+              "type": "text",
+              "content": "Misconception: If your salary increases, your financial problems automatically disappear. Reality: If expenses rise at the same time, your financial position may not improve much."
+            },
+            {
+              "type": "text",
+              "content": "Misconception: Inflation only matters to economists. Reality: Inflation affects everyday purchasing decisions, savings goals, wages, budgets, and the cost of living."
+            },
+            {
+              "type": "interactive",
+              "title": "Miimiid Challenge",
+              "content": "Your income increases by 10%, but your lifestyle and monthly expenses increase by 15%. Did your financial position automatically improve? No. The amount coming in increased, but your spending increased faster."
+            },
+            {
+              "type": "summary",
+              "content": "Money matters because of what it can buy and accomplish. Purchasing power can change over time. Financial decisions involve trade-offs, and a high income or expensive lifestyle does not automatically mean lasting wealth."
+            },
+            {
+              "type": "callout",
+              "title": "Remember this",
+              "content": "Do not ask only, “How much money do I have?” Ask, “What can this money actually do for my present and future?”"
+            }
+          ],
+          "quiz": [
+            {
+              "order": 1,
+              "questionType": "multiple-choice",
+              "question": "What does purchasing power mean in everyday language?",
+              "options": [
+                "What your money can actually buy",
+                "How much money you earn before deductions",
+                "How expensive your lifestyle looks",
+                "How much debt you can borrow"
+              ],
+              "correctAnswer": 0,
+              "explanation": "Purchasing power is about what your money can buy."
+            },
+            {
+              "order": 2,
+              "questionType": "multiple-choice",
+              "question": "If many prices rise while your income stays unchanged, what may happen?",
+              "options": [
+                "Your money may buy less than before.",
+                "Your money automatically becomes more valuable.",
+                "Your expenses automatically disappear.",
+                "Your wealth is guaranteed to increase."
+              ],
+              "correctAnswer": 0,
+              "explanation": "When prices rise faster than your available income, the purchasing power of your money can fall."
+            },
+            {
+              "order": 3,
+              "questionType": "multiple-choice",
+              "question": "You spend $100 on something today instead of putting it toward a future goal. What is the key financial idea involved?",
+              "options": [
+                "There is a trade-off between the two uses of the money.",
+                "Money has no limits.",
+                "Spending creates guaranteed wealth.",
+                "The future goal no longer matters."
+              ],
+              "correctAnswer": 0,
+              "explanation": "Choosing one use of limited money means giving up another possible use."
+            },
+            {
+              "order": 4,
+              "questionType": "multiple-choice",
+              "question": "Which person may have the stronger financial position?",
+              "options": [
+                "Someone with a lower income but substantial assets, manageable obligations, and strong reserves",
+                "Someone with a high income but very high expenses and large debts",
+                "Always the person with the highest salary",
+                "Always the person with the most expensive possessions"
+              ],
+              "correctAnswer": 0,
+              "explanation": "Income matters, but financial strength also depends on assets, obligations, savings, spending, and resilience."
+            },
+            {
+              "order": 5,
+              "questionType": "true-false",
+              "question": "An expensive lifestyle is reliable proof that someone is wealthy.",
+              "options": [
+                "True",
+                "False"
+              ],
+              "correctAnswer": 1,
+              "explanation": "Visible spending does not reveal the person's debts, savings, assets, or overall financial position."
+            }
+          ]
+        },
+        {
+          "slug": "essential-financial-vocabulary",
+          "title": "Essential Financial Vocabulary",
+          "estimatedDuration": 30,
+          "order": 3,
+          "published": true,
+          "contentBlocks": [
+            {
+              "type": "heading",
+              "content": "Follow the Money"
+            },
+            {
+              "type": "text",
+              "content": "Instead of memorizing financial words one by one, follow what happens to money in a real person’s life."
+            },
+            {
+              "type": "example",
+              "title": "Meet Alex",
+              "content": "Alex receives $2,500 during a month. Alex uses some money for housing, food, transportation, and other expenses. Some money goes toward savings, while another payment goes toward debt. Each movement of money tells us something important."
+            },
+            {
+              "type": "heading",
+              "content": "Income: Money Coming In"
+            },
+            {
+              "type": "text",
+              "content": "Income is money you receive. It can come from employment, self-employment, freelance work, business activity, investments, or other legitimate sources."
+            },
+            {
+              "type": "interactive",
+              "title": "Spot the Income",
+              "content": "Alex receives $2,500 from a job and $200 from freelance work. Both amounts are income because money is coming into Alex’s financial system."
+            },
+            {
+              "type": "heading",
+              "content": "Expenses: Money Going Out"
+            },
+            {
+              "type": "text",
+              "content": "Expenses are the costs and payments connected to the things you buy, use, or owe. Housing, food, transportation, subscriptions, education, utilities, and many other payments can be expenses."
+            },
+            {
+              "type": "example",
+              "title": "Where the money goes",
+              "content": "If Alex spends $900 on housing, $350 on food, and $150 on transportation, those amounts are part of Alex’s expenses."
+            },
+            {
+              "type": "heading",
+              "content": "Needs and Wants"
+            },
+            {
+              "type": "text",
+              "content": "A need is something important for basic living, safety, health, work, or a serious responsibility. A want is something you would like to have but can generally live without immediately. The line is not always identical for everyone."
+            },
+            {
+              "type": "interactive",
+              "title": "Think, Don’t Just Label",
+              "content": "Ask three questions before spending: Do I need this now? Can I afford it without harming an important goal? What happens if I delay the purchase? Financial maturity is not about never buying wants. It is about making conscious choices."
+            },
+            {
+              "type": "heading",
+              "content": "Budget: Giving Your Money a Job"
+            },
+            {
+              "type": "text",
+              "content": "A budget is simply a plan for what you want your available money to do. It helps you decide where money should go before it disappears through random spending."
+            },
+            {
+              "type": "example",
+              "title": "A practical budget",
+              "content": "Alex expects $2,500. Before spending, Alex decides how much should go toward essential costs, saving, debt repayment, and flexible spending. That plan is a budget."
+            },
+            {
+              "type": "heading",
+              "content": "Saving: Keeping Money for a Purpose"
+            },
+            {
+              "type": "text",
+              "content": "Saving means deliberately keeping some money instead of spending it immediately. A saving goal could be an emergency reserve, education, a future purchase, a move, or another financial priority."
+            },
+            {
+              "type": "heading",
+              "content": "Debt: Money You Owe"
+            },
+            {
+              "type": "text",
+              "content": "Debt means you have an obligation to repay money or another financial amount. Debt is not automatically good or bad. What matters is why you borrowed, how much it costs, whether you can repay it, and what it does to your future cash flow."
+            },
+            {
+              "type": "example",
+              "title": "Debt changes future choices",
+              "content": "If you borrow money today and must make monthly payments later, part of your future income is already committed. That can reduce the money available for saving, investing, or other goals."
+            },
+            {
+              "type": "heading",
+              "content": "Investment: Putting Money Into an Asset or Opportunity"
+            },
+            {
+              "type": "text",
+              "content": "An investment is money placed into an asset or opportunity with the expectation of future value or income. Investments can grow, stay flat, or lose value. There are no guaranteed profits simply because something is called an investment."
+            },
+            {
+              "type": "example",
+              "title": "Investment example",
+              "content": "Buying shares in a company is an investment because you are putting money into an asset with the possibility of future returns. The value can rise or fall."
+            },
+            {
+              "type": "heading",
+              "content": "The Financial Flow"
+            },
+            {
+              "type": "text",
+              "content": "Think of your personal finances as a flow: money comes in, money goes out, some money can be kept, some obligations may need repayment, and some money can be directed toward future growth."
+            },
+            {
+              "type": "interactive",
+              "title": "Miimiid Money Map",
+              "content": "Income → essential expenses → flexible spending → saving → debt repayment → investing → future goals. Your exact order and amounts can vary, but the key is knowing where your money is going."
+            },
+            {
+              "type": "heading",
+              "content": "Why Some People Stay Financially Stuck"
+            },
+            {
+              "type": "text",
+              "content": "Sometimes people remain financially stuck because spending rises with income, debt payments consume future income, emergencies repeatedly wipe out savings, income is unstable, financial knowledge is limited, or there is no clear system for allocating money."
+            },
+            {
+              "type": "text",
+              "content": "But financial struggle is not always caused by personal choices. Low wages, unemployment, economic conditions, family responsibilities, health problems, limited opportunities, unexpected emergencies, and lack of access to useful resources can make financial progress much harder."
+            },
+            {
+              "type": "callout",
+              "title": "No blame—focus on control",
+              "content": "Understanding the causes of financial hardship should not become blame. The useful question is: given my circumstances, what financial decisions and systems are within my control?"
+            },
+            {
+              "type": "heading",
+              "content": "Common Misconceptions"
+            },
+            {
+              "type": "text",
+              "content": "Misconception: Budgeting means you cannot enjoy your money. Reality: A useful budget gives your money intentional jobs, including room for enjoyment when appropriate."
+            },
+            {
+              "type": "text",
+              "content": "Misconception: All debt is equally harmful. Reality: Debt has different costs, purposes, risks, and repayment burdens. It should be evaluated rather than judged only by its existence."
+            },
+            {
+              "type": "text",
+              "content": "Misconception: Investing is the same as gambling. Reality: Investing involves risk, but legitimate investments represent ownership or financial claims on assets or productive activities. Understanding the risk and the asset matters."
+            },
+            {
+              "type": "summary",
+              "content": "Income is money coming in. Expenses are money going out. A budget gives available money a plan. Saving keeps money for future purposes. Debt creates future repayment obligations. Investing puts money into assets or opportunities with potential future returns and risk."
+            },
+            {
+              "type": "callout",
+              "title": "Remember this",
+              "content": "Do not try to memorize financial vocabulary in isolation. Follow the money. Once you understand what is happening to the money, the terminology becomes much easier."
+            }
+          ],
+          "quiz": [
+            {
+              "order": 1,
+              "questionType": "multiple-choice",
+              "question": "Alex receives $2,500 from a job. What is that money?",
+              "options": [
+                "Income",
+                "An expense",
+                "Debt",
+                "An investment"
+              ],
+              "correctAnswer": 0,
+              "explanation": "Income is money received. The source can be employment, business activity, freelance work, investments, or other sources."
+            },
+            {
+              "order": 2,
+              "questionType": "multiple-choice",
+              "question": "Why is a budget useful?",
+              "options": [
+                "It helps you decide where your money should go before you spend it.",
+                "It guarantees that you will never have an unexpected expense.",
+                "It means you can never spend money on wants.",
+                "It automatically makes you wealthy."
+              ],
+              "correctAnswer": 0,
+              "explanation": "A budget is a plan that helps you intentionally allocate available money."
+            },
+            {
+              "order": 3,
+              "questionType": "multiple-choice",
+              "question": "Why can debt affect your future financial choices?",
+              "options": [
+                "Repayments can commit part of your future income.",
+                "Debt never has to be repaid.",
+                "Debt automatically creates wealth.",
+                "Debt has no effect on cash flow."
+              ],
+              "correctAnswer": 0,
+              "explanation": "Debt repayments can reduce the amount of future income available for other priorities."
+            },
+            {
+              "order": 4,
+              "questionType": "multiple-choice",
+              "question": "Which statement about financial hardship is most accurate?",
+              "options": [
+                "It can result from both personal financial decisions and circumstances outside a person’s control.",
+                "Everyone who struggles financially simply refuses to work.",
+                "Financial hardship always results from overspending.",
+                "Personal decisions never matter."
+              ],
+              "correctAnswer": 0,
+              "explanation": "Financial outcomes can be influenced by behavior and choices as well as income, opportunities, economic conditions, family responsibilities, health, emergencies, and other circumstances."
+            },
+            {
+              "order": 5,
+              "questionType": "true-false",
+              "question": "A person can have a high income and still be financially stuck.",
+              "options": [
+                "True",
+                "False"
+              ],
+              "correctAnswer": 0,
+              "explanation": "High income does not guarantee financial progress if expenses, debt, lifestyle inflation, or other obligations consume most of it."
+            }
+          ]
+        },
+        {
+          "slug": "understanding-income",
+          "title": "Understanding Income",
+          "estimatedDuration": 30,
+          "order": 4,
+          "published": true,
+          "contentBlocks": [
+            {
+              "type": "heading",
+              "content": "Understanding Income"
+            },
+            {
+              "type": "text",
+              "content": "Income is where many personal-finance decisions begin because it provides the money you can direct toward living costs, saving, debt repayment, investing, and goals."
+            },
+            {
+              "type": "interactive",
+              "title": "Imagine This",
+              "content": "You work for a month and receive $3,000. Before celebrating the full $3,000, ask: Is all of it actually available for me to spend? What will be deducted? What responsibilities must this money cover?"
+            },
+            {
+              "type": "heading",
+              "content": "Where Income Can Come From"
+            },
+            {
+              "type": "text",
+              "content": "People can receive income from employment, freelance work, business activity, commissions, rental activity, investments, and other legitimate sources. Having more than one source can sometimes provide additional flexibility, although every income source has its own risks and requirements."
+            },
+            {
+              "type": "example",
+              "title": "One person, several sources",
+              "content": "Someone may earn $2,500 from a job, $300 from freelance work, and $100 from an investment during a month. Those are different sources contributing to total income."
+            },
+            {
+              "type": "heading",
+              "content": "Gross Income and Net Income"
+            },
+            {
+              "type": "text",
+              "content": "Gross income is the amount before applicable deductions. Net income is what remains after applicable deductions. When planning everyday spending, the amount actually available is what matters."
+            },
+            {
+              "type": "example",
+              "title": "A simple calculation",
+              "content": "If gross monthly income is $3,000 and applicable deductions total $300, the amount remaining after those deductions is $2,700."
+            },
+            {
+              "type": "interactive",
+              "title": "Miimiid Quick Check",
+              "content": "Gross income: $4,000. Applicable deductions: $500. What remains after those deductions? Answer: $3,500."
+            },
+            {
+              "type": "heading",
+              "content": "Predictable Income vs. Variable Income"
+            },
+            {
+              "type": "text",
+              "content": "Some people receive relatively predictable income. Others earn different amounts from month to month. Variable income can require extra planning because the timing and amount of money coming in may change."
+            },
+            {
+              "type": "example",
+              "title": "Why timing matters",
+              "content": "A salaried worker might receive a similar amount each month. A freelancer might earn $1,500 one month and $3,000 the next. The freelancer may need a stronger system for handling high-income and low-income months."
+            },
+            {
+              "type": "heading",
+              "content": "Why People Can Earn More and Still Feel Broke"
+            },
+            {
+              "type": "text",
+              "content": "One common pattern is lifestyle inflation: as income increases, spending increases too. A person gets a raise, upgrades housing, buys a more expensive car, adds subscriptions, eats out more often, and increases other spending. The raise can disappear without creating much additional financial security."
+            },
+            {
+              "type": "example",
+              "title": "The disappearing raise",
+              "content": "Your income rises by $500 per month. If your new spending rises by $450, your income increased significantly but your available financial room increased by only $50."
+            },
+            {
+              "type": "heading",
+              "content": "Why Some People Remain Financially Poor"
+            },
+            {
+              "type": "text",
+              "content": "There is no single reason why a person remains poor. Poverty can be connected to low wages, unemployment, limited access to opportunities, economic conditions, family responsibilities, health problems, education and skill barriers, location, discrimination, unexpected shocks, and other circumstances."
+            },
+            {
+              "type": "text",
+              "content": "At the same time, financial habits can influence how difficult it is to move forward once someone has income and choices available. High-cost debt, uncontrolled spending, lack of savings, poor planning, and failure to build useful skills can make progress harder."
+            },
+            {
+              "type": "callout",
+              "title": "Two truths can exist together",
+              "content": "Circumstances matter, and financial behavior matters. Good financial education should recognize both without blaming people for conditions they did not choose."
+            },
+            {
+              "type": "heading",
+              "content": "Why High Income Does Not Automatically Create Wealth"
+            },
+            {
+              "type": "text",
+              "content": "Income tells you how much money is coming in during a period. Wealth is about the broader financial resources you have accumulated relative to what you owe. Someone can earn a lot without building much wealth if most of the income is consumed by spending and obligations."
+            },
+            {
+              "type": "heading",
+              "content": "Rich vs. Wealthy"
+            },
+            {
+              "type": "text",
+              "content": "In everyday language, a rich person is often someone with a high income, lots of spending power, expensive possessions, or a visibly luxurious lifestyle. A wealthy person generally has substantial accumulated financial resources and assets relative to their obligations, giving them greater financial independence and resilience."
+            },
+            {
+              "type": "example",
+              "title": "Two different financial lives",
+              "content": "Person A earns $25,000 per month, spends $24,500, carries large debts, and has little savings. Person B earns $10,000 per month, spends $6,000, has manageable obligations, strong reserves, and owns productive assets. Person A has the higher income, but Person B may have the stronger financial foundation."
+            },
+            {
+              "type": "callout",
+              "title": "The goal is not to look rich",
+              "content": "A powerful financial goal is to build enough assets, savings, skills, and financial flexibility that you have more choices and are less dependent on your next paycheck."
+            },
+            {
+              "type": "heading",
+              "content": "How to Think About Every Paycheck"
+            },
+            {
+              "type": "interactive",
+              "title": "The Four Questions",
+              "content": "When income arrives, ask: What must this money cover? What should I keep for emergencies and future goals? What obligations should I handle? What part, if any, can I use to build future wealth?"
+            },
+            {
+              "type": "heading",
+              "content": "Common Misconceptions About Income"
+            },
+            {
+              "type": "text",
+              "content": "Misconception: Getting a raise means you can automatically afford a more expensive lifestyle. Reality: A raise creates an opportunity to improve your financial position; it does not require your expenses to rise with it."
+            },
+            {
+              "type": "text",
+              "content": "Misconception: Multiple income sources automatically make you wealthy. Reality: More income can help, but spending, saving, debt, taxes, risk, and how the additional income is used still matter."
+            },
+            {
+              "type": "text",
+              "content": "Misconception: Being poor means a person simply failed to manage money. Reality: Financial hardship has many causes, including factors outside individual control. Financial literacy should teach useful choices without turning poverty into a character judgment."
+            },
+            {
+              "type": "text",
+              "content": "Misconception: The person with the highest salary is always the wealthiest. Reality: Income is only one part of the financial picture."
+            },
+            {
+              "type": "summary",
+              "content": "Income is money coming in, but financial progress depends on what happens next. The way income is allocated among living costs, saving, debt, investing, and goals can determine whether higher income creates greater financial freedom or simply a more expensive lifestyle."
+            },
+            {
+              "type": "callout",
+              "title": "Remember this",
+              "content": "Do not build your financial life around looking rich. Build it around becoming financially stronger, more resilient, and more free to choose what happens next."
+            }
+          ],
+          "quiz": [
+            {
+              "order": 1,
+              "questionType": "multiple-choice",
+              "question": "If gross income is $3,000 and applicable deductions are $300, how much remains after those deductions?",
+              "options": [
+                "$2,700",
+                "$3,300",
+                "$300",
+                "$2,400"
+              ],
+              "correctAnswer": 0,
+              "explanation": "$3,000 minus $300 equals $2,700."
+            },
+            {
+              "order": 2,
+              "questionType": "multiple-choice",
+              "question": "What is lifestyle inflation?",
+              "options": [
+                "Increasing spending as income increases",
+                "Saving more whenever income increases",
+                "Reducing expenses after receiving a raise",
+                "A guaranteed increase in wealth"
+              ],
+              "correctAnswer": 0,
+              "explanation": "Lifestyle inflation occurs when spending rises as income rises, sometimes leaving little additional money for saving or wealth building."
+            },
+            {
+              "order": 3,
+              "questionType": "multiple-choice",
+              "question": "Why can someone with a high income still be financially fragile?",
+              "options": [
+                "High spending, debt, low savings, or other obligations can consume much of the income.",
+                "High income automatically prevents financial problems.",
+                "Income has no connection to expenses.",
+                "High earners cannot have debt."
+              ],
+              "correctAnswer": 0,
+              "explanation": "A high income can provide more opportunity, but financial security still depends on how much is kept, owed, and built."
+            },
+            {
+              "order": 4,
+              "questionType": "multiple-choice",
+              "question": "Which statement best describes the difference between being rich and being wealthy?",
+              "options": [
+                "Rich can describe high income or visible spending power, while wealth generally describes substantial accumulated resources and assets relative to obligations.",
+                "Rich and wealthy always mean exactly the same thing.",
+                "Wealth only means having an expensive lifestyle.",
+                "A high salary automatically makes someone wealthy."
+              ],
+              "correctAnswer": 0,
+              "explanation": "The terms overlap in everyday speech, but a high income or luxurious lifestyle does not necessarily mean someone has built substantial financial resources."
+            },
+            {
+              "order": 5,
+              "questionType": "multiple-choice",
+              "question": "Which statement about poverty is most responsible and accurate?",
+              "options": [
+                "Poverty can have many causes, including economic conditions and circumstances outside an individual’s control, while financial behavior can also affect outcomes where choices are available.",
+                "Everyone who is poor simply refuses to work.",
+                "Poverty is always caused by poor budgeting.",
+                "Personal choices never matter in financial outcomes."
+              ],
+              "correctAnswer": 0,
+              "explanation": "Financial outcomes are influenced by both individual decisions and wider circumstances. Good financial education should recognize both."
+            },
+            {
+              "order": 6,
+              "questionType": "true-false",
+              "question": "A raise automatically makes a person wealthier.",
+              "options": [
+                "True",
+                "False"
+              ],
+              "correctAnswer": 1,
+              "explanation": "A raise increases income, but wealth depends on what happens to that additional income and the person’s overall financial position."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "income-and-earning",
+      "title": "Module 2 — Income and Earning",
+      "description": "Learn how different forms of income work, how to increase your earning power, how to build additional income without unnecessary complexity, and how to avoid financial decision-making traps.",
+      "order": 2,
+      "lessons": [
+        {
+          "slug": "active-and-passive-income",
+          "title": "Active and Passive Income",
+          "estimatedDuration": 30,
+          "order": 1,
+          "published": true,
+          "contentBlocks": [
+            {
+              "type": "heading",
+              "content": "Income is more than a paycheck"
+            },
+            {
+              "type": "text",
+              "content": "Income is money that comes to you from a source. For many people, the first source they think of is a job, but people can receive money in many different ways. Understanding where income comes from helps you make better decisions about work, side projects, businesses, and investments."
+            },
+            {
+              "type": "example",
+              "title": "A simple example",
+              "content": "Imagine Maya earns $2,500 each month from her job. She also earns $300 from freelance design work. The $2,500 and $300 are both income, but they come from different activities and require different amounts of her time."
+            },
+            {
+              "type": "heading",
+              "content": "What is active income?"
+            },
+            {
+              "type": "text",
+              "content": "Active income is money you generally earn by actively providing your time, effort, skills, or services. If you stop doing the work, the income will usually stop or decrease."
+            },
+            {
+              "type": "example",
+              "title": "Common active income",
+              "content": "A salary from employment, payment for freelance work, wages from hourly work, consulting fees, and money earned from completing a service are common examples of active income."
+            },
+            {
+              "type": "example",
+              "title": "The time connection",
+              "content": "A freelancer who charges $40 per hour may earn more by working more hours, raising their rate, improving their skills, or finding better clients. The income is closely connected to the work being performed."
+            },
+            {
+              "type": "heading",
+              "content": "What is passive income?"
+            },
+            {
+              "type": "text",
+              "content": "Passive income generally refers to income that can continue with less direct day-to-day effort after an asset, system, or income-producing activity has been established. Passive does not mean effortless, risk-free, or guaranteed."
+            },
+            {
+              "type": "example",
+              "title": "Examples of potentially passive income",
+              "content": "Interest from savings or certain investments, dividends from investments, royalties from intellectual property, and income from a business system that can operate without the owner handling every task can be examples of income that is relatively passive."
+            },
+            {
+              "type": "callout",
+              "title": "Important reality check",
+              "content": "Something can be passive today because you did substantial work, invested money, or accepted risk earlier. Passive income often has a history of active effort behind it."
+            },
+            {
+              "type": "heading",
+              "content": "Passive does not mean free money"
+            },
+            {
+              "type": "text",
+              "content": "A common mistake is imagining passive income as money that appears without capital, skills, maintenance, risk, or responsibility. In reality, many passive or semi-passive income sources require money, knowledge, setup work, monitoring, or ongoing maintenance."
+            },
+            {
+              "type": "example",
+              "title": "A rental property example",
+              "content": "A rental property may generate income without requiring the owner to work there every day. But the owner may still face repairs, vacancies, taxes, insurance, financing costs, tenant issues, and periods when the property produces little or no profit."
+            },
+            {
+              "type": "heading",
+              "content": "Active versus passive is not always a perfect box"
+            },
+            {
+              "type": "text",
+              "content": "Real life is often more complicated than two labels. Some income sits somewhere between highly active and highly passive. A small online business, for example, may require significant work at first and much less daily work after systems and staff are established."
+            },
+            {
+              "type": "example",
+              "title": "A creator business",
+              "content": "A creator might spend months producing an educational course. After it is published, the course may continue generating sales. The later sales may require less effort per customer, but the original income opportunity depended on substantial work."
+            },
+            {
+              "type": "heading",
+              "content": "Misconception: passive income means doing nothing"
+            },
+            {
+              "type": "text",
+              "content": "This is one of the most common misconceptions. Passive income usually means the income is less directly tied to your ongoing time and effort. It does not mean there is never any work, risk, cost, or attention involved."
+            },
+            {
+              "type": "heading",
+              "content": "Misconception: passive income is always better"
+            },
+            {
+              "type": "text",
+              "content": "Not necessarily. A reliable active income can be extremely valuable. A skilled worker with strong earning power may be able to earn substantially more through active work than through a small passive asset. The goal is not to make every dollar passive; the goal is to build a healthy financial system."
+            },
+            {
+              "type": "heading",
+              "content": "Misconception: a salary is financially inferior"
+            },
+            {
+              "type": "text",
+              "content": "A salary can provide stability, predictable cash flow, benefits, experience, professional development, and opportunities to increase future earning power. Employment can be an important foundation while someone builds savings, investments, or another source of income."
+            },
+            {
+              "type": "heading",
+              "content": "Misconception: every investment creates passive income"
+            },
+            {
+              "type": "text",
+              "content": "Not every investment produces regular income. Some investments may primarily aim for growth in value. Others may generate interest, dividends, rent, or another form of cash flow. The type, amount, timing, and reliability of income depend on the asset and its risks."
+            },
+            {
+              "type": "heading",
+              "content": "Think about time, money, skill, and risk"
+            },
+            {
+              "type": "text",
+              "content": "When evaluating an income opportunity, ask what it requires from you. Does it require your time? Money? Specialized skills? Ongoing management? Exposure to financial risk? The answers can be more useful than simply calling something active or passive."
+            },
+            {
+              "type": "example",
+              "title": "Comparing two opportunities",
+              "content": "Suppose one opportunity could earn $500 from ten hours of work, while another could potentially earn $500 from an asset but requires $10,000 of capital and carries risk. The same income amount does not make the opportunities equivalent."
+            },
+            {
+              "type": "heading",
+              "content": "Why people want passive income"
+            },
+            {
+              "type": "text",
+              "content": "People are often attracted to passive income because time is limited. A person can only work so many hours in a day. Income that is less dependent on each additional hour can create more flexibility, but building that kind of income usually requires resources, patience, or previous effort."
+            },
+            {
+              "type": "heading",
+              "content": "A better question than “How do I get passive income?”"
+            },
+            {
+              "type": "text",
+              "content": "Instead of chasing anything advertised as passive income, ask: “How can I create income that is sustainable, appropriate for my situation, and less dependent on selling every hour of my time?” That question encourages realistic planning instead of hype."
+            },
+            {
+              "type": "interactive",
+              "title": "Quick decision check",
+              "content": "You are offered an online business promising $1,000 every month with almost no work and no meaningful risk. Before paying, identify what you would want to know: where the money actually comes from, what work is required, what costs exist, what risks exist, and whether the income claim can be independently verified."
+            },
+            {
+              "type": "example",
+              "title": "When active income can be the better choice",
+              "content": "Someone with a valuable professional skill may choose to focus on increasing their salary or freelance rate instead of immediately creating a side business. If their earning power is strong, improving their main income may produce a better result with less complexity."
+            },
+            {
+              "type": "example",
+              "title": "When additional income can help",
+              "content": "Someone who has stable employment and enough capacity might gradually develop another income source. The additional source could provide extra savings, investment capital, or flexibility without requiring them to abandon their primary income."
+            },
+            {
+              "type": "heading",
+              "content": "The real goal: stronger financial flexibility"
+            },
+            {
+              "type": "text",
+              "content": "Financially healthy people do not necessarily have the most income streams or the most passive income. They understand where their money comes from, what each source requires, how reliable it is, and how it fits into their broader financial plan."
+            },
+            {
+              "type": "summary",
+              "title": "What to remember",
+              "content": "Active income is usually closely connected to your ongoing work. Passive income is generally less directly tied to your day-to-day effort, but it is not automatically effortless, guaranteed, or risk-free. Evaluate income opportunities by considering time, money, skills, risk, reliability, and long-term usefulness rather than chasing labels."
+            }
+          ],
+          "quiz": [
+            {
+              "order": 1,
+              "questionType": "multiple-choice",
+              "question": "Which best describes active income?",
+              "options": [
+                "Income generally earned by actively providing time, effort, skills, or services",
+                "Money that is guaranteed without any work or risk",
+                "Only income from investments",
+                "Money that can never change"
+              ],
+              "correctAnswer": 0,
+              "explanation": "Active income is generally tied closely to work, time, effort, skills, or services that you actively provide.",
+              "points": 10
+            },
+            {
+              "order": 2,
+              "questionType": "multiple-choice",
+              "question": "What is a common misunderstanding about passive income?",
+              "options": [
+                "That it means money requires absolutely no work, cost, risk, or attention",
+                "That it can sometimes require setup work",
+                "That it may be less dependent on daily labor",
+                "That different income sources have different risks"
+              ],
+              "correctAnswer": 0,
+              "explanation": "Passive income does not mean effortless or risk-free money. Many passive income sources require capital, setup, maintenance, or risk.",
+              "points": 10
+            },
+            {
+              "order": 3,
+              "questionType": "multiple-choice",
+              "question": "Why can a salary still be valuable even if it is active income?",
+              "options": [
+                "It can provide reliable cash flow, experience, benefits, and opportunities to increase earning power",
+                "Active income can never be useful",
+                "A salary automatically makes someone wealthy",
+                "Salary income has no connection to skills"
+              ],
+              "correctAnswer": 0,
+              "explanation": "Active income can provide stability and resources that help someone save, invest, develop skills, and improve their financial position.",
+              "points": 10
+            },
+            {
+              "order": 4,
+              "questionType": "multiple-choice",
+              "question": "A person spends months creating a course and later earns sales from it with less daily work. What does this illustrate?",
+              "options": [
+                "Income can become less directly tied to ongoing effort after substantial setup work",
+                "Passive income always requires no effort",
+                "The course has no financial risk",
+                "All digital products are guaranteed to make money"
+              ],
+              "correctAnswer": 0,
+              "explanation": "Some income-producing assets or systems require significant work first and may require less direct effort later.",
+              "points": 10
+            },
+            {
+              "order": 5,
+              "questionType": "multiple-choice",
+              "question": "What should you examine before accepting an opportunity advertised as passive income?",
+              "options": [
+                "Its source of income, required work, costs, risks, and realistic evidence of the claims",
+                "Only how attractive the advertised monthly income sounds",
+                "Whether someone online calls it guaranteed",
+                "How quickly you can pay for it"
+              ],
+              "correctAnswer": 0,
+              "explanation": "A responsible evaluation looks beyond the label and examines how the income is generated, what it requires, and what could go wrong.",
+              "points": 10
+            },
+            {
+              "order": 6,
+              "questionType": "multiple-choice",
+              "question": "Which statement is most accurate?",
+              "options": [
+                "The same income amount can come with very different time, money, skill, and risk requirements",
+                "All $500 income opportunities are equally valuable",
+                "Passive income is always better than active income",
+                "Income labels tell you everything you need to know"
+              ],
+              "correctAnswer": 0,
+              "explanation": "Income should be evaluated in context. Two opportunities producing the same amount may require very different resources and carry very different risks.",
+              "points": 10
+            },
+            {
+              "order": 7,
+              "questionType": "true-false",
+              "question": "Passive income is automatically guaranteed and risk-free.",
+              "options": [
+                "True",
+                "False"
+              ],
+              "correctAnswer": 1,
+              "explanation": "Passive income can involve financial risk, changing returns, expenses, maintenance, and uncertainty. The word passive does not mean guaranteed.",
+              "points": 10
+            }
+          ]
+        },
+        {
+          "slug": "increasing-earning-power",
+          "title": "Increasing Your Earning Power",
+          "estimatedDuration": 35,
+          "order": 2,
+          "published": true,
+          "contentBlocks": [
+            {
+              "type": "heading",
+              "content": "Earning more starts with becoming more valuable"
+            },
+            {
+              "type": "text",
+              "content": "Increasing your income is not only about working longer or harder. You can improve your earning power by developing useful skills, solving valuable problems, communicating your value, choosing better opportunities, and continuing to learn."
+            },
+            {
+              "type": "example",
+              "title": "Working harder is not always enough",
+              "content": "Two people can work the same number of hours while developing very different skills and results. Over time, that difference can affect their opportunities and income."
+            },
+            {
+              "type": "heading",
+              "content": "What is earning power?"
+            },
+            {
+              "type": "text",
+              "content": "Earning power is your ability to generate income through your skills, experience, work, business activity, or other valuable contributions. It can strengthen or weaken over time."
+            },
+            {
+              "type": "heading",
+              "content": "Useful skills can create more opportunities"
+            },
+            {
+              "type": "text",
+              "content": "A useful skill can make you better able to solve problems and can open additional opportunities. A skill does not guarantee higher income, but it can increase the number and quality of opportunities available to you."
+            },
+            {
+              "type": "example",
+              "title": "One skill, several uses",
+              "content": "Someone who learns bookkeeping may use it in a job, freelance for small businesses, manage their own finances better, or use the skill as a foundation for a larger service."
+            },
+            {
+              "type": "heading",
+              "content": "Not every skill has the same earning potential"
+            },
+            {
+              "type": "text",
+              "content": "Earning potential can be influenced by demand, difficulty, responsibility, scarcity, experience, location, industry, and the value a skill creates. A skill can be useful without being highly paid."
+            },
+            {
+              "type": "heading",
+              "content": "Experience becomes valuable when you learn from it"
+            },
+            {
+              "type": "text",
+              "content": "Years spent doing something do not automatically make someone more valuable. Experience is more useful when it improves judgment, speed, quality, problem-solving, and the ability to handle greater responsibility."
+            },
+            {
+              "type": "example",
+              "title": "Five years is not always the same",
+              "content": "Two people can each have five years of experience. One may have learned new tools, solved harder problems, and taken on more responsibility while the other repeated the same tasks without much development."
+            },
+            {
+              "type": "heading",
+              "content": "Communication is part of your value"
+            },
+            {
+              "type": "text",
+              "content": "Being good at something is not enough if nobody understands what you can do. Clear communication helps you explain your skills, understand other people's needs, show results, and build trust."
+            },
+            {
+              "type": "example",
+              "title": "Show the result",
+              "content": "Instead of saying, \"I am good at spreadsheets,\" someone might explain, \"I built a reporting system that reduced the time needed to prepare our weekly report.\" The second statement shows the result of the skill."
+            },
+            {
+              "type": "heading",
+              "content": "Solve problems people actually care about"
+            },
+            {
+              "type": "text",
+              "content": "People are generally more willing to pay for solutions to problems that matter to them. Connecting a skill to a useful problem can make that skill more valuable."
+            },
+            {
+              "type": "example",
+              "title": "A practical example",
+              "content": "Knowing how to design graphics is a skill. Using that skill to help a business create clear marketing materials is connecting the skill to a real problem."
+            },
+            {
+              "type": "heading",
+              "content": "Specialization can help you stand out"
+            },
+            {
+              "type": "text",
+              "content": "As you gain experience, specializing in a useful area can make your skills easier to recognize. However, being too narrow can make it harder to adapt, so a strong foundation plus useful specialization is often practical."
+            },
+            {
+              "type": "heading",
+              "content": "Negotiation can affect income"
+            },
+            {
+              "type": "text",
+              "content": "Sometimes you do not need an entirely new skill to improve your income. If you are already producing strong results or taking on more responsibility, learning to discuss compensation professionally can matter."
+            },
+            {
+              "type": "example",
+              "title": "Prepare before negotiating",
+              "content": "An employee who has taken on new responsibilities can collect evidence of their contributions and results before asking whether compensation can be reviewed. Good negotiation is about a clear conversation, not simply demanding more money."
+            },
+            {
+              "type": "heading",
+              "content": "A higher-paying job is not automatically the better job"
+            },
+            {
+              "type": "text",
+              "content": "When comparing jobs, consider more than salary. Look at commuting costs, hours, stability, benefits, stress, flexibility, learning opportunities, and future growth."
+            },
+            {
+              "type": "example",
+              "title": "Look beyond the paycheck",
+              "content": "A job paying $5,000 more per year may not be better if it creates large commuting costs, much longer hours, or poor long-term opportunities."
+            },
+            {
+              "type": "heading",
+              "content": "Misconception: working harder automatically means earning more"
+            },
+            {
+              "type": "text",
+              "content": "Hard work matters, but effort alone does not determine income. The type of work, skills involved, demand, results produced, opportunities, and negotiating position can also matter."
+            },
+            {
+              "type": "heading",
+              "content": "Misconception: a degree automatically guarantees high income"
+            },
+            {
+              "type": "text",
+              "content": "Education can be valuable, but a qualification does not automatically guarantee high income. The field, skills developed, experience, demand, and application of the knowledge all matter."
+            },
+            {
+              "type": "heading",
+              "content": "Misconception: the highest-paying career is always the best career"
+            },
+            {
+              "type": "text",
+              "content": "A high salary can be attractive, but career choices should also consider fit, working conditions, training costs, location, time demands, stability, stress, and growth opportunities."
+            },
+            {
+              "type": "heading",
+              "content": "Misconception: you need natural talent to become valuable"
+            },
+            {
+              "type": "text",
+              "content": "Natural ability can help, but many useful skills improve through practice, feedback, experience, and persistence. You can begin as a beginner and become valuable through consistent development."
+            },
+            {
+              "type": "heading",
+              "content": "Misconception: earning more automatically fixes financial problems"
+            },
+            {
+              "type": "text",
+              "content": "A higher income can create more room to save and invest, but it does not automatically improve financial health. If spending and debt rise just as quickly, someone can earn more without becoming much more secure."
+            },
+            {
+              "type": "example",
+              "title": "A raise can disappear into higher spending",
+              "content": "Jordan receives a $600 monthly raise but increases spending by $550. Income increased, but only $50 of additional monthly cash remains before considering other changes."
+            },
+            {
+              "type": "heading",
+              "content": "Protect your ability to earn"
+            },
+            {
+              "type": "text",
+              "content": "Increasing earning power also means maintaining it. Keep learning, stay adaptable, protect your reputation, build useful relationships, and avoid choices that unnecessarily damage your ability to work and grow."
+            },
+            {
+              "type": "interactive",
+              "title": "Earning-power decision check",
+              "content": "You have five hours each week to improve your financial future. Compare learning a useful skill, taking random short-term gigs, and improving an existing professional skill. Ask which choice is most likely to improve your future options rather than simply produce the fastest payment."
+            },
+            {
+              "type": "heading",
+              "content": "Build earning power step by step"
+            },
+            {
+              "type": "text",
+              "content": "Identify what you already do well. Choose one useful skill to improve. Practice it, apply it in real situations, learn from the results, and look for opportunities where the improved ability can create more income."
+            },
+            {
+              "type": "heading",
+              "content": "Do not chase every opportunity"
+            },
+            {
+              "type": "text",
+              "content": "Trying to learn everything or start every side hustle can create exhaustion instead of progress. Choose a small number of valuable improvements and follow through consistently."
+            },
+            {
+              "type": "summary",
+              "title": "What to remember",
+              "content": "Increasing earning power is about becoming better able to create useful value and access good opportunities. Skills, experience, communication, specialization, negotiation, adaptability, and thoughtful choices can all contribute. Higher income is useful, but the deeper goal is to increase your options and strengthen your financial future."
+            }
+          ],
+          "quiz": [
+            {
+              "order": 1,
+              "questionType": "multiple-choice",
+              "question": "What is earning power?",
+              "options": [
+                "Your ability to generate income through useful skills, experience, work, business activity, or other valuable contributions",
+                "The amount of cash currently in your wallet",
+                "A guaranteed salary for life",
+                "The number of hours you work each week"
+              ],
+              "correctAnswer": 0,
+              "explanation": "Earning power is your ability to generate income through the value you can provide and the opportunities available to you.",
+              "points": 10
+            },
+            {
+              "order": 2,
+              "questionType": "multiple-choice",
+              "question": "Which is generally the strongest way to increase earning power?",
+              "options": [
+                "Develop useful abilities, solve valuable problems, communicate your value, and make better opportunity choices",
+                "Always work as many hours as possible",
+                "Change jobs every few months",
+                "Choose the career with the highest advertised salary"
+              ],
+              "correctAnswer": 0,
+              "explanation": "Increasing earning power is broader than simply working more. Building useful abilities and making better decisions can improve future opportunities.",
+              "points": 10
+            },
+            {
+              "order": 3,
+              "questionType": "multiple-choice",
+              "question": "Why can two people with the same number of years of experience have different earning opportunities?",
+              "options": [
+                "Their skills, responsibilities, results, adaptability, and learning may be different",
+                "Years of experience always guarantee identical income",
+                "Experience has no effect on earning",
+                "The person who works the longest hours must always earn more"
+              ],
+              "correctAnswer": 0,
+              "explanation": "Experience becomes valuable when it builds useful skills, judgment, results, and the ability to handle greater responsibilities.",
+              "points": 10
+            },
+            {
+              "order": 4,
+              "questionType": "multiple-choice",
+              "question": "Why should someone look beyond salary when comparing two jobs?",
+              "options": [
+                "Costs, working conditions, stability, growth opportunities, time demands, and other trade-offs can change the real value of the offer",
+                "Salary never matters",
+                "All jobs have exactly the same costs",
+                "The highest salary is always the best choice"
+              ],
+              "correctAnswer": 0,
+              "explanation": "A job is a complete package of income, costs, time, conditions, risks, and opportunities.",
+              "points": 10
+            },
+            {
+              "order": 5,
+              "questionType": "multiple-choice",
+              "question": "Which statement about education is most accurate?",
+              "options": [
+                "Education can improve opportunities, but a qualification does not automatically guarantee high income",
+                "Education never affects income",
+                "Any degree guarantees financial success",
+                "Only formal education creates valuable skills"
+              ],
+              "correctAnswer": 0,
+              "explanation": "Education can be valuable, but its financial benefit depends on the field, skills developed, experience, demand, and how the knowledge is applied.",
+              "points": 10
+            },
+            {
+              "order": 6,
+              "questionType": "multiple-choice",
+              "question": "Jordan gets a $600 monthly raise but increases spending by $550. What is the most useful lesson?",
+              "options": [
+                "A higher income creates an opportunity, but spending decisions determine how much of the increase improves financial health",
+                "The raise was completely useless",
+                "Higher income automatically creates wealth",
+                "Jordan should spend the remaining $50 immediately"
+              ],
+              "correctAnswer": 0,
+              "explanation": "Income increases can improve financial health when some of the additional money is used intentionally rather than being absorbed by higher spending.",
+              "points": 10
+            },
+            {
+              "order": 7,
+              "questionType": "multiple-choice",
+              "question": "Which approach is most likely to strengthen earning power over time?",
+              "options": [
+                "Choose a useful skill, practice it, apply it, learn from results, and look for better opportunities",
+                "Learn every popular skill at once",
+                "Only chase the fastest-paying opportunity",
+                "Avoid changing or improving your skills"
+              ],
+              "correctAnswer": 0,
+              "explanation": "Consistent development and application of useful skills can gradually create better opportunities and increase earning ability.",
+              "points": 10
+            },
+            {
+              "order": 8,
+              "questionType": "true-false",
+              "question": "Working more hours is always the best way to increase income.",
+              "options": [
+                "True",
+                "False"
+              ],
+              "correctAnswer": 1,
+              "explanation": "Working more can increase income in some situations, but improving skills, value, opportunities, rates, or career choices can sometimes have a greater long-term effect.",
+              "points": 10
+            }
+          ]
+        }
+      ]
+    }
+  ]
+};
+
+module.exports = moneyBasics;

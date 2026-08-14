@@ -597,61 +597,30 @@ let courseDataCache = null;
        ========================================= */
 
 async function fetchCourses() {
-
   showLoading(true);
   hideError();
 
-  const container =
-    document.getElementById("courses-container");
-
   try {
+    const response = await fetch("/api/learn/courses");
+    const data = await response.json();
 
-    const response =
-      await fetch("/api/learn/courses");
-
-    const result =
-      await response.json();
-
-    console.log("Courses API response:", result);
+    const container =
+      document.getElementById("courses-container");
 
     if (
-      !response.ok ||
-      result.status !== "success"
+      response.ok &&
+      data.status === "success" &&
+      Array.isArray(data.data) &&
+      data.data.length > 0
     ) {
-      throw new Error(
-        result.message ||
-        "Unable to load courses."
-      );
-    }
-
-    const courses =
-      Array.isArray(result.data)
-        ? result.data
-        : [];
-
-    if (courses.length === 0) {
-
-      container.innerHTML = `
-        <div class="card">
-          <p>
-            No courses available yet.
-          </p>
-        </div>
-      `;
-
-      return;
-    }
-
-    container.innerHTML =
-      courses
+      container.innerHTML = data.data
         .map(
           course => `
             <div class="card">
 
               <h3>
                 ${escapeHtml(
-                  course.title ||
-                  "Untitled Course"
+                  course.title || "Untitled Course"
                 )}
               </h3>
 
@@ -673,26 +642,29 @@ async function fetchCourses() {
           `
         )
         .join("");
+    } else {
+      container.innerHTML = `
+        <div class="card">
+          <p>
+            No courses available yet.
+          </p>
+        </div>
+      `;
+    }
 
   } catch (error) {
-
-    console.error(
-      "fetchCourses error:",
-      error
-    );
+    console.error("fetchCourses error:", error);
 
     showError(
       "Unable to load courses."
     );
 
   } finally {
-
     showLoading(false);
-
   }
 }
 
-/* =========================================
+    /* =========================================
        OPEN COURSE
        ========================================= */
 

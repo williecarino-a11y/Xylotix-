@@ -1,0 +1,517 @@
+{
+  "slug": "what-could-go-right-what-could-go-wrong",
+  "title": "What Could Go Right, What Could Go Wrong?",
+  "estimatedDuration": 45,
+  "order": 3,
+  "published": true,
+  "contentBlocks": [
+    {
+      "type": "heading",
+      "content": "Every investment is a bet on an uncertain future"
+    },
+    {
+      "type": "text",
+      "content": "When you buy an investment, you are making a decision based on what you believe may happen in the future. The future is uncertain, so a good investor does not ask only, \"How much could I make?\" A better question is, \"What needs to happen for this investment to work, and what could cause it to fail?\""
+    },
+    {
+      "type": "callout",
+      "title": "The key idea",
+      "content": "Before buying an investment, think through both sides of the decision: what could go right, what could go wrong, what you are assuming, and how much damage a bad outcome could cause."
+    },
+    {
+      "type": "heading",
+      "content": "Start with the reason you want to invest"
+    },
+    {
+      "type": "text",
+      "content": "A sensible investment decision starts with a clear reason for owning the investment. You might want long-term growth, income, diversification, or exposure to a particular type of asset. If you cannot explain why you want to own something, it becomes easier to buy it simply because other people are buying it."
+    },
+    {
+      "type": "heading",
+      "content": "Ask what needs to happen for the investment to succeed"
+    },
+    {
+      "type": "text",
+      "content": "Different investments depend on different conditions. A company may need to increase sales and profits. A bond issuer needs to make its promised payments. A fund may depend on the performance of the assets it holds. Understanding these drivers helps you identify what your investment decision is actually depending on."
+    },
+    {
+      "type": "example",
+      "title": "A simple business example",
+      "content": "Imagine you are considering a company because you believe its new product could become very successful. Your investment may depend on customers actually wanting the product, the company producing it successfully, competitors not taking most of the market, and the business eventually generating enough profit to justify its price."
+    },
+    {
+      "type": "heading",
+      "content": "Separate facts from assumptions"
+    },
+    {
+      "type": "text",
+      "content": "Investors often mix facts with predictions without realizing it. A company's current revenue is a fact from its reported information. Saying its revenue will double next year is an assumption about the future. Strong decision-making requires knowing which parts of your reasoning are known and which parts are guesses."
+    },
+    {
+      "type": "interactive",
+      "title": "Fact or assumption?",
+      "content": "For each statement, ask: Is this something I know from reliable information, or is it something I expect to happen? The more important your decision is based on assumptions, the more carefully you should test those assumptions."
+    },
+    {
+      "type": "heading",
+      "content": "Build the upside case"
+    },
+    {
+      "type": "text",
+      "content": "The upside case describes what could happen if the important conditions develop favorably. This might include stronger sales, higher profits, successful products, falling interest rates, improving economic conditions, or other factors relevant to the investment."
+    },
+    {
+      "type": "heading",
+      "content": "But do not stop at the best-case scenario"
+    },
+    {
+      "type": "text",
+      "content": "An investment can look extremely attractive if you imagine only the best possible outcome. A more useful approach is to ask how realistic that outcome is and what would have to happen to reach it."
+    },
+    {
+      "type": "example",
+      "title": "The danger of a perfect story",
+      "content": "Suppose an investor believes a company will grow rapidly for ten years, dominate its industry, maintain high profit margins, and face little competition. Each assumption might sound reasonable by itself, but depending on all of them at once can make the investment decision much more fragile."
+    },
+    {
+      "type": "heading",
+      "content": "Build the downside case"
+    },
+    {
+      "type": "text",
+      "content": "The downside case asks what could go wrong. Sales could disappoint, costs could rise, competitors could become stronger, interest rates could change, customers could leave, a borrower could struggle to repay, or the underlying asset could lose value."
+    },
+    {
+      "type": "heading",
+      "content": "Ask how bad the downside could be"
+    },
+    {
+      "type": "text",
+      "content": "It is not enough to know that an investment could fall. Consider the possible size and duration of the loss and whether you could financially withstand it."
+    },
+    {
+      "type": "example",
+      "title": "A simple downside calculation",
+      "content": "Suppose you invest $5,000 and believe the investment could realistically fall by 30% during a bad outcome."
+    },
+    {
+      "type": "formula",
+      "content": "$5,000 × 30% = $1,500 potential decline"
+    },
+    {
+      "type": "text",
+      "content": "That would leave approximately $3,500. Thinking about the dollar impact can make the risk easier to understand than simply saying, \"It could fall 30%.\""
+    },
+    {
+      "type": "heading",
+      "content": "Think about the middle case too"
+    },
+    {
+      "type": "text",
+      "content": "Real outcomes do not have to be either spectacular success or complete failure. A realistic analysis considers a range of possible outcomes. The investment might perform reasonably well, disappoint somewhat, or perform much better than expected."
+    },
+    {
+      "type": "heading",
+      "content": "What assumptions are carrying the decision?"
+    },
+    {
+      "type": "text",
+      "content": "Some investment decisions depend heavily on a small number of assumptions. If one assumption is especially important, identify it explicitly. Then ask what evidence supports it and what could prove it wrong."
+    },
+    {
+      "type": "example",
+      "title": "Finding the important assumption",
+      "content": "Imagine you are considering a company because you believe its profits will grow by 20% every year. If the investment only looks attractive when 20% annual growth occurs, then that growth assumption is critical. If growth falls to 8%, the investment may look very different."
+    },
+    {
+      "type": "heading",
+      "content": "Do not confuse possibility with probability"
+    },
+    {
+      "type": "text",
+      "content": "Something being possible does not mean it is likely. An investment might theoretically increase tenfold, but that does not make a tenfold increase a sensible expectation. Investors should distinguish between what could happen and what is reasonably likely."
+    },
+    {
+      "type": "heading",
+      "content": "Do not confuse probability with certainty"
+    },
+    {
+      "type": "text",
+      "content": "Even a scenario that appears highly likely can fail to happen. Investment decisions involve uncertainty. Good analysis improves the quality of your decision; it does not give you a guarantee about the future."
+    },
+    {
+      "type": "heading",
+      "content": "Look for evidence, not just a convincing story"
+    },
+    {
+      "type": "text",
+      "content": "A persuasive investment story can make an opportunity feel obvious. But a story is not evidence by itself. Look for information that supports the claims being made and consider information that challenges them."
+    },
+    {
+      "type": "heading",
+      "content": "Ask what would change your mind"
+    },
+    {
+      "type": "text",
+      "content": "One of the strongest questions an investor can ask is: \"What information would make me reconsider this investment?\" If the answer is \"nothing,\" you may be protecting a belief rather than evaluating an investment."
+    },
+    {
+      "type": "example",
+      "title": "A decision rule",
+      "content": "Suppose you invest because you believe a company's competitive advantage will remain strong. Before buying, decide what evidence would suggest that advantage is weakening. If competitors begin taking customers rapidly or the company's economics deteriorate significantly, those changes may deserve a fresh review."
+    },
+    {
+      "type": "heading",
+      "content": "Consider what you are giving up"
+    },
+    {
+      "type": "text",
+      "content": "Choosing one investment means choosing not to use that money somewhere else. This is called opportunity cost. The question is not simply whether an investment could make money, but whether it is a better use of your money than the realistic alternatives available to you."
+    },
+    {
+      "type": "example",
+      "title": "Comparing alternatives",
+      "content": "Suppose you have $10,000 and are deciding between two investments. Investment A appears capable of producing higher returns but carries much greater uncertainty. Investment B has lower expected returns but better matches your goal and risk capacity. The better decision depends on more than the maximum possible return."
+    },
+    {
+      "type": "heading",
+      "content": "Think about what happens if you are wrong"
+    },
+    {
+      "type": "text",
+      "content": "You do not need to predict the future perfectly. You do need to understand the consequences of being wrong. A small position in an uncertain investment may be manageable, while putting most of your financial resources into the same idea could be dangerous."
+    },
+    {
+      "type": "heading",
+      "content": "Position size changes the consequences"
+    },
+    {
+      "type": "text",
+      "content": "The same investment can have very different consequences depending on how much of your money is committed to it. A 40% decline on a small position may be manageable. A 40% decline on most of your investment portfolio could seriously damage your financial plan."
+    },
+    {
+      "type": "formula",
+      "content": "Potential dollar loss = Amount invested × Percentage decline"
+    },
+    {
+      "type": "heading",
+      "content": "Watch for one-sided analysis"
+    },
+    {
+      "type": "text",
+      "content": "One-sided analysis focuses only on evidence that supports a decision. This can make an investment appear safer or more attractive than it really is. Deliberately searching for reasons your idea might be wrong can improve the quality of the decision."
+    },
+    {
+      "type": "heading",
+      "content": "Ask the opposite question"
+    },
+    {
+      "type": "interactive",
+      "title": "Challenge your investment idea",
+      "content": "If your first thought is \"This investment will do well,\" ask: \"What could make this investment perform badly?\" If your first thought is \"Everyone is buying it,\" ask: \"What am I missing?\" If your first thought is \"The price has already risen a lot,\" ask: \"Does the current price still make sense?\""
+    },
+    {
+      "type": "heading",
+      "content": "Be careful with recent performance"
+    },
+    {
+      "type": "text",
+      "content": "Strong recent performance can attract attention, but past performance does not guarantee future results. A recent rise may reflect genuine improvement, temporary excitement, changing expectations, or a combination of factors."
+    },
+    {
+      "type": "heading",
+      "content": "Consider what is already reflected in the price"
+    },
+    {
+      "type": "text",
+      "content": "An investment can have excellent underlying qualities and still be a poor purchase if the current price already assumes extremely optimistic future results. This is why evaluating the investment and evaluating the price both matter."
+    },
+    {
+      "type": "heading",
+      "content": "Look for hidden dependencies"
+    },
+    {
+      "type": "text",
+      "content": "An investment may appear diversified or independent while actually depending on the same underlying factor as other investments you own. Several investments can suffer together if they are exposed to the same company, industry, economic condition, interest-rate movement, or other risk."
+    },
+    {
+      "type": "heading",
+      "content": "Think about time"
+    },
+    {
+      "type": "text",
+      "content": "An investment thesis may require time to work. If your expected outcome depends on several years of business growth but you may need the money next year, there is a mismatch between the investment and your financial need."
+    },
+    {
+      "type": "heading",
+      "content": "Ask how you actually make money"
+    },
+    {
+      "type": "text",
+      "content": "Before buying, explain in simple language how the investment is expected to produce a return. Is the return expected to come from business growth, income payments, interest, rising asset prices, or a combination? If you cannot explain it clearly, investigate further."
+    },
+    {
+      "type": "example",
+      "title": "Explain it without jargon",
+      "content": "Instead of saying, \"I am buying this because of its future earnings multiple,\" try explaining the decision in plain language: \"I believe the business can generate more profit over time, and I believe the current price is reasonable compared with what that future business could be worth.\""
+    },
+    {
+      "type": "heading",
+      "content": "Check whether the return requires someone else to pay more"
+    },
+    {
+      "type": "text",
+      "content": "Some investments can produce cash flows such as interest, dividends, or business profits. Other speculative decisions may depend heavily on selling the asset later at a higher price. Understanding where your expected return is supposed to come from helps you distinguish investment from speculation."
+    },
+    {
+      "type": "heading",
+      "content": "Do not rely on a single prediction"
+    },
+    {
+      "type": "text",
+      "content": "Predictions about markets, businesses, interest rates, currencies, or economies can be wrong. A stronger approach is to consider several reasonable scenarios and ask whether the investment still makes sense if your most optimistic prediction does not happen."
+    },
+    {
+      "type": "heading",
+      "content": "Scenario thinking"
+    },
+    {
+      "type": "example",
+      "title": "Three possible outcomes",
+      "content": "Imagine an investment could produce a strong result if business growth is excellent, a modest result if growth is average, or a loss if growth disappoints significantly. Thinking through all three outcomes gives you a more complete picture than focusing only on the strongest result."
+    },
+    {
+      "type": "heading",
+      "content": "What would make the investment thesis fail?"
+    },
+    {
+      "type": "text",
+      "content": "An investment thesis is the basic reasoning behind your decision. It fails when the important conditions supporting that reasoning no longer hold. Identifying those conditions before investing can help you recognize when a review is necessary."
+    },
+    {
+      "type": "heading",
+      "content": "Do not move the goalposts"
+    },
+    {
+      "type": "text",
+      "content": "When an investment performs badly, investors may keep changing their original reasoning to justify continuing to hold it. A better approach is to compare what actually happened with what you originally expected and honestly reassess the situation."
+    },
+    {
+      "type": "heading",
+      "content": "A loss does not automatically mean the decision was bad"
+    },
+    {
+      "type": "text",
+      "content": "A thoughtful investment can lose money because the future is uncertain. A bad decision can sometimes make money by luck. The quality of an investment decision should be judged by the reasoning and information available when the decision was made, not only by the eventual result."
+    },
+    {
+      "type": "callout",
+      "title": "Important distinction",
+      "content": "Good decisions do not guarantee good outcomes, and bad decisions can sometimes produce good outcomes by chance."
+    },
+    {
+      "type": "heading",
+      "content": "Review the decision, not just the result"
+    },
+    {
+      "type": "text",
+      "content": "After an investment has had time to develop, ask what actually happened. Which assumptions were correct? Which were wrong? Did the underlying investment change? Did the price change because expectations changed? Reviewing decisions this way can improve your future investing without turning every outcome into a lesson about luck."
+    },
+    {
+      "type": "heading",
+      "content": "The danger of confirmation bias"
+    },
+    {
+      "type": "text",
+      "content": "Confirmation bias is the tendency to pay more attention to information that supports what you already believe. Investors can become attached to an investment and then interpret every piece of information as evidence that they were right."
+    },
+    {
+      "type": "heading",
+      "content": "Actively search for disconfirming evidence"
+    },
+    {
+      "type": "text",
+      "content": "If you believe an investment is attractive, deliberately look for credible reasons it may not be. This does not mean trying to prove yourself wrong at all costs. It means making sure your decision is strong enough to survive reasonable criticism."
+    },
+    {
+      "type": "heading",
+      "content": "A practical investment stress test"
+    },
+    {
+      "type": "interactive",
+      "title": "Stress-test the idea",
+      "content": "Ask: What if growth is slower than expected? What if costs rise? What if the price falls 30%? What if the investment takes years to work? What if the main assumption is wrong? What if I need the money earlier than expected? What if a better opportunity appears?"
+    },
+    {
+      "type": "heading",
+      "content": "Know when not to invest"
+    },
+    {
+      "type": "text",
+      "content": "Evaluating investments is not only about finding opportunities. Sometimes the correct decision is to wait, invest less, choose a different asset, or do nothing until you understand the opportunity better."
+    },
+    {
+      "type": "heading",
+      "content": "Avoid forced decisions"
+    },
+    {
+      "type": "text",
+      "content": "You do not have to invest simply because the market is moving or because someone says an opportunity will disappear soon. Pressure can make investors skip important questions and take risks they would not normally accept."
+    },
+    {
+      "type": "heading",
+      "content": "A simple decision framework"
+    },
+    {
+      "type": "text",
+      "content": "Before investing, move through five questions: What am I buying? Why do I think it can produce a return? What assumptions am I making? What could go wrong? What happens to my financial plan if I am wrong?"
+    },
+    {
+      "type": "heading",
+      "content": "Putting it all together"
+    },
+    {
+      "type": "text",
+      "content": "Strong investment evaluation is not about predicting the future with perfect accuracy. It is about understanding what you are buying, identifying the reasons it might work, challenging those reasons, estimating the possible downside, and deciding whether the investment still makes sense if reality turns out differently from your expectations."
+    },
+    {
+      "type": "summary",
+      "content": "Before buying an investment, think beyond the potential return. Identify what needs to happen for the investment to work, separate facts from assumptions, consider upside and downside scenarios, identify what could invalidate your reasoning, and understand what happens if you are wrong. Good investing requires decisions that can survive uncertainty rather than predictions that pretend uncertainty does not exist."
+    },
+    {
+      "type": "callout",
+      "title": "Remember",
+      "content": "Do not ask only, \"How much could I make?\" Ask, \"Why could this work, what could break the idea, and can I handle the outcome if I am wrong?\""
+    }
+  ],
+  "quizzes": [
+    {
+      "order": 1,
+      "questionType": "multiple-choice",
+      "question": "What should an investor ask before focusing on how much an investment could make?",
+      "options": [
+        "How quickly can I buy it?",
+        "What needs to happen for the investment to work, and what could cause it to fail?",
+        "How many people are talking about it?",
+        "Can I invest all my money in it?"
+      ],
+      "correctAnswer": 1,
+      "explanation": "A strong investment decision considers both the conditions for success and the possible reasons for failure."
+    },
+    {
+      "order": 2,
+      "questionType": "multiple-choice",
+      "question": "Which is an example of an assumption rather than a current fact?",
+      "options": [
+        "A company's reported revenue for the previous year",
+        "The number of shares currently outstanding",
+        "The belief that a company's revenue will double next year",
+        "The price shown for an investment today"
+      ],
+      "correctAnswer": 2,
+      "explanation": "Future growth is an expectation about what may happen, not a current fact."
+    },
+    {
+      "order": 3,
+      "questionType": "multiple-choice",
+      "question": "Why should an investor consider a downside scenario?",
+      "options": [
+        "Because every investment will definitely lose money",
+        "Because understanding possible losses helps the investor judge whether the risk is manageable",
+        "Because upside never matters",
+        "Because predicting the exact future is possible"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Considering the downside helps investors understand the consequences if things do not go as expected."
+    },
+    {
+      "order": 4,
+      "questionType": "multiple-choice",
+      "question": "You invest $5,000 and the investment falls by 30%. Approximately how much is the decline?",
+      "options": [
+        "$150",
+        "$500",
+        "$1,500",
+        "$3,500"
+      ],
+      "correctAnswer": 2,
+      "explanation": "$5,000 × 30% = $1,500."
+    },
+    {
+      "order": 5,
+      "questionType": "true-false",
+      "question": "Something being possible means it is automatically likely to happen.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctAnswer": 1,
+      "explanation": "An outcome can be possible without being likely."
+    },
+    {
+      "order": 6,
+      "questionType": "multiple-choice",
+      "question": "What is a useful question to ask when testing an investment idea?",
+      "options": [
+        "What information would make me reconsider this investment?",
+        "How can I make sure nobody disagrees with me?",
+        "How can I ignore negative information?",
+        "How can I invest before doing any research?"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Knowing what could change your mind helps prevent attachment to an investment idea."
+    },
+    {
+      "order": 7,
+      "questionType": "multiple-choice",
+      "question": "Why can position size matter when evaluating an investment?",
+      "options": [
+        "A larger position can make a bad outcome much more damaging to your finances",
+        "Position size guarantees the investment will rise",
+        "A smaller position always produces a higher return",
+        "Position size removes investment risk"
+      ],
+      "correctAnswer": 0,
+      "explanation": "The amount committed determines how much a gain or loss can affect the overall financial plan."
+    },
+    {
+      "order": 8,
+      "questionType": "multiple-choice",
+      "question": "What is confirmation bias in investing?",
+      "options": [
+        "Comparing several investments fairly",
+        "Paying more attention to information that supports what you already believe",
+        "Automatically selling a losing investment",
+        "Diversifying across different assets"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Confirmation bias can cause investors to overlook information that challenges their existing belief."
+    },
+    {
+      "order": 9,
+      "questionType": "multiple-choice",
+      "question": "Which statement best describes a good investment decision?",
+      "options": [
+        "It guarantees a profitable outcome",
+        "It depends on making a perfect prediction",
+        "It considers the evidence, assumptions, possible outcomes, and consequences of being wrong",
+        "It follows whatever investment is currently popular"
+      ],
+      "correctAnswer": 2,
+      "explanation": "Good decisions are built around sound reasoning under uncertainty, not guaranteed outcomes."
+    },
+    {
+      "order": 10,
+      "questionType": "multiple-choice",
+      "question": "When might the correct investment decision be to wait?",
+      "options": [
+        "When you do not understand the investment well enough to judge its risks",
+        "Whenever an investment has any uncertainty",
+        "Whenever someone else is making money",
+        "Only when prices are rising"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Waiting can be sensible when you do not yet understand what you are buying or the risks involved."
+    }
+  ]
+}

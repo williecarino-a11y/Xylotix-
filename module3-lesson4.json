@@ -1,0 +1,622 @@
+{
+  "slug": "how-to-decide-if-you-can-afford-something",
+  "title": "How to Decide If You Can Afford Something",
+  "estimatedDuration": 35,
+  "order": 4,
+  "published": true,
+  "contentBlocks": [
+    {
+      "order": 1,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Having enough money today does not always mean you can afford something"
+      }
+    },
+    {
+      "order": 2,
+      "type": "text",
+      "data": {
+        "text": "You can have enough money in your account to buy something and still decide that buying it would put pressure on your finances. Affordability is about more than whether you can make the payment right now. It is about what the purchase does to your bills, goals, savings, future choices, and financial breathing room."
+      }
+    },
+    {
+      "order": 3,
+      "type": "example",
+      "data": {
+        "title": "The $500 purchase",
+        "text": "You have $600 available and see something that costs $500. You technically have enough money to buy it. But if you also need $450 for upcoming bills, spending $500 would leave you unable to cover them. Having the money today does not make the purchase affordable."
+      }
+    },
+    {
+      "order": 4,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Start with what your money already needs to do"
+      }
+    },
+    {
+      "order": 5,
+      "type": "text",
+      "data": {
+        "text": "Before deciding whether you can afford a purchase, look at the money you already need for essential expenses and known commitments. Rent or housing, food, utilities, transportation, debt payments, insurance, and other important costs may need to be covered before optional spending."
+      }
+    },
+    {
+      "order": 6,
+      "type": "example",
+      "data": {
+        "title": "Money with a job already",
+        "text": "You have $1,200 available. You know that $700 will be needed for upcoming essential expenses and $200 is committed to a debt payment. That leaves $300 before considering other goals or unexpected costs. Treating the full $1,200 as available spending money could create a problem."
+      }
+    },
+    {
+      "order": 7,
+      "type": "callout",
+      "data": {
+        "title": "A useful question",
+        "text": "Do not ask only, 'Can I pay for this?' Ask, 'After I pay for this, will I still be able to handle what matters next?'"
+      }
+    },
+    {
+      "order": 8,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Separate needs, wants, and timing"
+      }
+    },
+    {
+      "order": 9,
+      "type": "text",
+      "data": {
+        "text": "A purchase can be useful without being urgent. Something can be a want today and become a need later, or a need today can be solved with a cheaper option. Affordability also depends on timing. A purchase that is manageable next month may be a bad decision this week if important expenses are due now."
+      }
+    },
+    {
+      "order": 10,
+      "type": "example",
+      "data": {
+        "title": "Need, want, or timing problem?",
+        "text": "Your laptop is failing and you need one for work. Replacing it may be reasonable. But choosing a $2,000 model when a reliable $900 option would do the job may create unnecessary financial pressure. The question is not only whether you need a laptop; it is which option fits your situation."
+      }
+    },
+    {
+      "order": 11,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Look at the full price, not just the purchase price"
+      }
+    },
+    {
+      "order": 12,
+      "type": "text",
+      "data": {
+        "text": "Some purchases create additional costs. A car can require fuel, maintenance, insurance, and repairs. A device can require accessories, software, or a service plan. A pet can require food and care. A cheap purchase can become expensive when its ongoing costs are included."
+      }
+    },
+    {
+      "order": 13,
+      "type": "example",
+      "data": {
+        "title": "The real cost of a device",
+        "text": "A device costs $400, but you also expect to spend $10 per month on a required service. Over 12 months, the service costs $120. The first-year cost becomes $520: $400 + ($10 × 12)."
+      }
+    },
+    {
+      "order": 14,
+      "type": "interactive",
+      "data": {
+        "title": "Find the real first-year cost",
+        "text": "A product costs $300 and requires a $15 monthly service. Calculate the first-year cost: $300 + ($15 × 12) = $480. Before buying, ask whether the full cost still fits your plans."
+      }
+    },
+    {
+      "order": 15,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Recurring payments deserve special attention"
+      }
+    },
+    {
+      "order": 16,
+      "type": "text",
+      "data": {
+        "text": "A recurring payment can look small because it is spread across months. But once you agree to it, part of your future income is committed. Always convert recurring costs into a longer time period so you can see what they really mean."
+      }
+    },
+    {
+      "order": 17,
+      "type": "example",
+      "data": {
+        "title": "The $20 subscription",
+        "text": "A subscription costs $20 per month. That is $240 over 12 months. If you have three similar subscriptions at $20 each, they cost $60 per month and $720 per year."
+      }
+    },
+    {
+      "order": 18,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "A small monthly payment can become a large commitment"
+      }
+    },
+    {
+      "order": 19,
+      "type": "text",
+      "data": {
+        "text": "Monthly payments can make purchases feel easier than they really are. When you see only the monthly amount, you may overlook how long the payment continues and what else that money could have supported."
+      }
+    },
+    {
+      "order": 20,
+      "type": "example",
+      "data": {
+        "title": "The $75 monthly commitment",
+        "text": "A purchase requires $75 per month for 24 months. The scheduled payments total $1,800: $75 × 24. Before agreeing, ask whether you would still be comfortable committing that $75 every month if your circumstances changed."
+      }
+    },
+    {
+      "order": 21,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Check what the purchase would delay"
+      }
+    },
+    {
+      "order": 22,
+      "type": "text",
+      "data": {
+        "text": "Money spent on one purchase cannot be used for another purpose at the same time. A purchase may delay saving, debt repayment, investing, an emergency fund, education, travel, or another important goal. This does not automatically make the purchase wrong. It simply makes the trade-off visible."
+      }
+    },
+    {
+      "order": 23,
+      "type": "example",
+      "data": {
+        "title": "The $600 choice",
+        "text": "You have $600 available and are considering a new phone. The same $600 could also cover a planned course, strengthen your savings, or reduce a debt balance. The right choice depends on your priorities, but comparing the alternatives helps you make the decision deliberately."
+      }
+    },
+    {
+      "order": 24,
+      "type": "interactive",
+      "data": {
+        "title": "The alternative-use test",
+        "text": "Before making a large optional purchase, write down three other things the same money could do. Then ask which choice would give you the most useful result over the next 6 to 12 months."
+      }
+    },
+    {
+      "order": 25,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Think beyond this month"
+      }
+    },
+    {
+      "order": 26,
+      "type": "text",
+      "data": {
+        "text": "A purchase may feel affordable when viewed as a single event. Looking ahead can reveal the effect more clearly. Consider what the purchase will cost over six months or one year and whether it creates continuing commitments."
+      }
+    },
+    {
+      "order": 27,
+      "type": "example",
+      "data": {
+        "title": "Six months later",
+        "text": "You buy something for $300 and also pay $25 each month for a related service. After six months, you have spent $450: $300 + ($25 × 6). Looking beyond the first payment shows a more realistic picture."
+      }
+    },
+    {
+      "order": 28,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Use a simple affordability check"
+      }
+    },
+    {
+      "order": 29,
+      "type": "text",
+      "data": {
+        "text": "A practical affordability check is to look at what you have available, subtract money already needed for important expenses and commitments, and then consider the purchase and its future costs. The exact method can vary depending on your situation, but the goal is to avoid treating committed money as free money."
+      }
+    },
+    {
+      "order": 30,
+      "type": "example",
+      "data": {
+        "title": "A simple calculation",
+        "text": "You have $1,500 available. Upcoming essential expenses are $800, existing commitments are $250, and you want to spend $300 on an optional purchase. After those amounts, you would have $150 left: $1,500 − $800 − $250 − $300 = $150. Ask whether that remaining amount provides enough room for your other needs and unexpected costs."
+      }
+    },
+    {
+      "order": 31,
+      "type": "interactive",
+      "data": {
+        "title": "Try the affordability check",
+        "text": "You have $2,000 available. You expect $1,000 of essential expenses, $300 of existing commitments, and you are considering a $400 purchase. Calculate what remains: $2,000 − $1,000 − $300 − $400 = $300. Then ask whether $300 is enough breathing room for your situation."
+      }
+    },
+    {
+      "order": 32,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Affordability is personal"
+      }
+    },
+    {
+      "order": 33,
+      "type": "text",
+      "data": {
+        "text": "There is no single purchase price that is affordable for everyone. Two people can look at the same $500 purchase and make completely different decisions because their income, expenses, savings, debts, responsibilities, and goals are different."
+      }
+    },
+    {
+      "order": 34,
+      "type": "example",
+      "data": {
+        "title": "Same price, different situations",
+        "text": "One person has $5,000 in savings, stable income, and no major upcoming expenses. Another has $600 available and several bills due soon. A $500 purchase may be reasonable for one person and financially risky for the other."
+      }
+    },
+    {
+      "order": 35,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Do not use someone else's spending as your affordability test"
+      }
+    },
+    {
+      "order": 36,
+      "type": "text",
+      "data": {
+        "text": "Someone else buying something does not tell you whether you can afford it. Social media, friends, family, and advertising can make a purchase seem normal or necessary. Your decision should be based on your own numbers and priorities."
+      }
+    },
+    {
+      "order": 37,
+      "type": "example",
+      "data": {
+        "title": "Everyone seems to have one",
+        "text": "You see people around you using an expensive device and start feeling that you should buy one too. Your current device still works, and buying the new one would use most of your available savings. The fact that others own it does not change your financial situation."
+      }
+    },
+    {
+      "order": 38,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Affordability and value are different questions"
+      }
+    },
+    {
+      "order": 39,
+      "type": "text",
+      "data": {
+        "text": "You can afford something and still decide it is not worth the money. Affordability asks whether the purchase fits your finances. Value asks whether what you receive is worth what you give up. Good decisions consider both."
+      }
+    },
+    {
+      "order": 40,
+      "type": "example",
+      "data": {
+        "title": "Affordable but not valuable",
+        "text": "You can comfortably afford a $100 item, but after comparing it with alternatives you realize you would rarely use it. You can afford it, but that does not mean buying it is the best use of your money."
+      }
+    },
+    {
+      "order": 41,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Waiting can be a financial tool"
+      }
+    },
+    {
+      "order": 42,
+      "type": "text",
+      "data": {
+        "text": "Waiting gives you time to check your numbers, compare alternatives, watch for a better opportunity, or decide that you do not want the purchase after all. Waiting is especially useful for optional purchases that are not urgent."
+      }
+    },
+    {
+      "order": 43,
+      "type": "example",
+      "data": {
+        "title": "The 30-day decision",
+        "text": "You want a $700 item but it is not urgent. Instead of buying immediately, you wait 30 days while keeping the money available. During that time you compare alternatives and continue with your other financial plans. At the end of the month, you can decide with more information."
+      }
+    },
+    {
+      "order": 44,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Do not confuse financing with affordability"
+      }
+    },
+    {
+      "order": 45,
+      "type": "text",
+      "data": {
+        "text": "If a seller offers monthly payments, the purchase may appear more affordable than it really is. Financing changes how you pay; it does not automatically make the underlying purchase cheaper. Consider the total payments, interest, fees, and length of the commitment."
+      }
+    },
+    {
+      "order": 46,
+      "type": "example",
+      "data": {
+        "title": "The affordable-looking payment",
+        "text": "A $1,200 purchase is offered at $60 per month for 24 months. The scheduled payments total $1,440 before considering any additional fees or charges. The monthly amount looks manageable, but the total commitment is $1,440."
+      }
+    },
+    {
+      "order": 47,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Check what happens if your situation changes"
+      }
+    },
+    {
+      "order": 48,
+      "type": "text",
+      "data": {
+        "text": "A purchase that fits perfectly when everything goes well may become difficult if your income drops or an unexpected expense appears. Before taking on a recurring commitment, consider how much flexibility you would have if your circumstances changed."
+      }
+    },
+    {
+      "order": 49,
+      "type": "example",
+      "data": {
+        "title": "The income-change test",
+        "text": "You are considering a new $100 monthly commitment. Ask what would happen if your income fell for several months. If losing that $100 of monthly flexibility would make essential expenses difficult to cover, the commitment deserves more caution."
+      }
+    },
+    {
+      "order": 50,
+      "type": "interactive",
+      "data": {
+        "title": "The six-month test",
+        "text": "Imagine you make the purchase today. What will you have spent on it after six months? What other financial goal could that money have supported? Would you still be comfortable with the decision six months from now?"
+      }
+    },
+    {
+      "order": 51,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Ask four questions before a major purchase"
+      }
+    },
+    {
+      "order": 52,
+      "type": "text",
+      "data": {
+        "text": "Before a major purchase, ask: Can I afford the full cost? Do I actually need or strongly value it? What will I have to give up or delay? What happens if my circumstances change? These questions can expose problems before money leaves your hands."
+      }
+    },
+    {
+      "order": 53,
+      "type": "example",
+      "data": {
+        "title": "A quick decision check",
+        "text": "You want to spend $900 on a purchase. You check your upcoming expenses, ongoing commitments, the full cost of ownership, the alternatives, and your other goals. You discover that a $600 alternative would meet the same need. The affordability check helped you avoid spending $300 more."
+      }
+    },
+    {
+      "order": 54,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Sometimes the best answer is not yet"
+      }
+    },
+    {
+      "order": 55,
+      "type": "text",
+      "data": {
+        "text": "Saying 'not yet' can be a smart financial decision. You may decide to wait until you have more savings, finish another commitment, compare better options, or have more room in your budget. Delaying a purchase is not the same as permanently giving it up."
+      }
+    },
+    {
+      "order": 56,
+      "type": "example",
+      "data": {
+        "title": "Save first, buy later",
+        "text": "You want a $1,000 item but decide not to finance it. Instead, you save $125 each month. After eight months, you have $1,000: $125 × 8. You can then decide whether the purchase is still worth making without taking on a new monthly debt payment."
+      }
+    },
+    {
+      "order": 57,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "The goal is not to make every decision cheap"
+      }
+    },
+    {
+      "order": 58,
+      "type": "text",
+      "data": {
+        "text": "A financially smart decision is not always the cheapest option. Sometimes paying more for quality, reliability, safety, time, or usefulness can make sense. The goal is to understand the cost and make sure the choice fits your priorities."
+      }
+    },
+    {
+      "order": 59,
+      "type": "callout",
+      "data": {
+        "title": "Make the decision fit your life",
+        "text": "Affordability is not about proving that you can buy something. It is about making sure the purchase fits your real financial situation without creating unnecessary pressure."
+      }
+    },
+    {
+      "order": 60,
+      "type": "summary",
+      "data": {
+        "title": "What to remember",
+        "points": [
+          "Having enough money to pay for something today does not automatically mean you can afford it.",
+          "Look at upcoming expenses, commitments, goals, and future needs before spending.",
+          "Consider the full cost, including recurring costs and related expenses.",
+          "Convert monthly costs into six-month or yearly numbers when useful.",
+          "Ask what the same money could do instead.",
+          "Affordability is personal because everyone's income, expenses, responsibilities, and goals are different.",
+          "You can afford something and still decide that it is not worth the money.",
+          "Financing can spread payments out without making the purchase cheaper.",
+          "Waiting can give you time to save, compare options, and make a better decision.",
+          "The goal is not to spend as little as possible. The goal is to make purchases that fit your situation and priorities."
+        ]
+      }
+    }
+  ],
+  "quiz": [
+    {
+      "order": 1,
+      "questionType": "multiple-choice",
+      "question": "Why does having enough money to buy something today not automatically mean you can afford it?",
+      "options": [
+        "Some of that money may already be needed for bills, commitments, goals, or future needs",
+        "Having money always means you should spend it",
+        "Affordability depends only on the price tag",
+        "You can never afford anything you want"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Money you currently have may already be needed for important expenses and commitments. Affordability should consider what happens after the purchase.",
+      "points": 10
+    },
+    {
+      "order": 2,
+      "questionType": "multiple-choice",
+      "question": "A device costs $400 and has a $10 monthly service for 12 months. What is the first-year cost?",
+      "options": [
+        "$520",
+        "$410",
+        "$480",
+        "$640"
+      ],
+      "correctAnswer": 0,
+      "explanation": "$400 + ($10 × 12) = $520.",
+      "points": 10
+    },
+    {
+      "order": 3,
+      "questionType": "multiple-choice",
+      "question": "A subscription costs $20 per month. About how much does it cost over 12 months?",
+      "options": [
+        "$240",
+        "$120",
+        "$200",
+        "$480"
+      ],
+      "correctAnswer": 0,
+      "explanation": "$20 × 12 = $240.",
+      "points": 10
+    },
+    {
+      "order": 4,
+      "questionType": "multiple-choice",
+      "question": "You have $1,500 available, $800 of upcoming essential expenses, $250 of commitments, and want to spend $300. How much remains?",
+      "options": [
+        "$150",
+        "$450",
+        "$700",
+        "$950"
+      ],
+      "correctAnswer": 0,
+      "explanation": "$1,500 − $800 − $250 − $300 = $150.",
+      "points": 10
+    },
+    {
+      "order": 5,
+      "questionType": "multiple-choice",
+      "question": "Why should you consider what else the purchase money could do?",
+      "options": [
+        "The same money could support another goal or priority",
+        "Every purchase is a bad decision",
+        "Saving money is always better than spending it",
+        "Money can only be used for one type of goal"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Spending money on one thing means it cannot be used for another purpose at the same time. Seeing the alternatives makes the trade-off clearer.",
+      "points": 10
+    },
+    {
+      "order": 6,
+      "questionType": "true-false",
+      "question": "If a seller offers a low monthly payment, the purchase is automatically affordable.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctAnswer": 1,
+      "explanation": "A low monthly payment can hide a long commitment and a higher total cost. Check the total payments, fees, interest, and duration.",
+      "points": 10
+    },
+    {
+      "order": 7,
+      "questionType": "multiple-choice",
+      "question": "What is the difference between affordability and value?",
+      "options": [
+        "Affordability asks whether the purchase fits your finances; value asks whether it is worth what you give up",
+        "They mean exactly the same thing",
+        "Value only applies to expensive purchases",
+        "Affordability only applies to cash purchases"
+      ],
+      "correctAnswer": 0,
+      "explanation": "A purchase can be affordable but still not provide enough value to justify the money.",
+      "points": 10
+    },
+    {
+      "order": 8,
+      "questionType": "multiple-choice",
+      "question": "You want a $1,000 item and save $125 each month. How many months would it take to save $1,000?",
+      "options": [
+        "8 months",
+        "6 months",
+        "10 months",
+        "12 months"
+      ],
+      "correctAnswer": 0,
+      "explanation": "$1,000 ÷ $125 = 8 months.",
+      "points": 10
+    },
+    {
+      "order": 9,
+      "questionType": "multiple-choice",
+      "question": "Which question is most useful before taking on a new recurring payment?",
+      "options": [
+        "What happens if my income or expenses change?",
+        "Will other people know I bought it?",
+        "Can I make the first payment today?",
+        "Does the monthly number look small?"
+      ],
+      "correctAnswer": 0,
+      "explanation": "A recurring commitment affects future flexibility, so you should consider whether you could still handle it if your circumstances changed.",
+      "points": 10
+    },
+    {
+      "order": 10,
+      "questionType": "multiple-choice",
+      "question": "What is the main goal of an affordability check?",
+      "options": [
+        "To make sure a purchase fits your finances and priorities before you commit",
+        "To prevent yourself from ever buying anything enjoyable",
+        "To always choose the cheapest option",
+        "To spend all available money before the month ends"
+      ],
+      "correctAnswer": 0,
+      "explanation": "An affordability check helps you understand the purchase's effect on your current finances, future flexibility, and other priorities.",
+      "points": 10
+    }
+  ]
+}

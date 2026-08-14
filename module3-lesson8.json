@@ -1,0 +1,620 @@
+{
+  "slug": "credit-cards-buy-now-pay-later-and-easy-to-use-debt",
+  "title": "Credit Cards, Buy Now Pay Later, and Other Easy-to-Use Debt",
+  "estimatedDuration": 35,
+  "order": 8,
+  "published": true,
+  "contentBlocks": [
+    {
+      "order": 1,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Easy to use does not mean free to use"
+      }
+    },
+    {
+      "order": 2,
+      "type": "text",
+      "data": {
+        "text": "Credit cards, buy now pay later plans, overdrafts, and other borrowing tools can make purchases easier. But the convenience can hide the fact that you are committing future money."
+      }
+    },
+    {
+      "order": 3,
+      "type": "example",
+      "data": {
+        "title": "The easy purchase",
+        "text": "You want a $600 item and can pay for it today. A payment service offers four payments of $150, making the purchase feel easier. The important question is still whether the $600 commitment fits your financial situation."
+      }
+    },
+    {
+      "order": 4,
+      "type": "callout",
+      "data": {
+        "title": "The payment method does not change the price",
+        "text": "Splitting a purchase into payments can change when you pay, but it does not automatically make the purchase cheaper."
+      }
+    },
+    {
+      "order": 5,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Credit is not extra income"
+      }
+    },
+    {
+      "order": 6,
+      "type": "text",
+      "data": {
+        "text": "A credit limit is money you may be allowed to borrow, not money you have earned. Using credit today means part of your future income may already be committed."
+      }
+    },
+    {
+      "order": 7,
+      "type": "example",
+      "data": {
+        "title": "A $3,000 credit limit",
+        "text": "Having a $3,000 credit limit does not mean you have $3,000 more income. If you spend $1,000 and must repay it later, your future cash flow has to handle that obligation."
+      }
+    },
+    {
+      "order": 8,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Buy now pay later changes the timing, not the responsibility"
+      }
+    },
+    {
+      "order": 9,
+      "type": "text",
+      "data": {
+        "text": "A buy now pay later plan can divide a purchase into scheduled payments. You still have an obligation to make those payments, and fees or other charges may apply depending on the provider and agreement."
+      }
+    },
+    {
+      "order": 10,
+      "type": "example",
+      "data": {
+        "title": "Four small payments",
+        "text": "A $400 purchase is split into four $100 payments. Each payment is small compared with $400, but your total scheduled payments are still $400 before any additional charges."
+      }
+    },
+    {
+      "order": 11,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Small payments can hide a large total commitment"
+      }
+    },
+    {
+      "order": 12,
+      "type": "text",
+      "data": {
+        "text": "When several purchases are divided into small payments, each individual payment can look harmless. The combined commitments can become much larger."
+      }
+    },
+    {
+      "order": 13,
+      "type": "example",
+      "data": {
+        "title": "Three payment plans",
+        "text": "You have three plans requiring $40, $60, and $75 per month. Together they require $175 each month. Looking at each payment separately can make the total commitment easy to underestimate."
+      }
+    },
+    {
+      "order": 14,
+      "type": "interactive",
+      "data": {
+        "title": "Add your payments",
+        "text": "Suppose you have four recurring debt payments of $35, $45, $60, and $80. What is the combined monthly commitment? Add them together before deciding whether another payment fits."
+      }
+    },
+    {
+      "order": 15,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "A credit card balance can become expensive when it is carried"
+      }
+    },
+    {
+      "order": 16,
+      "type": "text",
+      "data": {
+        "text": "If a credit card balance is not fully paid according to the account terms, interest and other charges may increase the cost of carrying the balance. The exact terms depend on the card agreement."
+      }
+    },
+    {
+      "order": 17,
+      "type": "example",
+      "data": {
+        "title": "The balance that remains",
+        "text": "You spend $800 on a credit card and do not clear the balance as required by the account terms. Interest can cause the amount you ultimately pay to exceed the original $800."
+      }
+    },
+    {
+      "order": 18,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Minimum payments can make debt last longer"
+      }
+    },
+    {
+      "order": 19,
+      "type": "text",
+      "data": {
+        "text": "A minimum payment may keep an account from being considered unpaid according to its terms, but paying only the minimum can leave a balance outstanding for much longer and may increase the total interest paid."
+      }
+    },
+    {
+      "order": 20,
+      "type": "example",
+      "data": {
+        "title": "The payment that looks affordable",
+        "text": "A $2,000 balance may have a minimum payment that looks manageable. But if the balance is carried for a long period, interest can add substantially to the eventual cost."
+      }
+    },
+    {
+      "order": 21,
+      "type": "callout",
+      "data": {
+        "title": "A low payment is not necessarily a low-cost option",
+        "text": "Always consider how long the debt will last and how much you will pay in total."
+      }
+    },
+    {
+      "order": 22,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Promotional offers need careful reading"
+      }
+    },
+    {
+      "order": 23,
+      "type": "text",
+      "data": {
+        "text": "A credit product may advertise an introductory rate, special payment period, or promotional offer. Before accepting, find out what happens after the promotional period and which conditions apply."
+      }
+    },
+    {
+      "order": 24,
+      "type": "example",
+      "data": {
+        "title": "The temporary offer",
+        "text": "A card offers a special introductory rate for several months. If you expect to carry a balance beyond that period, you should understand the terms that will apply afterward."
+      }
+    },
+    {
+      "order": 25,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Late payments can create additional problems"
+      }
+    },
+    {
+      "order": 26,
+      "type": "text",
+      "data": {
+        "text": "Missing a required payment may lead to fees or other consequences depending on the agreement. Repeated missed payments can make debt harder to manage and may affect your access to credit."
+      }
+    },
+    {
+      "order": 27,
+      "type": "example",
+      "data": {
+        "title": "The missed payment",
+        "text": "You have three separate payment commitments and accidentally miss one. A fee may apply, and now you have to find money for both the missed obligation and your other upcoming payments."
+      }
+    },
+    {
+      "order": 28,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Using several payment services can complicate your finances"
+      }
+    },
+    {
+      "order": 29,
+      "type": "text",
+      "data": {
+        "text": "Having multiple cards, payment plans, and borrowing accounts can make it harder to remember due dates and track the total amount you owe."
+      }
+    },
+    {
+      "order": 30,
+      "type": "example",
+      "data": {
+        "title": "The scattered obligations",
+        "text": "You have one credit card payment, two buy now pay later plans, and a personal loan. Each commitment may look manageable alone, but together they reduce how much of your future income is flexible."
+      }
+    },
+    {
+      "order": 31,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Before using credit, check your future cash flow"
+      }
+    },
+    {
+      "order": 32,
+      "type": "text",
+      "data": {
+        "text": "Ask whether your expected future income can comfortably cover the new payment along with your existing obligations and essential expenses."
+      }
+    },
+    {
+      "order": 33,
+      "type": "interactive",
+      "data": {
+        "title": "The future-money test",
+        "text": "You expect $2,500 of monthly income. Essential expenses are $1,600 and existing debt payments are $400. A new purchase would require another $250 each month. Calculate what would remain before deciding whether the commitment is comfortable."
+      }
+    },
+    {
+      "order": 34,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Do not let available credit determine your spending"
+      }
+    },
+    {
+      "order": 35,
+      "type": "text",
+      "data": {
+        "text": "A larger available credit limit can make larger purchases feel possible. Your spending decisions should instead be based on what your finances can sustainably support."
+      }
+    },
+    {
+      "order": 36,
+      "type": "example",
+      "data": {
+        "title": "The increased limit",
+        "text": "Your credit limit rises from $2,000 to $5,000. Your income has not changed. The higher limit gives you more borrowing capacity, not more money to spend safely."
+      }
+    },
+    {
+      "order": 37,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Separate needs from convenience"
+      }
+    },
+    {
+      "order": 38,
+      "type": "text",
+      "data": {
+        "text": "Borrowing for an urgent essential expense and borrowing for an impulse purchase are different situations. Before using easy credit, ask whether the purchase is necessary, planned, and worth committing future money to."
+      }
+    },
+    {
+      "order": 39,
+      "type": "example",
+      "data": {
+        "title": "The impulse upgrade",
+        "text": "Your current phone works, but you see a new model advertised with small monthly payments. The small payment can make the upgrade feel inexpensive even though you are taking on a new obligation for something you do not need."
+      }
+    },
+    {
+      "order": 40,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Compare the cash price with the financed cost"
+      }
+    },
+    {
+      "order": 41,
+      "type": "text",
+      "data": {
+        "text": "When a purchase is financed, compare the cash price with the total of all required payments and fees. This reveals whether financing adds a meaningful cost."
+      }
+    },
+    {
+      "order": 42,
+      "type": "example",
+      "data": {
+        "title": "Cash versus payments",
+        "text": "An item costs $900 in cash. A financing plan requires $85 for 12 months plus a $40 fee. The scheduled payments total $1,020, and the total including the fee is $1,060. Financing therefore adds $160 compared with the $900 cash price."
+      }
+    },
+    {
+      "order": 43,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Watch for stacking"
+      }
+    },
+    {
+      "order": 44,
+      "type": "text",
+      "data": {
+        "text": "Stacking happens when you take on several small commitments at the same time. Each one may appear affordable, but the combined payments can become a serious monthly obligation."
+      }
+    },
+    {
+      "order": 45,
+      "type": "interactive",
+      "data": {
+        "title": "The stacked-payment check",
+        "text": "You already owe $120, $75, and $45 each month. A new plan would add $90. Your total would become $330 per month. Calculate the total before deciding whether another purchase fits."
+      }
+    },
+    {
+      "order": 46,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Credit can reduce future flexibility"
+      }
+    },
+    {
+      "order": 47,
+      "type": "text",
+      "data": {
+        "text": "Every new debt payment uses part of your future income. The more fixed commitments you create, the less money remains available for emergencies, savings, opportunities, or unexpected expenses."
+      }
+    },
+    {
+      "order": 48,
+      "type": "example",
+      "data": {
+        "title": "The emergency problem",
+        "text": "You add $300 of monthly debt payments because your income is currently comfortable. A few months later, an unexpected expense appears. The new debt payment has not disappeared, so less of your income is available to handle the emergency."
+      }
+    },
+    {
+      "order": 49,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Ask what happens if your income changes"
+      }
+    },
+    {
+      "order": 50,
+      "type": "interactive",
+      "data": {
+        "title": "The income-change test",
+        "text": "Imagine your income falls by 20% for several months. Would your existing credit-card, buy now pay later, and loan payments still be manageable alongside essential expenses? If not, taking on more debt may be too risky."
+      }
+    },
+    {
+      "order": 51,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Know when convenience is costing too much"
+      }
+    },
+    {
+      "order": 52,
+      "type": "text",
+      "data": {
+        "text": "A payment plan may be convenient, but convenience has a financial cost when fees or interest are added. Compare that cost with the benefit of paying over time."
+      }
+    },
+    {
+      "order": 53,
+      "type": "example",
+      "data": {
+        "title": "Paying for convenience",
+        "text": "You can save and buy an item for $500 in three months, or finance it today for total payments of $575. The financing convenience costs $75. You should decide whether getting the item earlier is worth that additional cost."
+      }
+    },
+    {
+      "order": 54,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Have a clear reason before using easy credit"
+      }
+    },
+    {
+      "order": 55,
+      "type": "text",
+      "data": {
+        "text": "Before using a credit card or payment plan, identify exactly why you are using it and how the commitment will be repaid. If the plan depends on hoping that future money will somehow appear, reconsider."
+      }
+    },
+    {
+      "order": 56,
+      "type": "interactive",
+      "data": {
+        "title": "The commitment checklist",
+        "text": "Before accepting easy credit, check four things: the purchase, the total cost, the payment schedule, and your ability to keep paying if something unexpected happens."
+      }
+    },
+    {
+      "order": 57,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Easy credit should be a tool, not a spending excuse"
+      }
+    },
+    {
+      "order": 58,
+      "type": "text",
+      "data": {
+        "text": "Credit can be useful when used deliberately and managed according to the agreement. The problem begins when easy access to borrowing changes what you buy or causes you to commit money you cannot comfortably spare."
+      }
+    },
+    {
+      "order": 59,
+      "type": "summary",
+      "data": {
+        "title": "What to remember",
+        "points": [
+          "Credit is borrowed money, not extra income.",
+          "Small payments can hide a large total commitment.",
+          "Add all your payment obligations together instead of judging them separately.",
+          "Compare the cash price with the total financed cost.",
+          "Understand interest, fees, promotional periods, and late-payment consequences.",
+          "Do not let your available credit limit determine what you spend.",
+          "Consider how new debt affects your future flexibility.",
+          "Think about what happens if your income falls or an unexpected expense appears."
+        ]
+      }
+    },
+    {
+      "order": 60,
+      "type": "callout",
+      "data": {
+        "title": "The easy-credit rule",
+        "text": "Before saying yes to an easy payment option, ask: What will I pay in total, how many commitments am I already carrying, and will this still make sense if my financial situation changes?"
+      }
+    }
+  ],
+  "quizzes": [
+    {
+      "order": 1,
+      "questionType": "multiple-choice",
+      "question": "What is the most important thing to remember about a credit limit?",
+      "options": [
+        "It is borrowing capacity, not extra income",
+        "It is money you have earned",
+        "It guarantees you can afford anything up to the limit",
+        "It removes the need to repay purchases"
+      ],
+      "correctAnswer": 0,
+      "explanation": "A credit limit shows how much you may be able to borrow. It does not increase your income or guarantee affordability.",
+      "points": 10
+    },
+    {
+      "order": 2,
+      "questionType": "multiple-choice",
+      "question": "You have monthly payment commitments of $40, $60, and $75. What is the combined amount?",
+      "options": [
+        "$175",
+        "$135",
+        "$165",
+        "$185"
+      ],
+      "correctAnswer": 0,
+      "explanation": "$40 + $60 + $75 = $175.",
+      "points": 10
+    },
+    {
+      "order": 3,
+      "questionType": "multiple-choice",
+      "question": "An item costs $900 in cash. A financing plan requires $85 for 12 months plus a $40 fee. What is the total financed cost?",
+      "options": [
+        "$1,060",
+        "$1,020",
+        "$940",
+        "$900"
+      ],
+      "correctAnswer": 0,
+      "explanation": "$85 × 12 = $1,020. Add the $40 fee and the total is $1,060.",
+      "points": 10
+    },
+    {
+      "order": 4,
+      "questionType": "multiple-choice",
+      "question": "Why can several small payment plans become risky?",
+      "options": [
+        "Their combined monthly commitments can become large",
+        "Small payments are never real obligations",
+        "Multiple payment plans always reduce debt",
+        "Each payment cancels the others"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Several small commitments can add up to a significant amount of money leaving your income each month.",
+      "points": 10
+    },
+    {
+      "order": 5,
+      "questionType": "true-false",
+      "question": "A larger credit limit means you have more income available to spend.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctAnswer": 1,
+      "explanation": "A credit limit increases borrowing capacity, not income.",
+      "points": 10
+    },
+    {
+      "order": 6,
+      "questionType": "multiple-choice",
+      "question": "What should you compare when deciding whether financing a purchase is worthwhile?",
+      "options": [
+        "The cash price versus the total financed cost",
+        "Only the monthly payment",
+        "Only the size of the credit limit",
+        "Only how quickly the purchase can be approved"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Comparing the cash price with the total financed cost shows whether paying over time adds a meaningful cost.",
+      "points": 10
+    },
+    {
+      "order": 7,
+      "questionType": "multiple-choice",
+      "question": "What can happen when you carry a credit card balance instead of clearing it according to the account terms?",
+      "options": [
+        "Interest and other charges may increase the total cost",
+        "The balance automatically disappears",
+        "The purchase becomes free",
+        "The credit limit becomes income"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Carrying a balance can result in interest and other charges according to the account terms.",
+      "points": 10
+    },
+    {
+      "order": 8,
+      "questionType": "multiple-choice",
+      "question": "You already have $240 in monthly debt payments and consider a new plan requiring $90. What would your combined monthly debt payments become?",
+      "options": [
+        "$330",
+        "$240",
+        "$300",
+        "$390"
+      ],
+      "correctAnswer": 0,
+      "explanation": "$240 + $90 = $330.",
+      "points": 10
+    },
+    {
+      "order": 9,
+      "questionType": "multiple-choice",
+      "question": "What is a useful question before accepting a new payment plan?",
+      "options": [
+        "Can I comfortably keep making this payment if my situation changes?",
+        "How much credit can I use before anyone notices?",
+        "What is the largest purchase I can make?",
+        "How many payment plans can I open today?"
+      ],
+      "correctAnswer": 0,
+      "explanation": "A strong decision considers whether the commitment remains manageable when circumstances change.",
+      "points": 10
+    },
+    {
+      "order": 10,
+      "questionType": "multiple-choice",
+      "question": "What is the best general lesson about easy-to-use debt?",
+      "options": [
+        "Convenient borrowing should still be treated as a real financial commitment",
+        "Small payments mean purchases are free",
+        "A high credit limit means you should spend more",
+        "Borrowing is always better than saving"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Credit and payment plans can be useful tools, but they commit future money and should be evaluated based on total cost, affordability, and risk.",
+      "points": 10
+    }
+  ]
+}

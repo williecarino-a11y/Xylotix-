@@ -1,0 +1,464 @@
+{
+  "slug": "how-to-manage-investment-risk",
+  "title": "How to Manage Investment Risk Without Avoiding Investing",
+  "estimatedDuration": 45,
+  "order": 4,
+  "published": true,
+  "contentBlocks": [
+    {
+      "type": "heading",
+      "content": "Risk cannot be completely removed"
+    },
+    {
+      "type": "text",
+      "content": "Every investment involves some form of risk. The goal is not to find an investment with zero risk. The goal is to understand the risks you are taking and manage them so one bad outcome does not destroy your financial plan."
+    },
+    {
+      "type": "callout",
+      "title": "The key idea",
+      "content": "Good risk management does not mean avoiding investing. It means taking risks deliberately, in amounts and types that fit your goals, time horizon, and ability to handle losses."
+    },
+    {
+      "type": "heading",
+      "content": "Start with your goal"
+    },
+    {
+      "type": "text",
+      "content": "Before choosing an investment, identify what the money is for. Money needed soon for an important expense generally cannot tolerate the same amount of investment volatility as money intended for a goal many years away."
+    },
+    {
+      "type": "example",
+      "title": "Two different goals"
+    },
+    {
+      "type": "text",
+      "content": "Suppose you have $5,000 for a major expense you expect to pay next year and another $5,000 intended for a long-term goal 20 years away. Treating both amounts exactly the same could expose the near-term money to unnecessary risk."
+    },
+    {
+      "type": "heading",
+      "content": "Understand your time horizon"
+    },
+    {
+      "type": "text",
+      "content": "Your time horizon is the amount of time before you expect to need the money. A longer horizon can provide more opportunity to remain invested through short-term market movements, while a short horizon leaves less time to recover from a decline."
+    },
+    {
+      "type": "heading",
+      "content": "Know your risk capacity"
+    },
+    {
+      "type": "text",
+      "content": "Risk capacity is how much financial loss you can actually withstand without seriously damaging your financial situation. It is different from simply saying that you are comfortable with risk."
+    },
+    {
+      "type": "example",
+      "title": "Risk tolerance versus risk capacity"
+    },
+    {
+      "type": "text",
+      "content": "An investor might say they are comfortable with a 30% decline, but if they need the invested money for rent or tuition next month, their financial situation may not have the capacity to absorb that decline."
+    },
+    {
+      "type": "heading",
+      "content": "Diversification"
+    },
+    {
+      "type": "text",
+      "content": "Diversification means spreading investments across different assets, businesses, sectors, regions, or other exposures so that one poor outcome does not necessarily determine the result of the entire portfolio."
+    },
+    {
+      "type": "example",
+      "title": "Why concentration can be dangerous"
+    },
+    {
+      "type": "text",
+      "content": "Imagine putting $10,000 into one company. If that company experiences severe problems, a large portion of your money could be affected at once. A diversified portfolio can reduce the impact of one company performing badly."
+    },
+    {
+      "type": "callout",
+      "title": "Diversification is not a guarantee",
+      "content": "Diversification can reduce concentration risk, but it cannot guarantee that a portfolio will not lose money."
+    },
+    {
+      "type": "heading",
+      "content": "Avoid putting everything into one idea"
+    },
+    {
+      "type": "text",
+      "content": "Concentration can happen when too much money depends on one company, one industry, one country, one asset type, or one investment strategy. The more dependent your financial outcome is on one thing, the more damaging a failure of that thing can become."
+    },
+    {
+      "type": "heading",
+      "content": "Understand what you own"
+    },
+    {
+      "type": "text",
+      "content": "One of the simplest forms of risk management is understanding the investment before buying it. Know what produces its potential return, what could cause its value to fall, what fees apply, how easily it can be sold, and what could cause you to lose some or all of your money."
+    },
+    {
+      "type": "heading",
+      "content": "Do not invest because something is popular"
+    },
+    {
+      "type": "text",
+      "content": "Popularity is not proof of quality. An investment can become fashionable because of excitement, social media attention, recent price increases, or speculation. Buying without understanding the investment can expose you to risks you did not intend to take."
+    },
+    {
+      "type": "heading",
+      "content": "Do not confuse a high return with a safe investment"
+    },
+    {
+      "type": "text",
+      "content": "A high advertised or historical return does not automatically mean an investment is safe. High potential returns may come with higher uncertainty or a greater chance of loss."
+    },
+    {
+      "type": "heading",
+      "content": "Think about the possibility of permanent loss"
+    },
+    {
+      "type": "text",
+      "content": "Price volatility is not the only concern. An investment can suffer a permanent loss if the underlying business fails, a borrower cannot repay, an asset loses its economic usefulness, or another fundamental problem destroys value."
+    },
+    {
+      "type": "heading",
+      "content": "Keep near-term money available"
+    },
+    {
+      "type": "text",
+      "content": "Money that you may need soon should not automatically be exposed to large investment fluctuations. Having accessible savings for important near-term needs can reduce the chance that you will be forced to sell a volatile investment during a downturn."
+    },
+    {
+      "type": "example",
+      "title": "Why accessible savings matter"
+    },
+    {
+      "type": "text",
+      "content": "Suppose your essential expenses are $2,000 per month and you have no accessible savings. A sudden financial emergency could force you to sell investments at an unfavorable time. Keeping appropriate cash reserves can reduce that pressure."
+    },
+    {
+      "type": "heading",
+      "content": "Position size matters"
+    },
+    {
+      "type": "text",
+      "content": "Even an investment you understand can become dangerous if it represents too large a portion of your financial resources. Limiting the size of a risky position can prevent one investment from causing disproportionate damage."
+    },
+    {
+      "type": "example",
+      "title": "A simple position-size calculation"
+    },
+    {
+      "type": "text",
+      "content": "Suppose you have $20,000 available for investing and decide that a particular high-risk investment should represent no more than 5% of that amount."
+    },
+    {
+      "type": "formula",
+      "content": "$20,000 × 5% = $1,000"
+    },
+    {
+      "type": "text",
+      "content": "A $1,000 position means that even a complete loss of that particular investment would not destroy the entire $20,000 investment amount. It would still be a serious loss, but the damage would be limited."
+    },
+    {
+      "type": "heading",
+      "content": "Understand fees"
+    },
+    {
+      "type": "text",
+      "content": "Fees can reduce investment returns. Even when a fee looks small, repeated fees can have a meaningful effect over many years because money paid in fees is money that is no longer available to compound."
+    },
+    {
+      "type": "heading",
+      "content": "Watch out for leverage"
+    },
+    {
+      "type": "text",
+      "content": "Borrowing money to invest can magnify both gains and losses. If an investment falls while borrowed money still has to be repaid, losses can become much more damaging."
+    },
+    {
+      "type": "callout",
+      "title": "Important",
+      "content": "Leverage can make a bad investment outcome worse because the debt obligation does not automatically disappear when the investment falls."
+    },
+    {
+      "type": "heading",
+      "content": "Do not use money you cannot afford to lose for speculation"
+    },
+    {
+      "type": "text",
+      "content": "Speculative investments can have substantial uncertainty. Money required for essential expenses, emergency needs, or critical short-term goals should not automatically be placed into highly speculative investments."
+    },
+    {
+      "type": "heading",
+      "content": "Have a plan before the market becomes emotional"
+    },
+    {
+      "type": "text",
+      "content": "A written or clearly defined investment plan can make it easier to respond rationally when markets become volatile. The plan can define goals, time horizon, diversification, acceptable risk, and circumstances that would cause you to review an investment."
+    },
+    {
+      "type": "heading",
+      "content": "Rebalancing"
+    },
+    {
+      "type": "text",
+      "content": "Over time, different investments can grow at different rates. This can cause the portfolio to become more concentrated or more risky than originally intended. Rebalancing means adjusting the portfolio back toward its intended allocation."
+    },
+    {
+      "type": "example",
+      "title": "A simple rebalancing example"
+    },
+    {
+      "type": "text",
+      "content": "Imagine a portfolio begins with 60% in Investment A and 40% in Investment B. If A grows much faster, the portfolio might eventually become 75% A and 25% B. If the original plan was 60/40, the investor may decide to rebalance."
+    },
+    {
+      "type": "heading",
+      "content": "Do not constantly react to headlines"
+    },
+    {
+      "type": "text",
+      "content": "Financial news can make ordinary market movements feel urgent. Constantly changing an investment strategy in response to headlines can lead to emotional decisions, unnecessary trading, and higher costs."
+    },
+    {
+      "type": "heading",
+      "content": "But do not ignore important changes"
+    },
+    {
+      "type": "text",
+      "content": "Risk management does not mean blindly holding an investment forever. If the underlying facts change materially, the investment no longer fits the goal, or the investor's financial circumstances change, reviewing the plan may be appropriate."
+    },
+    {
+      "type": "heading",
+      "content": "Insurance and investing solve different problems"
+    },
+    {
+      "type": "text",
+      "content": "Insurance can protect against certain financial risks such as unexpected medical costs, property damage, or other covered events. Investing is primarily about allocating money toward potential future growth or income. Protecting against major financial shocks can make it easier to invest for the long term."
+    },
+    {
+      "type": "heading",
+      "content": "Risk management is about survival"
+    },
+    {
+      "type": "text",
+      "content": "A powerful way to think about risk is to ask whether a bad outcome could permanently damage your ability to continue pursuing your financial goals. Avoiding catastrophic losses can be more important than maximizing every possible gain."
+    },
+    {
+      "type": "heading",
+      "content": "The risk of doing nothing"
+    },
+    {
+      "type": "text",
+      "content": "Avoiding all investment risk is not necessarily risk-free. Money that stays in cash for a long period can lose purchasing power because prices may rise. The right balance depends on the purpose of the money, the time horizon, and the investor's circumstances."
+    },
+    {
+      "type": "heading",
+      "content": "Common misconceptions"
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: Good investors eliminate risk"
+    },
+    {
+      "type": "text",
+      "content": "Reality: Risk cannot be eliminated completely. Good investors learn to identify, control, and accept appropriate risks."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: Diversification means you cannot lose money"
+    },
+    {
+      "type": "text",
+      "content": "Reality: Diversification can reduce concentration risk, but diversified investments can still fall in value."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: More investments always mean more diversification"
+    },
+    {
+      "type": "text",
+      "content": "Reality: Owning many investments that behave similarly may provide less diversification than it appears. What matters is how the investments are exposed to different risks."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: A long-term investor can ignore risk"
+    },
+    {
+      "type": "text",
+      "content": "Reality: A long horizon can help with some short-term volatility, but investors can still suffer permanent losses and may still need money before the long-term goal arrives."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: The safest investment is always the best investment"
+    },
+    {
+      "type": "text",
+      "content": "Reality: The appropriate investment depends on the goal. An investment that is too risky can be unsuitable, but an investment that cannot keep up with a long-term goal may also create problems."
+    },
+    {
+      "type": "heading",
+      "content": "A practical risk-management checklist"
+    },
+    {
+      "type": "interactive",
+      "title": "Before making an investment",
+      "content": "Ask: What is my goal? When will I need the money? How much could I lose? Could the loss permanently damage my finances? What could cause this investment to lose value? Am I diversified? Are there fees? Am I borrowing to invest? Do I understand what I am buying? Can I remain calm if the price falls?"
+    },
+    {
+      "type": "heading",
+      "content": "A simple risk-management framework"
+    },
+    {
+      "type": "text",
+      "content": "Think of risk management as five steps: identify the risk, understand its possible impact, limit the amount of damage it could cause, monitor whether the risk has changed, and adjust your plan when necessary."
+    },
+    {
+      "type": "heading",
+      "content": "Putting it all together"
+    },
+    {
+      "type": "text",
+      "content": "Investing is not about predicting every future price movement. It is about making sensible decisions under uncertainty. A strong investor understands risk, accepts that volatility is normal, diversifies appropriately, protects near-term financial needs, controls concentration, understands what they own, and avoids decisions driven purely by fear or excitement."
+    },
+    {
+      "type": "summary",
+      "content": "Investment risk cannot be eliminated, but it can be managed. Start with the goal and time horizon, understand your ability to withstand losses, diversify, control position sizes, maintain appropriate accessible savings, understand fees and leverage, and have a plan for volatile markets. Good risk management is not avoiding investing; it is making sure one bad outcome cannot destroy your broader financial plan."
+    },
+    {
+      "type": "callout",
+      "title": "Remember",
+      "content": "The goal is not to avoid every risk. The goal is to avoid taking risks that could permanently damage your ability to reach your financial goals."
+    }
+  ],
+  "quiz": [
+    {
+      "order": 1,
+      "questionType": "multiple-choice",
+      "question": "What is the main purpose of investment risk management?",
+      "options": [
+        "To eliminate every possible investment loss",
+        "To make every investment profitable",
+        "To understand and control risks so one bad outcome does not destroy the financial plan",
+        "To avoid investing completely"
+      ],
+      "correctAnswer": 2,
+      "explanation": "Risk management cannot eliminate all losses, but it can limit how damaging bad outcomes are."
+    },
+    {
+      "order": 2,
+      "questionType": "multiple-choice",
+      "question": "Why does time horizon matter when managing investment risk?",
+      "options": [
+        "Because investments always rise over long periods",
+        "Because a longer horizon can provide more opportunity to remain invested through short-term volatility",
+        "Because long-term investments have zero risk",
+        "Because time determines the guaranteed return"
+      ],
+      "correctAnswer": 1,
+      "explanation": "A longer horizon can provide more time to deal with short-term fluctuations, but it does not guarantee profit."
+    },
+    {
+      "order": 3,
+      "questionType": "multiple-choice",
+      "question": "What does diversification primarily help reduce?",
+      "options": [
+        "All investment risk",
+        "Concentration risk",
+        "Inflation everywhere",
+        "Every possible market decline"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Diversification reduces dependence on one investment or source of risk."
+    },
+    {
+      "order": 4,
+      "questionType": "multiple-choice",
+      "question": "You have $20,000 and decide that a high-risk investment should represent no more than 5% of your investment amount. What is 5% of $20,000?",
+      "options": [
+        "$100",
+        "$500",
+        "$1,000",
+        "$5,000"
+      ],
+      "correctAnswer": 2,
+      "explanation": "$20,000 × 5% = $1,000."
+    },
+    {
+      "order": 5,
+      "questionType": "true-false",
+      "question": "Diversification guarantees that a portfolio cannot lose money.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Diversification can reduce concentration risk, but diversified portfolios can still lose money."
+    },
+    {
+      "order": 6,
+      "questionType": "multiple-choice",
+      "question": "Why can borrowing money to invest increase risk?",
+      "options": [
+        "Debt disappears when an investment falls",
+        "Borrowing guarantees higher returns",
+        "Losses can be magnified while the debt still has to be repaid",
+        "Borrowing removes volatility"
+      ],
+      "correctAnswer": 2,
+      "explanation": "Leverage can magnify losses and the debt obligation remains even when the investment falls."
+    },
+    {
+      "order": 7,
+      "questionType": "multiple-choice",
+      "question": "Which money is generally least suitable for highly volatile investments?",
+      "options": [
+        "Money needed for an essential expense soon",
+        "Money intended for a distant long-term goal",
+        "Money that is genuinely available for long-term investing",
+        "Money that the investor does not expect to need soon"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Near-term essential money may not have enough time to recover from a market decline."
+    },
+    {
+      "order": 8,
+      "questionType": "multiple-choice",
+      "question": "What should an investor do before buying an unfamiliar investment?",
+      "options": [
+        "Buy it because it is popular",
+        "Understand what it is, how it can make or lose money, and what risks it has",
+        "Assume its recent return will continue",
+        "Invest as much as possible immediately"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Understanding an investment is a basic part of managing risk."
+    },
+    {
+      "order": 9,
+      "questionType": "multiple-choice",
+      "question": "What is rebalancing?",
+      "options": [
+        "Selling every investment during a market decline",
+        "Changing a portfolio back toward its intended allocation after investments grow at different rates",
+        "Buying only the investment that recently performed best",
+        "Avoiding all investments"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Rebalancing can restore a portfolio toward its intended risk and allocation."
+    },
+    {
+      "order": 10,
+      "questionType": "multiple-choice",
+      "question": "Which statement best summarizes good investment risk management?",
+      "options": [
+        "Avoid every investment that can fall in value",
+        "Take as much risk as possible to maximize returns",
+        "Understand risks, limit potentially damaging exposure, diversify appropriately, and keep investing aligned with your goals",
+        "Follow financial headlines and change investments constantly"
+      ],
+      "correctAnswer": 2,
+      "explanation": "Good risk management is about deliberate, controlled risk rather than avoiding investing or chasing maximum returns."
+    }
+  ]
+}

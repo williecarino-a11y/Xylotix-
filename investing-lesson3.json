@@ -1,0 +1,501 @@
+{
+  "slug": "risk-return-and-uncertainty",
+  "title": "Risk, Return, and Uncertainty",
+  "estimatedDuration": 45,
+  "order": 3,
+  "published": true,
+  "contentBlocks": [
+    {
+      "type": "heading",
+      "content": "Every investment decision involves uncertainty"
+    },
+    {
+      "type": "text",
+      "content": "When you invest, you are committing money today with the expectation of receiving some future benefit. That benefit might come from an increase in value, income, or both. The important point is that the future outcome is uncertain. Understanding that uncertainty is at the heart of investing."
+    },
+    {
+      "type": "callout",
+      "title": "The core idea",
+      "content": "Return is what you hope to gain. Risk is the uncertainty around what you will actually get."
+    },
+    {
+      "type": "heading",
+      "content": "What is investment return?"
+    },
+    {
+      "type": "text",
+      "content": "Investment return describes how much an investment has gained or lost over a period relative to the amount invested. Return can come from an increase in the investment's value, income received from the investment, or both."
+    },
+    {
+      "type": "example",
+      "title": "A simple return calculation",
+      "content": "Suppose you invest $1,000 and the investment later becomes worth $1,100. Ignoring fees, taxes, and income, your gain is $100."
+    },
+    {
+      "type": "formula",
+      "content": "Gain = $1,100 − $1,000 = $100"
+    },
+    {
+      "type": "formula",
+      "content": "Return = ($100 ÷ $1,000) × 100 = 10%"
+    },
+    {
+      "type": "heading",
+      "content": "Returns can also be negative"
+    },
+    {
+      "type": "text",
+      "content": "An investment does not have to increase in value. If an investment falls below the amount originally invested, the investor has a negative return over that period."
+    },
+    {
+      "type": "example",
+      "title": "A negative return",
+      "content": "You invest $1,000 and the investment later falls to $900. Your loss is $100, which represents a 10% decline from the original amount."
+    },
+    {
+      "type": "formula",
+      "content": "($900 − $1,000) ÷ $1,000 × 100 = −10%"
+    },
+    {
+      "type": "heading",
+      "content": "What is investment risk?"
+    },
+    {
+      "type": "text",
+      "content": "Investment risk is the possibility that the actual outcome will be different from what you expect. That difference can involve losing money, receiving less income than expected, experiencing large price movements, or being unable to access money when needed."
+    },
+    {
+      "type": "heading",
+      "content": "Risk does not mean guaranteed loss"
+    },
+    {
+      "type": "text",
+      "content": "Saying that an investment is risky does not mean that you will definitely lose money. It means there is greater uncertainty about the outcome. An investment can be risky even if it eventually produces a positive return."
+    },
+    {
+      "type": "example",
+      "title": "Uncertainty in action",
+      "content": "Imagine two investments. Investment A is expected to produce a small but relatively predictable return. Investment B could produce a much higher return, but it could also lose a significant amount. Investment B has greater uncertainty."
+    },
+    {
+      "type": "heading",
+      "content": "Why higher potential returns often involve more risk"
+    },
+    {
+      "type": "text",
+      "content": "Investors generally expect to be compensated for taking greater uncertainty. An opportunity offering a potentially higher return may also expose the investor to larger losses or a wider range of possible outcomes."
+    },
+    {
+      "type": "callout",
+      "title": "Important distinction",
+      "content": "Higher potential return does not mean higher guaranteed return. The word 'potential' matters."
+    },
+    {
+      "type": "heading",
+      "content": "The risk-return relationship is not a guarantee"
+    },
+    {
+      "type": "text",
+      "content": "A risky investment is not automatically a good investment just because it offers a possibility of a high return. Investors must consider whether the potential reward is reasonable for the risks they are accepting."
+    },
+    {
+      "type": "heading",
+      "content": "Volatility is not exactly the same as permanent loss"
+    },
+    {
+      "type": "text",
+      "content": "Volatility describes how much and how quickly an investment's price moves. A volatile investment may rise and fall significantly. A temporary decline is not necessarily the same as permanently losing the money."
+    },
+    {
+      "type": "example",
+      "title": "Temporary decline",
+      "content": "Suppose an investment falls from $1,000 to $750 and later recovers to $1,100. During the decline, the investment was volatile, but the temporary fall did not become a permanent loss for an investor who remained invested."
+    },
+    {
+      "type": "heading",
+      "content": "But volatility can still matter"
+    },
+    {
+      "type": "text",
+      "content": "Even if a price decline is temporary, it can still matter. An investor who needs the money during the decline may be forced to sell at an unfavorable price. This is one reason time horizon is important."
+    },
+    {
+      "type": "heading",
+      "content": "Different kinds of investment risk"
+    },
+    {
+      "type": "text",
+      "content": "Investment risk is not one single thing. Different investments can expose investors to different risks."
+    },
+    {
+      "type": "heading",
+      "content": "Market risk"
+    },
+    {
+      "type": "text",
+      "content": "Market risk is the possibility that the value of an investment will decline because broader market conditions change. Economic conditions, investor expectations, interest rates, and other factors can influence markets."
+    },
+    {
+      "type": "heading",
+      "content": "Business risk"
+    },
+    {
+      "type": "text",
+      "content": "When you invest in a business, the business itself can perform poorly. Weak sales, rising costs, competition, poor decisions, or other problems can affect its value."
+    },
+    {
+      "type": "heading",
+      "content": "Inflation risk"
+    },
+    {
+      "type": "text",
+      "content": "Inflation risk is the possibility that rising prices reduce the purchasing power of your investment returns or savings."
+    },
+    {
+      "type": "heading",
+      "content": "Interest-rate risk"
+    },
+    {
+      "type": "text",
+      "content": "Changes in interest rates can affect the value of some investments, particularly certain bonds and interest-sensitive assets."
+    },
+    {
+      "type": "heading",
+      "content": "Liquidity risk"
+    },
+    {
+      "type": "text",
+      "content": "Liquidity risk is the possibility that you cannot quickly convert an investment into cash at a reasonable price when you need the money."
+    },
+    {
+      "type": "heading",
+      "content": "Credit or default risk"
+    },
+    {
+      "type": "text",
+      "content": "When an investment depends on a borrower making payments, there is a possibility that the borrower may fail to meet those obligations."
+    },
+    {
+      "type": "heading",
+      "content": "Why diversification matters"
+    },
+    {
+      "type": "text",
+      "content": "Putting all your money into one investment can expose you heavily to the problems of that single investment. Diversification spreads money across different investments or types of assets so that one poor outcome does not necessarily determine the result of the entire portfolio."
+    },
+    {
+      "type": "example",
+      "title": "Concentration versus diversification",
+      "content": "Imagine investing all $10,000 in one company. If that company suffers a major problem, a large part of your portfolio could be affected. If the $10,000 is spread across many different investments, the failure of one investment may have a smaller effect on the overall portfolio."
+    },
+    {
+      "type": "heading",
+      "content": "Risk tolerance"
+    },
+    {
+      "type": "text",
+      "content": "Risk tolerance is how much investment uncertainty or loss you are emotionally and psychologically able to handle without abandoning your plan."
+    },
+    {
+      "type": "example",
+      "title": "Different reactions to the same loss",
+      "content": "Two investors may both experience a 20% decline. One remains comfortable with the long-term plan. The other becomes extremely stressed and sells immediately. Their risk tolerances are different."
+    },
+    {
+      "type": "heading",
+      "content": "Risk capacity"
+    },
+    {
+      "type": "text",
+      "content": "Risk capacity is different from risk tolerance. It refers to how much financial loss you can actually afford to withstand while still meeting your obligations and goals."
+    },
+    {
+      "type": "callout",
+      "title": "Tolerance versus capacity",
+      "content": "You might be emotionally comfortable with high risk but financially unable to withstand a large loss. Good investing considers both."
+    },
+    {
+      "type": "heading",
+      "content": "Time horizon changes the picture"
+    },
+    {
+      "type": "text",
+      "content": "An investor with a long time horizon may have more opportunity to recover from temporary declines than someone who needs the money soon. However, a long time horizon does not make an investment risk-free."
+    },
+    {
+      "type": "example",
+      "title": "Six months versus twenty years",
+      "content": "Someone who needs $5,000 in six months may not have enough time to recover from a major market decline. Someone investing money they expect to use in 20 years may have much more time to tolerate temporary price movements."
+    },
+    {
+      "type": "heading",
+      "content": "Past performance is not a promise"
+    },
+    {
+      "type": "text",
+      "content": "An investment that performed well in the past may perform differently in the future. Historical performance can provide information, but it does not guarantee future results."
+    },
+    {
+      "type": "heading",
+      "content": "Why guaranteed high returns should raise questions"
+    },
+    {
+      "type": "text",
+      "content": "Promises of high returns with little or no risk should be treated cautiously. In real investing, attractive returns generally involve some level of uncertainty. A promise of easy, guaranteed wealth can be a warning sign."
+    },
+    {
+      "type": "heading",
+      "content": "A practical way to think about return"
+    },
+    {
+      "type": "example",
+      "title": "Comparing two outcomes",
+      "content": "Suppose Investment A could reasonably produce a 6% return but has relatively moderate uncertainty. Investment B could potentially produce 12%, but it could also fall substantially. The question is not simply 'Which return is bigger?' It is 'Which potential outcome and level of risk fit my goal?'"
+    },
+    {
+      "type": "heading",
+      "content": "A simple annual return example"
+    },
+    {
+      "type": "text",
+      "content": "Suppose you invest $5,000 and after one year it is worth $5,400, ignoring fees, taxes, and income."
+    },
+    {
+      "type": "formula",
+      "content": "Gain = $5,400 − $5,000 = $400"
+    },
+    {
+      "type": "formula",
+      "content": "Return = ($400 ÷ $5,000) × 100 = 8%"
+    },
+    {
+      "type": "heading",
+      "content": "A loss requires more than the same percentage gain to recover"
+    },
+    {
+      "type": "text",
+      "content": "Percentage losses and gains do not cancel each other out. If an investment falls significantly, it may require a larger percentage gain to return to its starting value."
+    },
+    {
+      "type": "example",
+      "title": "Why percentage losses matter",
+      "content": "Suppose $1,000 falls by 20%. It becomes $800. To return from $800 to $1,000, the investment must rise by 25%, not 20%."
+    },
+    {
+      "type": "formula",
+      "content": "$1,000 × 80% = $800; ($1,000 − $800) ÷ $800 × 100 = 25%"
+    },
+    {
+      "type": "heading",
+      "content": "Risk should be connected to a real goal"
+    },
+    {
+      "type": "text",
+      "content": "Instead of asking whether an investment is simply 'safe' or 'risky,' ask whether its risk makes sense for the money's purpose, time horizon, and your financial ability to handle losses."
+    },
+    {
+      "type": "interactive",
+      "title": "Investor decision",
+      "content": "You have $20,000 that you need in three months for a required payment. An investment could potentially earn 15% but could also fall 20% before you need the money. What matters more: the attractive potential return or whether the investment fits the short time horizon and required goal?"
+    },
+    {
+      "type": "heading",
+      "content": "Common misconceptions"
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: High return means high profit"
+    },
+    {
+      "type": "text",
+      "content": "Reality: A high potential return does not guarantee that the investor will receive it. The investment could produce a lower return or a loss."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: Risk means you will lose everything"
+    },
+    {
+      "type": "text",
+      "content": "Reality: Risk means uncertainty about the outcome. The result could be a gain, a small loss, or a large loss depending on the investment."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: A temporary price drop is always a permanent loss"
+    },
+    {
+      "type": "text",
+      "content": "Reality: A temporary decline is different from a permanent loss, although a decline matters greatly if you must sell during it or if the underlying investment permanently loses value."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: Long-term investing eliminates risk"
+    },
+    {
+      "type": "text",
+      "content": "Reality: A longer time horizon can provide more opportunity to recover from temporary declines, but investments can still lose value and some losses can be permanent."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: Past winners will always keep winning"
+    },
+    {
+      "type": "text",
+      "content": "Reality: Past performance does not guarantee future results."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: If you can tolerate risk emotionally, you can afford it financially"
+    },
+    {
+      "type": "text",
+      "content": "Reality: Risk tolerance and risk capacity are different. You need to consider both."
+    },
+    {
+      "type": "heading",
+      "content": "Practical investor checklist"
+    },
+    {
+      "type": "text",
+      "content": "Before accepting an investment risk, ask: What could I gain? What could I lose? How likely are different outcomes? When will I need the money? Could I financially withstand a major decline? What could make the investment permanently lose value? How diversified am I?"
+    },
+    {
+      "type": "summary",
+      "content": "Investment return is the gain or loss produced by an investment. Risk is the uncertainty surrounding the outcome. Higher potential returns often come with greater uncertainty, but high risk does not guarantee high returns. Investors should understand volatility, different forms of risk, diversification, risk tolerance, risk capacity, and time horizon before choosing investments."
+    },
+    {
+      "type": "callout",
+      "title": "Remember",
+      "content": "Do not ask only, 'How much could I make?' Ask, 'How much could I lose, when might I need this money, and can I actually handle that outcome?'"
+    }
+  ],
+  "quiz": [
+    {
+      "order": 1,
+      "questionType": "multiple-choice",
+      "question": "What does investment return describe?",
+      "options": [
+        "Only the amount of money originally invested",
+        "The gain or loss from an investment over a period",
+        "A guarantee that an investment will make money",
+        "The amount of risk an investor feels emotionally"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Investment return describes how much an investment has gained or lost over a period."
+    },
+    {
+      "order": 2,
+      "questionType": "multiple-choice",
+      "question": "You invest $1,000 and it becomes $1,100. Ignoring fees, what is the return?",
+      "options": [
+        "5%",
+        "10%",
+        "15%",
+        "20%"
+      ],
+      "correctAnswer": 1,
+      "explanation": "The gain is $100. $100 ÷ $1,000 × 100 = 10%."
+    },
+    {
+      "order": 3,
+      "questionType": "multiple-choice",
+      "question": "What does investment risk primarily describe?",
+      "options": [
+        "A guarantee of losing money",
+        "The uncertainty surrounding the investment outcome",
+        "The amount of money invested",
+        "The investor's salary"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Risk is about uncertainty regarding the actual outcome."
+    },
+    {
+      "order": 4,
+      "questionType": "true-false",
+      "question": "A higher potential return guarantees a higher actual return.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Potential return is not guaranteed. A higher-return opportunity may also produce a lower return or a loss."
+    },
+    {
+      "order": 5,
+      "questionType": "multiple-choice",
+      "question": "An investment falls from $1,000 to $800. What percentage gain is required to return to $1,000?",
+      "options": [
+        "20%",
+        "22%",
+        "25%",
+        "30%"
+      ],
+      "correctAnswer": 2,
+      "explanation": "The investment needs to gain $200 from $800. $200 ÷ $800 × 100 = 25%."
+    },
+    {
+      "order": 6,
+      "questionType": "multiple-choice",
+      "question": "Which statement best describes diversification?",
+      "options": [
+        "Putting all your money into your favorite investment",
+        "Spreading investments so one poor outcome has less impact on the entire portfolio",
+        "Guaranteeing that every investment will rise",
+        "Avoiding all investments"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Diversification can reduce concentration in any one investment or source of risk, although it cannot eliminate all investment risk."
+    },
+    {
+      "order": 7,
+      "questionType": "multiple-choice",
+      "question": "What is risk tolerance?",
+      "options": [
+        "How much financial loss you can legally claim",
+        "How much investment uncertainty or loss you can emotionally handle",
+        "How much money you earn each year",
+        "How much an investment is guaranteed to return"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Risk tolerance describes your psychological ability to handle investment uncertainty and losses."
+    },
+    {
+      "order": 8,
+      "questionType": "multiple-choice",
+      "question": "What is risk capacity?",
+      "options": [
+        "Your ability to emotionally ignore a loss",
+        "Your financial ability to withstand a loss while still meeting obligations and goals",
+        "The highest return an investment can produce",
+        "The number of investments in a portfolio"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Risk capacity concerns what you can financially afford to lose."
+    },
+    {
+      "order": 9,
+      "questionType": "multiple-choice",
+      "question": "Why can a short time horizon make a risky investment inappropriate?",
+      "options": [
+        "Because risky investments can never make money",
+        "Because there may not be enough time to recover from a major decline before the money is needed",
+        "Because all short-term investments are guaranteed to lose money",
+        "Because time horizon has no connection to investment decisions"
+      ],
+      "correctAnswer": 1,
+      "explanation": "A short time horizon may not provide enough time to recover from a significant decline."
+    },
+    {
+      "order": 10,
+      "questionType": "multiple-choice",
+      "question": "Which question is most useful before accepting an investment risk?",
+      "options": [
+        "How much could I potentially make without considering anything else?",
+        "What could I lose, when will I need the money, and can I financially handle the loss?",
+        "What investment is currently most popular?",
+        "Can I guarantee that the price will rise?"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Good investing considers potential returns alongside possible losses, time horizon, and financial capacity."
+    }
+  ]
+}

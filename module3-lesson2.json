@@ -1,0 +1,619 @@
+{
+  "slug": "understanding-interest-and-borrowing-costs",
+  "title": "Understanding Interest and the Real Cost of Borrowing",
+  "estimatedDuration": 35,
+  "order": 2,
+  "published": true,
+  "contentBlocks": [
+    {
+      "order": 1,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "The amount you borrow is not always the amount you pay back"
+      }
+    },
+    {
+      "order": 2,
+      "type": "text",
+      "data": {
+        "text": "When you borrow money, the lender may charge interest and fees for providing the money. This means the amount you receive can be smaller than the total amount you eventually repay. Understanding this difference is one of the most useful skills you can develop before taking on debt."
+      }
+    },
+    {
+      "order": 3,
+      "type": "example",
+      "data": {
+        "title": "A simple borrowing example",
+        "text": "Suppose you borrow $1,000 and eventually repay $1,200. You received $1,000, but you paid $1,200. The extra $200 is part of the cost of borrowing."
+      }
+    },
+    {
+      "order": 4,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "What is interest?"
+      }
+    },
+    {
+      "order": 5,
+      "type": "text",
+      "data": {
+        "text": "Interest is the amount charged for borrowing money. It is usually calculated according to the amount borrowed, the interest rate, and the terms of the agreement. The exact calculation can vary between financial products, so never assume that a stated interest rate tells you the entire cost by itself."
+      }
+    },
+    {
+      "order": 6,
+      "type": "example",
+      "data": {
+        "title": "Calculating simple interest",
+        "text": "Imagine a loan of $1,000 with simple interest of 10% for one year. The interest would be $1,000 × 10% = $100. If there were no other charges and the full amount were due after one year, the repayment would be $1,000 + $100 = $1,100."
+      }
+    },
+    {
+      "order": 7,
+      "type": "callout",
+      "data": {
+        "title": "Remember",
+        "text": "A percentage becomes meaningful when you apply it to an actual amount. Always ask: 10% of how much, for how long, and under what terms?"
+      }
+    },
+    {
+      "order": 8,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Principal and interest are not the same thing"
+      }
+    },
+    {
+      "order": 9,
+      "type": "text",
+      "data": {
+        "text": "The principal is the amount originally borrowed. Interest is a cost associated with borrowing that money. As you make repayments, part of what you pay may reduce the principal while another part covers interest. The exact structure depends on the loan."
+      }
+    },
+    {
+      "order": 10,
+      "type": "example",
+      "data": {
+        "title": "Breaking down a repayment",
+        "text": "You borrow $2,000. Over the life of the loan, you repay $2,400 in total. The original principal is $2,000 and the additional $400 is the borrowing cost if there are no separate fees. Calculation: $2,400 − $2,000 = $400."
+      }
+    },
+    {
+      "order": 11,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "The monthly payment can hide the real cost"
+      }
+    },
+    {
+      "order": 12,
+      "type": "text",
+      "data": {
+        "text": "A loan can be advertised with a monthly payment that looks affordable. But a small monthly payment may result from spreading the debt over a long period. You need to know how many payments there are and how much you will pay in total."
+      }
+    },
+    {
+      "order": 13,
+      "type": "example",
+      "data": {
+        "title": "The $100 monthly payment",
+        "text": "A loan requires $100 per month for 24 months. Ignoring any separate fees, the total payments are $100 × 24 = $2,400. A monthly payment of $100 sounds small by itself, but the full commitment is $2,400."
+      }
+    },
+    {
+      "order": 14,
+      "type": "interactive",
+      "data": {
+        "title": "Calculate the total repayment",
+        "text": "A purchase is financed at $75 per month for 18 months. Calculate the total scheduled payments. Hint: multiply the monthly payment by the number of payments."
+      }
+    },
+    {
+      "order": 15,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "A longer repayment period can increase the cost"
+      }
+    },
+    {
+      "order": 16,
+      "type": "text",
+      "data": {
+        "text": "Spreading repayments over more months can make each payment smaller, but it can also mean paying interest for longer. A lower monthly payment is therefore not automatically a cheaper loan."
+      }
+    },
+    {
+      "order": 17,
+      "type": "example",
+      "data": {
+        "title": "Two ways to repay",
+        "text": "Imagine two offers for the same borrowing. Offer A requires $220 per month for 12 months, for $2,640 in scheduled payments. Offer B requires $130 per month for 24 months, for $3,120 in scheduled payments. Offer B looks easier each month, but it costs $480 more overall: $3,120 − $2,640 = $480."
+      }
+    },
+    {
+      "order": 18,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Fees can make borrowing more expensive"
+      }
+    },
+    {
+      "order": 19,
+      "type": "text",
+      "data": {
+        "text": "Interest is not necessarily the only borrowing cost. Depending on the product and agreement, there may be application fees, processing fees, late fees, service charges, insurance costs, or other charges. Always check the full agreement."
+      }
+    },
+    {
+      "order": 20,
+      "type": "example",
+      "data": {
+        "title": "The loan with an extra fee",
+        "text": "You borrow $1,000 and the scheduled repayments total $1,150. The lender also charges a $50 processing fee. Your total financial cost becomes $1,200. Compared with the $1,000 received, the additional cost is $200."
+      }
+    },
+    {
+      "order": 21,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Money you receive and money you owe can be different"
+      }
+    },
+    {
+      "order": 22,
+      "type": "text",
+      "data": {
+        "text": "Some borrowing arrangements include fees that are deducted before you receive the money. This means you might agree to repay a certain amount while receiving less cash in your hands. Understanding what you actually receive is important."
+      }
+    },
+    {
+      "order": 23,
+      "type": "example",
+      "data": {
+        "title": "Borrow $1,000 but receive $950",
+        "text": "Suppose a lender approves $1,000 but deducts a $50 fee before giving you the money. You receive $950, but your repayment obligation may still be based on the $1,000 loan. Ask what amount you receive, what amount you owe, and every fee that applies."
+      }
+    },
+    {
+      "order": 24,
+      "type": "callout",
+      "data": {
+        "title": "A useful calculation",
+        "text": "Actual cash received is not always the same as the amount stated as borrowed. Compare the amount you actually receive with the total amount you are required to repay."
+      }
+    },
+    {
+      "order": 25,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Interest rates need context"
+      }
+    },
+    {
+      "order": 26,
+      "type": "text",
+      "data": {
+        "text": "An interest rate is only one part of the borrowing decision. You also need to know whether the rate is annual or applies to another period, whether it is fixed or variable, how often interest is calculated, and what other charges apply. Two loans with similar advertised rates can still have different total costs."
+      }
+    },
+    {
+      "order": 27,
+      "type": "example",
+      "data": {
+        "title": "The same rate, different costs",
+        "text": "Two lenders advertise a similar interest rate, but one charges additional fees while the other has fewer charges. If both loans have the same principal and repayment period, the loan with fewer total costs may be cheaper even though the headline interest rates look similar."
+      }
+    },
+    {
+      "order": 28,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Simple interest is useful for learning, but real loans can be more complicated"
+      }
+    },
+    {
+      "order": 29,
+      "type": "text",
+      "data": {
+        "text": "The simple calculations in this lesson help you understand the basic idea of borrowing cost. Real loans can use different methods, including interest calculated on outstanding balances or other structures. Do not use a simple-interest calculation to assume the exact cost of a real loan unless the agreement actually uses that method."
+      }
+    },
+    {
+      "order": 30,
+      "type": "example",
+      "data": {
+        "title": "Why the agreement matters",
+        "text": "If a loan has a balance that changes as you make repayments, the interest calculation may also change over time. This is why a real loan agreement should be checked rather than relying on a quick percentage calculation alone."
+      }
+    },
+    {
+      "order": 31,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Compare total cost, not just the headline rate"
+      }
+    },
+    {
+      "order": 32,
+      "type": "text",
+      "data": {
+        "text": "When comparing borrowing options, look at the amount you receive, the total amount you will repay, the repayment period, the interest rate, and all applicable fees. The cheapest-looking monthly payment or lowest-looking headline rate may not be the cheapest option overall."
+      }
+    },
+    {
+      "order": 33,
+      "type": "interactive",
+      "data": {
+        "title": "Compare two borrowing offers",
+        "text": "Offer A: $2,000 borrowed and $2,300 repaid. Offer B: $2,000 borrowed and $2,520 repaid. Which costs more? Calculate the borrowing cost for each offer by subtracting $2,000 from the total repayment."
+      }
+    },
+    {
+      "order": 34,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Misconception: a low monthly payment means a cheap loan"
+      }
+    },
+    {
+      "order": 35,
+      "type": "text",
+      "data": {
+        "text": "This is one of the easiest mistakes to make when borrowing. A low payment can simply mean that the debt has been stretched over more time. Always ask how many payments you will make and what the total repayment will be."
+      }
+    },
+    {
+      "order": 36,
+      "type": "example",
+      "data": {
+        "title": "The cheaper-looking option",
+        "text": "A $3,000 purchase can be financed for $125 per month for 24 months or $90 per month for 40 months. The first option totals $3,000 before any extra charges. The second totals $3,600 before any extra charges. The lower monthly payment can therefore create a higher overall cost."
+      }
+    },
+    {
+      "order": 37,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Misconception: interest is the only cost that matters"
+      }
+    },
+    {
+      "order": 38,
+      "type": "text",
+      "data": {
+        "text": "Interest can be a major cost, but fees and other charges can also matter. A financially careful borrower looks at the complete cost rather than focusing on one number."
+      }
+    },
+    {
+      "order": 39,
+      "type": "example",
+      "data": {
+        "title": "The loan with hidden extras",
+        "text": "One offer has lower interest but several additional fees. Another has slightly higher interest but very few fees. You cannot decide which is cheaper from the interest rate alone. Compare the actual total cost under the terms you would receive."
+      }
+    },
+    {
+      "order": 40,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Misconception: borrowing cost is only a financial number"
+      }
+    },
+    {
+      "order": 41,
+      "type": "text",
+      "data": {
+        "text": "Debt can also have an opportunity cost. Money used for repayments cannot be used at the same time for other priorities such as saving, investing, education, family needs, or business opportunities. The financial cost therefore includes what the commitment prevents you from doing."
+      }
+    },
+    {
+      "order": 42,
+      "type": "example",
+      "data": {
+        "title": "The repayment that limits another goal",
+        "text": "Someone commits $250 every month to debt repayments. The payment may be manageable, but it leaves $250 less each month for other goals. Over 12 months, that is $3,000 of income committed to the debt: $250 × 12 = $3,000."
+      }
+    },
+    {
+      "order": 43,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Use borrowing for a reason you understand"
+      }
+    },
+    {
+      "order": 44,
+      "type": "text",
+      "data": {
+        "text": "Before borrowing, connect the cost of the debt to the reason for borrowing. If the purpose is important, understand what benefit you expect to receive. If the purpose is optional, ask whether taking on the extra cost and future obligation is worth it."
+      }
+    },
+    {
+      "order": 45,
+      "type": "example",
+      "data": {
+        "title": "Borrowing for a productive purpose",
+        "text": "A person borrows $2,000 for equipment that is genuinely necessary for their work. The equipment is expected to help generate income, and the person has a realistic repayment plan. The borrowing still carries risk, but the purpose and expected benefit should be considered alongside the cost."
+      }
+    },
+    {
+      "order": 46,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Calculate before you commit"
+      }
+    },
+    {
+      "order": 47,
+      "type": "interactive",
+      "data": {
+        "title": "Your borrowing-cost checklist",
+        "text": "For any borrowing offer, write down: amount received, total interest, all fees, number of payments, payment amount, and total repayment. Then calculate: total borrowing cost = total repayment + applicable upfront costs − amount actually received."
+      }
+    },
+    {
+      "order": 48,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "A practical comparison"
+      }
+    },
+    {
+      "order": 49,
+      "type": "example",
+      "data": {
+        "title": "Which offer costs less?",
+        "text": "Offer A: receive $1,500 and repay $1,740 with no additional fees. Borrowing cost = $1,740 − $1,500 = $240. Offer B: receive $1,500 and repay $1,650, but pay a $150 fee. Borrowing cost = $1,650 + $150 − $1,500 = $300. Offer A costs $60 less overall."
+      }
+    },
+    {
+      "order": 50,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Do not rush because a lender says you qualify"
+      }
+    },
+    {
+      "order": 51,
+      "type": "text",
+      "data": {
+        "text": "Being approved for borrowing does not mean borrowing is financially wise. A lender is evaluating whether it is willing to provide the money under its criteria. You still need to decide whether the debt fits your own goals, budget, risks, and future plans."
+      }
+    },
+    {
+      "order": 52,
+      "type": "callout",
+      "data": {
+        "title": "Approval is not affordability",
+        "text": "A lender deciding that you qualify for a loan does not mean the loan is necessarily a good decision for you."
+      }
+    },
+    {
+      "order": 53,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "The real cost includes future flexibility"
+      }
+    },
+    {
+      "order": 54,
+      "type": "text",
+      "data": {
+        "text": "The longer and more expensive a debt commitment is, the more future income may already be assigned to repayments. Before borrowing, consider not only whether you can make today's payment, but also whether the commitment leaves enough room for emergencies, changing circumstances, and important future goals."
+      }
+    },
+    {
+      "order": 55,
+      "type": "interactive",
+      "data": {
+        "title": "The future-income test",
+        "text": "Imagine your income falls for several months. Would you still be able to make the payment while covering essential expenses? If the answer is no, the borrowing commitment may be too large for your situation."
+      }
+    },
+    {
+      "order": 56,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "The goal is not to fear interest"
+      }
+    },
+    {
+      "order": 57,
+      "type": "text",
+      "data": {
+        "text": "Interest is not automatically evidence that borrowing is bad. The important skill is understanding what you are paying and deciding whether the benefit of borrowing is worth the total cost and risk. Financial literacy means making an informed choice rather than accepting or rejecting debt blindly."
+      }
+    },
+    {
+      "order": 58,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Make the numbers work before the agreement does"
+      }
+    },
+    {
+      "order": 59,
+      "type": "text",
+      "data": {
+        "text": "Before signing, calculate what the borrowing will actually cost you. A few minutes spent comparing numbers can reveal that a seemingly affordable offer is expensive, or that a different option provides better value."
+      }
+    },
+    {
+      "order": 60,
+      "type": "summary",
+      "data": {
+        "title": "What to remember",
+        "points": [
+          "Interest and fees can make the amount you repay larger than the amount you borrow.",
+          "Do not judge a loan only by its monthly payment or headline interest rate.",
+          "Calculate the total repayment and compare it with the amount you actually receive.",
+          "Check the repayment period, interest, fees, and other charges before committing.",
+          "A longer repayment period can reduce the monthly payment while increasing the total cost.",
+          "Borrowing should be judged by its purpose, cost, risk, and effect on your future financial flexibility.",
+          "Approval from a lender does not automatically mean the debt is affordable or appropriate for you."
+        ]
+      }
+    }
+  ],
+  "quiz": [
+    {
+      "order": 1,
+      "questionType": "multiple-choice",
+      "question": "You borrow $1,000 and repay $1,200 with no other charges. How much did the borrowing cost you?",
+      "options": [
+        "$200",
+        "$1,000",
+        "$1,200",
+        "$2,200"
+      ],
+      "correctAnswer": 0,
+      "explanation": "The borrowing cost is the total repayment minus the amount borrowed: $1,200 − $1,000 = $200.",
+      "points": 10
+    },
+    {
+      "order": 2,
+      "questionType": "multiple-choice",
+      "question": "A loan requires $100 per month for 24 months. Ignoring other fees, what is the total scheduled repayment?",
+      "options": [
+        "$2,400",
+        "$1,000",
+        "$2,000",
+        "$24,000"
+      ],
+      "correctAnswer": 0,
+      "explanation": "$100 × 24 months = $2,400.",
+      "points": 10
+    },
+    {
+      "order": 3,
+      "questionType": "multiple-choice",
+      "question": "Why can a lower monthly payment still result in a more expensive loan?",
+      "options": [
+        "The debt may be spread over more payments and accumulate more total cost",
+        "Lower monthly payments are always illegal",
+        "Monthly payments never include borrowing costs",
+        "A lower payment means the borrower pays nothing else"
+      ],
+      "correctAnswer": 0,
+      "explanation": "A longer repayment period can make each payment smaller while increasing the total amount paid.",
+      "points": 10
+    },
+    {
+      "order": 4,
+      "questionType": "multiple-choice",
+       "question": "You receive $950 from a loan but are required to repay $1,000. What should you pay attention to?",
+      "options": [
+        "The difference between what you receive and what you must repay",
+        "Only the $1,000 repayment",
+        "Only the advertised interest rate",
+        "Nothing because $950 is less than $1,000"
+      ],
+      "correctAnswer": 0,
+      "explanation": "You should understand why you received $950 and how the difference affects the real cost of borrowing.",
+      "points": 10
+    },
+    {
+      "order": 5,
+      "questionType": "multiple-choice",
+      "question": "Offer A costs $240 in borrowing costs. Offer B costs $300. Assuming the benefits and other terms are otherwise comparable, which costs less?",
+      "options": [
+        "Offer A",
+        "Offer B",
+        "They cost the same",
+        "It cannot be compared using the costs given"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Offer A has a borrowing cost of $240 compared with $300 for Offer B, so A costs $60 less.",
+      "points": 10
+    },
+    {
+      "order": 6,
+      "questionType": "multiple-choice",
+      "question": "What is the principal of a loan?",
+      "options": [
+        "The original amount borrowed",
+        "All interest paid",
+        "Every fee charged",
+        "The number of monthly payments"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Principal is the original amount borrowed.",
+      "points": 10
+    },
+    {
+      "order": 7,
+      "questionType": "multiple-choice",
+      "question": "Why should you consider fees as well as interest?",
+      "options": [
+        "Fees can increase the total cost of borrowing",
+        "Fees never affect the amount you pay",
+        "Interest is always zero when fees exist",
+        "Fees are only charged on savings accounts"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Fees can add to the amount you pay, so looking only at interest can underestimate the real cost.",
+      "points": 10
+    },
+    {
+      "order": 8,
+      "questionType": "true-false",
+      "question": "If a lender approves you for a loan, the loan is automatically affordable for you.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Approval means the lender is willing to provide the loan under its criteria. You still need to decide whether the debt fits your financial situation.",
+      "points": 10
+    },
+    {
+      "order": 9,
+      "questionType": "multiple-choice",
+      "question": "Which calculation is most useful when comparing the overall cost of borrowing?",
+      "options": [
+        "Total repayment plus applicable fees minus the amount actually received",
+        "Monthly payment alone",
+        "Interest rate alone",
+        "The amount shown in an advertisement alone"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Comparing the total amount you must pay with the amount you actually receive gives a clearer picture of the borrowing cost.",
+      "points": 10
+    },
+    {
+      "order": 10,
+      "questionType": "multiple-choice",
+      "question": "What is the best general lesson about interest and borrowing costs?",
+      "options": [
+        "Understand and calculate the full cost before deciding whether borrowing is worth it",
+        "Interest always makes borrowing a bad decision",
+        "The lowest monthly payment is always best",
+        "Only the original amount borrowed matters"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Financially informed borrowing means understanding the total cost, terms, risks, and purpose before committing.",
+      "points": 10
+    }
+  ]
+}

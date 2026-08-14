@@ -1,0 +1,441 @@
+{
+  "slug": "risk-and-return-why-higher-potential-returns-come-with-higher-risk",
+  "title": "Risk and Return: Why Higher Potential Returns Usually Come With Higher Risk",
+  "estimatedDuration": 45,
+  "order": 2,
+  "published": true,
+  "contentBlocks": [
+    {
+      "type": "heading",
+      "content": "The relationship between risk and return"
+    },
+    {
+      "type": "text",
+      "content": "When investors consider an investment, they are usually asking two connected questions: how much could I gain, and what could go wrong? In general, investments with greater uncertainty or risk may offer greater potential returns as compensation for taking that risk. But higher risk does not guarantee higher returns."
+    },
+    {
+      "type": "callout",
+      "title": "The key idea",
+      "content": "Higher risk means greater uncertainty about the outcome. It does not mean you are guaranteed to earn more."
+    },
+    {
+      "type": "heading",
+      "content": "What is return?"
+    },
+    {
+      "type": "text",
+      "content": "Return is the gain or loss produced by an investment over a period of time. It can come from an increase in the investment's value, income such as interest or dividends, or a combination of both."
+    },
+    {
+      "type": "example",
+      "title": "A simple return"
+    },
+    {
+      "type": "text",
+      "content": "Suppose you invest $1,000 and later sell the investment for $1,100. Your gain is $100."
+    },
+    {
+      "type": "formula",
+      "content": "Return = (Ending value − Starting value) ÷ Starting value"
+    },
+    {
+      "type": "formula",
+      "content": "($1,100 − $1,000) ÷ $1,000 = 0.10 = 10%"
+    },
+    {
+      "type": "heading",
+      "content": "Return can be positive or negative"
+    },
+    {
+      "type": "text",
+      "content": "A return is not always a gain. If a $1,000 investment falls to $900, the return is negative 10%."
+    },
+    {
+      "type": "formula",
+      "content": "($900 − $1,000) ÷ $1,000 = −0.10 = −10%"
+    },
+    {
+      "type": "heading",
+      "content": "Why would anyone accept more risk?"
+    },
+    {
+      "type": "text",
+      "content": "Investors may accept additional risk because they want the possibility of achieving a higher return than a lower-risk alternative may offer. The important word is possibility. The additional return is not guaranteed."
+    },
+    {
+      "type": "example",
+      "title": "A simple comparison",
+      "content": "Imagine Investment A has relatively low uncertainty and Investment B has much greater uncertainty. An investor might expect B to have greater long-term return potential, but B can also experience larger losses or disappointing results. The extra risk does not create a guaranteed reward."
+    },
+    {
+      "type": "heading",
+      "content": "Potential return versus guaranteed return"
+    },
+    {
+      "type": "text",
+      "content": "A potential return is an outcome that might happen. A guaranteed return is an outcome contractually or legally promised under specified conditions. Investors should never confuse an attractive possibility with a guaranteed result."
+    },
+    {
+      "type": "callout",
+      "title": "Be careful with promises",
+      "content": "Claims such as 'high return with zero risk' should trigger caution. In legitimate investing, uncertainty is real."
+    },
+    {
+      "type": "heading",
+      "content": "The risk-return trade-off"
+    },
+    {
+      "type": "text",
+      "content": "The risk-return trade-off is the idea that investors generally need to accept more uncertainty if they want access to investments with greater potential returns. Investors therefore make choices about how much uncertainty they are willing and able to accept."
+    },
+    {
+      "type": "heading",
+      "content": "Higher risk does not mean better"
+    },
+    {
+      "type": "text",
+      "content": "Taking more risk is not automatically a smarter investment decision. An investor can take excessive risk and lose money. The appropriate level of risk depends on the goal, time horizon, financial situation, and ability to withstand losses."
+    },
+    {
+      "type": "heading",
+      "content": "Risk and reward are not perfectly proportional"
+    },
+    {
+      "type": "text",
+      "content": "Two investments can have similar levels of risk but very different potential returns. Likewise, an investment can be extremely risky without offering a reasonable expected reward. Investors should evaluate whether the potential reward is worth the risk being accepted."
+    },
+    {
+      "type": "heading",
+      "content": "Expected return is not actual return"
+    },
+    {
+      "type": "text",
+      "content": "An expected return is an estimate or expectation about possible future outcomes. Actual return is what the investor ultimately experiences. The two can be very different."
+    },
+    {
+      "type": "example",
+      "title": "Expectation versus reality"
+    },
+    {
+      "type": "text",
+      "content": "Suppose an investor expects an investment to earn 8% over a year. If the investment actually falls by 12%, the investor's actual return is −12%, not 8%."
+    },
+    {
+      "type": "heading",
+      "content": "Why a higher return can require patience"
+    },
+      {
+        "type": "text",
+        "content": "Risky investments can experience large short-term losses even when an investor's long-term objective remains reasonable. A longer time horizon can sometimes give an investor more opportunity to remain invested through periods of market decline, although it does not guarantee recovery or profit."
+      },
+    {
+      "type": "heading",
+      "content": "The danger of chasing returns"
+    },
+    {
+      "type": "text",
+      "content": "Investors sometimes see an investment that recently produced a very high return and assume they should buy it immediately. This can lead to buying after prices have already risen substantially or taking more risk than their financial situation can handle."
+    },
+    {
+      "type": "example",
+      "title": "A common mistake"
+    },
+    {
+      "type": "text",
+      "content": "An investment rises 50% in a short period. An investor sees the gain and invests because they expect another 50% increase. The investment then falls 30%. The investor's decision was based on recent performance rather than an understanding of the underlying risk."
+    },
+    {
+      "type": "heading",
+      "content": "A return percentage can hide the size of a loss"
+    },
+    {
+      "type": "text",
+      "content": "Percentages matter because gains and losses are applied to the current value of the investment. A large loss can require a larger percentage gain to recover."
+    },
+    {
+      "type": "example",
+      "title": "Why losses matter"
+    },
+    {
+      "type": "text",
+      "content": "Suppose $1,000 falls by 50%. You now have $500. To return from $500 to $1,000, the investment must rise by 100%."
+    },
+    {
+      "type": "formula",
+      "content": "$1,000 × 50% = $500 loss"
+    },
+    {
+      "type": "formula",
+      "content": "$500 × 100% = $500 gain"
+    },
+    {
+      "type": "callout",
+      "title": "Important lesson",
+      "content": "A 50% loss requires a 100% gain to get back to the starting amount."
+    },
+    {
+      "type": "heading",
+      "content": "The sequence of returns matters"
+    },
+    {
+      "type": "text",
+      "content": "When money is invested over multiple periods, the order and size of gains and losses can affect the final result. This becomes especially important when an investor is withdrawing money from a portfolio."
+    },
+    {
+      "type": "example",
+      "title": "Same average, different experience"
+    },
+    {
+      "type": "text",
+      "content": "An investment that rises 20% and then falls 20% does not return to its original value. Starting with $1,000, a 20% gain produces $1,200. A 20% loss from $1,200 is $240, leaving $960."
+    },
+    {
+      "type": "formula",
+      "content": "$1,000 × 1.20 = $1,200"
+    },
+    {
+      "type": "formula",
+      "content": "$1,200 × 0.80 = $960"
+    },
+    {
+      "type": "heading",
+      "content": "Why the average percentage can mislead"
+    },
+    {
+      "type": "text",
+      "content": "Simply averaging percentage gains and losses does not always tell you what happened to your actual money. Investment values compound from one period to the next."
+    },
+    {
+      "type": "heading",
+      "content": "Risk should be judged against the goal"
+    },
+    {
+      "type": "text",
+      "content": "An investor saving for a goal many years away may have a different ability to accept market fluctuations than someone who needs the money next year. The same investment can therefore have different suitability for different goals."
+    },
+    {
+      "type": "heading",
+      "content": "Risk capacity versus risk tolerance"
+    },
+    {
+      "type": "text",
+      "content": "Risk tolerance describes how emotionally comfortable you are with uncertainty and losses. Risk capacity describes how much financial loss your circumstances can realistically withstand. A person may be comfortable taking high risks but financially unable to afford a major loss."
+    },
+    {
+      "type": "heading",
+      "content": "Risk-adjusted thinking"
+    },
+    {
+      "type": "text",
+      "content": "Instead of asking only 'Which investment made the most money?', investors should also ask 'How much risk was taken to achieve that result?' A lower return with substantially lower risk may be more appropriate for a particular goal than a higher return achieved through extreme risk."
+    },
+    {
+      "type": "example",
+      "title": "Comparing two outcomes"
+    },
+    {
+      "type": "text",
+      "content": "Investment A earns 7% with relatively moderate uncertainty. Investment B earns 9% but has much greater downside risk. The 2 percentage-point difference does not automatically make B the better choice."
+    },
+    {
+      "type": "heading",
+      "content": "Common misconceptions"
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: Higher risk guarantees higher returns"
+    },
+    {
+      "type": "text",
+      "content": "Reality: Higher risk creates the possibility of higher returns, but it can also produce large losses."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: The safest investment is always the best investment"
+    },
+    {
+      "type": "text",
+      "content": "Reality: The appropriate investment depends on the goal, time horizon, inflation, liquidity needs, and other factors. Avoiding all investment risk can create other risks, such as losing purchasing power to inflation."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: A high return means a good investment"
+    },
+    {
+      "type": "text",
+      "content": "Reality: A return should be considered alongside the risk taken, costs, taxes where applicable, and the investor's objective."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: A 20% gain and a 20% loss cancel each other out"
+    },
+    {
+      "type": "text",
+      "content": "Reality: They do not cancel out when applied sequentially. A 20% gain followed by a 20% loss leaves the investor below the starting value."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: You need to take the maximum possible risk to build wealth"
+    },
+    {
+      "type": "text",
+      "content": "Reality: Wealth building is about consistently making appropriate decisions over time. Taking unnecessary risk can damage long-term progress."
+    },
+    {
+      "type": "heading",
+      "content": "A practical risk-return checklist"
+    },
+    {
+      "type": "interactive",
+      "title": "Before accepting more investment risk",
+      "content": "What additional return am I hoping to achieve? What could I lose? Can I financially withstand that loss? How long can the money remain invested? What would happen if the investment fell sharply? Are the potential rewards reasonable compared with the risks?"
+    },
+    {
+      "type": "heading",
+      "content": "The bigger lesson"
+    },
+    {
+      "type": "text",
+      "content": "Investing involves choosing among uncertain outcomes. The goal is not to eliminate risk or chase the highest possible return. The goal is to accept an appropriate level of risk for a reasonable potential reward while keeping the investment aligned with the financial objective."
+    },
+    {
+      "type": "summary",
+      "content": "Return measures what an investment gains or loses. Higher-risk investments may offer greater potential returns, but higher risk does not guarantee higher returns. Investors should distinguish expected returns from actual results, understand how losses affect recovery, avoid chasing recent performance, and judge potential rewards against the risks being taken."
+    },
+    {
+      "type": "callout",
+      "title": "Remember",
+      "content": "Don't ask only, 'How much could I make?' Ask, 'What could I lose, and is the potential reward worth that risk for my goal?'"
+    }
+  ],
+  "quiz": [
+    {
+      "order": 1,
+      "questionType": "multiple-choice",
+      "question": "What does investment return measure?",
+      "options": [
+        "Only how much money an investor deposits",
+        "The gain or loss produced by an investment over a period",
+        "How risky an investor feels",
+        "The number of investments someone owns"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Return measures the gain or loss produced by an investment."
+    },
+    {
+      "order": 2,
+      "questionType": "multiple-choice",
+      "question": "You invest $1,000 and it grows to $1,100. What is the return?",
+      "options": [
+        "1%",
+        "5%",
+        "10%",
+        "20%"
+      ],
+      "correctAnswer": 2,
+      "explanation": "($1,100 − $1,000) ÷ $1,000 = 10%."
+    },
+    {
+      "order": 3,
+      "questionType": "multiple-choice",
+      "question": "What is the most accurate statement about higher-risk investments?",
+      "options": [
+        "They guarantee higher returns.",
+        "They can offer higher potential returns but can also produce larger losses.",
+        "They cannot lose money.",
+        "They are always better for long-term investors."
+      ],
+      "correctAnswer": 1,
+      "explanation": "Higher risk can create greater potential upside but does not guarantee a positive outcome."
+    },
+    {
+      "order": 4,
+      "questionType": "true-false",
+      "question": "A higher-risk investment is guaranteed to produce a higher return.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Higher risk means greater uncertainty, not a guaranteed higher return."
+    },
+    {
+      "order": 5,
+      "questionType": "multiple-choice",
+      "question": "If $1,000 falls by 50%, how much money remains?",
+      "options": [
+        "$250",
+        "$400",
+        "$500",
+        "$750"
+      ],
+      "correctAnswer": 2,
+      "explanation": "$1,000 × 50% = $500 loss, leaving $500."
+    },
+    {
+      "order": 6,
+      "questionType": "multiple-choice",
+      "question": "After falling from $1,000 to $500, what percentage gain is needed to return to $1,000?",
+      "options": [
+        "25%",
+        "50%",
+        "75%",
+        "100%"
+      ],
+      "correctAnswer": 3,
+      "explanation": "A $500 investment must gain another $500, which is 100% of $500."
+    },
+    {
+      "order": 7,
+      "questionType": "multiple-choice",
+      "question": "An investment rises 20% and then falls 20%. Starting with $1,000, what is the ending value?",
+      "options": [
+        "$1,000",
+        "$980",
+        "$960",
+        "$940"
+      ],
+      "correctAnswer": 2,
+      "explanation": "$1,000 × 1.20 = $1,200; $1,200 × 0.80 = $960."
+    },
+    {
+      "order": 8,
+      "questionType": "multiple-choice",
+      "question": "What is the difference between expected return and actual return?",
+      "options": [
+        "There is no difference.",
+        "Expected return is an estimate, while actual return is what the investor ultimately experiences.",
+        "Expected return is always guaranteed.",
+        "Actual return is always higher."
+      ],
+      "correctAnswer": 1,
+      "explanation": "Expected return is an estimate; actual return is the result that occurs."
+    },
+    {
+      "order": 9,
+      "questionType": "multiple-choice",
+      "question": "Why should investors avoid judging an investment only by its return?",
+      "options": [
+        "Returns are never useful.",
+        "A return should be considered alongside the risk taken and the investor's objective.",
+        "High returns are always fake.",
+        "Risk does not matter in investing."
+      ],
+      "correctAnswer": 1,
+      "explanation": "A high return may have required substantially more risk and may not fit the investor's goal."
+    },
+    {
+      "order": 10,
+      "questionType": "multiple-choice",
+      "question": "What is the best question to ask when considering additional investment risk?",
+      "options": [
+        "Can I guarantee the return?",
+        "What is everyone else buying?",
+        "What could I lose, and is the potential reward worth that risk for my goal?",
+        "Which investment has the most exciting advertisement?"
+      ],
+      "correctAnswer": 2,
+      "explanation": "Good investing decisions compare potential rewards with possible losses and the investor's objective."
+    }
+  ]
+}

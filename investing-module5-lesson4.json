@@ -1,0 +1,520 @@
+{
+  "slug": "investment-due-diligence-what-to-check-before-you-invest",
+  "title": "Investment Due Diligence: What to Check Before You Invest",
+  "estimatedDuration": 45,
+  "order": 4,
+  "published": true,
+  "contentBlocks": [
+    {
+      "type": "heading",
+      "content": "Do not invest on a story alone"
+    },
+    {
+      "type": "text",
+      "content": "An investment can sound exciting, profitable, or convincing without actually being a good fit for you. Before committing money, slow down and investigate what you are buying, how it can produce a return, what could cause a loss, what you are paying, and whether the investment makes sense for your goal."
+    },
+    {
+      "type": "callout",
+      "title": "The key idea",
+      "content": "Due diligence means doing enough investigation to understand an investment before committing your money. It is not about predicting the future perfectly. It is about making a decision with your eyes open."
+    },
+    {
+      "type": "heading",
+      "content": "Start with the basic question: What am I actually buying?"
+    },
+    {
+      "type": "text",
+      "content": "Before evaluating an investment, make sure you can explain what you are buying in simple language. Are you buying ownership in a business, lending money, buying a fund that owns other assets, or purchasing something whose value depends mainly on future buyers paying more?"
+    },
+    {
+      "type": "interactive",
+      "title": "Explain it simply",
+      "content": "Try explaining the investment to someone who knows nothing about investing. If you cannot explain what you own, how it can produce a return, and what could make you lose money, you may need to investigate further."
+    },
+    {
+      "type": "heading",
+      "content": "Understand where the potential return comes from"
+    },
+    {
+      "type": "text",
+      "content": "Different investments can produce returns in different ways. A stock may provide dividends and growth in the value of the business. A bond may provide interest payments and repayment of principal if the issuer meets its obligations. A fund may provide returns from the assets it owns. Understanding the source of the return helps you understand what the investment depends on."
+    },
+    {
+      "type": "example",
+      "title": "Follow the money"
+    },
+    {
+      "type": "text",
+      "content": "Suppose someone promises that an investment can produce unusually high returns. Instead of focusing on the promised percentage, ask where the money actually comes from. What economic activity generates the return? Who is paying it? What has to happen for the return to continue?"
+    },
+    {
+      "type": "heading",
+      "content": "Look at the underlying asset or business"
+    },
+    {
+      "type": "text",
+      "content": "When an investment depends on an underlying business or asset, investigate that underlying source of value. For a company, this can include its products, customers, revenue, costs, profits, competitive position, debt, and ability to generate cash."
+    },
+    {
+      "type": "heading",
+      "content": "Revenue is not the same as profit"
+    },
+    {
+      "type": "text",
+      "content": "A company can generate substantial sales without producing much profit. Revenue tells you how much money comes in from selling products or services. Profit is what remains after relevant expenses are accounted for."
+    },
+    {
+      "type": "example",
+      "title": "A simple business check"
+    },
+    {
+      "type": "text",
+      "content": "Imagine a company generates $10 million in revenue but has $9.5 million in expenses. Its revenue sounds impressive, but its profit before other relevant items is only about $500,000. Looking only at sales could give an incomplete picture."
+    },
+    {
+      "type": "formula",
+      "content": "$10,000,000 − $9,500,000 = $500,000"
+    },
+    {
+      "type": "heading",
+      "content": "Look beyond one impressive number"
+    },
+    {
+      "type": "text",
+      "content": "A single number can create a misleading impression. A strong evaluation looks at several important pieces of information together. For a company, that might include revenue growth, profitability, cash flow, debt, margins, competition, and valuation."
+    },
+    {
+      "type": "heading",
+      "content": "Understand debt"
+    },
+    {
+      "type": "text",
+      "content": "Debt can help a business grow, but too much debt can make the business more vulnerable when conditions become difficult. Interest payments must still be made even when sales or profits fall."
+    },
+    {
+      "type": "example",
+      "title": "Why debt matters"
+    },
+    {
+      "type": "text",
+      "content": "Imagine two businesses with similar sales. One has very little debt while the other has borrowed heavily and must make large interest payments. If both experience a major decline in sales, the heavily indebted business may have less flexibility."
+    },
+    {
+      "type": "heading",
+      "content": "Check the investment's fees"
+    },
+    {
+      "type": "text",
+      "content": "Fees reduce the amount of your return that you keep. Depending on the investment, costs may include management fees, transaction costs, commissions, spreads, account fees, performance fees, or other charges."
+    },
+    {
+      "type": "example",
+      "title": "A simple fee calculation"
+    },
+    {
+      "type": "text",
+      "content": "Suppose you invest $10,000 and the investment charges an annual fee of 1%. The fee would be about $100 for that year before considering changes in the investment's value."
+    },
+    {
+      "type": "formula",
+      "content": "$10,000 × 1% = $100"
+    },
+    {
+      "type": "callout",
+      "title": "Small percentages can matter"
+    },
+    {
+      "type": "text",
+      "content": "A fee that looks small may become significant when charged repeatedly over many years, especially because money paid in fees is money that cannot continue compounding for you."
+    },
+    {
+      "type": "heading",
+      "content": "Check liquidity"
+    },
+    {
+      "type": "text",
+      "content": "Liquidity describes how easily an investment can be converted into cash without causing a large price disadvantage. An investment may look attractive but become inconvenient if you cannot sell it when you need the money."
+    },
+    {
+      "type": "example",
+      "title": "Why liquidity matters"
+    },
+    {
+      "type": "text",
+      "content": "Imagine you invest money that you may need for an emergency in an asset that takes a long time to sell. Even if the asset eventually performs well, it may not solve your immediate cash need."
+    },
+    {
+      "type": "heading",
+      "content": "Understand what could make you lose money"
+    },
+    {
+      "type": "text",
+      "content": "Do not stop after asking how an investment can make money. Ask the opposite question: what could make me lose money? The answer might involve a falling stock price, business failure, borrower default, interest-rate changes, currency movements, poor liquidity, fraud, or other risks."
+    },
+    {
+      "type": "interactive",
+      "title": "The downside question",
+      "content": "Before investing, write down at least three realistic ways the investment could lose value. Then ask how severe each outcome could be and whether you could financially withstand it."
+    },
+    {
+      "type": "heading",
+      "content": "Look for concentration risk"
+    },
+    {
+      "type": "text",
+      "content": "An investment may appear reasonable by itself but become risky when combined with everything else you own. If most of your financial resources already depend on one company, industry, country, or asset type, adding more of the same exposure may increase concentration risk."
+    },
+    {
+      "type": "heading",
+      "content": "Check how the investment fits your existing portfolio"
+    },
+    {
+      "type": "text",
+      "content": "Evaluating an investment is not only about asking whether the investment is good. You should also ask whether it improves or damages the overall balance of your portfolio. An investment that is reasonable by itself may not be appropriate if it creates excessive concentration."
+    },
+    {
+      "type": "heading",
+      "content": "Question the assumptions"
+    },
+    {
+      "type": "text",
+      "content": "Investment decisions often depend on assumptions about future growth, interest rates, demand, costs, competition, or economic conditions. The more important an assumption is to your expected return, the more carefully you should examine it."
+    },
+    {
+      "type": "example",
+      "title": "One assumption can change the whole decision"
+    },
+    {
+      "type": "text",
+      "content": "Suppose an investment only looks attractive if a company can grow profits by 20% every year for a decade. Ask whether that growth rate is realistic, what would have to happen to achieve it, and what happens to your conclusion if growth is much lower."
+    },
+    {
+      "type": "heading",
+      "content": "Test more than one scenario"
+    },
+    {
+      "type": "text",
+      "content": "Instead of thinking only about what you hope will happen, consider different possible outcomes. A simple framework is to think about a reasonable upside case, a base case, and a downside case."
+    },
+    {
+      "type": "example",
+      "title": "Three possible outcomes"
+    },
+    {
+      "type": "text",
+      "content": "An investment might perform very well if conditions are favorable, produce an acceptable result if expectations are met, or perform poorly if important assumptions fail. Thinking through all three possibilities can reveal risks that are hidden by an overly optimistic forecast."
+    },
+    {
+      "type": "heading",
+      "content": "Do not confuse confidence with evidence"
+    },
+    {
+      "type": "text",
+      "content": "A confident person can still be wrong. Strong investment decisions should rely on evidence that can be examined rather than simply on how convincing someone sounds."
+    },
+    {
+      "type": "heading",
+      "content": "Check the source of the information"
+    },
+    {
+      "type": "text",
+      "content": "Not all investment information has the same reliability. Distinguish between official company information, financial statements, reputable research, independent analysis, advertisements, anonymous online posts, and promotional claims."
+    },
+    {
+      "type": "callout",
+      "title": "Be careful with promotional information"
+    },
+    {
+      "type": "text",
+      "content": "Someone trying to sell you an investment has a reason to make it sound attractive. That does not automatically make the information false, but it means you should independently verify important claims."
+    },
+    {
+      "type": "heading",
+      "content": "Look for conflicts of interest"
+    },
+    {
+      "type": "text",
+      "content": "Ask whether the person recommending an investment benefits financially if you buy it. A recommendation can be useful, but knowing the incentives behind the recommendation helps you judge the information more carefully."
+    },
+    {
+      "type": "heading",
+      "content": "Be skeptical of guaranteed high returns"
+    },
+    {
+      "type": "text",
+      "content": "Claims that an investment offers unusually high returns with little or no risk should receive serious scrutiny. In investing, higher potential returns generally come with uncertainty and risk."
+    },
+    {
+      "type": "heading",
+      "content": "Pressure is a warning sign"
+    },
+    {
+      "type": "text",
+      "content": "Be cautious when someone tells you that you must invest immediately, that an opportunity is available only for a very short time, or that asking questions means you will miss out. Pressure can interfere with careful decision-making."
+    },
+    {
+      "type": "heading",
+      "content": "Understand what happens if you change your mind"
+    },
+    {
+      "type": "text",
+      "content": "Before investing, understand how you would exit the investment. Can you sell easily? Are there penalties? Is there a lock-up period? Could the selling price be significantly different from the price you expected?"
+    },
+    {
+      "type": "heading",
+      "content": "Calculate the possible downside"
+    },
+    {
+      "type": "text",
+      "content": "Thinking in percentages is useful, but translate important risks into actual money. A 20% loss means something very different on $500 than on $50,000."
+    },
+    {
+      "type": "example",
+      "title": "Turning percentage risk into dollars"
+    },
+    {
+      "type": "text",
+      "content": "If you invest $5,000 and the investment falls by 20%, the decline is $1,000. If the same percentage decline happens to a $50,000 investment, the decline is $10,000."
+    },
+    {
+      "type": "formula",
+      "content": "$5,000 × 20% = $1,000"
+    },
+    {
+      "type": "formula",
+      "content": "$50,000 × 20% = $10,000"
+    },
+    {
+      "type": "heading",
+      "content": "Ask whether you can survive the downside"
+    },
+    {
+      "type": "text",
+      "content": "The important question is not simply whether a loss is possible. Ask whether the loss could force you to abandon important financial goals, take on debt, sell other investments, or suffer a serious financial setback."
+    },
+    {
+      "type": "heading",
+      "content": "Avoid analysis paralysis"
+    },
+    {
+      "type": "text",
+      "content": "Due diligence does not mean knowing everything before investing. No investor can know every future event. The goal is to gather enough reliable information to understand the investment, its major risks, its costs, its assumptions, and its fit with your plan."
+    },
+    {
+      "type": "heading",
+      "content": "Know when to walk away"
+    },
+    {
+      "type": "text",
+      "content": "Sometimes the best investment decision is not investing. If you cannot understand how the investment works, cannot verify important claims, cannot accept the downside, or the investment does not fit your goal, walking away can be a sensible decision."
+    },
+    {
+      "type": "heading",
+      "content": "A practical due-diligence checklist"
+    },
+    {
+      "type": "interactive",
+      "title": "Before committing your money",
+      "content": "Ask: What exactly am I buying? How can it produce a return? What could make me lose money? What assumptions does the investment depend on? What are the fees? How liquid is it? Who is providing the information? Do they have an incentive to sell it to me? What happens in a bad scenario? How does it fit my portfolio? Can I afford the downside? Do I understand it well enough to invest?"
+    },
+    {
+      "type": "heading",
+      "content": "A simple decision framework"
+    },
+    {
+      "type": "text",
+      "content": "Think of due diligence as a sequence: understand the investment, identify the source of potential returns, investigate the evidence, identify the risks, test the assumptions, calculate the possible financial impact, compare the investment with alternatives, and decide whether it fits your plan."
+    },
+    {
+      "type": "heading",
+      "content": "Putting it all together"
+    },
+    {
+      "type": "text",
+      "content": "A good investment decision does not require certainty about the future. It requires a clear understanding of what you are buying and an honest assessment of what could happen. The strongest investors do not ask only, 'How much could I make?' They also ask, 'What am I depending on, what could go wrong, and can I afford the consequences?'"
+    },
+    {
+      "type": "heading",
+      "content": "Common misconceptions"
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: Due diligence means finding an investment that cannot lose"
+    },
+    {
+      "type": "text",
+      "content": "Reality: Due diligence cannot eliminate investment risk. It helps you understand and manage uncertainty before committing money."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: More research always makes an investment safer"
+    },
+    {
+      "type": "text",
+      "content": "Reality: Research can improve understanding, but future events remain uncertain. Good research does not guarantee a good outcome."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: If a famous person recommends an investment, it must be trustworthy"
+    },
+    {
+      "type": "text",
+      "content": "Reality: Reputation is not proof. Important claims should still be independently examined."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: A high return makes an investment automatically better"
+    },
+    {
+      "type": "text",
+      "content": "Reality: Return must be considered alongside risk, fees, liquidity, time horizon, and the probability and consequences of different outcomes."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: Saying no means missing every opportunity"
+    },
+    {
+      "type": "text",
+      "content": "Reality: There will always be other investment opportunities. Protecting your money from an investment you do not understand can be more valuable than chasing every opportunity."
+    },
+    {
+      "type": "summary",
+      "content": "Investment due diligence means investigating an investment before committing your money. Understand what you are buying, where the potential return comes from, what could cause losses, what assumptions the decision depends on, what fees apply, how easily you can exit, who is providing the information, and how the investment fits your broader plan. The goal is not certainty. The goal is an informed decision where you understand both the opportunity and the downside."
+    },
+    {
+      "type": "callout",
+      "title": "Remember",
+      "content": "You do not need to know what will happen next. You need to understand what you are buying, what you are depending on, and what could happen if you are wrong."
+    }
+  ],
+  "quizzes": [
+    {
+      "order": 1,
+      "questionType": "multiple-choice",
+      "question": "What is the main purpose of investment due diligence?",
+      "options": [
+        "To guarantee that an investment will make money",
+        "To investigate an investment so you understand its potential returns, risks, costs, and fit before committing money",
+        "To predict every future market movement",
+        "To find investments with zero risk"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Due diligence helps you make an informed decision, but it cannot guarantee a particular investment outcome."
+    },
+    {
+      "order": 2,
+      "questionType": "multiple-choice",
+      "question": "What should you ask if someone promises unusually high investment returns?",
+      "options": [
+        "How quickly can I send the money?",
+        "Where does the return actually come from and what risks are involved?",
+        "Why should I invest everything immediately?",
+        "Can I ignore the details because the return is high?"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Understanding the source of the return and the risks behind it is a fundamental part of evaluating an investment."
+    },
+    {
+      "order": 3,
+      "questionType": "multiple-choice",
+      "question": "A company generates $10 million in revenue and has $9.5 million in expenses. Approximately how much remains before considering other relevant items?",
+      "options": [
+        "$50,000",
+        "$500,000",
+        "$1 million",
+        "$9.5 million"
+      ],
+      "correctAnswer": 1,
+      "explanation": "$10 million − $9.5 million = $500,000."
+    },
+    {
+      "order": 4,
+      "questionType": "multiple-choice",
+      "question": "Why should investors pay attention to fees?",
+      "options": [
+        "Fees always increase returns",
+        "Fees can reduce the amount of return the investor keeps",
+        "Fees guarantee that an investment is safe",
+        "Fees only matter for very small investments"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Fees reduce the money available to the investor and can have a meaningful effect when charged repeatedly."
+    },
+    {
+      "order": 5,
+      "questionType": "multiple-choice",
+      "question": "You invest $5,000 and the investment falls by 20%. Approximately how much is the decline?",
+      "options": [
+        "$100",
+        "$500",
+        "$1,000",
+        "$4,000"
+      ],
+      "correctAnswer": 2,
+      "explanation": "$5,000 × 20% = $1,000."
+    },
+    {
+      "order": 6,
+      "questionType": "true-false",
+      "question": "If someone confidently recommends an investment, you no longer need to investigate it yourself.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Confidence is not proof. Important investment claims should be examined and, where possible, independently verified."
+    },
+    {
+      "order": 7,
+      "questionType": "multiple-choice",
+      "question": "Why is liquidity important when evaluating an investment?",
+      "options": [
+        "It guarantees a profit",
+        "It tells you how easily the investment can generally be converted into cash without a large price disadvantage",
+        "It eliminates investment risk",
+        "It guarantees that buyers will always be available"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Liquidity matters because an investor may need to access money without suffering a major price disadvantage."
+    },
+    {
+      "order": 8,
+      "questionType": "multiple-choice",
+      "question": "Which is the strongest question to ask about an investment's downside?",
+      "options": [
+        "How popular is it?",
+        "What could cause me to lose money, and could I financially withstand that outcome?",
+        "How quickly has its price risen?",
+        "How many people online recommend it?"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Understanding possible losses and whether you can withstand them is central to sensible investment decision-making."
+    },
+    {
+      "order": 9,
+      "questionType": "multiple-choice",
+      "question": "Why should investors examine the assumptions behind an investment decision?",
+      "options": [
+        "Because assumptions are guaranteed facts",
+        "Because important assumptions can fail and change the expected outcome",
+        "Because assumptions eliminate uncertainty",
+        "Because assumptions guarantee higher returns"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Investment decisions often depend on expectations about the future, and those expectations can be wrong."
+    },
+    {
+      "order": 10,
+      "questionType": "multiple-choice",
+      "question": "Which is a sensible reason to walk away from an investment?",
+      "options": [
+        "You cannot understand how it works or verify important claims",
+        "Everyone else is buying it",
+        "The seller says you must act immediately",
+        "The investment promises a high return"
+      ],
+      "correctAnswer": 0,
+      "explanation": "If you cannot understand or adequately verify an investment, not investing can be a sensible risk-management decision."
+    }
+  ]
+}

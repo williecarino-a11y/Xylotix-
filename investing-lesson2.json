@@ -1,0 +1,404 @@
+{
+  "slug": "why-people-invest",
+  "title": "Why People Invest",
+  "estimatedDuration": 40,
+  "order": 2,
+  "published": true,
+  "contentBlocks": [
+    {
+      "type": "heading",
+      "content": "Investing starts with a reason"
+    },
+    {
+      "type": "text",
+      "content": "People generally do not invest simply because investing sounds interesting. They invest because they want their money to help accomplish something in the future. Understanding the reason behind an investment is one of the first steps toward making a sensible investment decision."
+    },
+    {
+      "type": "callout",
+      "title": "Start with the goal",
+      "content": "Before asking what to invest in, ask: What am I investing for, when will I need the money, and what would success look like?"
+    },
+    {
+      "type": "heading",
+      "content": "Growing wealth"
+    },
+    {
+      "type": "text",
+      "content": "One major reason people invest is to increase the value of their financial assets over time. If an investment grows in value and the investor holds it, the investor may build wealth through that increase."
+    },
+    {
+      "type": "example",
+      "title": "A simple growth example",
+      "content": "Suppose you invest $2,000 and the investment later becomes worth $2,300. Before considering fees, taxes, or other factors, the increase in value is $300."
+    },
+    {
+      "type": "formula",
+      "content": "$2,300 − $2,000 = $300"
+    },
+    {
+      "type": "heading",
+      "content": "Generating income"
+    },
+    {
+      "type": "text",
+      "content": "Some investments can provide income while they are held. Depending on the asset, that income may come from interest, dividends, rent, or other distributions. The amount and reliability of income vary by investment."
+    },
+    {
+      "type": "example",
+      "title": "Investment income",
+      "content": "Suppose an investment generates $50 of income during a period. That income can be received, saved, or potentially reinvested depending on the investor's goals and the investment terms."
+    },
+    {
+      "type": "heading",
+      "content": "Preparing for retirement"
+    },
+    {
+      "type": "text",
+      "content": "Retirement is a long-term goal for many investors. Someone may invest during their working years so that they have financial resources available after they stop or reduce employment income."
+    },
+    {
+      "type": "callout",
+      "title": "Why retirement investing is different",
+      "content": "Retirement investing usually has a long time horizon, which can allow more time for contributions and potential compound growth. However, the appropriate level of risk can change as retirement gets closer."
+    },
+    {
+      "type": "heading",
+      "content": "Protecting purchasing power"
+    },
+    {
+      "type": "text",
+      "content": "Prices can rise over time. If the value of your money does not keep pace with rising prices, the amount of goods and services that money can buy may decline. Some people invest because they want their long-term financial resources to have a chance of growing faster than inflation."
+    },
+    {
+      "type": "example",
+      "title": "Purchasing power",
+      "content": "Imagine you have $1,000 today. If prices rise significantly over many years while your $1,000 does not grow at all, that same $1,000 may buy less in the future."
+    },
+    {
+      "type": "heading",
+      "content": "Nominal growth versus real growth"
+    },
+    {
+      "type": "text",
+      "content": "An investment can increase in dollar value while your actual purchasing power grows by much less. This is why investors should think about returns in relation to inflation, not just the number displayed in an account."
+    },
+    {
+      "type": "example",
+      "title": "A simplified example",
+      "content": "Suppose your money grows by 8% over a period while prices rise by roughly 3%. Your money increased in nominal terms, but its purchasing power increased by less than 8%."
+    },
+    {
+      "type": "callout",
+      "title": "The bigger picture",
+      "content": "Making more dollars is not the only goal. What those dollars can actually buy matters too."
+    },
+    {
+      "type": "heading",
+      "content": "Funding a future goal"
+    },
+    {
+      "type": "text",
+      "content": "People may invest for goals such as education, buying a home, starting a business, or another long-term objective. The investment approach should match the amount of time available and the amount of risk that makes sense for that goal."
+    },
+    {
+      "type": "example",
+      "title": "A long-term goal",
+      "content": "Imagine you want to build $50,000 over many years for a future goal. Regular contributions combined with potential investment growth may help you work toward that target, although the final result is never guaranteed."
+    },
+    {
+      "type": "heading",
+      "content": "Building ownership"
+    },
+    {
+      "type": "text",
+      "content": "Some investments give investors an ownership interest in productive assets or businesses. Instead of simply holding cash, the investor is putting capital into something that may produce economic value."
+    },
+    {
+      "type": "heading",
+      "content": "Why not simply keep all money in cash?"
+    },
+    {
+      "type": "text",
+      "content": "Cash is useful because it is accessible and can help cover short-term needs. But keeping every dollar in cash for very long periods can create other challenges, including the risk that inflation reduces purchasing power. The appropriate balance between cash and investments depends on the person's goals, circumstances, and risk tolerance."
+    },
+    {
+      "type": "heading",
+      "content": "The trade-off between today and tomorrow"
+    },
+    {
+      "type": "text",
+      "content": "Money used for investing is money that is not being used for something else today. Choosing to invest therefore involves a trade-off: you give up some current spending or liquidity in exchange for the possibility of having more financial resources in the future."
+    },
+    {
+      "type": "example",
+      "title": "A simple trade-off",
+      "content": "Suppose you have an extra $500. You could spend the entire amount today, keep it as cash, use it to reduce debt, or invest some of it for a long-term goal. Each decision gives the money a different job."
+    },
+    {
+      "type": "heading",
+      "content": "Regular investing"
+    },
+    {
+      "type": "text",
+      "content": "Some investors contribute a consistent amount regularly rather than trying to invest one large amount at the perfect moment. Regular contributions can make investing easier to maintain as a habit and can add more money that has the potential to grow."
+    },
+    {
+      "type": "example",
+      "title": "Small contributions add up",
+      "content": "If someone invests $250 every month for one year, they contribute $3,000 before considering investment returns."
+    },
+    {
+      "type": "formula",
+      "content": "$250 × 12 = $3,000"
+    },
+    {
+      "type": "heading",
+      "content": "Compounding can support long-term goals"
+    },
+    {
+      "type": "text",
+      "content": "When investment returns are reinvested, future growth can potentially occur on previous growth as well as on new contributions. This is one reason investors often think in years or decades rather than days."
+    },
+    {
+      "type": "heading",
+      "content": "But investing is not a shortcut to wealth"
+    },
+    {
+      "type": "text",
+      "content": "Investing does not guarantee that a person will become wealthy. Results depend on contributions, time, investment performance, fees, taxes, risk, and many other factors. A sound investment plan focuses on realistic long-term objectives rather than promises of instant wealth."
+    },
+    {
+      "type": "heading",
+      "content": "Different goals require different approaches"
+    },
+    {
+      "type": "text",
+      "content": "The investment that may make sense for a long-term retirement goal may not make sense for money needed in a few months. Time horizon is therefore one of the most important connections between a goal and an investment decision."
+    },
+    {
+      "type": "example",
+      "title": "Two different goals",
+      "content": "Person A needs $5,000 in six months for a known expense. Person B is investing money they do not expect to need for 25 years. They may reasonably have very different approaches because their time horizons are very different."
+    },
+    {
+      "type": "heading",
+      "content": "Risk must match the goal"
+    },
+    {
+      "type": "text",
+      "content": "An investment that can experience large short-term losses may be difficult to use for a goal that is only months away. A longer time horizon may provide more opportunity to recover from temporary declines, although it does not eliminate investment risk."
+    },
+    {
+      "type": "heading",
+      "content": "The danger of chasing returns"
+    },
+    {
+      "type": "text",
+      "content": "A person who focuses only on the highest possible return may overlook the risk required to pursue that return. A higher potential return can come with greater uncertainty or a greater possibility of loss."
+    },
+    {
+      "type": "heading",
+      "content": "Investing should have a job"
+    },
+    {
+      "type": "text",
+      "content": "Instead of investing simply because other people are doing it, give your investment money a purpose. A clear purpose can help determine the time horizon, risk level, contribution amount, and type of investment that may be appropriate."
+    },
+    {
+      "type": "interactive",
+      "title": "Give the money a job",
+      "content": "You have $10,000 that you do not expect to need for 15 years. What questions should you answer before deciding how to invest it? Consider your goal, time horizon, risk tolerance, expected return, diversification, fees, and the possibility of losses."
+    },
+    {
+      "type": "heading",
+      "content": "Common misconceptions"
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: People invest only because they want to get rich"
+    },
+    {
+      "type": "text",
+      "content": "Reality: People invest for many reasons, including retirement, future income, long-term goals, wealth building, and maintaining purchasing power."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: Investing should always produce income immediately"
+    },
+    {
+      "type": "text",
+      "content": "Reality: Some investments may generate income, while others may primarily aim for long-term growth. The appropriate objective depends on the investment and the investor's goal."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: The highest return is always the best choice"
+    },
+    {
+      "type": "text",
+      "content": "Reality: Potential return must be considered alongside risk, time horizon, fees, liquidity, diversification, and suitability."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: Investing protects you completely from inflation"
+    },
+    {
+      "type": "text",
+      "content": "Reality: Investing may provide an opportunity for growth that helps offset inflation, but no investment guarantees that purchasing power will be protected."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: You should invest money you need soon"
+    },
+    {
+      "type": "text",
+      "content": "Reality: Money needed for a near-term goal may not be suitable for investments that can experience significant short-term losses."
+    },
+    {
+      "type": "heading",
+      "content": "A practical investor's checklist"
+    },
+    {
+      "type": "text",
+      "content": "Before investing, ask: What is my goal? When will I need the money? How much can I contribute? How much loss can I realistically tolerate? What am I buying? How does it potentially generate a return? What are the fees and risks?"
+    },
+    {
+      "type": "summary",
+      "content": "People invest because they want their money to help achieve future goals. Common reasons include growing wealth, generating income, preparing for retirement, maintaining purchasing power, funding long-term goals, and building ownership in productive assets. The right investment depends on the goal, time horizon, risk, and circumstances. Investing can create opportunities for growth, but returns are never guaranteed."
+    },
+    {
+      "type": "callout",
+      "title": "Remember",
+      "content": "A good investment decision starts with a clear goal. Do not choose an investment first and invent a reason afterward."
+    }
+  ],
+  "quiz": [
+    {
+      "order": 1,
+      "questionType": "multiple-choice",
+      "question": "Why do people generally invest?",
+      "options": [
+        "Because every investment guarantees profit",
+        "Because they want their resources to help achieve a future financial goal",
+        "Because investing eliminates all financial risk",
+        "Because spending money is always harmful"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Investing is generally connected to a future objective such as growth, income, retirement, or another financial goal."
+    },
+    {
+      "order": 2,
+      "questionType": "multiple-choice",
+      "question": "Which is a common reason people invest?",
+      "options": [
+        "To guarantee that prices never rise",
+        "To prepare for long-term goals such as retirement",
+        "To eliminate every possible loss",
+        "To avoid ever using money"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Retirement and other long-term goals are common reasons people invest."
+    },
+    {
+      "order": 3,
+      "questionType": "multiple-choice",
+      "question": "If someone invests $250 every month for one year, how much do they contribute before investment returns?",
+      "options": [
+        "$1,250",
+        "$2,000",
+        "$3,000",
+        "$3,500"
+      ],
+      "correctAnswer": 2,
+      "explanation": "$250 × 12 = $3,000."
+    },
+    {
+      "order": 4,
+      "questionType": "multiple-choice",
+      "question": "Why might someone invest for retirement?",
+      "options": [
+        "To create financial resources for a period when employment income may decrease or stop",
+        "To guarantee a specific retirement balance",
+        "To eliminate the need for any financial planning",
+        "To make every investment risk-free"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Retirement investing can help build financial resources for the future, although the final result is not guaranteed."
+    },
+    {
+      "order": 5,
+      "questionType": "true-false",
+      "question": "The highest possible investment return is always the best choice for every investor.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Potential return must be considered alongside risk, time horizon, fees, liquidity, diversification, and suitability."
+    },
+    {
+      "order": 6,
+      "questionType": "multiple-choice",
+      "question": "Why might investing be useful when thinking about inflation?",
+      "options": [
+        "Investing guarantees that inflation will stop",
+        "Some investments may have the potential to grow and help offset the loss of purchasing power",
+        "Inflation only affects people who invest",
+        "All investments automatically rise faster than inflation"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Some investments may provide growth that helps offset inflation, but no investment guarantees that result."
+    },
+    {
+      "order": 7,
+      "questionType": "multiple-choice",
+      "question": "Someone needs $5,000 in six months. Why should their time horizon matter when choosing an investment?",
+      "options": [
+        "Because short-term goals may have less time to recover from a major investment loss",
+        "Because short-term investments cannot lose money",
+        "Because six months is always enough time for any investment to grow",
+        "Because time horizon does not matter"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Money needed soon may not have enough time to recover if an investment experiences a significant decline."
+    },
+    {
+      "order": 8,
+      "questionType": "multiple-choice",
+      "question": "Which question should an investor ask before choosing an investment?",
+      "options": [
+        "What is everyone else buying?",
+        "What is my goal and when will I need the money?",
+        "How can I guarantee a profit?",
+        "How can I avoid learning about the investment?"
+      ],
+      "correctAnswer": 1,
+      "explanation": "The goal and time horizon help determine what type of investment approach may be appropriate."
+    },
+    {
+      "order": 9,
+      "questionType": "multiple-choice",
+      "question": "What is the trade-off involved in investing money?",
+      "options": [
+        "You give up some current spending or liquidity in exchange for the possibility of future growth or income",
+        "You guarantee that your money will increase",
+        "You eliminate the need for emergency savings",
+        "You stop all financial risk"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Investing commits resources that could otherwise be used today, in exchange for the possibility of a future financial benefit."
+    },
+    {
+      "order": 10,
+      "questionType": "multiple-choice",
+      "question": "Which statement best summarizes why people invest?",
+      "options": [
+        "People invest because all investments are guaranteed to make money",
+        "People invest to put resources to work toward future financial goals while accepting uncertainty",
+        "People invest only to become rich quickly",
+        "People invest so they never need cash"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Investing is about using resources toward future objectives while accepting that the outcome is uncertain."
+    }
+  ]
+}

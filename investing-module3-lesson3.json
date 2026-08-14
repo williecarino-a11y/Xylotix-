@@ -1,0 +1,447 @@
+{
+  "slug": "mutual-funds-vs-etfs",
+  "title": "Mutual Funds vs. ETFs",
+  "estimatedDuration": 45,
+  "order": 3,
+  "published": true,
+  "contentBlocks": [
+    {
+      "type": "heading",
+      "content": "Why compare mutual funds and ETFs?"
+    },
+    {
+      "type": "text",
+      "content": "Mutual funds and exchange-traded funds are both pooled investment vehicles. Both can hold collections of stocks, bonds, or other assets, and both can help investors gain exposure to many investments through one fund."
+    },
+    {
+      "type": "callout",
+      "title": "The key idea",
+      "content": "The biggest differences are often in how the funds are structured, priced, traded, managed, and accessed. Neither structure is automatically better for every investor."
+    },
+    {
+      "type": "heading",
+      "content": "What is a mutual fund?"
+    },
+    {
+      "type": "text",
+      "content": "A mutual fund pools money from many investors and invests that money according to the fund's stated strategy. Investors own shares or units of the fund rather than directly owning every underlying investment themselves."
+    },
+    {
+      "type": "heading",
+      "content": "What is an ETF?"
+    },
+    {
+      "type": "text",
+      "content": "An ETF is also a pooled investment fund, but its shares generally trade on an exchange during the trading day, similar to shares of an individual company."
+    },
+    {
+      "type": "heading",
+      "content": "Both can provide diversification"
+    },
+    {
+      "type": "text",
+      "content": "A mutual fund or ETF can hold many investments. This can make diversification easier than buying each investment separately."
+    },
+    {
+      "type": "heading",
+      "content": "But the fund's holdings still matter"
+    },
+    {
+      "type": "text",
+      "content": "Two funds can have completely different levels of diversification. One may hold thousands of companies, while another may focus on a small group of companies or a single industry."
+    },
+    {
+      "type": "heading",
+      "content": "How ETFs are traded"
+    },
+    {
+      "type": "text",
+      "content": "ETF shares generally trade on an exchange throughout the trading day. Their market price can change while the market is open based on supply, demand, and changes in the value of the underlying investments."
+    },
+    {
+      "type": "heading",
+      "content": "How mutual funds are priced"
+    },
+    {
+      "type": "text",
+      "content": "Mutual funds generally calculate a net asset value, or NAV, for their shares at a designated time, commonly at the end of the trading day. Investors typically transact based on that calculated NAV, subject to the fund's rules."
+    },
+    {
+      "type": "callout",
+      "title": "Simple distinction",
+      "content": "ETF: generally trades throughout the day on an exchange. Mutual fund: generally transacts at a calculated NAV."
+    },
+    {
+      "type": "heading",
+      "content": "What is NAV?"
+    },
+    {
+      "type": "text",
+      "content": "Net asset value is the value of a fund's assets minus its liabilities, divided by the number of outstanding fund shares or units."
+    },
+    {
+      "type": "formula",
+      "content": "NAV per share = (fund assets − fund liabilities) ÷ shares outstanding"
+    },
+    {
+      "type": "example",
+      "title": "Simple NAV calculation",
+      "content": "Suppose a fund has $10 million in assets, $200,000 in liabilities, and 980,000 shares outstanding. Its simplified NAV per share is approximately $10."
+    },
+    {
+      "type": "formula",
+      "content": "($10,000,000 − $200,000) ÷ 980,000 = $10 per share"
+    },
+    {
+      "type": "heading",
+      "content": "Active versus passive management"
+    },
+    {
+      "type": "text",
+      "content": "Both mutual funds and ETFs can be actively or passively managed. Active funds generally have managers selecting investments with the goal of achieving a particular objective, often outperforming a benchmark. Passive funds generally seek to track an index."
+    },
+    {
+      "type": "heading",
+      "content": "An ETF is not automatically passive"
+    },
+    {
+      "type": "text",
+      "content": "Many ETFs track indexes, but ETFs can also use active strategies. The word ETF tells you about the fund's structure and trading method, not necessarily whether it is active or passive."
+    },
+    {
+      "type": "heading",
+      "content": "A mutual fund is not automatically active"
+    },
+    {
+      "type": "text",
+      "content": "Mutual funds can also be designed to track indexes. Therefore, passive versus active is a separate question from ETF versus mutual fund."
+    },
+    {
+      "type": "heading",
+      "content": "Fees matter"
+    },
+    {
+      "type": "text",
+      "content": "Funds have costs. These can include operating expenses and, depending on the fund and platform, other charges. Investors should look at the actual fee structure rather than assuming one type of fund is always cheaper."
+    },
+    {
+      "type": "heading",
+      "content": "Expense ratio"
+    },
+    {
+      "type": "text",
+      "content": "The expense ratio expresses a fund's annual operating expenses as a percentage of its assets."
+    },
+    {
+      "type": "example",
+      "title": "Comparing fund costs",
+      "content": "If you have $25,000 invested in a fund with a 0.20% expense ratio, the simple annual cost represented by that ratio is about $50. At 1.00%, it would be about $250, ignoring changes in account value and other factors."
+    },
+    {
+      "type": "formula",
+      "content": "$25,000 × 0.20% = $50"
+    },
+    {
+      "type": "formula",
+      "content": "$25,000 × 1.00% = $250"
+    },
+    {
+      "type": "heading",
+      "content": "Trading costs can be different from fund expenses"
+    },
+    {
+      "type": "text",
+      "content": "The expense ratio is not the only potential cost. An ETF investor may also face trading-related costs depending on the brokerage and transaction. Mutual funds can have their own fees or transaction rules. Always check the actual fund and account terms."
+    },
+    {
+      "type": "heading",
+      "content": "Minimum investment requirements"
+    },
+    {
+      "type": "text",
+      "content": "Some mutual funds may have minimum investment requirements, while ETFs can generally be purchased according to the brokerage's trading rules and available share or fractional-share options."
+    },
+    {
+      "type": "heading",
+      "content": "Automatic investing"
+    },
+    {
+      "type": "text",
+      "content": "Some investors value the ability to automatically contribute a fixed amount to a fund on a recurring schedule. Whether this is easy or available depends on the brokerage and fund platform."
+    },
+    {
+      "type": "heading",
+      "content": "Liquidity"
+    },
+    {
+      "type": "text",
+      "content": "ETF shares generally trade throughout the day, but the ease and cost of trading can vary by ETF. Mutual funds generally do not trade like stocks during the day. Liquidity should therefore be considered alongside the specific fund and market."
+    },
+    {
+      "type": "heading",
+      "content": "Taxes can differ"
+    },
+    {
+      "type": "text",
+      "content": "The tax treatment of ETFs and mutual funds depends on the country, account type, fund structure, and investor circumstances. Investors should not assume that one structure always produces lower taxes."
+    },
+    {
+      "type": "heading",
+      "content": "What about index funds?"
+    },
+    {
+      "type": "text",
+      "content": "An index fund is defined by its strategy of tracking an index. It can be structured as an ETF or as a mutual fund. This means you can have an index ETF and an index mutual fund."
+    },
+    {
+      "type": "example",
+      "title": "Three different descriptions",
+      "content": "Fund A is an ETF that tracks a broad stock index. Fund B is a mutual fund that tracks the same type of index. Fund C is an actively managed mutual fund where a manager selects stocks. All three are funds, but their structures and strategies differ."
+    },
+    {
+      "type": "heading",
+      "content": "When an ETF may be attractive"
+    },
+    {
+      "type": "text",
+      "content": "An ETF may appeal to investors who value intraday trading, broad selection, transparency, or a particular low-cost passive strategy. The specific fund still needs to be evaluated."
+    },
+    {
+      "type": "heading",
+      "content": "When a mutual fund may be attractive"
+    },
+    {
+      "type": "text",
+      "content": "A mutual fund may appeal to investors who value automated contributions, professional management, particular fund strategies, or a platform that makes mutual-fund investing convenient. Again, the specific fund matters more than the label alone."
+    },
+    {
+      "type": "heading",
+      "content": "Neither structure guarantees better returns"
+    },
+    {
+      "type": "text",
+      "content": "ETF versus mutual fund is not a simple ranking. Investment results depend heavily on what the fund owns, its strategy, costs, market conditions, taxes, and investor behavior."
+    },
+    {
+      "type": "heading",
+      "content": "Common misconceptions"
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: Every ETF is an index fund"
+    },
+    {
+      "type": "text",
+      "content": "Reality: Many ETFs track indexes, but some ETFs are actively managed or follow other strategies."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: Every mutual fund is actively managed"
+    },
+    {
+      "type": "text",
+      "content": "Reality: Mutual funds can also passively track indexes."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: ETFs are always cheaper"
+    },
+    {
+      "type": "text",
+      "content": "Reality: Costs depend on the specific fund, strategy, fees, and trading arrangements."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: A lower share price means a cheaper fund"
+    },
+    {
+      "type": "text",
+      "content": "Reality: The share price does not tell you whether the fund is better value. What matters is the assets, strategy, costs, performance, and risks represented by the investment."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: ETFs and mutual funds cannot both be diversified"
+    },
+    {
+      "type": "text",
+      "content": "Reality: Both structures can provide broad diversification, depending on their holdings."
+    },
+    {
+      "type": "heading",
+      "content": "Practical decision framework"
+    },
+    {
+      "type": "interactive",
+      "title": "Compare the actual fund, not just the label",
+      "content": "Check what it owns. Check whether it is active or passive. Identify its benchmark if applicable. Compare expense ratios and other costs. Consider how it trades. Check diversification and concentration. Consider tax implications in your country and account. Finally, ask whether the fund fits your investment goal and time horizon."
+    },
+    {
+      "type": "heading",
+      "content": "Practical calculation"
+    },
+    {
+      "type": "example",
+      "title": "Why fees can create a meaningful difference",
+      "content": "Suppose two otherwise similar funds each have $40,000 invested. Fund A has a 0.15% expense ratio and Fund B has a 0.75% expense ratio. The simple annual difference represented by those expense ratios is $240."
+    },
+    {
+      "type": "formula",
+      "content": "Fund A: $40,000 × 0.15% = $60"
+    },
+    {
+      "type": "formula",
+      "content": "Fund B: $40,000 × 0.75% = $300"
+    },
+    {
+      "type": "formula",
+      "content": "$300 − $60 = $240 difference per year"
+    },
+    {
+      "type": "heading",
+      "content": "The bigger lesson"
+    },
+    {
+      "type": "text",
+      "content": "Do not choose an investment merely because it is called an ETF or a mutual fund. Understand the fund underneath the label. The structure, strategy, holdings, costs, risks, and suitability all matter."
+    },
+    {
+      "type": "summary",
+      "content": "Mutual funds and ETFs are both pooled investment vehicles. ETFs generally trade throughout the day on exchanges, while mutual funds generally transact at a calculated NAV. Both can be active or passive and both can provide diversification. The best choice depends on the specific fund, costs, strategy, holdings, risks, taxes, and the investor's goals."
+    },
+    {
+      "type": "callout",
+      "title": "Remember",
+      "content": "ETF versus mutual fund is a structure question. Active versus passive is a strategy question. Keep those two ideas separate."
+    }
+  ],
+  "quiz": [
+    {
+      "order": 1,
+      "questionType": "multiple-choice",
+      "question": "What is one major difference between ETFs and mutual funds?",
+      "options": [
+        "ETFs generally trade throughout the day on an exchange, while mutual funds generally transact at a calculated NAV",
+        "Only ETFs can hold stocks",
+        "Only mutual funds can hold bonds",
+        "ETFs always guarantee higher returns"
+      ],
+      "correctAnswer": 0,
+      "explanation": "ETFs generally trade throughout the day, while mutual funds generally transact at a calculated NAV."
+    },
+    {
+      "order": 2,
+      "questionType": "multiple-choice",
+      "question": "What does NAV stand for?",
+      "options": [
+        "Net Annual Value",
+        "Net Asset Value",
+        "New Account Value",
+        "Nominal Asset Variation"
+      ],
+      "correctAnswer": 1,
+      "explanation": "NAV stands for Net Asset Value."
+    },
+    {
+      "order": 3,
+      "questionType": "multiple-choice",
+      "question": "A fund has $10 million in assets, $200,000 in liabilities, and 980,000 shares. What is its simplified NAV per share?",
+      "options": [
+        "$5",
+        "$8",
+        "$10",
+        "$20"
+      ],
+      "correctAnswer": 2,
+      "explanation": "($10,000,000 − $200,000) ÷ 980,000 = approximately $10 per share."
+    },
+    {
+      "order": 4,
+      "questionType": "true-false",
+      "question": "Every ETF is passively managed.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Some ETFs are actively managed, so ETF structure and investment strategy are separate concepts."
+    },
+    {
+      "order": 5,
+      "questionType": "multiple-choice",
+      "question": "Can a mutual fund be an index fund?",
+      "options": [
+        "Yes",
+        "No",
+        "Only if it trades on an exchange",
+        "Only if it owns one stock"
+      ],
+      "correctAnswer": 0,
+      "explanation": "A mutual fund can be designed to track an index."
+    },
+    {
+      "order": 6,
+      "questionType": "multiple-choice",
+      "question": "What does an expense ratio represent?",
+      "options": [
+        "The fund's annual operating expenses expressed as a percentage of assets",
+        "The number of stocks in the fund",
+        "The fund's share price",
+        "The guaranteed annual return"
+      ],
+      "correctAnswer": 0,
+      "explanation": "An expense ratio expresses annual operating expenses as a percentage of the fund's assets."
+    },
+    {
+      "order": 7,
+      "questionType": "multiple-choice",
+      "question": "Two funds each have $25,000 invested. Fund A has a 0.20% expense ratio and Fund B has a 1.00% expense ratio. What is the simple annual difference represented by those ratios?",
+      "options": [
+        "$20",
+        "$100",
+        "$200",
+        "$250"
+      ],
+      "correctAnswer": 2,
+      "explanation": "Fund A represents $50 and Fund B represents $250, giving a $200 difference."
+    },
+    {
+      "order": 8,
+      "questionType": "multiple-choice",
+      "question": "Which statement is most accurate?",
+      "options": [
+        "ETF versus mutual fund tells you whether the fund is active or passive",
+        "ETF and mutual fund describe fund structures, while active and passive describe investment strategies",
+        "Every mutual fund is active",
+        "Every ETF tracks an index"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Fund structure and investment strategy are separate concepts."
+    },
+    {
+      "order": 9,
+      "questionType": "multiple-choice",
+      "question": "Why shouldn't an investor choose a fund based only on its expense ratio?",
+      "options": [
+        "Fees never matter",
+        "The fund's holdings, strategy, risks, taxes, tracking, and suitability also matter",
+        "Higher fees always produce higher returns",
+        "Expense ratios determine the fund's share price"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Costs matter, but they are only one part of evaluating an investment."
+    },
+    {
+      "order": 10,
+      "questionType": "multiple-choice",
+      "question": "What is the best general approach when comparing an ETF and a mutual fund?",
+      "options": [
+        "Choose whichever has the lower share price",
+        "Choose the one with the most impressive name",
+        "Compare the actual funds' holdings, strategy, costs, risks, taxes, and suitability",
+        "Always choose the ETF"
+      ],
+      "correctAnswer": 2,
+      "explanation": "The specific investment matters more than the label alone."
+    }
+  ]
+}

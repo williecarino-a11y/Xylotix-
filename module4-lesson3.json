@@ -1,0 +1,617 @@
+{
+  "slug": "how-to-save-money-when-income-is-low",
+  "title": "How to Save Money When Your Income Is Low",
+  "estimatedDuration": 35,
+  "order": 3,
+  "published": true,
+  "contentBlocks": [
+    {
+      "order": 1,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Saving is not only for people with high incomes"
+      }
+    },
+    {
+      "order": 2,
+      "type": "text",
+      "data": {
+        "text": "When income is tight, saving can feel impossible. But saving does not always begin with a large amount. It can begin with creating even a small amount of financial breathing room."
+      }
+    },
+    {
+      "order": 3,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Start with what is actually available"
+      }
+    },
+    {
+      "order": 4,
+      "type": "text",
+      "data": {
+        "text": "Before choosing a savings amount, look at your real income and essential expenses. A saving target that leaves you unable to cover necessities is not a sustainable plan."
+      }
+    },
+    {
+      "order": 5,
+      "type": "example",
+      "data": {
+        "title": "Finding a realistic amount",
+        "text": "You receive $1,200 this month and essential expenses are $1,050. That leaves $150 before other spending. Saving $50 may be more realistic than promising yourself $300."
+      }
+    },
+    {
+      "order": 6,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "A small amount still counts"
+      }
+    },
+    {
+      "order": 7,
+      "type": "text",
+      "data": {
+        "text": "Saving $10, $20, or $50 may seem small, but repeated contributions can build a useful reserve. The goal is to create a habit that works with your current circumstances."
+      }
+    },
+    {
+      "order": 8,
+      "type": "example",
+      "data": {
+        "title": "Small contributions add up",
+        "text": "If you save $20 each week, 52 weeks of contributions would total $1,040 if you make every contribution."
+      }
+    },
+    {
+      "order": 9,
+      "type": "formula",
+      "data": {
+        "text": "Weekly saving × number of weeks = total contributions"
+      }
+    },
+    {
+      "order": 10,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Do not compare your savings to someone else's"
+      }
+    },
+    {
+      "order": 11,
+      "type": "text",
+      "data": {
+        "text": "Someone earning five times your income may be able to save far more in absolute dollars. Comparing amounts without considering income and expenses can make you underestimate your own progress."
+      }
+    },
+    {
+      "order": 12,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Protect necessities first"
+      }
+    },
+    {
+      "order": 13,
+      "type": "text",
+      "data": {
+        "text": "When money is limited, essential needs such as housing, food, necessary transportation, and important bills generally need to be considered before optional spending and savings goals."
+      }
+    },
+    {
+      "order": 14,
+      "type": "callout",
+      "data": {
+        "title": "Saving should not create a new crisis",
+        "text": "Do not force an aggressive savings target if doing so means you cannot cover essential expenses or must immediately borrow to get through the month."
+      }
+    },
+    {
+      "order": 15,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Look for spending you can actually change"
+      }
+    },
+    {
+      "order": 16,
+      "type": "text",
+      "data": {
+        "text": "When income is low, every dollar matters. Look for recurring or discretionary expenses that provide less value to you than the money they consume."
+      }
+    },
+    {
+      "order": 17,
+      "type": "example",
+      "data": {
+        "title": "A small monthly reduction",
+        "text": "Suppose you identify $25 of monthly spending that you no longer value. Redirecting that $25 to savings would add $300 over a year."
+      }
+    },
+    {
+      "order": 18,
+      "type": "formula",
+      "data": {
+        "text": "$25 × 12 months = $300"
+      }
+    },
+    {
+      "order": 19,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Do not cut everything that makes life enjoyable"
+      }
+    },
+    {
+      "order": 20,
+      "type": "text",
+      "data": {
+        "text": "A savings plan that removes every enjoyable activity may become difficult to maintain. Look for changes that reduce waste without making your entire life feel like punishment."
+      }
+    },
+    {
+      "order": 21,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Use a specific first target"
+      }
+    },
+    {
+      "order": 22,
+      "type": "text",
+      "data": {
+        "text": "A small target can make saving easier to understand. Instead of thinking about saving thousands of dollars immediately, choose a first milestone that feels achievable."
+      }
+    },
+    {
+      "order": 23,
+      "type": "example",
+      "data": {
+        "title": "A $250 first target",
+        "text": "If you can save $25 each week, reaching $250 would take 10 weeks, assuming you save every week."
+      }
+    },
+    {
+      "order": 24,
+      "type": "formula",
+      "data": {
+        "text": "$250 ÷ $25 = 10 weeks"
+      }
+    },
+    {
+      "order": 25,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Automating a small amount can help"
+      }
+    },
+    {
+      "order": 26,
+      "type": "text",
+      "data": {
+        "text": "If your financial system allows it, automatically moving a small amount into savings after receiving income can reduce the need to make the decision manually every time."
+      }
+    },
+    {
+      "order": 27,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "But automation should still match reality"
+      }
+    },
+    {
+      "order": 28,
+      "type": "text",
+      "data": {
+        "text": "Do not automate an amount simply because it sounds impressive. If the amount regularly causes your account to fall short for essential expenses, the system needs to be adjusted."
+      }
+    },
+    {
+      "order": 29,
+      "type": "example",
+      "data": {
+        "title": "Adjusting the automatic amount",
+        "text": "You automatically save $100 every payday, but your income has recently fallen. If that transfer repeatedly leaves you unable to cover essentials, reducing it to a sustainable amount may be the smarter decision."
+      }
+    },
+    {
+      "order": 30,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Irregular income requires flexibility"
+      }
+    },
+    {
+      "order": 31,
+      "type": "text",
+      "data": {
+        "text": "If your income changes from month to month, committing to the exact same savings amount every month may not work. A flexible approach can be more realistic."
+      }
+    },
+    {
+      "order": 32,
+      "type": "example",
+      "data": {
+        "title": "Saving from variable income",
+        "text": "You earn $900 one month and $1,500 the next. You might choose a smaller contribution during the $900 month and a larger contribution during the $1,500 month, while still protecting essential expenses."
+      }
+    },
+    {
+      "order": 33,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "A percentage can sometimes work better"
+      }
+    },
+    {
+      "order": 34,
+      "type": "text",
+      "data": {
+        "text": "When income varies, saving a percentage of what you receive can sometimes be easier than choosing one fixed dollar amount."
+      }
+    },
+    {
+      "order": 35,
+      "type": "example",
+      "data": {
+        "title": "Saving 5% of income",
+        "text": "If you receive $800, saving 5% means $40. If you receive $1,400, saving 5% means $70."
+      }
+    },
+    {
+      "order": 36,
+      "type": "formula",
+      "data": {
+        "text": "Income × savings percentage = savings contribution"
+      }
+    },
+    {
+      "order": 37,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Extra income can create an opportunity"
+      }
+    },
+    {
+      "order": 38,
+      "type": "text",
+      "data": {
+        "text": "A bonus, gift, temporary side income, refund, or unusually strong month can provide an opportunity to increase savings without relying entirely on your normal income."
+      }
+    },
+    {
+      "order": 39,
+      "type": "example",
+      "data": {
+        "title": "Using part of an unexpected $200",
+        "text": "You receive an unexpected $200. You decide to save $100 and use the remaining $100 for other needs or goals. Your emergency savings increase without requiring a permanent reduction in your normal budget."
+      }
+    },
+    {
+      "order": 40,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Saving can protect you from future borrowing"
+      }
+    },
+    {
+      "order": 41,
+      "type": "text",
+      "data": {
+        "text": "Even a modest cash reserve can reduce the chance that a smaller unexpected expense immediately becomes new debt."
+      }
+    },
+    {
+      "order": 42,
+      "type": "example",
+      "data": {
+        "title": "A $150 problem",
+        "text": "An unexpected necessary expense costs $150. If you already have $200 saved, you may be able to handle it without borrowing the entire amount."
+      }
+    },
+    {
+      "order": 43,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Separate saving from spending money"
+      }
+    },
+    {
+      "order": 44,
+      "type": "text",
+      "data": {
+        "text": "Keeping savings separate from everyday spending can make it easier to see what money is actually available for normal purchases."
+      }
+    },
+    {
+      "order": 45,
+      "type": "interactive",
+      "data": {
+        "title": "Spot the problem",
+        "text": "You have $500 in your account and mentally consider all $500 available for spending, even though $200 is meant for savings. Ask yourself whether your spending decisions would change if the $200 were clearly separated."
+      }
+    },
+    {
+      "order": 46,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Track progress instead of judging yourself"
+      }
+    },
+    {
+      "order": 47,
+      "type": "text",
+      "data": {
+        "text": "A person with limited income may need more time to build savings. Progress should be measured against the person's own starting point and circumstances."
+      }
+    },
+    {
+      "order": 48,
+      "type": "example",
+      "data": {
+        "title": "From zero to $600",
+        "text": "If you started with no savings and gradually built a $600 reserve, that is meaningful progress even if someone else has saved much more."
+      }
+    },
+    {
+      "order": 49,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Increase savings when your situation improves"
+      }
+    },
+    {
+      "order": 50,
+      "type": "text",
+      "data": {
+        "text": "If your income rises or an expense disappears, consider directing part of the improvement toward savings rather than allowing all of it to become new spending."
+      }
+    },
+    {
+      "order": 51,
+      "type": "example",
+      "data": {
+        "title": "A $100 monthly improvement",
+        "text": "A bill of $100 per month ends. Instead of immediately spending the full $100 elsewhere, you could redirect some or all of it to savings."
+      }
+    },
+    {
+      "order": 52,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Do not use debt to pretend you are saving"
+      }
+    },
+    {
+      "order": 53,
+      "type": "text",
+      "data": {
+        "text": "Borrowing money so you can move money into savings can create a misleading picture. You may have cash in one place while owing more money somewhere else."
+      }
+    },
+    {
+      "order": 54,
+      "type": "callout",
+      "data": {
+        "title": "Look at your whole financial position",
+        "text": "Having $500 in savings while taking on $500 of expensive new debt does not create the same financial improvement as genuinely building $500 of savings from available resources."
+      }
+    },
+    {
+      "order": 55,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Build a system you can repeat"
+      }
+    },
+    {
+      "order": 56,
+      "type": "text",
+      "data": {
+        "text": "The strongest saving strategy is usually one that you can repeat during ordinary months. A realistic contribution made consistently can be more useful than an aggressive target that lasts only a few weeks."
+      }
+    },
+    {
+      "order": 57,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Your first goal is progress"
+      }
+    },
+    {
+      "order": 58,
+      "type": "summary",
+      "data": {
+        "title": "What to remember",
+        "points": [
+          "You can start saving even when income is limited.",
+          "Protect essential expenses before forcing a savings target.",
+          "Small contributions can become meaningful when repeated.",
+          "Choose a target that fits your real situation.",
+          "Variable income may require a flexible savings strategy.",
+          "A percentage can sometimes work well when income changes.",
+          "Unexpected extra income can provide opportunities to save.",
+          "Separate savings from everyday spending when possible.",
+          "Do not borrow simply to make your savings balance look larger.",
+          "Increase your savings contribution when your financial situation improves."
+        ]
+      }
+    },
+    {
+      "order": 59,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Saving is a skill, not a competition"
+      }
+    },
+    {
+      "order": 60,
+      "type": "callout",
+      "data": {
+        "title": "Start where you are",
+        "text": "You do not need a high income or a perfect financial situation to begin building the habit of saving. Start with an amount that your real life can support and improve the system as your situation changes."
+      }
+    }
+  ],
+  "quizzes": [
+    {
+      "order": 1,
+      "questionType": "multiple-choice",
+      "question": "What is a sensible approach when your income is low?",
+      "options": [
+        "Choose a realistic savings amount that does not prevent you from covering essential expenses",
+        "Save an extremely large amount no matter what",
+        "Borrow money so your savings balance looks bigger",
+        "Never save anything until your income becomes high"
+      ],
+      "correctAnswer": 0,
+      "explanation": "A sustainable savings amount should fit your actual financial situation while protecting essential needs.",
+      "points": 10
+    },
+    {
+      "order": 2,
+      "questionType": "multiple-choice",
+      "question": "If you save $20 each week for 52 weeks, how much will you contribute?",
+      "options": [
+        "$1,040",
+        "$520",
+        "$720",
+        "$2,040"
+      ],
+      "correctAnswer": 0,
+      "explanation": "$20 × 52 = $1,040.",
+      "points": 10
+    },
+    {
+      "order": 3,
+      "questionType": "multiple-choice",
+      "question": "You identify $25 of monthly spending you no longer value. How much could redirecting that amount to savings add over 12 months?",
+      "options": [
+        "$300",
+        "$125",
+        "$250",
+        "$500"
+      ],
+      "correctAnswer": 0,
+      "explanation": "$25 × 12 = $300.",
+      "points": 10
+    },
+    {
+      "order": 4,
+      "questionType": "multiple-choice",
+      "question": "If you want to save $250 and can save $25 each week, how many weeks will it take?",
+      "options": [
+        "10 weeks",
+        "5 weeks",
+        "15 weeks",
+        "25 weeks"
+      ],
+      "correctAnswer": 0,
+      "explanation": "$250 ÷ $25 = 10 weeks.",
+      "points": 10
+    },
+    {
+      "order": 5,
+      "questionType": "true-false",
+      "question": "Someone with variable income may need a more flexible savings strategy.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctAnswer": 0,
+      "explanation": "When income changes, a flexible contribution can be more realistic than a fixed amount that becomes difficult to maintain.",
+      "points": 10
+    },
+    {
+      "order": 6,
+      "questionType": "multiple-choice",
+      "question": "If you receive $800 and decide to save 5%, how much would you save?",
+      "options": [
+        "$40",
+        "$80",
+        "$20",
+        "$50"
+      ],
+      "correctAnswer": 0,
+      "explanation": "$800 × 0.05 = $40.",
+      "points": 10
+    },
+    {
+      "order": 7,
+      "questionType": "multiple-choice",
+      "question": "Why can separating savings from everyday spending be useful?",
+      "options": [
+        "It can make it easier to avoid treating savings as available spending money",
+        "It guarantees your income will increase",
+        "It eliminates every unexpected expense",
+        "It means you never need a budget"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Separating savings can make the amount available for everyday spending clearer and reduce accidental use of saved money.",
+      "points": 10
+    },
+    {
+      "order": 8,
+      "questionType": "multiple-choice",
+      "question": "What is a problem with borrowing money simply to increase your savings balance?",
+      "options": [
+        "You may have savings while also creating a new debt obligation",
+        "Borrowing always increases your wealth",
+        "It guarantees financial security",
+        "The debt disappears automatically"
+      ],
+      "correctAnswer": 0,
+      "explanation": "The savings balance alone does not show your whole financial position. New debt can offset or outweigh the apparent increase.",
+      "points": 10
+    },
+    {
+      "order": 9,
+      "questionType": "multiple-choice",
+      "question": "Your income increases by $100 per month. What could you consider doing with at least part of that improvement?",
+      "options": [
+        "Redirect some of it toward savings",
+        "Automatically spend all of it",
+        "Borrow more because your income increased",
+        "Stop tracking your money"
+      ],
+      "correctAnswer": 0,
+      "explanation": "A higher income can create an opportunity to increase savings while still allowing room for other priorities.",
+      "points": 10
+    },
+    {
+      "order": 10,
+      "questionType": "multiple-choice",
+      "question": "What is the strongest general lesson about saving on a low income?",
+      "options": [
+        "Start with an amount your real situation can support and build the habit consistently",
+        "Only large savings contributions matter",
+        "You should never adjust your savings amount",
+        "Saving is impossible without a high income"
+      ],
+      "correctAnswer": 0,
+      "explanation": "A realistic and repeatable savings system can help build financial protection even when income is limited.",
+      "points": 10
+    }
+  ]
+}

@@ -1,0 +1,453 @@
+{
+  "slug": "why-stock-prices-move",
+  "title": "Why Stock Prices Move",
+  "estimatedDuration": 45,
+  "order": 3,
+  "published": true,
+  "contentBlocks": [
+    {
+      "type": "heading",
+      "content": "Why does a stock price move?"
+    },
+    {
+      "type": "text",
+      "content": "A stock price changes because buyers and sellers continuously negotiate what a share is worth in the market. The price you see is the latest level at which willing buyers and sellers have been able to trade."
+    },
+    {
+      "type": "callout",
+      "title": "The key idea",
+      "content": "A stock price reflects both what investors know today and what they expect about the company's future."
+    },
+    {
+      "type": "heading",
+      "content": "Supply and demand"
+    },
+    {
+      "type": "text",
+      "content": "When more investors are willing to buy a stock at current prices than are willing to sell, buyers may have to offer higher prices to attract sellers. When selling pressure is stronger, buyers may be able to purchase shares at lower prices."
+    },
+    {
+      "type": "example",
+      "title": "A simple market example",
+      "content": "Imagine a stock is trading around $50. If many investors suddenly want to buy it while relatively few shareholders want to sell, buyers may compete by offering higher prices. The stock could move from $50 to $55 or higher."
+    },
+    {
+      "type": "heading",
+      "content": "Business performance matters"
+    },
+    {
+      "type": "text",
+      "content": "Investors pay attention to a company's revenue, profits, cash flow, debt, customers, products, competition, and future prospects. If investors believe a business is becoming more valuable, demand for its shares may increase."
+    },
+    {
+      "type": "heading",
+      "content": "But expectations matter too"
+    },
+    {
+      "type": "text",
+      "content": "Markets do not only react to what has already happened. Investors also make decisions based on what they expect to happen next."
+    },
+    {
+      "type": "example",
+      "title": "Good results, falling stock",
+      "content": "Suppose a company reports strong profits, but investors had expected even stronger results. The stock could fall because the actual results were disappointing relative to expectations."
+    },
+    {
+      "type": "heading",
+      "content": "Bad news can already be priced in"
+    },
+    {
+      "type": "text",
+      "content": "If investors already expect bad news and the company reports exactly what was expected, the stock may not fall much. In some situations, the stock may even rise if the news is less negative than investors feared."
+    },
+    {
+      "type": "heading",
+      "content": "The market reacts to surprises"
+    },
+    {
+      "type": "text",
+      "content": "A useful way to think about short-term price movements is to compare reality with expectations. A result that is better or worse than expected can create a stronger market reaction than a result that simply matches expectations."
+    },
+    {
+      "type": "example",
+      "title": "Three possible outcomes",
+      "content": "Imagine analysts expect a company to earn $2 per share. If it earns $2.50, investors may view the result positively. If it earns exactly $2, the reaction may be smaller. If it earns $1.40, investors may react negatively."
+    },
+    {
+      "type": "heading",
+      "content": "Future expectations can change today"
+    },
+    {
+      "type": "text",
+      "content": "A company's current results are only part of its value. News about future growth, competition, regulation, technology, management, or demand can change what investors believe the company may earn in the future."
+    },
+    {
+      "type": "heading",
+      "content": "Interest rates can affect stocks"
+    },
+    {
+      "type": "text",
+      "content": "Interest rates can influence borrowing costs, consumer spending, business investment, and the attractiveness of other investments. Changes in interest rates can therefore affect how investors value stocks."
+    },
+    {
+      "type": "example",
+      "title": "Higher borrowing costs",
+      "content": "If borrowing becomes more expensive, a company that relies heavily on debt may face higher interest expenses. Investors may reassess the company's expected future profits."
+    },
+    {
+      "type": "heading",
+      "content": "Economic conditions matter"
+    },
+    {
+      "type": "text",
+      "content": "Economic growth, employment, inflation, consumer spending, and business activity can affect companies differently. A strong economy may help some businesses, while certain companies can struggle even during broad economic growth."
+    },
+    {
+      "type": "heading",
+      "content": "Industry conditions matter"
+    },
+    {
+      "type": "text",
+      "content": "Companies operate within industries. Changes in technology, competition, regulation, commodity prices, customer behavior, or supply chains can affect an entire industry and its companies."
+    },
+    {
+      "type": "heading",
+      "content": "Company-specific news"
+    },
+    {
+      "type": "text",
+      "content": "A major product launch, leadership change, lawsuit, acquisition, accounting issue, regulatory decision, or unexpected business problem can cause a stock to move."
+    },
+    {
+      "type": "heading",
+      "content": "Investor sentiment"
+    },
+    {
+      "type": "text",
+      "content": "Sentiment describes how optimistic, pessimistic, confident, or fearful investors are. Sentiment can influence demand for stocks, especially over shorter periods."
+    },
+    {
+      "type": "callout",
+      "title": "Sentiment is not the same as value",
+      "content": "Investor enthusiasm or fear can move prices, but sentiment alone does not determine whether a business is fundamentally strong or weak."
+    },
+    {
+      "type": "heading",
+      "content": "Momentum and fear"
+    },
+    {
+      "type": "text",
+      "content": "When prices rise quickly, more people may become interested because they see others making money. Falling prices can similarly create fear and encourage more selling. These feedback effects can amplify price movements."
+    },
+    {
+      "type": "heading",
+      "content": "Why a stock can move dramatically in one day"
+    },
+    {
+      "type": "text",
+      "content": "A relatively small change in the balance between buyers and sellers can produce a large price movement when investors rapidly update their expectations."
+    },
+    {
+      "type": "heading",
+      "content": "Percentage changes help measure the move"
+    },
+    {
+      "type": "example",
+      "title": "Calculating a stock's daily move",
+      "content": "A stock rises from $80 to $88. The increase is $8 per share. Relative to the starting price, the stock increased by 10%."
+    },
+    {
+      "type": "formula",
+      "content": "Percentage change = (new price − old price) ÷ old price × 100"
+    },
+    {
+      "type": "formula",
+      "content": "($88 − $80) ÷ $80 × 100 = 10%"
+    },
+    {
+      "type": "heading",
+      "content": "A percentage decline works the same way"
+    },
+    {
+      "type": "example",
+      "title": "Calculating a decline",
+      "content": "A stock falls from $120 to $102. The decline is $18. Relative to $120, the stock fell 15%."
+    },
+    {
+      "type": "formula",
+      "content": "($102 − $120) ÷ $120 × 100 = −15%"
+    },
+    {
+      "type": "heading",
+      "content": "Price and percentage are different"
+    },
+    {
+      "type": "text",
+      "content": "A $5 move means different things for different stocks. A $5 increase from $10 to $15 is a 50% increase. A $5 increase from $100 to $105 is only a 5% increase."
+    },
+    {
+      "type": "formula",
+      "content": "$5 ÷ $10 × 100 = 50%"
+    },
+    {
+      "type": "formula",
+      "content": "$5 ÷ $100 × 100 = 5%"
+    },
+    {
+      "type": "heading",
+      "content": "Trading volume"
+    },
+    {
+      "type": "text",
+      "content": "Trading volume measures how many shares change hands during a period. Higher-than-usual volume can accompany major price movements, but volume by itself does not tell you whether a stock is a good investment."
+    },
+    {
+      "type": "heading",
+      "content": "Volatility"
+    },
+    {
+      "type": "text",
+      "content": "Volatility describes how much and how quickly an investment's price changes. A highly volatile stock can experience large price movements in either direction."
+    },
+    {
+      "type": "heading",
+      "content": "Volatility is not automatically the same as risk"
+    },
+    {
+      "type": "text",
+      "content": "Price volatility is one form of investment risk, but investors should also consider business risk, financial risk, liquidity risk, regulatory risk, and other possible sources of loss."
+    },
+    {
+      "type": "heading",
+      "content": "Why good companies can have falling stock prices"
+    },
+    {
+      "type": "text",
+      "content": "A strong company can experience a falling stock price if expectations become less optimistic, the broader market declines, its valuation becomes less attractive, or investors discover information that changes their outlook."
+    },
+    {
+      "type": "heading",
+      "content": "Why weak companies can temporarily rise"
+    },
+    {
+      "type": "text",
+      "content": "A weak business can still experience a rising stock price if investors expect improvement, buying pressure increases, short-term sentiment changes, or new information is interpreted positively."
+    },
+    {
+      "type": "heading",
+      "content": "The market price is not a perfect prediction machine"
+    },
+    {
+      "type": "text",
+      "content": "Market prices incorporate the information and expectations available to investors, but they can still change rapidly as new information arrives or expectations shift."
+    },
+    {
+      "type": "heading",
+      "content": "Short-term movement versus long-term investing"
+    },
+    {
+      "type": "text",
+      "content": "Short-term price movements can be difficult to predict consistently. Long-term investors often focus more heavily on the underlying business, earnings potential, valuation, competitive position, and ability to create value over time."
+    },
+    {
+      "type": "heading",
+      "content": "Common misconceptions"
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: Good company news always makes the stock rise"
+    },
+    {
+      "type": "text",
+      "content": "Reality: The market reacts to information relative to expectations. Good news that was already expected may have little positive effect."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: A stock falling means the company is failing"
+    },
+    {
+      "type": "text",
+      "content": "Reality: Stock prices can fall for many reasons, including changing expectations, market conditions, valuation changes, or temporary sentiment."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: A rising stock proves the company is strong"
+    },
+    {
+      "type": "text",
+      "content": "Reality: Price movements can be influenced by expectations, sentiment, and market forces. Price alone does not provide a complete picture of business quality."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: A $5 move always means the same thing"
+    },
+    {
+      "type": "text",
+      "content": "Reality: The percentage change depends on the starting price."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: High trading volume automatically means a stock is a good investment"
+    },
+    {
+      "type": "text",
+      "content": "Reality: Volume shows trading activity, not investment quality."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: You can always predict tomorrow's stock price if you research enough"
+    },
+    {
+      "type": "text",
+      "content": "Reality: Research can improve decision-making, but markets contain uncertainty and unexpected information."
+    },
+    {
+      "type": "heading",
+      "content": "Practical investor exercise"
+    },
+    {
+      "type": "interactive",
+      "title": "When a stock moves",
+      "content": "If a stock suddenly rises or falls, ask: What changed? Did the company's actual results change? Did expectations change? Did the broader market move? Did interest rates or economic conditions change? Is there company-specific news? Is this a fundamental change or short-term sentiment?"
+    },
+    {
+      "type": "summary",
+      "content": "Stock prices move because buyers and sellers continuously update what they are willing to pay. Business performance, expectations, interest rates, economic conditions, industry trends, company news, sentiment, and supply and demand can all influence prices. Understanding the difference between actual results and expectations helps explain why stock prices sometimes behave differently from what seems obvious."
+    },
+    {
+      "type": "callout",
+      "title": "Remember",
+      "content": "A stock price tells you what the market is pricing today. It does not tell you with certainty what the company will be worth tomorrow."
+    }
+  ],
+  "quiz": [
+    {
+      "order": 1,
+      "questionType": "multiple-choice",
+      "question": "What is the most direct reason a stock price changes in the market?",
+      "options": [
+        "The company chooses the exact trading price every minute",
+        "The balance between buyers and sellers changes",
+        "Dividends automatically change the price every day",
+        "The stock exchange guarantees a fixed price"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Market prices change as buyers and sellers interact and update what they are willing to pay or accept."
+    },
+    {
+      "order": 2,
+      "questionType": "multiple-choice",
+      "question": "A company reports strong profits, but investors expected even stronger results. What could happen?",
+      "options": [
+        "The stock must rise",
+        "The stock could fall because the results disappointed expectations",
+        "The stock cannot move",
+        "The company automatically pays a larger dividend"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Markets respond to results relative to expectations, not simply whether the results were objectively positive."
+    },
+    {
+      "order": 3,
+      "questionType": "multiple-choice",
+      "question": "A stock rises from $80 to $88. What is the percentage increase?",
+      "options": [
+        "5%",
+        "8%",
+        "10%",
+        "12%"
+      ],
+      "correctAnswer": 2,
+      "explanation": "($88 − $80) ÷ $80 × 100 = 10%."
+    },
+    {
+      "order": 4,
+      "questionType": "multiple-choice",
+      "question": "A stock falls from $120 to $102. What is the percentage decline?",
+      "options": [
+        "10%",
+        "12%",
+        "15%",
+        "18%"
+      ],
+      "correctAnswer": 2,
+      "explanation": "($102 − $120) ÷ $120 × 100 = −15%."
+    },
+    {
+      "order": 5,
+      "questionType": "true-false",
+      "question": "A stock's price can fall even when the company reports positive results.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctAnswer": 0,
+      "explanation": "If results are weaker than expected, or expectations for the future decline, a stock can fall despite positive current results."
+    },
+    {
+      "order": 6,
+      "questionType": "multiple-choice",
+      "question": "Which factor can affect how investors value stocks?",
+      "options": [
+        "Interest rates",
+        "Economic conditions",
+        "Company expectations",
+        "All of the above"
+      ],
+      "correctAnswer": 3,
+      "explanation": "Interest rates, economic conditions, and company expectations can all influence stock prices."
+    },
+    {
+      "order": 7,
+      "questionType": "multiple-choice",
+      "question": "What does trading volume measure?",
+      "options": [
+        "The company's total profit",
+        "The number of shares traded during a period",
+        "The percentage return guaranteed by the market",
+        "The number of employees at a company"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Trading volume measures how many shares change hands during a specified period."
+    },
+    {
+      "order": 8,
+      "questionType": "multiple-choice",
+      "question": "A $5 increase from $10 to $15 represents what percentage increase?",
+      "options": [
+        "5%",
+        "25%",
+        "50%",
+        "100%"
+      ],
+      "correctAnswer": 2,
+      "explanation": "$5 ÷ $10 × 100 = 50%."
+    },
+    {
+      "order": 9,
+      "questionType": "multiple-choice",
+      "question": "Why can a stock rise even when the underlying company is not currently performing strongly?",
+      "options": [
+        "Investors may expect future improvement",
+        "Stock prices can never reflect expectations",
+        "Weak companies are guaranteed to rise",
+        "Trading volume automatically creates profits"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Stock prices reflect expectations about the future as well as current business conditions."
+    },
+    {
+      "order": 10,
+      "questionType": "multiple-choice",
+      "question": "Which statement best describes stock prices?",
+      "options": [
+        "They provide a perfect prediction of future company value",
+        "They reflect current market pricing based on available information and expectations",
+        "They are determined only by company profits",
+        "They never respond to economic conditions"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Market prices reflect the information and expectations currently incorporated by buyers and sellers, but they are not perfect predictions of the future."
+    }
+  ]
+}

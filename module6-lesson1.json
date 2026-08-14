@@ -1,0 +1,517 @@
+{
+  "slug": "where-does-your-money-actually-go",
+  "title": "Where Does Your Money Actually Go?",
+  "estimatedDuration": 30,
+  "order": 1,
+  "published": true,
+  "contentBlocks": [
+    {
+      "type": "heading",
+      "content": "Your money leaves clues"
+    },
+    {
+      "type": "text",
+      "content": "If you want to manage money better, you first need to understand what is actually happening to it. You do not need a complicated spreadsheet. You need a clear picture of where your money goes."
+    },
+    {
+      "type": "text",
+      "content": "Many people know roughly how much they earn but cannot explain where a large part of that money went by the end of the month."
+    },
+    {
+      "type": "heading",
+      "content": "Start with income"
+    },
+    {
+      "type": "text",
+      "content": "Income is money that comes into your financial system. It can come from employment, self-employment, a business, freelance work, allowances, or other legitimate sources."
+    },
+    {
+      "type": "example",
+      "title": "A simple starting point",
+      "content": "Suppose you receive $2,500 during a month. That is the amount you can begin with when examining your monthly money flow."
+    },
+    {
+      "type": "heading",
+      "content": "Then look at where it goes"
+    },
+    {
+      "type": "text",
+      "content": "Money can leave through housing, food, transportation, bills, debt payments, subscriptions, shopping, entertainment, saving, investing, and many other uses."
+    },
+    {
+      "type": "heading",
+      "content": "Not every expense behaves the same way"
+    },
+    {
+      "type": "text",
+      "content": "Some expenses are fairly predictable. Others change from week to week or month to month. Understanding that difference makes your money easier to plan."
+    },
+    {
+      "type": "heading",
+      "content": "Fixed expenses"
+    },
+    {
+      "type": "text",
+      "content": "A fixed expense is a cost that is generally stable or predictable from one period to another."
+    },
+    {
+      "type": "example",
+      "title": "Examples of fixed expenses",
+      "content": "A regular rent payment, a scheduled loan payment, or a subscription with a consistent monthly price may be relatively fixed."
+    },
+    {
+      "type": "heading",
+      "content": "Variable expenses"
+    },
+    {
+      "type": "text",
+      "content": "A variable expense changes depending on how much you use, buy, or consume."
+    },
+    {
+      "type": "example",
+      "title": "Examples of variable expenses",
+      "content": "Groceries, fuel, entertainment, clothing, and some utility bills can change from month to month."
+    },
+    {
+      "type": "heading",
+      "content": "Some expenses are irregular"
+    },
+    {
+      "type": "text",
+      "content": "Not every expense happens every month. Annual fees, repairs, gifts, travel, school-related costs, or replacement purchases can appear occasionally."
+    },
+    {
+      "type": "callout",
+      "title": "Important",
+      "content": "An expense being irregular does not make it unexpected. If something happens every year, it can be planned for."
+    },
+    {
+      "type": "heading",
+      "content": "Why irregular expenses cause problems"
+    },
+    {
+      "type": "text",
+      "content": "If you only plan for expenses that happen every month, an occasional large bill can make your normal money system look broken."
+    },
+    {
+      "type": "example",
+      "title": "The annual expense",
+      "content": "Suppose you usually spend $1,800 per month, but a $600 annual expense arrives in one month. That month may feel unusually expensive even though the expense was predictable."
+    },
+    {
+      "type": "heading",
+      "content": "Look beyond individual purchases"
+    },
+    {
+      "type": "text",
+      "content": "One transaction rarely tells the whole story. A better approach is to look for patterns across several weeks or months."
+    },
+    {
+      "type": "example",
+      "title": "The repeated small expense",
+      "content": "A $4 purchase may look insignificant by itself. If it happens 20 times in a month, it represents about $80 of spending."
+    },
+    {
+      "type": "formula",
+      "content": "$4 × 20 = $80"
+    },
+    {
+      "type": "heading",
+      "content": "Use categories to make patterns visible"
+    },
+    {
+      "type": "text",
+      "content": "You can group similar expenses together. Categories do not need to be perfect. Their purpose is to help you see where your money is going."
+    },
+    {
+      "type": "example",
+      "title": "Simple categories",
+      "content": "You might use categories such as housing, food, transportation, bills, debt, saving, entertainment, shopping, and other spending."
+    },
+    {
+      "type": "heading",
+      "content": "Do not create too many categories"
+    },
+    {
+      "type": "text",
+      "content": "If tracking becomes so complicated that you stop doing it, the system has failed. Start with a small number of useful categories and add detail only when it helps you make a decision."
+    },
+    {
+      "type": "heading",
+      "content": "Your spending should answer questions"
+    },
+    {
+      "type": "text",
+      "content": "Tracking is useful when it helps you answer questions such as: What is costing me the most? What keeps increasing? What spending surprises me? What can I change?"
+    },
+    {
+      "type": "interactive",
+      "title": "Find your biggest category",
+      "content": "Look at your recent spending and identify the category that receives the most money. Do not judge it yet. Just identify it."
+    },
+    {
+      "type": "heading",
+      "content": "Needs can still be expensive"
+    },
+    {
+      "type": "text",
+      "content": "A necessary expense can still take up a large part of your income. Calling something a need does not make its cost irrelevant."
+    },
+    {
+      "type": "example",
+      "title": "A necessary expense",
+      "content": "Housing may be essential, but the amount you spend on housing still affects how much money remains for saving, transportation, food, and other priorities."
+    },
+    {
+      "type": "heading",
+      "content": "Wants can also become significant"
+    },
+    {
+      "type": "text",
+      "content": "Optional spending is not automatically bad. The important question is whether the amount fits your priorities and overall money situation."
+    },
+    {
+      "type": "heading",
+      "content": "Separate spending from saving"
+    },
+    {
+      "type": "text",
+      "content": "Money that leaves your checking account is not necessarily money that disappeared. Money transferred into savings or investments is being moved toward another purpose."
+    },
+    {
+      "type": "example",
+      "title": "A useful distinction",
+      "content": "If you receive $2,500 and transfer $300 into savings, that $300 is no longer available for everyday spending, but it is still part of your financial resources."
+    },
+    {
+      "type": "heading",
+      "content": "Do not confuse low spending with good money management"
+    },
+    {
+      "type": "text",
+      "content": "Someone can spend very little and still have a poor financial system if they regularly miss bills, have no plan for irregular expenses, or never prepare for future needs."
+    },
+    {
+      "type": "heading",
+      "content": "The goal is not to spend as little as possible"
+    },
+    {
+      "type": "text",
+      "content": "The goal is to make sure your spending supports your responsibilities, priorities, and future plans."
+    },
+    {
+      "type": "heading",
+      "content": "Calculate the total"
+    },
+    {
+      "type": "text",
+      "content": "Adding expenses within a category can reveal how much that category actually costs you."
+    },
+    {
+      "type": "example",
+      "title": "Adding food spending",
+      "content": "Suppose you spend $250 on groceries and $90 on eating out during a month. Your total food-related spending is $340."
+    },
+    {
+      "type": "formula",
+      "content": "$250 + $90 = $340"
+    },
+    {
+      "type": "heading",
+      "content": "Compare categories with income"
+    },
+    {
+      "type": "text",
+      "content": "Once you know your totals, compare them with the money coming in. This helps you see whether your current spending pattern is sustainable."
+    },
+    {
+      "type": "example",
+      "title": "Income versus expenses",
+      "content": "If monthly income is $2,500 and total monthly expenses are $2,200, there is $300 remaining before considering any additional planned use of that money."
+    },
+    {
+      "type": "formula",
+      "content": "$2,500 − $2,200 = $300"
+    },
+    {
+      "type": "heading",
+      "content": "A remaining balance is information"
+    },
+    {
+      "type": "text",
+      "content": "If money remains at the end of the month, that does not automatically mean you did everything perfectly. If you have no money left, it does not automatically mean you failed. The number is information you can use to improve the system."
+    },
+    {
+      "type": "heading",
+      "content": "Watch for spending that happens automatically"
+    },
+    {
+      "type": "text",
+      "content": "Automatic payments can be convenient, but they can also make expenses easy to forget."
+    },
+    {
+      "type": "example",
+      "title": "The forgotten subscription",
+      "content": "Three subscriptions costing $9, $12, and $15 per month add up to $36 every month, even if you rarely think about them."
+    },
+    {
+      "type": "formula",
+      "content": "$9 + $12 + $15 = $36"
+    },
+    {
+      "type": "text",
+      "content": "Over a year, that is $432."
+    },
+    {
+      "type": "formula",
+      "content": "$36 × 12 = $432"
+    },
+    {
+      "type": "heading",
+      "content": "Look for spending that surprises you"
+    },
+    {
+      "type": "text",
+      "content": "A useful review often begins with the categories or transactions that make you say, “I didn't realize I spent that much.”"
+    },
+    {
+      "type": "heading",
+      "content": "Surprise is a signal"
+    },
+    {
+      "type": "text",
+      "content": "Unexpectedly high spending does not automatically mean you should cut it. First understand why it happened."
+    },
+    {
+      "type": "example",
+      "title": "A high transportation month",
+      "content": "Transportation spending may rise because of extra trips, a temporary problem, or a change in routine. The solution depends on the reason."
+    },
+    {
+      "type": "heading",
+      "content": "Look for trends"
+    },
+    {
+      "type": "text",
+      "content": "If one category keeps increasing, investigate it. A trend can be more useful than a single unusually high month."
+    },
+    {
+      "type": "heading",
+      "content": "Compare similar months carefully"
+    },
+    {
+      "type": "text",
+      "content": "Some months naturally contain more expenses because of holidays, travel, annual bills, or other events. Context matters."
+    },
+    {
+      "type": "heading",
+      "content": "Use real numbers instead of guesses"
+    },
+    {
+      "type": "text",
+      "content": "Your memory is not always a reliable spending tracker. Looking at actual transactions gives you better information for making financial decisions."
+    },
+    {
+      "type": "heading",
+      "content": "Do not turn tracking into guilt"
+    },
+    {
+      "type": "text",
+      "content": "The purpose of reviewing your money is to understand it, not to shame yourself. A useful review should leave you with clearer choices."
+    },
+    {
+      "type": "heading",
+      "content": "Find one thing to improve"
+    },
+    {
+      "type": "text",
+      "content": "After reviewing your spending, choose one meaningful improvement rather than trying to change everything at once."
+    },
+    {
+      "type": "example",
+      "title": "One practical change",
+      "content": "If you discover that unused subscriptions cost $36 each month, canceling one or more of them may be a simple place to start."
+    },
+    {
+      "type": "heading",
+      "content": "Keep what is working"
+    },
+    {
+      "type": "text",
+      "content": "A review should not only identify problems. If a spending choice works well for you and fits your priorities, keep it."
+    },
+    {
+      "type": "heading",
+      "content": "Your money map"
+    },
+    {
+      "type": "text",
+      "content": "Think of your income as entering a system with several destinations. The clearer those destinations are, the easier it becomes to decide whether the system needs adjustment."
+    },
+    {
+      "type": "callout",
+      "title": "Simple money map",
+      "content": "Income → essential expenses → optional spending → saving and other financial goals. The exact order can vary, but you should know where your money is going."
+    },
+    {
+      "type": "heading",
+      "content": "A simple monthly review"
+    },
+    {
+      "type": "text",
+      "content": "At the end of a month, review your income, major expense categories, saving, unusual expenses, and the areas that surprised you."
+    },
+    {
+      "type": "interactive",
+      "title": "Your five-minute review",
+      "content": "Write down your total income, your three largest expense categories, one expense that surprised you, and one change you might make next month."
+    },
+    {
+      "type": "heading",
+      "content": "The goal is awareness before optimization"
+    },
+    {
+      "type": "text",
+      "content": "You cannot improve a money system effectively until you understand how it currently behaves."
+    },
+    {
+      "type": "summary",
+      "content": "Track where money comes from and where it goes. Group expenses into useful categories, recognize fixed, variable, and irregular costs, look for patterns, and use real numbers to make better decisions."
+    },
+    {
+      "type": "callout",
+      "title": "Remember",
+      "content": "You do not need to control every transaction perfectly. You need enough visibility to understand your money and make better decisions."
+    }
+  ],
+  "quizzes": [
+    {
+      "order": 1,
+      "questionType": "multiple-choice",
+      "question": "What is the main purpose of tracking your spending?",
+      "options": [
+        "To understand where your money is actually going",
+        "To stop spending completely",
+        "To make every purchase complicated",
+        "To avoid earning more money"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Tracking gives you information about your actual money habits so you can make better decisions."
+    },
+    {
+      "order": 2,
+      "questionType": "multiple-choice",
+      "question": "Which is most likely a fixed expense?",
+      "options": [
+        "A regular rent payment",
+        "A random shopping trip",
+        "An occasional restaurant visit",
+        "An unexpected repair"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Rent is generally predictable and recurring, making it a relatively fixed expense."
+    },
+    {
+      "order": 3,
+      "questionType": "multiple-choice",
+      "question": "Which is an example of a variable expense?",
+      "options": [
+        "Groceries",
+        "A fixed monthly loan payment",
+        "A fixed subscription price",
+        "A contractually fixed rent payment"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Grocery spending can change depending on what and how much you buy."
+    },
+    {
+      "order": 4,
+      "questionType": "multiple-choice",
+      "question": "You spend $4 twenty times in a month. About how much is that?",
+      "options": [
+        "$80",
+        "$24",
+        "$40",
+        "$100"
+      ],
+      "correctAnswer": 0,
+      "explanation": "$4 × 20 = $80."
+    },
+    {
+      "order": 5,
+      "questionType": "multiple-choice",
+      "question": "If your income is $2,500 and your expenses total $2,200, how much remains?",
+      "options": [
+        "$300",
+        "$200",
+        "$500",
+        "$700"
+      ],
+      "correctAnswer": 0,
+      "explanation": "$2,500 − $2,200 = $300."
+    },
+    {
+      "order": 6,
+      "questionType": "multiple-choice",
+      "question": "Why are irregular expenses important to plan for?",
+      "options": [
+        "They can be large even though they do not happen every month",
+        "They never happen",
+        "They are always optional",
+        "They automatically disappear"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Irregular expenses such as repairs or annual fees can disrupt a monthly plan if they are ignored."
+    },
+    {
+      "order": 7,
+      "questionType": "multiple-choice",
+      "question": "Three subscriptions cost $9, $12, and $15 per month. What is their combined monthly cost?",
+      "options": [
+        "$36",
+        "$27",
+        "$42",
+        "$45"
+      ],
+      "correctAnswer": 0,
+      "explanation": "$9 + $12 + $15 = $36."
+    },
+    {
+      "order": 8,
+      "questionType": "true-false",
+      "question": "The goal of tracking spending is to spend as little as possible.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctAnswer": 1,
+      "explanation": "The goal is to understand and intentionally manage your money, not simply minimize every expense."
+    },
+    {
+      "order": 9,
+      "questionType": "multiple-choice",
+      "question": "What should you do when one category suddenly looks unusually high?",
+      "options": [
+        "Investigate why it increased before deciding what to change",
+        "Immediately eliminate the category",
+        "Assume you failed",
+        "Ignore it permanently"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Understanding the reason behind a change helps you choose an appropriate response."
+    },
+    {
+      "order": 10,
+      "questionType": "multiple-choice",
+      "question": "What is the best first step toward improving your money system?",
+      "options": [
+        "Understand what is actually happening with your money",
+        "Copy someone else's budget",
+        "Cut every enjoyable expense",
+        "Avoid looking at your transactions"
+      ],
+      "correctAnswer": 0,
+      "explanation": "You need visibility into your current money flow before you can improve it intelligently."
+    }
+  ]
+}

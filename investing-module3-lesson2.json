@@ -1,0 +1,420 @@
+{
+  "slug": "etfs-and-index-funds-investing-in-many-investments",
+  "title": "ETFs and Index Funds: Investing in Many Investments at Once",
+  "estimatedDuration": 50,
+  "order": 2,
+  "published": true,
+  "contentBlocks": [
+    {
+      "type": "heading",
+      "content": "What is an ETF?"
+    },
+    {
+      "type": "text",
+      "content": "An exchange-traded fund, commonly called an ETF, is an investment fund that holds a collection of assets and whose shares can generally be bought and sold on an exchange during the trading day."
+    },
+    {
+      "type": "callout",
+      "title": "The key idea",
+      "content": "Instead of buying every investment separately, an investor can sometimes buy one fund that provides exposure to many investments at once."
+    },
+    {
+      "type": "heading",
+      "content": "What can an ETF hold?"
+    },
+    {
+      "type": "text",
+      "content": "An ETF can hold stocks, bonds, commodities, or other investments depending on its objective. Some ETFs focus on a broad market, while others focus on a particular sector, country, industry, asset class, or strategy."
+    },
+    {
+      "type": "heading",
+      "content": "What is an index?"
+    },
+    {
+      "type": "text",
+      "content": "An index is a measurement designed to represent the performance of a selected group of investments. For example, an index may track a broad group of companies or a particular segment of a market."
+    },
+    {
+      "type": "heading",
+      "content": "What is an index fund?"
+    },
+    {
+      "type": "text",
+      "content": "An index fund is a fund designed to follow the performance of a particular index before fees and other tracking differences. Index funds can be structured as ETFs or as mutual funds."
+    },
+    {
+      "type": "callout",
+      "title": "Important distinction",
+      "content": "ETF and index fund are not opposites. An ETF describes a fund structure that trades on an exchange, while an index fund describes a fund whose strategy is designed to track an index."
+    },
+    {
+      "type": "heading",
+      "content": "Why diversification matters"
+    },
+    {
+      "type": "text",
+      "content": "Diversification means spreading investments across different assets or businesses rather than relying heavily on one investment. The purpose is to reduce the damage that a poor result from one investment can have on the entire portfolio."
+    },
+    {
+      "type": "example",
+      "title": "One company versus many companies",
+      "content": "Imagine putting $10,000 into one company. If that company falls 50%, the investment falls by about $5,000. If instead the $10,000 is spread equally across 100 companies, a severe decline in one company has a much smaller direct effect on the overall portfolio, assuming the other holdings do not move."
+    },
+    {
+      "type": "heading",
+      "content": "Diversification does not eliminate risk"
+    },
+    {
+      "type": "text",
+      "content": "A diversified fund can still lose money. If the overall market or asset class falls, many or all of the holdings can decline at the same time."
+    },
+    {
+      "type": "heading",
+      "content": "Broad diversification versus narrow diversification"
+    },
+    {
+      "type": "text",
+      "content": "A fund holding hundreds or thousands of companies may be broadly diversified across companies, but a fund focused on one industry may still be concentrated in that industry."
+    },
+    {
+      "type": "heading",
+      "content": "How an index-tracking fund works"
+    },
+    {
+      "type": "text",
+      "content": "An index-tracking fund generally attempts to hold investments in a way that produces returns similar to its chosen index. The fund does not need to predict which individual company will outperform. Its goal is to track the selected index."
+    },
+    {
+      "type": "heading",
+      "content": "Passive investing"
+    },
+    {
+      "type": "text",
+      "content": "Index investing is commonly associated with passive investing. Instead of frequently trying to select the individual investments expected to outperform the market, the fund follows a predefined index strategy."
+    },
+    {
+      "type": "heading",
+      "content": "Active versus passive management"
+    },
+    {
+      "type": "text",
+      "content": "An actively managed fund generally has a manager or team making investment decisions with the goal of outperforming a benchmark. A passive index fund generally aims to track its benchmark rather than beat it through frequent security selection."
+    },
+    {
+      "type": "heading",
+      "content": "Expense ratios"
+    },
+    {
+      "type": "text",
+      "content": "Funds have operating costs. One common way these costs are expressed is through an expense ratio, which represents the fund's annual operating expenses as a percentage of its assets."
+    },
+    {
+      "type": "example",
+      "title": "A simple expense-ratio calculation",
+      "content": "Suppose you have $10,000 invested in a fund with a 0.20% expense ratio. Ignoring changes in the investment value and other factors, the annual expense represented by that ratio is about $20."
+    },
+    {
+      "type": "formula",
+      "content": "$10,000 × 0.20% = $20"
+    },
+    {
+      "type": "heading",
+      "content": "Small fees can matter over time"
+    },
+    {
+      "type": "text",
+      "content": "A fee that looks small in one year can become meaningful over many years because money that goes toward costs is money that is not remaining invested and compounding."
+    },
+    {
+      "type": "example",
+      "title": "Comparing two annual expense ratios",
+      "content": "Imagine two funds each have $20,000 invested. Fund A charges 0.10% annually while Fund B charges 1.00%. Ignoring other differences, the simple annual cost represented by the expense ratios would be about $20 for Fund A and $200 for Fund B."
+    },
+    {
+      "type": "formula",
+      "content": "Fund A: $20,000 × 0.10% = $20"
+    },
+    {
+      "type": "formula",
+      "content": "Fund B: $20,000 × 1.00% = $200"
+    },
+    {
+      "type": "heading",
+      "content": "Fees are not the only thing that matters"
+    },
+    {
+      "type": "text",
+      "content": "A lower expense ratio does not automatically make one fund better. Investors should also consider what the fund invests in, how closely it tracks its benchmark, liquidity, taxes, risk, and whether it fits the investor's goal."
+    },
+    {
+      "type": "heading",
+      "content": "What is tracking error?"
+    },
+    {
+      "type": "text",
+      "content": "Tracking error refers to the difference between a fund's performance and the performance of the index or benchmark it is designed to follow. Fees, trading costs, taxes, portfolio construction, and other factors can contribute to differences."
+    },
+    {
+      "type": "heading",
+      "content": "The fund does not magically remove market risk"
+    },
+    {
+      "type": "text",
+      "content": "If an ETF tracks a stock-market index and that market falls, the ETF will generally fall as well. Diversification can reduce company-specific risk, but it cannot guarantee that the investment will rise."
+    },
+    {
+      "type": "heading",
+      "content": "ETF price versus the value of its holdings"
+    },
+    {
+      "type": "text",
+      "content": "An ETF has a market price for its shares and also has underlying holdings with their own values. Market mechanisms generally help keep the ETF's market price close to the value of its underlying assets, although temporary differences can occur."
+    },
+    {
+      "type": "heading",
+      "content": "Not every ETF is broadly diversified"
+    },
+    {
+      "type": "text",
+      "content": "Some ETFs track a single sector, industry, country, commodity, or narrow strategy. Buying an ETF therefore does not automatically mean you have broad diversification."
+    },
+    {
+      "type": "example",
+      "title": "Why the fund's objective matters",
+      "content": "An investor who wants broad exposure to many companies should not assume that every ETF provides it. An ETF focused only on one industry may contain many companies but still expose the investor heavily to one economic area."
+    },
+    {
+      "type": "heading",
+      "content": "What is a mutual fund?"
+    },
+    {
+      "type": "text",
+      "content": "A mutual fund is another type of pooled investment vehicle. Investors contribute money to the fund, and the fund invests according to its stated strategy. Mutual funds and ETFs can both provide diversification."
+    },
+    {
+      "type": "heading",
+      "content": "ETF versus index fund"
+    },
+    {
+      "type": "text",
+      "content": "An ETF can be an index fund, but not every ETF is an index fund. Likewise, an index fund does not have to be an ETF because some index funds are mutual funds."
+    },
+    {
+      "type": "heading",
+      "content": "Common misconceptions"
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: Every ETF is automatically diversified"
+    },
+    {
+      "type": "text",
+      "content": "Reality: Some ETFs are highly concentrated in a particular sector, asset, country, or strategy."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: Index funds cannot lose money"
+    },
+    {
+      "type": "text",
+      "content": "Reality: An index fund can lose money when the investments in the index decline."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: An ETF and an index fund are completely different things"
+    },
+    {
+      "type": "text",
+      "content": "Reality: ETF describes a fund structure, while index fund describes an investment strategy. An ETF can be an index fund."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: The lowest fee is always the best choice"
+    },
+    {
+      "type": "text",
+      "content": "Reality: Fees matter, but investors also need to examine the fund's holdings, strategy, risks, tracking, liquidity, and suitability."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: Owning one ETF means owning the entire stock market"
+    },
+    {
+      "type": "text",
+      "content": "Reality: An ETF only gives exposure to the assets included in its particular portfolio or strategy."
+    },
+    {
+      "type": "heading",
+      "content": "Practical investor checklist"
+    },
+    {
+      "type": "interactive",
+      "title": "Before buying an ETF or index fund",
+      "content": "Check what the fund owns. Identify the index or strategy it follows. Look at the expense ratio. Consider how diversified the holdings really are. Check the fund's risk and concentration. Understand how closely it has tracked its benchmark. Consider whether it fits your time horizon and financial goal."
+    },
+    {
+      "type": "heading",
+      "content": "Practical calculation"
+    },
+    {
+      "type": "example",
+      "title": "How fees can add up",
+      "content": "Suppose an investor has $50,000 in a fund. A 0.20% expense ratio represents approximately $100 in annual expenses, while a 0.80% expense ratio represents approximately $400, ignoring changes in account value and other factors."
+    },
+    {
+      "type": "formula",
+      "content": "$50,000 × 0.20% = $100"
+    },
+    {
+      "type": "formula",
+      "content": "$50,000 × 0.80% = $400"
+    },
+    {
+      "type": "heading",
+      "content": "The bigger lesson"
+    },
+    {
+      "type": "text",
+      "content": "ETFs and index funds can make diversification easier, but the fund itself must still be understood. Investors should know what they own, what it costs, what risks they are taking, and what the investment is designed to accomplish."
+    },
+    {
+      "type": "summary",
+      "content": "ETFs and index funds pool investments so investors can gain exposure to a collection of assets through one fund. Index funds aim to track an index, while ETFs describe a fund structure that trades on an exchange. Diversification can reduce concentration risk, but it cannot eliminate investment losses. Fees, holdings, strategy, tracking, liquidity, and risk all matter."
+    },
+    {
+      "type": "callout",
+      "title": "Remember",
+      "content": "Don't ask only, 'Is this an ETF?' Ask, 'What does this ETF own, what does it cost, how diversified is it, and what risk am I actually taking?'"
+    }
+  ],
+  "quiz": [
+    {
+      "order": 1,
+      "questionType": "multiple-choice",
+      "question": "What is an ETF?",
+      "options": [
+        "A guaranteed savings account",
+        "A fund whose shares can generally be traded on an exchange",
+        "A type of personal loan",
+        "A government tax"
+      ],
+      "correctAnswer": 1,
+      "explanation": "An ETF is a fund structure whose shares can generally be bought and sold on an exchange during the trading day."
+    },
+    {
+      "order": 2,
+      "questionType": "multiple-choice",
+      "question": "What is an index fund designed to do?",
+      "options": [
+        "Guarantee a positive return",
+        "Track the performance of a selected index",
+        "Always outperform every stock",
+        "Avoid all market declines"
+      ],
+      "correctAnswer": 1,
+      "explanation": "An index fund is designed to follow the performance of its chosen index before fees and tracking differences."
+    },
+    {
+      "order": 3,
+      "questionType": "multiple-choice",
+      "question": "What is one major benefit of diversification?",
+      "options": [
+        "It guarantees profits",
+        "It eliminates all investment risk",
+        "It can reduce the impact of one poor-performing investment",
+        "It guarantees that every investment rises"
+      ],
+      "correctAnswer": 2,
+      "explanation": "Spreading investments can reduce the damage caused by one company or investment performing poorly."
+    },
+    {
+      "order": 4,
+      "questionType": "multiple-choice",
+      "question": "An investor has $10,000 in a fund with a 0.20% expense ratio. What annual expense does that percentage represent, ignoring other factors?",
+      "options": [
+        "$2",
+        "$20",
+        "$200",
+        "$2,000"
+      ],
+      "correctAnswer": 1,
+      "explanation": "$10,000 × 0.20% = $20."
+    },
+    {
+      "order": 5,
+      "questionType": "true-false",
+      "question": "Every ETF is broadly diversified.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Some ETFs focus on narrow sectors, industries, countries, commodities, or strategies."
+    },
+    {
+      "order": 6,
+      "questionType": "multiple-choice",
+      "question": "Which statement correctly describes an ETF and an index fund?",
+      "options": [
+        "They can never be the same thing",
+        "An ETF describes a fund structure, while an index fund describes a strategy designed to track an index",
+        "Every mutual fund is an ETF",
+        "Every ETF tracks an index"
+      ],
+      "correctAnswer": 1,
+      "explanation": "An ETF can be an index fund, but ETFs can also follow other strategies."
+    },
+    {
+      "order": 7,
+      "questionType": "multiple-choice",
+      "question": "Why can two funds that track similar indexes have slightly different returns?",
+      "options": [
+        "Fees, trading costs, portfolio construction, and other factors can create differences",
+        "Indexes always produce random results",
+        "Funds are legally required to have identical returns",
+        "Share prices cannot change"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Tracking differences can result from fees, trading costs, taxes, portfolio construction, and other factors."
+    },
+    {
+      "order": 8,
+      "questionType": "multiple-choice",
+      "question": "An investor has $50,000 in a fund with a 0.80% expense ratio. Approximately how much annual expense does that represent?",
+      "options": [
+        "$40",
+        "$80",
+        "$400",
+        "$4,000"
+      ],
+      "correctAnswer": 2,
+      "explanation": "$50,000 × 0.80% = $400."
+    },
+    {
+      "order": 9,
+      "questionType": "multiple-choice",
+      "question": "What should an investor check before buying an ETF?",
+      "options": [
+        "Only the ETF's share price",
+        "Only its name",
+        "Its holdings, strategy, costs, diversification, risks, and suitability",
+        "Whether the share price is below $10"
+      ],
+      "correctAnswer": 2,
+      "explanation": "Understanding what the fund owns, what it costs, and what risks it carries is more useful than looking at share price alone."
+    },
+    {
+      "order": 10,
+      "questionType": "multiple-choice",
+      "question": "What is the main purpose of an expense ratio?",
+      "options": [
+        "To show the fund's annual operating expenses as a percentage of its assets",
+        "To guarantee investor profits",
+        "To measure the number of companies in the fund",
+        "To show the fund's stock price"
+      ],
+      "correctAnswer": 0,
+      "explanation": "The expense ratio expresses a fund's annual operating expenses as a percentage of its assets."
+    }
+  ]
+}

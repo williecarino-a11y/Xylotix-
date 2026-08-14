@@ -1,0 +1,622 @@
+{
+  "slug": "what-happens-when-you-miss-debt-payments",
+  "title": "What Happens When You Miss Debt Payments?",
+  "estimatedDuration": 35,
+  "order": 9,
+  "published": true,
+  "contentBlocks": [
+    {
+      "order": 1,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Missing a payment can create a bigger problem than expected"
+      }
+    },
+    {
+      "order": 2,
+      "type": "text",
+      "data": {
+        "text": "A missed debt payment is not simply a payment you forgot. Depending on the agreement, it can lead to fees, additional interest, account restrictions, collection activity, or other consequences."
+      }
+    },
+    {
+      "order": 3,
+      "type": "example",
+      "data": {
+        "title": "The payment you planned to make tomorrow",
+        "text": "Your $200 payment is due today, but an unexpected expense used the money you had set aside. Waiting without checking your options can make the situation harder to manage."
+      }
+    },
+    {
+      "order": 4,
+      "type": "callout",
+      "data": {
+        "title": "The first move is not to panic",
+        "text": "Find out exactly what happened, what the agreement says, and what options are available. Acting early is usually better than ignoring the problem."
+      }
+    },
+    {
+      "order": 5,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "First, find out whether the payment is actually late"
+      }
+    },
+    {
+      "order": 6,
+      "type": "text",
+      "data": {
+        "text": "Check the payment due date, payment status, and the terms of the account. A payment that has not yet passed the relevant deadline may still be handled differently from one that is officially late."
+      }
+    },
+    {
+      "order": 7,
+      "type": "example",
+      "data": {
+        "title": "The date matters",
+        "text": "Your payment is due on the 15th. On the 14th you realize the money is not available. You should check the provider's instructions immediately rather than assuming the consequences."
+      }
+    },
+    {
+      "order": 8,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Read the agreement before guessing the consequences"
+      }
+    },
+    {
+      "order": 9,
+      "type": "text",
+      "data": {
+        "text": "Different lenders and credit products have different rules. Check the agreement or account information for late fees, grace periods if any, interest treatment, reporting practices, and what happens after a missed payment."
+      }
+    },
+    {
+      "order": 10,
+      "type": "example",
+      "data": {
+        "title": "Two debts can behave differently",
+        "text": "A credit card and a personal loan may both require monthly payments, but their late-payment rules can be different. Never assume that what happens with one account automatically applies to another."
+      }
+    },
+    {
+      "order": 11,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "A late fee can make the problem larger"
+      }
+    },
+    {
+      "order": 12,
+      "type": "text",
+      "data": {
+        "text": "If a late fee applies, the amount you need to catch up can become larger than the original scheduled payment."
+      }
+    },
+    {
+      "order": 13,
+      "type": "example",
+      "data": {
+        "title": "A $200 payment becomes $235",
+        "text": "You miss a $200 payment and a $35 late fee applies. The immediate amount associated with catching up may now be $235, before considering any other charges or interest that may apply."
+      }
+    },
+    {
+      "order": 14,
+      "type": "interactive",
+      "data": {
+        "title": "Calculate the new amount",
+        "text": "A missed payment is $180 and the applicable late fee is $25. If both must be paid, the amount becomes $180 + $25 = $205."
+      }
+    },
+    {
+      "order": 15,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "One missed payment can collide with next month's payment"
+      }
+    },
+    {
+      "order": 16,
+      "type": "text",
+      "data": {
+        "text": "If you do not catch up before the next scheduled payment, you may face two obligations close together. That can put additional pressure on the next month's budget."
+      }
+    },
+    {
+      "order": 17,
+      "type": "example",
+      "data": {
+        "title": "Two payments at once",
+        "text": "You miss a $250 payment and the next $250 payment becomes due before you have recovered financially. You may now need to deal with $500 of scheduled payments, plus any applicable charges."
+      }
+    },
+    {
+      "order": 18,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Do not solve one debt problem by creating another"
+      }
+    },
+    {
+      "order": 19,
+      "type": "text",
+      "data": {
+        "text": "Using another expensive form of borrowing to cover a missed payment can sometimes move the problem instead of solving it. Before borrowing again, understand the cost and whether the new obligation is sustainable."
+      }
+    },
+    {
+      "order": 20,
+      "type": "example",
+      "data": {
+        "title": "Borrowing to cover borrowing",
+        "text": "You are short $300 for a debt payment and consider using another credit product with fees and interest. The original debt still exists, while a new obligation has been created."
+      }
+    },
+    {
+      "order": 21,
+      "type": "callout",
+      "data": {
+        "title": "Ask what happens next month",
+        "text": "If the solution only gets you through today but makes next month's cash flow worse, it may not be a real solution."
+      }
+    },
+    {
+      "order": 22,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Contact the lender or provider early"
+      }
+    },
+    {
+      "order": 23,
+      "type": "text",
+      "data": {
+        "text": "If you know you may not be able to make a payment, contact the lender or provider as soon as possible. Ask what options are available and what each option would cost."
+      }
+    },
+    {
+      "order": 24,
+      "type": "example",
+      "data": {
+        "title": "The early conversation",
+        "text": "You know your income will arrive after the payment due date. Instead of ignoring the account, you contact the provider and ask whether there is an approved way to handle the timing problem."
+      }
+    },
+    {
+      "order": 25,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Ask specific questions"
+      }
+    },
+    {
+      "order": 26,
+      "type": "text",
+      "data": {
+        "text": "When contacting a lender, ask what amount is currently due, whether a fee applies, what happens if you pay late, whether any hardship options exist, and what the next required payment will be."
+      }
+    },
+    {
+      "order": 27,
+      "type": "example",
+      "data": {
+        "title": "A useful conversation",
+        "text": "Instead of simply saying 'I cannot pay,' explain when you expect to have money available and ask what official options could help you avoid making the situation worse."
+      }
+    },
+    {
+      "order": 28,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Prioritize essential obligations when money is tight"
+      }
+    },
+    {
+      "order": 29,
+      "type": "text",
+      "data": {
+        "text": "When you cannot pay everything, you need to understand which obligations have the most serious consequences if missed. Essential housing, utilities, food, transportation needed for work, and other critical expenses may require attention alongside debt obligations."
+      }
+    },
+    {
+      "order": 30,
+      "type": "example",
+      "data": {
+        "title": "The limited $600",
+        "text": "You have $600 available but $900 of bills and debt payments are due. Instead of paying whichever account sends the loudest message, list the obligations, consequences, due dates, and available options before deciding."
+      }
+    },
+    {
+      "order": 31,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Make a payment priority list"
+      }
+    },
+    {
+      "order": 32,
+      "type": "interactive",
+      "data": {
+        "title": "Your payment triage",
+        "text": "List every payment due, the amount, the deadline, the consequence of missing it, and whether the provider offers an alternative arrangement. This turns a stressful situation into a decision you can work through."
+      }
+    },
+    {
+      "order": 33,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Do not ignore messages from the lender"
+      }
+    },
+    {
+      "order": 34,
+      "type": "text",
+      "data": {
+        "text": "Ignoring account messages does not make a debt disappear. Open statements, notices, and account messages so you know what is happening and what action may be required."
+      }
+    },
+    {
+      "order": 35,
+      "type": "example",
+      "data": {
+        "title": "The unopened message",
+        "text": "You avoid opening a message because you are worried about the debt. A week later, you discover that a deadline has passed and the account has changed status. Knowing sooner could have given you more options."
+      }
+    },
+    {
+      "order": 36,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "A missed payment may affect future borrowing"
+      }
+    },
+    {
+      "order": 37,
+      "type": "text",
+      "data": {
+        "text": "Depending on the product, lender, and applicable reporting rules, missed payments may affect your credit history or how future lenders view your borrowing behavior."
+      }
+    },
+    {
+      "order": 38,
+      "type": "callout",
+      "data": {
+        "title": "The effect can extend beyond today",
+        "text": "A missed payment can affect more than the amount currently due. It may influence future borrowing decisions, costs, or access depending on the circumstances."
+      }
+    },
+    {
+      "order": 39,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Do not assume one missed payment means everything is ruined"
+      }
+    },
+    {
+      "order": 40,
+      "type": "text",
+      "data": {
+        "text": "A missed payment is a problem to address, not a reason to give up. The best response is to understand the situation, communicate, make a realistic plan, and avoid repeating the problem."
+      }
+    },
+    {
+      "order": 41,
+      "type": "example",
+      "data": {
+        "title": "Recovering after a mistake",
+        "text": "You missed one payment because of an unexpected expense. You contact the provider, understand the consequences, catch up according to an agreed plan, and adjust your budget so the same situation is less likely to happen again."
+      }
+    },
+    {
+      "order": 42,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Look for the reason behind the missed payment"
+      }
+    },
+    {
+      "order": 43,
+      "type": "text",
+      "data": {
+        "text": "If missed payments keep happening, the problem may not be the payment itself. Your debt commitments may be too high, your income may be unstable, or your budget may not reflect reality."
+      }
+    },
+    {
+      "order": 44,
+      "type": "example",
+      "data": {
+        "title": "The repeating problem",
+        "text": "You miss a $150 payment three months in a row. The issue may be more than forgetfulness. You may have taken on more debt than your regular income can comfortably support."
+      }
+    },
+    {
+      "order": 45,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Calculate the six-month effect"
+      }
+    },
+    {
+      "order": 46,
+      "type": "interactive",
+      "data": {
+        "title": "Small fees can add up",
+        "text": "Suppose a $25 late fee occurs once each month for six months. The fees alone total $25 × 6 = $150. This does not include any other interest, penalties, or consequences that may apply."
+      }
+    },
+    {
+      "order": 47,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Calculate the one-year effect"
+      }
+    },
+    {
+      "order": 48,
+      "type": "interactive",
+      "data": {
+        "title": "A year's worth of repeated fees",
+        "text": "If the same $25 fee happened once every month for 12 months, the fees would total $25 × 12 = $300. A repeated small problem can become a significant annual cost."
+      }
+    },
+    {
+      "order": 49,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Build a system that reduces missed payments"
+      }
+    },
+    {
+      "order": 50,
+      "type": "text",
+      "data": {
+        "text": "After dealing with a missed payment, improve the system that failed. Depending on your situation, that could mean changing payment dates, setting reminders, using automatic payments when appropriate, or keeping a dedicated amount available for scheduled obligations."
+      }
+    },
+    {
+      "order": 51,
+      "type": "example",
+      "data": {
+        "title": "The payment calendar",
+        "text": "You have six recurring payments with different due dates. Putting every date and amount into one calendar can make the total commitment visible and reduce the chance of forgetting one."
+      }
+    },
+    {
+      "order": 52,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Be careful with automatic payments"
+      }
+    },
+    {
+      "order": 53,
+      "type": "text",
+      "data": {
+        "text": "Automatic payments can reduce forgotten payments, but they can also cause problems if there is not enough money in the account. Use them thoughtfully and monitor your balance."
+      }
+    },
+    {
+      "order": 54,
+      "type": "example",
+      "data": {
+        "title": "The automatic payment problem",
+        "text": "An automatic payment of $300 is scheduled for tomorrow, but only $180 is available. Checking the account before the payment date may give you time to understand your options instead of discovering the problem afterward."
+      }
+    },
+    {
+      "order": 55,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "The goal is not simply to catch up"
+      }
+    },
+    {
+      "order": 56,
+      "type": "text",
+      "data": {
+        "text": "Catching up matters, but the bigger goal is to make your debt commitments sustainable. If your required payments repeatedly consume too much of your available income, the underlying debt problem needs attention."
+      }
+    },
+    {
+      "order": 57,
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Know when you need more help"
+      }
+    },
+    {
+      "order": 58,
+      "type": "text",
+      "data": {
+        "text": "If you cannot keep up with essential expenses and debt payments, consider seeking qualified financial or debt advice available in your area. Do not wait until the situation becomes impossible to manage."
+      }
+    },
+    {
+      "order": 59,
+      "type": "summary",
+      "data": {
+        "title": "What to do when you miss a payment",
+        "points": [
+          "Check exactly what is due and whether the payment is officially late.",
+          "Read the agreement instead of guessing the consequences.",
+          "Find out about fees, interest, and other possible charges.",
+          "Contact the lender or provider early when you know you may struggle.",
+          "Avoid creating expensive new debt simply to hide the old problem.",
+          "Prioritize obligations based on urgency and consequences.",
+          "Keep track of every payment and deadline.",
+          "Look for the reason behind repeated missed payments.",
+          "Build a system that makes future payments easier to manage."
+        ]
+      }
+    },
+    {
+      "order": 60,
+      "type": "callout",
+      "data": {
+        "title": "The recovery rule",
+        "text": "Do not ignore a missed payment. Find out what happened, understand the cost, communicate early, make a realistic plan, and fix the reason the payment was missed."
+      }
+    }
+  ],
+  "quizzes": [
+    {
+      "order": 1,
+      "questionType": "multiple-choice",
+      "question": "What should you do first when you realize you may have missed a debt payment?",
+      "options": [
+        "Check the payment status, due date, and account terms",
+        "Ignore the account",
+        "Borrow from another lender immediately",
+        "Assume the debt has disappeared"
+      ],
+      "correctAnswer": 0,
+      "explanation": "You need to understand the exact situation and applicable terms before deciding what to do next.",
+      "points": 10
+    },
+    {
+      "order": 2,
+      "questionType": "multiple-choice",
+      "question": "A missed payment is $180 and a $25 late fee applies. What is the combined amount?",
+      "options": [
+        "$205",
+        "$180",
+        "$195",
+        "$230"
+      ],
+      "correctAnswer": 0,
+      "explanation": "$180 + $25 = $205.",
+      "points": 10
+    },
+    {
+      "order": 3,
+      "questionType": "multiple-choice",
+      "question": "Why can ignoring a missed payment make the situation worse?",
+      "options": [
+        "You may miss opportunities to understand or address the problem early",
+        "The debt automatically disappears",
+        "The lender automatically cancels all charges",
+        "Ignoring it increases your income"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Ignoring the account can allow fees, missed deadlines, or other consequences to continue without you taking action.",
+      "points": 10
+    },
+    {
+      "order": 4,
+      "questionType": "multiple-choice",
+      "question": "If a $25 late fee occurred once every month for six months, how much would the fees total?",
+      "options": [
+        "$150",
+        "$125",
+        "$175",
+        "$300"
+      ],
+      "correctAnswer": 0,
+      "explanation": "$25 × 6 = $150.",
+      "points": 10
+    },
+    {
+      "order": 5,
+      "questionType": "true-false",
+      "question": "You should assume that every lender has the same rules for missed payments.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Different products and providers can have different terms, fees, reporting practices, and available options.",
+      "points": 10
+    },
+    {
+      "order": 6,
+      "questionType": "multiple-choice",
+      "question": "What is generally better when you know you may struggle to make a payment?",
+      "options": [
+        "Contact the lender or provider early and ask about available options",
+        "Wait until several payments are missed",
+        "Open several new credit accounts",
+        "Ignore all messages"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Early communication can help you understand the situation and identify any available options before the problem grows.",
+      "points": 10
+    },
+    {
+      "order": 7,
+      "questionType": "multiple-choice",
+      "question": "Why can borrowing to cover another debt payment be risky?",
+      "options": [
+        "It can create a new obligation while the original debt still exists",
+        "It always eliminates all debt",
+        "It increases income permanently",
+        "It makes interest disappear"
+      ],
+      "correctAnswer": 0,
+      "explanation": "New borrowing may simply move the problem while adding another repayment obligation and potentially additional costs.",
+      "points": 10
+    },
+    {
+      "order": 8,
+      "questionType": "multiple-choice",
+      "question": "If a $25 fee occurred every month for 12 months, how much would the fees total?",
+      "options": [
+        "$300",
+        "$250",
+        "$275",
+        "$325"
+      ],
+      "correctAnswer": 0,
+      "explanation": "$25 × 12 = $300.",
+      "points": 10
+    },
+    {
+      "order": 9,
+      "questionType": "multiple-choice",
+      "question": "What can repeated missed payments indicate?",
+      "options": [
+        "The underlying debt or cash-flow situation may be unsustainable",
+        "The person should always borrow more",
+        "The payments are not real obligations",
+        "The problem will automatically disappear"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Repeated missed payments can signal that debt commitments are too high, income is unstable, or the current financial system is not working.",
+      "points": 10
+    },
+    {
+      "order": 10,
+      "questionType": "multiple-choice",
+      "question": "What is the best general lesson about missed debt payments?",
+      "options": [
+        "Act early, understand the consequences, communicate, and make a realistic recovery plan",
+        "Ignore the debt until it disappears",
+        "Use unlimited new credit to cover every missed payment",
+        "Assume one missed payment means there is nothing you can do"
+      ],
+      "correctAnswer": 0,
+      "explanation": "A missed payment is a problem to address. Understanding the situation and acting early can help prevent a temporary setback from becoming a larger financial problem.",
+      "points": 10
+    }
+  ]
+}

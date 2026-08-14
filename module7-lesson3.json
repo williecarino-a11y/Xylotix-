@@ -1,0 +1,556 @@
+{
+  "slug": "net-worth-what-you-own-minus-what-you-owe",
+  "title": "Net Worth: What You Own Minus What You Owe",
+  "estimatedDuration": 40,
+  "order": 3,
+  "published": true,
+  "contentBlocks": [
+    {
+      "type": "heading",
+      "content": "What is net worth?"
+    },
+    {
+      "type": "text",
+      "content": "Net worth is a snapshot of your financial position. It compares the value of what you own with the amount you owe."
+    },
+    {
+      "type": "formula",
+      "content": "Net worth = Assets − Liabilities"
+    },
+    {
+      "type": "callout",
+      "title": "The simple idea",
+      "content": "Add up what you own, add up what you owe, and subtract what you owe from what you own."
+    },
+    {
+      "type": "heading",
+      "content": "Assets: what you own"
+    },
+    {
+      "type": "text",
+      "content": "An asset is something you own that has financial value. Depending on your situation, assets can include cash, savings accounts, investments, retirement accounts, property, business interests, and other valuable possessions."
+    },
+    {
+      "type": "heading",
+      "content": "Not every asset is equally useful"
+    },
+    {
+      "type": "text",
+      "content": "Two assets can have the same financial value while providing very different levels of access, income, risk, or usefulness. A savings account is immediately accessible, while a property may take time to sell."
+    },
+    {
+      "type": "heading",
+      "content": "Liabilities: what you owe"
+    },
+    {
+      "type": "text",
+      "content": "Liabilities are debts and financial obligations you owe to other people or organizations. Examples include credit-card balances, personal loans, student loans, auto loans, mortgages, and other debts."
+    },
+    {
+      "type": "heading",
+      "content": "A simple example"
+    },
+    {
+      "type": "example",
+      "title": "Starting with two numbers",
+      "content": "Suppose you have $40,000 in assets and $15,000 in liabilities."
+    },
+    {
+      "type": "formula",
+      "content": "$40,000 − $15,000 = $25,000"
+    },
+    {
+      "type": "text",
+      "content": "Your net worth is $25,000."
+    },
+    {
+      "type": "heading",
+      "content": "Build your personal balance sheet"
+    },
+    {
+      "type": "text",
+      "content": "A simple personal balance sheet lists your assets on one side and your liabilities on the other. This gives you the information needed to calculate net worth."
+    },
+    {
+      "type": "heading",
+      "content": "Step 1: List your assets"
+    },
+    {
+      "type": "text",
+      "content": "Start with the financial value of things you own. Use reasonable current values rather than what you originally paid."
+    },
+    {
+      "type": "example",
+      "title": "Example asset list",
+      "content": "Savings: $8,000. Investments: $12,000. Car: $15,000. Property equity-related value before debt: $100,000."
+    },
+    {
+      "type": "formula",
+      "content": "$8,000 + $12,000 + $15,000 + $100,000 = $135,000"
+    },
+    {
+      "type": "heading",
+      "content": "Step 2: List your liabilities"
+    },
+    {
+      "type": "text",
+      "content": "Next, list outstanding debts and other financial obligations."
+    },
+    {
+      "type": "example",
+      "title": "Example liability list",
+      "content": "Credit-card debt: $2,000. Car loan: $7,000. Mortgage: $60,000."
+    },
+    {
+      "type": "formula",
+      "content": "$2,000 + $7,000 + $60,000 = $69,000"
+    },
+    {
+      "type": "heading",
+      "content": "Step 3: Subtract liabilities from assets"
+    },
+    {
+      "type": "formula",
+      "content": "$135,000 − $69,000 = $66,000"
+    },
+    {
+      "type": "text",
+      "content": "In this example, net worth is $66,000."
+    },
+    {
+      "type": "heading",
+      "content": "A house does not automatically equal its full value in your net worth"
+    },
+    {
+      "type": "text",
+      "content": "If you own a property worth $300,000 but still owe $220,000 on the mortgage, the property contributes $80,000 of equity to your net worth."
+    },
+    {
+      "type": "formula",
+      "content": "$300,000 − $220,000 = $80,000"
+    },
+    {
+      "type": "heading",
+      "content": "Equity is the part you actually own"
+    },
+    {
+      "type": "text",
+      "content": "Equity is the value of an asset after subtracting the debt attached to it. It is especially useful when thinking about financed assets such as homes and cars."
+    },
+    {
+      "type": "formula",
+      "content": "Equity = Asset value − Debt secured against the asset"
+    },
+    {
+      "type": "example",
+      "title": "Car equity",
+      "content": "If a car is worth $25,000 and you owe $10,000 on the car loan, your equity in the car is $15,000."
+    },
+    {
+      "type": "formula",
+      "content": "$25,000 − $10,000 = $15,000"
+    },
+    {
+      "type": "heading",
+      "content": "Net worth can be positive"
+    },
+    {
+      "type": "text",
+      "content": "Positive net worth means your assets are worth more than your liabilities."
+    },
+    {
+      "type": "example",
+      "title": "Positive net worth",
+      "content": "Assets of $80,000 and liabilities of $30,000 produce a net worth of $50,000."
+    },
+    {
+      "type": "formula",
+      "content": "$80,000 − $30,000 = $50,000"
+    },
+    {
+      "type": "heading",
+      "content": "Net worth can also be zero"
+    },
+    {
+      "type": "text",
+      "content": "If your assets and liabilities have the same value, your net worth is zero."
+    },
+    {
+      "type": "example",
+      "title": "Zero net worth",
+      "content": "Assets of $50,000 and liabilities of $50,000 result in zero net worth."
+    },
+    {
+      "type": "formula",
+      "content": "$50,000 − $50,000 = $0"
+    },
+    {
+      "type": "heading",
+      "content": "Net worth can be negative"
+    },
+    {
+      "type": "text",
+      "content": "Negative net worth means you owe more than the value of what you own. This can happen for many reasons, including high debt, education costs, business losses, or having few assets."
+    },
+    {
+      "type": "example",
+      "title": "Negative net worth",
+      "content": "Suppose you have $20,000 in assets but owe $35,000."
+    },
+    {
+      "type": "formula",
+      "content": "$20,000 − $35,000 = −$15,000"
+    },
+    {
+      "type": "text",
+      "content": "Your net worth would be negative $15,000."
+    },
+    {
+      "type": "heading",
+      "content": "Negative net worth is information, not a permanent identity"
+    },
+    {
+      "type": "text",
+      "content": "A negative number does not mean you are financially hopeless. It tells you that, at that point in time, your liabilities exceed your assets. That information can help you decide what needs attention."
+    },
+    {
+      "type": "heading",
+      "content": "Net worth is a snapshot"
+    },
+    {
+      "type": "text",
+      "content": "Your net worth can change from month to month because of saving, debt repayment, investment movements, property values, business values, and other changes."
+    },
+    {
+      "type": "heading",
+      "content": "Cash flow and net worth are different"
+    },
+    {
+      "type": "text",
+      "content": "Net worth tells you about your financial position at a point in time. Cash flow tells you what money comes in and goes out during a period. A person can have high net worth but poor monthly cash flow, or modest net worth with healthy monthly cash flow."
+    },
+    {
+      "type": "heading",
+      "content": "Liquidity matters too"
+    },
+    {
+      "type": "text",
+      "content": "Liquidity describes how easily an asset can be converted into money without a major loss in value. Cash is highly liquid. A property is generally much less liquid."
+    },
+    {
+      "type": "callout",
+      "title": "Important distinction",
+      "content": "Net worth tells you how much financial value you have after liabilities. It does not tell you how much cash you can access today."
+    },
+    {
+      "type": "heading",
+      "content": "A high net worth does not always mean easy access to cash"
+    },
+    {
+      "type": "example",
+      "title": "Asset-rich, cash-poor",
+      "content": "Someone may own a property worth $500,000 with little debt but have only $2,000 in readily available cash. Their net worth may be substantial, but they could still struggle with an immediate $5,000 emergency."
+    },
+    {
+      "type": "heading",
+      "content": "Track net worth over time"
+    },
+    {
+      "type": "text",
+      "content": "Calculating net worth once can be useful, but tracking it periodically can reveal whether your overall financial position is moving in the direction you want."
+    },
+    {
+      "type": "example",
+      "title": "Tracking progress",
+      "content": "Suppose your net worth is $25,000 today and $31,000 one year later."
+    },
+    {
+      "type": "formula",
+      "content": "$31,000 − $25,000 = $6,000"
+    },
+    {
+      "type": "text",
+      "content": "Your net worth increased by $6,000 during that period. The reason for the increase could include saving, debt repayment, asset growth, or a combination of factors."
+    },
+    {
+      "type": "heading",
+      "content": "Debt repayment can increase net worth"
+    },
+    {
+      "type": "text",
+      "content": "Paying down debt can improve net worth because the liability becomes smaller. You do not necessarily need to buy a new asset for your net worth to improve."
+    },
+    {
+      "type": "example",
+      "title": "Debt repayment",
+      "content": "If your assets remain at $50,000 while your debt falls from $30,000 to $20,000, your net worth increases from $20,000 to $30,000."
+    },
+    {
+      "type": "formula",
+      "content": "$50,000 − $30,000 = $20,000"
+    },
+    {
+      "type": "formula",
+      "content": "$50,000 − $20,000 = $30,000"
+    },
+    {
+      "type": "heading",
+      "content": "Saving can increase net worth"
+    },
+    {
+      "type": "text",
+      "content": "When you add money to your savings and do not add an equal liability, your assets increase and your net worth can increase."
+    },
+    {
+      "type": "example",
+      "title": "Adding savings",
+      "content": "If your assets increase from $30,000 to $35,000 while liabilities remain at $10,000, your net worth rises from $20,000 to $25,000."
+    },
+    {
+      "type": "formula",
+      "content": "$35,000 − $10,000 = $25,000"
+    },
+    {
+      "type": "heading",
+      "content": "Borrowing can make an asset and liability rise together"
+    },
+    {
+      "type": "text",
+      "content": "When you borrow money to buy an asset, the asset and liability can increase at the same time. That means the transaction does not automatically create the same amount of new net worth."
+    },
+    {
+      "type": "example",
+      "title": "Buying with borrowed money",
+      "content": "Suppose you borrow $20,000 to purchase an asset worth $20,000. Your assets increase by $20,000, but your liabilities also increase by $20,000."
+    },
+    {
+      "type": "formula",
+      "content": "$20,000 − $20,000 = $0"
+    },
+    {
+      "type": "text",
+      "content": "Ignoring fees and other factors, the transaction itself does not increase net worth at the moment of purchase."
+    },
+    {
+      "type": "heading",
+      "content": "Why net worth is useful"
+    },
+    {
+      "type": "text",
+      "content": "Net worth can help you see whether your financial resources are growing relative to your obligations. It can also reveal whether debt is consuming a large part of your financial position."
+    },
+    {
+      "type": "heading",
+      "content": "But net worth is not the only number that matters"
+    },
+    {
+      "type": "text",
+      "content": "A healthy financial picture also considers income, cash flow, emergency savings, debt costs, liquidity, financial goals, and the risks surrounding your assets."
+    },
+    {
+      "type": "heading",
+      "content": "Common misconceptions"
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: Net worth means how much cash you have"
+    },
+    {
+      "type": "text",
+      "content": "Reality: Net worth includes assets beyond cash and subtracts liabilities. You can have substantial net worth without having the same amount available in your bank account."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: Owning a $300,000 home means your net worth increased by $300,000"
+    },
+    {
+      "type": "text",
+      "content": "Reality: If the home was purchased with debt, the liability must be considered. The relevant contribution to net worth is affected by the home's value and the debt attached to it."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: Negative net worth means you are a failure"
+    },
+    {
+      "type": "text",
+      "content": "Reality: Net worth is a financial measurement, not a judgment of your personal worth. A negative number can be a starting point for making informed decisions."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: Net worth should always increase every month"
+    },
+    {
+      "type": "text",
+      "content": "Reality: Net worth can fluctuate because asset values change and financial circumstances change. What matters is understanding the reasons behind changes and looking at the longer-term direction."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: You need expensive assets to have wealth"
+    },
+    {
+      "type": "text",
+      "content": "Reality: Wealth can be built through many forms of assets and consistent financial decisions. The value comes from the overall financial position, not from how impressive an individual possession looks."
+    },
+    {
+      "type": "interactive",
+      "title": "Build a simple balance sheet",
+      "content": "Imagine you have $10,000 in savings, $20,000 in investments, a car worth $18,000, and $8,000 of debt. Calculate your net worth before moving on."
+    },
+    {
+      "type": "formula",
+      "content": "$10,000 + $20,000 + $18,000 − $8,000 = $40,000"
+    },
+    {
+      "type": "heading",
+      "content": "Use net worth to improve decisions"
+    },
+    {
+      "type": "text",
+      "content": "The purpose of tracking net worth is not to compete with other people. Use it to understand your own financial direction and make better decisions."
+    },
+    {
+      "type": "interactive",
+      "title": "Decision moment",
+      "content": "If two choices have similar lifestyles but one leaves you with more assets, less debt, and greater financial flexibility, which choice is more likely to strengthen your long-term financial position?"
+    },
+    {
+      "type": "summary",
+      "content": "Net worth is the value of what you own minus what you owe. Assets increase the number, while liabilities reduce it. Net worth can be positive, zero, or negative, and it can change over time through saving, debt repayment, asset movements, and other financial changes. It is useful, but it should be considered alongside cash flow and liquidity."
+    },
+    {
+      "type": "callout",
+      "title": "Remember",
+      "content": "Do not ask only, 'What do I own?' Ask, 'What do I own, what do I owe, and what is the difference?'"
+    }
+  ],
+  "quizzes": [
+    {
+      "order": 1,
+      "questionType": "multiple-choice",
+      "question": "What is the basic formula for net worth?",
+      "options": [
+        "Income − Spending",
+        "Assets − Liabilities",
+        "Assets + Liabilities",
+        "Income × Savings"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Net worth is calculated by subtracting liabilities from assets."
+    },
+    {
+      "order": 2,
+      "questionType": "multiple-choice",
+      "question": "You have $40,000 in assets and $15,000 in liabilities. What is your net worth?",
+      "options": [
+        "$15,000",
+        "$25,000",
+        "$40,000",
+        "$55,000"
+      ],
+      "correctAnswer": 1,
+      "explanation": "$40,000 − $15,000 = $25,000."
+    },
+    {
+      "order": 3,
+      "questionType": "multiple-choice",
+      "question": "A property is worth $300,000 and you owe $220,000 on it. What is the property equity?",
+      "options": [
+        "$80,000",
+        "$220,000",
+        "$300,000",
+        "$520,000"
+      ],
+      "correctAnswer": 0,
+      "explanation": "$300,000 − $220,000 = $80,000."
+    },
+    {
+      "order": 4,
+      "questionType": "multiple-choice",
+      "question": "What does negative net worth mean?",
+      "options": [
+        "Your income is zero",
+        "You owe more than the value of what you own",
+        "You have no financial future",
+        "You have no assets at all"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Negative net worth occurs when liabilities exceed assets."
+    },
+    {
+      "order": 5,
+      "questionType": "multiple-choice",
+      "question": "You have $80,000 in assets and $30,000 in liabilities. What is your net worth?",
+      "options": [
+        "$30,000",
+        "$50,000",
+        "$80,000",
+        "$110,000"
+      ],
+      "correctAnswer": 1,
+      "explanation": "$80,000 − $30,000 = $50,000."
+    },
+    {
+      "order": 6,
+      "questionType": "true-false",
+      "question": "Net worth tells you exactly how much cash you can access today.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Net worth includes assets that may not be immediately liquid, such as property."
+    },
+    {
+      "order": 7,
+      "questionType": "multiple-choice",
+      "question": "If your assets stay at $50,000 while your debt falls from $30,000 to $20,000, what happens to your net worth?",
+      "options": [
+        "It falls by $10,000",
+        "It stays the same",
+        "It rises by $10,000",
+        "It becomes zero"
+      ],
+      "correctAnswer": 2,
+      "explanation": "Net worth rises from $20,000 to $30,000, an increase of $10,000."
+    },
+    {
+      "order": 8,
+      "questionType": "multiple-choice",
+      "question": "You have $10,000 in savings, $20,000 in investments, a car worth $18,000, and $8,000 in debt. What is your net worth?",
+      "options": [
+        "$32,000",
+        "$40,000",
+        "$48,000",
+        "$56,000"
+      ],
+      "correctAnswer": 1,
+      "explanation": "$10,000 + $20,000 + $18,000 − $8,000 = $40,000."
+    },
+    {
+      "order": 9,
+      "questionType": "multiple-choice",
+      "question": "Why can someone have high net worth but still struggle with an immediate expense?",
+      "options": [
+        "Net worth can include assets that are not easily accessible as cash",
+        "Net worth only measures income",
+        "High net worth means you cannot own cash",
+        "Net worth always equals bank balance"
+      ],
+      "correctAnswer": 0,
+      "explanation": "A large portion of net worth may be tied up in less-liquid assets."
+    },
+    {
+      "order": 10,
+      "questionType": "multiple-choice",
+      "question": "What is the best reason to track your net worth?",
+      "options": [
+        "To compete with other people",
+        "To prove that you look wealthy",
+        "To understand your financial direction and make better decisions",
+        "To replace your monthly budget"
+      ],
+      "correctAnswer": 2,
+      "explanation": "Net worth is most useful as a tool for understanding and improving your own financial position."
+    }
+  ]
+}

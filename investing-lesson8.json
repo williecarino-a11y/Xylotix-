@@ -1,0 +1,457 @@
+{
+  "slug": "valuing-a-stock-price-vs-value",
+  "title": "Valuing a Stock: Price vs. Value",
+  "estimatedDuration": 50,
+  "order": 4,
+  "published": true,
+  "contentBlocks": [
+    {
+      "type": "heading",
+      "content": "Is a $20 stock cheaper than a $200 stock?"
+    },
+    {
+      "type": "text",
+      "content": "Not necessarily. The price of one share tells you how much one share costs. It does not tell you how large the company is, how much money the company earns, or whether the stock is attractively priced relative to the business."
+    },
+    {
+      "type": "callout",
+      "title": "The key idea",
+      "content": "Share price and company value are not the same thing. A higher share price does not automatically mean a company is more expensive, and a lower share price does not automatically mean a bargain."
+    },
+    {
+      "type": "heading",
+      "content": "Share price"
+    },
+    {
+      "type": "text",
+      "content": "Share price is the market price of one share at a particular moment. Investors sometimes make the mistake of comparing share prices between companies as though the higher number automatically means the company is more valuable."
+    },
+    {
+      "type": "heading",
+      "content": "Market capitalization"
+    },
+    {
+      "type": "text",
+      "content": "Market capitalization, often called market cap, is a simple way to estimate the market value of a company's outstanding shares."
+    },
+    {
+      "type": "formula",
+      "content": "Market capitalization = share price × shares outstanding"
+    },
+    {
+      "type": "example",
+      "title": "Two companies with very different share prices",
+      "content": "Company A has 1 billion shares trading at $20. Company B has 100 million shares trading at $200. Company A has a market capitalization of $20 billion. Company B also has a market capitalization of $20 billion."
+    },
+    {
+      "type": "formula",
+      "content": "Company A: $20 × 1,000,000,000 = $20 billion"
+    },
+    {
+      "type": "formula",
+      "content": "Company B: $200 × 100,000,000 = $20 billion"
+    },
+    {
+      "type": "heading",
+      "content": "Why share count matters"
+    },
+    {
+      "type": "text",
+      "content": "A company can divide ownership into many shares or fewer shares. The number of shares does not by itself determine whether the company is large or small."
+    },
+    {
+      "type": "heading",
+      "content": "Stock splits can change the share price without changing the business"
+    },
+    {
+      "type": "text",
+      "content": "A company can split its shares into a larger number of shares. After a proportional split, the price per share changes while the total value represented by those shares can remain approximately the same."
+    },
+    {
+      "type": "example",
+      "title": "Why a split does not make a stock cheaper economically",
+      "content": "Suppose a company has 1 million shares priced at $100. Its market capitalization is $100 million. After a 2-for-1 split, there may be 2 million shares at roughly $50 each. The market capitalization remains approximately $100 million, all else equal."
+    },
+    {
+      "type": "heading",
+      "content": "Earnings matter"
+    },
+    {
+      "type": "text",
+      "content": "Investors often compare a company's market price with the profits the business generates. One commonly used measure is earnings per share, or EPS."
+    },
+    {
+      "type": "formula",
+      "content": "EPS = company earnings available to common shareholders ÷ shares outstanding"
+    },
+    {
+      "type": "example",
+      "title": "Simple EPS calculation",
+      "content": "If a company earns $10 million and has 2 million shares outstanding, its simplified earnings per share would be $5."
+    },
+    {
+      "type": "formula",
+      "content": "$10,000,000 ÷ 2,000,000 = $5 EPS"
+    },
+    {
+      "type": "heading",
+      "content": "The price-to-earnings ratio"
+    },
+    {
+      "type": "text",
+      "content": "The price-to-earnings ratio, or P/E ratio, compares a company's share price with its earnings per share. It is one way investors think about how much the market is paying for each dollar of earnings."
+    },
+    {
+      "type": "formula",
+      "content": "P/E ratio = share price ÷ earnings per share"
+    },
+    {
+      "type": "example",
+      "title": "Calculating P/E",
+      "content": "If a stock trades at $60 and its earnings per share are $3, its P/E ratio is 20."
+    },
+    {
+      "type": "formula",
+      "content": "$60 ÷ $3 = 20"
+    },
+    {
+      "type": "text",
+      "content": "A P/E of 20 can be interpreted simply as the market valuing the stock at 20 times its current earnings per share. It should not be interpreted as a guaranteed 20-year payback period."
+    },
+    {
+      "type": "heading",
+      "content": "Does a lower P/E always mean a better investment?"
+    },
+    {
+      "type": "text",
+      "content": "No. A lower P/E can mean a stock is cheaper relative to its current earnings, but it can also reflect weaker expected growth, higher risk, declining earnings, or other concerns."
+    },
+    {
+      "type": "heading",
+      "content": "Does a higher P/E always mean a bad investment?"
+    },
+    {
+      "type": "text",
+      "content": "No. A higher P/E may reflect expectations of stronger future growth, higher-quality earnings, or other factors. But investors are also paying more relative to current earnings, so expectations may need to be met for the valuation to make sense."
+    },
+    {
+      "type": "heading",
+      "content": "Growth expectations influence valuation"
+    },
+    {
+      "type": "text",
+      "content": "Two companies can have similar current earnings but very different valuations because investors expect different levels of future growth."
+    },
+    {
+      "type": "example",
+      "title": "Same earnings, different expectations",
+      "content": "Imagine Company A and Company B each earn $5 per share. Company A trades at $50, giving it a P/E of 10. Company B trades at $100, giving it a P/E of 20. The market is paying more for each dollar of Company B's current earnings, potentially because investors expect stronger future growth or perceive different risks."
+    },
+    {
+      "type": "formula",
+      "content": "Company A: $50 ÷ $5 = 10 P/E"
+    },
+    {
+      "type": "formula",
+      "content": "Company B: $100 ÷ $5 = 20 P/E"
+    },
+    {
+      "type": "heading",
+      "content": "Valuation is about expectations"
+    },
+    {
+      "type": "text",
+      "content": "A valuation is not simply a statement about what a company is worth today. It also reflects expectations about future earnings, cash flows, growth, competition, risk, and other factors."
+    },
+    {
+      "type": "heading",
+      "content": "A stock can be cheap for a reason"
+    },
+    {
+      "type": "text",
+      "content": "A low share price or low valuation ratio may reflect genuine problems. Revenue may be declining, debt may be high, competition may be increasing, or future profits may be uncertain."
+    },
+    {
+      "type": "heading",
+      "content": "A stock can be expensive for a reason"
+    },
+    {
+      "type": "text",
+      "content": "A high valuation may reflect strong growth expectations, a powerful competitive position, recurring revenue, strong profitability, or confidence in the company's future."
+    },
+    {
+      "type": "heading",
+      "content": "But expectations can be wrong"
+    },
+    {
+      "type": "text",
+      "content": "A stock with a high valuation can fall sharply if future results fail to justify what investors expected. The company can still grow while the stock falls if it grows less than the market expected."
+    },
+    {
+      "type": "example",
+      "title": "Growth is good, but expectations matter",
+      "content": "Suppose investors expect a company to increase earnings by 30%, but earnings grow only 15%. The company still grew, but investors may lower their valuation because the growth was weaker than expected."
+    },
+    {
+      "type": "heading",
+      "content": "Market capitalization is not the same as company assets"
+    },
+    {
+      "type": "text",
+      "content": "Market capitalization represents what the market is currently valuing the company's equity at. It is not the same as the total value of everything the company owns, and it does not directly tell you how much cash the company has."
+    },
+    {
+      "type": "heading",
+      "content": "Enterprise value gives a broader perspective"
+    },
+    {
+      "type": "text",
+      "content": "When analyzing companies, investors sometimes use enterprise value to consider equity value alongside debt and cash. This is a more advanced valuation concept and will be explored later."
+    },
+    {
+      "type": "heading",
+      "content": "Price-to-sales and other ratios"
+    },
+    {
+      "type": "text",
+      "content": "Investors may also compare market value with revenue, cash flow, book value, or other financial measures. No single ratio tells the complete story."
+    },
+    {
+      "type": "heading",
+      "content": "Why comparing companies can help"
+    },
+    {
+      "type": "text",
+      "content": "Valuation ratios can become more useful when compared with similar companies, the company's own historical valuation, and the company's growth and profitability. A ratio should always be interpreted in context."
+    },
+    {
+      "type": "heading",
+      "content": "A simple valuation checklist"
+    },
+    {
+      "type": "interactive",
+      "title": "Before calling a stock cheap",
+      "content": "Ask: What is the company's market capitalization? How much does it earn? Is revenue growing or shrinking? What are its profit margins? How much debt does it have? What growth does the current valuation imply? What risks could prevent those expectations from being achieved? How does its valuation compare with relevant companies?"
+    },
+    {
+      "type": "heading",
+      "content": "Common misconceptions"
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: A $5 stock is cheaper than a $500 stock"
+    },
+    {
+      "type": "text",
+      "content": "Reality: Share price alone does not tell you whether a company is cheap or expensive."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: A stock split creates wealth"
+    },
+    {
+      "type": "text",
+      "content": "Reality: A split can change the number of shares and price per share without creating additional economic value by itself."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: A low P/E automatically means buy"
+    },
+    {
+      "type": "text",
+      "content": "Reality: A low P/E can reflect low expectations, declining earnings, higher risk, or other problems."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: A high P/E automatically means sell"
+    },
+    {
+      "type": "text",
+      "content": "Reality: A high P/E may reflect expectations of strong future growth, although those expectations create additional valuation risk."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: Market capitalization tells you exactly what a company is worth"
+    },
+    {
+      "type": "text",
+      "content": "Reality: Market capitalization tells you the current market value of the company's equity, based on the share price and shares outstanding. It is a market valuation, not a guaranteed intrinsic value."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: One valuation ratio is enough"
+    },
+    {
+      "type": "text",
+      "content": "Reality: Investors should consider the business, financial statements, growth, profitability, risks, and appropriate valuation measures together."
+    },
+    {
+      "type": "heading",
+      "content": "Practical calculation"
+    },
+    {
+      "type": "example",
+      "title": "Putting the numbers together",
+      "content": "A company has 50 million shares, a share price of $40, and earnings of $100 million. Its market capitalization is $2 billion. Its simplified EPS is $2. Its P/E ratio is 20."
+    },
+    {
+      "type": "formula",
+      "content": "Market cap = 50,000,000 × $40 = $2,000,000,000"
+    },
+    {
+      "type": "formula",
+      "content": "EPS = $100,000,000 ÷ 50,000,000 = $2"
+    },
+    {
+      "type": "formula",
+      "content": "P/E = $40 ÷ $2 = 20"
+    },
+    {
+      "type": "heading",
+      "content": "The important lesson"
+    },
+    {
+      "type": "text",
+      "content": "The goal is not to memorize that a certain P/E or share price is good or bad. The goal is to understand what you are paying for and what expectations are already built into the price."
+    },
+    {
+      "type": "summary",
+      "content": "Valuing a stock requires more than looking at its share price. Market capitalization shows the market value of the company's equity, EPS connects company earnings to each share, and the P/E ratio compares price with earnings. These measures become more useful when combined with growth, profitability, debt, competition, risk, and realistic expectations."
+    },
+    {
+      "type": "callout",
+      "title": "Remember",
+      "content": "Cheap is not the same as low-priced, and expensive is not the same as high-priced. What matters is the relationship between the price you pay and the value and future potential you receive."
+    }
+  ],
+  "quiz": [
+    {
+      "order": 1,
+      "questionType": "multiple-choice",
+      "question": "Which statement is most accurate?",
+      "options": [
+        "A $20 stock is always cheaper than a $200 stock",
+        "Share price alone cannot tell you whether a stock is cheap or expensive",
+        "A $200 stock is always a better company",
+        "A lower share price guarantees a higher return"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Share price must be considered alongside share count, company size, earnings, valuation, growth, and risk."
+    },
+    {
+      "order": 2,
+      "questionType": "multiple-choice",
+      "question": "A company has 1 billion shares trading at $20. What is its market capitalization?",
+      "options": [
+        "$20 million",
+        "$200 million",
+        "$20 billion",
+        "$200 billion"
+      ],
+      "correctAnswer": 2,
+      "explanation": "$20 × 1 billion shares = $20 billion."
+    },
+    {
+      "order": 3,
+      "questionType": "multiple-choice",
+      "question": "A company earns $10 million and has 2 million shares outstanding. What is its simplified EPS?",
+      "options": [
+        "$2",
+        "$5",
+        "$10",
+        "$20"
+      ],
+      "correctAnswer": 1,
+      "explanation": "$10 million ÷ 2 million shares = $5 per share."
+    },
+    {
+      "order": 4,
+      "questionType": "multiple-choice",
+      "question": "A stock trades at $60 and has earnings per share of $3. What is its P/E ratio?",
+      "options": [
+        "10",
+        "15",
+        "20",
+        "60"
+      ],
+      "correctAnswer": 2,
+      "explanation": "$60 ÷ $3 = 20."
+    },
+    {
+      "order": 5,
+      "questionType": "true-false",
+      "question": "A lower P/E ratio automatically means a stock is a better investment.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctAnswer": 1,
+      "explanation": "A lower P/E can reflect weaker growth expectations, declining earnings, higher risk, or other concerns."
+    },
+    {
+      "order": 6,
+      "questionType": "multiple-choice",
+      "question": "Why might two companies with similar current earnings have different P/E ratios?",
+      "options": [
+        "Investors may have different expectations for their future growth and risk",
+        "P/E ratios are always identical between companies",
+        "Share prices never reflect expectations",
+        "Companies with different P/E ratios must have the same future"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Different expected growth, profitability, risk, and business quality can lead investors to assign different valuations."
+    },
+    {
+      "order": 7,
+      "questionType": "multiple-choice",
+      "question": "A company has 50 million shares at $40 and earns $100 million. What is its simplified P/E ratio?",
+      "options": [
+        "10",
+        "20",
+        "40",
+        "50"
+      ],
+      "correctAnswer": 1,
+      "explanation": "EPS is $100 million ÷ 50 million = $2. P/E is $40 ÷ $2 = 20."
+    },
+    {
+      "order": 8,
+      "questionType": "multiple-choice",
+      "question": "What does market capitalization primarily represent?",
+      "options": [
+        "The company's annual revenue",
+        "The current market value of its equity",
+        "The company's cash balance",
+        "The company's annual profit"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Market capitalization is share price multiplied by shares outstanding and represents the market value of the company's equity."
+    },
+    {
+      "order": 9,
+      "questionType": "multiple-choice",
+      "question": "Why can a stock with a high valuation fall even when the company continues to grow?",
+      "options": [
+        "The company must be losing money",
+        "Its growth may be weaker than investors expected",
+        "Growth always causes prices to fall",
+        "High valuations cannot change"
+      ],
+      "correctAnswer": 1,
+      "explanation": "A stock's valuation reflects expectations. Growth that falls short of those expectations can lead to a lower valuation."
+    },
+    {
+      "order": 10,
+      "questionType": "multiple-choice",
+      "question": "Which approach is most useful when evaluating whether a stock appears attractively valued?",
+      "options": [
+        "Look only at the share price",
+        "Look only at the P/E ratio",
+        "Consider valuation together with earnings, growth, profitability, risks, and the business",
+        "Buy the stock with the lowest share price"
+      ],
+      "correctAnswer": 2,
+      "explanation": "Valuation measures are most useful when interpreted in the context of the underlying business and its future prospects."
+    }
+  ]
+}

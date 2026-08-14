@@ -1,0 +1,421 @@
+{
+  "slug": "needs-wants-and-trade-offs",
+  "title": "Needs, Wants, and Trade-Offs",
+  "estimatedDuration": 35,
+  "order": 7,
+  "published": true,
+  "contentBlocks": [
+    {
+      "type": "heading",
+      "content": "Your money has limits, so your choices matter"
+    },
+    {
+      "type": "text",
+      "content": "Most people have more things they would like to buy than money available to buy them. Good money management is not about never spending on things you enjoy. It is about deciding what deserves your money now, what can wait, and what you may need to give up to afford something else."
+    },
+    {
+      "type": "example",
+      "title": "A simple trade-off",
+      "content": "Alex has $100 left after covering this month's essential bills. Alex wants new shoes for $70 and also wants to save $50 for an upcoming trip. Alex cannot fully do both with the same $100. The decision is a trade-off: choosing more spending now leaves less available for the trip."
+    },
+    {
+      "type": "heading",
+      "content": "What is a need?"
+    },
+    {
+      "type": "text",
+      "content": "A need is something necessary for basic living, safety, health, or an important responsibility. But the exact amount spent on a need is not automatically necessary. You can need food without needing the most expensive food available."
+    },
+    {
+      "type": "example",
+      "title": "The difference between the need and the choice",
+      "content": "You may need transportation to get to work, but that does not mean every type of transportation is equally necessary. The basic need is transportation; the specific choice may involve a trade-off between cost, convenience, time, comfort, and reliability."
+    },
+    {
+      "type": "heading",
+      "content": "What is a want?"
+    },
+    {
+      "type": "text",
+      "content": "A want is something you would like to have but could live without. Wants are not bad. Entertainment, hobbies, eating out, better clothing, upgraded devices, and travel can all be meaningful parts of life. The financial question is whether the spending fits your priorities."
+    },
+    {
+      "type": "callout",
+      "title": "A want is not automatically wasteful",
+      "content": "Financially responsible spending does not mean removing every enjoyable purchase. The goal is to enjoy your money without allowing wants to quietly damage your important goals."
+    },
+    {
+      "type": "heading",
+      "content": "Needs and wants can change with circumstances"
+    },
+    {
+      "type": "text",
+      "content": "The same purchase can be a need in one situation and a want in another. Circumstances, responsibilities, health, work requirements, location, and available alternatives can change the decision."
+    },
+    {
+      "type": "example",
+      "title": "A phone can be different for different people",
+      "content": "Someone may need a working phone for communication and work. That does not necessarily mean they need the newest premium model. For another person, specialized equipment may genuinely be necessary for their job."
+    },
+    {
+      "type": "heading",
+      "content": "The real skill is prioritizing"
+    },
+    {
+      "type": "text",
+      "content": "Financial decisions become easier when you rank your priorities instead of treating every purchase as equally important. Essential bills, urgent obligations, important savings goals, debt payments, and personal enjoyment may all deserve money, but they may not deserve the same amount or timing."
+    },
+    {
+      "type": "example",
+      "title": "Three competing uses for $300",
+      "content": "Suppose you have $300 available. You could spend it on entertainment, put it toward an expensive debt, or add it to savings for an upcoming important expense. There is no universal answer without knowing your situation. The useful question is which choice best supports your current priorities."
+    },
+    {
+      "type": "heading",
+      "content": "Every choice has an opportunity cost"
+    },
+    {
+      "type": "text",
+      "content": "When you use money for one purpose, that same money cannot be used for another purpose at the same time. This is an opportunity cost. You do not need to calculate a complicated number every time. Simply asking 'What am I giving up by spending this?' can improve your decisions."
+    },
+    {
+      "type": "example",
+      "title": "The hidden cost of a purchase",
+      "content": "You spend $200 on an impulse purchase. The obvious result is that you receive the item. The less obvious result is that you now have $200 less available for savings, debt repayment, another purchase, or an emergency."
+    },
+    {
+      "type": "heading",
+      "content": "Recurring wants deserve extra attention"
+    },
+    {
+      "type": "text",
+      "content": "A small purchase can become much more important when it repeats. A subscription, frequent delivery fee, daily convenience purchase, or recurring upgrade may seem harmless individually but can become a meaningful monthly and yearly expense."
+    },
+    {
+      "type": "example",
+      "title": "Small monthly spending",
+      "content": "A $15 monthly subscription costs $180 over a year if it remains active for twelve months. The important question is not whether $15 feels large today, but whether the service is valuable enough to deserve $180 over the year."
+    },
+    {
+      "type": "heading",
+      "content": "Convenience has a price"
+    },
+    {
+      "type": "text",
+      "content": "Convenience can be worth paying for. The problem is paying for convenience automatically without noticing the total cost. Delivery fees, premium versions, frequent rides, prepared meals, and other conveniences can save time while also consuming money."
+    },
+    {
+      "type": "example",
+      "title": "Buying back your time",
+      "content": "Someone may choose delivery because it saves an hour of travel. That can be a reasonable choice. But if delivery becomes automatic several times a week, the person should periodically check whether the time saved is worth the money spent."
+    },
+    {
+      "type": "heading",
+      "content": "Price is not the same as value"
+    },
+    {
+      "type": "text",
+      "content": "A cheap purchase is not automatically a good financial decision, and an expensive purchase is not automatically a bad one. Value depends on usefulness, quality, frequency of use, durability, alternatives, and whether the purchase fits your financial situation."
+    },
+    {
+      "type": "example",
+      "title": "Cheap versus useful",
+      "content": "Buying a $20 item that you never use is not necessarily better than spending $60 on something you use regularly for years. The lower price only tells you what you paid, not whether the purchase was useful."
+    },
+    {
+      "type": "heading",
+      "content": "Do not confuse affordability with wisdom"
+    },
+    {
+      "type": "text",
+      "content": "Being able to pay for something does not automatically mean it is a good decision. You can technically afford a purchase while still deciding that your money has a better use elsewhere."
+    },
+    {
+      "type": "example",
+      "title": "You can afford it, but should you buy it?",
+      "content": "Taylor has enough money to buy a $1,000 television without going into debt. But Taylor is also trying to build an emergency fund. The purchase may be affordable today while still conflicting with a more important financial goal."
+    },
+    {
+      "type": "heading",
+      "content": "Avoid turning every want into an emergency"
+    },
+    {
+      "type": "text",
+      "content": "Marketing and social pressure can make ordinary wants feel urgent. Most wants do not require an immediate decision. Creating a short pause between wanting something and buying it gives you time to reconsider."
+    },
+    {
+      "type": "interactive",
+      "title": "The pause test",
+      "content": "Before a non-essential purchase, ask: Do I still want this after waiting? What problem does it solve? How often will I use it? What will I give up to pay for it? Is there a cheaper option that works? These questions can expose purchases driven mainly by impulse."
+    },
+    {
+      "type": "heading",
+      "content": "Social pressure can change spending"
+    },
+    {
+      "type": "text",
+      "content": "People often spend to keep up with friends, coworkers, influencers, or the lifestyle they see online. Someone else's spending does not tell you what you can responsibly afford."
+    },
+    {
+      "type": "example",
+      "title": "Keeping up with friends",
+      "content": "A group of friends starts eating at expensive restaurants every weekend. You can technically pay for each meal, but doing so would prevent you from reaching an important savings goal. Choosing a cheaper activity does not mean you are financially behind."
+    },
+    {
+      "type": "heading",
+      "content": "Lifestyle choices create trade-offs"
+    },
+    {
+      "type": "text",
+      "content": "Housing, transportation, entertainment, travel, food, and other lifestyle choices affect how much money remains for other goals. A more expensive choice in one area can limit flexibility elsewhere."
+    },
+    {
+      "type": "example",
+      "title": "The expensive car trade-off",
+      "content": "A larger car may provide comfort and convenience, but it may also involve higher payments, insurance, fuel, maintenance, and depreciation. The decision is not only about the purchase price."
+    },
+    {
+      "type": "heading",
+      "content": "Look at the full cost"
+    },
+    {
+      "type": "text",
+      "content": "Some purchases have costs beyond the amount shown on the price tag. Maintenance, subscriptions, repairs, accessories, transportation, storage, insurance, and replacement costs can change the real financial impact."
+    },
+    {
+      "type": "example",
+      "title": "The low-price trap",
+      "content": "A device may look inexpensive, but if it requires a costly subscription or frequent replacement, the total cost may be much higher than the initial price."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: financially responsible people never buy wants"
+    },
+    {
+      "type": "text",
+      "content": "Responsible money management includes room for enjoyment. The problem is not having wants; the problem is allowing wants to consistently override important obligations and goals."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: every need must be bought at the highest quality"
+    },
+    {
+      "type": "text",
+      "content": "A need describes what is necessary, not the most expensive version of it. You can meet a need while choosing an option that is affordable and appropriate for your situation."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: the cheapest option is always financially smartest"
+    },
+    {
+      "type": "text",
+      "content": "Very cheap choices can sometimes cost more over time through poor quality, frequent replacement, repairs, or inconvenience. Compare usefulness and total cost rather than looking only at the initial price."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: if you can pay cash, the purchase is automatically fine"
+    },
+    {
+      "type": "text",
+      "content": "Paying cash avoids borrowing for the purchase, but the money still has a limited number of possible uses. A cash purchase can still delay savings or another important goal."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: every discount saves money"
+    },
+    {
+      "type": "text",
+      "content": "A discount only saves money if you actually needed or genuinely valued the item. Spending $80 instead of $100 on something you did not need still means $80 left your account."
+    },
+    {
+      "type": "heading",
+      "content": "Misconception: a small purchase cannot affect your finances"
+    },
+    {
+      "type": "text",
+      "content": "One small purchase may not matter much. Repeated small purchases can matter significantly. Look at patterns rather than judging each purchase in isolation."
+    },
+    {
+      "type": "heading",
+      "content": "Give your money jobs before spending it"
+    },
+    {
+      "type": "text",
+      "content": "A useful habit is to decide what your available money needs to accomplish before optional spending begins. Bills, savings, debt payments, important goals, and enjoyment can all receive a planned place in your spending."
+    },
+    {
+      "type": "example",
+      "title": "Planned enjoyment",
+      "content": "Morgan decides that after covering essential expenses and planned savings, $100 each month can be used freely for entertainment. Morgan can enjoy that money without feeling guilty because the spending has already been considered within the overall plan."
+    },
+    {
+      "type": "heading",
+      "content": "Use trade-offs instead of guilt"
+    },
+    {
+      "type": "text",
+      "content": "The purpose of understanding trade-offs is not to make you feel guilty whenever you spend. It is to make the decision conscious. If you choose a purchase knowing what it means for your other goals, you are making a more informed financial decision."
+    },
+    {
+      "type": "interactive",
+      "title": "The three-question decision check",
+      "content": "Before a meaningful non-essential purchase, ask: What do I gain? What does it really cost me? What important goal could this money support instead? If the purchase still makes sense after answering those questions, you can make the decision with greater confidence."
+    },
+    {
+      "type": "heading",
+      "content": "Priorities change over time"
+    },
+    {
+      "type": "text",
+      "content": "A financially sensible choice today may not be the right choice six months from now. Goals, income, responsibilities, emergencies, and opportunities change. Good financial habits include reviewing priorities instead of following old spending decisions automatically."
+    },
+    {
+      "type": "example",
+      "title": "A changing priority",
+      "content": "Someone may decide that travel is their main goal for the year. Later, an important financial obligation appears. Temporarily reducing travel spending to handle the new priority is not failure. It is adapting the plan."
+    },
+    {
+      "type": "heading",
+      "content": "A practical spending filter"
+    },
+    {
+      "type": "text",
+      "content": "Before spending, consider necessity, usefulness, total cost, frequency of use, timing, alternatives, and the effect on your other goals. You do not need a complicated formula. The purpose is simply to slow down enough to make the decision intentionally."
+    },
+    {
+      "type": "summary",
+      "title": "What to remember",
+      "content": "Needs and wants are not about judging what people are allowed to enjoy. They are tools for making choices when money is limited. Every meaningful spending decision involves trade-offs. Look beyond the price tag, notice recurring costs, question urgency, consider what you are giving up, and spend in a way that supports both your present life and important future goals."
+    }
+  ],
+  "quiz": [
+    {
+      "order": 1,
+      "questionType": "multiple-choice",
+      "question": "What is the most useful way to think about needs and wants?",
+      "options": [
+        "Needs are generally necessary, while wants are optional, but both should be considered within your real financial situation",
+        "Wants are always financially irresponsible",
+        "Needs always require the most expensive option",
+        "You should never spend money on wants"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Financial literacy is not about eliminating enjoyment. It is about understanding priorities and making spending fit your situation."
+    },
+    {
+      "order": 2,
+      "questionType": "multiple-choice",
+      "question": "Alex spends $200 on an impulse purchase. What is the most important trade-off?",
+      "options": [
+        "The $200 can no longer be used for another purpose such as saving, debt repayment, or another goal",
+        "There is no trade-off because Alex paid cash",
+        "The purchase automatically creates wealth",
+        "The purchase has no effect on future choices"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Money used for one purpose is no longer available for other purposes."
+    },
+    {
+      "order": 3,
+      "questionType": "multiple-choice",
+      "question": "Why should recurring small expenses receive attention?",
+      "options": [
+        "Repeated small expenses can become a meaningful amount over time",
+        "Small expenses are always bad",
+        "Recurring expenses never matter",
+        "Only large purchases affect financial health"
+      ],
+      "correctAnswer": 0,
+      "explanation": "A purchase that feels small individually can become significant when repeated over months or years."
+    },
+    {
+      "order": 4,
+      "questionType": "multiple-choice",
+      "question": "Which statement best describes affordability?",
+      "options": [
+        "Being able to pay for something does not automatically mean it is the best use of the money",
+        "Anything you can pay cash for is always a good purchase",
+        "Affordability means the purchase has no trade-off",
+        "If you have enough money today, future goals do not matter"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Money has competing uses. A purchase can be affordable while still conflicting with a more important goal."
+    },
+    {
+      "order": 5,
+      "questionType": "multiple-choice",
+      "question": "Why can the cheapest option sometimes be a poor financial choice?",
+      "options": [
+        "Poor quality, frequent replacement, repairs, or inconvenience can make the total cost higher",
+        "Cheap products are always useless",
+        "The most expensive option is always best",
+        "Price never matters"
+      ],
+      "correctAnswer": 0,
+      "explanation": "The initial price is only one part of the financial decision."
+    },
+    {
+      "order": 6,
+      "questionType": "multiple-choice",
+      "question": "Someone receives a large discount on an item they did not need. What is the most accurate conclusion?",
+      "options": [
+        "They did not necessarily save money because they still spent money on something they did not need",
+        "Any discount automatically creates savings",
+        "The discount means the purchase is free",
+        "Buying discounted items never affects financial goals"
+      ],
+      "correctAnswer": 0,
+      "explanation": "A discount reduces the price, but it does not make an unnecessary purchase financially free."
+    },
+    {
+      "order": 7,
+      "questionType": "multiple-choice",
+      "question": "What is a useful question before making a meaningful non-essential purchase?",
+      "options": [
+        "What important goal or alternative use could this money support instead?",
+        "How quickly can I buy it?",
+        "How can I convince someone else to buy it?",
+        "Is everyone else buying it?"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Considering the alternative use of the money makes the trade-off visible."
+    },
+    {
+      "order": 8,
+      "questionType": "multiple-choice",
+      "question": "Why can social pressure affect financial decisions?",
+      "options": [
+        "People may spend to match the lifestyles or activities of others even when those choices do not fit their own priorities",
+        "Other people's spending determines what you can afford",
+        "Social pressure always improves financial decisions",
+        "Friends can accurately manage your money for you"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Comparing yourself with others can push you toward spending that does not match your own goals or circumstances."
+    },
+    {
+      "order": 9,
+      "questionType": "multiple-choice",
+      "question": "Which approach best supports intentional spending?",
+      "options": [
+        "Cover important priorities first, then decide how much room remains for optional spending",
+        "Spend first and hope the important expenses work out",
+        "Avoid all enjoyable spending",
+        "Buy whatever feels urgent"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Giving important priorities a planned place reduces the chance that optional spending will consume money needed elsewhere."
+    },
+    {
+      "order": 10,
+      "questionType": "true-false",
+      "question": "A financially responsible person can spend money on wants.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Responsible money management does not require eliminating enjoyment. It requires making optional spending fit within your priorities and financial capacity."
+    }
+  ]
+}

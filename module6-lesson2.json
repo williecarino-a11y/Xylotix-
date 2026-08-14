@@ -1,0 +1,497 @@
+{
+  "slug": "cash-flow-money-coming-in-vs-going-out",
+  "title": "Cash Flow: The Money Coming In vs. Going Out",
+  "estimatedDuration": 35,
+  "order": 2,
+  "published": true,
+  "contentBlocks": [
+    {
+      "type": "heading",
+      "content": "Cash flow is about movement"
+    },
+    {
+      "type": "text",
+      "content": "Cash flow is the movement of money into and out of your financial life over a period of time. It helps you understand whether money coming in is enough to cover the money going out."
+    },
+    {
+      "type": "text",
+      "content": "Knowing your income alone is not enough. Knowing your expenses alone is not enough. You need to understand how the two interact."
+    },
+    {
+      "type": "heading",
+      "content": "The basic cash-flow equation"
+    },
+    {
+      "type": "formula",
+      "content": "Money in − Money out = Cash flow"
+    },
+    {
+      "type": "example",
+      "title": "A simple month",
+      "content": "Suppose $2,500 comes in during a month and $2,100 goes out. Your cash flow is $400."
+    },
+    {
+      "type": "formula",
+      "content": "$2,500 − $2,100 = $400"
+    },
+    {
+      "type": "heading",
+      "content": "Positive cash flow"
+    },
+    {
+      "type": "text",
+      "content": "Positive cash flow means more money came in than went out during the period being examined."
+    },
+    {
+      "type": "example",
+      "title": "Positive cash flow",
+      "content": "If $3,000 comes in and $2,400 goes out, $600 remains."
+    },
+    {
+      "type": "formula",
+      "content": "$3,000 − $2,400 = $600"
+    },
+    {
+      "type": "heading",
+      "content": "Negative cash flow"
+    },
+    {
+      "type": "text",
+      "content": "Negative cash flow means more money went out than came in during the period."
+    },
+    {
+      "type": "example",
+      "title": "Negative cash flow",
+      "content": "If $2,000 comes in but $2,300 goes out, the difference is negative $300."
+    },
+    {
+      "type": "formula",
+      "content": "$2,000 − $2,300 = −$300"
+    },
+    {
+      "type": "callout",
+      "title": "Important",
+      "content": "Negative cash flow does not automatically mean you are permanently in financial trouble. It tells you that, during that period, more money left than entered."
+    },
+    {
+      "type": "heading",
+      "content": "Cash flow is different from income"
+    },
+    {
+      "type": "text",
+      "content": "Two people can earn the same amount of money and have completely different cash-flow situations because their expenses, timing, and financial commitments differ."
+    },
+    {
+      "type": "example",
+      "title": "Same income, different outcome",
+      "content": "Person A earns $2,500 and spends $2,000. Person B also earns $2,500 but spends $2,700. Their incomes are identical, but their cash flow is very different."
+    },
+    {
+      "type": "heading",
+      "content": "Timing matters"
+    },
+    {
+      "type": "text",
+      "content": "Cash flow is not only about how much money comes in and goes out. It is also about when it happens."
+    },
+    {
+      "type": "example",
+      "title": "The timing problem",
+      "content": "Suppose you receive $2,000 on the 25th of the month, but a $1,000 bill is due on the 5th. Your total monthly income may be enough, but you can still face a short-term cash shortage before the income arrives."
+    },
+    {
+      "type": "heading",
+      "content": "A cash shortage is not always an income problem"
+    },
+    {
+      "type": "text",
+      "content": "Sometimes the problem is timing. Money may arrive after a major payment is due."
+    },
+    {
+      "type": "heading",
+      "content": "Map your income dates"
+    },
+    {
+      "type": "text",
+      "content": "If your income arrives on predictable dates, write those dates down. Then compare them with major bills and other important payments."
+    },
+    {
+      "type": "interactive",
+      "title": "Build a simple cash-flow calendar",
+      "content": "List when money normally enters your account and when your largest bills leave it. Look for periods where outgoing money is concentrated before incoming money arrives."
+    },
+    {
+      "type": "heading",
+      "content": "A month can have several cash-flow events"
+    },
+    {
+      "type": "text",
+      "content": "Money may come in several times during a month and leave several times as well. Looking only at the end-of-month balance can hide what happens in between."
+    },
+    {
+      "type": "example",
+      "title": "Money movement during a month",
+      "content": "You receive $1,500 at the start of the month and another $1,000 later. Between those dates, rent, transportation, food, and other bills may reduce your available cash."
+    },
+    {
+      "type": "heading",
+      "content": "Your account balance is a snapshot"
+    },
+    {
+      "type": "text",
+      "content": "A bank balance tells you how much money is available at one moment. Cash flow tells you how money has been moving and helps you think about what is coming next."
+    },
+    {
+      "type": "heading",
+      "content": "Do not treat every dollar in your account as available to spend"
+    },
+    {
+      "type": "text",
+      "content": "Some money may already have a job. It may be needed for an upcoming bill, debt payment, savings goal, or irregular expense."
+    },
+    {
+      "type": "example",
+      "title": "Money with a job",
+      "content": "You have $1,000 in your account, but $700 is needed for upcoming bills. Your account shows $1,000, but spending all of it would create a problem."
+    },
+    {
+      "type": "heading",
+      "content": "Cash flow and savings"
+    },
+    {
+      "type": "text",
+      "content": "Saving is one possible destination for money after income arrives. A healthy cash-flow system can intentionally direct part of your incoming money toward future needs."
+    },
+    {
+      "type": "example",
+      "title": "Directing money to savings",
+      "content": "If $2,500 comes in and you plan to save $300 while spending $2,000 on current needs and wants, $200 remains unassigned."
+    },
+    {
+      "type": "formula",
+      "content": "$2,500 − $300 − $2,000 = $200"
+    },
+    {
+      "type": "heading",
+      "content": "Cash flow and debt payments"
+    },
+    {
+      "type": "text",
+      "content": "Debt payments are cash leaving your system. They need to be included when you evaluate whether your income can comfortably support your commitments."
+    },
+    {
+      "type": "example",
+      "title": "Including debt",
+      "content": "If your normal expenses are $1,900 and debt payments add another $300, your total monthly outflow is $2,200."
+    },
+    {
+      "type": "formula",
+      "content": "$1,900 + $300 = $2,200"
+    },
+    {
+      "type": "heading",
+      "content": "Cash flow can reveal pressure"
+    },
+    {
+      "type": "text",
+      "content": "If almost all incoming money is immediately committed to expenses and payments, there may be very little room for unexpected costs or future goals."
+    },
+    {
+      "type": "heading",
+      "content": "A small surplus can still be useful"
+    },
+    {
+      "type": "text",
+      "content": "You do not need a huge monthly surplus to improve your position. A consistent amount left over can become savings, debt reduction, or money for future expenses."
+    },
+    {
+      "type": "example",
+      "title": "A $150 monthly surplus",
+      "content": "A $150 monthly surplus becomes $1,800 over twelve months if it is consistently preserved."
+    },
+    {
+      "type": "formula",
+      "content": "$150 × 12 = $1,800"
+    },
+    {
+      "type": "heading",
+      "content": "A surplus can disappear through unplanned spending"
+    },
+    {
+      "type": "text",
+      "content": "Having money left over on paper does not guarantee that it will remain available. Unplanned spending can consume a surplus."
+    },
+    {
+      "type": "example",
+      "title": "The disappearing surplus",
+      "content": "You have $300 left after planned expenses. If you make $120 of unnecessary purchases, only $180 remains from that original surplus."
+    },
+    {
+      "type": "formula",
+      "content": "$300 − $120 = $180"
+    },
+    {
+      "type": "heading",
+      "content": "Cash flow can change from month to month"
+    },
+    {
+      "type": "text",
+      "content": "Your financial life may not look identical every month. Income can change, seasonal expenses can appear, and unexpected costs can occur."
+    },
+    {
+      "type": "heading",
+      "content": "Look at more than one month"
+    },
+    {
+      "type": "text",
+      "content": "A single month can be unusual. Looking across several months can help you distinguish a temporary problem from a recurring pattern."
+    },
+    {
+      "type": "example",
+      "title": "A temporary spike",
+      "content": "Your expenses are normally $2,100, but one month they reach $2,700 because of a planned annual payment. Looking at several months helps you understand the reason instead of assuming your normal spending has permanently increased."
+    },
+    {
+      "type": "heading",
+      "content": "Separate normal expenses from unusual ones"
+    },
+    {
+      "type": "text",
+      "content": "When reviewing cash flow, identify expenses that happen regularly and expenses caused by a specific event."
+    },
+    {
+      "type": "heading",
+      "content": "Cash flow problems can have different causes"
+    },
+    {
+      "type": "text",
+      "content": "A negative cash-flow month may result from low income, high fixed expenses, excessive discretionary spending, irregular expenses, debt payments, or timing issues. The solution depends on the cause."
+    },
+    {
+      "type": "heading",
+      "content": "Do not automatically cut everything"
+    },
+    {
+      "type": "text",
+      "content": "If cash flow is tight, cutting every enjoyable expense may not be the best first response. First identify the largest and most changeable pressures."
+    },
+    {
+      "type": "heading",
+      "content": "Start with the biggest useful lever"
+    },
+    {
+      "type": "text",
+      "content": "A small recurring expense can matter, but a major structural expense may have a much larger effect on cash flow. Focus your effort where it can make a meaningful difference."
+    },
+    {
+      "type": "example",
+      "title": "Small versus large changes",
+      "content": "Saving $10 once is useful, but reducing a recurring monthly expense by $100 creates a larger ongoing improvement."
+    },
+    {
+      "type": "heading",
+      "content": "Look for income opportunities too"
+    },
+    {
+      "type": "text",
+      "content": "Cash-flow improvement does not always have to come from spending cuts. Depending on your situation, increasing income may also be part of the solution."
+    },
+    {
+      "type": "heading",
+      "content": "Use a simple cash-flow review"
+    },
+    {
+      "type": "text",
+      "content": "At the end of a period, compare total money in, total money out, the timing of major transactions, and the amount left for future priorities."
+    },
+    {
+      "type": "interactive",
+      "title": "Your cash-flow check",
+      "content": "Ask: How much came in? How much went out? When did the largest payments happen? Did the timing create pressure? What amount remained?"
+    },
+    {
+      "type": "heading",
+      "content": "Cash flow and financial breathing room"
+    },
+    {
+      "type": "text",
+      "content": "A positive cash-flow pattern can create breathing room. That breathing room can support savings, debt reduction, planned spending, and preparation for future expenses."
+    },
+    {
+      "type": "heading",
+      "content": "The goal is not a perfect number"
+    },
+    {
+      "type": "text",
+      "content": "There is no universal cash-flow amount that guarantees financial success. The goal is to understand your own numbers and create enough flexibility to handle your responsibilities and priorities."
+    },
+    {
+      "type": "heading",
+      "content": "Build the habit of checking before spending"
+    },
+    {
+      "type": "text",
+      "content": "Before making a significant purchase, consider what other payments are coming soon. A purchase that looks affordable today may create pressure if a major bill is due tomorrow."
+    },
+    {
+      "type": "example",
+      "title": "The upcoming bill",
+      "content": "You have $600 available and want to spend $250. If a $500 essential bill is due before your next income arrives, the purchase is not comfortably affordable even though your current balance is $600."
+    },
+    {
+      "type": "heading",
+      "content": "Think forward, not only backward"
+    },
+    {
+      "type": "text",
+      "content": "Reviewing past transactions is useful, but good cash-flow management also asks what money is expected to come in and what money is expected to go out next."
+    },
+    {
+      "type": "heading",
+      "content": "Cash flow is a decision-making tool"
+    },
+    {
+      "type": "text",
+      "content": "Once you understand your cash flow, you can make better decisions about spending, saving, debt, and timing."
+    },
+    {
+      "type": "summary",
+      "content": "Cash flow shows the relationship between money coming in and money going out. Track both amount and timing, account for upcoming commitments, identify whether problems come from income, expenses, or timing, and use the information to create more breathing room."
+    },
+    {
+      "type": "callout",
+      "title": "Remember",
+      "content": "A bank balance tells you what you have right now. Cash flow helps you understand what is happening and what may happen next."
+    }
+  ],
+  "quizzes": [
+    {
+      "order": 1,
+      "questionType": "multiple-choice",
+      "question": "What does cash flow mainly describe?",
+      "options": [
+        "Money coming in and money going out over a period",
+        "Only your salary",
+        "Only your savings balance",
+        "The price of everything you own"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Cash flow looks at the movement of money into and out of your financial system."
+    },
+    {
+      "order": 2,
+      "questionType": "multiple-choice",
+      "question": "If $2,500 comes in and $2,100 goes out, what is the cash flow?",
+      "options": [
+        "$400",
+        "$300",
+        "$600",
+        "$4,600"
+      ],
+      "correctAnswer": 0,
+      "explanation": "$2,500 − $2,100 = $400."
+    },
+    {
+      "order": 3,
+      "questionType": "multiple-choice",
+      "question": "What does negative cash flow mean?",
+      "options": [
+        "More money went out than came in during the period",
+        "You earned no money ever",
+        "You have no bank account",
+        "Every expense was unnecessary"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Negative cash flow occurs when outflows exceed inflows during the period."
+    },
+    {
+      "order": 4,
+      "questionType": "multiple-choice",
+      "question": "Why can timing matter even when monthly income is enough to cover monthly expenses?",
+      "options": [
+        "A major bill may be due before income arrives",
+        "Income always disappears",
+        "Bills never have due dates",
+        "Timing has no effect"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Cash shortages can occur when money arrives after important payments are due."
+    },
+    {
+      "order": 5,
+      "questionType": "multiple-choice",
+      "question": "You receive $2,500, plan to save $300, and expect $2,000 of spending. How much remains unassigned?",
+      "options": [
+        "$200",
+        "$300",
+        "$500",
+        "$800"
+      ],
+      "correctAnswer": 0,
+      "explanation": "$2,500 − $300 − $2,000 = $200."
+    },
+    {
+      "order": 6,
+      "questionType": "multiple-choice",
+      "question": "A $150 monthly surplus is consistently preserved for 12 months. How much is that?",
+      "options": [
+        "$1,800",
+        "$1,200",
+        "$1,500",
+        "$2,400"
+      ],
+      "correctAnswer": 0,
+      "explanation": "$150 × 12 = $1,800."
+    },
+    {
+      "order": 7,
+      "questionType": "true-false",
+      "question": "Every dollar in your bank account is automatically safe to spend.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Some money may already be needed for upcoming bills, goals, or other commitments."
+    },
+    {
+      "order": 8,
+      "questionType": "multiple-choice",
+      "question": "If cash flow is negative, what should you do first?",
+      "options": [
+        "Identify whether the main cause is income, expenses, debt, irregular costs, or timing",
+        "Immediately eliminate every enjoyable expense",
+        "Ignore the problem",
+        "Assume the problem can never be fixed"
+      ],
+      "correctAnswer": 0,
+      "explanation": "The cause determines which response is most useful."
+    },
+    {
+      "order": 9,
+      "questionType": "multiple-choice",
+      "question": "You have $600 available, but a $500 essential bill is due before your next income. Should you treat the full $600 as comfortably available for spending?",
+      "options": [
+        "No, because much of it is already committed",
+        "Yes, because it is visible in the account",
+        "Yes, because bills can be ignored",
+        "No, because spending is never allowed"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Upcoming commitments reduce how much of the current balance is safely available."
+    },
+    {
+      "order": 10,
+      "questionType": "multiple-choice",
+      "question": "What is the most useful purpose of understanding cash flow?",
+      "options": [
+        "To make better decisions about spending, saving, debt, and timing",
+        "To avoid looking at your finances",
+        "To guarantee a specific income",
+        "To eliminate all expenses"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Cash-flow awareness helps you understand your financial position and make better decisions."
+    }
+  ]
+}
