@@ -3,6 +3,8 @@ const Module = require('../models/Module');
 const Lesson = require('../models/Lesson');
 const Quiz = require('../models/Quiz');
 const UserProgress = require('../models/UserProgress');
+const translationService =
+  require('./translationService');
 
 class LearningService {
   /**
@@ -68,12 +70,57 @@ class LearningService {
    * GET ALL PUBLISHED COURSES
    * =========================================================
    */
-  async getAllCourses() {
-    return await Course.find({
-      published: true
-    }).sort({
-      order: 1
-    });
+  async getAllCourses(targetLanguage = 'en') {
+    const courses =
+      await Course.find({
+        published: true
+      }).sort({
+        order: 1
+      });
+
+    const language =
+      translationService.normalizeLanguage(
+        targetLanguage
+      );
+
+    if (language === 'en') {
+      return courses;
+    }
+
+    return await Promise.all(
+      courses.map(async course => {
+        const data =
+          course.toObject();
+
+        return {
+          ...data,
+          title:
+            await translationService.translateString({
+              sourceType: 'course',
+              sourceId: course._id,
+              value: data.title,
+              targetLanguage: language,
+              fieldName: 'title'
+            }),
+          description:
+            await translationService.translateString({
+              sourceType: 'course',
+              sourceId: course._id,
+              value: data.description,
+              targetLanguage: language,
+              fieldName: 'description'
+            }),
+          longDescription:
+            await translationService.translateString({
+              sourceType: 'course',
+              sourceId: course._id,
+              value: data.longDescription,
+              targetLanguage: language,
+              fieldName: 'longDescription'
+            })
+        };
+      })
+    );
   }
 
   /**
@@ -86,7 +133,15 @@ class LearningService {
    *             └── Quizzes
    * =========================================================
    */
-  async getCourseDetails(courseId) {
+  async getCourseDetails(
+    courseId,
+    targetLanguage = 'en'
+  ) {
+    const language =
+      translationService.normalizeLanguage(
+        targetLanguage
+      );
+
     const course =
       await Course.findOne({
         _id: courseId,
@@ -169,11 +224,102 @@ class LearningService {
         };
       });
 
-    return {
+    const courseData = {
       ...course.toObject(),
       modules:
         structuredModules
     };
+
+    if (language === 'en') {
+      return courseData;
+    }
+
+    courseData.title =
+      await translationService.translateString({
+        sourceType: 'course',
+        sourceId: course._id,
+        value: courseData.title,
+        targetLanguage: language,
+        fieldName: 'title'
+      });
+
+    courseData.description =
+      await translationService.translateString({
+        sourceType: 'course',
+        sourceId: course._id,
+        value: courseData.description,
+        targetLanguage: language,
+        fieldName: 'description'
+      });
+
+    courseData.longDescription =
+      await translationService.translateString({
+        sourceType: 'course',
+        sourceId: course._id,
+        value: courseData.longDescription,
+        targetLanguage: language,
+        fieldName: 'longDescription'
+      });
+
+    for (const module of courseData.modules) {
+      module.title =
+        await translationService.translateString({
+          sourceType: 'module',
+          sourceId: module._id,
+          value: module.title,
+          targetLanguage: language,
+          fieldName: 'title'
+        });
+
+      module.description =
+        await translationService.translateString({
+          sourceType: 'module',
+          sourceId: module._id,
+          value: module.description,
+          targetLanguage: language,
+          fieldName: 'description'
+        });
+
+      for (const lesson of module.lessons) {
+        lesson.title =
+          await translationService.translateString({
+            sourceType: 'lesson',
+            sourceId: lesson._id,
+            value: lesson.title,
+            targetLanguage: language,
+            fieldName: 'title'
+          });
+
+        lesson.description =
+          await translationService.translateString({
+            sourceType: 'lesson',
+            sourceId: lesson._id,
+            value: lesson.description,
+            targetLanguage: language,
+            fieldName: 'description'
+          });
+
+        lesson.contentBlocks =
+          await translationService.translateLessonContent({
+            lessonId: lesson._id,
+            contentBlocks:
+              lesson.contentBlocks || [],
+            targetLanguage: language
+          });
+
+        lesson.quizzes =
+          await Promise.all(
+            lesson.quizzes.map(quiz =>
+              translationService.translateQuiz({
+                quiz,
+                targetLanguage: language
+              })
+            )
+          );
+      }
+    }
+
+    return courseData;
   }
 
   /**
@@ -182,8 +328,14 @@ class LearningService {
    * =========================================================
    */
   async getLessonWithQuiz(
-    lessonId
+    lessonId,
+    targetLanguage = 'en'
   ) {
+    const language =
+      translationService.normalizeLanguage(
+        targetLanguage
+      );
+
     const lesson =
       await Lesson.findOne({
         _id: lessonId,
@@ -204,12 +356,51 @@ class LearningService {
         order: 1
       });
 
-    return {
-      lesson,
-      quizzes:
-        quizzes.map(quiz =>
-          this.sanitizeQuiz(quiz)
+    const lessonData =
+      lesson.toObject();
+
+    const safeQuizzes =
+      quizzes.map(quiz =>
+        this.sanitizeQuiz(quiz)
+      );
+
+    if (language === 'en') {
+      return {
+        lesson: lessonData,
+        quizzes: safeQuizzes
+      };
+    }
+
+    lessonData.title =
+      await translationService.translateString({
+        sourceType: 'lesson',
+        sourceId: lesson._id,
+        value: lessonData.title,
+        targetLanguage: language,
+        fieldName: 'title'
+      });
+
+    lessonData.contentBlocks =
+      await translationService.translateLessonContent({
+        lessonId: lesson._id,
+        contentBlocks:
+          lessonData.contentBlocks || [],
+        targetLanguage: language
+      });
+
+    const translatedQuizzes =
+      await Promise.all(
+        safeQuizzes.map(quiz =>
+          translationService.translateQuiz({
+            quiz,
+            targetLanguage: language
+          })
         )
+      );
+
+    return {
+      lesson: lessonData,
+      quizzes: translatedQuizzes
     };
   }
 
@@ -439,6 +630,88 @@ class LearningService {
       quizResult,
       message:
         'Lesson progress recorded successfully'
+    };
+  }
+
+  /**
+   * =========================================================
+   * GET COURSE PROGRESS FOR USER
+   * =========================================================
+   */
+  async getCourseProgress(
+    courseId,
+    userId
+  ) {
+    const modules =
+      await Module.find({
+        courseId
+      }).select(
+        "_id"
+      );
+
+    const moduleIds =
+      modules.map(
+        module => module._id
+      );
+
+    const lessons =
+      moduleIds.length > 0
+        ? await Lesson.find({
+            moduleId: {
+              $in: moduleIds
+            },
+            published: true
+          }).select(
+            "_id moduleId"
+          )
+        : [];
+
+    const lessonIds =
+      lessons.map(
+        lesson => lesson._id
+      );
+
+    const completedProgress =
+      lessonIds.length > 0
+        ? await UserProgress.find({
+            userId,
+            lessonId: {
+              $in: lessonIds
+            },
+            completed: true
+          }).select(
+            "lessonId quizScore completedAt"
+          )
+        : [];
+
+    const completedLessonIds =
+      completedProgress.map(
+        progress =>
+          progress.lessonId.toString()
+      );
+
+    const totalLessons =
+      lessons.length;
+
+    const completedLessons =
+      completedProgress.length;
+
+    const progressPercentage =
+      totalLessons > 0
+        ? Math.round(
+            (
+              completedLessons /
+              totalLessons
+            ) * 100
+          )
+        : 0;
+
+    return {
+      courseId,
+      totalLessons,
+      completedLessons,
+      progressPercentage,
+      completedLessonIds
     };
   }
 

@@ -87,7 +87,16 @@ async function seedModule(courseId, moduleData) {
         slug: moduleData.slug,
         title: moduleData.title,
         description: moduleData.description,
-        order: moduleData.order
+        introduction: moduleData.introduction || moduleData.description || '',
+        learningObjectives: moduleData.learningObjectives || [],
+        estimatedDuration: moduleData.estimatedDuration || 1,
+        skillsGained: moduleData.skillsGained || [],
+        outcomes: moduleData.outcomes || [],
+        order: moduleData.order,
+        published:
+          moduleData.published !== undefined
+            ? moduleData.published
+            : true
       }
     },
     {
@@ -111,30 +120,86 @@ function normalizeContentBlocks(contentBlocks) {
   }
 
   return contentBlocks.map((block, index) => {
-    const { type, content, ...rest } = block || {};
-
-    let data;
-
-    if (content !== undefined && Object.keys(rest).length === 0) {
-      data = content;
-    } else {
-      data = {
-        ...rest
+    if (!block || typeof block !== 'object') {
+      return {
+        order: index + 1,
+        type: 'text',
+        data: {
+          text: String(block ?? '')
+        }
       };
-
-      if (content !== undefined) {
-        data.content = content;
-      }
     }
+
+    const type = block.type || 'text';
+
+    // New format:
+    // {
+    //   order: 1,
+    //   type: 'text',
+    //   data: { text: '...' }
+    // }
+    //
+    // Preserve the existing data object exactly.
+    if (
+      block.data !== undefined &&
+      block.data !== null
+    ) {
+      return {
+        order: index + 1,
+        type,
+        data: block.data
+      };
+    }
+
+    // Legacy format:
+    // {
+    //   type: 'text',
+    //   content: '...'
+    // }
+    if (block.content !== undefined) {
+      const { content } = block;
+
+      const rest = { ...block };
+      delete rest.type;
+      delete rest.content;
+      delete rest.order;
+
+      let data;
+
+      if (
+        typeof content === 'object' &&
+        content !== null
+      ) {
+        data = {
+          ...rest,
+          ...content
+        };
+      } else {
+        data = {
+          ...rest,
+          content
+        };
+      }
+
+      return {
+        order: index + 1,
+        type,
+        data
+      };
+    }
+
+    // Fallback for simple blocks without data/content.
+    const rest = { ...block };
+    delete rest.type;
+    delete rest.order;
 
     return {
       order: index + 1,
       type,
-      data
+      data: rest
     };
   });
 }
-
 async function seedLesson(moduleId, lessonData) {
   return Lesson.findOneAndUpdate(
     {
@@ -146,9 +211,15 @@ async function seedLesson(moduleId, lessonData) {
         moduleId,
         slug: lessonData.slug,
         title: lessonData.title,
+        description: lessonData.description || '',
+        learningObjectives:
+          lessonData.learningObjectives || [],
         estimatedDuration: lessonData.estimatedDuration,
         order: lessonData.order,
-        published: lessonData.published,
+        published:
+          lessonData.published !== undefined
+            ? lessonData.published
+            : false,
         contentBlocks: normalizeContentBlocks(
           lessonData.contentBlocks
         )

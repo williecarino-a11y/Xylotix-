@@ -225,7 +225,7 @@ const moneyBasics = {
               "content": "Do not measure financial success only by how much money passes through your hands. Pay attention to what you keep, what you owe, what you own, and what your money is helping you build."
             }
           ],
-          "quiz": [
+          "quizzes": [
             {
               "order": 1,
               "questionType": "multiple-choice",
@@ -429,7 +429,7 @@ const moneyBasics = {
               "content": "Do not ask only, “How much money do I have?” Ask, “What can this money actually do for my present and future?”"
             }
           ],
-          "quiz": [
+          "quizzes": [
             {
               "order": 1,
               "questionType": "multiple-choice",
@@ -657,7 +657,7 @@ const moneyBasics = {
               "content": "Do not try to memorize financial vocabulary in isolation. Follow the money. Once you understand what is happening to the money, the terminology becomes much easier."
             }
           ],
-          "quiz": [
+          "quizzes": [
             {
               "order": 1,
               "questionType": "multiple-choice",
@@ -882,7 +882,7 @@ const moneyBasics = {
               "content": "Do not build your financial life around looking rich. Build it around becoming financially stronger, more resilient, and more free to choose what happens next."
             }
           ],
-          "quiz": [
+          "quizzes": [
             {
               "order": 1,
               "questionType": "multiple-choice",
@@ -1141,7 +1141,7 @@ const moneyBasics = {
               "content": "Active income is usually closely connected to your ongoing work. Passive income is generally less directly tied to your day-to-day effort, but it is not automatically effortless, guaranteed, or risk-free. Evaluate income opportunities by considering time, money, skills, risk, reliability, and long-term usefulness rather than chasing labels."
             }
           ],
-          "quiz": [
+          "quizzes": [
             {
               "order": 1,
               "questionType": "multiple-choice",
@@ -1442,7 +1442,7 @@ const moneyBasics = {
               "content": "Increasing earning power is about becoming better able to create useful value and access good opportunities. Skills, experience, communication, specialization, negotiation, adaptability, and thoughtful choices can all contribute. Higher income is useful, but the deeper goal is to increase your options and strengthen your financial future."
             }
           ],
-          "quiz": [
+          "quizzes": [
             {
               "order": 1,
               "questionType": "multiple-choice",
@@ -1764,7 +1764,7 @@ const moneyBasics = {
               "content": "A sunk cost is something already spent that cannot be recovered. The sunk cost fallacy occurs when that past investment becomes a reason to continue even though a different choice would now be better. Good decisions focus on the future costs, benefits, risks, and alternatives while learning from the past without becoming trapped by it."
             }
           ],
-          "quiz": [
+          "quizzes": [
             {
               "order": 1,
               "questionType": "multiple-choice",
@@ -2097,7 +2097,7 @@ const moneyBasics = {
               "content": "Reliable income is about more than the amount of money coming in. Think about how predictable each source is, what happens if it stops, what it costs to maintain, and how it fits into your life. Multiple income sources can help, but they are not automatically better. Strong financial habits, useful skills, savings, manageable expenses, and thoughtful planning can make your financial life more resilient."
             }
           ],
-          "quiz": [
+          "quizzes": [
             {
               "order": 1,
               "questionType": "multiple-choice",
@@ -2470,7 +2470,7 @@ const moneyBasics = {
               "content": "Gross income and take-home pay are not always the same. Taxes and other deductions can reduce the money you actually receive, while some deductions may provide benefits or support future goals. Use realistic take-home pay when planning your spending, compare complete job offers rather than headline salaries, and make intentional decisions about increases in income."
             }
           ],
-          "quiz": [
+          "quizzes": [
             {
               "order": 1,
               "questionType": "multiple-choice",
@@ -2834,7 +2834,7 @@ const moneyBasics = {
               "content": "The amount you earn is not always the amount that reaches your account, and the amount that reaches your account is not automatically the amount you should spend. Learn to follow the money from earnings to deductions to take-home pay and then to your financial priorities. When something changes, investigate it instead of guessing."
             }
           ],
-          "quiz": [
+          "quizzes": [
             {
               "order": 1,
               "questionType": "multiple-choice",
@@ -3255,7 +3255,7 @@ const moneyBasics = {
               "content": "Needs and wants are not about judging what people are allowed to enjoy. They are tools for making choices when money is limited. Every meaningful spending decision involves trade-offs. Look beyond the price tag, notice recurring costs, question urgency, consider what you are giving up, and spend in a way that supports both your present life and important future goals."
             }
           ],
-          "quiz": [
+          "quizzes": [
             {
               "order": 1,
               "questionType": "multiple-choice",
@@ -3678,7 +3678,7 @@ const moneyBasics = {
               "content": "Better money decisions come from slowing down, understanding priorities, considering trade-offs, looking at the full cost, and thinking about future consequences. Do not confuse affordability with usefulness, discounts with savings, urgency with importance, or past spending with a reason to keep spending. Build simple habits that make good decisions easier, and review your choices when something does not work."
             }
           ],
-          "quiz": [
+          "quizzes": [
             {
               "order": 1,
               "questionType": "multiple-choice",

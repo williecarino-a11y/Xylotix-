@@ -6,6 +6,10 @@ const router = express.Router();
 const learningService =
   require('../services/learningService');
 
+const {
+  getFunCenterActivities
+} = require('../scripts/learningData/funCenter');
+
 /**
  * GET /api/learn/courses
  *
@@ -13,8 +17,15 @@ const learningService =
  */
 router.get('/courses', async (req, res) => {
   try {
+    const language =
+      typeof req.query.language === 'string'
+        ? req.query.language
+        : 'en';
+
     const courses =
-      await learningService.getAllCourses();
+      await learningService.getAllCourses(
+        language
+      );
 
     if (!courses.length) {
       return res.status(200).json({
@@ -43,6 +54,70 @@ router.get('/courses', async (req, res) => {
 
 
 /**
+ * GET /api/learn/courses/:courseId/progress/:userId
+ *
+ * Get a user's progress for a specific course.
+ */
+router.get(
+  '/courses/:courseId/progress/:userId',
+  async (req, res) => {
+    try {
+      const {
+        courseId,
+        userId
+      } = req.params;
+
+      if (
+        !mongoose.Types.ObjectId.isValid(
+          courseId
+        )
+      ) {
+        return res.status(400).json({
+          status: 'error',
+          message: 'Invalid course ID.'
+        });
+      }
+
+      if (
+        !mongoose.Types.ObjectId.isValid(
+          userId
+        )
+      ) {
+        return res.status(400).json({
+          status: 'error',
+          message: 'Invalid user ID.'
+        });
+      }
+
+      const progress =
+        await learningService.getCourseProgress(
+          courseId,
+          userId
+        );
+
+      return res.status(200).json({
+        status: 'success',
+        data: progress
+      });
+
+    } catch (error) {
+      console.error(
+        'Get course progress error:',
+        error
+      );
+
+      return res.status(500).json({
+        status: 'error',
+        message:
+          'Unable to load course progress.'
+      });
+    }
+  }
+);
+
+
+
+/**
  * GET /api/learn/courses/:courseId
  *
  * Get complete course tree:
@@ -65,9 +140,15 @@ router.get(
         });
       }
 
+      const language =
+        typeof req.query.language === 'string'
+          ? req.query.language
+          : 'en';
+
       const courseData =
         await learningService.getCourseDetails(
-          courseId
+          courseId,
+          language
         );
 
       return res.status(200).json({
@@ -122,9 +203,15 @@ router.get(
         });
       }
 
+      const language =
+        typeof req.query.language === 'string'
+          ? req.query.language
+          : 'en';
+
       const lessonData =
         await learningService.getLessonWithQuiz(
-          lessonId
+          lessonId,
+          language
         );
 
       return res.status(200).json({
@@ -378,6 +465,37 @@ router.get(
     }
   }
 );
+
+
+
+/**
+ * GET /api/learn/fun-center
+ *
+ * Get genuinely implemented Fun Center activities.
+ *
+ * Activity content is supplied by the Fun Center data source.
+ * The frontend is responsible only for rendering and state.
+ */
+router.get('/fun-center', async (req, res) => {
+  try {
+    const activities = getFunCenterActivities();
+
+    return res.status(200).json({
+      status: 'success',
+      data: activities
+    });
+  } catch (error) {
+    console.error(
+      'Fun Center loading error:',
+      error
+    );
+
+    return res.status(500).json({
+      status: 'error',
+      message: 'Unable to load Fun Center activities.'
+    });
+  }
+});
 
 
 module.exports = router;

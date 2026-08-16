@@ -11,3 +11,15 @@ yarn-error.log*
 coverage/
 dist/
 build/
+
+# Local Miimiid test artifacts
+miimiid-auth-test.cookies
+miimiid-inline-check.js
+miimiid-syntax-check.js
+miimiid-syntax-check.js.broken-browser-execution
+miimiid-work/
+public/*.backup*
+public/*.before-*
+routes/*.before-*
+services/*.before-*
+server.js.before-*
