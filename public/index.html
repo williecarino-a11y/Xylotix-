@@ -1462,7 +1462,7 @@ body.miimiid-drawer-open {
       >
         <div class="miimiid-auth-field">
           <label for="miimiid-login-identifier">
-            Email or phone number
+            Email address
           </label>
 
           <input
@@ -1631,7 +1631,7 @@ body.miimiid-drawer-open {
         </section>
 
 
-        <!-- STEP 3: EMAIL + PHONE -->
+        <!-- STEP 3: EMAIL -->
         <section
           class="miimiid-register-step hidden"
           data-register-step="3"
@@ -1645,18 +1645,6 @@ body.miimiid-drawer-open {
               id="miimiid-register-email"
               type="email"
               autocomplete="email"
-            >
-          </div>
-
-          <div class="miimiid-auth-field">
-            <label for="miimiid-register-phone">
-              Phone number
-            </label>
-
-            <input
-              id="miimiid-register-phone"
-              type="tel"
-              autocomplete="tel"
             >
           </div>
 
@@ -4279,7 +4267,7 @@ body.miimiid-drawer-open {
 
       if (!identifier || !password) {
         setMiimiidAuthStatus(
-          "Enter your email or phone number and password.",
+          "Enter your email address and password.",
           "error"
         );
         return;
@@ -4544,14 +4532,6 @@ body.miimiid-drawer-open {
           ?.value
           .trim() || "";
 
-      const phone =
-        document
-          .getElementById(
-            "miimiid-register-phone"
-          )
-          ?.value
-          .trim() || "";
-
       const dateOfBirth =
         document
           .getElementById(
@@ -4600,17 +4580,6 @@ body.miimiid-drawer-open {
 
         setMiimiidRegisterFeedback(
           "Enter your email address.",
-          "error"
-        );
-
-        return;
-      }
-
-      if (!phone) {
-        showMiimiidRegistrationStep(3);
-
-        setMiimiidRegisterFeedback(
-          "Enter your phone number.",
           "error"
         );
 
@@ -4671,7 +4640,6 @@ body.miimiid-drawer-open {
               firstName,
               lastName,
               email,
-              phone,
               dateOfBirth,
               password
             }
@@ -5261,14 +5229,6 @@ body.miimiid-drawer-open {
                 ?.value
                 .trim() || "";
 
-            const phone =
-              document
-                .getElementById(
-                  "miimiid-register-phone"
-                )
-                ?.value
-                .trim() || "";
-
             if (
               !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
                 email
@@ -5276,14 +5236,6 @@ body.miimiid-drawer-open {
             ) {
               setMiimiidRegisterFeedback(
                 "Enter a valid email address.",
-                "error"
-              );
-              return;
-            }
-
-            if (!phone) {
-              setMiimiidRegisterFeedback(
-                "Enter your phone number.",
                 "error"
               );
               return;
@@ -7931,7 +7883,7 @@ async function submitQuiz() {
       authResetSubtitle: 'Choose a new password for your Miimiid account.',
       authResetTitle: 'Reset your password',
       authResetDescription: 'Choose a new password for your Miimiid account.',
-      authEmailOrPhone: 'Email or phone number',
+      authEmail: 'Email address',
       authPassword: 'Password',
       authSignIn: 'Sign In',
       authForgotPassword: 'Forgot password?',
@@ -7944,7 +7896,6 @@ async function submitQuiz() {
       authConfirmPassword: 'Confirm password',
       authName: 'Name',
       authEmail: 'Email',
-      authPhoneNumber: 'Phone number',
       authCreateAccountButton: 'Create Account',
       authSendResetInstructions: 'Send Reset Instructions',
       authResetPasswordButton: 'Reset Password',

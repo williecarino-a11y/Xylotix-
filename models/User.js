@@ -28,22 +28,16 @@ const userSchema = new mongoose.Schema(
       maxlength: 50
     },
 
+
     email: {
       type: String,
-      required: true,
-      unique: true,
       lowercase: true,
       trim: true,
-      maxlength: 254
+      maxlength: 254,
+      unique: true,
+      sparse: true
     },
 
-    phone: {
-      type: String,
-      required: true,
-      unique: true,
-      trim: true,
-      maxlength: 30
-    },
 
     dateOfBirth: {
       type: Date,
@@ -67,10 +61,6 @@ const userSchema = new mongoose.Schema(
       default: true
     },
 
-    phoneVerified: {
-      type: Boolean,
-      default: true
-    },
 
     accountVerified: {
       type: Boolean,

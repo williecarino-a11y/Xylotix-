@@ -28,11 +28,6 @@ function normalizeEmail(value) {
     .toLowerCase();
 }
 
-function normalizePhone(value) {
-  return String(value || '')
-    .trim()
-    .replace(/[^\d+]/g, '');
-}
 
 function hashToken(token) {
   return crypto
@@ -240,15 +235,12 @@ function publicUser(user) {
     name: user.name || '',
     firstName: user.firstName || '',
     lastName: user.lastName || '',
-    email: user.email,
-    phone: user.phone,
+    email: user.email || '',
     dateOfBirth: user.dateOfBirth
       ? user.dateOfBirth.toISOString().slice(0, 10)
       : null,
     emailVerified:
       user.emailVerified === true,
-    phoneVerified:
-      user.phoneVerified === true,
     accountVerified:
       user.accountVerified === true
   };
@@ -308,9 +300,6 @@ router.post(
       const email =
         normalizeEmail(req.body.email);
 
-      const phone =
-        normalizePhone(req.body.phone);
-
       const password =
         typeof req.body.password === 'string'
           ? req.body.password
@@ -327,8 +316,7 @@ router.post(
       ) {
         return res.status(400).json({
           status: 'error',
-          message:
-            'Enter your first name.'
+          message: 'Enter your first name.'
         });
       }
 
@@ -338,106 +326,68 @@ router.post(
       ) {
         return res.status(400).json({
           status: 'error',
-          message:
-            'Enter your last name.'
+          message: 'Enter your last name.'
         });
       }
 
       if (
-        !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
-          email
-        )
+        !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
       ) {
         return res.status(400).json({
           status: 'error',
-          message:
-            'Enter a valid email address.'
-        });
-      }
-
-      if (phone.length < 7) {
-        return res.status(400).json({
-          status: 'error',
-          message:
-            'Enter a valid phone number.'
+          message: 'Enter a valid email address.'
         });
       }
 
       if (
         !dateOfBirth ||
-        !/^\d{4}-\d{2}-\d{2}$/.test(
-          dateOfBirth
-        )
+        !/^\d{4}-\d{2}-\d{2}$/.test(dateOfBirth)
       ) {
         return res.status(400).json({
           status: 'error',
-          message:
-            'Enter a valid date of birth.'
+          message: 'Enter a valid date of birth.'
         });
       }
 
       const parsedDate =
-        new Date(
-          `${dateOfBirth}T00:00:00.000Z`
-        );
+        new Date(`${dateOfBirth}T00:00:00.000Z`);
 
       if (
-        Number.isNaN(
-          parsedDate.getTime()
-        ) ||
-        parsedDate
-          .toISOString()
-          .slice(0, 10) !== dateOfBirth
+        Number.isNaN(parsedDate.getTime()) ||
+        parsedDate.toISOString().slice(0, 10) !== dateOfBirth
       ) {
         return res.status(400).json({
           status: 'error',
-          message:
-            'Enter a valid date of birth.'
+          message: 'Enter a valid date of birth.'
         });
       }
 
-      if (
-        parsedDate.getTime() > Date.now()
-      ) {
+      if (parsedDate.getTime() > Date.now()) {
         return res.status(400).json({
           status: 'error',
-          message:
-            'Date of birth cannot be in the future.'
+          message: 'Date of birth cannot be in the future.'
         });
       }
 
-      if (
-        password.length < 8
-      ) {
+      if (password.length < 8) {
         return res.status(400).json({
           status: 'error',
-          message:
-            'Password must be at least 8 characters.'
+          message: 'Password must be at least 8 characters.'
         });
       }
 
       const existing =
-        await User.findOne({
-          $or: [
-            {
-              email
-            },
-            {
-              phone
-            }
-          ]
-        });
+        await User.findOne({ email });
 
       if (existing) {
         return res.status(409).json({
           status: 'error',
           message:
-            'An account with those details already exists.'
+            'An account with that email already exists.'
         });
       }
 
-      const mailer =
-        getMailer();
+      const mailer = getMailer();
 
       if (!mailer) {
         console.error(
@@ -458,14 +408,17 @@ router.post(
         await User.create({
           name:
             `${firstName} ${lastName}`.trim(),
+
           firstName,
           lastName,
+
           email,
-          phone,
+
           dateOfBirth: parsedDate,
           passwordHash,
+
           emailVerified: false,
-          phoneVerified: false,
+
           accountVerified: false
         });
 
@@ -481,14 +434,11 @@ router.post(
         userId: user._id,
         tokenHash:
           hashVerificationCode(code),
-        purpose:
-          'account-verification',
+        purpose: 'account-verification',
         expiresAt:
           new Date(
             Date.now() +
-            VERIFICATION_MINUTES *
-            60 *
-            1000
+            VERIFICATION_MINUTES * 60 * 1000
           ),
         attempts: 0
       });
@@ -498,13 +448,17 @@ router.post(
           from:
             process.env.SMTP_FROM ||
             process.env.SMTP_USER,
+
           to: user.email,
+
           subject:
             'Your Miimiid verification code',
+
           text:
             `Your Miimiid verification code is ${code}.\n\n` +
             `This code expires in ${VERIFICATION_MINUTES} minutes.\n\n` +
             `If you did not create a Miimiid account, you can ignore this email.`,
+
           html:
             `<p>Welcome to Miimiid.</p>
              <p>Your account verification code is:</p>
@@ -527,11 +481,16 @@ router.post(
 
       return res.status(201).json({
         status: 'success',
+
         data: {
           verificationRequired: true,
-          verificationMethod: 'email',
+
+          verificationMethod:
+            'email',
+
           maskedEmail:
             maskEmail(user.email),
+
           expiresInSeconds:
             VERIFICATION_MINUTES * 60
         }
@@ -551,7 +510,6 @@ router.post(
     }
   }
 );
-
 
 /**
  * POST /api/auth/verify-account
@@ -849,7 +807,7 @@ router.post(
 /**
  * POST /api/auth/login
  *
- * Login with email OR phone number.
+ * Login with email address.
  */
 router.post(
   '/login',
@@ -869,26 +827,26 @@ router.post(
         return res.status(400).json({
           status: 'error',
           message:
-            'Email or phone number and password are required.'
+            'Email address and password are required.'
         });
       }
 
       const normalizedEmail =
         normalizeEmail(identifier);
 
-      const normalizedPhone =
-        normalizePhone(identifier);
+      if (
+        !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalizedEmail)
+      ) {
+        return res.status(400).json({
+          status: 'error',
+          message:
+            'Enter a valid email address.'
+        });
+      }
 
       const user =
         await User.findOne({
-          $or: [
-            {
-              email: normalizedEmail
-            },
-            {
-              phone: normalizedPhone
-            }
-          ]
+          email: normalizedEmail
         });
 
       if (!user) {
