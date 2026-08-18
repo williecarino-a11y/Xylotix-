@@ -964,91 +964,228 @@ body.miimiid-drawer-open {
 
 
     /* =========================================
-       MIIMIID AUTHENTICATION
+       MIIMIID AUTHENTICATION — FULL SCREEN
        ========================================= */
 
     .miimiid-auth-view {
-      max-width: 520px;
-      margin: 40px auto;
-      padding: 0 10px;
+      min-height: 100vh;
+      min-height: 100dvh;
+      width: 100%;
+      max-width: none;
+      margin: 0;
+      padding:
+        max(32px, env(safe-area-inset-top))
+        24px
+        max(32px, env(safe-area-inset-bottom));
+      box-sizing: border-box;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      background:
+        radial-gradient(
+          circle at 50% 0%,
+          rgba(56, 189, 248, 0.10),
+          transparent 42%
+        ),
+        #020617;
+      animation: miimiidAuthFadeIn 0.28s ease-out;
+    }
+
+    .miimiid-auth-view.hidden {
+      display: none !important;
     }
 
     .miimiid-auth-card {
-      background: #1e293b;
-      border: 1px solid #334155;
-      border-radius: 14px;
-      padding: 24px;
+      width: 100%;
+      max-width: 430px;
+      margin: 0 auto;
+      padding: 34px 0 20px;
+      background: transparent;
+      border: 0;
+      border-radius: 0;
+      box-shadow: none;
     }
 
     .miimiid-auth-card h1 {
-      margin-top: 0;
-      margin-bottom: 8px;
+      margin: 0 0 8px;
+      font-size: clamp(1.75rem, 7vw, 2.15rem);
+      line-height: 1.15;
+      font-weight: 750;
+      letter-spacing: -0.035em;
     }
 
     .miimiid-auth-card p {
-      opacity: 0.85;
+      margin: 0 0 30px;
+      opacity: 0.72;
+      font-size: 1rem;
+      line-height: 1.5;
     }
 
     .miimiid-auth-form {
-      margin-top: 20px;
+      margin-top: 0;
+      animation: miimiidAuthFormIn 0.22s ease-out;
     }
 
     .miimiid-auth-field {
+      position: relative;
       margin-bottom: 15px;
     }
 
     .miimiid-auth-field label {
       display: block;
-      margin-bottom: 6px;
-      font-weight: bold;
+      margin: 0 0 8px;
+      font-size: 0.88rem;
+      font-weight: 650;
+      color: #cbd5e1;
     }
 
     .miimiid-auth-field input {
       width: 100%;
-      padding: 12px;
-      border-radius: 7px;
-      border: 1px solid #475569;
+      min-height: 54px;
+      box-sizing: border-box;
+      padding: 0 16px;
+      border: 1px solid #334155;
+      border-radius: 14px;
       background: #0f172a;
       color: #f8fafc;
       font-size: 1rem;
+      line-height: 1.2;
+      transition:
+        border-color 0.18s ease,
+        box-shadow 0.18s ease,
+        background 0.18s ease;
+    }
+
+    .miimiid-auth-field input::placeholder {
+      color: #64748b;
     }
 
     .miimiid-auth-field input:focus {
-      outline: 2px solid #38bdf8;
-      outline-offset: 1px;
+      outline: none;
+      border-color: #38bdf8;
+      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.12);
+      background: #111c31;
+    }
+
+    .miimiid-auth-password-wrap {
+      position: relative;
+    }
+
+    .miimiid-auth-password-wrap input {
+      padding-right: 52px;
+    }
+
+    .miimiid-password-toggle {
+      position: absolute;
+      top: 50%;
+      right: 8px;
+      width: 40px;
+      height: 40px;
+      margin: 0;
+      padding: 0;
+      transform: translateY(-50%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 0;
+      border-radius: 50%;
+      background: transparent;
+      color: #94a3b8;
+      cursor: pointer;
+      font-size: 1.05rem;
+      transition:
+        background 0.16s ease,
+        color 0.16s ease;
+    }
+
+    .miimiid-password-icon {
+      width: 20px;
+      height: 20px;
+      display: block;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      pointer-events: none;
+    }
+
+    .miimiid-password-icon-hide {
+      display: none;
+    }
+
+    .miimiid-password-toggle:hover,
+    .miimiid-password-toggle:focus-visible {
+      background: rgba(148, 163, 184, 0.10);
+      color: #f8fafc;
+      outline: none;
+    }
+
+    .miimiid-password-toggle:active {
+      transform: translateY(-50%) scale(0.94);
+    }
+
+    .miimiid-auth-card .btn {
+      width: 100%;
+      min-height: 54px;
+      margin-top: 8px;
+      border-radius: 14px;
+      font-size: 1rem;
+      font-weight: 700;
+      transition:
+        transform 0.16s ease,
+        box-shadow 0.16s ease,
+        opacity 0.16s ease;
+    }
+
+    .miimiid-auth-card .btn:active {
+      transform: scale(0.985);
     }
 
     .miimiid-auth-actions {
       display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-top: 15px;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      margin-top: 18px;
     }
 
     .miimiid-auth-link {
+      min-height: 40px;
+      padding: 8px 4px;
       background: none;
-      border: none;
+      border: 0;
       color: #38bdf8;
       cursor: pointer;
-      padding: 9px 0;
       font-size: 0.95rem;
-      font-weight: bold;
+      font-weight: 650;
+      text-align: center;
+      transition: opacity 0.16s ease;
     }
 
-    .miimiid-auth-link:hover {
+    .miimiid-auth-link:hover,
+    .miimiid-auth-link:focus-visible {
       text-decoration: underline;
+      opacity: 0.9;
+      outline: none;
     }
 
     .miimiid-auth-status {
       min-height: 22px;
-      margin-top: 14px;
+      margin: 0 0 14px;
+      font-size: 0.9rem;
+      line-height: 1.4;
     }
 
     .miimiid-auth-loading {
+      width: 100%;
+      max-width: 430px;
+      box-sizing: border-box;
+      margin: 0 auto;
+      padding: 80px 0;
       text-align: center;
-      padding: 50px 20px;
       color: #38bdf8;
-      font-weight: bold;
+      font-weight: 650;
     }
 
     .miimiid-auth-user {
@@ -1069,61 +1206,229 @@ body.miimiid-drawer-open {
       margin-top: 0;
     }
 
-</style></head><body>  <header class="miimiid-header">
-    <h1 class="miimiid-brand">Miimiid</h1>
+    @keyframes miimiidAuthFadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
 
-    <div class="language-selector" id="language-selector">
-      <button
-        type="button"
-        class="language-toggle"
-        id="language-toggle"
-        aria-haspopup="true"
-        aria-expanded="false"
-        aria-label="Select language"
-      >
-        <span class="language-toggle-icon">🌍</span>
-        <span class="language-toggle-label" id="selected-language-label">English</span>
-        <span class="language-chevron">▼</span>
-      </button>
+    @keyframes miimiidAuthFormIn {
+      from {
+        opacity: 0;
+        transform: translateY(5px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
-      <div
-        class="language-menu hidden"
-        id="language-menu"
-        role="menu"
-        aria-label="Language options"
-      ></div>
-    </div>
+    @media (max-width: 520px) {
+      .miimiid-auth-view {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
 
-    <div class="miimiid-dashboard-menu" id="miimiid-dashboard-menu">
-      <button
-        type="button"
-        class="miimiid-menu-toggle"
-        id="miimiid-menu-toggle"
-        aria-label="Open menu"
-        aria-expanded="false"
-      >
-        ☰
-      </button>
+      .miimiid-auth-card {
+        padding-top: 26px;
+      }
 
-      <div
-        class="miimiid-dashboard-menu-panel"
-        id="miimiid-dashboard-menu-panel"
-      ></div>
-    </div>
-  </header>
+      .miimiid-auth-card h1 {
+        font-size: 1.8rem;
+      }
+    }
 
-  <div
-    class="miimiid-drawer-backdrop"
-    id="miimiid-drawer-backdrop"
-    aria-hidden="true"
-  ></div>
+    @media (min-width: 700px) {
+      .miimiid-auth-view {
+        padding-top: 8vh;
+      }
+
+      .miimiid-auth-card {
+        max-width: 440px;
+      }
+    }
 
 
-  <!-- =========================================
-       MIIMIID AUTHENTICATION
-       ========================================= -->
+    /* =========================================================
+       MIIMIID AUTH — TRUE FULL-SCREEN MOBILE-FIRST LAYOUT
+       ========================================================= */
 
-  <section
+    body:has(#miimiid-auth-view:not(.hidden)) {
+      overflow: hidden !important;
+      height: 100dvh !important;
+    }
+
+    #miimiid-auth-view {
+      position: fixed !important;
+      inset: 0 !important;
+      width: 100vw !important;
+      height: 100dvh !important;
+      min-height: 100dvh !important;
+      max-height: 100dvh !important;
+      margin: 0 !important;
+      padding:
+        max(24px, env(safe-area-inset-top))
+        max(20px, env(safe-area-inset-right))
+        max(24px, env(safe-area-inset-bottom))
+        max(20px, env(safe-area-inset-left)) !important;
+      box-sizing: border-box !important;
+
+      display: flex !important;
+      align-items: flex-start !important;
+      justify-content: center !important;
+
+      overflow: hidden !important;
+      background:
+        radial-gradient(
+          circle at 50% 0%,
+          rgba(56, 189, 248, 0.10),
+          transparent 42%
+        ),
+        #020617 !important;
+    }
+
+    #miimiid-auth-view.hidden {
+      display: none !important;
+    }
+
+    #miimiid-auth-card {
+      width: 100% !important;
+      max-width: 520px !important;
+      min-height: 0 !important;
+      height: auto !important;
+
+      margin: 0 !important;
+      padding: clamp(32px, 8vh, 72px) 0 24px !important;
+
+      /* IMPORTANT: this is NOT a card */
+      background: transparent !important;
+      border: 0 !important;
+      border-radius: 0 !important;
+      box-shadow: none !important;
+
+      box-sizing: border-box !important;
+      overflow: visible !important;
+    }
+
+    #miimiid-auth-card h1 {
+      margin: 0 0 8px !important;
+      font-size: clamp(1.75rem, 7vw, 2.25rem) !important;
+      line-height: 1.15 !important;
+      letter-spacing: -0.025em !important;
+    }
+
+    #miimiid-auth-card p {
+      margin: 0 0 30px !important;
+      font-size: 1rem !important;
+      line-height: 1.5 !important;
+      opacity: 0.78 !important;
+    }
+
+    .miimiid-auth-form {
+      width: 100% !important;
+      margin: 0 !important;
+    }
+
+    .miimiid-auth-field {
+      width: 100% !important;
+      margin-bottom: 16px !important;
+    }
+
+    .miimiid-auth-field input {
+      width: 100% !important;
+      min-height: 52px !important;
+      box-sizing: border-box !important;
+      border-radius: 14px !important;
+    }
+
+    .miimiid-auth-password-wrap {
+      width: 100% !important;
+      position: relative !important;
+    }
+
+    .miimiid-auth-password-wrap input {
+      padding-right: 52px !important;
+    }
+
+    .miimiid-password-toggle {
+      position: absolute !important;
+      right: 8px !important;
+      top: 50% !important;
+      transform: translateY(-50%) !important;
+
+      width: 40px !important;
+      height: 40px !important;
+      margin: 0 !important;
+      padding: 0 !important;
+
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+
+      background: transparent !important;
+      border: 0 !important;
+      box-shadow: none !important;
+      border-radius: 50% !important;
+
+      cursor: pointer !important;
+    }
+
+    .miimiid-auth-card .btn {
+      width: 100% !important;
+      min-height: 52px !important;
+      margin-top: 8px !important;
+      border-radius: 14px !important;
+    }
+
+    .miimiid-auth-actions {
+      width: 100% !important;
+      margin-top: 18px !important;
+
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      gap: 10px !important;
+    }
+
+    .miimiid-auth-link {
+      padding: 5px 0 !important;
+      margin: 0 !important;
+    }
+
+    @media (max-height: 680px) {
+      #miimiid-auth-card {
+        padding-top: 20px !important;
+      }
+
+      #miimiid-auth-card p {
+        margin-bottom: 18px !important;
+      }
+
+      .miimiid-auth-field {
+        margin-bottom: 10px !important;
+      }
+
+      .miimiid-auth-field input,
+      .miimiid-auth-card .btn {
+        min-height: 48px !important;
+      }
+    }
+
+    @media (min-width: 768px) {
+      #miimiid-auth-view {
+        align-items: center !important;
+      }
+
+      #miimiid-auth-card {
+        padding-top: 24px !important;
+        padding-bottom: 24px !important;
+      }
+    }
+
+</style></head><body><section
     id="miimiid-auth-view"
     class="miimiid-auth-view hidden"
     aria-live="polite"
@@ -1173,12 +1478,44 @@ body.miimiid-drawer-open {
             Password
           </label>
 
+          <div class="miimiid-auth-password-wrap">
           <input
             id="miimiid-login-password"
             type="password"
             autocomplete="current-password"
             required
           >
+          <button
+            type="button"
+            class="miimiid-password-toggle"
+            data-password-toggle="miimiid-login-password"
+            aria-label="Show password"
+            aria-pressed="false"
+          >
+<svg
+              class="miimiid-password-icon miimiid-password-icon-show"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                d="M2.25 12s3.5-6 9.75-6 9.75 6 9.75 6-3.5 6-9.75 6S2.25 12 2.25 12Z"
+              />
+              <circle cx="12" cy="12" r="2.75" />
+            </svg>
+            <svg
+              class="miimiid-password-icon miimiid-password-icon-hide"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path d="M3 3l18 18" />
+              <path d="M10.58 10.58a2 2 0 0 0 2.83 2.83" />
+              <path d="M9.88 5.2A10.9 10.9 0 0 1 12 5c6.25 0 9.75 7 9.75 7a17.8 17.8 0 0 1-3.07 3.82" />
+              <path d="M6.61 6.61C4.05 8.14 2.25 12 2.25 12s3.5 7 9.75 7a10.8 10.8 0 0 0 4.12-.8" />
+            </svg>
+          </button>
+        </div>
         </div>
 
         <button
@@ -1212,82 +1549,338 @@ body.miimiid-drawer-open {
         id="miimiid-register-form"
         class="miimiid-auth-form hidden"
       >
-        <div class="miimiid-auth-field">
-          <label for="miimiid-register-name">
-            Name
-          </label>
 
-          <input
-            id="miimiid-register-name"
-            type="text"
-            autocomplete="name"
-            minlength="2"
-            required
-          >
-        </div>
-
-        <div class="miimiid-auth-field">
-          <label for="miimiid-register-email">
-            Email
-          </label>
-
-          <input
-            id="miimiid-register-email"
-            type="email"
-            autocomplete="email"
-            required
-          >
-        </div>
-
-        <div class="miimiid-auth-field">
-          <label for="miimiid-register-phone">
-            Phone number
-          </label>
-
-          <input
-            id="miimiid-register-phone"
-            type="tel"
-            autocomplete="tel"
-            required
-          >
-        </div>
-
-        <div class="miimiid-auth-field">
-          <label for="miimiid-register-password">
-            Password
-          </label>
-
-          <input
-            id="miimiid-register-password"
-            type="password"
-            autocomplete="new-password"
-            minlength="8"
-            required
-          >
-        </div>
-
-        <div class="miimiid-auth-field">
-          <label for="miimiid-register-confirm">
-            Confirm password
-          </label>
-
-          <input
-            id="miimiid-register-confirm"
-            type="password"
-            autocomplete="new-password"
-            minlength="8"
-            required
-          >
-        </div>
-
-        <button
-          type="submit"
-          class="btn"
-          id="miimiid-register-submit"
+        <!-- STEP 1: WELCOME -->
+        <section
+          class="miimiid-register-step"
+          data-register-step="1"
         >
-          Create Account
-        </button>
+          <div class="miimiid-register-welcome">
+            <h2>Welcome to Miimiid</h2>
 
+            <div
+              class="miimiid-register-visual"
+              aria-hidden="true"
+            >
+              <div class="miimiid-register-visual-icon">
+                💰
+              </div>
+            </div>
+
+            <p>
+              Build better money habits, understand your finances,
+              and make smarter financial decisions.
+            </p>
+          </div>
+
+          <button
+            type="button"
+            class="btn"
+            id="miimiid-register-get-started"
+          >
+            Get started
+          </button>
+        </section>
+
+
+        <!-- STEP 2: NAME -->
+        <section
+          class="miimiid-register-step hidden"
+          data-register-step="2"
+        >
+          <div class="miimiid-auth-field">
+            <label for="miimiid-register-first-name">
+              First name
+            </label>
+
+            <input
+              id="miimiid-register-first-name"
+              type="text"
+              autocomplete="given-name"
+              minlength="1"
+            >
+          </div>
+
+          <div class="miimiid-auth-field">
+            <label for="miimiid-register-last-name">
+              Last name
+            </label>
+
+            <input
+              id="miimiid-register-last-name"
+              type="text"
+              autocomplete="family-name"
+            >
+          </div>
+
+          <button
+            type="button"
+            class="btn"
+            id="miimiid-register-name-next"
+          >
+            Continue
+          </button>
+
+          <button
+            type="button"
+            class="miimiid-auth-link"
+            data-register-back="1"
+          >
+            Back
+          </button>
+        </section>
+
+
+        <!-- STEP 3: EMAIL + PHONE -->
+        <section
+          class="miimiid-register-step hidden"
+          data-register-step="3"
+        >
+          <div class="miimiid-auth-field">
+            <label for="miimiid-register-email">
+              Email address
+            </label>
+
+            <input
+              id="miimiid-register-email"
+              type="email"
+              autocomplete="email"
+            >
+          </div>
+
+          <div class="miimiid-auth-field">
+            <label for="miimiid-register-phone">
+              Phone number
+            </label>
+
+            <input
+              id="miimiid-register-phone"
+              type="tel"
+              autocomplete="tel"
+            >
+          </div>
+
+          <button
+            type="button"
+            class="btn"
+            id="miimiid-register-contact-next"
+          >
+            Continue
+          </button>
+
+          <button
+            type="button"
+            class="miimiid-auth-link"
+            data-register-back="2"
+          >
+            Back
+          </button>
+        </section>
+
+
+        <!-- STEP 4: DOB + PASSWORD -->
+        <section
+          class="miimiid-register-step hidden"
+          data-register-step="4"
+        >
+          <div class="miimiid-auth-field">
+            <label for="miimiid-register-dob">
+              Date of birth
+            </label>
+
+            <input
+              id="miimiid-register-dob"
+              type="date"
+              autocomplete="bday"
+            >
+          </div>
+
+          <div class="miimiid-auth-field">
+            <label for="miimiid-register-password">
+              Password
+            </label>
+
+            <div class="miimiid-auth-password-wrap">
+              <input
+                id="miimiid-register-password"
+                type="password"
+                autocomplete="new-password"
+                minlength="8"
+              >
+
+              <button
+                type="button"
+                class="miimiid-password-toggle"
+                data-password-toggle="miimiid-register-password"
+                aria-label="Show password"
+                aria-pressed="false"
+              >
+                <svg
+                  class="miimiid-password-icon miimiid-password-icon-show"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <path
+                    d="M2.25 12s3.5-6 9.75-6 9.75 6 9.75 6-3.5 6-9.75 6S2.25 12 2.25 12Z"
+                  />
+                  <circle cx="12" cy="12" r="2.75" />
+                </svg>
+
+                <svg
+                  class="miimiid-password-icon miimiid-password-icon-hide"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <path d="M3 3l18 18" />
+                  <path d="M10.58 10.58a2 2 0 0 0 2.83 2.83" />
+                  <path d="M9.88 5.2A10.9 10.9 0 0 1 12 5c6.25 0 9.75 7 9.75 7a17.8 17.8 0 0 1-3.07 3.82" />
+                  <path d="M6.61 6.61C4.05 8.14 2.25 12 2.25 12s3.5 7 9.75 7a10.8 10.8 0 0 0 4.12-.8" />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="miimiid-auth-field">
+            <label for="miimiid-register-confirm">
+              Confirm password
+            </label>
+
+            <div class="miimiid-auth-password-wrap">
+              <input
+                id="miimiid-register-confirm"
+                type="password"
+                autocomplete="new-password"
+                minlength="8"
+              >
+
+              <button
+                type="button"
+                class="miimiid-password-toggle"
+                data-password-toggle="miimiid-register-confirm"
+                aria-label="Show password"
+                aria-pressed="false"
+              >
+                <svg
+                  class="miimiid-password-icon miimiid-password-icon-show"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <path
+                    d="M2.25 12s3.5-6 9.75-6 9.75 6 9.75 6-3.5 6-9.75 6S2.25 12 2.25 12Z"
+                  />
+                  <circle cx="12" cy="12" r="2.75" />
+                </svg>
+
+                <svg
+                  class="miimiid-password-icon miimiid-password-icon-hide"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <path d="M3 3l18 18" />
+                  <path d="M10.58 10.58a2 2 0 0 0 2.83 2.83" />
+                  <path d="M9.88 5.2A10.9 10.9 0 0 1 12 5c6.25 0 9.75 7 9.75 7a17.8 17.8 0 0 1-3.07 3.82" />
+                  <path d="M6.61 6.61C4.05 8.14 2.25 12 2.25 12s3.5 7 9.75 7a10.8 10.8 0 0 0 4.12-.8" />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <button
+            type="button"
+            class="btn"
+            id="miimiid-register-submit"
+          >
+            Continue
+          </button>
+
+          <button
+            type="button"
+            class="miimiid-auth-link"
+            data-register-back="3"
+          >
+            Back
+          </button>
+        </section>
+
+
+        <!-- STEP 5: ACCOUNT VERIFICATION -->
+        <section
+          class="miimiid-register-step hidden"
+          data-register-step="5"
+        >
+          <div class="miimiid-auth-field">
+            <label for="miimiid-register-verification-code">
+              Account verification
+            </label>
+
+            <p
+              id="miimiid-register-verification-message"
+              class="miimiid-auth-help"
+            >
+              Enter the 6-digit code sent to your email address.
+            </p>
+
+            <p
+              id="miimiid-verification-email"
+              class="miimiid-auth-help"
+            ></p>
+
+            <p
+              id="miimiid-verification-timer"
+              class="miimiid-auth-help"
+              aria-live="polite"
+            ></p>
+
+            <input
+              id="miimiid-register-verification-code"
+              type="text"
+              inputmode="numeric"
+              autocomplete="one-time-code"
+              maxlength="6"
+              pattern="[0-9]{6}"
+            >
+          </div>
+
+          <button
+            type="button"
+            class="btn"
+            id="miimiid-verify-account-submit"
+          >
+            Verify account
+          </button>
+
+          <button
+            type="button"
+            class="miimiid-auth-link"
+            id="miimiid-resend-verification"
+          >
+            Resend code
+          </button>
+
+          <button
+            type="button"
+            class="miimiid-auth-link"
+            data-register-back="4"
+          >
+            Back
+          </button>
+        </section>
+
+
+        <!-- Shared registration feedback -->
+        <div
+          id="miimiid-register-feedback"
+          class="miimiid-auth-feedback"
+          role="status"
+          aria-live="polite"
+        ></div>
+
+
+        <!-- Shared login link -->
         <button
           type="button"
           class="miimiid-auth-link"
@@ -1295,6 +1888,7 @@ body.miimiid-drawer-open {
         >
           Back to sign in
         </button>
+
       </form>
 
       <form
@@ -1340,6 +1934,7 @@ body.miimiid-drawer-open {
             New password
           </label>
 
+          <div class="miimiid-auth-password-wrap">
           <input
             id="miimiid-reset-password"
             type="password"
@@ -1347,6 +1942,37 @@ body.miimiid-drawer-open {
             minlength="8"
             required
           >
+          <button
+            type="button"
+            class="miimiid-password-toggle"
+            data-password-toggle="miimiid-reset-password"
+            aria-label="Show password"
+            aria-pressed="false"
+          >
+<svg
+              class="miimiid-password-icon miimiid-password-icon-show"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                d="M2.25 12s3.5-6 9.75-6 9.75 6 9.75 6-3.5 6-9.75 6S2.25 12 2.25 12Z"
+              />
+              <circle cx="12" cy="12" r="2.75" />
+            </svg>
+            <svg
+              class="miimiid-password-icon miimiid-password-icon-hide"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path d="M3 3l18 18" />
+              <path d="M10.58 10.58a2 2 0 0 0 2.83 2.83" />
+              <path d="M9.88 5.2A10.9 10.9 0 0 1 12 5c6.25 0 9.75 7 9.75 7a17.8 17.8 0 0 1-3.07 3.82" />
+              <path d="M6.61 6.61C4.05 8.14 2.25 12 2.25 12s3.5 7 9.75 7a10.8 10.8 0 0 0 4.12-.8" />
+            </svg>
+          </button>
+        </div>
         </div>
 
         <div class="miimiid-auth-field">
@@ -1354,6 +1980,7 @@ body.miimiid-drawer-open {
             Confirm new password
           </label>
 
+          <div class="miimiid-auth-password-wrap">
           <input
             id="miimiid-reset-confirm"
             type="password"
@@ -1361,6 +1988,37 @@ body.miimiid-drawer-open {
             minlength="8"
             required
           >
+          <button
+            type="button"
+            class="miimiid-password-toggle"
+            data-password-toggle="miimiid-reset-confirm"
+            aria-label="Show password"
+            aria-pressed="false"
+          >
+<svg
+              class="miimiid-password-icon miimiid-password-icon-show"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                d="M2.25 12s3.5-6 9.75-6 9.75 6 9.75 6-3.5 6-9.75 6S2.25 12 2.25 12Z"
+              />
+              <circle cx="12" cy="12" r="2.75" />
+            </svg>
+            <svg
+              class="miimiid-password-icon miimiid-password-icon-hide"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path d="M3 3l18 18" />
+              <path d="M10.58 10.58a2 2 0 0 0 2.83 2.83" />
+              <path d="M9.88 5.2A10.9 10.9 0 0 1 12 5c6.25 0 9.75 7 9.75 7a17.8 17.8 0 0 1-3.07 3.82" />
+              <path d="M6.61 6.61C4.05 8.14 2.25 12 2.25 12s3.5 7 9.75 7a10.8 10.8 0 0 0 4.12-.8" />
+            </svg>
+          </button>
+        </div>
         </div>
 
         <button
@@ -1384,7 +2042,56 @@ body.miimiid-drawer-open {
 
   <div id="miimiid-app-shell" class="miimiid-app-shell hidden">
 
-    <section
+      <header class="miimiid-header">
+    <h1 class="miimiid-brand">Miimiid</h1>
+
+    <div class="language-selector" id="language-selector">
+      <button
+        type="button"
+        class="language-toggle"
+        id="language-toggle"
+        aria-haspopup="true"
+        aria-expanded="false"
+        aria-label="Select language"
+      >
+        <span class="language-toggle-icon">🌍</span>
+        <span class="language-toggle-label" id="selected-language-label">English</span>
+        <span class="language-chevron">▼</span>
+      </button>
+
+      <div
+        class="language-menu hidden"
+        id="language-menu"
+        role="menu"
+        aria-label="Language options"
+      ></div>
+    </div>
+
+    <div class="miimiid-dashboard-menu" id="miimiid-dashboard-menu">
+      <button
+        type="button"
+        class="miimiid-menu-toggle"
+        id="miimiid-menu-toggle"
+        aria-label="Open menu"
+        aria-expanded="false"
+      >
+        ☰
+      </button>
+
+      <div
+        class="miimiid-dashboard-menu-panel"
+        id="miimiid-dashboard-menu-panel"
+      ></div>
+    </div>
+  </header>
+
+  <div
+    class="miimiid-drawer-backdrop"
+    id="miimiid-drawer-backdrop"
+    aria-hidden="true"
+  ></div>
+
+<section
       id="miimiid-dashboard"
       class="miimiid-dashboard active"
       aria-live="polite"
@@ -3303,7 +4010,8 @@ body.miimiid-drawer-open {
           title.textContent =
             miimiidDashboardTranslate("authResetPassword");
         } else if (mode === "reset") {
-          title.textContent = "Reset your password";
+          title.textContent =
+            miimiidDashboardTranslate("authResetTitle");
         } else {
           title.textContent =
             miimiidDashboardTranslate("authWelcome");
@@ -3319,7 +4027,7 @@ body.miimiid-drawer-open {
             miimiidDashboardTranslate("authResetSubtitle");
         } else if (mode === "reset") {
           subtitle.textContent =
-            "Choose a new password for your Miimiid account.";
+            miimiidDashboardTranslate("authResetDescription");
         } else {
           subtitle.textContent =
             miimiidDashboardTranslate("authSignInSubtitle");
@@ -3622,16 +4330,211 @@ body.miimiid-drawer-open {
       }
     }
 
+    let miimiidRegistrationStep = 1;
+    let miimiidVerificationEmail = "";
+    let miimiidVerificationExpiresAt = 0;
+    let miimiidVerificationTimer = null;
+
+    function showMiimiidRegistrationStep(step) {
+      const steps =
+        document.querySelectorAll(
+          "#miimiid-register-form [data-register-step]"
+        );
+
+      if (!steps.length) {
+        return;
+      }
+
+      const requestedStep =
+        Math.max(
+          1,
+          Math.min(
+            5,
+            Number(step) || 1
+          )
+        );
+
+      miimiidRegistrationStep =
+        requestedStep;
+
+      steps.forEach(section => {
+        const sectionStep =
+          Number(
+            section.getAttribute(
+              "data-register-step"
+            )
+          );
+
+        section.classList.toggle(
+          "hidden",
+          sectionStep !== requestedStep
+        );
+      });
+
+      const feedback =
+        document.getElementById(
+          "miimiid-register-feedback"
+        );
+
+      if (feedback) {
+        feedback.textContent = "";
+        feedback.className =
+          "miimiid-auth-feedback";
+      }
+    }
+
+    function setMiimiidRegisterFeedback(
+      message,
+      type = ""
+    ) {
+      const feedback =
+        document.getElementById(
+          "miimiid-register-feedback"
+        );
+
+      if (!feedback) {
+        return;
+      }
+
+      feedback.textContent =
+        message || "";
+
+      feedback.className =
+        "miimiid-auth-feedback" +
+        (type
+          ? ` ${type}`
+          : "");
+    }
+
+    function clearMiimiidVerificationTimer() {
+      if (
+        miimiidVerificationTimer
+      ) {
+        clearInterval(
+          miimiidVerificationTimer
+        );
+
+        miimiidVerificationTimer =
+          null;
+      }
+    }
+
+    function startMiimiidVerificationTimer(
+      expiresInSeconds
+    ) {
+      clearMiimiidVerificationTimer();
+
+      const expires =
+        Number(expiresInSeconds);
+
+      if (
+        !Number.isFinite(expires) ||
+        expires <= 0
+      ) {
+        return;
+      }
+
+      miimiidVerificationExpiresAt =
+        Date.now() +
+        expires * 1000;
+
+      const update =
+        () => {
+          const remaining =
+            Math.max(
+              0,
+              Math.ceil(
+                (
+                  miimiidVerificationExpiresAt -
+                  Date.now()
+                ) / 1000
+              )
+            );
+
+          const minutes =
+            Math.floor(
+              remaining / 60
+            );
+
+          const seconds =
+            String(
+              remaining % 60
+            ).padStart(2, "0");
+
+          const timer =
+            document.getElementById(
+              "miimiid-verification-timer"
+            );
+
+          if (timer) {
+            timer.textContent =
+              remaining > 0
+                ? `Code expires in ${minutes}:${seconds}`
+                : "Code expired. Request a new code.";
+          }
+
+          if (remaining <= 0) {
+            clearMiimiidVerificationTimer();
+          }
+        };
+
+      update();
+
+      miimiidVerificationTimer =
+        setInterval(
+          update,
+          1000
+        );
+    }
+
+    function resetMiimiidRegistrationFlow() {
+      clearMiimiidVerificationTimer();
+
+      miimiidRegistrationStep =
+        1;
+
+      miimiidVerificationEmail =
+        "";
+
+      miimiidVerificationExpiresAt =
+        0;
+
+      const code =
+        document.getElementById(
+          "miimiid-register-verification-code"
+        );
+
+      if (code) {
+        code.value = "";
+      }
+
+      setMiimiidRegisterFeedback(
+        ""
+      );
+
+      showMiimiidRegistrationStep(
+        1
+      );
+    }
+
     async function handleMiimiidRegister(event) {
       event.preventDefault();
 
-      const name =
+      const firstName =
         document
           .getElementById(
-            "miimiid-register-name"
+            "miimiid-register-first-name"
           )
           ?.value
-          .trim();
+          .trim() || "";
+
+      const lastName =
+        document
+          .getElementById(
+            "miimiid-register-last-name"
+          )
+          ?.value
+          .trim() || "";
 
       const email =
         document
@@ -3639,7 +4542,7 @@ body.miimiid-drawer-open {
             "miimiid-register-email"
           )
           ?.value
-          .trim();
+          .trim() || "";
 
       const phone =
         document
@@ -3647,7 +4550,14 @@ body.miimiid-drawer-open {
             "miimiid-register-phone"
           )
           ?.value
-          .trim();
+          .trim() || "";
+
+      const dateOfBirth =
+        document
+          .getElementById(
+            "miimiid-register-dob"
+          )
+          ?.value || "";
 
       const password =
         document
@@ -3663,16 +4573,194 @@ body.miimiid-drawer-open {
           )
           ?.value || "";
 
+      if (!firstName) {
+        showMiimiidRegistrationStep(2);
+
+        setMiimiidRegisterFeedback(
+          "Enter your first name.",
+          "error"
+        );
+
+        return;
+      }
+
+      if (!lastName) {
+        showMiimiidRegistrationStep(2);
+
+        setMiimiidRegisterFeedback(
+          "Enter your last name.",
+          "error"
+        );
+
+        return;
+      }
+
+      if (!email) {
+        showMiimiidRegistrationStep(3);
+
+        setMiimiidRegisterFeedback(
+          "Enter your email address.",
+          "error"
+        );
+
+        return;
+      }
+
+      if (!phone) {
+        showMiimiidRegistrationStep(3);
+
+        setMiimiidRegisterFeedback(
+          "Enter your phone number.",
+          "error"
+        );
+
+        return;
+      }
+
+      if (!dateOfBirth) {
+        showMiimiidRegistrationStep(4);
+
+        setMiimiidRegisterFeedback(
+          "Enter your date of birth.",
+          "error"
+        );
+
+        return;
+      }
+
+      if (password.length < 8) {
+        showMiimiidRegistrationStep(4);
+
+        setMiimiidRegisterFeedback(
+          "Password must be at least 8 characters.",
+          "error"
+        );
+
+        return;
+      }
+
+      if (password !== confirm) {
+        showMiimiidRegistrationStep(4);
+
+        setMiimiidRegisterFeedback(
+          "Passwords do not match.",
+          "error"
+        );
+
+        return;
+      }
+
       const submit =
         document.getElementById(
           "miimiid-register-submit"
         );
 
-      if (password !== confirm) {
-        setMiimiidAuthStatus(
-          "Passwords do not match.",
+      if (submit) {
+        submit.disabled = true;
+      }
+
+      setMiimiidRegisterFeedback(
+        "Creating your account..."
+      );
+
+      try {
+        const response =
+          await miimiidAuthenticate(
+            "/api/auth/register",
+            {
+              firstName,
+              lastName,
+              email,
+              phone,
+              dateOfBirth,
+              password
+            }
+          );
+
+        const data =
+          response?.data || {};
+
+        if (
+          data.verificationRequired
+        ) {
+          miimiidVerificationEmail =
+            email;
+
+          const verificationEmail =
+            document.getElementById(
+              "miimiid-verification-email"
+            );
+
+          if (verificationEmail) {
+            verificationEmail.textContent =
+              data.maskedEmail ||
+              email;
+          }
+
+          const verificationCode =
+            document.getElementById(
+              "miimiid-register-verification-code"
+            );
+
+          if (verificationCode) {
+            verificationCode.value = "";
+            verificationCode.focus();
+          }
+
+          showMiimiidRegistrationStep(
+            5
+          );
+
+          startMiimiidVerificationTimer(
+            data.expiresInSeconds
+          );
+
+          return;
+        }
+
+        throw new Error(
+          "Account verification is required."
+        );
+
+      } catch (error) {
+        console.error(
+          "Miimiid registration error:",
+          error
+        );
+
+        setMiimiidRegisterFeedback(
+          error.message ||
+          "Unable to create your account.",
           "error"
         );
+
+      } finally {
+        if (submit) {
+          submit.disabled = false;
+        }
+      }
+    }
+
+    async function handleMiimiidVerifyAccount() {
+      const code =
+        document
+          .getElementById(
+            "miimiid-register-verification-code"
+          )
+          ?.value
+          .trim() || "";
+
+      const submit =
+        document.getElementById(
+          "miimiid-verify-account-submit"
+        );
+
+      if (!/^\d{6}$/.test(code)) {
+        setMiimiidRegisterFeedback(
+          "Enter the 6-digit verification code.",
+          "error"
+        );
+
         return;
       }
 
@@ -3680,23 +4768,36 @@ body.miimiid-drawer-open {
         submit.disabled = true;
       }
 
-      setMiimiidAuthStatus(
-        "Creating your account..."
+      setMiimiidRegisterFeedback(
+        "Verifying your account..."
       );
 
       try {
-        await miimiidAuthenticate(
-          "/api/auth/register",
-          {
-            name,
-            email,
-            phone,
-            password
-          }
-        );
+        const response =
+          await miimiidAuthenticate(
+            "/api/auth/verify-account",
+            {
+              email:
+                miimiidVerificationEmail,
+              code
+            }
+          );
 
-        setMiimiidAuthStatus(
-          "Account created successfully.",
+        const data =
+          response?.data || {};
+
+        if (
+          !data.verified
+        ) {
+          throw new Error(
+            "Unable to verify your account."
+          );
+        }
+
+        clearMiimiidVerificationTimer();
+
+        setMiimiidRegisterFeedback(
+          "Account verified successfully.",
           "success"
         );
 
@@ -3706,19 +4807,106 @@ body.miimiid-drawer-open {
 
       } catch (error) {
         console.error(
-          "Miimiid registration error:",
+          "Miimiid account verification error:",
           error
         );
 
-        setMiimiidAuthStatus(
+        setMiimiidRegisterFeedback(
           error.message ||
-          "Unable to create your account.",
+          "Unable to verify your account.",
           "error"
         );
 
       } finally {
         if (submit) {
           submit.disabled = false;
+        }
+      }
+    }
+
+    async function handleMiimiidResendVerification() {
+      if (!miimiidVerificationEmail) {
+        setMiimiidRegisterFeedback(
+          "Your verification session is missing. Please start again.",
+          "error"
+        );
+
+        return;
+      }
+
+      const resend =
+        document.getElementById(
+          "miimiid-resend-verification"
+        );
+
+      if (resend) {
+        resend.disabled = true;
+      }
+
+      setMiimiidRegisterFeedback(
+        "Sending a new verification code..."
+      );
+
+      try {
+        const response =
+          await miimiidAuthenticate(
+            "/api/auth/resend-verification",
+            {
+              email:
+                miimiidVerificationEmail
+            }
+          );
+
+        const data =
+          response?.data || {};
+
+        if (
+          data.verified
+        ) {
+          clearMiimiidVerificationTimer();
+
+          hideMiimiidAuthView();
+
+          await initializeMiimiidDashboard();
+
+          return;
+        }
+
+        const verificationEmail =
+          document.getElementById(
+            "miimiid-verification-email"
+          );
+
+        if (verificationEmail) {
+          verificationEmail.textContent =
+            data.maskedEmail ||
+            miimiidVerificationEmail;
+        }
+
+        startMiimiidVerificationTimer(
+          data.expiresInSeconds
+        );
+
+        setMiimiidRegisterFeedback(
+          "A new verification code has been sent.",
+          "success"
+        );
+
+      } catch (error) {
+        console.error(
+          "Miimiid verification resend error:",
+          error
+        );
+
+        setMiimiidRegisterFeedback(
+          error.message ||
+          "Unable to send a new verification code.",
+          "error"
+        );
+
+      } finally {
+        if (resend) {
+          resend.disabled = false;
         }
       }
     }
@@ -3984,6 +5172,191 @@ body.miimiid-drawer-open {
       }
     }
 
+    function initializeMiimiidRegistrationFlow() {
+      const form =
+        document.getElementById(
+          "miimiid-register-form"
+        );
+
+      if (!form) {
+        return;
+      }
+
+      if (
+        form.dataset.registrationInitialized ===
+        "true"
+      ) {
+        return;
+      }
+
+      form.dataset.registrationInitialized =
+        "true";
+
+      document
+        .getElementById(
+          "miimiid-register-get-started"
+        )
+        ?.addEventListener(
+          "click",
+          () => {
+            showMiimiidRegistrationStep(2);
+          }
+        );
+
+      document
+        .getElementById(
+          "miimiid-register-name-next"
+        )
+        ?.addEventListener(
+          "click",
+          () => {
+            const firstName =
+              document
+                .getElementById(
+                  "miimiid-register-first-name"
+                )
+                ?.value
+                .trim() || "";
+
+            const lastName =
+              document
+                .getElementById(
+                  "miimiid-register-last-name"
+                )
+                ?.value
+                .trim() || "";
+
+            if (!firstName) {
+              setMiimiidRegisterFeedback(
+                "Enter your first name.",
+                "error"
+              );
+              return;
+            }
+
+            if (!lastName) {
+              setMiimiidRegisterFeedback(
+                "Enter your last name.",
+                "error"
+              );
+              return;
+            }
+
+            showMiimiidRegistrationStep(3);
+          }
+        );
+
+      document
+        .getElementById(
+          "miimiid-register-contact-next"
+        )
+        ?.addEventListener(
+          "click",
+          () => {
+            const email =
+              document
+                .getElementById(
+                  "miimiid-register-email"
+                )
+                ?.value
+                .trim() || "";
+
+            const phone =
+              document
+                .getElementById(
+                  "miimiid-register-phone"
+                )
+                ?.value
+                .trim() || "";
+
+            if (
+              !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
+                email
+              )
+            ) {
+              setMiimiidRegisterFeedback(
+                "Enter a valid email address.",
+                "error"
+              );
+              return;
+            }
+
+            if (!phone) {
+              setMiimiidRegisterFeedback(
+                "Enter your phone number.",
+                "error"
+              );
+              return;
+            }
+
+            showMiimiidRegistrationStep(4);
+          }
+        );
+
+      document
+        .getElementById(
+          "miimiid-register-submit"
+        )
+        ?.addEventListener(
+          "click",
+          () => {
+            const formEvent =
+              new Event(
+                "submit",
+                {
+                  bubbles: true,
+                  cancelable: true
+                }
+              );
+
+            form.dispatchEvent(
+              formEvent
+            );
+          }
+        );
+
+      document
+        .getElementById(
+          "miimiid-verify-account-submit"
+        )
+        ?.addEventListener(
+          "click",
+          handleMiimiidVerifyAccount
+        );
+
+      document
+        .getElementById(
+          "miimiid-resend-verification"
+        )
+        ?.addEventListener(
+          "click",
+          handleMiimiidResendVerification
+        );
+
+      form
+        .querySelectorAll(
+          "[data-register-back]"
+        )
+        .forEach(button => {
+          button.addEventListener(
+            "click",
+            () => {
+              const target =
+                Number(
+                  button.getAttribute(
+                    "data-register-back"
+                  )
+                );
+
+              showMiimiidRegistrationStep(
+                target
+              );
+            }
+          );
+        });
+    }
+
+
     function initializeMiimiidAuth() {
       if (miimiidAuthInitialized) {
         return;
@@ -4081,7 +5454,76 @@ body.miimiid-drawer-open {
         );
     }
 
+    function initializeMiimiidPasswordToggles() {
+      document
+        .querySelectorAll("[data-password-toggle]")
+        .forEach(toggle => {
+          if (toggle.dataset.initialized === "true") {
+            return;
+          }
+
+          toggle.dataset.initialized = "true";
+
+          toggle.addEventListener("click", () => {
+            const inputId =
+              toggle.getAttribute("data-password-toggle");
+
+            const input =
+              document.getElementById(inputId);
+
+            if (!input) {
+              return;
+            }
+
+            const showing =
+              input.type === "text";
+
+            input.type =
+              showing ? "password" : "text";
+
+            const showIcon =
+              toggle.querySelector(
+                ".miimiid-password-icon-show"
+              );
+
+            const hideIcon =
+              toggle.querySelector(
+                ".miimiid-password-icon-hide"
+              );
+
+            if (showIcon) {
+              showIcon.style.display =
+                showing ? "block" : "none";
+            }
+
+            if (hideIcon) {
+              hideIcon.style.display =
+                showing ? "none" : "block";
+            }
+
+            toggle.setAttribute(
+              "aria-label",
+              miimiidDashboardTranslate(
+                showing
+                  ? "authShowPassword"
+                  : "authHidePassword"
+              )
+            );
+
+            toggle.setAttribute(
+              "aria-pressed",
+              showing ? "false" : "true"
+            );
+          });
+        });
+    }
+
+
     async function initializeMiimiidApplication() {
+      initializeMiimiidPasswordToggles();
+
+      initializeMiimiidRegistrationFlow();
+
       initializeMiimiidAuth();
 
       const authLoading =
@@ -6480,6 +7922,37 @@ async function submitQuiz() {
       pro: 'Pro',
       premium: 'Premium',
       settings: 'Settings',
+
+      authWelcome: 'Welcome back',
+      authSignInSubtitle: 'Sign in to continue to your account.',
+      authCreateAccount: 'Create an account',
+      authCreateSubtitle: 'Create your Miimiid account to get started.',
+      authResetPassword: 'Reset your password',
+      authResetSubtitle: 'Choose a new password for your Miimiid account.',
+      authResetTitle: 'Reset your password',
+      authResetDescription: 'Choose a new password for your Miimiid account.',
+      authEmailOrPhone: 'Email or phone number',
+      authPassword: 'Password',
+      authSignIn: 'Sign In',
+      authForgotPassword: 'Forgot password?',
+      authCreateAccountLink: 'Create an account',
+      authBackToSignIn: 'Back to sign in',
+      authShowPassword: 'Show password',
+      authHidePassword: 'Hide password',
+      authNewPassword: 'New password',
+      authConfirmNewPassword: 'Confirm new password',
+      authConfirmPassword: 'Confirm password',
+      authName: 'Name',
+      authEmail: 'Email',
+      authPhoneNumber: 'Phone number',
+      authCreateAccountButton: 'Create Account',
+      authSendResetInstructions: 'Send Reset Instructions',
+      authResetPasswordButton: 'Reset Password',
+      authPasswordsDoNotMatch: 'Passwords do not match.',
+      authCreatingAccount: 'Creating your account...',
+      authAccountCreated: 'Account created successfully.',
+      authUnableToSignIn: 'Unable to sign in.',
+      authUnableToCreateAccount: 'Unable to create your account.',
 
     },
 

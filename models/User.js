@@ -2,12 +2,30 @@ const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema(
   {
+    /*
+     * Legacy display name.
+     *
+     * Kept temporarily so existing Miimiid accounts remain
+     * completely compatible while the new registration flow
+     * moves to firstName + lastName.
+     */
     name: {
       type: String,
-      required: true,
       trim: true,
       minlength: 2,
       maxlength: 100
+    },
+
+    firstName: {
+      type: String,
+      trim: true,
+      maxlength: 50
+    },
+
+    lastName: {
+      type: String,
+      trim: true,
+      maxlength: 50
     },
 
     email: {
@@ -27,9 +45,36 @@ const userSchema = new mongoose.Schema(
       maxlength: 30
     },
 
+    dateOfBirth: {
+      type: Date,
+      default: null
+    },
+
     passwordHash: {
       type: String,
       required: true
+    },
+
+    /*
+     * Verification lifecycle.
+     *
+     * Existing users receive the compatibility defaults.
+     * New registration will explicitly create an unverified
+     * account and move these values to false.
+     */
+    emailVerified: {
+      type: Boolean,
+      default: true
+    },
+
+    phoneVerified: {
+      type: Boolean,
+      default: true
+    },
+
+    accountVerified: {
+      type: Boolean,
+      default: true
     }
   },
   {

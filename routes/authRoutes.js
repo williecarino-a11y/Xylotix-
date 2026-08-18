@@ -7,10 +7,16 @@ const UserSession = require('../models/UserSession');
 const PasswordResetToken =
   require('../models/PasswordResetToken');
 
+const VerificationToken =
+  require('../models/VerificationToken');
+
 const router = express.Router();
 
 const SESSION_DAYS = 30;
 const RESET_MINUTES = 30;
+
+const VERIFICATION_MINUTES = 5;
+const VERIFICATION_MAX_ATTEMPTS = 5;
 
 const COOKIE_NAME =
   process.env.AUTH_COOKIE_NAME ||
@@ -37,6 +43,43 @@ function hashToken(token) {
 
 function createToken() {
   return crypto.randomBytes(32).toString('hex');
+}
+
+function createVerificationCode() {
+  return String(
+    crypto.randomInt(100000, 1000000)
+  );
+}
+
+function hashVerificationCode(code) {
+  return crypto
+    .createHash('sha256')
+    .update(String(code))
+    .digest('hex');
+}
+
+function maskEmail(email) {
+  const value = String(email || '');
+
+  const at = value.indexOf('@');
+
+  if (at <= 0) {
+    return value;
+  }
+
+  const name = value.slice(0, at);
+  const domain = value.slice(at);
+
+  if (name.length <= 2) {
+    return `${name[0] || ''}*${domain}`;
+  }
+
+  return (
+    name[0] +
+    '*'.repeat(Math.min(name.length - 2, 5)) +
+    name[name.length - 1] +
+    domain
+  );
 }
 
 function hashPassword(password) {
@@ -194,9 +237,20 @@ async function getAuthenticatedUser(req) {
 function publicUser(user) {
   return {
     id: user._id.toString(),
-    name: user.name,
+    name: user.name || '',
+    firstName: user.firstName || '',
+    lastName: user.lastName || '',
     email: user.email,
-    phone: user.phone
+    phone: user.phone,
+    dateOfBirth: user.dateOfBirth
+      ? user.dateOfBirth.toISOString().slice(0, 10)
+      : null,
+    emailVerified:
+      user.emailVerified === true,
+    phoneVerified:
+      user.phoneVerified === true,
+    accountVerified:
+      user.accountVerified === true
   };
 }
 
@@ -215,9 +269,17 @@ function getMailer() {
     port: Number(process.env.SMTP_PORT),
     secure:
       String(process.env.SMTP_SECURE) === 'true',
+    family: 4,
+    requireTLS: true,
     auth: {
       user: process.env.SMTP_USER,
       pass: process.env.SMTP_PASSWORD
+    },
+    connectionTimeout: 30000,
+    greetingTimeout: 30000,
+    socketTimeout: 30000,
+    tls: {
+      minVersion: 'TLSv1.2'
     }
   });
 }
@@ -225,38 +287,65 @@ function getMailer() {
 
 /**
  * POST /api/auth/register
+ *
+ * Creates an unverified Miimiid account and sends
+ * a six-digit account verification code by email.
  */
 router.post(
   '/register',
   async (req, res) => {
     try {
-      const {
-        name,
-        email,
-        phone,
-        password
-      } = req.body;
+      const firstName =
+        typeof req.body.firstName === 'string'
+          ? req.body.firstName.trim()
+          : '';
+
+      const lastName =
+        typeof req.body.lastName === 'string'
+          ? req.body.lastName.trim()
+          : '';
+
+      const email =
+        normalizeEmail(req.body.email);
+
+      const phone =
+        normalizePhone(req.body.phone);
+
+      const password =
+        typeof req.body.password === 'string'
+          ? req.body.password
+          : '';
+
+      const dateOfBirth =
+        typeof req.body.dateOfBirth === 'string'
+          ? req.body.dateOfBirth.trim()
+          : '';
 
       if (
-        typeof name !== 'string' ||
-        name.trim().length < 2
+        firstName.length < 1 ||
+        firstName.length > 50
       ) {
         return res.status(400).json({
           status: 'error',
           message:
-            'A valid name is required.'
+            'Enter your first name.'
         });
       }
 
-      const normalizedEmail =
-        normalizeEmail(email);
-
-      const normalizedPhone =
-        normalizePhone(phone);
+      if (
+        lastName.length < 1 ||
+        lastName.length > 50
+      ) {
+        return res.status(400).json({
+          status: 'error',
+          message:
+            'Enter your last name.'
+        });
+      }
 
       if (
         !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
-          normalizedEmail
+          email
         )
       ) {
         return res.status(400).json({
@@ -266,9 +355,7 @@ router.post(
         });
       }
 
-      if (
-        normalizedPhone.length < 7
-      ) {
+      if (phone.length < 7) {
         return res.status(400).json({
           status: 'error',
           message:
@@ -277,7 +364,49 @@ router.post(
       }
 
       if (
-        typeof password !== 'string' ||
+        !dateOfBirth ||
+        !/^\d{4}-\d{2}-\d{2}$/.test(
+          dateOfBirth
+        )
+      ) {
+        return res.status(400).json({
+          status: 'error',
+          message:
+            'Enter a valid date of birth.'
+        });
+      }
+
+      const parsedDate =
+        new Date(
+          `${dateOfBirth}T00:00:00.000Z`
+        );
+
+      if (
+        Number.isNaN(
+          parsedDate.getTime()
+        ) ||
+        parsedDate
+          .toISOString()
+          .slice(0, 10) !== dateOfBirth
+      ) {
+        return res.status(400).json({
+          status: 'error',
+          message:
+            'Enter a valid date of birth.'
+        });
+      }
+
+      if (
+        parsedDate.getTime() > Date.now()
+      ) {
+        return res.status(400).json({
+          status: 'error',
+          message:
+            'Date of birth cannot be in the future.'
+        });
+      }
+
+      if (
         password.length < 8
       ) {
         return res.status(400).json({
@@ -291,10 +420,10 @@ router.post(
         await User.findOne({
           $or: [
             {
-              email: normalizedEmail
+              email
             },
             {
-              phone: normalizedPhone
+              phone
             }
           ]
         });
@@ -307,28 +436,107 @@ router.post(
         });
       }
 
+      const mailer =
+        getMailer();
+
+      if (!mailer) {
+        console.error(
+          'Registration requested but SMTP is not configured.'
+        );
+
+        return res.status(503).json({
+          status: 'error',
+          message:
+            'Account verification email service is not configured yet.'
+        });
+      }
+
       const passwordHash =
         await hashPassword(password);
 
       const user =
         await User.create({
-          name: name.trim(),
-          email: normalizedEmail,
-          phone: normalizedPhone,
-          passwordHash
+          name:
+            `${firstName} ${lastName}`.trim(),
+          firstName,
+          lastName,
+          email,
+          phone,
+          dateOfBirth: parsedDate,
+          passwordHash,
+          emailVerified: false,
+          phoneVerified: false,
+          accountVerified: false
         });
 
-      const token =
-        await createSession(user._id);
+      await VerificationToken.deleteMany({
+        userId: user._id,
+        purpose: 'account-verification'
+      });
 
-      setSessionCookie(res, token);
+      const code =
+        createVerificationCode();
+
+      await VerificationToken.create({
+        userId: user._id,
+        tokenHash:
+          hashVerificationCode(code),
+        purpose:
+          'account-verification',
+        expiresAt:
+          new Date(
+            Date.now() +
+            VERIFICATION_MINUTES *
+            60 *
+            1000
+          ),
+        attempts: 0
+      });
+
+      try {
+        await mailer.sendMail({
+          from:
+            process.env.SMTP_FROM ||
+            process.env.SMTP_USER,
+          to: user.email,
+          subject:
+            'Your Miimiid verification code',
+          text:
+            `Your Miimiid verification code is ${code}.\n\n` +
+            `This code expires in ${VERIFICATION_MINUTES} minutes.\n\n` +
+            `If you did not create a Miimiid account, you can ignore this email.`,
+          html:
+            `<p>Welcome to Miimiid.</p>
+             <p>Your account verification code is:</p>
+             <p style="font-size:32px;font-weight:700;letter-spacing:8px;">${code}</p>
+             <p>This code expires in ${VERIFICATION_MINUTES} minutes.</p>
+             <p>If you did not create a Miimiid account, you can ignore this email.</p>`
+        });
+      } catch (mailError) {
+        await VerificationToken.deleteMany({
+          userId: user._id,
+          purpose: 'account-verification'
+        });
+
+        await User.deleteOne({
+          _id: user._id
+        });
+
+        throw mailError;
+      }
 
       return res.status(201).json({
         status: 'success',
         data: {
-          user: publicUser(user)
+          verificationRequired: true,
+          verificationMethod: 'email',
+          maskedEmail:
+            maskEmail(user.email),
+          expiresInSeconds:
+            VERIFICATION_MINUTES * 60
         }
       });
+
     } catch (error) {
       console.error(
         'Registration error:',
@@ -339,6 +547,299 @@ router.post(
         status: 'error',
         message:
           'Unable to create your account.'
+      });
+    }
+  }
+);
+
+
+/**
+ * POST /api/auth/verify-account
+ *
+ * Verifies the six-digit account verification code.
+ */
+router.post(
+  '/verify-account',
+  async (req, res) => {
+    try {
+      const email =
+        normalizeEmail(req.body.email);
+
+      const code =
+        String(
+          req.body.code || ''
+        ).trim();
+
+      if (
+        !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
+          email
+        )
+      ) {
+        return res.status(400).json({
+          status: 'error',
+          message:
+            'Enter a valid email address.'
+        });
+      }
+
+      if (!/^\d{6}$/.test(code)) {
+        return res.status(400).json({
+          status: 'error',
+          message:
+            'Enter the 6-digit verification code.'
+        });
+      }
+
+      const user =
+        await User.findOne({
+          email
+        });
+
+      if (!user) {
+        return res.status(400).json({
+          status: 'error',
+          message:
+            'This verification request is invalid.'
+        });
+      }
+
+      if (
+        user.accountVerified === true &&
+        user.emailVerified === true
+      ) {
+        return res.status(200).json({
+          status: 'success',
+          data: {
+            verified: true,
+            user: publicUser(user)
+          }
+        });
+      }
+
+      const verification =
+        await VerificationToken.findOne({
+          userId: user._id,
+          purpose:
+            'account-verification',
+          expiresAt: {
+            $gt: new Date()
+          }
+        });
+
+      if (!verification) {
+        return res.status(400).json({
+          status: 'error',
+          message:
+            'This verification code has expired. Request a new code.'
+        });
+      }
+
+      if (
+        Number(
+          verification.attempts || 0
+        ) >= VERIFICATION_MAX_ATTEMPTS
+      ) {
+        return res.status(429).json({
+          status: 'error',
+          message:
+            'Too many incorrect attempts. Request a new verification code.'
+        });
+      }
+
+      const submittedHash =
+        hashVerificationCode(code);
+
+      if (
+        submittedHash !==
+        verification.tokenHash
+      ) {
+        verification.attempts =
+          Number(
+            verification.attempts || 0
+          ) + 1;
+
+        await verification.save();
+
+        return res.status(400).json({
+          status: 'error',
+          message:
+            'That verification code is incorrect.'
+        });
+      }
+
+      user.emailVerified = true;
+      user.accountVerified = true;
+
+      await user.save();
+
+      await VerificationToken.deleteMany({
+        userId: user._id,
+        purpose:
+          'account-verification'
+      });
+
+      const sessionToken =
+        await createSession(user._id);
+
+      setSessionCookie(
+        res,
+        sessionToken
+      );
+
+      return res.status(200).json({
+        status: 'success',
+        data: {
+          verified: true,
+          user: publicUser(user)
+        }
+      });
+
+    } catch (error) {
+      console.error(
+        'Account verification error:',
+        error
+      );
+
+      return res.status(500).json({
+        status: 'error',
+        message:
+          'Unable to verify your account.'
+      });
+    }
+  }
+);
+
+
+/**
+ * POST /api/auth/resend-verification
+ *
+ * Generates and sends a new account verification code.
+ */
+router.post(
+  '/resend-verification',
+  async (req, res) => {
+    try {
+      const email =
+        normalizeEmail(req.body.email);
+
+      if (
+        !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
+          email
+        )
+      ) {
+        return res.status(400).json({
+          status: 'error',
+          message:
+            'Enter a valid email address.'
+        });
+      }
+
+      const user =
+        await User.findOne({
+          email
+        });
+
+      if (!user) {
+        return res.status(200).json({
+          status: 'success',
+          message:
+            'If an unverified account exists for that email, a new verification code will be sent.'
+        });
+      }
+
+      if (
+        user.accountVerified === true &&
+        user.emailVerified === true
+      ) {
+        return res.status(200).json({
+          status: 'success',
+          data: {
+            verified: true,
+            user: publicUser(user)
+          }
+        });
+      }
+
+      const mailer =
+        getMailer();
+
+      if (!mailer) {
+        console.error(
+          'Verification resend requested but SMTP is not configured.'
+        );
+
+        return res.status(503).json({
+          status: 'error',
+          message:
+            'Account verification email service is not configured yet.'
+        });
+      }
+
+      await VerificationToken.deleteMany({
+        userId: user._id,
+        purpose:
+          'account-verification'
+      });
+
+      const code =
+        createVerificationCode();
+
+      await VerificationToken.create({
+        userId: user._id,
+        tokenHash:
+          hashVerificationCode(code),
+        purpose:
+          'account-verification',
+        expiresAt:
+          new Date(
+            Date.now() +
+            VERIFICATION_MINUTES *
+            60 *
+            1000
+          ),
+        attempts: 0
+      });
+
+      await mailer.sendMail({
+        from:
+          process.env.SMTP_FROM ||
+          process.env.SMTP_USER,
+        to: user.email,
+        subject:
+          'Your new Miimiid verification code',
+        text:
+          `Your new Miimiid verification code is ${code}.\n\n` +
+          `This code expires in ${VERIFICATION_MINUTES} minutes.\n\n` +
+          `If you did not create a Miimiid account, you can ignore this email.`,
+        html:
+          `<p>Your new Miimiid verification code is:</p>
+           <p style="font-size:32px;font-weight:700;letter-spacing:8px;">${code}</p>
+           <p>This code expires in ${VERIFICATION_MINUTES} minutes.</p>
+           <p>If you did not create a Miimiid account, you can ignore this email.</p>`
+      });
+
+      return res.status(200).json({
+        status: 'success',
+        data: {
+          verificationRequired: true,
+          verificationMethod: 'email',
+          maskedEmail:
+            maskEmail(user.email),
+          expiresInSeconds:
+            VERIFICATION_MINUTES * 60
+        }
+      });
+
+    } catch (error) {
+      console.error(
+        'Verification resend error:',
+        error
+      );
+
+      return res.status(500).json({
+        status: 'error',
+        message:
+          'Unable to send a new verification code.'
       });
     }
   }
