@@ -258,21 +258,15 @@ function getMailer() {
 
   return nodemailer.createTransport({
     host: process.env.SMTP_HOST,
-    port: Number(process.env.SMTP_PORT),
-    secure:
-      String(process.env.SMTP_SECURE) === 'true',
-    family: 4,
-    requireTLS: true,
+    port: 465,
+    secure: true,
     auth: {
       user: process.env.SMTP_USER,
       pass: process.env.SMTP_PASSWORD
     },
     connectionTimeout: 30000,
     greetingTimeout: 30000,
-    socketTimeout: 30000,
-    tls: {
-      minVersion: 'TLSv1.2'
-    }
+    socketTimeout: 30000
   });
 }
 
@@ -444,7 +438,7 @@ router.post(
       });
 
       try {
-        await mailer.sendMail({
+        const mailInfo = await mailer.sendMail({
           from:
             process.env.SMTP_FROM ||
             process.env.SMTP_USER,
@@ -466,6 +460,13 @@ router.post(
              <p>This code expires in ${VERIFICATION_MINUTES} minutes.</p>
              <p>If you did not create a Miimiid account, you can ignore this email.</p>`
         });
+
+     console.log('Miimiid verification email sent:', {
+  messageId: mailInfo.messageId,
+  accepted: mailInfo.accepted,
+  rejected: mailInfo.rejected,
+  response: mailInfo.response
+});
       } catch (mailError) {
         await VerificationToken.deleteMany({
           userId: user._id,
