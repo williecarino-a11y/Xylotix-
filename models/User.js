@@ -2,20 +2,6 @@ const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema(
   {
-    /*
-     * Legacy display name.
-     *
-     * Kept temporarily so existing Miimiid accounts remain
-     * completely compatible while the new registration flow
-     * moves to firstName + lastName.
-     */
-    name: {
-      type: String,
-      trim: true,
-      minlength: 2,
-      maxlength: 100
-    },
-
     firstName: {
       type: String,
       trim: true,

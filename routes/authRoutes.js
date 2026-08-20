@@ -232,7 +232,6 @@ async function getAuthenticatedUser(req) {
 function publicUser(user) {
   return {
     id: user._id.toString(),
-    name: user.name || '',
     firstName: user.firstName || '',
     lastName: user.lastName || '',
     email: user.email || '',
@@ -400,9 +399,6 @@ router.post(
 
       const user =
         await User.create({
-          name:
-            `${firstName} ${lastName}`.trim(),
-
           firstName,
           lastName,
 

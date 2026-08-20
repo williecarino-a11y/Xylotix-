@@ -1,68 +1,164 @@
 /**
- * Miimiid Fun Center activity data.
+ * Miimiid Fun Center
  *
- * This file contains activity DATA only.
- * Rendering and interaction logic belong to the frontend.
+ * DATA DEFINITIONS ONLY.
  *
- * User-facing text is represented by localization keys so
- * the frontend localization system remains authoritative.
+ * The frontend owns presentation, animation and interaction.
+ * The server owns validation and rewards.
  */
 
-const funCenterActivities = [
+const funCenterGames = [
   {
     id: 'needs-vs-wants',
+
+    type: 'classification',
+
     titleKey: 'funNeedsVsWants',
+
+    subtitleKey: 'funNeedsVsWantsSubtitle',
+
     resultTitleKey: 'funRoundComplete',
+
     resultMessageKey: 'funNeedsVsWantsResult',
+
+    rounds: [
+      {
+        id: 'rent',
+        textKey: 'funNeedsVsWantsRent',
+        category: 'housing',
+        answer: 'need',
+        visual: '🏠'
+      },
+
+      {
+        id: 'groceries',
+        textKey: 'funNeedsVsWantsGroceries',
+        category: 'food',
+        answer: 'need',
+        visual: '🛒'
+      },
+
+      {
+        id: 'concert',
+        textKey: 'funNeedsVsWantsConcert',
+        category: 'entertainment',
+        answer: 'want',
+        visual: '🎵'
+      },
+
+      {
+        id: 'medicine',
+        textKey: 'funNeedsVsWantsMedicine',
+        category: 'health',
+        answer: 'need',
+        visual: '💊'
+      },
+
+      {
+        id: 'headphones',
+        textKey: 'funNeedsVsWantsHeadphones',
+        category: 'shopping',
+        answer: 'want',
+        visual: '🎧'
+      },
+
+      {
+        id: 'emergency-savings',
+        textKey: 'funNeedsVsWantsEmergencySavings',
+        category: 'saving',
+        answer: 'need',
+        visual: '🛡️'
+      },
+
+      {
+        id: 'luxury-watch',
+        textKey: 'funNeedsVsWantsLuxuryWatch',
+        category: 'shopping',
+        answer: 'want',
+        visual: '⌚'
+      },
+
+      {
+        id: 'electricity',
+        textKey: 'funNeedsVsWantsElectricity',
+        category: 'utilities',
+        answer: 'need',
+        visual: '💡'
+      },
+
+      {
+        id: 'gaming-console',
+        textKey: 'funNeedsVsWantsGamingConsole',
+        category: 'entertainment',
+        answer: 'want',
+        visual: '🎮'
+      },
+
+      {
+        id: 'basic-clothing',
+        textKey: 'funNeedsVsWantsBasicClothing',
+        category: 'clothing',
+        answer: 'need',
+        visual: '👕'
+      }
+    ],
+
     answers: [
       {
         id: 'need',
         key: 'funNeed'
       },
+
       {
         id: 'want',
         key: 'funWant'
-      }
-    ],
-    rounds: [
-      {
-        id: 'rent',
-        textKey: 'funNeedsVsWantsRent',
-        answer: 'need'
-      },
-      {
-        id: 'groceries',
-        textKey: 'funNeedsVsWantsGroceries',
-        answer: 'need'
-      },
-      {
-        id: 'concert',
-        textKey: 'funNeedsVsWantsConcert',
-        answer: 'want'
-      },
-      {
-        id: 'medicine',
-        textKey: 'funNeedsVsWantsMedicine',
-        answer: 'need'
-      },
-      {
-        id: 'headphones',
-        textKey: 'funNeedsVsWantsHeadphones',
-        answer: 'want'
       }
     ]
   }
 ];
 
-function getFunCenterActivities() {
-  return funCenterActivities.map(activity => ({
-    ...activity,
-    rounds: activity.rounds.map(round => ({
+function getFunCenterGames() {
+  return funCenterGames.map(game => ({
+    ...game,
+
+    rounds: game.rounds.map(round => ({
       ...round
+    })),
+
+    answers: game.answers.map(answer => ({
+      ...answer
     }))
   }));
 }
 
+function getFunCenterGame(gameId) {
+  return funCenterGames.find(
+    game => game.id === gameId
+  );
+}
+
+function validateFunCenterAnswer(
+  gameId,
+  roundIndex,
+  answer
+) {
+  const game = getFunCenterGame(gameId);
+
+  if (!game) {
+    return false;
+  }
+
+  const round = game.rounds[roundIndex];
+
+  if (!round) {
+    return false;
+  }
+
+  return round.answer === answer;
+}
+
 module.exports = {
-  getFunCenterActivities
+  getFunCenterGames,
+  getFunCenterGame,
+  validateFunCenterAnswer
 };

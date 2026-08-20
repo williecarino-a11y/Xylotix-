@@ -35,6 +35,14 @@ app.use('/api/auth', authRoutes);
 const learningRoutes = require('./routes/learningRoutes');
 app.use('/api/learn', learningRoutes);
 
+const funCenterRoutes =
+  require('./routes/funCenterRoutes');
+
+app.use(
+  '/api/fun-center',
+  funCenterRoutes
+);
+
 // Miimiid AI Tutor API
 const aiTutorRoutes = require('./routes/aiTutorRoutes');
 app.use('/api/ai-tutor', aiTutorRoutes);
