@@ -381,7 +381,7 @@
   color: #64748b;
   opacity: 1;
 }
-
+  
   /* ================================
      MIIMIID HEADER + LANGUAGE SELECTOR
      ================================ */
@@ -1571,19 +1571,17 @@ body:has(#miimiid-auth-view:not(.hidden)) {
 
 
     /*
-     * MIIMIID REUSABLE PRIMARY ASYNC ACTION BUTTON
+     * MIIMIID REUSABLE PRIMARY ACTION BUTTON
      *
-     * Central loading presentation used by real asynchronous
-     * application/authentication operations.
-     *
-     * The button itself keeps its existing dimensions.
-     * Only its content presentation changes while the real
-     * Promise returned by the action is pending.
+     * One loading mechanism for authentication and application
+     * primary actions. The button itself never changes dimensions.
      */
     .miimiid-async-button {
       position: relative;
       overflow: hidden;
-      isolation: isolate;
+      transition:
+        opacity 220ms ease,
+        transform 220ms ease;
     }
 
     .miimiid-async-button[aria-busy="true"] {
@@ -1597,53 +1595,44 @@ body:has(#miimiid-auth-view:not(.hidden)) {
       justify-content: center;
       width: 100%;
       min-width: 0;
-      visibility: visible;
-      opacity: 1;
+      transition: opacity 180ms ease;
+    }
+
+    .miimiid-async-button[aria-busy="true"]
+    .miimiid-async-button-content {
+      opacity: 0;
     }
 
     .miimiid-async-button-spinner {
       position: absolute;
       left: 50%;
       top: 50%;
-      width: 20px;
-      height: 20px;
-      box-sizing: border-box;
-      border: 3px solid currentColor;
+      width: 16px;
+      height: 16px;
+      margin-left: -8px;
+      margin-top: -8px;
+      border: 2px solid currentColor;
       border-right-color: transparent;
       border-radius: 50%;
-      display: block;
-      margin: -10px 0 0 -10px;
-      padding: 0;
       opacity: 0;
-      visibility: hidden;
-      animation: miimiidAsyncButtonSpin 0.75s linear infinite;
+      transform: scale(0.82);
+      transition:
+        opacity 180ms ease,
+        transform 220ms ease;
+      animation: miimiid-async-button-spin 700ms linear infinite;
       animation-play-state: paused;
-      transform: rotate(0deg);
-      pointer-events: none;
-    }
-
-    .miimiid-async-button[aria-busy="true"]
-    .miimiid-async-button-content {
-      visibility: hidden;
-      opacity: 0;
     }
 
     .miimiid-async-button[aria-busy="true"]
     .miimiid-async-button-spinner {
       opacity: 1;
-      visibility: visible;
+      transform: scale(1);
       animation-play-state: running;
     }
 
-    @keyframes miimiidAsyncButtonSpin {
+    @keyframes miimiid-async-button-spin {
       to {
         transform: rotate(360deg);
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .miimiid-async-button-spinner {
-        animation-duration: 1400ms;
       }
     }
 
@@ -2080,7 +2069,7 @@ body:has(#miimiid-auth-view:not(.hidden)) {
             class="btn"
             id="miimiid-register-name-next"
            data-miimiid-auth-key="authContinue">
-
+            
           </button>
 
           <button
@@ -2117,7 +2106,7 @@ body:has(#miimiid-auth-view:not(.hidden)) {
             class="btn"
             id="miimiid-register-contact-next"
            data-miimiid-auth-key="authContinue">
-
+            
           </button>
 
           <button
@@ -2129,33 +2118,12 @@ body:has(#miimiid-auth-view:not(.hidden)) {
         </section>
 
 
-        <!-- STEP 5: PASSWORD + CONFIRM PASSWORD -->
-
-
-
-        <!-- STEP 4: GENDER + DATE OF BIRTH -->
+        <!-- STEP 4: DOB + PASSWORD -->
+                <!-- STEP 4: BIRTHDAY + PASSWORD -->
         <section
           class="miimiid-register-step hidden"
           data-register-step="4"
         >
-
-          <h2
-            class="miimiid-auth-step-title"
-            data-miimiid-auth-key="authGenderBirthday"
-          ></h2>
-
-          <div class="miimiid-auth-field">
-            <label
-              for="miimiid-register-gender"
-              data-miimiid-auth-key="authGender"
-            ></label>
-
-            <select
-              id="miimiid-register-gender"
-              autocomplete="sex"
-              data-miimiid-register-field="gender"
-            ></select>
-          </div>
 
           <!-- Birthday comes FIRST -->
           <h2
@@ -2230,28 +2198,6 @@ body:has(#miimiid-auth-view:not(.hidden)) {
             >
           </div>
 
-
-
-          <button
-            type="button"
-            class="btn"
-            id="miimiid-register-details-next"
-            data-miimiid-auth-key="authContinue"
-          ></button>
-
-          <button
-            type="button"
-            class="miimiid-auth-link"
-            data-register-back="3"
-            data-miimiid-auth-key="authBack"
-          ></button>
-
-        </section>
-
-<section
-          class="miimiid-register-step hidden"
-          data-register-step="5"
-        >
 
           <!-- Password comes AFTER birthday -->
           <h2
@@ -2340,7 +2286,7 @@ body:has(#miimiid-auth-view:not(.hidden)) {
 
           <!-- Continue comes LAST -->
           <button
-            type="submit"
+            type="button"
             class="btn"
             id="miimiid-register-submit"
             data-miimiid-auth-key="authContinue"
@@ -2349,7 +2295,7 @@ body:has(#miimiid-auth-view:not(.hidden)) {
           <button
             type="button"
             class="miimiid-auth-link"
-            data-register-back="4"
+            data-register-back="3"
             data-miimiid-auth-key="authBack"
           ></button>
 
@@ -2461,10 +2407,10 @@ body:has(#miimiid-auth-view:not(.hidden)) {
         </div>
 
 
-<!-- STEP 6: ACCOUNT VERIFICATION -->
+<!-- STEP 5: ACCOUNT VERIFICATION -->
         <section
           class="miimiid-register-step hidden"
-          data-register-step="6"
+          data-register-step="5"
         >
           <h2
             class="miimiid-auth-step-title"
@@ -2506,7 +2452,7 @@ body:has(#miimiid-auth-view:not(.hidden)) {
             class="btn"
             id="miimiid-verify-account-submit"
            data-miimiid-auth-key="authVerifyAccount">
-
+            
           </button>
 
           <button
@@ -2514,13 +2460,13 @@ body:has(#miimiid-auth-view:not(.hidden)) {
             class="miimiid-auth-link"
             id="miimiid-resend-verification"
            data-miimiid-auth-key="authResendCode">
-
+            
           </button>
 
           <button
             type="button"
             class="miimiid-auth-link"
-            data-register-back="5"
+            data-register-back="4"
             data-miimiid-auth-key="authBack"
           ></button>
         </section>
@@ -2541,7 +2487,7 @@ body:has(#miimiid-auth-view:not(.hidden)) {
           class="miimiid-auth-link"
           id="miimiid-show-login-from-register"
          data-miimiid-auth-key="authBackToSignIn">
-
+          
         </button>
 
       </form>
@@ -3377,19 +3323,7 @@ body:has(#miimiid-auth-view:not(.hidden)) {
       try {
         renderMiimiidBottomNavigation();
 
-        const dashboardReady =
-          await miimiidNavigate("home");
-
-        /*
-         * Never expose the authenticated application merely
-         * because authentication succeeded. The dashboard
-         * itself must report successful initialization.
-         */
-        if (dashboardReady !== true) {
-          throw new Error(
-            "Miimiid dashboard initialization did not complete successfully."
-          );
-        }
+        await miimiidNavigate("home");
 
         /*
          * Dashboard initialization completed successfully.
@@ -3431,12 +3365,7 @@ body:has(#miimiid-auth-view:not(.hidden)) {
         );
 
       if (!dashboard) {
-        console.error(
-          "Miimiid dashboard loading error: dashboard element is missing."
-        );
-
-        miimiidDashboardData = null;
-        return false;
+        return;
       }
 
       try {
@@ -3449,7 +3378,7 @@ body:has(#miimiid-auth-view:not(.hidden)) {
           );
 
           miimiidDashboardData = null;
-          return false;
+          return;
         }
 
         const response =
@@ -3489,28 +3418,20 @@ body:has(#miimiid-auth-view:not(.hidden)) {
 
         renderMiimiidDashboard();
 
-        /*
-         * A successful dashboard initialization must be
-         * explicitly observable by the authentication boundary.
-         */
-        return true;
-
       } catch (error) {
         console.error(
           "Miimiid dashboard loading error:",
           error
         );
 
-        /*
-         * Do not manufacture a successful dashboard state.
-         *
-         * Authentication may have succeeded, but the
-         * authenticated application is not ready until the
-         * real dashboard request and rendering complete.
-         */
-        miimiidDashboardData = null;
+        miimiidDashboardData = {
+          totalLessonsCompleted: 0,
+          averageQuizScore: 0,
+          streak: 0,
+          totalXP: 0
+        };
 
-        return false;
+        renderMiimiidDashboard();
       }
     }
 
@@ -3994,11 +3915,8 @@ body:has(#miimiid-auth-view:not(.hidden)) {
 
         renderMiimiidBottomNavigation();
 
-        /*
-         * Propagate real dashboard readiness to the
-         * authentication/application boundary.
-         */
-        return await loadMiimiidDashboard();
+        await loadMiimiidDashboard();
+        return;
       }
 
       if (dashboard) {
@@ -5345,7 +5263,7 @@ body:has(#miimiid-auth-view:not(.hidden)) {
           miimiidCurrentUser;
       }
 
-      return result;
+      return miimiidCurrentUser;
     }
 
     async function handleMiimiidLogin(event) {
@@ -5450,7 +5368,7 @@ body:has(#miimiid-auth-view:not(.hidden)) {
         Math.max(
           1,
           Math.min(
-            6,
+            5,
             Number(step) || 1
           )
         );
@@ -5619,24 +5537,7 @@ body:has(#miimiid-auth-view:not(.hidden)) {
     }
 
     async function handleMiimiidRegister(event) {
-      console.log(
-        "[MIIMIID REGISTER] *** SUBMIT EVENT REACHED HANDLER ***",
-        {
-          defaultPreventedBefore: event.defaultPrevented,
-          submitter: event.submitter ? event.submitter.id : null,
-          timestamp: performance.now()
-        }
-      );
-
       event.preventDefault();
-
-      console.log(
-        "[MIIMIID REGISTER] submit handler entered",
-        {
-          submitId: "miimiid-register-submit",
-          timestamp: performance.now()
-        }
-      );
 
       const firstName =
         document
@@ -5668,14 +5569,6 @@ body:has(#miimiid-auth-view:not(.hidden)) {
             "miimiid-register-dob"
           )
           ?.value || "";
-
-      const gender =
-        document
-          .getElementById(
-            "miimiid-register-gender"
-          )
-          ?.value
-          .trim() || "";
 
       const password =
         document
@@ -5724,19 +5617,6 @@ body:has(#miimiid-auth-view:not(.hidden)) {
         return;
       }
 
-      if (!gender) {
-        showMiimiidRegistrationStep(4);
-
-        setMiimiidRegisterFeedback(
-          miimiidDashboardTranslate(
-            "authSelectGender"
-          ),
-          "error"
-        );
-
-        return;
-      }
-
       if (!miimiidValidateBirthday()) {
         showMiimiidRegistrationStep(4);
 
@@ -5761,7 +5641,7 @@ body:has(#miimiid-auth-view:not(.hidden)) {
       }
 
       if (!miimiidValidatePassword()) {
-        showMiimiidRegistrationStep(5);
+        showMiimiidRegistrationStep(4);
 
         setMiimiidRegisterFeedback(
           miimiidSafeAuthMessage(
@@ -5781,7 +5661,7 @@ body:has(#miimiid-auth-view:not(.hidden)) {
       }
 
       if (!miimiidValidateConfirmPassword()) {
-        showMiimiidRegistrationStep(5);
+        showMiimiidRegistrationStep(4);
 
         setMiimiidRegisterFeedback(
           miimiidSafeAuthMessage(
@@ -5805,55 +5685,18 @@ body:has(#miimiid-auth-view:not(.hidden)) {
           "miimiid-register-submit"
         );
 
-      console.log(
-        "[MIIMIID REGISTER] validation passed",
-        {
-          submitId: submit && submit.id,
-          disabled: submit ? submit.disabled : null,
-          timestamp: performance.now()
-        }
-      );
-
       const actionButton =
         getMiimiidAsyncButton(submit);
 
       if (!actionButton) {
-        console.error(
-          "[MIIMIID REGISTER] async button unavailable",
-          {
-            submitId: submit && submit.id,
-            timestamp: performance.now()
-          }
-        );
         return;
       }
-
-      console.log(
-        "[MIIMIID REGISTER] async button acquired",
-        {
-          submitId: submit.id,
-          state: actionButton.state,
-          loading: actionButton.loading,
-          ariaBusy: submit.getAttribute("aria-busy"),
-          timestamp: performance.now()
-        }
-      );
 
       setMiimiidRegisterFeedback(
         miimiidDashboardTranslate("authCreatingAccount")
       );
 
       await actionButton.run(async () => {
-        console.log(
-          "[MIIMIID REGISTER] action starting",
-          {
-            submitId: submit.id,
-            ariaBusy: submit.getAttribute("aria-busy"),
-            state: submit.dataset.miimiidState,
-            timestamp: performance.now()
-          }
-        );
-
         try {
           const response =
             await miimiidAuthenticate(
@@ -5862,7 +5705,6 @@ body:has(#miimiid-auth-view:not(.hidden)) {
                 firstName,
                 lastName,
                 email,
-                gender,
                 dateOfBirth,
                 password
               }
@@ -5899,7 +5741,7 @@ body:has(#miimiid-auth-view:not(.hidden)) {
             }
 
             showMiimiidRegistrationStep(
-              6
+              5
             );
 
             startMiimiidVerificationTimer(
@@ -5997,14 +5839,7 @@ body:has(#miimiid-auth-view:not(.hidden)) {
             "success"
           );
 
-          const dashboardReady =
-            await initializeMiimiidDashboard();
-
-          if (!dashboardReady) {
-            throw new Error(
-              "Your account was verified, but the dashboard could not be loaded."
-            );
-          }
+          await initializeMiimiidDashboard();
 
         } catch (error) {
           console.error(
@@ -6470,73 +6305,7 @@ async function handleMiimiidForgotPassword(event) {
       return MIIMIID_EYE_VISIBLE_SVG;
     }
 
-
-const MIIMIID_REGISTRATION_DATA = {
-  genderOptions: [
-    {
-      value: "male",
-      translationKey: "authGenderMale"
-    },
-    {
-      value: "female",
-      translationKey: "authGenderFemale"
-    },
-    {
-      value: "other",
-      translationKey: "authGenderOther"
-    },
-    {
-      value: "prefer-not-to-say",
-      translationKey: "authGenderPreferNotToSay"
-    }
-  ]
-};
-
-
-function initializeMiimiidGenderSelector() {
-  const select =
-    document.getElementById(
-      "miimiid-register-gender"
-    );
-
-  if (!select || select.dataset.initialized === "true") {
-    return;
-  }
-
-  select.dataset.initialized = "true";
-
-  select.innerHTML = "";
-
-  const placeholder =
-    document.createElement("option");
-
-  placeholder.value = "";
-  placeholder.disabled = true;
-  placeholder.selected = true;
-  placeholder.textContent =
-    miimiidDashboardTranslate(
-      "authSelectGender"
-    );
-
-  select.appendChild(placeholder);
-
-  MIIMIID_REGISTRATION_DATA.genderOptions.forEach(
-    item => {
-      const option =
-        document.createElement("option");
-
-      option.value = item.value;
-      option.textContent =
-        miimiidDashboardTranslate(
-          item.translationKey
-        );
-
-      select.appendChild(option);
-    }
-  );
-}
-
-
+    
 function initializeMiimiidDobWheelPicker() {
   const month =
     document.getElementById("miimiid-register-dob-month");
@@ -7591,18 +7360,11 @@ function MiimiidAsyncButton(button) {
   }
 
   const originalHTML = button.innerHTML;
-  const initialDisabled = button.disabled;
 
   button.classList.add("miimiid-async-button");
 
-  /*
-   * Preserve the existing button content and dimensions.
-   * The loader is layered over the content.
-   */
   button.innerHTML = `
-    <span
-      class="miimiid-async-button-content"
-    >
+    <span class="miimiid-async-button-content">
       ${originalHTML}
     </span>
     <span
@@ -7613,10 +7375,10 @@ function MiimiidAsyncButton(button) {
 
   let state = "idle";
   let actionRunning = false;
-  let explicitDisabled = initialDisabled;
 
   const setState = nextState => {
     state = nextState;
+
     button.dataset.miimiidState = nextState;
 
     if (nextState === "loading") {
@@ -7627,151 +7389,53 @@ function MiimiidAsyncButton(button) {
 
     button.removeAttribute("aria-busy");
 
-    if (
-      nextState === "idle" ||
-      nextState === "success" ||
-      nextState === "error"
-    ) {
-      button.disabled = explicitDisabled;
+    /*
+     * Validation/network/server errors always return the
+     * button to an enabled idle state unless the caller has
+     * explicitly disabled it.
+     */
+    if (nextState === "idle" || nextState === "error") {
+      button.disabled =
+        button.dataset.miimiidExplicitDisabled === "true";
     }
   };
 
   const setEnabled = enabled => {
-    explicitDisabled = !enabled;
-
     button.dataset.miimiidExplicitDisabled =
-      explicitDisabled ? "true" : "false";
+      enabled ? "false" : "true";
 
     if (!actionRunning) {
-      button.disabled = explicitDisabled;
+      button.disabled = !enabled;
     }
   };
 
-  const run = async (
-    action,
-    {
-      onSuccess = null,
-      onError = null,
-      onFinally = null
-    } = {}
-  ) => {
+  const run = async action => {
     /*
-     * Synchronous duplicate-submission guard.
+     * Hard guard against double taps, including taps that
+     * arrive before the browser has painted the disabled state.
      */
     if (
       actionRunning ||
       state === "loading" ||
       button.disabled
     ) {
-      return undefined;
-    }
-
-    if (typeof action !== "function") {
-      const error = new TypeError(
-        "MiimiidAsyncButton.run requires an async action function."
-      );
-
-      setState("error");
-
-      if (typeof onError === "function") {
-        try {
-          await onError(error);
-        } catch (callbackError) {
-          console.error(
-            "Miimiid async-button error handler failed:",
-            callbackError
-          );
-        }
-      }
-
-      setState("idle");
-      return undefined;
+      return;
     }
 
     actionRunning = true;
     setState("loading");
 
-    console.log(
-      "[MIIMIID ASYNC] loading committed",
-      {
-        id: button.id,
-        ariaBusy: button.getAttribute("aria-busy"),
-        state: button.dataset.miimiidState,
-        timestamp: performance.now()
-      }
-    );
-
-    /*
-     * Synchronize with two real browser rendering frames so the
-     * loading state is committed and visibly paintable before the
-     * authentication operation or local authentication transition.
-     *
-     * This is not an artificial timeout. It does not determine the
-     * duration of the real operation; the real Promise remains the
-     * source of the loading lifecycle.
-     */
-    await new Promise(resolve => {
-      requestAnimationFrame(() => {
-        console.log(
-          "[MIIMIID ASYNC] first RAF",
-          {
-            id: button.id,
-            ariaBusy: button.getAttribute("aria-busy"),
-            state: button.dataset.miimiidState,
-            timestamp: performance.now()
-          }
-        );
-
-        requestAnimationFrame(() => {
-          console.log(
-            "[MIIMIID ASYNC] second RAF",
-            {
-              id: button.id,
-              ariaBusy: button.getAttribute("aria-busy"),
-              state: button.dataset.miimiidState,
-              timestamp: performance.now()
-            }
-          );
-
-          resolve();
-        });
-      });
-    });
-
     try {
-      console.log(
-        "[MIIMIID ASYNC] action starting",
-        {
-          id: button.id,
-          ariaBusy: button.getAttribute("aria-busy"),
-          state: button.dataset.miimiidState,
-          timestamp: performance.now()
-        }
-      );
-
       const result = await action();
 
-      setState("success");
-
-      if (typeof onSuccess === "function") {
-        await onSuccess(result);
-      }
+      state = "success";
+      button.dataset.miimiidState = "success";
 
       return result;
 
     } catch (error) {
-      setState("error");
-
-      if (typeof onError === "function") {
-        try {
-          await onError(error);
-        } catch (callbackError) {
-          console.error(
-            "Miimiid async-button error handler failed:",
-            callbackError
-          );
-        }
-      }
+      state = "error";
+      button.dataset.miimiidState = "error";
 
       throw error;
 
@@ -7779,20 +7443,11 @@ function MiimiidAsyncButton(button) {
       actionRunning = false;
 
       /*
-       * Guaranteed release after the real Promise settles.
+       * Never leave a primary action permanently locked.
+       * Navigation can occur before this executes without
+       * affecting the next page.
        */
       setState("idle");
-
-      if (typeof onFinally === "function") {
-        try {
-          await onFinally();
-        } catch (callbackError) {
-          console.error(
-            "Miimiid async-button finally handler failed:",
-            callbackError
-          );
-        }
-      }
     }
   };
 
@@ -7817,96 +7472,15 @@ function MiimiidAsyncButton(button) {
 
   button.__miimiidAsyncButton = api;
 
-  button.dataset.miimiidExplicitDisabled =
-    explicitDisabled ? "true" : "false";
-
+  /*
+   * Mark the initial state explicitly so all primary buttons
+   * have the same predictable lifecycle.
+   */
   button.dataset.miimiidState = "idle";
-
-  button.removeAttribute("aria-busy");
 
   return api;
 }
 
-
-/*
- * MIIMIID AUTH STEP TRANSITION
- *
- * Registration steps are local UI state transitions rather
- * than network operations. They still need one browser-render
- * opportunity so the async-button loading state can actually
- * become visible before the next authentication screen is
- * rendered.
- *
- * No artificial timeout is used.
- */
-async function runMiimiidAuthStepTransition(
-  button,
-  transition
-) {
-  const actionButton =
-    getMiimiidAsyncButton(button);
-
-  if (!actionButton) {
-    console.error(
-      "[MIIMIID REGISTRATION ASYNC] unable to obtain controller:",
-      button?.id
-    );
-
-    return false;
-  }
-
-  console.log(
-    "[MIIMIID REGISTRATION ASYNC] transition requested:",
-    {
-      id: button.id,
-      state: actionButton.state,
-      loading: actionButton.loading,
-      disabled: button.disabled
-    }
-  );
-
-  try {
-    await actionButton.run(async () => {
-      console.log(
-        "[MIIMIID REGISTRATION ASYNC] transition action starting:",
-        button.id
-      );
-
-      if (typeof transition !== "function") {
-        throw new Error(
-          "Miimiid registration transition is unavailable."
-        );
-      }
-
-      await transition();
-
-      console.log(
-        "[MIIMIID REGISTRATION ASYNC] transition completed:",
-        button.id
-      );
-    });
-
-    return true;
-
-  } catch (error) {
-    console.error(
-      "[MIIMIID REGISTRATION ASYNC] transition failed:",
-      button.id,
-      error
-    );
-
-    setMiimiidRegisterFeedback(
-      error?.message ||
-      miimiidSafeAuthMessage(
-        "authUnableContinue",
-        "We couldn't continue right now. Please try again."
-      ),
-      "error"
-    );
-
-    return false;
-  }
-}
 
 function getMiimiidAsyncButton(buttonOrId) {
   const button =
@@ -7963,49 +7537,6 @@ function initializeMiimiidRegistrationFlow() {
       form.dataset.registrationInitialized =
         "true";
 
-      /*
-       * Initialize every registration primary action through
-       * the same reusable async-button controller used by
-       * Login and Forgot Password.
-       *
-       * This is deliberately done before any registration
-       * click/submit handler can invoke the buttons.
-       */
-      [
-        "miimiid-register-get-started",
-        "miimiid-register-name-next",
-        "miimiid-register-contact-next",
-        "miimiid-register-details-next",
-        "miimiid-register-submit",
-        "miimiid-verify-account-submit",
-        "miimiid-resend-verification"
-      ].forEach(buttonId => {
-        const button =
-          document.getElementById(buttonId);
-
-        if (!button) {
-          console.warn(
-            "[MIIMIID REGISTRATION ASYNC] button missing:",
-            buttonId
-          );
-          return;
-        }
-
-        const controller =
-          getMiimiidAsyncButton(button);
-
-        console.log(
-          "[MIIMIID REGISTRATION ASYNC] initialized:",
-          {
-            id: button.id,
-            controller: !!controller,
-            disabled: button.disabled,
-            state: button.dataset.miimiidState
-          }
-        );
-      });
-
-      initializeMiimiidGenderSelector();
       initializeMiimiidDobWheelPicker();
       initializeMiimiidBirthdayWheelModal();
       initializeMiimiidRegistrationValidation();
@@ -8016,18 +7547,8 @@ function initializeMiimiidRegistrationFlow() {
         )
         ?.addEventListener(
           "click",
-          async () => {
-            const button =
-              document.getElementById(
-                "miimiid-register-get-started"
-              );
-
-            await runMiimiidAuthStepTransition(
-              button,
-              () => {
-                showMiimiidRegistrationStep(2);
-              }
-            );
+          () => {
+            showMiimiidRegistrationStep(2);
           }
         );
 
@@ -8037,11 +7558,16 @@ function initializeMiimiidRegistrationFlow() {
         )
         ?.addEventListener(
           "click",
-          async () => {
+          () => {
             const button =
               document.getElementById(
                 "miimiid-register-name-next"
               );
+
+            setMiimiidAuthActionLoading(
+              button,
+              true
+            );
 
             const firstName =
               document
@@ -8060,31 +7586,42 @@ function initializeMiimiidRegistrationFlow() {
                 .trim() || "";
 
             if (!firstName) {
+              setMiimiidAuthActionLoading(
+                button,
+                false
+              );
+
               setMiimiidRegisterFeedback(
-                miimiidDashboardTranslate(
-                  "authEnterFirstName"
-                ),
+                miimiidDashboardTranslate("authEnterFirstName"),
                 "error"
               );
               return;
             }
 
             if (!lastName) {
+              setMiimiidAuthActionLoading(
+                button,
+                false
+              );
+
               setMiimiidRegisterFeedback(
-                miimiidDashboardTranslate(
-                  "authEnterLastName"
-                ),
+                miimiidDashboardTranslate("authEnterLastName"),
                 "error"
               );
               return;
             }
 
-            await runMiimiidAuthStepTransition(
-              button,
-              () => {
-                showMiimiidRegistrationStep(3);
-              }
-            );
+            showMiimiidRegistrationStep(3);
+
+            /*
+             * Restore after the UI transition has been committed.
+             */
+            requestAnimationFrame(() => {
+              setMiimiidAuthActionLoading(
+                button,
+                false
+              );
+            });
           }
         );
 
@@ -8094,11 +7631,16 @@ function initializeMiimiidRegistrationFlow() {
         )
         ?.addEventListener(
           "click",
-          async () => {
+          () => {
             const button =
               document.getElementById(
                 "miimiid-register-contact-next"
               );
+
+            setMiimiidAuthActionLoading(
+              button,
+              true
+            );
 
             const email =
               document
@@ -8113,70 +7655,47 @@ function initializeMiimiidRegistrationFlow() {
                 email
               )
             ) {
+              setMiimiidAuthActionLoading(
+                button,
+                false
+              );
+
               setMiimiidRegisterFeedback(
-                miimiidDashboardTranslate(
-                  "authEnterValidEmail"
-                ),
+                miimiidDashboardTranslate("authEnterValidEmail"),
                 "error"
               );
               return;
             }
 
-            await runMiimiidAuthStepTransition(
-              button,
-              () => {
-                showMiimiidRegistrationStep(4);
-              }
-            );
+            showMiimiidRegistrationStep(4);
+
+            requestAnimationFrame(() => {
+              setMiimiidAuthActionLoading(
+                button,
+                false
+              );
+            });
           }
         );
 
       document
         .getElementById(
-          "miimiid-register-details-next"
+          "miimiid-register-submit"
         )
         ?.addEventListener(
           "click",
-          async () => {
-            const button =
-              document.getElementById(
-                "miimiid-register-details-next"
+          () => {
+            const formEvent =
+              new Event(
+                "submit",
+                {
+                  bubbles: true,
+                  cancelable: true
+                }
               );
 
-            const gender =
-              document
-                .getElementById(
-                  "miimiid-register-gender"
-                )
-                ?.value
-                .trim() || "";
-
-            if (!gender) {
-              setMiimiidRegisterFeedback(
-                miimiidDashboardTranslate(
-                  "authSelectGender"
-                ),
-                "error"
-              );
-              return;
-            }
-
-            if (!miimiidValidateBirthday()) {
-              setMiimiidRegisterFeedback(
-                miimiidSafeAuthMessage(
-                  "authBirthdayInvalid",
-                  "Please select a valid birthday."
-                ),
-                "error"
-              );
-              return;
-            }
-
-            await runMiimiidAuthStepTransition(
-              button,
-              () => {
-                showMiimiidRegistrationStep(5);
-              }
+            form.dispatchEvent(
+              formEvent
             );
           }
         );
@@ -8223,7 +7742,7 @@ function initializeMiimiidRegistrationFlow() {
     }
 
 
-
+    
 
 function initializeMiimiidAuth() {
       if (miimiidAuthInitialized) {
@@ -8437,34 +7956,32 @@ function initializeMiimiidAuth() {
       /*
        * Only a positively authenticated user can cross
        * the authentication boundary.
-       *
-       * Keep the authenticated application shell hidden
-       * until dashboard initialization has completed
-       * successfully. initializeMiimiidDashboard() owns
-       * the final visibility transition.
        */
+      if (authView) {
+        authView.classList.add("hidden");
+      }
+
+      if (authLoading) {
+        authLoading.classList.add("hidden");
+      }
+
+      if (authCard) {
+        authCard.classList.add("hidden");
+      }
+
       if (appShell) {
-        appShell.classList.add("hidden");
+        appShell.classList.remove("hidden");
       }
 
       if (miimiidHeader) {
-        miimiidHeader.classList.add("hidden");
+        miimiidHeader.classList.remove("hidden");
       }
 
       if (drawerBackdrop) {
-        drawerBackdrop.classList.add("hidden");
+        drawerBackdrop.classList.remove("hidden");
       }
 
-      const dashboardReady =
-        await initializeMiimiidDashboard();
-
-      if (!dashboardReady) {
-        /*
-         * Dashboard initialization owns its failure state
-         * and restores the authentication view.
-         */
-        return;
-      }
+      await initializeMiimiidDashboard();
     }
 
 
@@ -8905,7 +8422,7 @@ async function loadCourseProgress(courseId) {
               module.title ||
              `Module ${moduleIndex + 1}`
              )}
-          </h3>
+          </h3> 
 
                 ${
                   lessons.length === 0
@@ -10585,7 +10102,7 @@ async function submitQuiz() {
       name: "English",
       nativeName: "English",
 
-
+    
       authCancel: "Cancel",
       authSet: "Set",
 },
@@ -10754,13 +10271,6 @@ async function submitQuiz() {
       authRegisterWelcomeText: 'Build better money habits, understand your finances, and make smarter financial decisions.',
       authGetStarted: 'Get started',
       authFirstName: 'First name',
-      authGenderBirthday: 'Gender and date of birth',
-      authGender: 'Gender',
-      authSelectGender: 'Select your gender',
-      authGenderMale: 'Male',
-      authGenderFemale: 'Female',
-      authGenderOther: 'Other',
-      authGenderPreferNotToSay: 'Prefer not to say',
       authLastName: 'Last name',
       authNameQuestion: "What's your name?",
       authEmailTitle: 'Email',

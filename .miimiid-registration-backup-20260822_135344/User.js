@@ -30,13 +30,6 @@ const userSchema = new mongoose.Schema(
       default: null
     },
 
-    gender: {
-      type: String,
-      trim: true,
-      maxlength: 50,
-      default: null
-    },
-
     passwordHash: {
       type: String,
       required: true

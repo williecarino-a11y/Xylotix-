@@ -1,0 +1,3649 @@
+
+  /* ================================
+     MIIMIID LANGUAGE SELECTOR
+     ================================ */
+
+  const MIIMIID_LANGUAGE_KEY = "miimiid-language";
+
+  const MIIMIID_LANGUAGES = {
+    en: {
+
+      name: "English",
+      nativeName: "English"
+    },
+    es: {
+
+      name: "Spanish",
+      nativeName: "Español"
+    },
+    fr: {
+
+      name: "French",
+      nativeName: "Français"
+    },
+    de: {
+
+      name: "German",
+      nativeName: "Deutsch"
+    },
+    pt: {
+
+      name: "Portuguese",
+      nativeName: "Português"
+    },
+    it: {
+
+      name: "Italian",
+      nativeName: "Italiano"
+    },
+    nl: {
+
+      name: "Dutch",
+      nativeName: "Nederlands"
+    },
+    pl: {
+
+      name: "Polish",
+      nativeName: "Polski"
+    },
+    tr: {
+
+      name: "Turkish",
+      nativeName: "Türkçe"
+    },
+    ru: {
+
+      name: "Russian",
+      nativeName: "Русский"
+    },
+    uk: {
+
+      name: "Ukrainian",
+      nativeName: "Українська"
+    },
+    ar: {
+
+      name: "Arabic",
+      nativeName: "العربية"
+    },
+    he: {
+
+      name: "Hebrew",
+      nativeName: "עברית"
+    },
+    fa: {
+
+      name: "Persian",
+      nativeName: "فارسی"
+    },
+    hi: {
+
+      name: "Hindi",
+      nativeName: "हिन्दी"
+    },
+    bn: {
+
+      name: "Bengali",
+      nativeName: "বাংলা"
+    },
+    ur: {
+
+      name: "Urdu",
+      nativeName: "اردو"
+    },
+    id: {
+
+      name: "Indonesian",
+      nativeName: "Bahasa Indonesia"
+    },
+    ms: {
+
+      name: "Malay",
+      nativeName: "Bahasa Melayu"
+    },
+    vi: {
+
+      name: "Vietnamese",
+      nativeName: "Tiếng Việt"
+    },
+    th: {
+
+      name: "Thai",
+      nativeName: "ไทย"
+    },
+    zh: {
+
+      name: "Chinese",
+      nativeName: "中文"
+    },
+    ja: {
+
+      name: "Japanese",
+      nativeName: "日本語"
+    },
+    ko: {
+
+      name: "Korean",
+      nativeName: "한국어"
+    },
+    sw: {
+
+      name: "Swahili",
+      nativeName: "Kiswahili"
+    },
+    yo: {
+
+      name: "Yoruba",
+      nativeName: "Yorùbá"
+    },
+    ig: {
+
+      name: "Igbo",
+      nativeName: "Igbo"
+    },
+    ha: {
+
+      name: "Hausa",
+      nativeName: "Hausa"
+    }
+  };
+
+  /*
+   * =========================================
+   * MIIMIID UI LOCALIZATION
+   * =========================================
+   */
+
+  const MIIMIID_TRANSLATIONS = {    en: {
+      authWelcome: 'Welcome to Miimiid',
+      authSignInSubtitle: 'Sign in to continue learning',
+      authLoginIdentifier: 'Email or phone number',
+      authPassword: 'Password',
+      authSignIn: 'Sign In',
+      authCreateAccountLink: 'Create an account',
+      authRegisterWelcomeText: 'Build better money habits, understand your finances, and make smarter financial decisions.',
+      authGetStarted: 'Get started',
+      authFirstName: 'First name',
+      authLastName: 'Last name',
+      authDateOfBirth: 'Date of birth',
+      authConfirmPassword: 'Confirm password',
+      authAccountVerification: 'Account verification',
+      authContinue: 'Continue',
+      authVerifyAccount: 'Verify account',
+      authResendCode: 'Resend code',
+      authForgotPassword: 'Forgot password?',
+      authName: 'Name',
+      authEmail: 'Email',
+      authPhone: 'Phone number',
+      authConfirmPassword: 'Confirm password',
+      authCreateAccountButton: 'Create Account',
+      authBackToSignIn: 'Back to sign in',
+      authEmailAddress: 'Email address',
+      authSendResetInstructions: 'Send Reset Instructions',
+      authResetPassword: 'Reset Password',
+      authResetSubtitle: 'Enter your email address to receive instructions to reset your password',
+      authNewPassword: 'New password',
+      authConfirmNewPassword: 'Confirm new password',
+      authResetPasswordButton: 'Reset Password',
+      authCheckingSession: 'Checking your Miimiid session...',
+      authShowPassword: 'Show password',
+      authHidePassword: 'Hide password',
+      authResetPasswordTitle: 'Reset your password',
+      authResetPasswordSubtitle: 'Choose a new password for your Miimiid account.',
+      untitledLesson: 'Untitled Lesson',
+      noLessonContent: 'No lesson content available.',
+      questionUnavailable: 'Question unavailable.',
+      unsupportedQuestionType: 'Unsupported question type:',
+
+      untitledLesson: 'Untitled Lesson',
+
+      checking: 'Checking...',
+      saving: 'Saving...',
+      noQuizAvailable: 'There is no quiz available for this lesson.',
+      answerAllQuestions: 'Please answer all the questions before submitting.',
+      noLessonSelected: 'No lesson is currently selected.',
+      submitQuizFirst: 'Please complete and submit the quiz before completing this lesson.',
+      lessonNotFound: 'Lesson not found.',
+      quizComplete: 'Quiz complete!',
+      score: 'Score',
+      youGot: 'You got',
+      outOf: 'out of',
+      correct: 'correct.',
+      canCompleteLesson: 'You can now complete the lesson.',
+      reviewLessonTryAgain: "Review the lesson and try again.",
+
+      selectCourse: "Select a course to explore modules and lessons:",
+      backToCourses: "← Back to Courses",
+      backToModules: "← Back to Course Modules",
+      yourProgress: "Your Progress",
+      lessonsComplete: "lessons complete",
+      noLessonsYet: "No lessons yet",
+      startLesson: "Start Lesson",
+      reviewLesson: "Review Lesson",
+      completed: "✓ Completed",
+      moduleComplete: "✓ Module complete",
+      quickCheck: "Quick Check",
+      submitAnswer: "Submit Answer",
+      nextLesson: "Next Lesson",
+      previousLesson: "Previous Lesson",
+      loading: "Loading...",
+      noDescription: "No description available.",
+      noModules: "No modules are available yet.",
+      noLessons: "No lessons available in this module yet.",
+      lessonCompletedSuccessfully: "Lesson completed successfully! 🎉",
+      selectLanguage: "Select language",
+      openCourse: "Open Course",
+      unableToLoadCourses: "Unable to load courses.",
+      unableToLoadCourse: "Unable to load course.",
+      invalidCourseId: "Invalid course ID.",
+      questionInstruction: "Answer the questions below before completing the lesson.",
+      unableToValidateQuiz: "Unable to validate quiz.",
+      unableToConnect: 'Unable to connect to the server.',
+      failedToSaveProgress: "Failed to save progress.",
+      completeLesson: "Complete Lesson",
+      somethingWentWrong: "Something went wrong."
+
+,
+      home: 'Home',
+      learn: 'Learn',
+      funCenter: 'Fun Center',
+      aiTutor: 'AI Tutor',
+      xp: 'XP',
+      streak: 'Streak',
+      lessonsCompleted: 'Lessons completed',
+      averageQuizScore: 'Average quiz score',
+      pro: 'Pro',
+      premium: 'Premium',
+      settings: 'Settings',
+
+    },
+
+    es: {
+      authWelcome: 'Bienvenido a Miimiid',
+      authSignInSubtitle: 'Inicia sesión para continuar aprendiendo',
+      authCreateAccount: 'Crea tu cuenta de Miimiid',
+      authCreateSubtitle: 'Crea una cuenta para comenzar a aprender',
+      authResetSubtitle: 'Introduce tu correo electrónico para recibir instrucciones para restablecer tu contraseña',
+      authPasswordMismatch: 'Las contraseñas no coinciden.',
+      authCreatingAccount: 'Creando tu cuenta...',
+      authAccountCreated: 'Cuenta creada correctamente.',
+      authCreateAccountError: 'No se pudo crear tu cuenta.',
+      authEnterEmail: 'Introduce tu dirección de correo electrónico.',
+      authSendingResetInstructions: 'Enviando instrucciones de restablecimiento...',
+      authResetInstructionsSent: 'Se han enviado las instrucciones para restablecer la contraseña.',
+      authRequestResetError: 'No se pudieron solicitar las instrucciones de restablecimiento.',
+      authInvalidResetLink: 'Este enlace para restablecer la contraseña no es válido o falta.',
+      authPasswordMinLength: 'La contraseña debe tener al menos 8 caracteres.',
+      authResettingPassword: 'Restableciendo tu contraseña...',
+      authResetPasswordError: 'No se pudo restablecer tu contraseña.',
+      authPasswordResetSuccess: 'Tu contraseña se ha restablecido correctamente.',
+
+      authLoginIdentifier: 'Correo electrónico o número de teléfono',
+      authPassword: 'Contraseña',
+      authSignIn: 'Iniciar sesión',
+      authCreateAccountLink: 'Crear una cuenta',
+      authForgotPassword: '¿Olvidaste tu contraseña?',
+      authName: 'Nombre',
+      authEmail: 'Correo electrónico',
+      authPhone: 'Número de teléfono',
+      authConfirmPassword: 'Confirmar contraseña',
+      authCreateAccountButton: 'Crear cuenta',
+      authBackToSignIn: 'Volver a iniciar sesión',
+      authEmailAddress: 'Dirección de correo electrónico',
+      authSendResetInstructions: 'Enviar instrucciones de restablecimiento',
+      authNewPassword: 'Nueva contraseña',
+      authConfirmNewPassword: 'Confirmar nueva contraseña',
+      authResetPasswordButton: 'Restablecer contraseña',
+      authCheckingSession: 'Comprobando tu sesión de Miimiid...',
+      authShowPassword: 'Mostrar contraseña',
+      authHidePassword: 'Ocultar contraseña',
+      authResetPasswordTitle: 'Restablece tu contraseña',
+      authResetPasswordSubtitle: 'Elige una nueva contraseña para tu cuenta de Miimiid.',
+      noLessonContent: 'No hay contenido disponible para esta lección.',
+      questionUnavailable: 'Pregunta no disponible.',
+      unsupportedQuestionType: 'Tipo de pregunta no compatible:',
+
+      untitledLesson: 'Untitled Lesson',
+
+      openCourse: 'Abrir curso',
+      unableToLoadCourses: 'No se pudieron cargar los cursos.',
+      invalidCourseId: 'ID de curso no válido.',
+      questionInstruction: 'Responde las preguntas siguientes antes de completar la lección.',
+      unableToConnect: 'No se pudo conectar con el servidor.',
+      completeLesson: 'Completar lección',
+      somethingWentWrong: 'Algo salió mal.',
+      checking: 'Comprobando...',
+      saving: 'Guardando...',
+      noQuizAvailable: 'No hay ningún cuestionario disponible para esta lección.',
+      answerAllQuestions: 'Responde todas las preguntas antes de enviar.',
+      noLessonSelected: 'No hay ninguna lección seleccionada.',
+      submitQuizFirst: 'Completa y envía el cuestionario antes de completar esta lección.',
+      lessonNotFound: 'No se encontró la lección.',
+      quizComplete: '¡Cuestionario completado!',
+      score: 'Puntuación',
+      youGot: 'Obtuviste',
+      outOf: 'de',
+      canCompleteLesson: 'Ahora puedes completar la lección.',
+      reviewLessonTryAgain: 'Repasa la lección e inténtalo de nuevo.',
+
+      selectCourse: "Selecciona un curso para explorar módulos y lecciones:",
+      backToCourses: "← Volver a los cursos",
+      backToModules: "← Volver a los módulos del curso",
+      yourProgress: "Tu progreso",
+      lessonsComplete: "lecciones completadas",
+      noLessonsYet: "Aún no hay lecciones",
+      startLesson: "Comenzar lección",
+      reviewLesson: "Repasar lección",
+      completed: "✓ Completada",
+      moduleComplete: "✓ Módulo completado",
+      quickCheck: "Comprobación rápida",
+      submitAnswer: "Enviar respuesta",
+      nextLesson: "Siguiente lección",
+      previousLesson: "Lección anterior",
+      loading: "Cargando...",
+      noDescription: "No hay descripción disponible.",
+      noModules: "Aún no hay módulos disponibles.",
+      noLessons: "Aún no hay lecciones disponibles en este módulo.",
+      unableToLoadCourse: "No se pudo cargar el curso.",
+      unableToValidateQuiz: "No se pudo validar el cuestionario.",
+      lessonCompleted: "¡Lección completada correctamente! 🎉",
+      lessonCompletedSuccessfully: "¡Lección completada correctamente! 🎉",
+      failedToSaveProgress: "No se pudo guardar el progreso.",
+      selectLanguage: "Seleccionar idioma"
+
+,
+      home: 'Home',
+      learn: 'Learn',
+      funCenter: 'Fun Center',
+      aiTutor: 'AI Tutor',
+      xp: 'XP',
+      streak: 'Streak',
+      lessonsCompleted: 'Lessons completed',
+      averageQuizScore: 'Average quiz score',
+      pro: 'Pro',
+      premium: 'Premium',
+      settings: 'Settings',
+
+    },
+
+    fr: {
+      authWelcome: 'Bienvenue sur Miimiid',
+      authSignInSubtitle: 'Connectez-vous pour continuer votre apprentissage',
+      authCreateAccount: 'Créez votre compte Miimiid',
+      authCreateSubtitle: 'Créez un compte pour commencer à apprendre',
+      authResetSubtitle: 'Saisissez votre adresse e-mail pour recevoir les instructions de réinitialisation',
+      authPasswordMismatch: 'Les mots de passe ne correspondent pas.',
+      authCreatingAccount: 'Création de votre compte...',
+      authAccountCreated: 'Compte créé avec succès.',
+      authCreateAccountError: 'Impossible de créer votre compte.',
+      authEnterEmail: 'Saisissez votre adresse e-mail.',
+      authSendingResetInstructions: 'Envoi des instructions de réinitialisation...',
+      authResetInstructionsSent: 'Les instructions de réinitialisation du mot de passe ont été envoyées.',
+      authRequestResetError: 'Impossible de demander la réinitialisation du mot de passe.',
+      authInvalidResetLink: 'Ce lien de réinitialisation du mot de passe est invalide ou manquant.',
+      authPasswordMinLength: 'Le mot de passe doit comporter au moins 8 caractères.',
+      authResettingPassword: 'Réinitialisation de votre mot de passe...',
+      authResetPasswordError: 'Impossible de réinitialiser votre mot de passe.',
+      authPasswordResetSuccess: 'Votre mot de passe a été réinitialisé avec succès.',
+
+      authLoginIdentifier: 'E-mail ou numéro de téléphone',
+      authPassword: 'Mot de passe',
+      authSignIn: 'Se connecter',
+      authCreateAccountLink: 'Créer un compte',
+      authForgotPassword: 'Mot de passe oublié ?',
+      authName: 'Nom',
+      authEmail: 'E-mail',
+      authPhone: 'Numéro de téléphone',
+      authConfirmPassword: 'Confirmer le mot de passe',
+      authCreateAccountButton: 'Créer un compte',
+      authBackToSignIn: 'Retour à la connexion',
+      authEmailAddress: 'Adresse e-mail',
+      authSendResetInstructions: 'Envoyer les instructions de réinitialisation',
+      authNewPassword: 'Nouveau mot de passe',
+      authConfirmNewPassword: 'Confirmer le nouveau mot de passe',
+      authResetPasswordButton: 'Réinitialiser le mot de passe',
+      authCheckingSession: 'Vérification de votre session Miimiid...',
+      authShowPassword: 'Afficher le mot de passe',
+      authHidePassword: 'Masquer le mot de passe',
+      authResetPasswordTitle: 'Réinitialisez votre mot de passe',
+      authResetPasswordSubtitle: 'Choisissez un nouveau mot de passe pour votre compte Miimiid.',
+      noLessonContent: 'Aucun contenu n’est disponible pour cette leçon.',
+      questionUnavailable: 'Question indisponible.',
+      unsupportedQuestionType: 'Type de question non pris en charge :',
+
+      untitledLesson: 'Untitled Lesson',
+
+      openCourse: 'Ouvrir le cours',
+      unableToLoadCourses: 'Impossible de charger les cours.',
+      invalidCourseId: 'ID de cours invalide.',
+      questionInstruction: 'Répondez aux questions ci-dessous avant de terminer la leçon.',
+      unableToConnect: 'Impossible de se connecter au serveur.',
+      completeLesson: 'Terminer la leçon',
+      somethingWentWrong: "Une erreur s'est produite.",
+      checking: 'Vérification...',
+      saving: 'Enregistrement...',
+      noQuizAvailable: "Aucun quiz n'est disponible pour cette leçon.",
+      answerAllQuestions: "Répondez à toutes les questions avant d'envoyer vos réponses.",
+      noLessonSelected: "Aucune leçon n'est actuellement sélectionnée.",
+      submitQuizFirst: 'Terminez et envoyez le quiz avant de terminer cette leçon.',
+      lessonNotFound: 'Leçon introuvable.',
+      quizComplete: 'Quiz terminé !',
+      score: 'Score',
+      youGot: 'Vous avez obtenu',
+      outOf: 'sur',
+      correct: 'bonnes réponses.',
+      canCompleteLesson: 'Vous pouvez maintenant terminer la leçon.',
+      reviewLessonTryAgain: 'Revoyez la leçon et réessayez.',
+
+      selectCourse: "Sélectionnez un cours pour explorer les modules et les leçons :",
+      backToCourses: "← Retour aux cours",
+      backToModules: "← Retour aux modules du cours",
+      yourProgress: "Votre progression",
+      lessonsComplete: "leçons terminées",
+      noLessonsYet: "Aucune leçon pour le moment",
+      startLesson: "Commencer la leçon",
+      reviewLesson: "Revoir la leçon",
+      completed: "✓ Terminée",
+      moduleComplete: "✓ Module terminé",
+      quickCheck: "Vérification rapide",
+      submitAnswer: "Soumettre la réponse",
+      nextLesson: "Leçon suivante",
+      previousLesson: "Leçon précédente",
+      loading: "Chargement...",
+      noDescription: "Aucune description disponible.",
+      noModules: "Aucun module n'est encore disponible.",
+      noLessons: "Aucune leçon n'est encore disponible dans ce module.",
+      unableToLoadCourse: "Impossible de charger le cours.",
+      unableToValidateQuiz: "Impossible de valider le quiz.",
+      lessonCompleted: "Leçon terminée avec succès ! 🎉",
+      lessonCompletedSuccessfully: "Leçon terminée avec succès ! 🎉",
+      failedToSaveProgress: "Échec de l'enregistrement de la progression.",
+      selectLanguage: "Choisir la langue"
+
+,
+      home: 'Home',
+      learn: 'Learn',
+      funCenter: 'Fun Center',
+      aiTutor: 'AI Tutor',
+      xp: 'XP',
+      streak: 'Streak',
+      lessonsCompleted: 'Lessons completed',
+      averageQuizScore: 'Average quiz score',
+      pro: 'Pro',
+      premium: 'Premium',
+      settings: 'Settings',
+
+    },
+
+    de: {
+      authWelcome: 'Willkommen bei Miimiid',
+      authSignInSubtitle: 'Melden Sie sich an, um weiterzulernen',
+      authCreateAccount: 'Erstellen Sie Ihr Miimiid-Konto',
+      authCreateSubtitle: 'Erstellen Sie ein Konto, um mit dem Lernen zu beginnen',
+      authResetSubtitle: 'Geben Sie Ihre E-Mail-Adresse ein, um Anweisungen zum Zurücksetzen des Passworts zu erhalten',
+      authPasswordMismatch: 'Die Passwörter stimmen nicht überein.',
+      authCreatingAccount: 'Ihr Konto wird erstellt...',
+      authAccountCreated: 'Konto erfolgreich erstellt.',
+      authCreateAccountError: 'Ihr Konto konnte nicht erstellt werden.',
+      authEnterEmail: 'Geben Sie Ihre E-Mail-Adresse ein.',
+      authSendingResetInstructions: 'Anweisungen zum Zurücksetzen werden gesendet...',
+      authResetInstructionsSent: 'Anweisungen zum Zurücksetzen des Passworts wurden gesendet.',
+      authRequestResetError: 'Das Zurücksetzen des Passworts konnte nicht angefordert werden.',
+      authInvalidResetLink: 'Dieser Link zum Zurücksetzen des Passworts ist ungültig oder fehlt.',
+      authPasswordMinLength: 'Das Passwort muss mindestens 8 Zeichen lang sein.',
+      authResettingPassword: 'Ihr Passwort wird zurückgesetzt...',
+      authResetPasswordError: 'Ihr Passwort konnte nicht zurückgesetzt werden.',
+      authPasswordResetSuccess: 'Ihr Passwort wurde erfolgreich zurückgesetzt.',
+
+      authLoginIdentifier: 'E-Mail oder Telefonnummer',
+      authPassword: 'Passwort',
+      authSignIn: 'Anmelden',
+      authCreateAccountLink: 'Konto erstellen',
+      authForgotPassword: 'Passwort vergessen?',
+      authName: 'Name',
+      authEmail: 'E-Mail',
+      authPhone: 'Telefonnummer',
+      authConfirmPassword: 'Passwort bestätigen',
+      authCreateAccountButton: 'Konto erstellen',
+      authBackToSignIn: 'Zur Anmeldung zurück',
+      authEmailAddress: 'E-Mail-Adresse',
+      authSendResetInstructions: 'Anweisungen zum Zurücksetzen senden',
+      authNewPassword: 'Neues Passwort',
+      authConfirmNewPassword: 'Neues Passwort bestätigen',
+      authResetPasswordButton: 'Passwort zurücksetzen',
+      authCheckingSession: 'Ihre Miimiid-Sitzung wird überprüft...',
+      authShowPassword: 'Passwort anzeigen',
+      authHidePassword: 'Passwort ausblenden',
+      authResetPasswordTitle: 'Passwort zurücksetzen',
+      authResetPasswordSubtitle: 'Wählen Sie ein neues Passwort für Ihr Miimiid-Konto.',
+      noLessonContent: 'Für diese Lektion ist kein Inhalt verfügbar.',
+      questionUnavailable: 'Frage nicht verfügbar.',
+      unsupportedQuestionType: 'Nicht unterstützter Fragetyp:',
+
+      untitledLesson: 'Untitled Lesson',
+
+      openCourse: 'Kurs öffnen',
+      unableToLoadCourses: 'Kurse konnten nicht geladen werden.',
+      invalidCourseId: 'Ungültige Kurs-ID.',
+      questionInstruction: 'Beantworte die folgenden Fragen, bevor du die Lektion abschließt.',
+      unableToConnect: 'Verbindung zum Server konnte nicht hergestellt werden.',
+      completeLesson: 'Lektion abschließen',
+      somethingWentWrong: 'Etwas ist schiefgelaufen.',
+      checking: 'Wird überprüft...',
+      saving: 'Wird gespeichert...',
+      noQuizAvailable: 'Für diese Lektion ist kein Quiz verfügbar.',
+      answerAllQuestions: 'Beantworte alle Fragen, bevor du sie absendest.',
+      noLessonSelected: 'Keine Lektion ist derzeit ausgewählt.',
+      submitQuizFirst: 'Schließe das Quiz ab und sende es ab, bevor du diese Lektion abschließt.',
+      lessonNotFound: 'Lektion nicht gefunden.',
+      quizComplete: 'Quiz abgeschlossen!',
+      score: 'Punktzahl',
+      youGot: 'Du hast',
+      outOf: 'von',
+      correct: 'richtig beantwortet.',
+      canCompleteLesson: 'Du kannst die Lektion jetzt abschließen.',
+      reviewLessonTryAgain: 'Wiederhole die Lektion und versuche es erneut.',
+
+      selectCourse: "Wähle einen Kurs aus, um Module und Lektionen zu entdecken:",
+      backToCourses: "← Zurück zu den Kursen",
+      backToModules: "← Zurück zu den Kursmodulen",
+      yourProgress: "Dein Fortschritt",
+      lessonsComplete: "Lektionen abgeschlossen",
+      noLessonsYet: "Noch keine Lektionen",
+      startLesson: "Lektion starten",
+      reviewLesson: "Lektion wiederholen",
+      completed: "✓ Abgeschlossen",
+      moduleComplete: "✓ Modul abgeschlossen",
+      quickCheck: "Schnelltest",
+      submitAnswer: "Antwort senden",
+      nextLesson: "Nächste Lektion",
+      previousLesson: "Vorherige Lektion",
+      loading: "Wird geladen...",
+      noDescription: "Keine Beschreibung verfügbar.",
+      noModules: "Noch keine Module verfügbar.",
+      noLessons: "In diesem Modul sind noch keine Lektionen verfügbar.",
+      unableToLoadCourse: "Der Kurs konnte nicht geladen werden.",
+      unableToValidateQuiz: "Das Quiz konnte nicht validiert werden.",
+      lessonCompleted: "Lektion erfolgreich abgeschlossen! 🎉",
+      lessonCompletedSuccessfully: "Lektion erfolgreich abgeschlossen! 🎉",
+      failedToSaveProgress: "Der Fortschritt konnte nicht gespeichert werden.",
+      selectLanguage: "Sprache auswählen"
+
+,
+      home: 'Home',
+      learn: 'Learn',
+      funCenter: 'Fun Center',
+      aiTutor: 'AI Tutor',
+      xp: 'XP',
+      streak: 'Streak',
+      lessonsCompleted: 'Lessons completed',
+      averageQuizScore: 'Average quiz score',
+      pro: 'Pro',
+      premium: 'Premium',
+      settings: 'Settings',
+
+    },
+
+    pt: {
+      authWelcome: 'Bem-vindo ao Miimiid',
+      authSignInSubtitle: 'Entre para continuar aprendendo',
+      authCreateAccount: 'Crie sua conta Miimiid',
+      authCreateSubtitle: 'Crie uma conta para começar a aprender',
+      authResetSubtitle: 'Digite seu e-mail para receber instruções de redefinição de senha',
+      authPasswordMismatch: 'As senhas não coincidem.',
+      authCreatingAccount: 'Criando sua conta...',
+      authAccountCreated: 'Conta criada com sucesso.',
+      authCreateAccountError: 'Não foi possível criar sua conta.',
+      authEnterEmail: 'Digite seu endereço de e-mail.',
+      authSendingResetInstructions: 'Enviando instruções de redefinição...',
+      authResetInstructionsSent: 'As instruções para redefinir a senha foram enviadas.',
+      authRequestResetError: 'Não foi possível solicitar a redefinição da senha.',
+      authInvalidResetLink: 'Este link de redefinição de senha é inválido ou está ausente.',
+      authPasswordMinLength: 'A senha deve ter pelo menos 8 caracteres.',
+      authResettingPassword: 'Redefinindo sua senha...',
+      authResetPasswordError: 'Não foi possível redefinir sua senha.',
+      authPasswordResetSuccess: 'Sua senha foi redefinida com sucesso.',
+
+      authLoginIdentifier: 'E-mail ou número de telefone',
+      authPassword: 'Senha',
+      authSignIn: 'Entrar',
+      authCreateAccountLink: 'Criar uma conta',
+      authForgotPassword: 'Esqueceu a senha?',
+      authName: 'Nome',
+      authEmail: 'E-mail',
+      authPhone: 'Número de telefone',
+      authConfirmPassword: 'Confirmar senha',
+      authCreateAccountButton: 'Criar conta',
+      authBackToSignIn: 'Voltar para entrar',
+      authEmailAddress: 'Endereço de e-mail',
+      authSendResetInstructions: 'Enviar instruções de redefinição',
+      authNewPassword: 'Nova senha',
+      authConfirmNewPassword: 'Confirmar nova senha',
+      authResetPasswordButton: 'Redefinir senha',
+      authCheckingSession: 'Verificando sua sessão do Miimiid...',
+      authShowPassword: 'Mostrar senha',
+      authHidePassword: 'Ocultar senha',
+      authResetPasswordTitle: 'Redefina sua senha',
+      authResetPasswordSubtitle: 'Escolha uma nova senha para sua conta Miimiid.',
+      noLessonContent: 'Não há conteúdo disponível para esta lição.',
+      questionUnavailable: 'Pergunta indisponível.',
+      unsupportedQuestionType: 'Tipo de pergunta não compatível:',
+
+      untitledLesson: 'Untitled Lesson',
+
+      openCourse: 'Abrir curso',
+      unableToLoadCourses: 'Não foi possível carregar os cursos.',
+      invalidCourseId: 'ID do curso inválido.',
+      questionInstruction: 'Responda às perguntas abaixo antes de concluir a lição.',
+      unableToConnect: 'Não foi possível conectar ao servidor.',
+      completeLesson: 'Concluir lição',
+      somethingWentWrong: 'Algo deu errado.',
+      checking: 'Verificando...',
+      saving: 'Salvando...',
+      noQuizAvailable: 'Não há questionário disponível para esta lição.',
+      answerAllQuestions: 'Responda a todas as perguntas antes de enviar.',
+      noLessonSelected: 'Nenhuma lição está selecionada.',
+      submitQuizFirst: 'Conclua e envie o questionário antes de concluir esta lição.',
+      lessonNotFound: 'Lição não encontrada.',
+      quizComplete: 'Questionário concluído!',
+      score: 'Pontuação',
+      youGot: 'Você acertou',
+      outOf: 'de',
+      correct: 'corretas.',
+      canCompleteLesson: 'Agora você pode concluir a lição.',
+      reviewLessonTryAgain: 'Revise a lição e tente novamente.',
+
+      selectCourse: "Selecione um curso para explorar módulos e lições:",
+      backToCourses: "← Voltar aos cursos",
+      backToModules: "← Voltar aos módulos do curso",
+      yourProgress: "Seu progresso",
+      lessonsComplete: "lições concluídas",
+      noLessonsYet: "Nenhuma lição ainda",
+      startLesson: "Iniciar lição",
+      reviewLesson: "Revisar lição",
+      completed: "✓ Concluída",
+      moduleComplete: "✓ Módulo concluído",
+      quickCheck: "Verificação rápida",
+      submitAnswer: "Enviar resposta",
+      nextLesson: "Próxima lição",
+      previousLesson: "Lição anterior",
+      loading: "Carregando...",
+      noDescription: "Nenhuma descrição disponível.",
+      noModules: "Nenhum módulo disponível ainda.",
+      noLessons: "Nenhuma lição disponível neste módulo ainda.",
+      unableToLoadCourse: "Não foi possível carregar o curso.",
+      unableToValidateQuiz: "Não foi possível validar o questionário.",
+      lessonCompleted: "Lição concluída com sucesso! 🎉",
+      lessonCompletedSuccessfully: "Lição concluída com sucesso! 🎉",
+      failedToSaveProgress: "Não foi possível guardar o progresso.",
+      selectLanguage: "Selecionar idioma"
+
+,
+      home: 'Home',
+      learn: 'Learn',
+      funCenter: 'Fun Center',
+      aiTutor: 'AI Tutor',
+      xp: 'XP',
+      streak: 'Streak',
+      lessonsCompleted: 'Lessons completed',
+      averageQuizScore: 'Average quiz score',
+      pro: 'Pro',
+      premium: 'Premium',
+      settings: 'Settings',
+
+    },
+
+    it: {
+      authWelcome: 'Benvenuto su Miimiid',
+      authSignInSubtitle: 'Accedi per continuare a imparare',
+      authCreateAccount: 'Crea il tuo account Miimiid',
+      authCreateSubtitle: 'Crea un account per iniziare a imparare',
+      authResetSubtitle: 'Inserisci la tua e-mail per ricevere le istruzioni per reimpostare la password',
+      authPasswordMismatch: 'Le password non coincidono.',
+      authCreatingAccount: 'Creazione del tuo account...',
+      authAccountCreated: 'Account creato con successo.',
+      authCreateAccountError: 'Impossibile creare il tuo account.',
+      authEnterEmail: 'Inserisci il tuo indirizzo e-mail.',
+      authSendingResetInstructions: 'Invio delle istruzioni di reimpostazione...',
+      authResetInstructionsSent: 'Le istruzioni per reimpostare la password sono state inviate.',
+      authRequestResetError: 'Impossibile richiedere la reimpostazione della password.',
+      authInvalidResetLink: 'Questo link per reimpostare la password non è valido o manca.',
+      authPasswordMinLength: 'La password deve contenere almeno 8 caratteri.',
+      authResettingPassword: 'Reimpostazione della password...',
+      authResetPasswordError: 'Impossibile reimpostare la password.',
+      authPasswordResetSuccess: 'La password è stata reimpostata correttamente.',
+
+      authLoginIdentifier: 'Email o numero di telefono',
+      authPassword: 'Password',
+      authSignIn: 'Accedi',
+      authCreateAccountLink: 'Crea un account',
+      authForgotPassword: 'Password dimenticata?',
+      authName: 'Nome',
+      authEmail: 'Email',
+      authPhone: 'Numero di telefono',
+      authConfirmPassword: 'Conferma password',
+      authCreateAccountButton: 'Crea account',
+      authBackToSignIn: 'Torna all\'accesso',
+      authEmailAddress: 'Indirizzo email',
+      authSendResetInstructions: 'Invia istruzioni per reimpostare',
+      authNewPassword: 'Nuova password',
+      authConfirmNewPassword: 'Conferma nuova password',
+      authResetPasswordButton: 'Reimposta password',
+      authCheckingSession: 'Verifica della sessione Miimiid...',
+      authShowPassword: 'Mostra password',
+      authHidePassword: 'Nascondi password',
+      authResetPasswordTitle: 'Reimposta la password',
+      authResetPasswordSubtitle: 'Scegli una nuova password per il tuo account Miimiid.',
+      noLessonContent: 'Nessun contenuto disponibile per questa lezione.',
+      questionUnavailable: 'Domanda non disponibile.',
+      unsupportedQuestionType: 'Tipo di domanda non supportato:',
+
+      untitledLesson: 'Untitled Lesson',
+
+      openCourse: 'Apri corso',
+      unableToLoadCourses: 'Impossibile caricare i corsi.',
+      invalidCourseId: 'ID corso non valido.',
+      questionInstruction: 'Rispondi alle domande qui sotto prima di completare la lezione.',
+      unableToConnect: 'Impossibile connettersi al server.',
+      completeLesson: 'Completa lezione',
+      somethingWentWrong: 'Qualcosa è andato storto.',
+      checking: 'Controllo...',
+      saving: 'Salvataggio...',
+      noQuizAvailable: 'Non ci sono quiz disponibili per questa lezione.',
+      answerAllQuestions: 'Rispondi a tutte le domande prima di inviare.',
+      noLessonSelected: 'Nessuna lezione è attualmente selezionata.',
+      submitQuizFirst: 'Completa e invia il quiz prima di completare questa lezione.',
+      lessonNotFound: 'Lezione non trovata.',
+      quizComplete: 'Quiz completato!',
+      score: 'Punteggio',
+      youGot: 'Hai ottenuto',
+      outOf: 'su',
+      correct: 'risposte corrette.',
+      canCompleteLesson: 'Ora puoi completare la lezione.',
+      reviewLessonTryAgain: 'Ripassa la lezione e riprova.',
+
+      selectCourse: "Seleziona un corso per esplorare moduli e lezioni:",
+      backToCourses: "← Torna ai corsi",
+      backToModules: "← Torna ai moduli del corso",
+      yourProgress: "I tuoi progressi",
+      lessonsComplete: "lezioni completate",
+      noLessonsYet: "Nessuna lezione ancora",
+      startLesson: "Inizia lezione",
+      reviewLesson: "Ripassa lezione",
+      completed: "✓ Completata",
+      moduleComplete: "✓ Modulo completato",
+      quickCheck: "Controllo rapido",
+      submitAnswer: "Invia risposta",
+      nextLesson: "Lezione successiva",
+      previousLesson: "Lezione precedente",
+      loading: "Caricamento...",
+      noDescription: "Nessuna descrizione disponibile.",
+      noModules: "Nessun modulo disponibile.",
+      noLessons: "Nessuna lezione disponibile in questo modulo.",
+      unableToLoadCourse: "Impossibile caricare il corso.",
+      unableToValidateQuiz: "Impossibile convalidare il quiz.",
+      lessonCompleted: "Lezione completata con successo! 🎉",
+      lessonCompletedSuccessfully: "Lezione completata con successo! 🎉",
+      failedToSaveProgress: "Impossibile salvare i progressi.",
+      selectLanguage: "Seleziona lingua"
+
+,
+      home: 'Home',
+      learn: 'Learn',
+      funCenter: 'Fun Center',
+      aiTutor: 'AI Tutor',
+      xp: 'XP',
+      streak: 'Streak',
+      lessonsCompleted: 'Lessons completed',
+      averageQuizScore: 'Average quiz score',
+      pro: 'Pro',
+      premium: 'Premium',
+      settings: 'Settings',
+
+    },
+
+    nl: {
+      authWelcome: 'Welkom bij Miimiid',
+      authSignInSubtitle: 'Log in om verder te leren',
+      authCreateAccount: 'Maak je Miimiid-account',
+      authCreateSubtitle: 'Maak een account om te beginnen met leren',
+      authResetSubtitle: 'Voer je e-mailadres in om instructies voor het opnieuw instellen van je wachtwoord te ontvangen',
+      authPasswordMismatch: 'De wachtwoorden komen niet overeen.',
+      authCreatingAccount: 'Je account wordt aangemaakt...',
+      authAccountCreated: 'Account succesvol aangemaakt.',
+      authCreateAccountError: 'Je account kon niet worden aangemaakt.',
+      authEnterEmail: 'Voer je e-mailadres in.',
+      authSendingResetInstructions: 'Instructies voor het opnieuw instellen worden verzonden...',
+      authResetInstructionsSent: 'De instructies voor het opnieuw instellen van je wachtwoord zijn verzonden.',
+      authRequestResetError: 'Het opnieuw instellen van je wachtwoord kon niet worden aangevraagd.',
+      authInvalidResetLink: 'Deze link voor het opnieuw instellen van je wachtwoord is ongeldig of ontbreekt.',
+      authPasswordMinLength: 'Het wachtwoord moet minimaal 8 tekens bevatten.',
+      authResettingPassword: 'Je wachtwoord wordt opnieuw ingesteld...',
+      authResetPasswordError: 'Je wachtwoord kon niet opnieuw worden ingesteld.',
+      authPasswordResetSuccess: 'Je wachtwoord is succesvol opnieuw ingesteld.',
+
+      authLoginIdentifier: 'E-mail of telefoonnummer',
+      authPassword: 'Wachtwoord',
+      authSignIn: 'Inloggen',
+      authCreateAccountLink: 'Account aanmaken',
+      authForgotPassword: 'Wachtwoord vergeten?',
+      authName: 'Naam',
+      authEmail: 'E-mail',
+      authPhone: 'Telefoonnummer',
+      authConfirmPassword: 'Wachtwoord bevestigen',
+      authCreateAccountButton: 'Account aanmaken',
+      authBackToSignIn: 'Terug naar inloggen',
+      authEmailAddress: 'E-mailadres',
+      authSendResetInstructions: 'Instructies voor opnieuw instellen verzenden',
+      authNewPassword: 'Nieuw wachtwoord',
+      authConfirmNewPassword: 'Nieuw wachtwoord bevestigen',
+      authResetPasswordButton: 'Wachtwoord opnieuw instellen',
+      authCheckingSession: 'Je Miimiid-sessie wordt gecontroleerd...',
+      authShowPassword: 'Wachtwoord tonen',
+      authHidePassword: 'Wachtwoord verbergen',
+      authResetPasswordTitle: 'Wachtwoord opnieuw instellen',
+      authResetPasswordSubtitle: 'Kies een nieuw wachtwoord voor je Miimiid-account.',
+      noLessonContent: 'Er is geen inhoud beschikbaar voor deze les.',
+      questionUnavailable: 'Vraag niet beschikbaar.',
+      unsupportedQuestionType: 'Niet-ondersteund vraagtype:',
+
+      untitledLesson: 'Untitled Lesson',
+
+      openCourse: 'Cursus openen',
+      unableToLoadCourses: 'Kan cursussen niet laden.',
+      invalidCourseId: 'Ongeldige cursus-ID.',
+      questionInstruction: 'Beantwoord de onderstaande vragen voordat je de les voltooit.',
+      unableToConnect: 'Kan geen verbinding maken met de server.',
+      completeLesson: 'Les voltooien',
+      somethingWentWrong: 'Er is iets misgegaan.',
+      checking: 'Controleren...',
+      saving: 'Opslaan...',
+      noQuizAvailable: 'Er is geen quiz beschikbaar voor deze les.',
+      answerAllQuestions: 'Beantwoord alle vragen voordat je ze indient.',
+      noLessonSelected: 'Er is momenteel geen les geselecteerd.',
+      submitQuizFirst: 'Voltooi en dien de quiz in voordat je deze les voltooit.',
+      lessonNotFound: 'Les niet gevonden.',
+      quizComplete: 'Quiz voltooid!',
+      score: 'Score',
+      youGot: 'Je hebt',
+      outOf: 'van de',
+      correct: 'goed.',
+      canCompleteLesson: 'Je kunt de les nu voltooien.',
+      reviewLessonTryAgain: 'Bekijk de les opnieuw en probeer het nog eens.',
+
+      selectCourse: "Selecteer een cursus om modules en lessen te bekijken:",
+      backToCourses: "← Terug naar cursussen",
+      backToModules: "← Terug naar cursusmodules",
+      yourProgress: "Jouw voortgang",
+      lessonsComplete: "lessen voltooid",
+      noLessonsYet: "Nog geen lessen",
+      startLesson: "Les starten",
+      reviewLesson: "Les herhalen",
+      completed: "✓ Voltooid",
+      moduleComplete: "✓ Module voltooid",
+      quickCheck: "Snelle controle",
+      submitAnswer: "Antwoord indienen",
+      nextLesson: "Volgende les",
+      previousLesson: "Vorige les",
+      loading: "Laden...",
+      noDescription: "Geen beschrijving beschikbaar.",
+      noModules: "Er zijn nog geen modules beschikbaar.",
+      noLessons: "Er zijn nog geen lessen beschikbaar in deze module.",
+      unableToLoadCourse: "Kan de cursus niet laden.",
+      unableToValidateQuiz: "Kan de quiz niet valideren.",
+      lessonCompleted: "Les succesvol voltooid! 🎉",
+      lessonCompletedSuccessfully: "Les succesvol voltooid! 🎉",
+      failedToSaveProgress: "De voortgang kon niet worden opgeslagen.",
+      selectLanguage: "Taal selecteren"
+
+,
+      home: 'Home',
+      learn: 'Learn',
+      funCenter: 'Fun Center',
+      aiTutor: 'AI Tutor',
+      xp: 'XP',
+      streak: 'Streak',
+      lessonsCompleted: 'Lessons completed',
+      averageQuizScore: 'Average quiz score',
+      pro: 'Pro',
+      premium: 'Premium',
+      settings: 'Settings',
+
+    },
+
+    pl: {
+      authWelcome: 'Witamy w Miimiid',
+      authSignInSubtitle: 'Zaloguj się, aby kontynuować naukę',
+      authCreateAccount: 'Utwórz konto Miimiid',
+      authCreateSubtitle: 'Utwórz konto, aby rozpocząć naukę',
+      authResetSubtitle: 'Wpisz swój adres e-mail, aby otrzymać instrukcje resetowania hasła',
+      authPasswordMismatch: 'Hasła nie są zgodne.',
+      authCreatingAccount: 'Tworzenie konta...',
+      authAccountCreated: 'Konto zostało pomyślnie utworzone.',
+      authCreateAccountError: 'Nie udało się utworzyć konta.',
+      authEnterEmail: 'Wpisz swój adres e-mail.',
+      authSendingResetInstructions: 'Wysyłanie instrukcji resetowania...',
+      authResetInstructionsSent: 'Instrukcje resetowania hasła zostały wysłane.',
+      authRequestResetError: 'Nie udało się poprosić o reset hasła.',
+      authInvalidResetLink: 'Ten link do resetowania hasła jest nieprawidłowy lub go brakuje.',
+      authPasswordMinLength: 'Hasło musi mieć co najmniej 8 znaków.',
+      authResettingPassword: 'Resetowanie hasła...',
+      authResetPasswordError: 'Nie udało się zresetować hasła.',
+      authPasswordResetSuccess: 'Hasło zostało pomyślnie zresetowane.',
+
+      authLoginIdentifier: 'E-mail lub numer telefonu',
+      authPassword: 'Hasło',
+      authSignIn: 'Zaloguj się',
+      authCreateAccountLink: 'Utwórz konto',
+      authForgotPassword: 'Nie pamiętasz hasła?',
+      authName: 'Imię i nazwisko',
+      authEmail: 'E-mail',
+      authPhone: 'Numer telefonu',
+      authConfirmPassword: 'Potwierdź hasło',
+      authCreateAccountButton: 'Utwórz konto',
+      authBackToSignIn: 'Wróć do logowania',
+      authEmailAddress: 'Adres e-mail',
+      authSendResetInstructions: 'Wyślij instrukcje resetowania',
+      authNewPassword: 'Nowe hasło',
+      authConfirmNewPassword: 'Potwierdź nowe hasło',
+      authResetPasswordButton: 'Zresetuj hasło',
+      authCheckingSession: 'Sprawdzanie sesji Miimiid...',
+      authShowPassword: 'Pokaż hasło',
+      authHidePassword: 'Ukryj hasło',
+      authResetPasswordTitle: 'Zresetuj hasło',
+      authResetPasswordSubtitle: 'Wybierz nowe hasło do swojego konta Miimiid.',
+      noLessonContent: 'Brak dostępnej treści dla tej lekcji.',
+      questionUnavailable: 'Pytanie niedostępne.',
+      unsupportedQuestionType: 'Nieobsługiwany typ pytania:',
+
+      untitledLesson: 'Untitled Lesson',
+
+      openCourse: 'Otwórz kurs',
+      unableToLoadCourses: 'Nie udało się załadować kursów.',
+      invalidCourseId: 'Nieprawidłowy identyfikator kursu.',
+      questionInstruction: 'Odpowiedz na poniższe pytania przed ukończeniem lekcji.',
+      unableToConnect: 'Nie można połączyć się z serwerem.',
+      completeLesson: 'Ukończ lekcję',
+      somethingWentWrong: 'Coś poszło nie tak.',
+      checking: 'Sprawdzanie...',
+      saving: 'Zapisywanie...',
+      noQuizAvailable: 'Dla tej lekcji nie ma dostępnego quizu.',
+      answerAllQuestions: 'Odpowiedz na wszystkie pytania przed wysłaniem.',
+      noLessonSelected: 'Nie wybrano aktualnie żadnej lekcji.',
+      submitQuizFirst: 'Ukończ i wyślij quiz przed ukończeniem tej lekcji.',
+      lessonNotFound: 'Nie znaleziono lekcji.',
+      quizComplete: 'Quiz ukończony!',
+      score: 'Wynik',
+      youGot: 'Uzyskano',
+      outOf: 'z',
+      correct: 'poprawnych odpowiedzi.',
+      canCompleteLesson: 'Możesz teraz ukończyć lekcję.',
+      reviewLessonTryAgain: 'Powtórz lekcję i spróbuj ponownie.',
+
+      selectCourse: "Wybierz kurs, aby poznać moduły i lekcje:",
+      backToCourses: "← Powrót do kursów",
+      backToModules: "← Powrót do modułów kursu",
+      yourProgress: "Twój postęp",
+      lessonsComplete: "ukończonych lekcji",
+      noLessonsYet: "Brak lekcji",
+      startLesson: "Rozpocznij lekcję",
+      reviewLesson: "Powtórz lekcję",
+      completed: "✓ Ukończono",
+      moduleComplete: "✓ Moduł ukończony",
+      quickCheck: "Szybkie sprawdzenie",
+      submitAnswer: "Wyślij odpowiedź",
+      nextLesson: "Następna lekcja",
+      previousLesson: "Poprzednia lekcja",
+      loading: "Ładowanie...",
+      noDescription: "Brak dostępnego opisu.",
+      noModules: "Brak dostępnych modułów.",
+      noLessons: "W tym module nie ma jeszcze dostępnych lekcji.",
+      unableToLoadCourse: "Nie udało się załadować kursu.",
+      unableToValidateQuiz: "Nie udało się zweryfikować quizu.",
+      lessonCompleted: "Lekcja ukończona pomyślnie! 🎉",
+      lessonCompletedSuccessfully: "Lekcja ukończona pomyślnie! 🎉",
+      failedToSaveProgress: "Nie udało się zapisać postępów.",
+      selectLanguage: "Wybierz język"
+
+,
+      home: 'Home',
+      learn: 'Learn',
+      funCenter: 'Fun Center',
+      aiTutor: 'AI Tutor',
+      xp: 'XP',
+      streak: 'Streak',
+      lessonsCompleted: 'Lessons completed',
+      averageQuizScore: 'Average quiz score',
+      pro: 'Pro',
+      premium: 'Premium',
+      settings: 'Settings',
+
+    },
+
+    tr: {
+      authWelcome: 'Miimiid\'e Hoş Geldiniz',
+      authSignInSubtitle: 'Öğrenmeye devam etmek için giriş yapın',
+      authCreateAccount: 'Miimiid hesabınızı oluşturun',
+      authCreateSubtitle: 'Öğrenmeye başlamak için bir hesap oluşturun',
+      authResetSubtitle: 'Şifre sıfırlama talimatlarını almak için e-posta adresinizi girin',
+      authPasswordMismatch: 'Şifreler eşleşmiyor.',
+      authCreatingAccount: 'Hesabınız oluşturuluyor...',
+      authAccountCreated: 'Hesap başarıyla oluşturuldu.',
+      authCreateAccountError: 'Hesabınız oluşturulamadı.',
+      authEnterEmail: 'E-posta adresinizi girin.',
+      authSendingResetInstructions: 'Sıfırlama talimatları gönderiliyor...',
+      authResetInstructionsSent: 'Şifre sıfırlama talimatları gönderildi.',
+      authRequestResetError: 'Şifre sıfırlama isteği gönderilemedi.',
+      authInvalidResetLink: 'Bu şifre sıfırlama bağlantısı geçersiz veya eksik.',
+      authPasswordMinLength: 'Şifre en az 8 karakter olmalıdır.',
+      authResettingPassword: 'Şifreniz sıfırlanıyor...',
+      authResetPasswordError: 'Şifreniz sıfırlanamadı.',
+      authPasswordResetSuccess: 'Şifreniz başarıyla sıfırlandı.',
+
+      authLoginIdentifier: 'E-posta veya telefon numarası',
+      authPassword: 'Şifre',
+      authSignIn: 'Giriş yap',
+      authCreateAccountLink: 'Hesap oluştur',
+      authForgotPassword: 'Şifrenizi mi unuttunuz?',
+      authName: 'Ad',
+      authEmail: 'E-posta',
+      authPhone: 'Telefon numarası',
+      authConfirmPassword: 'Şifreyi onayla',
+      authCreateAccountButton: 'Hesap oluştur',
+      authBackToSignIn: 'Girişe dön',
+      authEmailAddress: 'E-posta adresi',
+      authSendResetInstructions: 'Sıfırlama talimatlarını gönder',
+      authNewPassword: 'Yeni şifre',
+      authConfirmNewPassword: 'Yeni şifreyi onayla',
+      authResetPasswordButton: 'Şifreyi sıfırla',
+      authCheckingSession: 'Miimiid oturumunuz kontrol ediliyor...',
+      authShowPassword: 'Şifreyi göster',
+      authHidePassword: 'Şifreyi gizle',
+      authResetPasswordTitle: 'Şifrenizi sıfırlayın',
+      authResetPasswordSubtitle: 'Miimiid hesabınız için yeni bir şifre seçin.',
+      noLessonContent: 'Bu ders için içerik mevcut değil.',
+      questionUnavailable: 'Soru mevcut değil.',
+      unsupportedQuestionType: 'Desteklenmeyen soru türü:',
+
+      untitledLesson: 'Untitled Lesson',
+
+      openCourse: 'Kursu Aç',
+      unableToLoadCourses: 'Kurslar yüklenemedi.',
+      invalidCourseId: 'Geçersiz kurs kimliği.',
+      questionInstruction: 'Dersi tamamlamadan önce aşağıdaki soruları cevaplayın.',
+      unableToConnect: 'Sunucuya bağlanılamadı.',
+      completeLesson: 'Dersi Tamamla',
+      somethingWentWrong: 'Bir şeyler yanlış gitti.',
+      checking: 'Kontrol ediliyor...',
+      saving: 'Kaydediliyor...',
+      noQuizAvailable: 'Bu ders için kullanılabilir bir test yok.',
+      answerAllQuestions: 'Göndermeden önce tüm soruları cevaplayın.',
+      noLessonSelected: 'Şu anda seçili bir ders yok.',
+      submitQuizFirst: 'Bu dersi tamamlamadan önce testi tamamlayıp gönderin.',
+      lessonNotFound: 'Ders bulunamadı.',
+      quizComplete: 'Test tamamlandı!',
+      score: 'Puan',
+      youGot: 'Doğru cevap',
+      outOf: '/',
+      correct: 'doğru.',
+      canCompleteLesson: 'Artık dersi tamamlayabilirsiniz.',
+      reviewLessonTryAgain: 'Dersi gözden geçirip tekrar deneyin.',
+
+      selectCourse: "Modülleri ve dersleri keşfetmek için bir kurs seçin:",
+      backToCourses: "← Kurslara dön",
+      backToModules: "← Kurs modüllerine dön",
+      yourProgress: "İlerlemeniz",
+      lessonsComplete: "ders tamamlandı",
+      noLessonsYet: "Henüz ders yok",
+      startLesson: "Derse Başla",
+      reviewLesson: "Dersi Tekrarla",
+      completed: "✓ Tamamlandı",
+      moduleComplete: "✓ Modül tamamlandı",
+      quickCheck: "Hızlı Kontrol",
+      submitAnswer: "Cevabı Gönder",
+      nextLesson: "Sonraki Ders",
+      previousLesson: "Önceki Ders",
+      loading: "Yükleniyor...",
+      noDescription: "Açıklama mevcut değil.",
+      noModules: "Henüz kullanılabilir modül yok.",
+      noLessons: "Bu modülde henüz kullanılabilir ders yok.",
+      unableToLoadCourse: "Kurs yüklenemedi.",
+      unableToValidateQuiz: "Test doğrulanamadı.",
+      lessonCompleted: "Ders başarıyla tamamlandı! 🎉",
+      lessonCompletedSuccessfully: "Ders başarıyla tamamlandı! 🎉",
+      failedToSaveProgress: "İlerleme kaydedilemedi.",
+      selectLanguage: "Dil seçin"
+
+,
+      home: 'Home',
+      learn: 'Learn',
+      funCenter: 'Fun Center',
+      aiTutor: 'AI Tutor',
+      xp: 'XP',
+      streak: 'Streak',
+      lessonsCompleted: 'Lessons completed',
+      averageQuizScore: 'Average quiz score',
+      pro: 'Pro',
+      premium: 'Premium',
+      settings: 'Settings',
+
+    },
+
+    ru: {
+      authWelcome: 'Добро пожаловать в Miimiid',
+      authSignInSubtitle: 'Войдите, чтобы продолжить обучение',
+      authCreateAccount: 'Создайте аккаунт Miimiid',
+      authCreateSubtitle: 'Создайте аккаунт, чтобы начать обучение',
+      authResetSubtitle: 'Введите адрес электронной почты, чтобы получить инструкции по сбросу пароля',
+      authPasswordMismatch: 'Пароли не совпадают.',
+      authCreatingAccount: 'Создание аккаунта...',
+      authAccountCreated: 'Аккаунт успешно создан.',
+      authCreateAccountError: 'Не удалось создать аккаунт.',
+      authEnterEmail: 'Введите адрес электронной почты.',
+      authSendingResetInstructions: 'Отправка инструкций по сбросу...',
+      authResetInstructionsSent: 'Инструкции по сбросу пароля отправлены.',
+      authRequestResetError: 'Не удалось запросить сброс пароля.',
+      authInvalidResetLink: 'Эта ссылка для сброса пароля недействительна или отсутствует.',
+      authPasswordMinLength: 'Пароль должен содержать не менее 8 символов.',
+      authResettingPassword: 'Сброс пароля...',
+      authResetPasswordError: 'Не удалось сбросить пароль.',
+      authPasswordResetSuccess: 'Ваш пароль успешно сброшен.',
+
+      authLoginIdentifier: 'Электронная почта или номер телефона',
+      authPassword: 'Пароль',
+      authSignIn: 'Войти',
+      authCreateAccountLink: 'Создать аккаунт',
+      authForgotPassword: 'Забыли пароль?',
+      authName: 'Имя',
+      authEmail: 'Электронная почта',
+      authPhone: 'Номер телефона',
+      authConfirmPassword: 'Подтвердите пароль',
+      authCreateAccountButton: 'Создать аккаунт',
+      authBackToSignIn: 'Вернуться ко входу',
+      authEmailAddress: 'Адрес электронной почты',
+      authSendResetInstructions: 'Отправить инструкции по сбросу',
+      authNewPassword: 'Новый пароль',
+      authConfirmNewPassword: 'Подтвердите новый пароль',
+      authResetPasswordButton: 'Сбросить пароль',
+      authCheckingSession: 'Проверка вашей сессии Miimiid...',
+      authShowPassword: 'Показать пароль',
+      authHidePassword: 'Скрыть пароль',
+      authResetPasswordTitle: 'Сбросить пароль',
+      authResetPasswordSubtitle: 'Выберите новый пароль для своей учетной записи Miimiid.',
+      noLessonContent: 'Для этого урока нет доступного содержимого.',
+      questionUnavailable: 'Вопрос недоступен.',
+      unsupportedQuestionType: 'Неподдерживаемый тип вопроса:',
+
+      untitledLesson: 'Untitled Lesson',
+
+      openCourse: 'Открыть курс',
+      unableToLoadCourses: 'Не удалось загрузить курсы.',
+      invalidCourseId: 'Недопустимый идентификатор курса.',
+      questionInstruction: 'Ответьте на вопросы ниже перед завершением урока.',
+      unableToConnect: 'Не удалось подключиться к серверу.',
+      completeLesson: 'Завершить урок',
+      somethingWentWrong: 'Что-то пошло не так.',
+      checking: 'Проверка...',
+      saving: 'Сохранение...',
+      noQuizAvailable: 'Для этого урока нет доступного теста.',
+      answerAllQuestions: 'Ответьте на все вопросы перед отправкой.',
+      noLessonSelected: 'Урок не выбран.',
+      submitQuizFirst: 'Пройдите и отправьте тест перед завершением этого урока.',
+      lessonNotFound: 'Урок не найден.',
+      quizComplete: 'Тест завершён!',
+      score: 'Результат',
+      youGot: 'Правильных ответов',
+      outOf: 'из',
+      correct: 'правильных.',
+      canCompleteLesson: 'Теперь можно завершить урок.',
+      reviewLessonTryAgain: 'Повторите урок и попробуйте снова.',
+
+      selectCourse: "Выберите курс, чтобы изучить модули и уроки:",
+      backToCourses: "← Назад к курсам",
+      backToModules: "← Назад к модулям курса",
+      yourProgress: "Ваш прогресс",
+      lessonsComplete: "уроков завершено",
+      noLessonsYet: "Уроков пока нет",
+      startLesson: "Начать урок",
+      reviewLesson: "Повторить урок",
+      completed: "✓ Завершено",
+      moduleComplete: "✓ Модуль завершён",
+      quickCheck: "Быстрая проверка",
+      submitAnswer: "Отправить ответ",
+      nextLesson: "Следующий урок",
+      previousLesson: "Предыдущий урок",
+      loading: "Загрузка...",
+      noDescription: "Описание недоступно.",
+      noModules: "Модули пока недоступны.",
+      noLessons: "В этом модуле пока нет доступных уроков.",
+      unableToLoadCourse: "Не удалось загрузить курс.",
+      unableToValidateQuiz: "Не удалось проверить тест.",
+      lessonCompleted: "Урок успешно завершён! 🎉",
+      lessonCompletedSuccessfully: "Урок успешно завершён! 🎉",
+      failedToSaveProgress: "Не удалось сохранить прогресс.",
+      selectLanguage: "Выберите язык"
+
+,
+      home: 'Home',
+      learn: 'Learn',
+      funCenter: 'Fun Center',
+      aiTutor: 'AI Tutor',
+      xp: 'XP',
+      streak: 'Streak',
+      lessonsCompleted: 'Lessons completed',
+      averageQuizScore: 'Average quiz score',
+      pro: 'Pro',
+      premium: 'Premium',
+      settings: 'Settings',
+
+    },
+
+    uk: {
+      authWelcome: 'Ласкаво просимо до Miimiid',
+      authSignInSubtitle: 'Увійдіть, щоб продовжити навчання',
+      authCreateAccount: 'Створіть обліковий запис Miimiid',
+      authCreateSubtitle: 'Створіть обліковий запис, щоб почати навчання',
+      authResetSubtitle: 'Введіть адресу електронної пошти, щоб отримати інструкції зі скидання пароля',
+      authPasswordMismatch: 'Паролі не збігаються.',
+      authCreatingAccount: 'Створення облікового запису...',
+      authAccountCreated: 'Обліковий запис успішно створено.',
+      authCreateAccountError: 'Не вдалося створити обліковий запис.',
+      authEnterEmail: 'Введіть адресу електронної пошти.',
+      authSendingResetInstructions: 'Надсилання інструкцій зі скидання...',
+      authResetInstructionsSent: 'Інструкції зі скидання пароля надіслано.',
+      authRequestResetError: 'Не вдалося запросити скидання пароля.',
+      authInvalidResetLink: 'Це посилання для скидання пароля недійсне або відсутнє.',
+      authPasswordMinLength: 'Пароль має містити щонайменше 8 символів.',
+      authResettingPassword: 'Скидання пароля...',
+      authResetPasswordError: 'Не вдалося скинути пароль.',
+      authPasswordResetSuccess: 'Ваш пароль успішно скинуто.',
+
+      authLoginIdentifier: 'Електронна пошта або номер телефону',
+      authPassword: 'Пароль',
+      authSignIn: 'Увійти',
+      authCreateAccountLink: 'Створити обліковий запис',
+      authForgotPassword: 'Забули пароль?',
+      authName: 'Ім\'я',
+      authEmail: 'Електронна пошта',
+      authPhone: 'Номер телефону',
+      authConfirmPassword: 'Підтвердьте пароль',
+      authCreateAccountButton: 'Створити обліковий запис',
+      authBackToSignIn: 'Повернутися до входу',
+      authEmailAddress: 'Адреса електронної пошти',
+      authSendResetInstructions: 'Надіслати інструкції зі скидання',
+      authNewPassword: 'Новий пароль',
+      authConfirmNewPassword: 'Підтвердьте новий пароль',
+      authResetPasswordButton: 'Скинути пароль',
+      authCheckingSession: 'Перевірка вашого сеансу Miimiid...',
+      authShowPassword: 'Показати пароль',
+      authHidePassword: 'Приховати пароль',
+      authResetPasswordTitle: 'Скинути пароль',
+      authResetPasswordSubtitle: 'Виберіть новий пароль для свого облікового запису Miimiid.',
+      noLessonContent: 'Для цього уроку немає доступного вмісту.',
+      questionUnavailable: 'Запитання недоступне.',
+      unsupportedQuestionType: 'Непідтримуваний тип запитання:',
+
+      untitledLesson: 'Untitled Lesson',
+
+      openCourse: 'Відкрити курс',
+      unableToLoadCourses: 'Не вдалося завантажити курси.',
+      invalidCourseId: 'Недійсний ідентифікатор курсу.',
+      questionInstruction: 'Дайте відповіді на наведені нижче запитання перед завершенням уроку.',
+      unableToConnect: 'Не вдалося підключитися до сервера.',
+      completeLesson: 'Завершити урок',
+      somethingWentWrong: 'Щось пішло не так.',
+      checking: 'Перевірка...',
+      saving: 'Збереження...',
+      noQuizAvailable: 'Для цього уроку немає доступного тесту.',
+      answerAllQuestions: 'Дайте відповіді на всі запитання перед надсиланням.',
+      noLessonSelected: 'Урок не вибрано.',
+      submitQuizFirst: 'Пройдіть і надішліть тест перед завершенням цього уроку.',
+      lessonNotFound: 'Урок не знайдено.',
+      quizComplete: 'Тест завершено!',
+      score: 'Результат',
+      youGot: 'Правильних відповідей',
+      outOf: 'із',
+      correct: 'правильних.',
+      canCompleteLesson: 'Тепер ви можете завершити урок.',
+      reviewLessonTryAgain: 'Перегляньте урок і спробуйте ще раз.',
+
+      selectCourse: "Виберіть курс, щоб переглянути модулі та уроки:",
+      backToCourses: "← Назад до курсів",
+      backToModules: "← Назад до модулів курсу",
+      yourProgress: "Ваш прогрес",
+      lessonsComplete: "уроків завершено",
+      noLessonsYet: "Уроків ще немає",
+      startLesson: "Почати урок",
+      reviewLesson: "Повторити урок",
+      completed: "✓ Завершено",
+      moduleComplete: "✓ Модуль завершено",
+      quickCheck: "Швидка перевірка",
+      submitAnswer: "Надіслати відповідь",
+      nextLesson: "Наступний урок",
+      previousLesson: "Попередній урок",
+      loading: "Завантаження...",
+      noDescription: "Опис недоступний.",
+      noModules: "Модулі ще недоступні.",
+      noLessons: "У цьому модулі ще немає доступних уроків.",
+      unableToLoadCourse: "Не вдалося завантажити курс.",
+      unableToValidateQuiz: "Не вдалося перевірити тест.",
+      lessonCompleted: "Урок успішно завершено! 🎉",
+      lessonCompletedSuccessfully: "Урок успішно завершено! 🎉",
+      failedToSaveProgress: "Не вдалося зберегти прогрес.",
+      selectLanguage: "Виберіть мову"
+
+,
+      home: 'Home',
+      learn: 'Learn',
+      funCenter: 'Fun Center',
+      aiTutor: 'AI Tutor',
+      xp: 'XP',
+      streak: 'Streak',
+      lessonsCompleted: 'Lessons completed',
+      averageQuizScore: 'Average quiz score',
+      pro: 'Pro',
+      premium: 'Premium',
+      settings: 'Settings',
+
+    },
+
+    ar: {
+      authWelcome: 'مرحبًا بك في Miimiid',
+      authSignInSubtitle: 'سجّل الدخول لمواصلة التعلّم',
+      authCreateAccount: 'أنشئ حساب Miimiid الخاص بك',
+      authCreateSubtitle: 'أنشئ حسابًا لبدء التعلّم',
+      authResetSubtitle: 'أدخل بريدك الإلكتروني لتلقي تعليمات إعادة تعيين كلمة المرور',
+      authPasswordMismatch: 'كلمتا المرور غير متطابقتين.',
+      authCreatingAccount: 'جارٍ إنشاء حسابك...',
+      authAccountCreated: 'تم إنشاء الحساب بنجاح.',
+      authCreateAccountError: 'تعذر إنشاء حسابك.',
+      authEnterEmail: 'أدخل عنوان بريدك الإلكتروني.',
+      authSendingResetInstructions: 'جارٍ إرسال تعليمات إعادة التعيين...',
+      authResetInstructionsSent: 'تم إرسال تعليمات إعادة تعيين كلمة المرور.',
+      authRequestResetError: 'تعذر طلب إعادة تعيين كلمة المرور.',
+      authInvalidResetLink: 'رابط إعادة تعيين كلمة المرور غير صالح أو مفقود.',
+      authPasswordMinLength: 'يجب أن تتكون كلمة المرور من 8 أحرف على الأقل.',
+      authResettingPassword: 'جارٍ إعادة تعيين كلمة المرور...',
+      authResetPasswordError: 'تعذر إعادة تعيين كلمة المرور.',
+      authPasswordResetSuccess: 'تمت إعادة تعيين كلمة المرور بنجاح.',
+
+      authLoginIdentifier: 'البريد الإلكتروني أو رقم الهاتف',
+      authPassword: 'كلمة المرور',
+      authSignIn: 'تسجيل الدخول',
+      authCreateAccountLink: 'إنشاء حساب',
+      authForgotPassword: 'هل نسيت كلمة المرور؟',
+      authName: 'الاسم',
+      authEmail: 'البريد الإلكتروني',
+      authPhone: 'رقم الهاتف',
+      authConfirmPassword: 'تأكيد كلمة المرور',
+      authCreateAccountButton: 'إنشاء حساب',
+      authBackToSignIn: 'العودة إلى تسجيل الدخول',
+      authEmailAddress: 'عنوان البريد الإلكتروني',
+      authSendResetInstructions: 'إرسال تعليمات إعادة التعيين',
+      authNewPassword: 'كلمة المرور الجديدة',
+      authConfirmNewPassword: 'تأكيد كلمة المرور الجديدة',
+      authResetPasswordButton: 'إعادة تعيين كلمة المرور',
+      authCheckingSession: 'جارٍ التحقق من جلسة Miimiid...',
+      authShowPassword: 'إظهار كلمة المرور',
+      authHidePassword: 'إخفاء كلمة المرور',
+      authResetPasswordTitle: 'إعادة تعيين كلمة المرور',
+      authResetPasswordSubtitle: 'اختر كلمة مرور جديدة لحساب Miimiid الخاص بك.',
+      noLessonContent: 'لا يوجد محتوى متاح لهذا الدرس.',
+      questionUnavailable: 'السؤال غير متاح.',
+      unsupportedQuestionType: 'نوع السؤال غير مدعوم:',
+
+      untitledLesson: 'Untitled Lesson',
+
+      openCourse: 'فتح الدورة',
+      unableToLoadCourses: 'تعذر تحميل الدورات.',
+      invalidCourseId: 'معرّف الدورة غير صالح.',
+      questionInstruction: 'أجب عن الأسئلة أدناه قبل إكمال الدرس.',
+      unableToConnect: 'تعذر الاتصال بالخادم.',
+      completeLesson: 'إكمال الدرس',
+      somethingWentWrong: 'حدث خطأ ما.',
+      checking: 'جارٍ التحقق...',
+      saving: 'جارٍ الحفظ...',
+      noQuizAvailable: 'لا يوجد اختبار متاح لهذا الدرس.',
+      answerAllQuestions: 'أجب عن جميع الأسئلة قبل الإرسال.',
+      noLessonSelected: 'لم يتم تحديد درس حاليًا.',
+      submitQuizFirst: 'أكمل الاختبار وأرسله قبل إكمال هذا الدرس.',
+      lessonNotFound: 'لم يتم العثور على الدرس.',
+      quizComplete: 'اكتمل الاختبار!',
+      score: 'النتيجة',
+      youGot: 'أجبت بشكل صحيح عن',
+      outOf: 'من',
+      correct: 'إجابات صحيحة.',
+      canCompleteLesson: 'يمكنك الآن إكمال الدرس.',
+      reviewLessonTryAgain: 'راجع الدرس وحاول مرة أخرى.',
+
+      selectCourse: "اختر دورة لاستكشاف الوحدات والدروس:",
+      backToCourses: "← العودة إلى الدورات",
+      backToModules: "← العودة إلى وحدات الدورة",
+      yourProgress: "تقدمك",
+      lessonsComplete: "دروس مكتملة",
+      noLessonsYet: "لا توجد دروس بعد",
+      startLesson: "ابدأ الدرس",
+      reviewLesson: "مراجعة الدرس",
+      completed: "✓ مكتمل",
+      moduleComplete: "✓ اكتملت الوحدة",
+      quickCheck: "اختبار سريع",
+      submitAnswer: "إرسال الإجابة",
+      nextLesson: "الدرس التالي",
+      previousLesson: "الدرس السابق",
+      loading: "جارٍ التحميل...",
+      noDescription: "لا يوجد وصف متاح.",
+      noModules: "لا توجد وحدات متاحة بعد.",
+      noLessons: "لا توجد دروس متاحة في هذه الوحدة بعد.",
+      unableToLoadCourse: "تعذر تحميل الدورة.",
+      unableToValidateQuiz: "تعذر التحقق من الاختبار.",
+      lessonCompleted: "اكتمل الدرس بنجاح! 🎉",
+      lessonCompletedSuccessfully: "اكتمل الدرس بنجاح! 🎉",
+      failedToSaveProgress: "تعذر حفظ التقدم.",
+      selectLanguage: "اختيار اللغة"
+
+,
+      home: 'Home',
+      learn: 'Learn',
+      funCenter: 'Fun Center',
+      aiTutor: 'AI Tutor',
+      xp: 'XP',
+      streak: 'Streak',
+      lessonsCompleted: 'Lessons completed',
+      averageQuizScore: 'Average quiz score',
+      pro: 'Pro',
+      premium: 'Premium',
+      settings: 'Settings',
+
+    },
+
+    he: {
+      authWelcome: 'ברוכים הבאים ל-Miimiid',
+      authSignInSubtitle: 'התחבר כדי להמשיך ללמוד',
+      authCreateAccount: 'צור את חשבון Miimiid שלך',
+      authCreateSubtitle: 'צור חשבון כדי להתחיל ללמוד',
+      authResetSubtitle: 'הזן את כתובת האימייל שלך כדי לקבל הוראות לאיפוס הסיסמה',
+      authPasswordMismatch: 'הסיסמאות אינן תואמות.',
+      authCreatingAccount: 'יוצר את החשבון שלך...',
+      authAccountCreated: 'החשבון נוצר בהצלחה.',
+      authCreateAccountError: 'לא ניתן ליצור את החשבון שלך.',
+      authEnterEmail: 'הזן את כתובת האימייל שלך.',
+      authSendingResetInstructions: 'שולח הוראות איפוס...',
+      authResetInstructionsSent: 'הוראות לאיפוס הסיסמה נשלחו.',
+      authRequestResetError: 'לא ניתן לבקש איפוס סיסמה.',
+      authInvalidResetLink: 'קישור איפוס הסיסמה אינו תקין או חסר.',
+      authPasswordMinLength: 'הסיסמה חייבת להכיל לפחות 8 תווים.',
+      authResettingPassword: 'מאפס את הסיסמה שלך...',
+      authResetPasswordError: 'לא ניתן לאפס את הסיסמה שלך.',
+      authPasswordResetSuccess: 'הסיסמה שלך אופסה בהצלחה.',
+
+      authLoginIdentifier: 'אימייל או מספר טלפון',
+      authPassword: 'סיסמה',
+      authSignIn: 'התחברות',
+      authCreateAccountLink: 'יצירת חשבון',
+      authForgotPassword: 'שכחת את הסיסמה?',
+      authName: 'שם',
+      authEmail: 'אימייל',
+      authPhone: 'מספר טלפון',
+      authConfirmPassword: 'אישור סיסמה',
+      authCreateAccountButton: 'יצירת חשבון',
+      authBackToSignIn: 'חזרה להתחברות',
+      authEmailAddress: 'כתובת אימייל',
+      authSendResetInstructions: 'שליחת הוראות איפוס',
+      authNewPassword: 'סיסמה חדשה',
+      authConfirmNewPassword: 'אישור הסיסמה החדשה',
+      authResetPasswordButton: 'איפוס סיסמה',
+      authCheckingSession: 'בודק את ההתחברות שלך ל-Miimiid...',
+      authShowPassword: 'הצג סיסמה',
+      authHidePassword: 'הסתר סיסמה',
+      authResetPasswordTitle: 'איפוס הסיסמה',
+      authResetPasswordSubtitle: 'בחר סיסמה חדשה לחשבון Miimiid שלך.',
+      noLessonContent: 'אין תוכן זמין לשיעור זה.',
+      questionUnavailable: 'השאלה אינה זמינה.',
+      unsupportedQuestionType: 'סוג שאלה שאינו נתמך:',
+
+      untitledLesson: 'Untitled Lesson',
+
+      openCourse: 'פתיחת קורס',
+      unableToLoadCourses: 'לא ניתן לטעון את הקורסים.',
+      invalidCourseId: 'מזהה קורס לא חוקי.',
+      questionInstruction: 'ענה על השאלות שלהלן לפני השלמת השיעור.',
+      unableToConnect: 'לא ניתן להתחבר לשרת.',
+      completeLesson: 'השלמת שיעור',
+      somethingWentWrong: 'משהו השתבש.',
+      checking: 'בודק...',
+      saving: 'שומר...',
+      noQuizAvailable: 'אין שאלון זמין לשיעור זה.',
+      answerAllQuestions: 'ענה על כל השאלות לפני השליחה.',
+      noLessonSelected: 'לא נבחר שיעור כרגע.',
+      submitQuizFirst: 'השלם ושלח את השאלון לפני השלמת השיעור.',
+      lessonNotFound: 'השיעור לא נמצא.',
+      quizComplete: 'השאלון הושלם!',
+      score: 'ציון',
+      youGot: 'ענית נכון על',
+      outOf: 'מתוך',
+      correct: 'תשובות נכונות.',
+      canCompleteLesson: 'כעת ניתן להשלים את השיעור.',
+      reviewLessonTryAgain: 'חזור על השיעור ונסה שוב.',
+
+      selectCourse: "בחר קורס כדי לחקור את המודולים והשיעורים:",
+      backToCourses: "← חזרה לקורסים",
+      backToModules: "← חזרה למודולי הקורס",
+      yourProgress: "ההתקדמות שלך",
+      lessonsComplete: "שיעורים שהושלמו",
+      noLessonsYet: "אין עדיין שיעורים",
+      startLesson: "התחל שיעור",
+      reviewLesson: "חזור על השיעור",
+      completed: "✓ הושלם",
+      moduleComplete: "✓ המודול הושלם",
+      quickCheck: "בדיקה מהירה",
+      submitAnswer: "שלח תשובה",
+      nextLesson: "השיעור הבא",
+      previousLesson: "השיעור הקודם",
+      loading: "טוען...",
+      noDescription: "אין תיאור זמין.",
+      noModules: "אין עדיין מודולים זמינים.",
+      noLessons: "אין עדיין שיעורים זמינים במודול זה.",
+      unableToLoadCourse: "לא ניתן לטעון את הקורס.",
+      unableToValidateQuiz: "לא ניתן לאמת את השאלון.",
+      lessonCompleted: "השיעור הושלם בהצלחה! 🎉",
+      lessonCompletedSuccessfully: "השיעור הושלם בהצלחה! 🎉",
+      failedToSaveProgress: "לא ניתן היה לשמור את ההתקדמות.",
+      selectLanguage: "בחירת שפה"
+
+,
+      home: 'Home',
+      learn: 'Learn',
+      funCenter: 'Fun Center',
+      aiTutor: 'AI Tutor',
+      xp: 'XP',
+      streak: 'Streak',
+      lessonsCompleted: 'Lessons completed',
+      averageQuizScore: 'Average quiz score',
+      pro: 'Pro',
+      premium: 'Premium',
+      settings: 'Settings',
+
+    },
+
+    fa: {
+      authWelcome: 'به Miimiid خوش آمدید',
+      authSignInSubtitle: 'برای ادامه یادگیری وارد شوید',
+      authCreateAccount: 'حساب Miimiid خود را ایجاد کنید',
+      authCreateSubtitle: 'برای شروع یادگیری یک حساب ایجاد کنید',
+      authResetSubtitle: 'ایمیل خود را وارد کنید تا دستورالعمل بازنشانی رمز عبور را دریافت کنید',
+      authPasswordMismatch: 'رمزهای عبور مطابقت ندارند.',
+      authCreatingAccount: 'در حال ایجاد حساب شما...',
+      authAccountCreated: 'حساب با موفقیت ایجاد شد.',
+      authCreateAccountError: 'ایجاد حساب شما امکان‌پذیر نیست.',
+      authEnterEmail: 'آدرس ایمیل خود را وارد کنید.',
+      authSendingResetInstructions: 'در حال ارسال دستورالعمل بازنشانی...',
+      authResetInstructionsSent: 'دستورالعمل بازنشانی رمز عبور ارسال شد.',
+      authRequestResetError: 'درخواست بازنشانی رمز عبور امکان‌پذیر نیست.',
+      authInvalidResetLink: 'این پیوند بازنشانی رمز عبور نامعتبر یا مفقود است.',
+      authPasswordMinLength: 'رمز عبور باید حداقل ۸ نویسه داشته باشد.',
+      authResettingPassword: 'در حال بازنشانی رمز عبور شما...',
+      authResetPasswordError: 'بازنشانی رمز عبور شما امکان‌پذیر نیست.',
+      authPasswordResetSuccess: 'رمز عبور شما با موفقیت بازنشانی شد.',
+
+      authLoginIdentifier: 'ایمیل یا شماره تلفن',
+      authPassword: 'رمز عبور',
+      authSignIn: 'ورود',
+      authCreateAccountLink: 'ایجاد حساب',
+      authForgotPassword: 'رمز عبور را فراموش کرده‌اید؟',
+      authName: 'نام',
+      authEmail: 'ایمیل',
+      authPhone: 'شماره تلفن',
+      authConfirmPassword: 'تأیید رمز عبور',
+      authCreateAccountButton: 'ایجاد حساب',
+      authBackToSignIn: 'بازگشت به ورود',
+      authEmailAddress: 'آدرس ایمیل',
+      authSendResetInstructions: 'ارسال دستورالعمل بازنشانی',
+      authNewPassword: 'رمز عبور جدید',
+      authConfirmNewPassword: 'تأیید رمز عبور جدید',
+      authResetPasswordButton: 'بازنشانی رمز عبور',
+      authCheckingSession: 'در حال بررسی نشست Miimiid شما...',
+      authShowPassword: 'نمایش رمز عبور',
+      authHidePassword: 'پنهان کردن رمز عبور',
+      authResetPasswordTitle: 'بازنشانی رمز عبور',
+      authResetPasswordSubtitle: 'یک رمز عبور جدید برای حساب Miimiid خود انتخاب کنید.',
+      noLessonContent: 'محتوایی برای این درس در دسترس نیست.',
+      questionUnavailable: 'پرسش در دسترس نیست.',
+      unsupportedQuestionType: 'نوع پرسش پشتیبانی نمی‌شود:',
+
+      untitledLesson: 'Untitled Lesson',
+
+      openCourse: 'باز کردن دوره',
+      unableToLoadCourses: 'بارگذاری دوره\u200cها ممکن نیست.',
+      invalidCourseId: 'شناسه دوره نامعتبر است.',
+      questionInstruction: 'پیش از تکمیل درس، به پرسش\u200cهای زیر پاسخ دهید.',
+      unableToConnect: 'اتصال به سرور ممکن نیست.',
+      completeLesson: 'تکمیل درس',
+      somethingWentWrong: 'مشکلی پیش آمد.',
+      checking: 'در حال بررسی...',
+      saving: 'در حال ذخیره...',
+      noQuizAvailable: 'برای این درس آزمونی در دسترس نیست.',
+      answerAllQuestions: 'پیش از ارسال، به همه پرسش\u200cها پاسخ دهید.',
+      noLessonSelected: 'در حال حاضر درسی انتخاب نشده است.',
+      submitQuizFirst: 'پیش از تکمیل این درس، آزمون را کامل و ارسال کنید.',
+      lessonNotFound: 'درس پیدا نشد.',
+      quizComplete: 'آزمون تکمیل شد!',
+      score: 'امتیاز',
+      youGot: 'پاسخ صحیح شما',
+      outOf: 'از',
+      correct: 'پاسخ صحیح بود.',
+      canCompleteLesson: 'اکنون می\u200cتوانید درس را تکمیل کنید.',
+      reviewLessonTryAgain: 'درس را مرور کنید و دوباره تلاش کنید.',
+
+      selectCourse: "یک دوره را برای مشاهده ماژول‌ها و درس‌ها انتخاب کنید:",
+      backToCourses: "← بازگشت به دوره‌ها",
+      backToModules: "← بازگشت به ماژول‌های دوره",
+      yourProgress: "پیشرفت شما",
+      lessonsComplete: "درس تکمیل شده",
+      noLessonsYet: "هنوز درسی وجود ندارد",
+      startLesson: "شروع درس",
+      reviewLesson: "مرور درس",
+      completed: "✓ تکمیل شد",
+      moduleComplete: "✓ ماژول تکمیل شد",
+      quickCheck: "بررسی سریع",
+      submitAnswer: "ارسال پاسخ",
+      nextLesson: "درس بعدی",
+      previousLesson: "درس قبلی",
+      loading: "در حال بارگذاری...",
+      noDescription: "توضیحی موجود نیست.",
+      noModules: "هنوز ماژولی در دسترس نیست.",
+      noLessons: "هنوز درسی در این ماژول موجود نیست.",
+      unableToLoadCourse: "بارگذاری دوره ممکن نیست.",
+      unableToValidateQuiz: "اعتبارسنجی آزمون ممکن نیست.",
+      lessonCompleted: "درس با موفقیت تکمیل شد! 🎉",
+      lessonCompletedSuccessfully: "درس با موفقیت تکمیل شد! 🎉",
+      failedToSaveProgress: "ذخیره پیشرفت امکان‌پذیر نبود.",
+      selectLanguage: "انتخاب زبان"
+
+,
+      home: 'Home',
+      learn: 'Learn',
+      funCenter: 'Fun Center',
+      aiTutor: 'AI Tutor',
+      xp: 'XP',
+      streak: 'Streak',
+      lessonsCompleted: 'Lessons completed',
+      averageQuizScore: 'Average quiz score',
+      pro: 'Pro',
+      premium: 'Premium',
+      settings: 'Settings',
+
+    },
+
+    hi: {
+      authWelcome: 'Miimiid में आपका स्वागत है',
+      authSignInSubtitle: 'सीखना जारी रखने के लिए साइन इन करें',
+      authCreateAccount: 'अपना Miimiid खाता बनाएं',
+      authCreateSubtitle: 'सीखना शुरू करने के लिए खाता बनाएं',
+      authResetSubtitle: 'पासवर्ड रीसेट करने के निर्देश पाने के लिए अपना ईमेल दर्ज करें',
+      authPasswordMismatch: 'पासवर्ड मेल नहीं खाते।',
+      authCreatingAccount: 'आपका खाता बनाया जा रहा है...',
+      authAccountCreated: 'खाता सफलतापूर्वक बनाया गया।',
+      authCreateAccountError: 'आपका खाता नहीं बनाया जा सका।',
+      authEnterEmail: 'अपना ईमेल पता दर्ज करें।',
+      authSendingResetInstructions: 'रीसेट निर्देश भेजे जा रहे हैं...',
+      authResetInstructionsSent: 'पासवर्ड रीसेट करने के निर्देश भेज दिए गए हैं।',
+      authRequestResetError: 'पासवर्ड रीसेट का अनुरोध नहीं किया जा सका।',
+      authInvalidResetLink: 'यह पासवर्ड रीसेट लिंक अमान्य या अनुपलब्ध है।',
+      authPasswordMinLength: 'पासवर्ड कम से कम 8 अक्षरों का होना चाहिए।',
+      authResettingPassword: 'आपका पासवर्ड रीसेट किया जा रहा है...',
+      authResetPasswordError: 'आपका पासवर्ड रीसेट नहीं किया जा सका।',
+      authPasswordResetSuccess: 'आपका पासवर्ड सफलतापूर्वक रीसेट कर दिया गया है।',
+
+      authLoginIdentifier: 'ईमेल या फ़ोन नंबर',
+      authPassword: 'पासवर्ड',
+      authSignIn: 'साइन इन करें',
+      authCreateAccountLink: 'खाता बनाएं',
+      authForgotPassword: 'पासवर्ड भूल गए?',
+      authName: 'नाम',
+      authEmail: 'ईमेल',
+      authPhone: 'फ़ोन नंबर',
+      authConfirmPassword: 'पासवर्ड की पुष्टि करें',
+      authCreateAccountButton: 'खाता बनाएं',
+      authBackToSignIn: 'साइन इन पर वापस जाएं',
+      authEmailAddress: 'ईमेल पता',
+      authSendResetInstructions: 'रीसेट निर्देश भेजें',
+      authNewPassword: 'नया पासवर्ड',
+      authConfirmNewPassword: 'नए पासवर्ड की पुष्टि करें',
+      authResetPasswordButton: 'पासवर्ड रीसेट करें',
+      authCheckingSession: 'आपका Miimiid सत्र जांचा जा रहा है...',
+      authShowPassword: 'पासवर्ड दिखाएं',
+      authHidePassword: 'पासवर्ड छिपाएं',
+      authResetPasswordTitle: 'पासवर्ड रीसेट करें',
+      authResetPasswordSubtitle: 'अपने Miimiid खाते के लिए नया पासवर्ड चुनें।',
+      noLessonContent: 'इस पाठ के लिए कोई सामग्री उपलब्ध नहीं है।',
+      questionUnavailable: 'प्रश्न उपलब्ध नहीं है।',
+      unsupportedQuestionType: 'असमर्थित प्रश्न प्रकार:',
+
+      untitledLesson: 'Untitled Lesson',
+
+      openCourse: 'कोर्स खोलें',
+      unableToLoadCourses: 'कोर्स लोड नहीं किए जा सके।',
+      invalidCourseId: 'अमान्य कोर्स आईडी।',
+      questionInstruction: 'पाठ पूरा करने से पहले नीचे दिए गए प्रश्नों के उत्तर दें।',
+      unableToConnect: 'सर्वर से कनेक्ट नहीं हो सका।',
+      completeLesson: 'पाठ पूरा करें',
+      somethingWentWrong: 'कुछ गलत हो गया।',
+      checking: 'जाँच हो रही है...',
+      saving: 'सहेजा जा रहा है...',
+      noQuizAvailable: 'इस पाठ के लिए कोई क्विज़ उपलब्ध नहीं है।',
+      answerAllQuestions: 'जमा करने से पहले सभी प्रश्नों के उत्तर दें।',
+      noLessonSelected: 'अभी कोई पाठ चयनित नहीं है।',
+      submitQuizFirst: 'इस पाठ को पूरा करने से पहले क्विज़ पूरा करके जमा करें।',
+      lessonNotFound: 'पाठ नहीं मिला।',
+      quizComplete: 'क्विज़ पूरा हुआ!',
+      score: 'स्कोर',
+      youGot: 'आपने सही उत्तर दिए',
+      outOf: 'में से',
+      correct: 'सही।',
+      canCompleteLesson: 'अब आप पाठ पूरा कर सकते हैं।',
+      reviewLessonTryAgain: 'पाठ की समीक्षा करें और फिर प्रयास करें।',
+
+      selectCourse: "मॉड्यूल और पाठ देखने के लिए एक कोर्स चुनें:",
+      backToCourses: "← कोर्स पर वापस जाएँ",
+      backToModules: "← कोर्स मॉड्यूल पर वापस जाएँ",
+      yourProgress: "आपकी प्रगति",
+      lessonsComplete: "पाठ पूरे हुए",
+      noLessonsYet: "अभी कोई पाठ नहीं",
+      startLesson: "पाठ शुरू करें",
+      reviewLesson: "पाठ दोहराएँ",
+      completed: "✓ पूरा हुआ",
+      moduleComplete: "✓ मॉड्यूल पूरा हुआ",
+      quickCheck: "त्वरित जाँच",
+      submitAnswer: "उत्तर जमा करें",
+      nextLesson: "अगला पाठ",
+      previousLesson: "पिछला पाठ",
+      loading: "लोड हो रहा है...",
+      noDescription: "कोई विवरण उपलब्ध नहीं है।",
+      noModules: "अभी कोई मॉड्यूल उपलब्ध नहीं है।",
+      noLessons: "इस मॉड्यूल में अभी कोई पाठ उपलब्ध नहीं है।",
+      unableToLoadCourse: "कोर्स लोड नहीं किया जा सका।",
+      unableToValidateQuiz: "क्विज़ सत्यापित नहीं की जा सकी।",
+      lessonCompleted: "पाठ सफलतापूर्वक पूरा हुआ! 🎉",
+      lessonCompletedSuccessfully: "पाठ सफलतापूर्वक पूरा हुआ! 🎉",
+      failedToSaveProgress: "प्रगति सहेजी नहीं जा सकी।",
+      selectLanguage: "भाषा चुनें"
+
+,
+      home: 'Home',
+      learn: 'Learn',
+      funCenter: 'Fun Center',
+      aiTutor: 'AI Tutor',
+      xp: 'XP',
+      streak: 'Streak',
+      lessonsCompleted: 'Lessons completed',
+      averageQuizScore: 'Average quiz score',
+      pro: 'Pro',
+      premium: 'Premium',
+      settings: 'Settings',
+
+    },
+
+    bn: {
+      authWelcome: 'Miimiid-এ স্বাগতম',
+      authSignInSubtitle: 'শেখা চালিয়ে যেতে সাইন ইন করুন',
+      authCreateAccount: 'আপনার Miimiid অ্যাকাউন্ট তৈরি করুন',
+      authCreateSubtitle: 'শেখা শুরু করতে একটি অ্যাকাউন্ট তৈরি করুন',
+      authResetSubtitle: 'পাসওয়ার্ড রিসেট করার নির্দেশনা পেতে আপনার ইমেল লিখুন',
+      authPasswordMismatch: 'পাসওয়ার্ড দুটি মেলে না।',
+      authCreatingAccount: 'আপনার অ্যাকাউন্ট তৈরি করা হচ্ছে...',
+      authAccountCreated: 'অ্যাকাউন্ট সফলভাবে তৈরি হয়েছে।',
+      authCreateAccountError: 'আপনার অ্যাকাউন্ট তৈরি করা যায়নি।',
+      authEnterEmail: 'আপনার ইমেল ঠিকানা লিখুন।',
+      authSendingResetInstructions: 'রিসেট নির্দেশনা পাঠানো হচ্ছে...',
+      authResetInstructionsSent: 'পাসওয়ার্ড রিসেট করার নির্দেশনা পাঠানো হয়েছে।',
+      authRequestResetError: 'পাসওয়ার্ড রিসেটের অনুরোধ করা যায়নি।',
+      authInvalidResetLink: 'এই পাসওয়ার্ড রিসেট লিংকটি অবৈধ বা অনুপস্থিত।',
+      authPasswordMinLength: 'পাসওয়ার্ডে কমপক্ষে ৮টি অক্ষর থাকতে হবে।',
+      authResettingPassword: 'আপনার পাসওয়ার্ড রিসেট করা হচ্ছে...',
+      authResetPasswordError: 'আপনার পাসওয়ার্ড রিসেট করা যায়নি।',
+      authPasswordResetSuccess: 'আপনার পাসওয়ার্ড সফলভাবে রিসেট করা হয়েছে।',
+
+      authLoginIdentifier: 'ইমেল বা ফোন নম্বর',
+      authPassword: 'পাসওয়ার্ড',
+      authSignIn: 'সাইন ইন করুন',
+      authCreateAccountLink: 'অ্যাকাউন্ট তৈরি করুন',
+      authForgotPassword: 'পাসওয়ার্ড ভুলে গেছেন?',
+      authName: 'নাম',
+      authEmail: 'ইমেল',
+      authPhone: 'ফোন নম্বর',
+      authConfirmPassword: 'পাসওয়ার্ড নিশ্চিত করুন',
+      authCreateAccountButton: 'অ্যাকাউন্ট তৈরি করুন',
+      authBackToSignIn: 'সাইন ইন-এ ফিরে যান',
+      authEmailAddress: 'ইমেল ঠিকানা',
+      authSendResetInstructions: 'রিসেট নির্দেশনা পাঠান',
+      authNewPassword: 'নতুন পাসওয়ার্ড',
+      authConfirmNewPassword: 'নতুন পাসওয়ার্ড নিশ্চিত করুন',
+      authResetPasswordButton: 'পাসওয়ার্ড রিসেট করুন',
+      authCheckingSession: 'আপনার Miimiid সেশন পরীক্ষা করা হচ্ছে...',
+      authShowPassword: 'পাসওয়ার্ড দেখান',
+      authHidePassword: 'পাসওয়ার্ড লুকান',
+      authResetPasswordTitle: 'পাসওয়ার্ড রিসেট করুন',
+      authResetPasswordSubtitle: 'আপনার Miimiid অ্যাকাউন্টের জন্য একটি নতুন পাসওয়ার্ড বেছে নিন।',
+      noLessonContent: 'এই পাঠের জন্য কোনো বিষয়বস্তু উপলভ্য নেই।',
+      questionUnavailable: 'প্রশ্নটি উপলভ্য নয়।',
+      unsupportedQuestionType: 'অসমর্থিত প্রশ্নের ধরন:',
+
+      untitledLesson: 'Untitled Lesson',
+
+      openCourse: 'কোর্স খুলুন',
+      unableToLoadCourses: 'কোর্সগুলো লোড করা যায়নি।',
+      invalidCourseId: 'অবৈধ কোর্স আইডি।',
+      questionInstruction: 'পাঠ সম্পন্ন করার আগে নিচের প্রশ্নগুলোর উত্তর দিন।',
+      unableToConnect: 'সার্ভারের সাথে সংযোগ করা যায়নি।',
+      completeLesson: 'পাঠ সম্পন্ন করুন',
+      somethingWentWrong: 'কিছু ভুল হয়েছে।',
+      checking: 'যাচাই করা হচ্ছে...',
+      saving: 'সংরক্ষণ করা হচ্ছে...',
+      noQuizAvailable: 'এই পাঠের জন্য কোনো কুইজ উপলভ্য নেই।',
+      answerAllQuestions: 'জমা দেওয়ার আগে সব প্রশ্নের উত্তর দিন।',
+      noLessonSelected: 'এখন কোনো পাঠ নির্বাচন করা হয়নি।',
+      submitQuizFirst: 'এই পাঠ সম্পন্ন করার আগে কুইজটি সম্পন্ন করে জমা দিন।',
+      lessonNotFound: 'পাঠ পাওয়া যায়নি।',
+      quizComplete: 'কুইজ সম্পন্ন হয়েছে!',
+      score: 'স্কোর',
+      youGot: 'আপনি সঠিক উত্তর দিয়েছেন',
+      outOf: 'এর মধ্যে',
+      correct: 'টি।',
+      canCompleteLesson: 'এখন আপনি পাঠটি সম্পন্ন করতে পারেন।',
+      reviewLessonTryAgain: 'পাঠটি পর্যালোচনা করে আবার চেষ্টা করুন।',
+
+      selectCourse: "মডিউল ও পাঠ দেখতে একটি কোর্স নির্বাচন করুন:",
+      backToCourses: "← কোর্সে ফিরে যান",
+      backToModules: "← কোর্সের মডিউলে ফিরে যান",
+      yourProgress: "আপনার অগ্রগতি",
+      lessonsComplete: "টি পাঠ সম্পন্ন",
+      noLessonsYet: "এখনও কোনো পাঠ নেই",
+      startLesson: "পাঠ শুরু করুন",
+      reviewLesson: "পাঠ পুনরায় দেখুন",
+      completed: "✓ সম্পন্ন",
+      moduleComplete: "✓ মডিউল সম্পন্ন",
+      quickCheck: "দ্রুত যাচাই",
+      submitAnswer: "উত্তর জমা দিন",
+      nextLesson: "পরবর্তী পাঠ",
+      previousLesson: "আগের পাঠ",
+      loading: "লোড হচ্ছে...",
+      noDescription: "কোনো বিবরণ পাওয়া যায়নি।",
+      noModules: "এখনও কোনো মডিউল উপলভ্য নেই।",
+      noLessons: "এই মডিউলে এখনও কোনো পাঠ উপলভ্য নেই।",
+      unableToLoadCourse: "কোর্স লোড করা যায়নি।",
+      unableToValidateQuiz: "কুইজ যাচাই করা যায়নি।",
+      lessonCompleted: "পাঠ সফলভাবে সম্পন্ন হয়েছে! 🎉",
+      lessonCompletedSuccessfully: "পাঠ সফলভাবে সম্পন্ন হয়েছে! 🎉",
+      failedToSaveProgress: "অগ্রগতি সংরক্ষণ করা যায়নি।",
+      selectLanguage: "ভাষা নির্বাচন করুন"
+
+,
+      home: 'Home',
+      learn: 'Learn',
+      funCenter: 'Fun Center',
+      aiTutor: 'AI Tutor',
+      xp: 'XP',
+      streak: 'Streak',
+      lessonsCompleted: 'Lessons completed',
+      averageQuizScore: 'Average quiz score',
+      pro: 'Pro',
+      premium: 'Premium',
+      settings: 'Settings',
+
+    },
+
+    ur: {
+      authWelcome: 'Miimiid میں خوش آمدید',
+      authSignInSubtitle: 'سیکھنا جاری رکھنے کے لیے سائن ان کریں',
+      authCreateAccount: 'اپنا Miimiid اکاؤنٹ بنائیں',
+      authCreateSubtitle: 'سیکھنا شروع کرنے کے لیے اکاؤنٹ بنائیں',
+      authResetSubtitle: 'پاس ورڈ دوبارہ ترتیب دینے کی ہدایات حاصل کرنے کے لیے اپنا ای میل درج کریں',
+      authPasswordMismatch: 'پاس ورڈز مماثل نہیں ہیں۔',
+      authCreatingAccount: 'آپ کا اکاؤنٹ بنایا جا رہا ہے...',
+      authAccountCreated: 'اکاؤنٹ کامیابی سے بن گیا۔',
+      authCreateAccountError: 'آپ کا اکاؤنٹ نہیں بنایا جا سکا۔',
+      authEnterEmail: 'اپنا ای میل پتہ درج کریں۔',
+      authSendingResetInstructions: 'ری سیٹ کی ہدایات بھیجی جا رہی ہیں...',
+      authResetInstructionsSent: 'پاس ورڈ ری سیٹ کرنے کی ہدایات بھیج دی گئی ہیں۔',
+      authRequestResetError: 'پاس ورڈ ری سیٹ کی درخواست نہیں کی جا سکی۔',
+      authInvalidResetLink: 'یہ پاس ورڈ ری سیٹ لنک غلط یا موجود نہیں ہے۔',
+      authPasswordMinLength: 'پاس ورڈ کم از کم 8 حروف کا ہونا چاہیے۔',
+      authResettingPassword: 'آپ کا پاس ورڈ ری سیٹ کیا جا رہا ہے...',
+      authResetPasswordError: 'آپ کا پاس ورڈ ری سیٹ نہیں کیا جا سکا۔',
+      authPasswordResetSuccess: 'آپ کا پاس ورڈ کامیابی سے ری سیٹ ہو گیا ہے۔',
+
+      authLoginIdentifier: 'ای میل یا فون نمبر',
+      authPassword: 'پاس ورڈ',
+      authSignIn: 'سائن ان کریں',
+      authCreateAccountLink: 'اکاؤنٹ بنائیں',
+      authForgotPassword: 'پاس ورڈ بھول گئے؟',
+      authName: 'نام',
+      authEmail: 'ای میل',
+      authPhone: 'فون نمبر',
+      authConfirmPassword: 'پاس ورڈ کی تصدیق کریں',
+      authCreateAccountButton: 'اکاؤنٹ بنائیں',
+      authBackToSignIn: 'سائن ان پر واپس جائیں',
+      authEmailAddress: 'ای میل پتہ',
+      authSendResetInstructions: 'ری سیٹ ہدایات بھیجیں',
+      authNewPassword: 'نیا پاس ورڈ',
+      authConfirmNewPassword: 'نئے پاس ورڈ کی تصدیق کریں',
+      authResetPasswordButton: 'پاس ورڈ ری سیٹ کریں',
+      authCheckingSession: 'آپ کے Miimiid سیشن کی جانچ ہو رہی ہے...',
+      authShowPassword: 'پاس ورڈ دکھائیں',
+      authHidePassword: 'پاس ورڈ چھپائیں',
+      authResetPasswordTitle: 'پاس ورڈ دوبارہ ترتیب دیں',
+      authResetPasswordSubtitle: 'اپنے Miimiid اکاؤنٹ کے لیے نیا پاس ورڈ منتخب کریں۔',
+      noLessonContent: 'اس سبق کے لیے کوئی مواد دستیاب نہیں ہے۔',
+      questionUnavailable: 'سوال دستیاب نہیں ہے۔',
+      unsupportedQuestionType: 'غیر معاون سوال کی قسم:',
+
+      untitledLesson: 'Untitled Lesson',
+
+      openCourse: 'کورس کھولیں',
+      unableToLoadCourses: 'کورسز لوڈ نہیں کیے جا سکے۔',
+      invalidCourseId: 'غلط کورس آئی ڈی۔',
+      questionInstruction: 'سبق مکمل کرنے سے پہلے نیچے دیے گئے سوالات کے جواب دیں۔',
+      unableToConnect: 'سرور سے رابطہ نہیں ہو سکا۔',
+      completeLesson: 'سبق مکمل کریں',
+      somethingWentWrong: 'کچھ غلط ہو گیا۔',
+      checking: 'جانچ ہو رہی ہے...',
+      saving: 'محفوظ کیا جا رہا ہے...',
+      noQuizAvailable: 'اس سبق کے لیے کوئی کوئز دستیاب نہیں۔',
+      answerAllQuestions: 'جمع کرنے سے پہلے تمام سوالات کے جواب دیں۔',
+      noLessonSelected: 'فی الحال کوئی سبق منتخب نہیں ہے۔',
+      submitQuizFirst: 'اس سبق کو مکمل کرنے سے پہلے کوئز مکمل کرکے جمع کریں۔',
+      lessonNotFound: 'سبق نہیں ملا۔',
+      quizComplete: 'کوئز مکمل ہو گیا!',
+      score: 'اسکور',
+      youGot: 'آپ نے درست جواب دیے',
+      outOf: 'میں سے',
+      correct: 'درست۔',
+      canCompleteLesson: 'اب آپ سبق مکمل کر سکتے ہیں۔',
+      reviewLessonTryAgain: 'سبق کا جائزہ لیں اور دوبارہ کوشش کریں۔',
+
+      selectCourse: "ماڈیولز اور اسباق دیکھنے کے لیے ایک کورس منتخب کریں:",
+      backToCourses: "← کورسز پر واپس جائیں",
+      backToModules: "← کورس ماڈیولز پر واپس جائیں",
+      yourProgress: "آپ کی پیش رفت",
+      lessonsComplete: "اسباق مکمل",
+      noLessonsYet: "ابھی کوئی سبق نہیں",
+      startLesson: "سبق شروع کریں",
+      reviewLesson: "سبق دہرائیں",
+      completed: "✓ مکمل",
+      moduleComplete: "✓ ماڈیول مکمل",
+      quickCheck: "فوری جانچ",
+      submitAnswer: "جواب جمع کریں",
+      nextLesson: "اگلا سبق",
+      previousLesson: "پچھلا سبق",
+      loading: "لوڈ ہو رہا ہے...",
+      noDescription: "کوئی وضاحت دستیاب نہیں۔",
+      noModules: "ابھی کوئی ماڈیول دستیاب نہیں۔",
+      noLessons: "اس ماڈیول میں ابھی کوئی سبق دستیاب نہیں۔",
+      unableToLoadCourse: "کورس لوڈ نہیں کیا جا سکا۔",
+      unableToValidateQuiz: "کوئز کی توثیق نہیں کی جا سکی۔",
+      lessonCompleted: "سبق کامیابی سے مکمل ہو گیا! 🎉",
+      lessonCompletedSuccessfully: "سبق کامیابی سے مکمل ہو گیا! 🎉",
+      failedToSaveProgress: "پیش رفت محفوظ نہیں کی جا سکی۔",
+      selectLanguage: "زبان منتخب کریں"
+
+,
+      home: 'Home',
+      learn: 'Learn',
+      funCenter: 'Fun Center',
+      aiTutor: 'AI Tutor',
+      xp: 'XP',
+      streak: 'Streak',
+      lessonsCompleted: 'Lessons completed',
+      averageQuizScore: 'Average quiz score',
+      pro: 'Pro',
+      premium: 'Premium',
+      settings: 'Settings',
+
+    },
+
+    id: {
+      authWelcome: 'Selamat datang di Miimiid',
+      authSignInSubtitle: 'Masuk untuk melanjutkan belajar',
+      authCreateAccount: 'Buat akun Miimiid Anda',
+      authCreateSubtitle: 'Buat akun untuk mulai belajar',
+      authResetSubtitle: 'Masukkan email Anda untuk menerima petunjuk reset kata sandi',
+      authPasswordMismatch: 'Kata sandi tidak cocok.',
+      authCreatingAccount: 'Membuat akun Anda...',
+      authAccountCreated: 'Akun berhasil dibuat.',
+      authCreateAccountError: 'Akun Anda tidak dapat dibuat.',
+      authEnterEmail: 'Masukkan alamat email Anda.',
+      authSendingResetInstructions: 'Mengirim petunjuk reset...',
+      authResetInstructionsSent: 'Petunjuk reset kata sandi telah dikirim.',
+      authRequestResetError: 'Permintaan reset kata sandi tidak dapat dilakukan.',
+      authInvalidResetLink: 'Tautan reset kata sandi ini tidak valid atau tidak tersedia.',
+      authPasswordMinLength: 'Kata sandi harus terdiri dari setidaknya 8 karakter.',
+      authResettingPassword: 'Mereset kata sandi Anda...',
+      authResetPasswordError: 'Kata sandi Anda tidak dapat direset.',
+      authPasswordResetSuccess: 'Kata sandi Anda berhasil direset.',
+
+      authLoginIdentifier: 'Email atau nomor telepon',
+      authPassword: 'Kata sandi',
+      authSignIn: 'Masuk',
+      authCreateAccountLink: 'Buat akun',
+      authForgotPassword: 'Lupa kata sandi?',
+      authName: 'Nama',
+      authEmail: 'Email',
+      authPhone: 'Nomor telepon',
+      authConfirmPassword: 'Konfirmasi kata sandi',
+      authCreateAccountButton: 'Buat akun',
+      authBackToSignIn: 'Kembali untuk masuk',
+      authEmailAddress: 'Alamat email',
+      authSendResetInstructions: 'Kirim instruksi reset',
+      authNewPassword: 'Kata sandi baru',
+      authConfirmNewPassword: 'Konfirmasi kata sandi baru',
+      authResetPasswordButton: 'Reset kata sandi',
+      authCheckingSession: 'Memeriksa sesi Miimiid Anda...',
+      authShowPassword: 'Tampilkan kata sandi',
+      authHidePassword: 'Sembunyikan kata sandi',
+      authResetPasswordTitle: 'Atur ulang kata sandi',
+      authResetPasswordSubtitle: 'Pilih kata sandi baru untuk akun Miimiid Anda.',
+      noLessonContent: 'Tidak ada konten yang tersedia untuk pelajaran ini.',
+      questionUnavailable: 'Pertanyaan tidak tersedia.',
+      unsupportedQuestionType: 'Jenis pertanyaan tidak didukung:',
+
+      untitledLesson: 'Untitled Lesson',
+
+      openCourse: 'Buka Kursus',
+      unableToLoadCourses: 'Kursus tidak dapat dimuat.',
+      invalidCourseId: 'ID kursus tidak valid.',
+      questionInstruction: 'Jawab pertanyaan di bawah sebelum menyelesaikan pelajaran.',
+      unableToConnect: 'Tidak dapat terhubung ke server.',
+      completeLesson: 'Selesaikan Pelajaran',
+      somethingWentWrong: 'Terjadi kesalahan.',
+      checking: 'Memeriksa...',
+      saving: 'Menyimpan...',
+      noQuizAvailable: 'Tidak ada kuis yang tersedia untuk pelajaran ini.',
+      answerAllQuestions: 'Jawab semua pertanyaan sebelum mengirim.',
+      noLessonSelected: 'Belum ada pelajaran yang dipilih.',
+      submitQuizFirst: 'Selesaikan dan kirim kuis sebelum menyelesaikan pelajaran ini.',
+      lessonNotFound: 'Pelajaran tidak ditemukan.',
+      quizComplete: 'Kuis selesai!',
+      score: 'Skor',
+      youGot: 'Anda menjawab benar',
+      outOf: 'dari',
+      correct: 'jawaban.',
+      canCompleteLesson: 'Sekarang Anda dapat menyelesaikan pelajaran.',
+      reviewLessonTryAgain: 'Tinjau pelajaran dan coba lagi.',
+
+      selectCourse: "Pilih kursus untuk menjelajahi modul dan pelajaran:",
+      backToCourses: "← Kembali ke kursus",
+      backToModules: "← Kembali ke modul kursus",
+      yourProgress: "Kemajuan Anda",
+      lessonsComplete: "pelajaran selesai",
+      noLessonsYet: "Belum ada pelajaran",
+      startLesson: "Mulai Pelajaran",
+      reviewLesson: "Tinjau Pelajaran",
+      completed: "✓ Selesai",
+      moduleComplete: "✓ Modul selesai",
+      quickCheck: "Pemeriksaan Cepat",
+      submitAnswer: "Kirim Jawaban",
+      nextLesson: "Pelajaran Berikutnya",
+      previousLesson: "Pelajaran Sebelumnya",
+      loading: "Memuat...",
+      noDescription: "Deskripsi tidak tersedia.",
+      noModules: "Belum ada modul yang tersedia.",
+      noLessons: "Belum ada pelajaran yang tersedia dalam modul ini.",
+      unableToLoadCourse: "Kursus tidak dapat dimuat.",
+      unableToValidateQuiz: "Kuis tidak dapat divalidasi.",
+      lessonCompleted: "Pelajaran berhasil diselesaikan! 🎉",
+      lessonCompletedSuccessfully: "Pelajaran berhasil diselesaikan! 🎉",
+      failedToSaveProgress: "Kemajuan tidak dapat disimpan.",
+      selectLanguage: "Pilih bahasa"
+
+,
+      home: 'Home',
+      learn: 'Learn',
+      funCenter: 'Fun Center',
+      aiTutor: 'AI Tutor',
+      xp: 'XP',
+      streak: 'Streak',
+      lessonsCompleted: 'Lessons completed',
+      averageQuizScore: 'Average quiz score',
+      pro: 'Pro',
+      premium: 'Premium',
+      settings: 'Settings',
+
+    },
+
+    ms: {
+      authWelcome: 'Selamat datang ke Miimiid',
+      authSignInSubtitle: 'Log masuk untuk terus belajar',
+      authCreateAccount: 'Cipta akaun Miimiid anda',
+      authCreateSubtitle: 'Cipta akaun untuk mula belajar',
+      authResetSubtitle: 'Masukkan e-mel anda untuk menerima arahan menetapkan semula kata laluan',
+      authPasswordMismatch: 'Kata laluan tidak sepadan.',
+      authCreatingAccount: 'Mencipta akaun anda...',
+      authAccountCreated: 'Akaun berjaya dicipta.',
+      authCreateAccountError: 'Akaun anda tidak dapat dicipta.',
+      authEnterEmail: 'Masukkan alamat e-mel anda.',
+      authSendingResetInstructions: 'Menghantar arahan tetapan semula...',
+      authResetInstructionsSent: 'Arahan untuk menetapkan semula kata laluan telah dihantar.',
+      authRequestResetError: 'Permintaan tetapan semula kata laluan tidak dapat dilakukan.',
+      authInvalidResetLink: 'Pautan tetapan semula kata laluan ini tidak sah atau tiada.',
+      authPasswordMinLength: 'Kata laluan mesti mempunyai sekurang-kurangnya 8 aksara.',
+      authResettingPassword: 'Menetapkan semula kata laluan anda...',
+      authResetPasswordError: 'Kata laluan anda tidak dapat ditetapkan semula.',
+      authPasswordResetSuccess: 'Kata laluan anda berjaya ditetapkan semula.',
+
+      authLoginIdentifier: 'E-mel atau nombor telefon',
+      authPassword: 'Kata laluan',
+      authSignIn: 'Log masuk',
+      authCreateAccountLink: 'Cipta akaun',
+      authForgotPassword: 'Lupa kata laluan?',
+      authName: 'Nama',
+      authEmail: 'E-mel',
+      authPhone: 'Nombor telefon',
+      authConfirmPassword: 'Sahkan kata laluan',
+      authCreateAccountButton: 'Cipta akaun',
+      authBackToSignIn: 'Kembali ke log masuk',
+      authEmailAddress: 'Alamat e-mel',
+      authSendResetInstructions: 'Hantar arahan tetapan semula',
+      authNewPassword: 'Kata laluan baharu',
+      authConfirmNewPassword: 'Sahkan kata laluan baharu',
+      authResetPasswordButton: 'Tetapkan semula kata laluan',
+      authCheckingSession: 'Menyemak sesi Miimiid anda...',
+      authShowPassword: 'Tunjukkan kata laluan',
+      authHidePassword: 'Sembunyikan kata laluan',
+      authResetPasswordTitle: 'Tetapkan semula kata laluan',
+      authResetPasswordSubtitle: 'Pilih kata laluan baharu untuk akaun Miimiid anda.',
+      noLessonContent: 'Tiada kandungan tersedia untuk pelajaran ini.',
+      questionUnavailable: 'Soalan tidak tersedia.',
+      unsupportedQuestionType: 'Jenis soalan tidak disokong:',
+
+      untitledLesson: 'Untitled Lesson',
+
+      openCourse: 'Buka Kursus',
+      unableToLoadCourses: 'Kursus tidak dapat dimuat.',
+      invalidCourseId: 'ID kursus tidak sah.',
+      questionInstruction: 'Jawab soalan di bawah sebelum melengkapkan pelajaran.',
+      unableToConnect: 'Tidak dapat menyambung ke pelayan.',
+      completeLesson: 'Lengkapkan Pelajaran',
+      somethingWentWrong: 'Sesuatu telah berlaku.',
+      checking: 'Menyemak...',
+      saving: 'Menyimpan...',
+      noQuizAvailable: 'Tiada kuiz tersedia untuk pelajaran ini.',
+      answerAllQuestions: 'Jawab semua soalan sebelum menghantar.',
+      noLessonSelected: 'Tiada pelajaran dipilih pada masa ini.',
+      submitQuizFirst: 'Lengkapkan dan hantar kuiz sebelum melengkapkan pelajaran ini.',
+      lessonNotFound: 'Pelajaran tidak ditemui.',
+      quizComplete: 'Kuiz selesai!',
+      score: 'Skor',
+      youGot: 'Anda mendapat',
+      outOf: 'daripada',
+      correct: 'jawapan betul.',
+      canCompleteLesson: 'Anda kini boleh melengkapkan pelajaran.',
+      reviewLessonTryAgain: 'Semak semula pelajaran dan cuba lagi.',
+
+      selectCourse: "Pilih kursus untuk meneroka modul dan pelajaran:",
+      backToCourses: "← Kembali ke kursus",
+      backToModules: "← Kembali ke modul kursus",
+      yourProgress: "Kemajuan Anda",
+      lessonsComplete: "pelajaran selesai",
+      noLessonsYet: "Belum ada pelajaran",
+      startLesson: "Mula Pelajaran",
+      reviewLesson: "Ulang Kaji Pelajaran",
+      completed: "✓ Selesai",
+      moduleComplete: "✓ Modul selesai",
+      quickCheck: "Semakan Pantas",
+      submitAnswer: "Hantar Jawapan",
+      nextLesson: "Pelajaran Seterusnya",
+      previousLesson: "Pelajaran Sebelumnya",
+      loading: "Memuatkan...",
+      noDescription: "Tiada penerangan tersedia.",
+      noModules: "Belum ada modul yang tersedia.",
+      noLessons: "Belum ada pelajaran tersedia dalam modul ini.",
+      unableToLoadCourse: "Kursus tidak dapat dimuat.",
+      unableToValidateQuiz: "Kuiz tidak dapat disahkan.",
+      lessonCompleted: "Pelajaran berjaya diselesaikan! 🎉",
+      lessonCompletedSuccessfully: "Pelajaran berjaya diselesaikan! 🎉",
+      failedToSaveProgress: "Kemajuan tidak dapat disimpan.",
+      selectLanguage: "Pilih bahasa"
+
+,
+      home: 'Home',
+      learn: 'Learn',
+      funCenter: 'Fun Center',
+      aiTutor: 'AI Tutor',
+      xp: 'XP',
+      streak: 'Streak',
+      lessonsCompleted: 'Lessons completed',
+      averageQuizScore: 'Average quiz score',
+      pro: 'Pro',
+      premium: 'Premium',
+      settings: 'Settings',
+
+    },
+
+    vi: {
+      authWelcome: 'Chào mừng bạn đến với Miimiid',
+      authSignInSubtitle: 'Đăng nhập để tiếp tục học',
+      authCreateAccount: 'Tạo tài khoản Miimiid của bạn',
+      authCreateSubtitle: 'Tạo tài khoản để bắt đầu học',
+      authResetSubtitle: 'Nhập email để nhận hướng dẫn đặt lại mật khẩu',
+      authPasswordMismatch: 'Mật khẩu không khớp.',
+      authCreatingAccount: 'Đang tạo tài khoản của bạn...',
+      authAccountCreated: 'Tạo tài khoản thành công.',
+      authCreateAccountError: 'Không thể tạo tài khoản của bạn.',
+      authEnterEmail: 'Nhập địa chỉ email của bạn.',
+      authSendingResetInstructions: 'Đang gửi hướng dẫn đặt lại...',
+      authResetInstructionsSent: 'Hướng dẫn đặt lại mật khẩu đã được gửi.',
+      authRequestResetError: 'Không thể yêu cầu đặt lại mật khẩu.',
+      authInvalidResetLink: 'Liên kết đặt lại mật khẩu này không hợp lệ hoặc bị thiếu.',
+      authPasswordMinLength: 'Mật khẩu phải có ít nhất 8 ký tự.',
+      authResettingPassword: 'Đang đặt lại mật khẩu của bạn...',
+      authResetPasswordError: 'Không thể đặt lại mật khẩu của bạn.',
+      authPasswordResetSuccess: 'Mật khẩu của bạn đã được đặt lại thành công.',
+
+      authLoginIdentifier: 'Email hoặc số điện thoại',
+      authPassword: 'Mật khẩu',
+      authSignIn: 'Đăng nhập',
+      authCreateAccountLink: 'Tạo tài khoản',
+      authForgotPassword: 'Quên mật khẩu?',
+      authName: 'Tên',
+      authEmail: 'Email',
+      authPhone: 'Số điện thoại',
+      authConfirmPassword: 'Xác nhận mật khẩu',
+      authCreateAccountButton: 'Tạo tài khoản',
+      authBackToSignIn: 'Quay lại đăng nhập',
+      authEmailAddress: 'Địa chỉ email',
+      authSendResetInstructions: 'Gửi hướng dẫn đặt lại',
+      authNewPassword: 'Mật khẩu mới',
+      authConfirmNewPassword: 'Xác nhận mật khẩu mới',
+      authResetPasswordButton: 'Đặt lại mật khẩu',
+      authCheckingSession: 'Đang kiểm tra phiên Miimiid của bạn...',
+      authShowPassword: 'Hiện mật khẩu',
+      authHidePassword: 'Ẩn mật khẩu',
+      authResetPasswordTitle: 'Đặt lại mật khẩu',
+      authResetPasswordSubtitle: 'Chọn mật khẩu mới cho tài khoản Miimiid của bạn.',
+      noLessonContent: 'Không có nội dung cho bài học này.',
+      questionUnavailable: 'Câu hỏi không khả dụng.',
+      unsupportedQuestionType: 'Loại câu hỏi không được hỗ trợ:',
+
+      untitledLesson: 'Untitled Lesson',
+
+      openCourse: 'Mở khóa học',
+      unableToLoadCourses: 'Không thể tải các khóa học.',
+      invalidCourseId: 'ID khóa học không hợp lệ.',
+      questionInstruction: 'Hãy trả lời các câu hỏi dưới đây trước khi hoàn thành bài học.',
+      unableToConnect: 'Không thể kết nối với máy chủ.',
+      completeLesson: 'Hoàn thành bài học',
+      somethingWentWrong: 'Đã xảy ra lỗi.',
+      checking: 'Đang kiểm tra...',
+      saving: 'Đang lưu...',
+      noQuizAvailable: 'Không có bài kiểm tra cho bài học này.',
+      answerAllQuestions: 'Hãy trả lời tất cả câu hỏi trước khi gửi.',
+      noLessonSelected: 'Hiện chưa chọn bài học nào.',
+      submitQuizFirst: 'Hãy hoàn thành và gửi bài kiểm tra trước khi hoàn thành bài học này.',
+      lessonNotFound: 'Không tìm thấy bài học.',
+      quizComplete: 'Đã hoàn thành bài kiểm tra!',
+      score: 'Điểm',
+      youGot: 'Bạn trả lời đúng',
+      outOf: 'trên',
+      correct: 'câu.',
+      canCompleteLesson: 'Bây giờ bạn có thể hoàn thành bài học.',
+      reviewLessonTryAgain: 'Hãy xem lại bài học và thử lại.',
+
+      selectCourse: "Chọn một khóa học để khám phá các mô-đun và bài học:",
+      backToCourses: "← Quay lại khóa học",
+      backToModules: "← Quay lại các mô-đun khóa học",
+      yourProgress: "Tiến độ của bạn",
+      lessonsComplete: "bài học đã hoàn thành",
+      noLessonsYet: "Chưa có bài học",
+      startLesson: "Bắt đầu bài học",
+      reviewLesson: "Xem lại bài học",
+      completed: "✓ Đã hoàn thành",
+      moduleComplete: "✓ Đã hoàn thành mô-đun",
+      quickCheck: "Kiểm tra nhanh",
+      submitAnswer: "Gửi câu trả lời",
+      nextLesson: "Bài học tiếp theo",
+      previousLesson: "Bài học trước",
+      loading: "Đang tải...",
+      noDescription: "Không có mô tả.",
+      noModules: "Chưa có mô-đun nào.",
+      noLessons: "Chưa có bài học nào trong mô-đun này.",
+      unableToLoadCourse: "Không thể tải khóa học.",
+      unableToValidateQuiz: "Không thể xác thực bài kiểm tra.",
+      lessonCompleted: "Bài học đã được hoàn thành thành công! 🎉",
+      lessonCompletedSuccessfully: "Bài học đã được hoàn thành thành công! 🎉",
+      failedToSaveProgress: "Không thể lưu tiến độ.",
+      selectLanguage: "Chọn ngôn ngữ"
+
+,
+      home: 'Home',
+      learn: 'Learn',
+      funCenter: 'Fun Center',
+      aiTutor: 'AI Tutor',
+      xp: 'XP',
+      streak: 'Streak',
+      lessonsCompleted: 'Lessons completed',
+      averageQuizScore: 'Average quiz score',
+      pro: 'Pro',
+      premium: 'Premium',
+      settings: 'Settings',
+
+    },
+
+    th: {
+      authWelcome: 'ยินดีต้อนรับสู่ Miimiid',
+      authSignInSubtitle: 'ลงชื่อเข้าใช้เพื่อเรียนรู้ต่อ',
+      authCreateAccount: 'สร้างบัญชี Miimiid ของคุณ',
+      authCreateSubtitle: 'สร้างบัญชีเพื่อเริ่มเรียนรู้',
+      authResetSubtitle: 'ป้อนอีเมลของคุณเพื่อรับคำแนะนำในการรีเซ็ตรหัสผ่าน',
+      authPasswordMismatch: 'รหัสผ่านไม่ตรงกัน',
+      authCreatingAccount: 'กำลังสร้างบัญชีของคุณ...',
+      authAccountCreated: 'สร้างบัญชีสำเร็จแล้ว',
+      authCreateAccountError: 'ไม่สามารถสร้างบัญชีของคุณได้',
+      authEnterEmail: 'ป้อนที่อยู่อีเมลของคุณ',
+      authSendingResetInstructions: 'กำลังส่งคำแนะนำการรีเซ็ต...',
+      authResetInstructionsSent: 'ส่งคำแนะนำในการรีเซ็ตรหัสผ่านแล้ว',
+      authRequestResetError: 'ไม่สามารถขอรีเซ็ตรหัสผ่านได้',
+      authInvalidResetLink: 'ลิงก์รีเซ็ตรหัสผ่านนี้ไม่ถูกต้องหรือไม่มีอยู่',
+      authPasswordMinLength: 'รหัสผ่านต้องมีอย่างน้อย 8 ตัวอักษร',
+      authResettingPassword: 'กำลังรีเซ็ตรหัสผ่านของคุณ...',
+      authResetPasswordError: 'ไม่สามารถรีเซ็ตรหัสผ่านของคุณได้',
+      authPasswordResetSuccess: 'รีเซ็ตรหัสผ่านของคุณสำเร็จแล้ว',
+
+      authLoginIdentifier: 'อีเมลหรือหมายเลขโทรศัพท์',
+      authPassword: 'รหัสผ่าน',
+      authSignIn: 'เข้าสู่ระบบ',
+      authCreateAccountLink: 'สร้างบัญชี',
+      authForgotPassword: 'ลืมรหัสผ่าน?',
+      authName: 'ชื่อ',
+      authEmail: 'อีเมล',
+      authPhone: 'หมายเลขโทรศัพท์',
+      authConfirmPassword: 'ยืนยันรหัสผ่าน',
+      authCreateAccountButton: 'สร้างบัญชี',
+      authBackToSignIn: 'กลับไปเข้าสู่ระบบ',
+      authEmailAddress: 'ที่อยู่อีเมล',
+      authSendResetInstructions: 'ส่งคำแนะนำการรีเซ็ต',
+      authNewPassword: 'รหัสผ่านใหม่',
+      authConfirmNewPassword: 'ยืนยันรหัสผ่านใหม่',
+      authResetPasswordButton: 'รีเซ็ตรหัสผ่าน',
+      authCheckingSession: 'กำลังตรวจสอบเซสชัน Miimiid ของคุณ...',
+      authShowPassword: 'แสดงรหัสผ่าน',
+      authHidePassword: 'ซ่อนรหัสผ่าน',
+      noLessonContent: 'ไม่มีเนื้อหาสำหรับบทเรียนนี้',
+      questionUnavailable: 'ไม่มีคำถามนี้',
+      unsupportedQuestionType: 'ไม่รองรับประเภทคำถาม:',
+
+      untitledLesson: 'Untitled Lesson',
+
+      openCourse: 'เปิดหลักสูตร',
+      unableToLoadCourses: 'ไม่สามารถโหลดหลักสูตรได้',
+      invalidCourseId: 'รหัสหลักสูตรไม่ถูกต้อง',
+      questionInstruction: 'ตอบคำถามด้านล่างก่อนจบบทเรียน',
+      unableToConnect: 'ไม่สามารถเชื่อมต่อกับเซิร์ฟเวอร์ได้',
+      completeLesson: 'จบบทเรียน',
+      somethingWentWrong: 'เกิดข้อผิดพลาด',
+      checking: 'กำลังตรวจสอบ...',
+      saving: 'กำลังบันทึก...',
+      noQuizAvailable: 'ไม่มีแบบทดสอบสำหรับบทเรียนนี้',
+      answerAllQuestions: 'ตอบคำถามทั้งหมดก่อนส่ง',
+      noLessonSelected: 'ยังไม่ได้เลือกบทเรียน',
+      submitQuizFirst: 'ทำแบบทดสอบและส่งคำตอบก่อนจบบทเรียนนี้',
+      lessonNotFound: 'ไม่พบบทเรียน',
+      quizComplete: 'ทำแบบทดสอบเสร็จแล้ว!',
+      score: 'คะแนน',
+      youGot: 'ตอบถูก',
+      outOf: 'จาก',
+      correct: 'ข้อ',
+      canCompleteLesson: 'ตอนนี้คุณสามารถจบบทเรียนได้',
+      reviewLessonTryAgain: 'ทบทวนบทเรียนแล้วลองอีกครั้ง',
+
+      selectCourse: "เลือกหลักสูตรเพื่อสำรวจโมดูลและบทเรียน:",
+      backToCourses: "← กลับไปยังหลักสูตร",
+      backToModules: "← กลับไปยังโมดูลของหลักสูตร",
+      yourProgress: "ความคืบหน้าของคุณ",
+      lessonsComplete: "บทเรียนที่เสร็จแล้ว",
+      noLessonsYet: "ยังไม่มีบทเรียน",
+      startLesson: "เริ่มบทเรียน",
+      reviewLesson: "ทบทวนบทเรียน",
+      completed: "✓ เสร็จแล้ว",
+      moduleComplete: "✓ โมดูลเสร็จสมบูรณ์",
+      quickCheck: "ตรวจสอบด่วน",
+      submitAnswer: "ส่งคำตอบ",
+      nextLesson: "บทเรียนถัดไป",
+      previousLesson: "บทเรียนก่อนหน้า",
+      loading: "กำลังโหลด...",
+      noDescription: "ไม่มีคำอธิบาย",
+      noModules: "ยังไม่มีโมดูล",
+      noLessons: "ยังไม่มีบทเรียนในโมดูลนี้",
+      unableToLoadCourse: "ไม่สามารถโหลดหลักสูตรได้",
+      unableToValidateQuiz: "ไม่สามารถตรวจสอบแบบทดสอบได้",
+      lessonCompleted: "เรียนจบเรียบร้อยแล้ว! 🎉",
+      lessonCompletedSuccessfully: "เรียนจบเรียบร้อยแล้ว! 🎉",
+      failedToSaveProgress: "ไม่สามารถบันทึกความคืบหน้าได้",
+      selectLanguage: "เลือกภาษา"
+
+,
+      home: 'Home',
+      learn: 'Learn',
+      funCenter: 'Fun Center',
+      aiTutor: 'AI Tutor',
+      xp: 'XP',
+      streak: 'Streak',
+      lessonsCompleted: 'Lessons completed',
+      averageQuizScore: 'Average quiz score',
+      pro: 'Pro',
+      premium: 'Premium',
+      settings: 'Settings',
+
+    },
+
+    zh: {
+      authWelcome: '欢迎来到 Miimiid',
+      authSignInSubtitle: '登录以继续学习',
+      authCreateAccount: '创建您的 Miimiid 账户',
+      authCreateSubtitle: '创建账户以开始学习',
+      authResetSubtitle: '输入您的电子邮件地址以接收密码重置说明',
+      authPasswordMismatch: '两次输入的密码不一致。',
+      authCreatingAccount: '正在创建您的账户...',
+      authAccountCreated: '账户创建成功。',
+      authCreateAccountError: '无法创建您的账户。',
+      authEnterEmail: '请输入您的电子邮件地址。',
+      authSendingResetInstructions: '正在发送重置说明...',
+      authResetInstructionsSent: '密码重置说明已发送。',
+      authRequestResetError: '无法请求密码重置。',
+      authInvalidResetLink: '此密码重置链接无效或缺失。',
+      authPasswordMinLength: '密码至少需要 8 个字符。',
+      authResettingPassword: '正在重置您的密码...',
+      authResetPasswordError: '无法重置您的密码。',
+      authPasswordResetSuccess: '您的密码已成功重置。',
+
+      authLoginIdentifier: '电子邮件或电话号码',
+      authPassword: '密码',
+      authSignIn: '登录',
+      authCreateAccountLink: '创建账户',
+      authForgotPassword: '忘记密码？',
+      authName: '姓名',
+      authEmail: '电子邮件',
+      authPhone: '电话号码',
+      authConfirmPassword: '确认密码',
+      authCreateAccountButton: '创建账户',
+      authBackToSignIn: '返回登录',
+      authEmailAddress: '电子邮件地址',
+      authSendResetInstructions: '发送重置说明',
+      authNewPassword: '新密码',
+      authConfirmNewPassword: '确认新密码',
+      authResetPasswordButton: '重置密码',
+      authCheckingSession: '正在检查您的 Miimiid 会话...',
+      authShowPassword: '显示密码',
+      authHidePassword: '隐藏密码',
+      authResetPasswordTitle: '重置密码',
+      authResetPasswordSubtitle: '为您的 Miimiid 账户选择一个新密码。',
+      noLessonContent: '本课程暂无内容。',
+      questionUnavailable: '问题不可用。',
+      unsupportedQuestionType: '不支持的问题类型：',
+
+      untitledLesson: 'Untitled Lesson',
+
+      openCourse: '打开课程',
+      unableToLoadCourses: '无法加载课程。',
+      invalidCourseId: '课程 ID 无效。',
+      questionInstruction: '完成课程前，请回答下面的问题。',
+      unableToConnect: '无法连接到服务器。',
+      completeLesson: '完成课程',
+      somethingWentWrong: '出了点问题。',
+      checking: '正在检查...',
+      saving: '正在保存...',
+      noQuizAvailable: '本课程暂无测验。',
+      answerAllQuestions: '提交前请回答所有问题。',
+      noLessonSelected: '当前未选择课程。',
+      submitQuizFirst: '请先完成并提交测验，再完成本课程。',
+      lessonNotFound: '未找到课程。',
+      quizComplete: '测验完成！',
+      score: '得分',
+      youGot: '你答对了',
+      outOf: '共',
+      correct: '题。',
+      canCompleteLesson: '现在可以完成课程了。',
+      reviewLessonTryAgain: '复习课程后再试一次。',
+
+      selectCourse: "选择课程以探索模块和课程：",
+      backToCourses: "← 返回课程",
+      backToModules: "← 返回课程模块",
+      yourProgress: "你的学习进度",
+      lessonsComplete: "个课程已完成",
+      noLessonsYet: "暂无课程",
+      startLesson: "开始课程",
+      reviewLesson: "复习课程",
+      completed: "✓ 已完成",
+      moduleComplete: "✓ 模块已完成",
+      quickCheck: "快速检查",
+      submitAnswer: "提交答案",
+      nextLesson: "下一课",
+      previousLesson: "上一课",
+      loading: "加载中...",
+      noDescription: "暂无描述。",
+      noModules: "暂无可用模块。",
+      noLessons: "此模块暂无可用课程。",
+      unableToLoadCourse: "无法加载课程。",
+      unableToValidateQuiz: "无法验证测验。",
+      lessonCompleted: "课程已成功完成！🎉",
+      lessonCompletedSuccessfully: "课程已成功完成！🎉",
+      failedToSaveProgress: "无法保存学习进度。",
+      selectLanguage: "选择语言"
+
+,
+      home: 'Home',
+      learn: 'Learn',
+      funCenter: 'Fun Center',
+      aiTutor: 'AI Tutor',
+      xp: 'XP',
+      streak: 'Streak',
+      lessonsCompleted: 'Lessons completed',
+      averageQuizScore: 'Average quiz score',
+      pro: 'Pro',
+      premium: 'Premium',
+      settings: 'Settings',
+
+    },
+
+    ja: {
+      authWelcome: 'Miimiidへようこそ',
+      authSignInSubtitle: 'サインインして学習を続ける',
+      authCreateAccount: 'Miimiidアカウントを作成',
+      authCreateSubtitle: 'アカウントを作成して学習を始めましょう',
+      authResetSubtitle: 'パスワードリセットの手順を受け取るにはメールアドレスを入力してください',
+      authPasswordMismatch: 'パスワードが一致しません。',
+      authCreatingAccount: 'アカウントを作成しています...',
+      authAccountCreated: 'アカウントが正常に作成されました。',
+      authCreateAccountError: 'アカウントを作成できませんでした。',
+      authEnterEmail: 'メールアドレスを入力してください。',
+      authSendingResetInstructions: 'リセット手順を送信しています...',
+      authResetInstructionsSent: 'パスワードリセットの手順を送信しました。',
+      authRequestResetError: 'パスワードリセットをリクエストできませんでした。',
+      authInvalidResetLink: 'このパスワードリセットリンクは無効または不足しています。',
+      authPasswordMinLength: 'パスワードは8文字以上である必要があります。',
+      authResettingPassword: 'パスワードをリセットしています...',
+      authResetPasswordError: 'パスワードをリセットできませんでした。',
+      authPasswordResetSuccess: 'パスワードが正常にリセットされました。',
+
+      authLoginIdentifier: 'メールアドレスまたは電話番号',
+      authPassword: 'パスワード',
+      authSignIn: 'ログイン',
+      authCreateAccountLink: 'アカウントを作成',
+      authForgotPassword: 'パスワードをお忘れですか？',
+      authName: '名前',
+      authEmail: 'メールアドレス',
+      authPhone: '電話番号',
+      authConfirmPassword: 'パスワードを確認',
+      authCreateAccountButton: 'アカウントを作成',
+      authBackToSignIn: 'ログインに戻る',
+      authEmailAddress: 'メールアドレス',
+      authSendResetInstructions: 'リセット手順を送信',
+      authNewPassword: '新しいパスワード',
+      authConfirmNewPassword: '新しいパスワードを確認',
+      authResetPasswordButton: 'パスワードをリセット',
+      authCheckingSession: 'Miimiid セッションを確認しています...',
+      authShowPassword: 'パスワードを表示',
+      authHidePassword: 'パスワードを非表示',
+      authResetPasswordTitle: 'パスワードをリセット',
+      authResetPasswordSubtitle: 'Miimiidアカウントの新しいパスワードを選択してください。',
+      noLessonContent: 'このレッスンには利用可能なコンテンツがありません。',
+      questionUnavailable: '質問を利用できません。',
+      unsupportedQuestionType: 'サポートされていない質問タイプ：',
+
+      untitledLesson: 'Untitled Lesson',
+
+      openCourse: 'コースを開く',
+      unableToLoadCourses: 'コースを読み込めませんでした。',
+      invalidCourseId: '無効なコースIDです。',
+      questionInstruction: 'レッスンを完了する前に、以下の質問に答えてください。',
+      unableToConnect: 'サーバーに接続できません。',
+      completeLesson: 'レッスンを完了',
+      somethingWentWrong: '問題が発生しました。',
+      checking: '確認中...',
+      saving: '保存中...',
+      noQuizAvailable: 'このレッスンにはクイズがありません。',
+      answerAllQuestions: '送信する前にすべての質問に答えてください。',
+      noLessonSelected: '現在レッスンが選択されていません。',
+      submitQuizFirst: 'このレッスンを完了する前に、クイズを完了して送信してください。',
+      lessonNotFound: 'レッスンが見つかりません。',
+      quizComplete: 'クイズ完了！',
+      score: 'スコア',
+      youGot: '正解数',
+      outOf: '全',
+      correct: '問中。',
+      canCompleteLesson: 'これでレッスンを完了できます。',
+      reviewLessonTryAgain: 'レッスンを復習してもう一度試してください。',
+
+      selectCourse: "モジュールとレッスンを見るにはコースを選択してください：",
+      backToCourses: "← コースに戻る",
+      backToModules: "← コースモジュールに戻る",
+      yourProgress: "あなたの進捗",
+      lessonsComplete: "レッスン完了",
+      noLessonsYet: "レッスンはまだありません",
+      startLesson: "レッスンを開始",
+      reviewLesson: "レッスンを復習",
+      completed: "✓ 完了",
+      moduleComplete: "✓ モジュール完了",
+      quickCheck: "クイックチェック",
+      submitAnswer: "回答を送信",
+      nextLesson: "次のレッスン",
+      previousLesson: "前のレッスン",
+      loading: "読み込み中...",
+      noDescription: "説明はありません。",
+      noModules: "利用可能なモジュールはまだありません。",
+      noLessons: "このモジュールにはまだレッスンがありません。",
+      unableToLoadCourse: "コースを読み込めませんでした。",
+      unableToValidateQuiz: "クイズを検証できませんでした。",
+      lessonCompleted: "レッスンを正常に完了しました！🎉",
+      lessonCompletedSuccessfully: "レッスンを正常に完了しました！🎉",
+      failedToSaveProgress: "進捗を保存できませんでした。",
+      selectLanguage: "言語を選択"
+
+,
+      home: 'Home',
+      learn: 'Learn',
+      funCenter: 'Fun Center',
+      aiTutor: 'AI Tutor',
+      xp: 'XP',
+      streak: 'Streak',
+      lessonsCompleted: 'Lessons completed',
+      averageQuizScore: 'Average quiz score',
+      pro: 'Pro',
+      premium: 'Premium',
+      settings: 'Settings',
+
+    },
+
+    ko: {
+      authWelcome: 'Miimiid에 오신 것을 환영합니다',
+      authSignInSubtitle: '로그인하여 학습을 계속하세요',
+      authCreateAccount: 'Miimiid 계정 만들기',
+      authCreateSubtitle: '계정을 만들어 학습을 시작하세요',
+      authResetSubtitle: '비밀번호 재설정 안내를 받으려면 이메일을 입력하세요',
+      authPasswordMismatch: '비밀번호가 일치하지 않습니다.',
+      authCreatingAccount: '계정을 생성하는 중...',
+      authAccountCreated: '계정이 성공적으로 생성되었습니다.',
+      authCreateAccountError: '계정을 생성할 수 없습니다.',
+      authEnterEmail: '이메일 주소를 입력하세요.',
+      authSendingResetInstructions: '재설정 안내를 보내는 중...',
+      authResetInstructionsSent: '비밀번호 재설정 안내가 전송되었습니다.',
+      authRequestResetError: '비밀번호 재설정을 요청할 수 없습니다.',
+      authInvalidResetLink: '이 비밀번호 재설정 링크가 잘못되었거나 없습니다.',
+      authPasswordMinLength: '비밀번호는 8자 이상이어야 합니다.',
+      authResettingPassword: '비밀번호를 재설정하는 중...',
+      authResetPasswordError: '비밀번호를 재설정할 수 없습니다.',
+      authPasswordResetSuccess: '비밀번호가 성공적으로 재설정되었습니다.',
+
+      authLoginIdentifier: '이메일 또는 전화번호',
+      authPassword: '비밀번호',
+      authSignIn: '로그인',
+      authCreateAccountLink: '계정 만들기',
+      authForgotPassword: '비밀번호를 잊으셨나요?',
+      authName: '이름',
+      authEmail: '이메일',
+      authPhone: '전화번호',
+      authConfirmPassword: '비밀번호 확인',
+      authCreateAccountButton: '계정 만들기',
+      authBackToSignIn: '로그인으로 돌아가기',
+      authEmailAddress: '이메일 주소',
+      authSendResetInstructions: '재설정 안내 보내기',
+      authNewPassword: '새 비밀번호',
+      authConfirmNewPassword: '새 비밀번호 확인',
+      authResetPasswordButton: '비밀번호 재설정',
+      authCheckingSession: 'Miimiid 세션을 확인하는 중...',
+      authShowPassword: '비밀번호 표시',
+      authHidePassword: '비밀번호 숨기기',
+      authResetPasswordTitle: '비밀번호 재설정',
+      authResetPasswordSubtitle: 'Miimiid 계정의 새 비밀번호를 선택하세요.',
+      noLessonContent: '이 수업에 사용할 수 있는 콘텐츠가 없습니다.',
+      questionUnavailable: '질문을 사용할 수 없습니다.',
+      unsupportedQuestionType: '지원되지 않는 질문 유형:',
+
+      untitledLesson: 'Untitled Lesson',
+
+      openCourse: '코스 열기',
+      unableToLoadCourses: '코스를 불러올 수 없습니다.',
+      invalidCourseId: '잘못된 코스 ID입니다.',
+      questionInstruction: '수업을 완료하기 전에 아래 질문에 답하세요.',
+      unableToConnect: '서버에 연결할 수 없습니다.',
+      completeLesson: '수업 완료',
+      somethingWentWrong: '문제가 발생했습니다.',
+      checking: '확인 중...',
+      saving: '저장 중...',
+      noQuizAvailable: '이 수업에는 사용할 수 있는 퀴즈가 없습니다.',
+      answerAllQuestions: '제출하기 전에 모든 질문에 답하세요.',
+      noLessonSelected: '현재 선택된 수업이 없습니다.',
+      submitQuizFirst: '이 수업을 완료하기 전에 퀴즈를 완료하고 제출하세요.',
+      lessonNotFound: '수업을 찾을 수 없습니다.',
+      quizComplete: '퀴즈 완료!',
+      score: '점수',
+      youGot: '정답',
+      outOf: '총',
+      correct: '개.',
+      canCompleteLesson: '이제 수업을 완료할 수 있습니다.',
+      reviewLessonTryAgain: '수업을 다시 살펴보고 시도해 보세요.',
+
+      selectCourse: "모듈과 수업을 살펴보려면 코스를 선택하세요:",
+      backToCourses: "← 코스로 돌아가기",
+      backToModules: "← 코스 모듈로 돌아가기",
+      yourProgress: "학습 진행률",
+      lessonsComplete: "수업 완료",
+      noLessonsYet: "아직 수업이 없습니다",
+      startLesson: "수업 시작",
+      reviewLesson: "수업 복습",
+      completed: "✓ 완료",
+      moduleComplete: "✓ 모듈 완료",
+      quickCheck: "빠른 확인",
+      submitAnswer: "답변 제출",
+      nextLesson: "다음 수업",
+      previousLesson: "이전 수업",
+      loading: "로드 중...",
+      noDescription: "설명이 없습니다.",
+      noModules: "아직 사용할 수 있는 모듈이 없습니다.",
+      noLessons: "이 모듈에는 아직 사용할 수 있는 수업이 없습니다.",
+      unableToLoadCourse: "코스를 불러올 수 없습니다.",
+      unableToValidateQuiz: "퀴즈를 확인할 수 없습니다.",
+      lessonCompleted: "레슨이 성공적으로 완료되었습니다! 🎉",
+      lessonCompletedSuccessfully: "레슨이 성공적으로 완료되었습니다! 🎉",
+      failedToSaveProgress: "진행 상황을 저장할 수 없습니다.",
+      selectLanguage: "언어 선택"
+
+,
+      home: 'Home',
+      learn: 'Learn',
+      funCenter: 'Fun Center',
+      aiTutor: 'AI Tutor',
+      xp: 'XP',
+      streak: 'Streak',
+      lessonsCompleted: 'Lessons completed',
+      averageQuizScore: 'Average quiz score',
+      pro: 'Pro',
+      premium: 'Premium',
+      settings: 'Settings',
+
+    },
+
+    sw: {
+      authWelcome: 'Karibu Miimiid',
+      authSignInSubtitle: 'Ingia ili kuendelea kujifunza',
+      authCreateAccount: 'Unda akaunti yako ya Miimiid',
+      authCreateSubtitle: 'Unda akaunti ili kuanza kujifunza',
+      authResetSubtitle: 'Weka barua pepe yako ili upokee maelekezo ya kuweka upya nenosiri',
+      authPasswordMismatch: 'Nenosiri hazilingani.',
+      authCreatingAccount: 'Akaunti yako inaundwa...',
+      authAccountCreated: 'Akaunti imeundwa kwa mafanikio.',
+      authCreateAccountError: 'Imeshindikana kuunda akaunti yako.',
+      authEnterEmail: 'Weka anwani yako ya barua pepe.',
+      authSendingResetInstructions: 'Inatuma maelekezo ya kuweka upya...',
+      authResetInstructionsSent: 'Maelekezo ya kuweka upya nenosiri yametumwa.',
+      authRequestResetError: 'Imeshindikana kuomba kuweka upya nenosiri.',
+      authInvalidResetLink: 'Kiungo hiki cha kuweka upya nenosiri si sahihi au hakipo.',
+      authPasswordMinLength: 'Nenosiri lazima liwe na angalau herufi 8.',
+      authResettingPassword: 'Inaweka upya nenosiri lako...',
+      authResetPasswordError: 'Imeshindikana kuweka upya nenosiri lako.',
+      authPasswordResetSuccess: 'Nenosiri lako limewekwa upya kwa mafanikio.',
+
+      authLoginIdentifier: 'Barua pepe au nambari ya simu',
+      authPassword: 'Nenosiri',
+      authSignIn: 'Ingia',
+      authCreateAccountLink: 'Fungua akaunti',
+      authForgotPassword: 'Umesahau nenosiri?',
+      authName: 'Jina',
+      authEmail: 'Barua pepe',
+      authPhone: 'Nambari ya simu',
+      authConfirmPassword: 'Thibitisha nenosiri',
+      authCreateAccountButton: 'Fungua akaunti',
+      authBackToSignIn: 'Rudi kwenye kuingia',
+      authEmailAddress: 'Anwani ya barua pepe',
+      authSendResetInstructions: 'Tuma maagizo ya kuweka upya',
+      authNewPassword: 'Nenosiri jipya',
+      authConfirmNewPassword: 'Thibitisha nenosiri jipya',
+      authResetPasswordButton: 'Weka upya nenosiri',
+      authCheckingSession: 'Inakagua kikao chako cha Miimiid...',
+      authShowPassword: 'Onyesha nenosiri',
+      authHidePassword: 'Ficha nenosiri',
+      authResetPasswordTitle: 'Weka upya nenosiri',
+      authResetPasswordSubtitle: 'Chagua nenosiri jipya la akaunti yako ya Miimiid.',
+      noLessonContent: 'Hakuna maudhui yanayopatikana kwa somo hili.',
+      questionUnavailable: 'Swali halipatikani.',
+      unsupportedQuestionType: 'Aina ya swali isiyotumika:',
+
+      untitledLesson: 'Untitled Lesson',
+
+      openCourse: 'Fungua Kozi',
+      unableToLoadCourses: 'Imeshindwa kupakia kozi.',
+      invalidCourseId: 'Kitambulisho cha kozi si sahihi.',
+      questionInstruction: 'Jibu maswali yaliyo hapa chini kabla ya kukamilisha somo.',
+      unableToConnect: 'Imeshindwa kuunganisha na seva.',
+      completeLesson: 'Kamilisha Somo',
+      somethingWentWrong: 'Kuna tatizo limetokea.',
+      checking: 'Inakagua...',
+      saving: 'Inahifadhi...',
+      noQuizAvailable: 'Hakuna jaribio linalopatikana kwa somo hili.',
+      answerAllQuestions: 'Jibu maswali yote kabla ya kutuma.',
+      noLessonSelected: 'Hakuna somo lililochaguliwa kwa sasa.',
+      submitQuizFirst: 'Kamilisha na utume jaribio kabla ya kukamilisha somo hili.',
+      lessonNotFound: 'Somo halikupatikana.',
+      quizComplete: 'Jaribio limekamilika!',
+      score: 'Alama',
+      youGot: 'Umejibu kwa usahihi',
+      outOf: 'kati ya',
+      correct: 'majibu.',
+      canCompleteLesson: 'Sasa unaweza kukamilisha somo.',
+      reviewLessonTryAgain: 'Pitia somo na ujaribu tena.',
+
+      selectCourse: "Chagua kozi ili kuchunguza moduli na masomo:",
+      backToCourses: "← Rudi kwenye kozi",
+      backToModules: "← Rudi kwenye moduli za kozi",
+      yourProgress: "Maendeleo yako",
+      lessonsComplete: "masomo yamekamilika",
+      noLessonsYet: "Hakuna masomo bado",
+      startLesson: "Anza Somo",
+      reviewLesson: "Pitia Somo",
+      completed: "✓ Imekamilika",
+      moduleComplete: "✓ Moduli imekamilika",
+      quickCheck: "Ukaguzi wa Haraka",
+      submitAnswer: "Wasilisha Jibu",
+      nextLesson: "Somo Linalofuata",
+      previousLesson: "Somo Lililotangulia",
+      loading: "Inapakia...",
+      noDescription: "Hakuna maelezo yanayopatikana.",
+      noModules: "Hakuna moduli zinazopatikana bado.",
+      noLessons: "Hakuna masomo yanayopatikana katika moduli hii bado.",
+      unableToLoadCourse: "Imeshindwa kupakia kozi.",
+      unableToValidateQuiz: "Imeshindwa kuthibitisha jaribio.",
+      lessonCompleted: "Somo limekamilika kwa mafanikio! 🎉",
+      lessonCompletedSuccessfully: "Somo limekamilika kwa mafanikio! 🎉",
+      failedToSaveProgress: "Imeshindwa kuhifadhi maendeleo.",
+      selectLanguage: "Chagua lugha"
+
+,
+      home: 'Home',
+      learn: 'Learn',
+      funCenter: 'Fun Center',
+      aiTutor: 'AI Tutor',
+      xp: 'XP',
+      streak: 'Streak',
+      lessonsCompleted: 'Lessons completed',
+      averageQuizScore: 'Average quiz score',
+      pro: 'Pro',
+      premium: 'Premium',
+      settings: 'Settings',
+
+    },
+
+    yo: {
+      authWelcome: 'Kaabo si Miimiid',
+      authSignInSubtitle: 'Wọlé láti tẹ̀síwájú nínú ẹ̀kọ́',
+      authCreateAccount: 'Ṣẹ̀dá àkọọ́lẹ̀ Miimiid rẹ',
+      authCreateSubtitle: 'Ṣẹ̀dá àkọọ́lẹ̀ láti bẹ̀rẹ̀ ẹ̀kọ́',
+      authResetSubtitle: 'Tẹ imeeli rẹ sílẹ̀ láti gba àwọn ìtọ́sọ́nà fún títún ọ̀rọ̀ aṣínà ṣe',
+      authPasswordMismatch: 'Àwọn ọ̀rọ̀ aṣínà kò bá ara wọn mu.',
+      authCreatingAccount: 'A ń ṣẹ̀dá àkọọ́lẹ̀ rẹ...',
+      authAccountCreated: 'A ti ṣẹ̀dá àkọọ́lẹ̀ náà ní àṣeyọrí.',
+      authCreateAccountError: 'A kò lè ṣẹ̀dá àkọọ́lẹ̀ rẹ.',
+      authEnterEmail: 'Tẹ àdírẹ́sì imeeli rẹ sílẹ̀.',
+      authSendingResetInstructions: 'A ń rán àwọn ìtọ́sọ́nà títúnṣe...',
+      authResetInstructionsSent: 'A ti rán àwọn ìtọ́sọ́nà títún ọ̀rọ̀ aṣínà ṣe.',
+      authRequestResetError: 'A kò lè béèrè fún títún ọ̀rọ̀ aṣínà ṣe.',
+      authInvalidResetLink: 'Ọ̀nà asopọ títún ọ̀rọ̀ aṣínà ṣe yìí kò wúlò tàbí ó sonù.',
+      authPasswordMinLength: 'Ọ̀rọ̀ aṣínà gbọ́dọ̀ ní ó kéré tán àwọn àmì 8.',
+      authResettingPassword: 'A ń tún ọ̀rọ̀ aṣínà rẹ ṣe...',
+      authResetPasswordError: 'A kò lè tún ọ̀rọ̀ aṣínà rẹ ṣe.',
+      authPasswordResetSuccess: 'A ti tún ọ̀rọ̀ aṣínà rẹ ṣe ní àṣeyọrí.',
+
+      authLoginIdentifier: 'Imeeli tabi nọmba foonu',
+      authPassword: 'Ọrọigbaniwọle',
+      authSignIn: 'Wọlé',
+      authCreateAccountLink: 'Ṣẹda akọọlẹ',
+      authForgotPassword: 'O gbagbe ọrọigbaniwọle?',
+      authName: 'Orukọ',
+      authEmail: 'Imeeli',
+      authPhone: 'Nọmba foonu',
+      authConfirmPassword: 'Jẹrisi ọrọigbaniwọle',
+      authCreateAccountButton: 'Ṣẹda akọọlẹ',
+      authBackToSignIn: 'Pada si iwọle',
+      authEmailAddress: 'Adirẹsi imeeli',
+      authSendResetInstructions: 'Firanṣẹ awọn ilana atunto',
+      authNewPassword: 'Ọrọigbaniwọle tuntun',
+      authConfirmNewPassword: 'Jẹrisi ọrọigbaniwọle tuntun',
+      authResetPasswordButton: 'Tun ọrọigbaniwọle ṣe',
+      authCheckingSession: 'N ṣayẹwo igba Miimiid rẹ...',
+      authShowPassword: 'Fi ọrọigbaniwọle han',
+      authHidePassword: 'Fi ọrọigbaniwọle pamọ',
+      authResetPasswordTitle: 'Tun ọrọigbaniwọle ṣe',
+      authResetPasswordSubtitle: 'Yan ọrọigbaniwọle tuntun fun akọọlẹ Miimiid rẹ.',
+      noLessonContent: 'Ko si akoonu tó wà fún ẹ̀kọ́ yìí.',
+      questionUnavailable: 'Ìbéèrè kò sí.',
+      unsupportedQuestionType: 'Irú ìbéèrè tí a kò ṣe àtìlẹ́yìn fún:',
+
+      untitledLesson: 'Untitled Lesson',
+
+      openCourse: 'Ṣí Ẹkọ',
+      unableToLoadCourses: 'A kò lè gbe àwọn ẹkọ wọlé.',
+      invalidCourseId: 'ID ẹkọ kò tọ́.',
+      questionInstruction: 'Dáhùn àwọn ìbéèrè tó wà ní isalẹ kí o tó parí ẹkọ.',
+      unableToConnect: 'A kò lè sopọ̀ mọ́ olupin.',
+      completeLesson: 'Parí Ẹkọ',
+      somethingWentWrong: 'Ohun kan ṣẹlẹ̀ tí kò tọ́.',
+      checking: 'Ń ṣàyẹ̀wò...',
+      saving: 'Ń fipamọ́...',
+      noQuizAvailable: 'Ko si idanwo fun ẹkọ yii.',
+      answerAllQuestions: 'Dáhùn gbogbo àwọn ìbéèrè kí o tó fi ránṣẹ́.',
+      noLessonSelected: 'A kò yan ẹkọ kankan báyìí.',
+      submitQuizFirst: 'Parí kí o sì fi idanwo ránṣẹ́ kí o tó parí ẹkọ yii.',
+      lessonNotFound: 'A kò rí ẹkọ náà.',
+      quizComplete: 'Idanwo ti parí!',
+      score: 'Àmì',
+      youGot: 'O dáhùn tọ́',
+      outOf: 'nínú',
+      correct: 'dáhùn.',
+      canCompleteLesson: 'O lè parí ẹkọ báyìí.',
+      reviewLessonTryAgain: 'Ṣàtúnyẹ̀wò ẹkọ náà kí o sì tún gbìyànjú.',
+
+      selectCourse: "Yan ẹkọ kan lati ṣawari awọn modulu ati awọn ẹkọ:",
+      backToCourses: "← Pada si awọn ẹkọ",
+      backToModules: "← Pada si awọn modulu ẹkọ",
+      yourProgress: "Ilọsiwaju rẹ",
+      lessonsComplete: "awọn ẹkọ ti pari",
+      noLessonsYet: "Ko si ẹkọ sibẹ",
+      startLesson: "Bẹrẹ Ẹkọ",
+      reviewLesson: "Tun Ẹkọ Wo",
+      completed: "✓ Ti pari",
+      moduleComplete: "✓ Modulu ti pari",
+      quickCheck: "Ayẹwo Yara",
+      submitAnswer: "Fi Idahun Ranṣẹ",
+      nextLesson: "Ẹkọ Tókàn",
+      previousLesson: "Ẹkọ Ṣaaju",
+      loading: "N n gbe...",
+      noDescription: "Ko si apejuwe ti o wa.",
+      noModules: "Ko si modulu ti o wa sibẹ.",
+      noLessons: "Ko si ẹkọ ti o wa ninu modulu yii sibẹ.",
+      unableToLoadCourse: "Ko ṣee ṣe lati gbe ẹkọ naa wọle.",
+      unableToValidateQuiz: "Ko ṣee ṣe lati jẹrisi idanwo naa.",
+      lessonCompleted: "A ti pari ẹkọ naa ni aṣeyọri! 🎉",
+      lessonCompletedSuccessfully: "A ti pari ẹkọ naa ni aṣeyọri! 🎉",
+      failedToSaveProgress: "Ko ṣee ṣe lati fipamọ ilọsiwaju.",
+      selectLanguage: "Yan ede"
+
+,
+      home: 'Home',
+      learn: 'Learn',
+      funCenter: 'Fun Center',
+      aiTutor: 'AI Tutor',
+      xp: 'XP',
+      streak: 'Streak',
+      lessonsCompleted: 'Lessons completed',
+      averageQuizScore: 'Average quiz score',
+      pro: 'Pro',
+      premium: 'Premium',
+      settings: 'Settings',
+
+    },
+
+    ig: {
+      authWelcome: 'Nnọọ na Miimiid',
+      authSignInSubtitle: 'Banye ka ị gaa n\'ihu n\'ịmụ ihe',
+      authCreateAccount: 'Mepụta akaụntụ Miimiid gị',
+      authCreateSubtitle: 'Mepụta akaụntụ ka ịmalite ịmụ ihe',
+      authResetSubtitle: 'Tinye email gị ka ịnata ntuziaka maka ịtọgharịa okwuntughe',
+      authPasswordMismatch: 'Okwuntughe adabaghị.',
+      authCreatingAccount: 'A na-emepụta akaụntụ gị...',
+      authAccountCreated: 'Emepụtara akaụntụ nke ọma.',
+      authCreateAccountError: 'Enweghị ike ịmepụta akaụntụ gị.',
+      authEnterEmail: 'Tinye adreesị email gị.',
+      authSendingResetInstructions: 'A na-eziga ntuziaka ịtọgharịa...',
+      authResetInstructionsSent: 'E zigala ntuziaka ịtọgharịa okwuntughe.',
+      authRequestResetError: 'Enweghị ike ịrịọ ka a tọgharịa okwuntughe.',
+      authInvalidResetLink: 'Njikọ ịtọgharịa okwuntughe a ezighi ezi ma ọ bụ na-efu.',
+      authPasswordMinLength: 'Okwuntughe ga-enwerịrị opekata mpe mkpụrụedemede 8.',
+      authResettingPassword: 'A na-edozi okwuntughe gị ọzọ...',
+      authResetPasswordError: 'Enweghị ike ịtọgharịa okwuntughe gị.',
+      authPasswordResetSuccess: 'A tọgharịrị okwuntughe gị nke ọma.',
+
+      authLoginIdentifier: 'Email ma ọ bụ nọmba ekwentị',
+      authPassword: 'Okwuntughe',
+      authSignIn: 'Banye',
+      authCreateAccountLink: 'Mepụta akaụntụ',
+      authForgotPassword: 'Ị chefuru okwuntughe?',
+      authName: 'Aha',
+      authEmail: 'Email',
+      authPhone: 'Nọmba ekwentị',
+      authConfirmPassword: 'Kwenye okwuntughe',
+      authCreateAccountButton: 'Mepụta akaụntụ',
+      authBackToSignIn: 'Laghachi na nbanye',
+      authEmailAddress: 'Adreesị email',
+      authSendResetInstructions: 'Zipụ ntuziaka nrụpụta',
+      authNewPassword: 'Okwuntughe ọhụrụ',
+      authConfirmNewPassword: 'Kwenye okwuntughe ọhụrụ',
+      authResetPasswordButton: 'Tọgharịa okwuntughe',
+      authCheckingSession: 'Na-enyocha nnọkọ Miimiid gị...',
+      authShowPassword: 'Gosi okwuntughe',
+      authHidePassword: 'Zoo okwuntughe',
+      authResetPasswordTitle: 'Tọgharịa okwuntughe',
+      authResetPasswordSubtitle: 'Họrọ okwuntughe ọhụrụ maka akaụntụ Miimiid gị.',
+      noLessonContent: 'Enweghị ọdịnaya dị maka nkuzi a.',
+      questionUnavailable: 'Ajụjụ adịghị.',
+      unsupportedQuestionType: 'Ụdị ajụjụ anaghị akwado:',
+
+      untitledLesson: 'Untitled Lesson',
+
+      openCourse: 'Mepee Nkuzi',
+      unableToLoadCourses: 'Enweghị ike ibunye nkuzi.',
+      invalidCourseId: 'ID nkuzi ezighi ezi.',
+      questionInstruction: "Zaa ajụjụ ndị dị n'okpuru tupu ịmechaa nkuzi.",
+      unableToConnect: 'Enweghị ike ijikọ na sava.',
+      completeLesson: 'Mechaa Nkuzi',
+      somethingWentWrong: 'Ihe adịghị mma mere.',
+      checking: 'A na-enyocha...',
+      saving: 'A na-echekwa...',
+      noQuizAvailable: 'Enweghị ule dị maka nkuzi a.',
+      answerAllQuestions: 'Zaa ajụjụ niile tupu izipu.',
+      noLessonSelected: 'Enweghị nkuzi ahọpụtara ugbu a.',
+      submitQuizFirst: 'Mechaa ma zipụ ule tupu ịmechaa nkuzi a.',
+      lessonNotFound: 'Achọtaghị nkuzi.',
+      quizComplete: 'Ule agwụla!',
+      score: 'Akara',
+      youGot: 'Ị zara nke ọma',
+      outOf: "n'ime",
+      correct: 'azịza.',
+      canCompleteLesson: 'Ị nwere ike imecha nkuzi ugbu a.',
+      reviewLessonTryAgain: 'Nyochaa nkuzi ahụ ma nwaa ọzọ.',
+
+      selectCourse: "Họrọ nkuzi iji nyochaa modul na nkuzi:",
+      backToCourses: "← Laghachi na nkuzi",
+      backToModules: "← Laghachi na modul nkuzi",
+      yourProgress: "Ọganihu gị",
+      lessonsComplete: "nkuzi emechara",
+      noLessonsYet: "Enweghị nkuzi ugbu a",
+      startLesson: "Malite Nkuzi",
+      reviewLesson: "Nyochaa Nkuzi",
+      completed: "✓ Emechara",
+      moduleComplete: "✓ Modul emechara",
+      quickCheck: "Nlele Ngwa ngwa",
+      submitAnswer: "Nyefee Azịza",
+      nextLesson: "Nkuzi Na-esote",
+      previousLesson: "Nkuzi Gara Aga",
+      loading: "Na-ebunye...",
+      noDescription: "Enweghị nkọwa dị.",
+      noModules: "Enweghị modul dị ugbu a.",
+      noLessons: "Enweghị nkuzi dị na modul a ugbu a.",
+      unableToLoadCourse: "Enweghị ike ibunye nkuzi ahụ.",
+      unableToValidateQuiz: "Enweghị ike ịkwado ule ahụ.",
+      lessonCompleted: "Emechara nkuzi ahụ nke ọma! 🎉",
+      lessonCompletedSuccessfully: "Emechara nkuzi ahụ nke ọma! 🎉",
+      failedToSaveProgress: "Enweghị ike ịchekwa ọganihu.",
+      selectLanguage: "Họrọ asụsụ"
+
+,
+      home: 'Home',
+      learn: 'Learn',
+      funCenter: 'Fun Center',
+      aiTutor: 'AI Tutor',
+      xp: 'XP',
+      streak: 'Streak',
+      lessonsCompleted: 'Lessons completed',
+      averageQuizScore: 'Average quiz score',
+      pro: 'Pro',
+      premium: 'Premium',
+      settings: 'Settings',
+
+    },
+
+    ha: {
+      authWelcome: 'Barka da zuwa Miimiid',
+      authSignInSubtitle: 'Shiga don ci gaba da koyo',
+      authCreateAccount: 'Ƙirƙiri asusun Miimiid ɗinka',
+      authCreateSubtitle: 'Ƙirƙiri asusu don fara koyo',
+      authResetSubtitle: 'Shigar da imel ɗinka don karɓar umarnin sake saita kalmar sirri',
+      authPasswordMismatch: 'Kalmomin sirri ba su dace ba.',
+      authCreatingAccount: 'Ana ƙirƙirar asusunka...',
+      authAccountCreated: 'An ƙirƙiri asusu cikin nasara.',
+      authCreateAccountError: 'Ba a iya ƙirƙirar asusunka ba.',
+      authEnterEmail: 'Shigar da adireshin imel ɗinka.',
+      authSendingResetInstructions: 'Ana aika umarnin sake saiti...',
+      authResetInstructionsSent: 'An aika umarnin sake saita kalmar sirri.',
+      authRequestResetError: 'Ba a iya neman sake saita kalmar sirri ba.',
+      authInvalidResetLink: 'Wannan hanyar haɗin sake saita kalmar sirri ba ta aiki ko ta ɓace.',
+      authPasswordMinLength: 'Kalmar sirri dole ta kasance da aƙalla haruffa 8.',
+      authResettingPassword: 'Ana sake saita kalmar sirrinka...',
+      authResetPasswordError: 'Ba a iya sake saita kalmar sirrinka ba.',
+      authPasswordResetSuccess: 'An sake saita kalmar sirrinka cikin nasara.',
+
+      authLoginIdentifier: 'Imel ko lambar waya',
+      authPassword: 'Kalmar sirri',
+      authSignIn: 'Shiga',
+      authCreateAccountLink: 'Ƙirƙiri asusu',
+      authForgotPassword: 'An manta kalmar sirri?',
+      authName: 'Suna',
+      authEmail: 'Imel',
+      authPhone: 'Lambar waya',
+      authConfirmPassword: 'Tabbatar da kalmar sirri',
+      authCreateAccountButton: 'Ƙirƙiri asusu',
+      authBackToSignIn: 'Koma shiga',
+      authEmailAddress: 'Adireshin imel',
+      authSendResetInstructions: 'Aika umarnin sake saiti',
+      authNewPassword: 'Sabuwar kalmar sirri',
+      authConfirmNewPassword: 'Tabbatar da sabuwar kalmar sirri',
+      authResetPasswordButton: 'Sake saita kalmar sirri',
+      authCheckingSession: 'Ana duba zaman Miimiid ɗinka...',
+      authShowPassword: 'Nuna kalmar sirri',
+      authHidePassword: 'Boye kalmar sirri',
+      authResetPasswordTitle: 'Sake saita kalmar sirri',
+      authResetPasswordSubtitle: 'Zaɓi sabuwar kalmar sirri don asusun Miimiid ɗinka.',
+      untitledLesson: 'Darasi mara suna',
+      noLessonContent: 'Babu abun ciki da ake da shi don wannan darasin.',
+      questionUnavailable: 'Ba a samun tambayar.',
+      unsupportedQuestionType: 'Nau\'in tambayar da ba a tallafa wa:',
+      openCourse: 'Buɗe Kwas',
+      unableToLoadCourses: 'Ba a iya loda kwas-kwasan ba.',
+      invalidCourseId: 'ID ɗin kwas ba daidai ba ne.',
+      questionInstruction: 'Amsa tambayoyin da ke ƙasa kafin ka kammala darasin.',
+      unableToConnect: 'Ba a iya haɗawa da uwar garke ba.',
+      completeLesson: 'Kammala Darasi',
+      somethingWentWrong: 'Wani abu ya faru ba daidai ba.',
+      checking: 'Ana dubawa...',
+      saving: 'Ana adanawa...',
+      noQuizAvailable: 'Babu gwaji da ake da shi don wannan darasi.',
+      answerAllQuestions: 'Amsa duk tambayoyin kafin aikawa.',
+      noLessonSelected: 'Ba a zaɓi wani darasi a yanzu ba.',
+      submitQuizFirst: 'Kammala kuma aika gwajin kafin ka kammala wannan darasi.',
+      lessonNotFound: 'Ba a sami darasin ba.',
+      quizComplete: 'An kammala gwajin!',
+      score: 'Maki',
+      youGot: 'Ka amsa daidai',
+      outOf: 'cikin',
+      correct: 'amsoshi.',
+      canCompleteLesson: 'Yanzu za ka iya kammala darasin.',
+      reviewLessonTryAgain: 'Sake duba darasin sannan ka sake gwadawa.',
+
+      selectCourse: "Zaɓi kwas don duba sassa da darussa:",
+      backToCourses: "← Koma zuwa kwas",
+      backToModules: "← Koma zuwa sassan kwas",
+      yourProgress: "Ci gabanka",
+      lessonsComplete: "darussa da aka kammala",
+      noLessonsYet: "Babu darasi tukuna",
+      startLesson: "Fara Darasi",
+      reviewLesson: "Duba Darasi",
+      completed: "✓ An kammala",
+      moduleComplete: "✓ An kammala sashe",
+      quickCheck: "Dubawa cikin sauri",
+      submitAnswer: "Aika Amsa",
+      nextLesson: "Darasi na gaba",
+      previousLesson: "Darasin baya",
+      loading: "Ana lodawa...",
+      noDescription: "Babu bayanin da ake da shi.",
+      noModules: "Babu sassa da ake da su tukuna.",
+      noLessons: "Babu darussa da ake da su a wannan sashe tukuna.",
+      unableToLoadCourse: "Ba a iya loda kwas ɗin ba.",
+      unableToValidateQuiz: "Ba a iya tantance gwajin ba.",
+      lessonCompleted: "An kammala darasin cikin nasara! 🎉",
+      lessonCompletedSuccessfully: "An kammala darasin cikin nasara! 🎉",
+      failedToSaveProgress: "Ba a iya adana ci gaba ba.",
+      selectLanguage: "Zaɓi harshe"
+
+,
+      home: 'Home',
+      learn: 'Learn',
+      funCenter: 'Fun Center',
+      aiTutor: 'AI Tutor',
+      xp: 'XP',
+      streak: 'Streak',
+      lessonsCompleted: 'Lessons completed',
+      averageQuizScore: 'Average quiz score',
+      pro: 'Pro',
+      premium: 'Premium',
+      settings: 'Settings',
+
+    }
+  };
+
+  function miimiidTranslate(key, language) {
+    const activeLanguage =
+      MIIMIID_TRANSLATIONS[language]
+        ? language
+        : "en";
+
+    return (
+      MIIMIID_TRANSLATIONS[
+        activeLanguage
+      ][key] ||
+      MIIMIID_TRANSLATIONS.en[key] ||
+      key
+    );
+  }
+
+  function getSavedLanguage() {
+    try {
+      const saved = localStorage.getItem(MIIMIID_LANGUAGE_KEY);
+
+      if (saved && MIIMIID_LANGUAGES[saved]) {
+        return saved;
+      }
+    } catch (error) {
+      console.warn("Miimiid could not read saved language preference.");
+    }
+
+    return "en";
+  }
+
+  function saveLanguage(language) {
+    try {
+      localStorage.setItem(MIIMIID_LANGUAGE_KEY, language);
+    } catch (error) {
+      console.warn("Miimiid could not save language preference.");
+    }
+  }
+
+  function updateLanguageUI(language) {
+    const languageData =
+      MIIMIID_LANGUAGES[language];
+
+    if (!languageData) {
+      return;
+    }
+
+    const label =
+      document.getElementById(
+        "selected-language-label"
+      );
+
+    const menu =
+      document.getElementById(
+        "language-menu"
+      );
+
+    if (label) {
+      label.textContent =
+        languageData.name;
+    }
+
+    /*
+     * Build the language menu directly
+     * from MIIMIID_LANGUAGES.
+     */
+    if (menu) {
+      menu.innerHTML = Object.entries(
+        MIIMIID_LANGUAGES
+      )
+        .map(
+          ([code, data]) => {
+            const isActive =
+              code === language;
+
+            return `
+              <button
+                type="button"
+                class="language-option ${
+                  isActive ? "active" : ""
+                }"
+                data-language="${code}"
+                role="menuitem"
+                aria-current="${
+                  isActive ? "true" : "false"
+                }"
+              >
+                <span class="language-option-name">
+                  <span>
+                    ${data.name}
+                  </span>
+                  <span class="language-option-native">
+                    ${data.nativeName}
+                  </span>
+                </span>
+
+                ${
+                  isActive
+                    ? '<span class="language-check">✓</span>'
+                    : ""
+                }
+              </button>
+            `;
+          }
+        )
+        .join("");
+    }
+
+    document.documentElement.lang =
+      language;
+  }
+
+  function applyMiimiidTranslations(language) {
+
+    const activeLanguage =
+      MIIMIID_TRANSLATIONS[language]
+        ? language
+        : "en";
+
+    const t = key =>
+      miimiidTranslate(
+        key,
+        activeLanguage
+      );
+
+    /*
+     * Static course/detail UI
+     */
+    const elements = {
+      "course-progress-title": "yourProgress",
+      "course-progress-text": "lessonsCompleted",
+      "lesson-back-btn": "backToModules",
+      "quiz-title": "quickCheck",
+      "quiz-submit-btn": "submitAnswer",
+      "complete-btn": "completeLesson",
+      "previous-lesson-btn": "previousLesson",
+      "next-lesson-btn": "nextLesson"
+    };
+
+    Object.entries(elements).forEach(
+      ([id, key]) => {
+
+        const element =
+          document.getElementById(id);
+
+        if (!element) {
+          return;
+        }
+
+        element.textContent = t(key);
+      }
+    );
+
+    /*
+     * Re-render dynamic course content
+     * so translated buttons/progress text
+     * appear immediately.
+     */
+    if (
+      courseDataCache &&
+      Array.isArray(courseDataCache.modules)
+    ) {
+
+      renderModules(
+        courseDataCache.modules
+      );
+
+      if (currentCourseId) {
+        loadCourseProgress(
+          currentCourseId
+        );
+      }
+    }
+
+    /*
+     * Keep the HTML language attribute
+     * synchronized with the active language.
+     */
+    document.documentElement.lang =
+      activeLanguage;
+  }
+
+  function closeLanguageMenu() {
+    const selector = document.getElementById("language-selector");
+    const toggle = document.getElementById("language-toggle");
+    const menu = document.getElementById("language-menu");
+
+    if (!selector || !toggle || !menu) {
+      return;
+    }
+
+    selector.classList.remove("open");
+    menu.classList.add("hidden");
+    toggle.setAttribute("aria-expanded", "false");
+  }
+
+  function openLanguageMenu() {
+    const selector = document.getElementById("language-selector");
+    const toggle = document.getElementById("language-toggle");
+    const menu = document.getElementById("language-menu");
+
+    if (!selector || !toggle || !menu) {
+      return;
+    }
+
+    selector.classList.add("open");
+    menu.classList.remove("hidden");
+    toggle.setAttribute("aria-expanded", "true");
+  }
+
+  function toggleLanguageMenu() {
+    const selector = document.getElementById("language-selector");
+
+    if (!selector) {
+      return;
+    }
+
+    if (selector.classList.contains("open")) {
+      closeLanguageMenu();
+    } else {
+      openLanguageMenu();
+    }
+  }
+
+  function selectLanguage(language) {
+    if (!MIIMIID_LANGUAGES[language]) {
+      return;
+    }
+
+    saveLanguage(language);
+    updateLanguageUI(language);
+    closeLanguageMenu();
+
+    applyMiimiidTranslations(language);
+
+    document.dispatchEvent(
+      new CustomEvent("miimiidLanguageChanged", {
+        detail: {
+          language,
+          languageData: MIIMIID_LANGUAGES[language]
+        }
+      })
+    );
+  }
+
+  function initializeLanguageSelector() {
+    const toggle = document.getElementById("language-toggle");
+
+    if (!toggle) {
+      return;
+    }
+
+    const savedLanguage = getSavedLanguage();
+
+    updateLanguageUI(savedLanguage);
+    applyMiimiidTranslations(savedLanguage);
+
+    toggle.addEventListener("click", toggleLanguageMenu);
+
+    const menu =
+      document.getElementById(
+        "language-menu"
+      );
+
+    if (menu) {
+      menu.addEventListener(
+        "click",
+        event => {
+          const option =
+            event.target.closest(
+              ".language-option"
+            );
+
+          if (!option) {
+            return;
+          }
+
+          selectLanguage(
+            option.dataset.language
+          );
+        }
+      );
+    }
+
+    document.addEventListener("click", event => {
+      const selector = document.getElementById("language-selector");
+
+      if (selector && !selector.contains(event.target)) {
+        closeLanguageMenu();
+      }
+    });
+
+    toggle.addEventListener("keydown", event => {
+      if (event.key === "Escape") {
+        closeLanguageMenu();
+        toggle.focus();
+      }
+    });
+
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape") {
+        closeLanguageMenu();
+      }
+    });
+  }
+
+  /*
+   * =========================================
+   * LANGUAGE CHANGE REFRESH
+   * =========================================
+   */
+
+  document.addEventListener(
+    "miimiidLanguageChanged",
+    async () => {
+
+      const language =
+        getSavedLanguage();
+
+      /*
+       * =====================================================
+       * MIIMIID DYNAMIC LOCALIZATION REFRESH
+       * =====================================================
+       *
+       * Every visible surface must be rebuilt from its
+       * existing data/state. No hardcoded replacement UI
+       * is introduced here.
+       */
+
+      document.documentElement.lang =
+        language;
+
+      /*
+       * Dashboard
+       *
+       * Re-render the existing dashboard registry and data
+       * so navigation labels, statistics, and drawer labels
+       * immediately use the selected language.
+       */
+      renderMiimiidBottomNavigation();
+
+      if (
+        typeof renderMiimiidDashboard === "function" &&
+        miimiidDashboardData
+      ) {
+        renderMiimiidDashboard();
+      } else {
+        renderMiimiidDashboardMenu();
+      }
+
+      /*
+       * Learning state.
+       *
+       * Preserve the learner's current course and lesson
+       * before refreshing translated course data.
+       */
+      const courseId =
+        currentCourseId;
+
+      const lessonId =
+        currentLessonId;
+
+      const courseList =
+        document.getElementById(
+          "course-list-view"
+        );
+
+      const courseDetail =
+        document.getElementById(
+          "course-detail-view"
+        );
+
+      const lessonView =
+        document.getElementById(
+          "lesson-view"
+        );
+
+      /*
+       * If the learner is currently browsing the course
+       * list, reload the real course data in the selected
+       * language.
+       */
+      if (
+        courseList &&
+        !courseList.classList.contains("hidden")
+      ) {
+        await fetchCourses();
+        return;
+      }
+
+      /*
+       * If a real course is open, reload its complete
+       * translated tree.
+       */
+      if (courseId) {
+
+        await openCourse(
+          courseId
+        );
+
+        /*
+         * Restore the exact lesson only when the learner
+         * was actually inside one.
+         */
+        if (
+          lessonId &&
+          lessonView
+        ) {
+          openLesson(
+            lessonId
+          );
+        }
+
+        return;
+      }
+
+      /*
+       * If no course is active, still ensure the static
+       * translation layer has been applied to the existing
+       * shell.
+       */
+      applyMiimiidTranslations(
+        language
+      );
+    }
+  );
+
+  if (document.readyState === "loading") {
+    document.addEventListener(
+      "DOMContentLoaded",
+      initializeLanguageSelector
+    );
+  } else {
+    initializeLanguageSelector();
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener(
+      "DOMContentLoaded",
+      initializeMiimiidApplication
+    );
+  } else {
+    initializeMiimiidApplication();
+  }
+
+
+    /*
+     * MIIMIID REGISTRATION INITIALIZATION
+     * Programmatic initialization fix.
+     */
+    initializeMiimiidRegistrationFlow();
+

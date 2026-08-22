@@ -1,0 +1,384 @@
+from pathlib import Path
+import subprocess
+import re
+import shutil
+
+CURRENT = Path("public/index.html")
+BACKUP = Path("public/index.html.before-email-only-restore")
+
+current = CURRENT.read_text()
+recovered = subprocess.check_output(
+    ["git", "show", "c26f6d2:public/index.html"],
+    text=True
+)
+
+# ------------------------------------------------------------
+# SAFETY: current file must still equal our untouched backup.
+# ------------------------------------------------------------
+
+if not BACKUP.exists():
+    raise SystemExit("STOP: safety backup does not exist.")
+
+if current != BACKUP.read_text():
+    raise SystemExit(
+        "STOP: current public/index.html has changed since the "
+        "backup was created. No changes made."
+    )
+
+# ------------------------------------------------------------
+# HELPERS
+# ------------------------------------------------------------
+
+def locate_form(text, form_id):
+    """
+    Locate a form by id without depending on whitespace/formatting.
+    Returns (start, end).
+    """
+    id_match = re.search(
+        rf'\bid\s*=\s*"{re.escape(form_id)}"',
+        text
+    )
+
+    if not id_match:
+        raise SystemExit(
+            f'STOP: could not find form id="{form_id}".'
+        )
+
+    form_start = text.rfind("<form", 0, id_match.start())
+
+    if form_start == -1:
+        raise SystemExit(
+            f'STOP: opening <form> for {form_id} not found.'
+        )
+
+    # The registration form is immediately followed by the
+    # forgot-password form. Use that as the reliable boundary.
+    if form_id == "miimiid-register-form":
+        next_form = re.search(
+            r'<form\b[^>]*\bid\s*=\s*"miimiid-forgot-form"',
+            text[id_match.end():],
+            re.DOTALL
+        )
+
+        if not next_form:
+            raise SystemExit(
+                "STOP: forgot-password form boundary not found."
+            )
+
+        relative_start = id_match.end() + next_form.start()
+        form_end = relative_start
+
+        # Include nothing from the forgot form itself.
+        return form_start, form_end
+
+    # Generic fallback.
+    close = text.find("</form>", id_match.end())
+
+    if close == -1:
+        raise SystemExit(
+            f'STOP: closing </form> for {form_id} not found.'
+        )
+
+    return form_start, close + len("</form>")
+
+
+# ------------------------------------------------------------
+# 1. LOCATE CURRENT + RECOVERED REGISTRATION HTML
+# ------------------------------------------------------------
+
+current_start, current_end = locate_form(
+    current,
+    "miimiid-register-form"
+)
+
+recovered_start, recovered_end = locate_form(
+    recovered,
+    "miimiid-register-form"
+)
+
+current_form = current[current_start:current_end]
+recovered_form = recovered[recovered_start:recovered_end]
+
+if "miimiid-register-phone" not in current_form:
+    raise SystemExit(
+        "STOP: current registration form does not contain the "
+        "expected phone field. Refusing to overwrite."
+    )
+
+if "miimiid-register-step" not in recovered_form:
+    raise SystemExit(
+        "STOP: recovered form does not contain the expected "
+        "5-step onboarding architecture."
+    )
+
+if "miimiid-register-verification-code" not in recovered_form:
+    raise SystemExit(
+        "STOP: recovered form does not contain the verification "
+        "code field."
+    )
+
+print("Current registration form verified.")
+print("Recovered 5-step email-only form verified.")
+
+# ------------------------------------------------------------
+# 2. RESTORE THE RECOVERED REGISTRATION FORM
+# ------------------------------------------------------------
+
+current = (
+    current[:current_start]
+    + recovered_form
+    + current[current_end:]
+)
+
+# ------------------------------------------------------------
+# 3. REMOVE CURRENT SINGLE-PAGE REGISTRATION HANDLER
+# ------------------------------------------------------------
+
+register_start_match = re.search(
+    r'async\s+function\s+handleMiimiidRegister\s*\(\s*event\s*\)\s*\{',
+    current
+)
+
+if not register_start_match:
+    raise SystemExit(
+        "STOP: current handleMiimiidRegister() was not found."
+    )
+
+forgot_pattern = re.compile(
+    r'async\s+function\s+handleMiimiidForgotPassword\s*\(\s*event\s*\)\s*\{'
+)
+
+forgot_match = forgot_pattern.search(
+    current,
+    register_start_match.end()
+)
+
+if not forgot_match:
+    raise SystemExit(
+        "STOP: current forgot-password handler boundary was not found."
+    )
+
+current_register_block_start = register_start_match.start()
+current_register_block_end = forgot_match.start()
+
+# Remove current single-page registration handler.
+current = (
+    current[:current_register_block_start]
+    + current[current_register_block_end:]
+)
+
+print("Current single-page registration handler removed.")
+
+# ------------------------------------------------------------
+# 4. RECOVER COMPLETE EMAIL-ONLY ONBOARDING JS
+# ------------------------------------------------------------
+
+# The recovered commit contains the complete registration implementation
+# from the registration state through the event listeners immediately before
+# the forgot-password handler.
+#
+# Do NOT stop at a fragile exact function signature. The recovered file uses
+# formatting/newlines that can vary between revisions.
+
+recovered_onboarding_start = recovered.find(
+    "let miimiidRegistrationStep = 1;"
+)
+
+recovered_forgot_pattern = re.compile(
+    r"async\s+function\s+handleMiimiidForgotPassword\s*\(\s*event\s*\)\s*\{"
+)
+
+recovered_forgot_match = recovered_forgot_pattern.search(
+    recovered,
+    recovered_onboarding_start
+)
+
+if recovered_onboarding_start == -1:
+    raise SystemExit(
+        "STOP: recovered onboarding state was not found."
+    )
+
+if not recovered_forgot_match:
+    raise SystemExit(
+        "STOP: recovered forgot-password boundary was not found."
+    )
+
+recovered_onboarding_block = recovered[
+    recovered_onboarding_start:recovered_forgot_match.start()
+]
+
+required_core_js = [
+    "let miimiidRegistrationStep = 1;",
+    "function showMiimiidRegistrationStep(step)",
+    "function setMiimiidRegisterFeedback(",
+    "function clearMiimiidVerificationTimer()",
+    "function startMiimiidVerificationTimer(",
+    "function resetMiimiidRegistrationFlow()",
+    "async function handleMiimiidRegister(event)",
+    "async function handleMiimiidVerifyAccount()",
+    "async function handleMiimiidResendVerification()"
+]
+
+for marker in required_core_js:
+    if marker not in recovered_onboarding_block:
+        raise SystemExit(
+            f"STOP: recovered onboarding core JS is missing: {marker}"
+        )
+
+print("Recovered onboarding core JS verified.")
+
+registration_init_start = recovered.find(
+    "function initializeMiimiidRegistrationFlow()"
+)
+
+initialize_auth_start = recovered.find(
+    "function initializeMiimiidAuth()",
+    registration_init_start
+)
+
+if registration_init_start == -1:
+    raise SystemExit(
+        "STOP: recovered initializeMiimiidRegistrationFlow() was not found."
+    )
+
+if initialize_auth_start == -1:
+    raise SystemExit(
+        "STOP: recovered initializeMiimiidAuth() boundary was not found."
+    )
+
+recovered_registration_init = recovered[
+    registration_init_start:initialize_auth_start
+]
+
+required_registration_bindings = [
+    "miimiid-register-get-started",
+    "miimiid-register-name-next",
+    "miimiid-register-contact-next",
+    "miimiid-register-submit",
+    "miimiid-verify-account-submit",
+    "miimiid-resend-verification"
+]
+
+for marker in required_registration_bindings:
+    if marker not in recovered_registration_init:
+        raise SystemExit(
+            f"STOP: recovered registration event binding is missing: {marker}"
+        )
+
+print("Recovered registration event bindings verified.")
+
+# ------------------------------------------------------------
+# 5. INSERT COMPLETE ONBOARDING JS BEFORE FORGOT PASSWORD
+# ------------------------------------------------------------
+
+forgot_position = current.find(
+    "async function handleMiimiidForgotPassword(event)"
+)
+
+if forgot_position == -1:
+    raise SystemExit(
+        "STOP: forgot-password handler disappeared unexpectedly."
+    )
+
+current = (
+    current[:forgot_position]
+    + recovered_onboarding_block
+    + "\n\n"
+    + current[forgot_position:]
+)
+
+initialize_auth_position = current.find(
+    "function initializeMiimiidAuth()"
+)
+
+if initialize_auth_position == -1:
+    raise SystemExit(
+        "STOP: initializeMiimiidAuth() boundary was not found after core restoration."
+    )
+
+current = (
+    current[:initialize_auth_position]
+    + recovered_registration_init
+    + "\n\n"
+    + current[initialize_auth_position:]
+)
+
+print("Recovered registration event bindings inserted.")
+
+# ------------------------------------------------------------
+# 6. FINAL SAFETY ASSERTIONS BEFORE WRITING
+# ------------------------------------------------------------
+
+# Must contain email-only onboarding.
+for marker in [
+    "miimiid-register-step",
+    "miimiid-register-first-name",
+    "miimiid-register-last-name",
+    "miimiid-register-email",
+    "miimiid-register-dob",
+    "miimiid-register-password",
+    "miimiid-register-confirm",
+    "miimiid-register-verification-code",
+    "handleMiimiidRegister",
+    "handleMiimiidVerifyAccount",
+    "handleMiimiidResendVerification"
+]:
+    if marker not in current:
+        raise SystemExit(
+            f"STOP: final file is missing required marker: {marker}"
+        )
+
+# The old registration controls must be gone.
+for forbidden in [
+    "miimiid-register-phone",
+    "miimiid-register-name"
+]:
+    if forbidden in current:
+        raise SystemExit(
+            f"STOP: old registration marker still exists: {forbidden}"
+        )
+
+# The authentication API must remain present.
+if "/api/auth/register" not in current:
+    raise SystemExit(
+        "STOP: /api/auth/register disappeared."
+    )
+
+# Forgot-password functionality must remain present.
+if "handleMiimiidForgotPassword" not in current:
+    raise SystemExit(
+        "STOP: forgot-password functionality disappeared."
+    )
+
+# ------------------------------------------------------------
+# WRITE
+# ------------------------------------------------------------
+
+CURRENT.write_text(current)
+
+print()
+print("==============================================")
+print("EMAIL-ONLY ONBOARDING RESTORATION COMPLETED")
+print("==============================================")
+print()
+print("Preserved backup:")
+print("  public/index.html.before-email-only-restore")
+print()
+print("Restored:")
+print("  ✓ 5-step onboarding")
+print("  ✓ First name")
+print("  ✓ Last name")
+print("  ✓ Email address")
+print("  ✓ Date of birth")
+print("  ✓ Password")
+print("  ✓ Confirm password")
+print("  ✓ Email verification")
+print("  ✓ 6-digit verification code")
+print("  ✓ Verification expiry timer")
+print("  ✓ Resend verification")
+print()
+print("Removed from registration:")
+print("  ✓ Phone field")
+print("  ✓ Old single-page name field")
+print()
+print("No server files were modified.")

@@ -381,7 +381,7 @@
   color: #64748b;
   opacity: 1;
 }
-
+  
   /* ================================
      MIIMIID HEADER + LANGUAGE SELECTOR
      ================================ */
@@ -1602,24 +1602,19 @@ body:has(#miimiid-auth-view:not(.hidden)) {
     }
 
     .miimiid-async-button-spinner {
-      position: absolute;
-      left: 50%;
-      top: 50%;
       width: 20px;
       height: 20px;
       box-sizing: border-box;
       border: 3px solid currentColor;
       border-right-color: transparent;
       border-radius: 50%;
-      display: block;
-      margin: -10px 0 0 -10px;
-      padding: 0;
+      display: inline-block;
+      flex: 0 0 20px;
       opacity: 0;
       visibility: hidden;
       animation: miimiidAsyncButtonSpin 0.75s linear infinite;
       animation-play-state: paused;
       transform: rotate(0deg);
-      pointer-events: none;
     }
 
     .miimiid-async-button[aria-busy="true"]
@@ -2080,7 +2075,7 @@ body:has(#miimiid-auth-view:not(.hidden)) {
             class="btn"
             id="miimiid-register-name-next"
            data-miimiid-auth-key="authContinue">
-
+            
           </button>
 
           <button
@@ -2117,7 +2112,7 @@ body:has(#miimiid-auth-view:not(.hidden)) {
             class="btn"
             id="miimiid-register-contact-next"
            data-miimiid-auth-key="authContinue">
-
+            
           </button>
 
           <button
@@ -2129,33 +2124,12 @@ body:has(#miimiid-auth-view:not(.hidden)) {
         </section>
 
 
-        <!-- STEP 5: PASSWORD + CONFIRM PASSWORD -->
-
-
-
-        <!-- STEP 4: GENDER + DATE OF BIRTH -->
+        <!-- STEP 4: DOB + PASSWORD -->
+                <!-- STEP 4: BIRTHDAY + PASSWORD -->
         <section
           class="miimiid-register-step hidden"
           data-register-step="4"
         >
-
-          <h2
-            class="miimiid-auth-step-title"
-            data-miimiid-auth-key="authGenderBirthday"
-          ></h2>
-
-          <div class="miimiid-auth-field">
-            <label
-              for="miimiid-register-gender"
-              data-miimiid-auth-key="authGender"
-            ></label>
-
-            <select
-              id="miimiid-register-gender"
-              autocomplete="sex"
-              data-miimiid-register-field="gender"
-            ></select>
-          </div>
 
           <!-- Birthday comes FIRST -->
           <h2
@@ -2230,28 +2204,6 @@ body:has(#miimiid-auth-view:not(.hidden)) {
             >
           </div>
 
-
-
-          <button
-            type="button"
-            class="btn"
-            id="miimiid-register-details-next"
-            data-miimiid-auth-key="authContinue"
-          ></button>
-
-          <button
-            type="button"
-            class="miimiid-auth-link"
-            data-register-back="3"
-            data-miimiid-auth-key="authBack"
-          ></button>
-
-        </section>
-
-<section
-          class="miimiid-register-step hidden"
-          data-register-step="5"
-        >
 
           <!-- Password comes AFTER birthday -->
           <h2
@@ -2349,7 +2301,7 @@ body:has(#miimiid-auth-view:not(.hidden)) {
           <button
             type="button"
             class="miimiid-auth-link"
-            data-register-back="4"
+            data-register-back="3"
             data-miimiid-auth-key="authBack"
           ></button>
 
@@ -2461,10 +2413,10 @@ body:has(#miimiid-auth-view:not(.hidden)) {
         </div>
 
 
-<!-- STEP 6: ACCOUNT VERIFICATION -->
+<!-- STEP 5: ACCOUNT VERIFICATION -->
         <section
           class="miimiid-register-step hidden"
-          data-register-step="6"
+          data-register-step="5"
         >
           <h2
             class="miimiid-auth-step-title"
@@ -2506,7 +2458,7 @@ body:has(#miimiid-auth-view:not(.hidden)) {
             class="btn"
             id="miimiid-verify-account-submit"
            data-miimiid-auth-key="authVerifyAccount">
-
+            
           </button>
 
           <button
@@ -2514,13 +2466,13 @@ body:has(#miimiid-auth-view:not(.hidden)) {
             class="miimiid-auth-link"
             id="miimiid-resend-verification"
            data-miimiid-auth-key="authResendCode">
-
+            
           </button>
 
           <button
             type="button"
             class="miimiid-auth-link"
-            data-register-back="5"
+            data-register-back="4"
             data-miimiid-auth-key="authBack"
           ></button>
         </section>
@@ -2541,7 +2493,7 @@ body:has(#miimiid-auth-view:not(.hidden)) {
           class="miimiid-auth-link"
           id="miimiid-show-login-from-register"
          data-miimiid-auth-key="authBackToSignIn">
-
+          
         </button>
 
       </form>
@@ -5450,7 +5402,7 @@ body:has(#miimiid-auth-view:not(.hidden)) {
         Math.max(
           1,
           Math.min(
-            6,
+            5,
             Number(step) || 1
           )
         );
@@ -5669,14 +5621,6 @@ body:has(#miimiid-auth-view:not(.hidden)) {
           )
           ?.value || "";
 
-      const gender =
-        document
-          .getElementById(
-            "miimiid-register-gender"
-          )
-          ?.value
-          .trim() || "";
-
       const password =
         document
           .getElementById(
@@ -5724,19 +5668,6 @@ body:has(#miimiid-auth-view:not(.hidden)) {
         return;
       }
 
-      if (!gender) {
-        showMiimiidRegistrationStep(4);
-
-        setMiimiidRegisterFeedback(
-          miimiidDashboardTranslate(
-            "authSelectGender"
-          ),
-          "error"
-        );
-
-        return;
-      }
-
       if (!miimiidValidateBirthday()) {
         showMiimiidRegistrationStep(4);
 
@@ -5761,7 +5692,7 @@ body:has(#miimiid-auth-view:not(.hidden)) {
       }
 
       if (!miimiidValidatePassword()) {
-        showMiimiidRegistrationStep(5);
+        showMiimiidRegistrationStep(4);
 
         setMiimiidRegisterFeedback(
           miimiidSafeAuthMessage(
@@ -5781,7 +5712,7 @@ body:has(#miimiid-auth-view:not(.hidden)) {
       }
 
       if (!miimiidValidateConfirmPassword()) {
-        showMiimiidRegistrationStep(5);
+        showMiimiidRegistrationStep(4);
 
         setMiimiidRegisterFeedback(
           miimiidSafeAuthMessage(
@@ -5862,7 +5793,6 @@ body:has(#miimiid-auth-view:not(.hidden)) {
                 firstName,
                 lastName,
                 email,
-                gender,
                 dateOfBirth,
                 password
               }
@@ -5899,7 +5829,7 @@ body:has(#miimiid-auth-view:not(.hidden)) {
             }
 
             showMiimiidRegistrationStep(
-              6
+              5
             );
 
             startMiimiidVerificationTimer(
@@ -6470,73 +6400,7 @@ async function handleMiimiidForgotPassword(event) {
       return MIIMIID_EYE_VISIBLE_SVG;
     }
 
-
-const MIIMIID_REGISTRATION_DATA = {
-  genderOptions: [
-    {
-      value: "male",
-      translationKey: "authGenderMale"
-    },
-    {
-      value: "female",
-      translationKey: "authGenderFemale"
-    },
-    {
-      value: "other",
-      translationKey: "authGenderOther"
-    },
-    {
-      value: "prefer-not-to-say",
-      translationKey: "authGenderPreferNotToSay"
-    }
-  ]
-};
-
-
-function initializeMiimiidGenderSelector() {
-  const select =
-    document.getElementById(
-      "miimiid-register-gender"
-    );
-
-  if (!select || select.dataset.initialized === "true") {
-    return;
-  }
-
-  select.dataset.initialized = "true";
-
-  select.innerHTML = "";
-
-  const placeholder =
-    document.createElement("option");
-
-  placeholder.value = "";
-  placeholder.disabled = true;
-  placeholder.selected = true;
-  placeholder.textContent =
-    miimiidDashboardTranslate(
-      "authSelectGender"
-    );
-
-  select.appendChild(placeholder);
-
-  MIIMIID_REGISTRATION_DATA.genderOptions.forEach(
-    item => {
-      const option =
-        document.createElement("option");
-
-      option.value = item.value;
-      option.textContent =
-        miimiidDashboardTranslate(
-          item.translationKey
-        );
-
-      select.appendChild(option);
-    }
-  );
-}
-
-
+    
 function initializeMiimiidDobWheelPicker() {
   const month =
     document.getElementById("miimiid-register-dob-month");
@@ -7975,7 +7839,6 @@ function initializeMiimiidRegistrationFlow() {
         "miimiid-register-get-started",
         "miimiid-register-name-next",
         "miimiid-register-contact-next",
-        "miimiid-register-details-next",
         "miimiid-register-submit",
         "miimiid-verify-account-submit",
         "miimiid-resend-verification"
@@ -8005,7 +7868,6 @@ function initializeMiimiidRegistrationFlow() {
         );
       });
 
-      initializeMiimiidGenderSelector();
       initializeMiimiidDobWheelPicker();
       initializeMiimiidBirthdayWheelModal();
       initializeMiimiidRegistrationValidation();
@@ -8133,56 +7995,6 @@ function initializeMiimiidRegistrationFlow() {
 
       document
         .getElementById(
-          "miimiid-register-details-next"
-        )
-        ?.addEventListener(
-          "click",
-          async () => {
-            const button =
-              document.getElementById(
-                "miimiid-register-details-next"
-              );
-
-            const gender =
-              document
-                .getElementById(
-                  "miimiid-register-gender"
-                )
-                ?.value
-                .trim() || "";
-
-            if (!gender) {
-              setMiimiidRegisterFeedback(
-                miimiidDashboardTranslate(
-                  "authSelectGender"
-                ),
-                "error"
-              );
-              return;
-            }
-
-            if (!miimiidValidateBirthday()) {
-              setMiimiidRegisterFeedback(
-                miimiidSafeAuthMessage(
-                  "authBirthdayInvalid",
-                  "Please select a valid birthday."
-                ),
-                "error"
-              );
-              return;
-            }
-
-            await runMiimiidAuthStepTransition(
-              button,
-              () => {
-                showMiimiidRegistrationStep(5);
-              }
-            );
-          }
-        );
-
-      document
-        .getElementById(
           "miimiid-verify-account-submit"
         )
         ?.addEventListener(
@@ -8223,7 +8035,7 @@ function initializeMiimiidRegistrationFlow() {
     }
 
 
-
+    
 
 function initializeMiimiidAuth() {
       if (miimiidAuthInitialized) {
@@ -8905,7 +8717,7 @@ async function loadCourseProgress(courseId) {
               module.title ||
              `Module ${moduleIndex + 1}`
              )}
-          </h3>
+          </h3> 
 
                 ${
                   lessons.length === 0
@@ -10585,7 +10397,7 @@ async function submitQuiz() {
       name: "English",
       nativeName: "English",
 
-
+    
       authCancel: "Cancel",
       authSet: "Set",
 },
@@ -10754,13 +10566,6 @@ async function submitQuiz() {
       authRegisterWelcomeText: 'Build better money habits, understand your finances, and make smarter financial decisions.',
       authGetStarted: 'Get started',
       authFirstName: 'First name',
-      authGenderBirthday: 'Gender and date of birth',
-      authGender: 'Gender',
-      authSelectGender: 'Select your gender',
-      authGenderMale: 'Male',
-      authGenderFemale: 'Female',
-      authGenderOther: 'Other',
-      authGenderPreferNotToSay: 'Prefer not to say',
       authLastName: 'Last name',
       authNameQuestion: "What's your name?",
       authEmailTitle: 'Email',

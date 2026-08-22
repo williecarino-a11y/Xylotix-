@@ -303,11 +303,6 @@ router.post(
           ? req.body.dateOfBirth.trim()
           : '';
 
-      const gender =
-        typeof req.body.gender === 'string'
-          ? req.body.gender.trim()
-          : '';
-
       if (
         firstName.length < 1 ||
         firstName.length > 50
@@ -334,20 +329,6 @@ router.post(
         return res.status(400).json({
           status: 'error',
           message: 'Enter a valid email address.'
-        });
-      }
-
-      if (!gender || gender.length > 50) {
-        return res.status(400).json({
-          status: 'error',
-          message: 'Select your gender.'
-        });
-      }
-
-      if (!gender) {
-        return res.status(400).json({
-          status: 'error',
-          message: 'Select your gender.'
         });
       }
 
@@ -448,7 +429,6 @@ router.post(
 
           email,
 
-          gender,
           dateOfBirth: parsedDate,
           passwordHash,
 

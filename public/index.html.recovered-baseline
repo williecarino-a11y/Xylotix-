@@ -1,7 +1,7 @@
 <!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Miimiid</title>  <style>
     * {
       box-sizing: border-box;
@@ -381,7 +381,7 @@
   color: #64748b;
   opacity: 1;
 }
-
+  
   /* ================================
      MIIMIID HEADER + LANGUAGE SELECTOR
      ================================ */
@@ -1004,45 +1004,21 @@ body.miimiid-drawer-open {
        ========================================= */
 
     .miimiid-auth-view {
-      width: calc(100% + 30px);
-      min-height: calc(100vh + 30px);
-      min-height: calc(100dvh + 30px);
-      margin: -15px;
-      padding:
-        env(safe-area-inset-top)
-        env(safe-area-inset-right)
-        env(safe-area-inset-bottom)
-        env(safe-area-inset-left);
+      width: 100%;
+      min-height: 100vh;
+      margin: 0;
+      padding: 24px;
       box-sizing: border-box;
       display: flex;
-      align-items: stretch;
+      align-items: center;
       justify-content: center;
     }
 
     .miimiid-auth-card {
-      width: 100%;
-      max-width: 520px;
-      background: transparent;
-      border: 0;
-      border-radius: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    /*
-     * Authentication viewport safety:
-     * Keep long registration/authentication states reachable
-     * when the viewport becomes shorter because of the keyboard.
-     */
-    .miimiid-auth-view {
-      overflow-y: auto;
-      overflow-x: hidden;
-      -webkit-overflow-scrolling: touch;
-      overscroll-behavior-y: contain;
-    }
-
-    .miimiid-auth-card {
-      min-height: 100%;
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 14px;
+      padding: 24px;
     }
 
     .miimiid-auth-card h1 {
@@ -1180,732 +1156,7 @@ body.miimiid-drawer-open {
       margin-top: 0;
     }
 
-
-    /* =========================================
-       MIIMIID REGISTRATION — RESTORED UI
-       ========================================= */
-
-    .miimiid-register-step {
-      width: 100%;
-      box-sizing: border-box;
-    }
-
-    .miimiid-register-step.hidden {
-      display: none !important;
-    }
-
-    .miimiid-register-welcome {
-      width: 100%;
-      text-align: center;
-      box-sizing: border-box;
-      padding: 32px 20px 24px;
-    }
-
-    .miimiid-register-welcome h2 {
-      margin: 0 0 24px;
-      font-size: clamp(2rem, 8vw, 3rem);
-      line-height: 1.1;
-      font-weight: 800;
-      letter-spacing: -0.03em;
-    }
-
-    .miimiid-register-visual {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      margin: 0 auto 24px;
-    }
-
-    .miimiid-register-visual-icon {
-      width: 112px;
-      height: 112px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 32px;
-      font-size: 4rem;
-      line-height: 1;
-      background: rgba(56, 189, 248, 0.10);
-      border: 1px solid rgba(56, 189, 248, 0.20);
-      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.18);
-    }
-
-    .miimiid-register-welcome p {
-      max-width: 430px;
-      margin: 0 auto;
-      font-size: 1.05rem;
-      line-height: 1.65;
-      opacity: 0.82;
-    }
-
-    #miimiid-register-form {
-      width: 100%;
-      box-sizing: border-box;
-    }
-
-    #miimiid-register-form > .miimiid-auth-link {
-      display: block;
-      width: max-content;
-      margin: 18px auto 0;
-    }
-
-    #miimiid-register-form .miimiid-auth-field {
-      width: 100%;
-      box-sizing: border-box;
-    }
-
-    #miimiid-register-form .btn {
-      width: 100%;
-      box-sizing: border-box;
-    }
-
-    #miimiid-register-form .miimiid-register-step[data-register-step="1"] {
-      min-height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
-
-    #miimiid-register-form
-      .miimiid-register-step[data-register-step="1"].hidden {
-      display: none !important;
-    }
-
-    @media (max-width: 600px) {
-      .miimiid-auth-view {
-        padding:
-          env(safe-area-inset-top)
-          max(18px, env(safe-area-inset-right))
-          env(safe-area-inset-bottom)
-          max(18px, env(safe-area-inset-left));
-      }
-
-      .miimiid-register-welcome {
-        padding: 24px 8px 20px;
-      }
-
-      .miimiid-register-welcome h2 {
-        font-size: 2.15rem;
-      }
-
-      .miimiid-register-visual-icon {
-        width: 96px;
-        height: 96px;
-        border-radius: 28px;
-        font-size: 3.4rem;
-      }
-
-      .miimiid-register-welcome p {
-        font-size: 1rem;
-      }
-    }
-
-
-
-/* =========================================================
-   MIIMIID AUTH FINAL MOBILE-SAFE OVERRIDES
-   Restores the prototype/full-screen auth presentation while
-   preserving keyboard scrolling and safe-area behavior.
-   ========================================================= */
-
-.miimiid-auth-view {
-  position: fixed !important;
-  inset: 0 !important;
-
-  width: 100vw !important;
-  height: 100dvh !important;
-  min-height: 100dvh !important;
-  max-height: none !important;
-
-  margin: 0 !important;
-
-  padding:
-    max(24px, env(safe-area-inset-top))
-    max(20px, env(safe-area-inset-right))
-    max(24px, env(safe-area-inset-bottom))
-    max(20px, env(safe-area-inset-left)) !important;
-
-  box-sizing: border-box !important;
-
-  display: flex !important;
-  align-items: flex-start !important;
-  justify-content: center !important;
-
-  overflow-x: hidden !important;
-  overflow-y: auto !important;
-
-  -webkit-overflow-scrolling: touch;
-  overscroll-behavior-y: contain;
-
-  background:
-    radial-gradient(
-      circle at 50% 0%,
-      rgba(56, 189, 248, 0.10),
-      transparent 42%
-    ),
-    #020617 !important;
-
-  animation: miimiidAuthFadeIn 0.28s ease-out;
-}
-
-.miimiid-auth-view.hidden {
-  display: none !important;
-}
-
-/*
- * Do NOT lock the document with height:100dvh/overflow:hidden.
- * The auth viewport itself owns scrolling so registration remains
- * reachable when the mobile keyboard reduces the visual viewport.
- */
-body:has(#miimiid-auth-view:not(.hidden)) {
-  overflow-x: hidden;
-}
-
-#miimiid-auth-card {
-  width: 100% !important;
-  max-width: 520px !important;
-
-  min-height: 0 !important;
-  height: auto !important;
-
-  margin: 0 auto !important;
-
-  padding:
-    clamp(32px, 8vh, 72px)
-    0
-    24px !important;
-
-  background: transparent !important;
-  border: 0 !important;
-  border-radius: 0 !important;
-  box-shadow: none !important;
-
-  box-sizing: border-box !important;
-
-  overflow: visible !important;
-}
-
-#miimiid-auth-card h1 {
-  margin: 0 0 8px !important;
-  font-size: clamp(1.75rem, 7vw, 2.25rem) !important;
-  line-height: 1.15 !important;
-  letter-spacing: -0.025em !important;
-}
-
-#miimiid-auth-card p {
-  margin: 0 0 30px !important;
-  font-size: 1rem !important;
-  line-height: 1.5 !important;
-  opacity: 0.78 !important;
-}
-
-#miimiid-auth-card .miimiid-auth-form {
-  width: 100% !important;
-  margin-top: 0 !important;
-}
-
-#miimiid-auth-card .miimiid-auth-field {
-  width: 100% !important;
-  margin-bottom: 16px !important;
-}
-
-#miimiid-auth-card .miimiid-auth-field input {
-  width: 100% !important;
-  min-height: 52px !important;
-
-  box-sizing: border-box !important;
-
-  padding: 0 16px !important;
-
-  border-radius: 14px !important;
-}
-
-#miimiid-auth-card .miimiid-auth-password-wrap {
-  width: 100% !important;
-  position: relative !important;
-}
-
-#miimiid-auth-card .miimiid-auth-password-wrap input {
-  padding-right: 52px !important;
-}
-
-#miimiid-auth-card .miimiid-password-toggle {
-  position: absolute !important;
-
-  right: 8px !important;
-  top: 50% !important;
-
-  transform: translateY(-50%) !important;
-
-  width: 40px !important;
-  height: 40px !important;
-
-  margin: 0 !important;
-  padding: 0 !important;
-
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-
-  background: transparent !important;
-  border: 0 !important;
-  box-shadow: none !important;
-  border-radius: 50% !important;
-
-  cursor: pointer !important;
-}
-
-#miimiid-auth-card .miimiid-password-toggle:active {
-  transform: translateY(-50%) scale(0.94) !important;
-}
-
-#miimiid-auth-card .btn {
-  width: 100% !important;
-  min-height: 52px !important;
-
-  margin-top: 8px !important;
-
-  border-radius: 14px !important;
-}
-
-#miimiid-auth-card .miimiid-auth-actions {
-  width: 100% !important;
-
-  margin-top: 18px !important;
-
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: center !important;
-  gap: 10px !important;
-}
-
-#miimiid-auth-card .miimiid-auth-link {
-  padding: 5px 0 !important;
-  margin: 0 !important;
-}
-
-/*
- * Registration remains inside the same scrollable auth viewport.
- * Step 1 gets enough vertical space to reproduce the centered
- * welcome presentation without forcing the whole page to lock.
- */
-#miimiid-register-form {
-  width: 100% !important;
-}
-
-#miimiid-register-form .miimiid-register-step {
-  width: 100%;
-  box-sizing: border-box;
-}
-
-#miimiid-register-form .miimiid-register-step[data-register-step="1"] {
-  min-height: calc(
-    100dvh
-    - env(safe-area-inset-top)
-    - env(safe-area-inset-bottom)
-    - 48px
-  ) !important;
-
-  display: flex !important;
-  flex-direction: column !important;
-  justify-content: center !important;
-  align-items: center !important;
-}
-
-#miimiid-register-form
-.miimiid-register-step[data-register-step="1"].hidden {
-  display: none !important;
-}
-
-@media (max-height: 680px) {
-  #miimiid-auth-card {
-    padding-top: 20px !important;
-  }
-
-  #miimiid-auth-card p {
-    margin-bottom: 18px !important;
-  }
-
-  #miimiid-auth-card .miimiid-auth-field {
-    margin-bottom: 10px !important;
-  }
-
-  #miimiid-auth-card .miimiid-auth-field input,
-  #miimiid-auth-card .btn {
-    min-height: 48px !important;
-  }
-
-  #miimiid-register-form
-  .miimiid-register-step[data-register-step="1"] {
-    min-height: calc(
-      100dvh
-      - env(safe-area-inset-top)
-      - env(safe-area-inset-bottom)
-      - 32px
-    ) !important;
-  }
-}
-
-@media (min-width: 768px) {
-  .miimiid-auth-view {
-    align-items: center !important;
-  }
-
-  #miimiid-auth-card {
-    padding-top: 24px !important;
-    padding-bottom: 24px !important;
-  }
-}
-
-@keyframes miimiidAuthFadeIn {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
-}
-
-
-    /*
-     * MIIMIID REUSABLE PRIMARY ASYNC ACTION BUTTON
-     *
-     * Central loading presentation used by real asynchronous
-     * application/authentication operations.
-     *
-     * The button itself keeps its existing dimensions.
-     * Only its content presentation changes while the real
-     * Promise returned by the action is pending.
-     */
-    .miimiid-async-button {
-      position: relative;
-      overflow: hidden;
-      isolation: isolate;
-    }
-
-    .miimiid-async-button[aria-busy="true"] {
-      pointer-events: none;
-      cursor: wait;
-    }
-
-    .miimiid-async-button-content {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      min-width: 0;
-      visibility: visible;
-      opacity: 1;
-    }
-
-    .miimiid-async-button-spinner {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      width: 20px;
-      height: 20px;
-      box-sizing: border-box;
-      border: 3px solid currentColor;
-      border-right-color: transparent;
-      border-radius: 50%;
-      display: block;
-      margin: -10px 0 0 -10px;
-      padding: 0;
-      opacity: 0;
-      visibility: hidden;
-      animation: miimiidAsyncButtonSpin 0.75s linear infinite;
-      animation-play-state: paused;
-      transform: rotate(0deg);
-      pointer-events: none;
-    }
-
-    .miimiid-async-button[aria-busy="true"]
-    .miimiid-async-button-content {
-      visibility: hidden;
-      opacity: 0;
-    }
-
-    .miimiid-async-button[aria-busy="true"]
-    .miimiid-async-button-spinner {
-      opacity: 1;
-      visibility: visible;
-      animation-play-state: running;
-    }
-
-    @keyframes miimiidAsyncButtonSpin {
-      to {
-        transform: rotate(360deg);
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .miimiid-async-button-spinner {
-        animation-duration: 1400ms;
-      }
-    }
-
-</style>
-<style id="miimiid-birthday-wheel-picker-styles">
-
-/* ============================================================
-   MIIMIID BIRTHDAY FIELD
-   ============================================================ */
-
-.miimiid-birthday-input {
-  width: 100%;
-  min-height: 56px;
-  border: 1px solid rgba(255,255,255,.14);
-  border-radius: 14px;
-  background: rgba(255,255,255,.045);
-  color: #f1f5f7;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 0 16px;
-  font: inherit;
-  text-align: left;
-  cursor: pointer;
-  transition:
-    border-color .18s ease,
-    background .18s ease,
-    transform .12s ease;
-}
-
-.miimiid-birthday-input:hover {
-  background: rgba(255,255,255,.07);
-}
-
-.miimiid-birthday-input:active {
-  transform: scale(.99);
-}
-
-.miimiid-birthday-value {
-  color: #eef2f4;
-  font-size: 16px;
-  line-height: 1.2;
-}
-
-.miimiid-birthday-value:empty::after {
-  content: "";
-}
-
-.miimiid-birthday-chevron {
-  width: 20px;
-  height: 20px;
-  flex: 0 0 20px;
-  opacity: .72;
-}
-
-.miimiid-birthday-chevron svg {
-  width: 100%;
-  height: 100%;
-}
-
-/* Keep existing registration values functional but invisible. */
-.miimiid-dob-internal-value {
-  position: absolute !important;
-  width: 1px !important;
-  height: 1px !important;
-  opacity: 0 !important;
-  pointer-events: none !important;
-  overflow: hidden !important;
-}
-
-/* ============================================================
-   MODAL
-   ============================================================ */
-
-.miimiid-birthday-picker-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 10000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  background: rgba(3, 8, 12, .68);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-}
-
-.miimiid-birthday-picker-overlay.hidden {
-  display: none;
-}
-
-.miimiid-birthday-picker-card {
-  width: min(430px, 100%);
-  overflow: hidden;
-  border-radius: 24px;
-  background: #1C2B34;
-  color: #eef2f4;
-  box-shadow:
-    0 28px 70px rgba(0,0,0,.48),
-    0 4px 20px rgba(0,0,0,.22);
-  border: 1px solid rgba(255,255,255,.08);
-}
-
-.miimiid-birthday-picker-header {
-  padding: 22px 22px 8px;
-}
-
-.miimiid-birthday-picker-title {
-  margin: 0;
-  color: #f4f7f8;
-  font-size: 20px;
-  font-weight: 700;
-  line-height: 1.25;
-}
-
-.miimiid-birthday-wheel-labels {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  padding: 8px 18px 4px;
-  color: #bfcbd0;
-  font-size: 12px;
-  font-weight: 600;
-  text-align: center;
-}
-
-.miimiid-birthday-wheels {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1.15fr;
-  gap: 5px;
-  padding: 4px 14px 10px;
-}
-
-.miimiid-birthday-wheel {
-  position: relative;
-  height: 220px;
-  overflow: hidden;
-  border-radius: 14px;
-}
-
-.miimiid-wheel-selection-indicator {
-  position: absolute;
-  left: 2px;
-  right: 2px;
-  top: 50%;
-  height: 48px;
-  transform: translateY(-50%);
-  border-top: 1px solid rgba(255,255,255,.13);
-  border-bottom: 1px solid rgba(255,255,255,.13);
-  background: rgba(255,255,255,.045);
-  border-radius: 10px;
-  pointer-events: none;
-  z-index: 2;
-}
-
-.miimiid-wheel-list {
-  height: 100%;
-  overflow-y: auto;
-  scroll-snap-type: y mandatory;
-  scrollbar-width: none;
-  overscroll-behavior-y: contain;
-  padding: 86px 4px;
-  -webkit-overflow-scrolling: touch;
-}
-
-.miimiid-wheel-list::-webkit-scrollbar {
-  display: none;
-}
-
-.miimiid-wheel-option {
-  height: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  scroll-snap-align: center;
-  color: rgba(229,236,239,.58);
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 1;
-  user-select: none;
-  cursor: pointer;
-  transition:
-    color .12s ease,
-    font-size .12s ease,
-    opacity .12s ease;
-}
-
-.miimiid-wheel-option.is-selected {
-  color: #f0f4f5;
-  font-size: 17px;
-  font-weight: 650;
-}
-
-.miimiid-wheel-option.is-disabled {
-  color: rgba(180,192,198,.25);
-  cursor: not-allowed;
-}
-
-.miimiid-birthday-picker-actions {
-  display: flex;
-  justify-content: flex-end;
-  gap: 8px;
-  padding: 12px 16px 16px;
-  border-top: 1px solid rgba(255,255,255,.07);
-}
-
-.miimiid-birthday-picker-action {
-  min-width: 92px;
-  min-height: 44px;
-  border: 0;
-  border-radius: 12px;
-  padding: 0 18px;
-  background: transparent;
-  color: #dfe7ea;
-  font: inherit;
-  font-weight: 650;
-  cursor: pointer;
-}
-
-.miimiid-birthday-picker-action:hover {
-  background: rgba(255,255,255,.07);
-}
-
-.miimiid-birthday-picker-set {
-  background: rgba(255,255,255,.11);
-  color: #f5f8f9;
-}
-
-.miimiid-birthday-picker-set:hover {
-  background: rgba(255,255,255,.16);
-}
-
-.miimiid-password-section-title {
-  margin-top: 22px;
-}
-
-@media (max-width: 420px) {
-  .miimiid-birthday-picker-overlay {
-    padding: 12px;
-  }
-
-  .miimiid-birthday-picker-card {
-    border-radius: 21px;
-  }
-
-  .miimiid-birthday-wheels {
-    padding-left: 9px;
-    padding-right: 9px;
-  }
-
-  .miimiid-wheel-option {
-    font-size: 15px;
-  }
-
-  .miimiid-wheel-option.is-selected {
-    font-size: 16px;
-  }
-}
-
-</style>
-
-</head><body>
+</style></head><body>
 <!-- =========================================
        MIIMIID AUTHENTICATION
        ========================================= -->
@@ -1926,9 +1177,9 @@ body:has(#miimiid-auth-view:not(.hidden)) {
       id="miimiid-auth-card"
       class="miimiid-auth-card hidden"
     >
-      <h1 id="miimiid-auth-title" class="hidden"></h1>
+      <h1 id="miimiid-auth-title"></h1>
 
-      <p id="miimiid-auth-subtitle" class="hidden"></p>
+      <p id="miimiid-auth-subtitle"></p>
 
       <div
         id="miimiid-auth-status"
@@ -1967,7 +1218,7 @@ body:has(#miimiid-auth-view:not(.hidden)) {
               type="button"
               class="miimiid-password-toggle"
               data-password-target="miimiid-login-password"
-              data-miimiid-auth-aria-key="authShowPassword" aria-label=""
+              aria-label="Show password"
               aria-pressed="false"
             >
               <svg
@@ -2014,536 +1265,128 @@ body:has(#miimiid-auth-view:not(.hidden)) {
         id="miimiid-register-form"
         class="miimiid-auth-form hidden"
       >
+        <div class="miimiid-auth-field">
+          <label
+            for="miimiid-register-name"
+            data-miimiid-auth-key="authName"
+          ></label>
 
-        <!-- STEP 1: WELCOME -->
-        <section
-          class="miimiid-register-step"
-          data-register-step="1"
-        >
-          <div class="miimiid-register-welcome">
-            <h2 data-miimiid-auth-key="authWelcome"></h2>
+          <input
+            id="miimiid-register-name"
+            type="text"
+            autocomplete="name"
+            minlength="2"
+            required
+          >
+        </div>
 
-            <div
-              class="miimiid-register-visual"
-              aria-hidden="true"
-            >
-              <div class="miimiid-register-visual-icon">
-                💰
-              </div>
-            </div>
+        <div class="miimiid-auth-field">
+          <label for="miimiid-register-email"
+            data-miimiid-auth-key="authEmail"></label>
 
-            <p data-miimiid-auth-key="authRegisterWelcomeText"></p>
-          </div>
+          <input
+            id="miimiid-register-email"
+            type="email"
+            autocomplete="email"
+            required
+          >
+        </div>
 
-          <button
-            type="button"
-            class="btn"
-            id="miimiid-register-get-started"
-            data-miimiid-auth-key="authGetStarted"
-          ></button>
-        </section>
+        <div class="miimiid-auth-field">
+          <label for="miimiid-register-phone"
+            data-miimiid-auth-key="authPhone"></label>
 
+          <input
+            id="miimiid-register-phone"
+            type="tel"
+            autocomplete="tel"
+            required
+          >
+        </div>
 
-        <!-- STEP 2: NAME -->
-        <section
-          class="miimiid-register-step hidden"
-          data-register-step="2"
-        >
-          <h2
-            class="miimiid-auth-step-title"
-            data-miimiid-auth-key="authNameQuestion"
-          ></h2>
+        <div class="miimiid-auth-field">
+          <label for="miimiid-register-password"
+            data-miimiid-auth-key="authPassword"></label>
 
-          <div class="miimiid-auth-field">
-            <label for="miimiid-register-first-name" data-miimiid-auth-key="authFirstName"></label>
-
+          <div class="miimiid-auth-password-wrap">
             <input
-              id="miimiid-register-first-name"
-              type="text"
-              autocomplete="given-name"
-              minlength="1"
+              id="miimiid-register-password"
+              type="password"
+            autocomplete="new-password"
+            minlength="8"
+            required
             >
-          </div>
-
-          <div class="miimiid-auth-field">
-            <label for="miimiid-register-last-name" data-miimiid-auth-key="authLastName"></label>
-
-            <input
-              id="miimiid-register-last-name"
-              type="text"
-              autocomplete="family-name"
-            >
-          </div>
-
-          <button
-            type="button"
-            class="btn"
-            id="miimiid-register-name-next"
-           data-miimiid-auth-key="authContinue">
-
-          </button>
-
-          <button
-            type="button"
-            class="miimiid-auth-link"
-            data-register-back="1"
-            data-miimiid-auth-key="authBack"
-          ></button>
-        </section>
-
-
-        <!-- STEP 3: EMAIL -->
-        <section
-          class="miimiid-register-step hidden"
-          data-register-step="3"
-        >
-          <h2
-            class="miimiid-auth-step-title"
-            data-miimiid-auth-key="authEmailInstruction"
-          ></h2>
-
-          <div class="miimiid-auth-field">
-            <label for="miimiid-register-email" data-miimiid-auth-key="authEmailAddress"></label>
-
-            <input
-              id="miimiid-register-email"
-              type="email"
-              autocomplete="email"
-            >
-          </div>
-
-          <button
-            type="button"
-            class="btn"
-            id="miimiid-register-contact-next"
-           data-miimiid-auth-key="authContinue">
-
-          </button>
-
-          <button
-            type="button"
-            class="miimiid-auth-link"
-            data-register-back="2"
-            data-miimiid-auth-key="authBack"
-          ></button>
-        </section>
-
-
-        <!-- STEP 5: PASSWORD + CONFIRM PASSWORD -->
-
-
-
-        <!-- STEP 4: GENDER + DATE OF BIRTH -->
-        <section
-          class="miimiid-register-step hidden"
-          data-register-step="4"
-        >
-
-          <h2
-            class="miimiid-auth-step-title"
-            data-miimiid-auth-key="authGenderBirthday"
-          ></h2>
-
-          <div class="miimiid-auth-field">
-            <label
-              for="miimiid-register-gender"
-              data-miimiid-auth-key="authGender"
-            ></label>
-
-            <select
-              id="miimiid-register-gender"
-              autocomplete="sex"
-              data-miimiid-register-field="gender"
-            ></select>
-          </div>
-
-          <!-- Birthday comes FIRST -->
-          <h2
-            class="miimiid-auth-step-title"
-            data-miimiid-auth-key="authBirthday"
-          ></h2>
-
-          <div class="miimiid-auth-field miimiid-birthday-field">
-
-            <!-- Single visible birthday field -->
             <button
               type="button"
-              id="miimiid-register-birthday-trigger"
-              class="miimiid-birthday-input"
-              aria-haspopup="dialog"
-              aria-expanded="false"
-              aria-controls="miimiid-birthday-picker-modal"
+              class="miimiid-password-toggle"
+              data-password-target="miimiid-register-password"
+              aria-label="Show password"
+              aria-pressed="false"
             >
-              <span
-                id="miimiid-register-birthday-value"
-                class="miimiid-birthday-value"
-                data-miimiid-auth-dynamic="birthday-value"
-              ></span>
-
-              <span
-                class="miimiid-birthday-chevron"
-                aria-hidden="true"
-              >
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  aria-hidden="true"
-                >
-                  <path d="m6 9 6 6 6-6"></path>
-                </svg>
-              </span>
+              <svg
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+>
+  <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"></path>
+  <circle cx="12" cy="12" r="3"></circle>
+</svg>
             </button>
-
-            <!-- Existing hidden values retained for registration logic -->
-            <select
-              id="miimiid-register-dob-month"
-              class="miimiid-dob-internal-value"
-              tabindex="-1"
-              aria-hidden="true"
-              autocomplete="bday-month"
-            ></select>
-
-            <select
-              id="miimiid-register-dob-day"
-              class="miimiid-dob-internal-value"
-              tabindex="-1"
-              aria-hidden="true"
-              autocomplete="bday-day"
-            ></select>
-
-            <select
-              id="miimiid-register-dob-year"
-              class="miimiid-dob-internal-value"
-              tabindex="-1"
-              aria-hidden="true"
-              autocomplete="bday-year"
-            ></select>
-
-            <input
-              id="miimiid-register-dob"
-              type="hidden"
-              autocomplete="bday"
-            >
-          </div>
-
-
-
-          <button
-            type="button"
-            class="btn"
-            id="miimiid-register-details-next"
-            data-miimiid-auth-key="authContinue"
-          ></button>
-
-          <button
-            type="button"
-            class="miimiid-auth-link"
-            data-register-back="3"
-            data-miimiid-auth-key="authBack"
-          ></button>
-
-        </section>
-
-<section
-          class="miimiid-register-step hidden"
-          data-register-step="5"
-        >
-
-          <!-- Password comes AFTER birthday -->
-          <h2
-            class="miimiid-auth-step-title miimiid-password-section-title"
-            data-miimiid-auth-key="authPasswordTitle"
-          ></h2>
-
-          <div class="miimiid-auth-field">
-            <label
-              for="miimiid-register-password"
-              data-miimiid-auth-key="authPassword"
-            ></label>
-
-            <div class="miimiid-auth-password-wrap">
-              <input
-                id="miimiid-register-password"
-                type="password"
-                autocomplete="new-password"
-                minlength="8"
-              >
-
-              <button
-                type="button"
-                class="miimiid-password-toggle"
-                data-password-target="miimiid-register-password"
-                data-miimiid-auth-aria-key="authShowPassword"
-                aria-label=""
-                aria-pressed="false"
-              >
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  aria-hidden="true"
-                >
-                  <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"></path>
-                  <circle cx="12" cy="12" r="3"></circle>
-                </svg>
-              </button>
-            </div>
-          </div>
-
-
-          <!-- Confirm password -->
-          <div class="miimiid-auth-field">
-            <label
-              for="miimiid-register-confirm"
-              data-miimiid-auth-key="authConfirmPassword"
-            ></label>
-
-            <div class="miimiid-auth-password-wrap">
-              <input
-                id="miimiid-register-confirm"
-                type="password"
-                autocomplete="new-password"
-                minlength="8"
-              >
-
-              <button
-                type="button"
-                class="miimiid-password-toggle"
-                data-password-target="miimiid-register-confirm"
-                data-miimiid-auth-aria-key="authShowPassword"
-                aria-label=""
-                aria-pressed="false"
-              >
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  aria-hidden="true"
-                >
-                  <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"></path>
-                  <circle cx="12" cy="12" r="3"></circle>
-                </svg>
-              </button>
-            </div>
-          </div>
-
-
-          <!-- Continue comes LAST -->
-          <button
-            type="submit"
-            class="btn"
-            id="miimiid-register-submit"
-            data-miimiid-auth-key="authContinue"
-          ></button>
-
-          <button
-            type="button"
-            class="miimiid-auth-link"
-            data-register-back="4"
-            data-miimiid-auth-key="authBack"
-          ></button>
-
-        </section>
-
-
-        <!-- REAL BIRTHDAY WHEEL PICKER MODAL -->
-        <div
-          id="miimiid-birthday-picker-modal"
-          class="miimiid-birthday-picker-overlay hidden"
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="miimiid-birthday-picker-title"
-          aria-hidden="true"
-        >
-          <div class="miimiid-birthday-picker-card">
-
-            <div class="miimiid-birthday-picker-header">
-              <h3
-                id="miimiid-birthday-picker-title"
-                class="miimiid-birthday-picker-title"
-                data-miimiid-auth-key="authBirthday"
-              ></h3>
-            </div>
-
-            <div class="miimiid-birthday-wheel-labels">
-              <span data-miimiid-auth-key="authMonth"></span>
-              <span data-miimiid-auth-key="authDay"></span>
-              <span data-miimiid-auth-key="authYear"></span>
-            </div>
-
-            <div class="miimiid-birthday-wheels">
-
-              <div
-                class="miimiid-birthday-wheel"
-                id="miimiid-birthday-month-wheel"
-              >
-                <div
-                  class="miimiid-wheel-selection-indicator"
-                  aria-hidden="true"
-                ></div>
-
-                <div
-                  class="miimiid-wheel-list"
-                  id="miimiid-birthday-month-list"
-                  role="listbox"
-                  aria-label=""
-                  tabindex="0"
-                ></div>
-              </div>
-
-              <div
-                class="miimiid-birthday-wheel"
-                id="miimiid-birthday-day-wheel"
-              >
-                <div
-                  class="miimiid-wheel-selection-indicator"
-                  aria-hidden="true"
-                ></div>
-
-                <div
-                  class="miimiid-wheel-list"
-                  id="miimiid-birthday-day-list"
-                  role="listbox"
-                  aria-label=""
-                  tabindex="0"
-                ></div>
-              </div>
-
-              <div
-                class="miimiid-birthday-wheel"
-                id="miimiid-birthday-year-wheel"
-              >
-                <div
-                  class="miimiid-wheel-selection-indicator"
-                  aria-hidden="true"
-                ></div>
-
-                <div
-                  class="miimiid-wheel-list"
-                  id="miimiid-birthday-year-list"
-                  role="listbox"
-                  aria-label=""
-                  tabindex="0"
-                ></div>
-              </div>
-
-            </div>
-
-            <div class="miimiid-birthday-picker-actions">
-
-              <button
-                type="button"
-                id="miimiid-birthday-picker-cancel"
-                class="miimiid-birthday-picker-action miimiid-birthday-picker-cancel"
-                data-miimiid-auth-key="authCancel"
-              ></button>
-
-              <button
-                type="button"
-                id="miimiid-birthday-picker-set"
-                class="miimiid-birthday-picker-action miimiid-birthday-picker-set"
-                data-miimiid-auth-key="authSet"
-              ></button>
-
-            </div>
-
           </div>
         </div>
 
+        <div class="miimiid-auth-field">
+          <label for="miimiid-register-confirm"
+            data-miimiid-auth-key="authConfirmPassword"></label>
 
-<!-- STEP 6: ACCOUNT VERIFICATION -->
-        <section
-          class="miimiid-register-step hidden"
-          data-register-step="6"
-        >
-          <h2
-            class="miimiid-auth-step-title"
-            data-miimiid-auth-key="authVerifyEmail"
-          ></h2>
-
-          <div class="miimiid-auth-field">
-            <label for="miimiid-register-verification-code" data-miimiid-auth-key="authAccountVerification"></label>
-
-            <p
-              id="miimiid-register-verification-message"
-              class="miimiid-auth-help"
-              data-miimiid-auth-key="authVerificationInstruction"
-            ></p>
-
-            <p
-              id="miimiid-verification-email"
-              class="miimiid-auth-help"
-             data-miimiid-auth-dynamic="verification-email"></p>
-
-            <p
-              id="miimiid-verification-timer"
-              class="miimiid-auth-help"
-              aria-live="polite"
-             data-miimiid-auth-dynamic="verification-timer"></p>
-
+          <div class="miimiid-auth-password-wrap">
             <input
-              id="miimiid-register-verification-code"
-              type="text"
-              inputmode="numeric"
-              autocomplete="one-time-code"
-              maxlength="6"
-              pattern="[0-9]{6}"
+              id="miimiid-register-confirm"
+              type="password"
+            autocomplete="new-password"
+            minlength="8"
+            required
             >
+            <button
+              type="button"
+              class="miimiid-password-toggle"
+              data-password-target="miimiid-register-confirm"
+              aria-label="Show password"
+              aria-pressed="false"
+            >
+              <svg
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+>
+  <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"></path>
+  <circle cx="12" cy="12" r="3"></circle>
+</svg>
+            </button>
           </div>
+        </div>
 
-          <button
-            type="button"
-            class="btn"
-            id="miimiid-verify-account-submit"
-           data-miimiid-auth-key="authVerifyAccount">
+        <button
+          type="submit"
+          class="btn"
+          id="miimiid-register-submit" data-miimiid-auth-key="authCreateAccountButton"
+        >
+        </button>
 
-          </button>
-
-          <button
-            type="button"
-            class="miimiid-auth-link"
-            id="miimiid-resend-verification"
-           data-miimiid-auth-key="authResendCode">
-
-          </button>
-
-          <button
-            type="button"
-            class="miimiid-auth-link"
-            data-register-back="5"
-            data-miimiid-auth-key="authBack"
-          ></button>
-        </section>
-
-
-        <!-- Shared registration feedback -->
-        <div
-          id="miimiid-register-feedback"
-          class="miimiid-auth-feedback"
-          role="status"
-          aria-live="polite"
-        ></div>
-
-
-        <!-- Shared login link -->
         <button
           type="button"
           class="miimiid-auth-link"
-          id="miimiid-show-login-from-register"
-         data-miimiid-auth-key="authBackToSignIn">
-
+          id="miimiid-show-login-from-register" data-miimiid-auth-key="authBackToSignIn"
+        >
         </button>
-
       </form>
 
       <form
@@ -2597,7 +1440,7 @@ body:has(#miimiid-auth-view:not(.hidden)) {
               type="button"
               class="miimiid-password-toggle"
               data-password-target="miimiid-reset-password"
-              data-miimiid-auth-aria-key="authShowPassword" aria-label=""
+              aria-label="Show password"
               aria-pressed="false"
             >
               <svg
@@ -2632,7 +1475,7 @@ body:has(#miimiid-auth-view:not(.hidden)) {
               type="button"
               class="miimiid-password-toggle"
               data-password-target="miimiid-reset-confirm"
-              data-miimiid-auth-aria-key="authShowPassword" aria-label=""
+              aria-label="Show password"
               aria-pressed="false"
             >
               <svg
@@ -3030,60 +1873,9 @@ body:has(#miimiid-auth-view:not(.hidden)) {
     ];
 
     function miimiidDashboardTranslate(key) {
-      if (
-        !key ||
-        typeof miimiidTranslate !== "function"
-      ) {
-        return "";
-      }
-
-      const language =
-        typeof getSavedLanguage === "function"
-          ? getSavedLanguage()
-          : "en";
-
-      const translated =
-        miimiidTranslate(
-          key,
-          language
-        );
-
-      /*
-       * Never allow an internal translation identifier
-       * to become visible UI.
-       *
-       * If the selected language does not contain the key,
-       * resolve against the canonical English translation data.
-       */
-      if (
-        typeof translated === "string" &&
-        translated.trim() &&
-        translated.trim() !== key
-      ) {
-        return translated;
-      }
-
-      if (language !== "en") {
-        const english =
-          miimiidTranslate(
-            key,
-            "en"
-          );
-
-        if (
-          typeof english === "string" &&
-          english.trim() &&
-          english.trim() !== key
-        ) {
-          return english;
-        }
-      }
-
-      /*
-       * Empty is safer than leaking an internal database/
-       * translation identifier into production UI.
-       */
-      return "";
+      return typeof miimiidTranslate === "function"
+        ? miimiidTranslate(key, getSavedLanguage())
+        : key;
     }
 
     function renderMiimiidBottomNavigation() {
@@ -3360,68 +2152,19 @@ body:has(#miimiid-auth-view:not(.hidden)) {
 
     async function initializeMiimiidDashboard() {
       /*
-       * Authentication boundary:
-       *
-       * The application shell is exposed only after a real
-       * authenticated user exists AND the initial dashboard
-       * view has successfully initialized.
+       * Dashboard initialization is allowed only after
+       * the real authenticated user has been established.
        */
       const userId =
         getMiimiidCurrentUserId();
 
       if (!userId) {
         showMiimiidAuthView();
-        return false;
+        return;
       }
 
-      try {
-        renderMiimiidBottomNavigation();
-
-        const dashboardReady =
-          await miimiidNavigate("home");
-
-        /*
-         * Never expose the authenticated application merely
-         * because authentication succeeded. The dashboard
-         * itself must report successful initialization.
-         */
-        if (dashboardReady !== true) {
-          throw new Error(
-            "Miimiid dashboard initialization did not complete successfully."
-          );
-        }
-
-        /*
-         * Dashboard initialization completed successfully.
-         * This is the single controlled point where the
-         * authenticated application becomes visible.
-         */
-        hideMiimiidAuthView();
-
-        return true;
-
-      } catch (error) {
-        console.error(
-          "Miimiid dashboard initialization error:",
-          error
-        );
-
-        /*
-         * Never leave the application between auth and
-         * dashboard states.
-         */
-        showMiimiidAuthView();
-
-        setMiimiidAuthStatus(
-          miimiidSafeAuthMessage(
-            "authDashboardLoadError",
-            "We couldn't load your account right now. Please try again."
-          ),
-          "error"
-        );
-
-        return false;
-      }
+      renderMiimiidBottomNavigation();
+      await miimiidNavigate("home");
     }
 
     async function loadMiimiidDashboard() {
@@ -3431,12 +2174,7 @@ body:has(#miimiid-auth-view:not(.hidden)) {
         );
 
       if (!dashboard) {
-        console.error(
-          "Miimiid dashboard loading error: dashboard element is missing."
-        );
-
-        miimiidDashboardData = null;
-        return false;
+        return;
       }
 
       try {
@@ -3449,20 +2187,12 @@ body:has(#miimiid-auth-view:not(.hidden)) {
           );
 
           miimiidDashboardData = null;
-          return false;
+          return;
         }
 
         const response =
-          await miimiidFetchWithTimeout(
-            `/api/learn/dashboard/${encodeURIComponent(userId)}`,
-            {
-              method: "GET",
-              credentials: "same-origin",
-              headers: {
-                "Accept": "application/json"
-              }
-            },
-            15000
+          await fetch(
+            `/api/learn/dashboard/${encodeURIComponent(userId)}`
           );
 
         if (!response.ok) {
@@ -3489,28 +2219,20 @@ body:has(#miimiid-auth-view:not(.hidden)) {
 
         renderMiimiidDashboard();
 
-        /*
-         * A successful dashboard initialization must be
-         * explicitly observable by the authentication boundary.
-         */
-        return true;
-
       } catch (error) {
         console.error(
           "Miimiid dashboard loading error:",
           error
         );
 
-        /*
-         * Do not manufacture a successful dashboard state.
-         *
-         * Authentication may have succeeded, but the
-         * authenticated application is not ready until the
-         * real dashboard request and rendering complete.
-         */
-        miimiidDashboardData = null;
+        miimiidDashboardData = {
+          totalLessonsCompleted: 0,
+          averageQuizScore: 0,
+          streak: 0,
+          totalXP: 0
+        };
 
-        return false;
+        renderMiimiidDashboard();
       }
     }
 
@@ -3994,11 +2716,8 @@ body:has(#miimiid-auth-view:not(.hidden)) {
 
         renderMiimiidBottomNavigation();
 
-        /*
-         * Propagate real dashboard readiness to the
-         * authentication/application boundary.
-         */
-        return await loadMiimiidDashboard();
+        await loadMiimiidDashboard();
+        return;
       }
 
       if (dashboard) {
@@ -4808,77 +3527,59 @@ body:has(#miimiid-auth-view:not(.hidden)) {
       const subtitle =
         document.getElementById("miimiid-auth-subtitle");
 
-      if (!login && !register && !forgot && !reset) {
+      if (!login || !register || !forgot || !reset) {
         return;
       }
 
-      if (login) {
-        login.classList.toggle(
-          "hidden",
-          mode !== "login"
-        );
-      }
+      login.classList.toggle(
+        "hidden",
+        mode !== "login"
+      );
 
-      if (register) {
-        register.classList.toggle(
-          "hidden",
-          mode !== "register"
-        );
-      }
+      register.classList.toggle(
+        "hidden",
+        mode !== "register"
+      );
 
-      if (forgot) {
-        forgot.classList.toggle(
-          "hidden",
-          mode !== "forgot"
-        );
-      }
+      forgot.classList.toggle(
+        "hidden",
+        mode !== "forgot"
+      );
 
-      if (reset) {
-        reset.classList.toggle(
-          "hidden",
-          mode !== "reset"
-        );
-      }
+      reset.classList.toggle(
+        "hidden",
+        mode !== "reset"
+      );
 
       if (title) {
         if (mode === "register") {
-          title.classList.add("hidden");
+          title.textContent =
+            miimiidDashboardTranslate("authCreateAccount");
+        } else if (mode === "forgot") {
+          title.textContent =
+            miimiidDashboardTranslate("authResetPassword");
+        } else if (mode === "reset") {
+          title.textContent =
+            miimiidDashboardTranslate("authResetPasswordTitle");
         } else {
-          title.classList.remove("hidden");
-
-          if (mode === "forgot") {
-            title.textContent =
-              miimiidDashboardTranslate("authResetPassword");
-          } else if (mode === "reset") {
-            title.textContent =
-              miimiidDashboardTranslate("authResetPasswordTitle");
-          } else {
-            title.textContent =
-              miimiidDashboardTranslate("authWelcome");
-          }
+          title.textContent =
+            miimiidDashboardTranslate("authWelcome");
         }
       }
 
       if (subtitle) {
         if (mode === "register") {
-          subtitle.classList.add("hidden");
+          subtitle.textContent =
+            miimiidDashboardTranslate("authCreateSubtitle");
+        } else if (mode === "forgot") {
+          subtitle.textContent =
+            miimiidDashboardTranslate("authResetSubtitle");
+        } else if (mode === "reset") {
+          subtitle.textContent =
+            miimiidDashboardTranslate("authResetPasswordSubtitle");
         } else {
-          subtitle.classList.remove("hidden");
-
-          if (mode === "forgot") {
-            subtitle.textContent =
-              miimiidDashboardTranslate("authResetSubtitle");
-          } else if (mode === "reset") {
-            subtitle.textContent =
-              miimiidDashboardTranslate(
-                "authResetPasswordSubtitle"
-              );
-          } else {
-            subtitle.textContent =
-              miimiidDashboardTranslate(
-                "authSignInSubtitle"
-              );
-          }
+          subtitle.textContent =
+            miimiidDashboardTranslate("authSignInSubtitle");
         }
       }
 
@@ -4942,6 +3643,7 @@ body:has(#miimiid-auth-view:not(.hidden)) {
         }
       });
 
+      showMiimiidAuthMode("login");
     }
 
     function hideMiimiidAuthView() {
@@ -5044,252 +3746,6 @@ body:has(#miimiid-auth-view:not(.hidden)) {
       return null;
     }
 
-
-    /*
-     * Abort a network request that remains pending indefinitely.
-     * Authentication/dashboard transitions must always resolve.
-     */
-    async function miimiidFetchWithTimeout(
-      url,
-      options = {},
-      timeoutMs = 15000
-    ) {
-      const controller =
-        new AbortController();
-
-      const timeout =
-        window.setTimeout(
-          () => controller.abort(),
-          timeoutMs
-        );
-
-      try {
-        return await fetch(
-          url,
-          {
-            ...options,
-            signal: controller.signal
-          }
-        );
-      } finally {
-        window.clearTimeout(timeout);
-      }
-    }
-
-
-    /*
-     * MIIMIID AUTH VALIDATION HELPERS
-     *
-     * Never expose raw backend/internal translation keys
-     * directly to the user interface.
-     */
-    function miimiidSafeAuthMessage(
-      key,
-      fallback
-    ) {
-      try {
-        const translated =
-          typeof miimiidDashboardTranslate === "function"
-            ? miimiidDashboardTranslate(key)
-            : "";
-
-        if (
-          translated &&
-          translated !== key &&
-          !/^auth[A-Z]/.test(translated)
-        ) {
-          return translated;
-        }
-      } catch (error) {
-        console.warn(
-          "Miimiid translation lookup failed:",
-          error
-        );
-      }
-
-      return fallback;
-    }
-
-    function miimiidNormalizeAuthenticationError(
-      error,
-      fallback
-    ) {
-      const raw =
-        error &&
-        typeof error.message === "string"
-          ? error.message.trim()
-          : "";
-
-      if (!raw) {
-        return fallback;
-      }
-
-      /*
-       * Never expose internal translation keys,
-       * technical backend errors, or stack-like messages.
-       */
-      if (
-        /^auth[A-Z]/.test(raw) ||
-        /^Error:/i.test(raw) ||
-        /ECONN|ETIMEDOUT|ENOTFOUND|Mongo|Mongoose|ValidationError|CastError/i.test(raw)
-      ) {
-        return fallback;
-      }
-
-      return raw;
-    }
-
-    function miimiidValidateBirthday() {
-      const hiddenDob =
-        document.getElementById(
-          "miimiid-register-dob"
-        );
-
-      const picker =
-        document.getElementById(
-          "miimiid-birthday-picker-modal"
-        );
-
-      const value =
-        hiddenDob?.value || "";
-
-      if (
-        !/^\d{4}-\d{2}-\d{2}$/.test(value) ||
-        !picker ||
-        picker.dataset.dobValid !== "true"
-      ) {
-        return false;
-      }
-
-      const [
-        year,
-        month,
-        day
-      ] = value.split("-").map(Number);
-
-      const selected =
-        new Date(
-          year,
-          month - 1,
-          day
-        );
-
-      const today =
-        new Date();
-
-      const maximum =
-        new Date(
-          today.getFullYear() - 18,
-          today.getMonth(),
-          today.getDate()
-        );
-
-      return (
-        selected.getFullYear() === year &&
-        selected.getMonth() === month - 1 &&
-        selected.getDate() === day &&
-        selected <= maximum
-      );
-    }
-
-    function miimiidValidatePassword() {
-      const password =
-        document.getElementById(
-          "miimiid-register-password"
-        )?.value || "";
-
-      return password.length >= 8;
-    }
-
-    function miimiidValidateConfirmPassword() {
-      const password =
-        document.getElementById(
-          "miimiid-register-password"
-        )?.value || "";
-
-      const confirm =
-        document.getElementById(
-          "miimiid-register-confirm"
-        )?.value || "";
-
-      return (
-        confirm.length >= 8 &&
-        password === confirm
-      );
-    }
-
-    function initializeMiimiidRegistrationValidation() {
-      const password =
-        document.getElementById(
-          "miimiid-register-password"
-        );
-
-      const confirm =
-        document.getElementById(
-          "miimiid-register-confirm"
-        );
-
-      const birthday =
-        document.getElementById(
-          "miimiid-register-birthday-trigger"
-        );
-
-      if (!password || !confirm) {
-        return;
-      }
-
-      const validateLive = () => {
-        const value =
-          password.value || "";
-
-        const confirmValue =
-          confirm.value || "";
-
-        password.setCustomValidity(
-          value.length > 0 &&
-          value.length < 8
-            ? miimiidSafeAuthMessage(
-                "authPasswordMinLength",
-                "Password must be at least 8 characters."
-              )
-            : ""
-        );
-
-        if (
-          confirmValue.length > 0 &&
-          value !== confirmValue
-        ) {
-          confirm.setCustomValidity(
-            miimiidSafeAuthMessage(
-              "authPasswordMismatch",
-              "Passwords do not match."
-            )
-          );
-        } else {
-          confirm.setCustomValidity("");
-        }
-      };
-
-      password.addEventListener(
-        "input",
-        validateLive
-      );
-
-      confirm.addEventListener(
-        "input",
-        validateLive
-      );
-
-      birthday?.addEventListener(
-        "click",
-        () => {
-          birthday.removeAttribute(
-            "aria-invalid"
-          );
-        }
-      );
-    }
-
     async function miimiidAuthenticate(
       endpoint,
       payload
@@ -5345,7 +3801,7 @@ body:has(#miimiid-auth-view:not(.hidden)) {
           miimiidCurrentUser;
       }
 
-      return result;
+      return miimiidCurrentUser;
     }
 
     async function handleMiimiidLogin(event) {
@@ -5373,286 +3829,67 @@ body:has(#miimiid-auth-view:not(.hidden)) {
 
       if (!identifier || !password) {
         setMiimiidAuthStatus(
-          "Enter your email and password.",
+          "Enter your email or phone number and password.",
           "error"
         );
         return;
       }
 
-      const actionButton =
-        getMiimiidAsyncButton(submit);
-
-      if (!actionButton) {
-        return;
+      if (submit) {
+        submit.disabled = true;
       }
 
       setMiimiidAuthStatus(
         "Signing in..."
       );
 
-      await actionButton.run(async () => {
-        try {
-          await miimiidAuthenticate(
-            "/api/auth/login",
-            {
-              identifier,
-              password
-            }
-          );
-
-          const dashboardReady =
-            await initializeMiimiidDashboard();
-
-          if (!dashboardReady) {
-            throw new Error(
-              "Your account was authenticated, but the dashboard could not be loaded."
-            );
+      try {
+        await miimiidAuthenticate(
+          "/api/auth/login",
+          {
+            identifier,
+            password
           }
+        );
 
-          setMiimiidAuthStatus(
-            "Signed in successfully.",
-            "success"
-          );
+        setMiimiidAuthStatus(
+          "Signed in successfully.",
+          "success"
+        );
 
-        } catch (error) {
-          console.error(
-            "Miimiid login error:",
-            error
-          );
+        hideMiimiidAuthView();
 
-          setMiimiidAuthStatus(
-            miimiidNormalizeAuthenticationError(
-              error,
-              "Unable to sign in."
-            ),
-            "error"
-          );
+        await initializeMiimiidDashboard();
+
+      } catch (error) {
+        console.error(
+          "Miimiid login error:",
+          error
+        );
+
+        setMiimiidAuthStatus(
+          error.message ||
+          "Unable to sign in.",
+          "error"
+        );
+
+      } finally {
+        if (submit) {
+          submit.disabled = false;
         }
-      });
-    }
-
-    let miimiidRegistrationStep = 1;
-    let miimiidVerificationEmail = "";
-    let miimiidVerificationExpiresAt = 0;
-    let miimiidVerificationTimer = null;
-
-    function showMiimiidRegistrationStep(step) {
-      const steps =
-        document.querySelectorAll(
-          "#miimiid-register-form [data-register-step]"
-        );
-
-      if (!steps.length) {
-        return;
       }
-
-      const requestedStep =
-        Math.max(
-          1,
-          Math.min(
-            6,
-            Number(step) || 1
-          )
-        );
-
-      miimiidRegistrationStep =
-        requestedStep;
-
-      steps.forEach(section => {
-        const sectionStep =
-          Number(
-            section.getAttribute(
-              "data-register-step"
-            )
-          );
-
-        section.classList.toggle(
-          "hidden",
-          sectionStep !== requestedStep
-        );
-      });
-
-      const feedback =
-        document.getElementById(
-          "miimiid-register-feedback"
-        );
-
-      if (feedback) {
-        feedback.textContent = "";
-        feedback.className =
-          "miimiid-auth-feedback";
-      }
-    }
-
-    function setMiimiidRegisterFeedback(
-      message,
-      type = ""
-    ) {
-      const feedback =
-        document.getElementById(
-          "miimiid-register-feedback"
-        );
-
-      if (!feedback) {
-        return;
-      }
-
-      feedback.textContent =
-        message || "";
-
-      feedback.className =
-        "miimiid-auth-feedback" +
-        (type
-          ? ` ${type}`
-          : "");
-    }
-
-    function clearMiimiidVerificationTimer() {
-      if (
-        miimiidVerificationTimer
-      ) {
-        clearInterval(
-          miimiidVerificationTimer
-        );
-
-        miimiidVerificationTimer =
-          null;
-      }
-    }
-
-    function startMiimiidVerificationTimer(
-      expiresInSeconds
-    ) {
-      clearMiimiidVerificationTimer();
-
-      const expires =
-        Number(expiresInSeconds);
-
-      if (
-        !Number.isFinite(expires) ||
-        expires <= 0
-      ) {
-        return;
-      }
-
-      miimiidVerificationExpiresAt =
-        Date.now() +
-        expires * 1000;
-
-      const update =
-        () => {
-          const remaining =
-            Math.max(
-              0,
-              Math.ceil(
-                (
-                  miimiidVerificationExpiresAt -
-                  Date.now()
-                ) / 1000
-              )
-            );
-
-          const minutes =
-            Math.floor(
-              remaining / 60
-            );
-
-          const seconds =
-            String(
-              remaining % 60
-            ).padStart(2, "0");
-
-          const timer =
-            document.getElementById(
-              "miimiid-verification-timer"
-            );
-
-          if (timer) {
-            timer.textContent =
-              remaining > 0
-                ? `${miimiidDashboardTranslate("authCodeExpiresIn")} ${minutes}:${seconds}`
-                : miimiidDashboardTranslate("authCodeExpired");
-          }
-
-          if (remaining <= 0) {
-            clearMiimiidVerificationTimer();
-          }
-        };
-
-      update();
-
-      miimiidVerificationTimer =
-        setInterval(
-          update,
-          1000
-        );
-    }
-
-    function resetMiimiidRegistrationFlow() {
-      clearMiimiidVerificationTimer();
-
-      miimiidRegistrationStep =
-        1;
-
-      miimiidVerificationEmail =
-        "";
-
-      miimiidVerificationExpiresAt =
-        0;
-
-      const code =
-        document.getElementById(
-          "miimiid-register-verification-code"
-        );
-
-      if (code) {
-        code.value = "";
-      }
-
-      setMiimiidRegisterFeedback(
-        ""
-      );
-
-      showMiimiidRegistrationStep(
-        1
-      );
     }
 
     async function handleMiimiidRegister(event) {
-      console.log(
-        "[MIIMIID REGISTER] *** SUBMIT EVENT REACHED HANDLER ***",
-        {
-          defaultPreventedBefore: event.defaultPrevented,
-          submitter: event.submitter ? event.submitter.id : null,
-          timestamp: performance.now()
-        }
-      );
-
       event.preventDefault();
 
-      console.log(
-        "[MIIMIID REGISTER] submit handler entered",
-        {
-          submitId: "miimiid-register-submit",
-          timestamp: performance.now()
-        }
-      );
-
-      const firstName =
+      const name =
         document
           .getElementById(
-            "miimiid-register-first-name"
+            "miimiid-register-name"
           )
           ?.value
-          .trim() || "";
-
-      const lastName =
-        document
-          .getElementById(
-            "miimiid-register-last-name"
-          )
-          ?.value
-          .trim() || "";
+          .trim();
 
       const email =
         document
@@ -5660,22 +3897,15 @@ body:has(#miimiid-auth-view:not(.hidden)) {
             "miimiid-register-email"
           )
           ?.value
-          .trim() || "";
+          .trim();
 
-      const dateOfBirth =
+      const phone =
         document
           .getElementById(
-            "miimiid-register-dob"
-          )
-          ?.value || "";
-
-      const gender =
-        document
-          .getElementById(
-            "miimiid-register-gender"
+            "miimiid-register-phone"
           )
           ?.value
-          .trim() || "";
+          .trim();
 
       const password =
         document
@@ -5691,433 +3921,67 @@ body:has(#miimiid-auth-view:not(.hidden)) {
           )
           ?.value || "";
 
-      if (!firstName) {
-        showMiimiidRegistrationStep(2);
-
-        setMiimiidRegisterFeedback(
-          miimiidDashboardTranslate("authEnterFirstName"),
-          "error"
-        );
-
-        return;
-      }
-
-      if (!lastName) {
-        showMiimiidRegistrationStep(2);
-
-        setMiimiidRegisterFeedback(
-          miimiidDashboardTranslate("authEnterLastName"),
-          "error"
-        );
-
-        return;
-      }
-
-      if (!email) {
-        showMiimiidRegistrationStep(3);
-
-        setMiimiidRegisterFeedback(
-          miimiidDashboardTranslate("authEnterValidEmail"),
-          "error"
-        );
-
-        return;
-      }
-
-      if (!gender) {
-        showMiimiidRegistrationStep(4);
-
-        setMiimiidRegisterFeedback(
-          miimiidDashboardTranslate(
-            "authSelectGender"
-          ),
-          "error"
-        );
-
-        return;
-      }
-
-      if (!miimiidValidateBirthday()) {
-        showMiimiidRegistrationStep(4);
-
-        setMiimiidRegisterFeedback(
-          miimiidSafeAuthMessage(
-            "authBirthdayInvalid",
-            "Please select a valid birthday."
-          ),
-          "error"
-        );
-
-        document
-          .getElementById(
-            "miimiid-register-birthday-trigger"
-          )
-          ?.setAttribute(
-            "aria-invalid",
-            "true"
-          );
-
-        return;
-      }
-
-      if (!miimiidValidatePassword()) {
-        showMiimiidRegistrationStep(5);
-
-        setMiimiidRegisterFeedback(
-          miimiidSafeAuthMessage(
-            "authPasswordMinLength",
-            "Password must be at least 8 characters."
-          ),
-          "error"
-        );
-
-        document
-          .getElementById(
-            "miimiid-register-password"
-          )
-          ?.focus();
-
-        return;
-      }
-
-      if (!miimiidValidateConfirmPassword()) {
-        showMiimiidRegistrationStep(5);
-
-        setMiimiidRegisterFeedback(
-          miimiidSafeAuthMessage(
-            "authPasswordMismatch",
-            "Passwords do not match."
-          ),
-          "error"
-        );
-
-        document
-          .getElementById(
-            "miimiid-register-confirm"
-          )
-          ?.focus();
-
-        return;
-      }
-
       const submit =
         document.getElementById(
           "miimiid-register-submit"
         );
 
-      console.log(
-        "[MIIMIID REGISTER] validation passed",
-        {
-          submitId: submit && submit.id,
-          disabled: submit ? submit.disabled : null,
-          timestamp: performance.now()
-        }
-      );
-
-      const actionButton =
-        getMiimiidAsyncButton(submit);
-
-      if (!actionButton) {
-        console.error(
-          "[MIIMIID REGISTER] async button unavailable",
-          {
-            submitId: submit && submit.id,
-            timestamp: performance.now()
-          }
+      if (password !== confirm) {
+        setMiimiidAuthStatus(
+          miimiidDashboardTranslate("authPasswordMismatch"),
+          "error"
         );
         return;
       }
 
-      console.log(
-        "[MIIMIID REGISTER] async button acquired",
-        {
-          submitId: submit.id,
-          state: actionButton.state,
-          loading: actionButton.loading,
-          ariaBusy: submit.getAttribute("aria-busy"),
-          timestamp: performance.now()
-        }
-      );
+      if (submit) {
+        submit.disabled = true;
+      }
 
-      setMiimiidRegisterFeedback(
+      setMiimiidAuthStatus(
         miimiidDashboardTranslate("authCreatingAccount")
       );
 
-      await actionButton.run(async () => {
-        console.log(
-          "[MIIMIID REGISTER] action starting",
+      try {
+        await miimiidAuthenticate(
+          "/api/auth/register",
           {
-            submitId: submit.id,
-            ariaBusy: submit.getAttribute("aria-busy"),
-            state: submit.dataset.miimiidState,
-            timestamp: performance.now()
+            name,
+            email,
+            phone,
+            password
           }
         );
 
-        try {
-          const response =
-            await miimiidAuthenticate(
-              "/api/auth/register",
-              {
-                firstName,
-                lastName,
-                email,
-                gender,
-                dateOfBirth,
-                password
-              }
-            );
-
-          const data =
-            response?.data || {};
-
-          if (
-            data.verificationRequired
-          ) {
-            miimiidVerificationEmail =
-              email;
-
-            const verificationEmail =
-              document.getElementById(
-                "miimiid-verification-email"
-              );
-
-            if (verificationEmail) {
-              verificationEmail.textContent =
-                data.maskedEmail ||
-                email;
-            }
-
-            const verificationCode =
-              document.getElementById(
-                "miimiid-register-verification-code"
-              );
-
-            if (verificationCode) {
-              verificationCode.value = "";
-              verificationCode.focus();
-            }
-
-            showMiimiidRegistrationStep(
-              6
-            );
-
-            startMiimiidVerificationTimer(
-              data.expiresInSeconds
-            );
-
-            return;
-          }
-
-          throw new Error(
-            miimiidDashboardTranslate("authVerificationRequired")
-          );
-
-        } catch (error) {
-          console.error(
-            "Miimiid registration error:",
-            error
-          );
-
-          setMiimiidRegisterFeedback(
-            miimiidNormalizeAuthenticationError(
-              error,
-              miimiidSafeAuthMessage(
-                "authUnableCreateAccount",
-                "Unable to create your account."
-              )
-            ),
-            "error"
-          );
-        }
-      });
-    }
-
-    async function handleMiimiidVerifyAccount() {
-      const code =
-        document
-          .getElementById(
-            "miimiid-register-verification-code"
-          )
-          ?.value
-          .trim() || "";
-
-      const submit =
-        document.getElementById(
-          "miimiid-verify-account-submit"
+        setMiimiidAuthStatus(
+          miimiidDashboardTranslate("authAccountCreated"),
+          "success"
         );
 
-      if (!/^\d{6}$/.test(code)) {
-        setMiimiidRegisterFeedback(
-          miimiidDashboardTranslate("authVerificationCodeRequired"),
+        hideMiimiidAuthView();
+
+        await initializeMiimiidDashboard();
+
+      } catch (error) {
+        console.error(
+          "Miimiid registration error:",
+          error
+        );
+
+        setMiimiidAuthStatus(
+          error.message ||
+          miimiidDashboardTranslate("authCreateAccountError"),
           "error"
         );
 
-        return;
-      }
-
-      const actionButton =
-        getMiimiidAsyncButton(submit);
-
-      if (!actionButton) {
-        return;
-      }
-
-      setMiimiidRegisterFeedback(
-        miimiidDashboardTranslate("authVerifyingAccount")
-      );
-
-      await actionButton.run(async () => {
-        try {
-          const response =
-            await miimiidAuthenticate(
-              "/api/auth/verify-account",
-              {
-                email:
-                  miimiidVerificationEmail,
-                code
-              }
-            );
-
-          const data =
-            response?.data || {};
-
-          if (
-            !data.verified
-          ) {
-            throw new Error(
-              miimiidDashboardTranslate("authUnableVerifyAccount")
-            );
-          }
-
-          clearMiimiidVerificationTimer();
-
-          setMiimiidRegisterFeedback(
-            miimiidDashboardTranslate("authAccountVerified"),
-            "success"
-          );
-
-          const dashboardReady =
-            await initializeMiimiidDashboard();
-
-          if (!dashboardReady) {
-            throw new Error(
-              "Your account was verified, but the dashboard could not be loaded."
-            );
-          }
-
-        } catch (error) {
-          console.error(
-            "Miimiid account verification error:",
-            error
-          );
-
-          setMiimiidRegisterFeedback(
-            miimiidNormalizeAuthenticationError(
-              error,
-              miimiidSafeAuthMessage(
-                "authUnableVerifyAccount",
-                "Unable to verify your account."
-              )
-            ),
-            "error"
-          );
+      } finally {
+        if (submit) {
+          submit.disabled = false;
         }
-      });
+      }
     }
 
-    async function handleMiimiidResendVerification() {
-      if (!miimiidVerificationEmail) {
-        setMiimiidRegisterFeedback(
-          miimiidDashboardTranslate("authVerificationSessionMissing"),
-          "error"
-        );
-
-        return;
-      }
-
-      const resend =
-        document.getElementById(
-          "miimiid-resend-verification"
-        );
-
-      const actionButton =
-        getMiimiidAsyncButton(resend);
-
-      if (!actionButton) {
-        return;
-      }
-
-      setMiimiidRegisterFeedback(
-        miimiidDashboardTranslate("authSendingVerificationCode")
-      );
-
-      await actionButton.run(async () => {
-        try {
-          const response =
-            await miimiidAuthenticate(
-              "/api/auth/resend-verification",
-              {
-                email:
-                  miimiidVerificationEmail
-              }
-            );
-
-          const data =
-            response?.data || {};
-
-          if (
-            data.verified
-          ) {
-            clearMiimiidVerificationTimer();
-
-            await initializeMiimiidDashboard();
-
-            return;
-          }
-
-          const verificationEmail =
-            document.getElementById(
-              "miimiid-verification-email"
-            );
-
-          if (verificationEmail) {
-            verificationEmail.textContent =
-              data.maskedEmail ||
-              miimiidVerificationEmail;
-          }
-
-          startMiimiidVerificationTimer(
-            data.expiresInSeconds
-          );
-
-          setMiimiidRegisterFeedback(
-            miimiidDashboardTranslate("authVerificationCodeSent"),
-            "success"
-          );
-
-        } catch (error) {
-          console.error(
-            "Miimiid verification resend error:",
-            error
-          );
-
-          setMiimiidRegisterFeedback(
-            miimiidNormalizeAuthenticationError(
-              error,
-              miimiidSafeAuthMessage(
-                "authUnableSendVerification",
-                "Unable to send the verification code."
-              )
-            ),
-            "error"
-          );
-        }
-      });
-    }
-
-
-async function handleMiimiidForgotPassword(event) {
+    async function handleMiimiidForgotPassword(event) {
       event.preventDefault();
 
       const email =
@@ -6141,70 +4005,70 @@ async function handleMiimiidForgotPassword(event) {
         return;
       }
 
-      const actionButton =
-        getMiimiidAsyncButton(submit);
-
-      if (!actionButton) {
-        return;
+      if (submit) {
+        submit.disabled = true;
       }
 
       setMiimiidAuthStatus(
         miimiidDashboardTranslate("authSendingResetInstructions")
       );
 
-      await actionButton.run(async () => {
-        try {
-          const response =
-            await fetch(
-              "/api/auth/forgot-password",
-              {
-                method: "POST",
-                credentials: "same-origin",
-                headers: {
-                  "Content-Type": "application/json",
-                  "Accept": "application/json"
-                },
-                body: JSON.stringify({
-                  email
-                })
-              }
-            );
-
-          const result =
-            await response.json();
-
-          if (
-            !response.ok ||
-            !result ||
-            result.status !== "success"
-          ) {
-            throw new Error(
-              result &&
-              result.message
-                ? result.message
-                : miimiidDashboardTranslate("authRequestResetError")
-            );
-          }
-
-          setMiimiidAuthStatus(
-            result.message ||
-            miimiidDashboardTranslate("authResetInstructionsSent"),
-            "success"
+      try {
+        const response =
+          await fetch(
+            "/api/auth/forgot-password",
+            {
+              method: "POST",
+              credentials: "same-origin",
+              headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+              },
+              body: JSON.stringify({
+                email
+              })
+            }
           );
 
-        } catch (error) {
-          console.error(
-            "Miimiid password reset request error:",
-            error
-          );
+        const result =
+          await response.json();
 
-          setMiimiidAuthStatus(
-            error.message ||
-            miimiidDashboardTranslate("authRequestResetError"),
-            "error"
+        if (
+          !response.ok ||
+          !result ||
+          result.status !== "success"
+        ) {
+          throw new Error(
+            result &&
+            result.message
+              ? result.message
+              : miimiidDashboardTranslate("authRequestResetError")
           );
         }
-      });
+
+        setMiimiidAuthStatus(
+          result.message ||
+          miimiidDashboardTranslate("authResetInstructionsSent"),
+          "success"
+        );
+
+      } catch (error) {
+        console.error(
+          "Miimiid password reset request error:",
+          error
+        );
+
+        setMiimiidAuthStatus(
+          error.message ||
+          miimiidDashboardTranslate("authRequestResetError"),
+          "error"
+        );
+
+      } finally {
+        if (submit) {
+          submit.disabled = false;
+        }
+      }
     }
 
 
@@ -6252,93 +4116,92 @@ async function handleMiimiidForgotPassword(event) {
         return;
       }
 
-      const actionButton =
-        getMiimiidAsyncButton(submit);
-
-      if (!actionButton) {
-        return;
+      if (submit) {
+        submit.disabled = true;
       }
 
       setMiimiidAuthStatus(
         miimiidDashboardTranslate("authResettingPassword")
       );
 
-      await actionButton.run(async () => {
-        try {
-          const response =
-            await fetch(
-              "/api/auth/reset-password",
-              {
-                method: "POST",
-                credentials: "same-origin",
-                headers: {
-                  "Content-Type": "application/json",
-                  "Accept": "application/json"
-                },
-                body: JSON.stringify({
-                  token,
-                  password
-                })
-              }
-            );
-
-          const result =
-            await response.json();
-
-          if (
-            !response.ok ||
-            !result ||
-            result.status !== "success"
-          ) {
-            throw new Error(
-              result &&
-              result.message
-                ? result.message
-                : miimiidDashboardTranslate("authResetPasswordError")
-            );
-          }
-
-          setMiimiidAuthStatus(
-            result.message ||
-            miimiidDashboardTranslate("authPasswordResetSuccess"),
-            "success"
+      try {
+        const response =
+          await fetch(
+            "/api/auth/reset-password",
+            {
+              method: "POST",
+              credentials: "same-origin",
+              headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+              },
+              body: JSON.stringify({
+                token,
+                password
+              })
+            }
           );
 
-          const resetForm =
-            document.getElementById(
-              "miimiid-reset-form"
-            );
+        const result =
+          await response.json();
 
-          if (resetForm) {
-            resetForm.reset();
-          }
-
-          window.history.replaceState(
-            {},
-            document.title,
-            window.location.pathname
-          );
-
-          window.setTimeout(
-            () => showMiimiidAuthMode("login"),
-            900
-          );
-
-        } catch (error) {
-          console.error(
-            "Miimiid reset password error:",
-            error
-          );
-
-          setMiimiidAuthStatus(
-            error.message ||
-            miimiidDashboardTranslate("authResetPasswordError"),
-            "error"
+        if (
+          !response.ok ||
+          !result ||
+          result.status !== "success"
+        ) {
+          throw new Error(
+            result &&
+            result.message
+              ? result.message
+              : miimiidDashboardTranslate("authResetPasswordError")
           );
         }
-      });
-    }
 
+        setMiimiidAuthStatus(
+          result.message ||
+          miimiidDashboardTranslate("authPasswordResetSuccess"),
+          "success"
+        );
+
+        const resetForm =
+          document.getElementById(
+            "miimiid-reset-form"
+          );
+
+        if (resetForm) {
+          resetForm.reset();
+        }
+
+        window.history.replaceState(
+          {},
+          document.title,
+          window.location.pathname
+        );
+
+        window.setTimeout(
+          () => showMiimiidAuthMode("login"),
+          900
+        );
+
+      } catch (error) {
+        console.error(
+          "Miimiid reset password error:",
+          error
+        );
+
+        setMiimiidAuthStatus(
+          error.message ||
+          miimiidDashboardTranslate("authResetPasswordError"),
+          "error"
+        );
+
+      } finally {
+        if (submit) {
+          submit.disabled = false;
+        }
+      }
+    }
 
     async function logoutMiimiid() {
       try {
@@ -6470,1762 +4333,7 @@ async function handleMiimiidForgotPassword(event) {
       return MIIMIID_EYE_VISIBLE_SVG;
     }
 
-
-const MIIMIID_REGISTRATION_DATA = {
-  genderOptions: [
-    {
-      value: "male",
-      translationKey: "authGenderMale"
-    },
-    {
-      value: "female",
-      translationKey: "authGenderFemale"
-    },
-    {
-      value: "other",
-      translationKey: "authGenderOther"
-    },
-    {
-      value: "prefer-not-to-say",
-      translationKey: "authGenderPreferNotToSay"
-    }
-  ]
-};
-
-
-function initializeMiimiidGenderSelector() {
-  const select =
-    document.getElementById(
-      "miimiid-register-gender"
-    );
-
-  if (!select || select.dataset.initialized === "true") {
-    return;
-  }
-
-  select.dataset.initialized = "true";
-
-  select.innerHTML = "";
-
-  const placeholder =
-    document.createElement("option");
-
-  placeholder.value = "";
-  placeholder.disabled = true;
-  placeholder.selected = true;
-  placeholder.textContent =
-    miimiidDashboardTranslate(
-      "authSelectGender"
-    );
-
-  select.appendChild(placeholder);
-
-  MIIMIID_REGISTRATION_DATA.genderOptions.forEach(
-    item => {
-      const option =
-        document.createElement("option");
-
-      option.value = item.value;
-      option.textContent =
-        miimiidDashboardTranslate(
-          item.translationKey
-        );
-
-      select.appendChild(option);
-    }
-  );
-}
-
-
-function initializeMiimiidDobWheelPicker() {
-  const month =
-    document.getElementById("miimiid-register-dob-month");
-
-  const day =
-    document.getElementById("miimiid-register-dob-day");
-
-  const year =
-    document.getElementById("miimiid-register-dob-year");
-
-  const hidden =
-    document.getElementById("miimiid-register-dob");
-
-  const picker =
-    document.getElementById("miimiid-dob-wheel-picker");
-
-  if (!month || !day || !year || !hidden || !picker) {
-    return;
-  }
-
-  if (picker.dataset.initialized === "true") {
-    return;
-  }
-
-  picker.dataset.initialized = "true";
-
-  const translate =
-    key => miimiidDashboardTranslate(key);
-
-  const now = new Date();
-
-  const maxDate =
-    new Date(
-      now.getFullYear() - 18,
-      now.getMonth(),
-      now.getDate()
-    );
-
-  const maxYear =
-    maxDate.getFullYear();
-
-  month.innerHTML = "";
-
-  for (let i = 1; i <= 12; i++) {
-    const option =
-      document.createElement("option");
-
-    option.value =
-      String(i).padStart(2, "0");
-
-    option.textContent =
-      new Date(2000, i - 1, 1)
-        .toLocaleString(
-          undefined,
-          { month: "long" }
-        );
-
-    month.appendChild(option);
-  }
-
-  year.innerHTML = "";
-
-  for (
-    let y = maxYear;
-    y >= maxYear - 100;
-    y--
-  ) {
-    const option =
-      document.createElement("option");
-
-    option.value =
-      String(y);
-
-    option.textContent =
-      String(y);
-
-    year.appendChild(option);
-  }
-
-  function rebuildDays() {
-    const selectedYear =
-      Number(year.value);
-
-    const selectedMonth =
-      Number(month.value);
-
-    const daysInMonth =
-      new Date(
-        selectedYear,
-        selectedMonth,
-        0
-      ).getDate();
-
-    const previous =
-      Number(day.value) || 1;
-
-    day.innerHTML = "";
-
-    for (
-      let d = 1;
-      d <= daysInMonth;
-      d++
-    ) {
-      const option =
-        document.createElement("option");
-
-      option.value =
-        String(d).padStart(2, "0");
-
-      option.textContent =
-        String(d);
-
-      day.appendChild(option);
-    }
-
-    day.value =
-      String(
-        Math.min(previous, daysInMonth)
-      ).padStart(2, "0");
-
-    updateDob();
-  }
-
-  function updateDob() {
-    const m = month.value;
-    const d = day.value;
-    const y = year.value;
-
-    if (!m || !d || !y) {
-      hidden.value = "";
-      picker.dataset.dobValid = "false";
-      return;
-    }
-
-    const selected =
-      new Date(
-        Number(y),
-        Number(m) - 1,
-        Number(d)
-      );
-
-    const valid =
-      selected <= maxDate &&
-      selected.getFullYear() === Number(y) &&
-      selected.getMonth() === Number(m) - 1 &&
-      selected.getDate() === Number(d);
-
-    hidden.value =
-      valid
-        ? `${y}-${m}-${d}`
-        : "";
-
-    picker.dataset.dobValid =
-      valid ? "true" : "false";
-  }
-
-  month.addEventListener(
-    "change",
-    rebuildDays
-  );
-
-  day.addEventListener(
-    "change",
-    updateDob
-  );
-
-  year.addEventListener(
-    "change",
-    rebuildDays
-  );
-
-  year.value =
-    String(maxYear);
-
-  month.value =
-    String(maxDate.getMonth() + 1)
-      .padStart(2, "0");
-
-  rebuildDays();
-
-  day.value =
-    String(maxDate.getDate())
-      .padStart(2, "0");
-
-  updateDob();
-
-  /*
-   * Keep the accessible labels/data-driven.
-   * Translation application can update these elements
-   * without hardcoded UI strings.
-   */
-  picker
-    .querySelectorAll("[data-miimiid-auth-key]")
-    .forEach(element => {
-      const key =
-        element.getAttribute(
-          "data-miimiid-auth-key"
-        );
-
-      if (key) {
-        element.textContent =
-          translate(key);
-      }
-    });
-}
-
-
-function initializeMiimiidBirthdayWheelModal() {
-  const trigger =
-    document.getElementById("miimiid-register-birthday-trigger");
-
-  const modal =
-    document.getElementById("miimiid-birthday-picker-modal");
-
-  const valueDisplay =
-    document.getElementById("miimiid-register-birthday-value");
-
-  const monthSelect =
-    document.getElementById("miimiid-register-dob-month");
-
-  const daySelect =
-    document.getElementById("miimiid-register-dob-day");
-
-  const yearSelect =
-    document.getElementById("miimiid-register-dob-year");
-
-  const hiddenDob =
-    document.getElementById("miimiid-register-dob");
-
-  const monthList =
-    document.getElementById("miimiid-birthday-month-list");
-
-  const dayList =
-    document.getElementById("miimiid-birthday-day-list");
-
-  const yearList =
-    document.getElementById("miimiid-birthday-year-list");
-
-  const cancelButton =
-    document.getElementById("miimiid-birthday-picker-cancel");
-
-  const setButton =
-    document.getElementById("miimiid-birthday-picker-set");
-
-  if (
-    !trigger ||
-    !modal ||
-    !valueDisplay ||
-    !monthSelect ||
-    !daySelect ||
-    !yearSelect ||
-    !hiddenDob ||
-    !monthList ||
-    !dayList ||
-    !yearList ||
-    !cancelButton ||
-    !setButton
-  ) {
-    return;
-  }
-
-  if (modal.dataset.initialized === "true") {
-    return;
-  }
-
-  modal.dataset.initialized = "true";
-
-  const now = new Date();
-
-  const maxDate = new Date(
-    now.getFullYear() - 18,
-    now.getMonth(),
-    now.getDate()
-  );
-
-  const currentYear = now.getFullYear();
-
-  const MIN_YEAR = 1900;
-
-  let draftMonth = null;
-  let draftDay = null;
-  let draftYear = null;
-
-  let previousFocus = null;
-
-  const monthNames = Array.from(
-    { length: 12 },
-    (_, index) =>
-      new Date(2000, index, 1).toLocaleString(
-        undefined,
-        { month: "long" }
-      )
-  );
-
-  function daysInMonth(year, month) {
-    return new Date(
-      Number(year),
-      Number(month),
-      0
-    ).getDate();
-  }
-
-  function pad(value) {
-    return String(value).padStart(2, "0");
-  }
-
-  function dateKey(year, month, day) {
-    return `${year}-${pad(month)}-${pad(day)}`;
-  }
-
-  function isValidDate(year, month, day) {
-    if (
-      !Number.isInteger(year) ||
-      !Number.isInteger(month) ||                                                                          !Number.isInteger(day)
-    ) {
-      return false;
-    }
-
-    const selected =
-      new Date(year, month - 1, day);
-
-    return (
-      selected.getFullYear() === year &&
-      selected.getMonth() === month - 1 &&
-      selected.getDate() === day &&
-      year >= MIN_YEAR &&
-      selected <= maxDate
-    );
-  }
-
-  function setHiddenValues(year, month, day) {
-    yearSelect.value = String(year);
-    monthSelect.value = pad(month);
-    daySelect.value = pad(day);
-
-    hiddenDob.value =
-      dateKey(year, month, day);
-
-    const picker =
-      document.getElementById(
-        "miimiid-birthday-picker-modal"
-      );
-
-    if (picker) {
-      picker.dataset.dobValid =
-        isValidDate(year, month, day)
-          ? "true"
-          : "false";
-    }
-  }
-
-  function updateVisibleBirthday() {
-    if (
-      !draftYear ||
-      !draftMonth ||
-      !draftDay
-    ) {
-      valueDisplay.textContent = "";
-      return;
-    }
-
-    valueDisplay.textContent =
-      `${monthNames[draftMonth - 1]} ${draftDay}, ${draftYear}`;
-  }
-
-  function createWheelOption(
-    value,
-    label,
-    selected,
-    disabled = false
-  ) {
-    const option =
-      document.createElement("div");
-
-    option.className =
-      "miimiid-wheel-option";
-
-    if (selected) {
-      option.classList.add("is-selected");
-    }
-
-    if (disabled) {
-      option.classList.add("is-disabled");
-      option.setAttribute("aria-disabled", "true");
-    }
-
-    option.dataset.value =
-      String(value);
-
-    option.textContent =
-      label;
-
-    option.setAttribute(
-      "role",
-      "option"
-    );
-
-    option.setAttribute(
-      "aria-selected",
-      selected ? "true" : "false"
-    );
-
-    return option;
-  }
-
-  function updateSelectedVisual(list) {
-    const options =
-      list.querySelectorAll(
-        ".miimiid-wheel-option"
-      );
-
-    if (!options.length) {
-      return;
-    }
-
-    const center =
-      list.scrollTop +
-      list.clientHeight / 2;
-
-    let closest = null;
-    let closestDistance = Infinity;
-
-    options.forEach(option => {
-      const optionCenter =
-        option.offsetTop +
-        option.offsetHeight / 2;
-
-      const distance =
-        Math.abs(optionCenter - center);
-
-      if (distance < closestDistance) {
-        closestDistance = distance;
-        closest = option;
-      }
-    });
-
-    options.forEach(option => {
-      const selected =
-        option === closest;
-
-      option.classList.toggle(
-        "is-selected",
-        selected
-      );
-
-      option.setAttribute(
-        "aria-selected",
-        selected ? "true" : "false"
-      );
-    });
-  }
-
-  function scrollWheelToValue(
-    list,
-    value,
-    instant = false
-  ) {
-    const option =
-      list.querySelector(
-        `[data-value="${CSS.escape(String(value))}"]`
-      );
-
-    if (!option) {
-      return;
-    }
-
-    list.scrollTo({
-      top:
-        option.offsetTop -
-        (list.clientHeight / 2) +
-        (option.offsetHeight / 2),
-      behavior:
-        instant ? "auto" : "smooth"
-    });
-
-    window.setTimeout(
-      () => updateSelectedVisual(list),
-      instant ? 0 : 220
-    );
-  }
-
-  function populateMonths() {
-    monthList.innerHTML = "";
-
-    monthNames.forEach(
-      (name, index) => {
-        const month =
-          index + 1;
-
-        const option =
-          createWheelOption(
-            pad(month),
-            name,
-            month === draftMonth
-          );
-
-        option.addEventListener(
-          "click",
-          () => {
-            draftMonth = month;
-
-            const maxDay =
-              daysInMonth(
-                draftYear,
-                draftMonth
-              );
-
-            if (draftDay > maxDay) {
-              draftDay = maxDay;
-            }
-
-            populateDays();
-
-            scrollWheelToValue(
-              monthList,
-              pad(draftMonth)
-            );
-          }
-        );
-
-        monthList.appendChild(option);
-      }
-    );
-  }
-
-  function populateDays() {
-    dayList.innerHTML = "";
-
-    const maximum =
-      daysInMonth(
-        draftYear,
-        draftMonth
-      );
-
-    for (
-      let day = 1;
-      day <= maximum;
-      day++
-    ) {
-      const candidate =
-        new Date(
-          draftYear,
-          draftMonth - 1,
-          day
-        );
-
-      const disabled =
-        candidate > maxDate;
-
-      const option =
-        createWheelOption(
-          pad(day),
-          day,
-          day === draftDay,
-          disabled
-        );
-
-      if (!disabled) {
-        option.addEventListener(
-          "click",
-          () => {
-            draftDay = day;
-
-            scrollWheelToValue(
-              dayList,
-              pad(draftDay)
-            );
-          }
-        );
-      }
-
-      dayList.appendChild(option);
-    }
-  }
-
-  function populateYears() {
-    yearList.innerHTML = "";
-
-    /*
-     * Dynamic range:
-     * 1900 -> current year.
-     *
-     * Future years never appear.
-     *
-     * Years after the maximum valid
-     * age-18 boundary remain visible
-     * but are disabled.
-     */
-    for (
-      let year = currentYear;
-      year >= MIN_YEAR;
-      year--
-    ) {
-      const disabled =
-        year > maxDate.getFullYear();
-
-      const option =
-        createWheelOption(
-          year,
-          year,
-          year === draftYear,
-          disabled
-        );
-
-      if (!disabled) {
-        option.addEventListener(
-          "click",
-          () => {
-            draftYear = year;
-
-            const maximum =
-              daysInMonth(
-                draftYear,
-                draftMonth
-              );
-
-            if (draftDay > maximum) {
-              draftDay = maximum;
-            }
-
-            populateDays();
-
-            scrollWheelToValue(
-              yearList,
-              draftYear
-            );
-          }
-        );
-      }
-
-      yearList.appendChild(option);
-    }
-  }
-
-  function attachScrollSelection(
-    list,
-    onSelection
-  ) {
-    let timer = null;
-
-    list.addEventListener(
-      "scroll",
-      () => {
-        updateSelectedVisual(list);
-
-        window.clearTimeout(timer);
-
-        timer =
-          window.setTimeout(
-            () => {
-              const options =
-                list.querySelectorAll(
-                  ".miimiid-wheel-option"
-                );
-
-              if (!options.length) {
-                return;
-              }
-
-              const center =
-                list.scrollTop +
-                list.clientHeight / 2;
-
-              let closest = null;
-              let distance = Infinity;
-
-              options.forEach(
-                option => {
-                  const optionCenter =
-                    option.offsetTop +
-                    option.offsetHeight / 2;
-
-                  const currentDistance =
-                    Math.abs(
-                      optionCenter -
-                      center
-                    );
-
-                  if (
-                    currentDistance <
-                    distance
-                  ) {
-                    distance =
-                      currentDistance;
-                    closest =
-                      option;
-                  }
-                }
-              );
-
-              if (
-                closest &&
-                !closest.classList.contains(
-                  "is-disabled"
-                )
-              ) {
-                onSelection(
-                  closest.dataset.value
-                );
-              }
-
-              updateSelectedVisual(list);
-            },
-            90
-          );
-      },
-      { passive: true }
-    );
-  }
-
-  attachScrollSelection(
-    monthList,
-    value => {
-      draftMonth =
-        Number(value);
-
-      const maximum =
-        daysInMonth(
-          draftYear,
-          draftMonth
-        );
-
-      if (draftDay > maximum) {
-        draftDay = maximum;
-        populateDays();
-        scrollWheelToValue(
-          dayList,
-          pad(draftDay),
-          true
-        );
-      }
-    }
-  );
-
-  attachScrollSelection(
-    dayList,
-    value => {
-      draftDay =
-        Number(value);
-    }
-  );
-
-  attachScrollSelection(
-    yearList,
-    value => {
-      const selectedYear =
-        Number(value);
-
-      if (
-        selectedYear <=
-        maxDate.getFullYear()
-      ) {
-        draftYear =
-          selectedYear;
-
-        const maximum =
-          daysInMonth(
-            draftYear,
-            draftMonth
-          );
-
-        if (draftDay > maximum) {
-          draftDay = maximum;
-          populateDays();
-          scrollWheelToValue(
-            dayList,
-            pad(draftDay),
-            true
-          );
-        }
-      }
-    }
-  );
-
-  function initializeDraftDate() {
-    const existing =
-      hiddenDob.value;
-
-    if (
-      /^\d{4}-\d{2}-\d{2}$/.test(existing)
-    ) {
-      const [
-        year,
-        month,
-        day
-      ] = existing
-        .split("-")
-        .map(Number);
-
-      if (
-        isValidDate(
-          year,
-          month,
-          day
-        )
-      ) {
-        draftYear = year;
-        draftMonth = month;
-        draftDay = day;
-        return;
-      }
-    }
-
-    /*
-     * Default to the newest date that
-     * is actually valid for the age-18
-     * requirement.
-     */
-    draftYear =
-      maxDate.getFullYear();
-
-    draftMonth =
-      maxDate.getMonth() + 1;
-
-    draftDay =
-      maxDate.getDate();
-  }
-
-  function renderDraftWheels() {
-    populateMonths();
-    populateDays();
-    populateYears();
-
-    requestAnimationFrame(() => {
-      scrollWheelToValue(
-        monthList,
-        pad(draftMonth),
-        true
-      );
-
-      scrollWheelToValue(
-        dayList,
-        pad(draftDay),
-        true
-      );
-
-      scrollWheelToValue(
-        yearList,
-        draftYear,
-        true
-      );
-    });
-  }
-
-  function openPicker() {
-    previousFocus =
-      document.activeElement;
-
-    initializeDraftDate();
-
-    renderDraftWheels();
-
-    modal.classList.remove(
-      "hidden"
-    );
-
-    modal.setAttribute(
-      "aria-hidden",
-      "false"
-    );
-
-    trigger.setAttribute(
-      "aria-expanded",
-      "true"
-    );
-
-    document.body.classList.add(
-      "miimiid-birthday-picker-open"
-    );
-
-    requestAnimationFrame(() => {
-      monthList.focus();
-    });
-  }
-
-  function closePicker() {
-    modal.classList.add(
-      "hidden"
-    );
-
-    modal.setAttribute(
-      "aria-hidden",
-      "true"
-    );
-
-    trigger.setAttribute(
-      "aria-expanded",
-      "false"
-    );
-
-    document.body.classList.remove(
-      "miimiid-birthday-picker-open"
-    );
-
-    if (
-      previousFocus &&
-      typeof previousFocus.focus ===
-        "function"
-    ) {
-      previousFocus.focus();
-    }
-  }
-
-  function setPickerValue() {
-    if (
-      !isValidDate(
-        draftYear,
-        draftMonth,
-        draftDay
-      )
-    ) {
-      return;
-    }
-
-    setHiddenValues(
-      draftYear,
-      draftMonth,
-      draftDay
-    );
-
-    updateVisibleBirthday();
-
-    closePicker();
-
-    /*
-     * Keep existing DOB listeners and
-     * registration validation in sync.
-     */
-    [
-      monthSelect,
-      daySelect,
-      yearSelect
-    ].forEach(
-      element => {
-        element.dispatchEvent(
-          new Event(
-            "change",
-            { bubbles: true }
-          )
-        );
-      }
-    );
-  }
-
-  trigger.addEventListener(
-    "click",
-    openPicker
-  );
-
-  cancelButton.addEventListener(
-    "click",
-    closePicker
-  );
-
-  setButton.addEventListener(
-    "click",
-    setPickerValue
-  );
-
-  modal.addEventListener(
-    "click",
-    event => {
-      if (
-        event.target === modal
-      ) {
-        closePicker();
-      }
-    }
-  );
-
-  document.addEventListener(
-    "keydown",
-    event => {
-      if (
-        modal.classList.contains(
-          "hidden"
-        )
-      ) {
-        return;
-      }
-
-      if (
-        event.key === "Escape"
-      ) {
-        closePicker();
-      }
-    }
-  );
-
-  /*
-   * Keep the visible field synchronized
-   * when the existing registration flow
-   * restores DOB state.
-   */
-  if (
-    hiddenDob.value &&
-    /^\d{4}-\d{2}-\d{2}$/.test(
-      hiddenDob.value
-    )
-  ) {
-    const [
-      year,
-      month,
-      day
-    ] = hiddenDob.value
-      .split("-")
-      .map(Number);
-
-    if (
-      isValidDate(
-        year,
-        month,
-        day
-      )
-    ) {
-      draftYear = year;
-      draftMonth = month;
-      draftDay = day;
-
-      updateVisibleBirthday();
-    }
-  }
-}
-
-
-/*
- * MIIMIID REUSABLE ASYNC BUTTON
- *
- * Centralized primary-action lifecycle:
- *
- * idle -> loading -> success/error -> idle
- *
- * The component owns:
- * - duplicate-tap protection
- * - disabled state
- * - spinner presentation
- * - guaranteed loading cleanup
- *
- * The caller owns:
- * - validation
- * - API/business logic
- * - navigation
- * - user-facing error handling
- */
-function MiimiidAsyncButton(button) {
-  if (!button) {
-    return null;
-  }
-
-  if (button.__miimiidAsyncButton) {
-    return button.__miimiidAsyncButton;
-  }
-
-  const originalHTML = button.innerHTML;
-  const initialDisabled = button.disabled;
-
-  button.classList.add("miimiid-async-button");
-
-  /*
-   * Preserve the existing button content and dimensions.
-   * The loader is layered over the content.
-   */
-  button.innerHTML = `
-    <span
-      class="miimiid-async-button-content"
-    >
-      ${originalHTML}
-    </span>
-    <span
-      class="miimiid-async-button-spinner"
-      aria-hidden="true"
-    ></span>
-  `;
-
-  let state = "idle";
-  let actionRunning = false;
-  let explicitDisabled = initialDisabled;
-
-  const setState = nextState => {
-    state = nextState;
-    button.dataset.miimiidState = nextState;
-
-    if (nextState === "loading") {
-      button.disabled = true;
-      button.setAttribute("aria-busy", "true");
-      return;
-    }
-
-    button.removeAttribute("aria-busy");
-
-    if (
-      nextState === "idle" ||
-      nextState === "success" ||
-      nextState === "error"
-    ) {
-      button.disabled = explicitDisabled;
-    }
-  };
-
-  const setEnabled = enabled => {
-    explicitDisabled = !enabled;
-
-    button.dataset.miimiidExplicitDisabled =
-      explicitDisabled ? "true" : "false";
-
-    if (!actionRunning) {
-      button.disabled = explicitDisabled;
-    }
-  };
-
-  const run = async (
-    action,
-    {
-      onSuccess = null,
-      onError = null,
-      onFinally = null
-    } = {}
-  ) => {
-    /*
-     * Synchronous duplicate-submission guard.
-     */
-    if (
-      actionRunning ||
-      state === "loading" ||
-      button.disabled
-    ) {
-      return undefined;
-    }
-
-    if (typeof action !== "function") {
-      const error = new TypeError(
-        "MiimiidAsyncButton.run requires an async action function."
-      );
-
-      setState("error");
-
-      if (typeof onError === "function") {
-        try {
-          await onError(error);
-        } catch (callbackError) {
-          console.error(
-            "Miimiid async-button error handler failed:",
-            callbackError
-          );
-        }
-      }
-
-      setState("idle");
-      return undefined;
-    }
-
-    actionRunning = true;
-    setState("loading");
-
-    console.log(
-      "[MIIMIID ASYNC] loading committed",
-      {
-        id: button.id,
-        ariaBusy: button.getAttribute("aria-busy"),
-        state: button.dataset.miimiidState,
-        timestamp: performance.now()
-      }
-    );
-
-    /*
-     * Synchronize with two real browser rendering frames so the
-     * loading state is committed and visibly paintable before the
-     * authentication operation or local authentication transition.
-     *
-     * This is not an artificial timeout. It does not determine the
-     * duration of the real operation; the real Promise remains the
-     * source of the loading lifecycle.
-     */
-    await new Promise(resolve => {
-      requestAnimationFrame(() => {
-        console.log(
-          "[MIIMIID ASYNC] first RAF",
-          {
-            id: button.id,
-            ariaBusy: button.getAttribute("aria-busy"),
-            state: button.dataset.miimiidState,
-            timestamp: performance.now()
-          }
-        );
-
-        requestAnimationFrame(() => {
-          console.log(
-            "[MIIMIID ASYNC] second RAF",
-            {
-              id: button.id,
-              ariaBusy: button.getAttribute("aria-busy"),
-              state: button.dataset.miimiidState,
-              timestamp: performance.now()
-            }
-          );
-
-          resolve();
-        });
-      });
-    });
-
-    try {
-      console.log(
-        "[MIIMIID ASYNC] action starting",
-        {
-          id: button.id,
-          ariaBusy: button.getAttribute("aria-busy"),
-          state: button.dataset.miimiidState,
-          timestamp: performance.now()
-        }
-      );
-
-      const result = await action();
-
-      setState("success");
-
-      if (typeof onSuccess === "function") {
-        await onSuccess(result);
-      }
-
-      return result;
-
-    } catch (error) {
-      setState("error");
-
-      if (typeof onError === "function") {
-        try {
-          await onError(error);
-        } catch (callbackError) {
-          console.error(
-            "Miimiid async-button error handler failed:",
-            callbackError
-          );
-        }
-      }
-
-      throw error;
-
-    } finally {
-      actionRunning = false;
-
-      /*
-       * Guaranteed release after the real Promise settles.
-       */
-      setState("idle");
-
-      if (typeof onFinally === "function") {
-        try {
-          await onFinally();
-        } catch (callbackError) {
-          console.error(
-            "Miimiid async-button finally handler failed:",
-            callbackError
-          );
-        }
-      }
-    }
-  };
-
-  const api = {
-    get state() {
-      return state;
-    },
-
-    get loading() {
-      return actionRunning;
-    },
-
-    run,
-    setState,
-    setEnabled,
-
-    reset() {
-      actionRunning = false;
-      setState("idle");
-    }
-  };
-
-  button.__miimiidAsyncButton = api;
-
-  button.dataset.miimiidExplicitDisabled =
-    explicitDisabled ? "true" : "false";
-
-  button.dataset.miimiidState = "idle";
-
-  button.removeAttribute("aria-busy");
-
-  return api;
-}
-
-
-/*
- * MIIMIID AUTH STEP TRANSITION
- *
- * Registration steps are local UI state transitions rather
- * than network operations. They still need one browser-render
- * opportunity so the async-button loading state can actually
- * become visible before the next authentication screen is
- * rendered.
- *
- * No artificial timeout is used.
- */
-async function runMiimiidAuthStepTransition(
-  button,
-  transition
-) {
-  const actionButton =
-    getMiimiidAsyncButton(button);
-
-  if (!actionButton) {
-    console.error(
-      "[MIIMIID REGISTRATION ASYNC] unable to obtain controller:",
-      button?.id
-    );
-
-    return false;
-  }
-
-  console.log(
-    "[MIIMIID REGISTRATION ASYNC] transition requested:",
-    {
-      id: button.id,
-      state: actionButton.state,
-      loading: actionButton.loading,
-      disabled: button.disabled
-    }
-  );
-
-  try {
-    await actionButton.run(async () => {
-      console.log(
-        "[MIIMIID REGISTRATION ASYNC] transition action starting:",
-        button.id
-      );
-
-      if (typeof transition !== "function") {
-        throw new Error(
-          "Miimiid registration transition is unavailable."
-        );
-      }
-
-      await transition();
-
-      console.log(
-        "[MIIMIID REGISTRATION ASYNC] transition completed:",
-        button.id
-      );
-    });
-
-    return true;
-
-  } catch (error) {
-    console.error(
-      "[MIIMIID REGISTRATION ASYNC] transition failed:",
-      button.id,
-      error
-    );
-
-    setMiimiidRegisterFeedback(
-      error?.message ||
-      miimiidSafeAuthMessage(
-        "authUnableContinue",
-        "We couldn't continue right now. Please try again."
-      ),
-      "error"
-    );
-
-    return false;
-  }
-}
-
-function getMiimiidAsyncButton(buttonOrId) {
-  const button =
-    typeof buttonOrId === "string"
-      ? document.getElementById(buttonOrId)
-      : buttonOrId;
-
-  return MiimiidAsyncButton(button);
-}
-
-
-/*
- * Backward-compatible adapter.
- *
- * Existing authentication code can continue calling this
- * temporarily while individual handlers are migrated.
- */
-function setMiimiidAuthActionLoading(
-  button,
-  isLoading
-) {
-  const controller =
-    getMiimiidAsyncButton(button);
-
-  if (!controller) {
-    return;
-  }
-
-  if (isLoading) {
-    controller.setState("loading");
-  } else {
-    controller.reset();
-  }
-}
-
-
-function initializeMiimiidRegistrationFlow() {
-      const form =
-        document.getElementById(
-          "miimiid-register-form"
-        );
-
-      if (!form) {
-        return;
-      }
-
-      if (
-        form.dataset.registrationInitialized ===
-        "true"
-      ) {
-        return;
-      }
-
-      form.dataset.registrationInitialized =
-        "true";
-
-      /*
-       * Initialize every registration primary action through
-       * the same reusable async-button controller used by
-       * Login and Forgot Password.
-       *
-       * This is deliberately done before any registration
-       * click/submit handler can invoke the buttons.
-       */
-      [
-        "miimiid-register-get-started",
-        "miimiid-register-name-next",
-        "miimiid-register-contact-next",
-        "miimiid-register-details-next",
-        "miimiid-register-submit",
-        "miimiid-verify-account-submit",
-        "miimiid-resend-verification"
-      ].forEach(buttonId => {
-        const button =
-          document.getElementById(buttonId);
-
-        if (!button) {
-          console.warn(
-            "[MIIMIID REGISTRATION ASYNC] button missing:",
-            buttonId
-          );
-          return;
-        }
-
-        const controller =
-          getMiimiidAsyncButton(button);
-
-        console.log(
-          "[MIIMIID REGISTRATION ASYNC] initialized:",
-          {
-            id: button.id,
-            controller: !!controller,
-            disabled: button.disabled,
-            state: button.dataset.miimiidState
-          }
-        );
-      });
-
-      initializeMiimiidGenderSelector();
-      initializeMiimiidDobWheelPicker();
-      initializeMiimiidBirthdayWheelModal();
-      initializeMiimiidRegistrationValidation();
-
-      document
-        .getElementById(
-          "miimiid-register-get-started"
-        )
-        ?.addEventListener(
-          "click",
-          async () => {
-            const button =
-              document.getElementById(
-                "miimiid-register-get-started"
-              );
-
-            await runMiimiidAuthStepTransition(
-              button,
-              () => {
-                showMiimiidRegistrationStep(2);
-              }
-            );
-          }
-        );
-
-      document
-        .getElementById(
-          "miimiid-register-name-next"
-        )
-        ?.addEventListener(
-          "click",
-          async () => {
-            const button =
-              document.getElementById(
-                "miimiid-register-name-next"
-              );
-
-            const firstName =
-              document
-                .getElementById(
-                  "miimiid-register-first-name"
-                )
-                ?.value
-                .trim() || "";
-
-            const lastName =
-              document
-                .getElementById(
-                  "miimiid-register-last-name"
-                )
-                ?.value
-                .trim() || "";
-
-            if (!firstName) {
-              setMiimiidRegisterFeedback(
-                miimiidDashboardTranslate(
-                  "authEnterFirstName"
-                ),
-                "error"
-              );
-              return;
-            }
-
-            if (!lastName) {
-              setMiimiidRegisterFeedback(
-                miimiidDashboardTranslate(
-                  "authEnterLastName"
-                ),
-                "error"
-              );
-              return;
-            }
-
-            await runMiimiidAuthStepTransition(
-              button,
-              () => {
-                showMiimiidRegistrationStep(3);
-              }
-            );
-          }
-        );
-
-      document
-        .getElementById(
-          "miimiid-register-contact-next"
-        )
-        ?.addEventListener(
-          "click",
-          async () => {
-            const button =
-              document.getElementById(
-                "miimiid-register-contact-next"
-              );
-
-            const email =
-              document
-                .getElementById(
-                  "miimiid-register-email"
-                )
-                ?.value
-                .trim() || "";
-
-            if (
-              !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
-                email
-              )
-            ) {
-              setMiimiidRegisterFeedback(
-                miimiidDashboardTranslate(
-                  "authEnterValidEmail"
-                ),
-                "error"
-              );
-              return;
-            }
-
-            await runMiimiidAuthStepTransition(
-              button,
-              () => {
-                showMiimiidRegistrationStep(4);
-              }
-            );
-          }
-        );
-
-      document
-        .getElementById(
-          "miimiid-register-details-next"
-        )
-        ?.addEventListener(
-          "click",
-          async () => {
-            const button =
-              document.getElementById(
-                "miimiid-register-details-next"
-              );
-
-            const gender =
-              document
-                .getElementById(
-                  "miimiid-register-gender"
-                )
-                ?.value
-                .trim() || "";
-
-            if (!gender) {
-              setMiimiidRegisterFeedback(
-                miimiidDashboardTranslate(
-                  "authSelectGender"
-                ),
-                "error"
-              );
-              return;
-            }
-
-            if (!miimiidValidateBirthday()) {
-              setMiimiidRegisterFeedback(
-                miimiidSafeAuthMessage(
-                  "authBirthdayInvalid",
-                  "Please select a valid birthday."
-                ),
-                "error"
-              );
-              return;
-            }
-
-            await runMiimiidAuthStepTransition(
-              button,
-              () => {
-                showMiimiidRegistrationStep(5);
-              }
-            );
-          }
-        );
-
-      document
-        .getElementById(
-          "miimiid-verify-account-submit"
-        )
-        ?.addEventListener(
-          "click",
-          handleMiimiidVerifyAccount
-        );
-
-      document
-        .getElementById(
-          "miimiid-resend-verification"
-        )
-        ?.addEventListener(
-          "click",
-          handleMiimiidResendVerification
-        );
-
-      form
-        .querySelectorAll(
-          "[data-register-back]"
-        )
-        .forEach(button => {
-          button.addEventListener(
-            "click",
-            () => {
-              const target =
-                Number(
-                  button.getAttribute(
-                    "data-register-back"
-                  )
-                );
-
-              showMiimiidRegistrationStep(
-                target
-              );
-            }
-          );
-        });
-    }
-
-
-
-
-function initializeMiimiidAuth() {
+    function initializeMiimiidAuth() {
       if (miimiidAuthInitialized) {
         return;
       }
@@ -8359,11 +4467,9 @@ function initializeMiimiidAuth() {
         );
 
       /*
-       * Authentication is the application boot gate.
-       *
-       * The authenticated application must remain hidden
-       * until /api/auth/me positively confirms a valid
-       * authenticated user.
+       * Never expose authenticated application
+       * chrome or dashboard data while
+       * authentication state is unknown.
        */
       if (appShell) {
         appShell.classList.add("hidden");
@@ -8399,72 +4505,31 @@ function initializeMiimiidAuth() {
         return;
       }
 
-      let user = null;
+      const user =
+        await loadMiimiidCurrentUser();
 
-      try {
-        user =
-          await loadMiimiidCurrentUser();
-      } catch (error) {
-        console.error(
-          "Miimiid authentication bootstrap error:",
-          error
-        );
-
-        user = null;
-      }
-
-      /*
-       * No authenticated user means the application must
-       * stop at authentication. Do not initialize courses,
-       * dashboard data, Fun Center, AI Tutor, or other
-       * authenticated application state.
-       */
       if (!user) {
         showMiimiidAuthView();
-        showMiimiidAuthMode("login");
-
-        if (authLoading) {
-          authLoading.classList.add("hidden");
-        }
-
-        if (authCard) {
-          authCard.classList.remove("hidden");
-        }
-
         return;
       }
 
-      /*
-       * Only a positively authenticated user can cross
-       * the authentication boundary.
-       *
-       * Keep the authenticated application shell hidden
-       * until dashboard initialization has completed
-       * successfully. initializeMiimiidDashboard() owns
-       * the final visibility transition.
-       */
+      if (authView) {
+        authView.classList.add("hidden");
+      }
+
       if (appShell) {
-        appShell.classList.add("hidden");
+        appShell.classList.remove("hidden");
       }
 
       if (miimiidHeader) {
-        miimiidHeader.classList.add("hidden");
+        miimiidHeader.classList.remove("hidden");
       }
 
       if (drawerBackdrop) {
-        drawerBackdrop.classList.add("hidden");
+        drawerBackdrop.classList.remove("hidden");
       }
 
-      const dashboardReady =
-        await initializeMiimiidDashboard();
-
-      if (!dashboardReady) {
-        /*
-         * Dashboard initialization owns its failure state
-         * and restores the authentication view.
-         */
-        return;
-      }
+      await initializeMiimiidDashboard();
     }
 
 
@@ -8905,7 +4970,7 @@ async function loadCourseProgress(courseId) {
               module.title ||
              `Module ${moduleIndex + 1}`
              )}
-          </h3>
+          </h3> 
 
                 ${
                   lessons.length === 0
@@ -10583,12 +6648,8 @@ async function submitQuiz() {
     en: {
 
       name: "English",
-      nativeName: "English",
-
-
-      authCancel: "Cancel",
-      authSet: "Set",
-},
+      nativeName: "English"
+    },
     es: {
 
       name: "Spanish",
@@ -10732,73 +6793,11 @@ async function submitQuiz() {
    * =========================================
    */
 
-  const MIIMIID_TRANSLATIONS = {      authBirthday: "What's your birthday?",
-      authMonth: "Month",
-      authDay: "Day",
-      authYear: "Year",
-      authSelectMonth: "Select month",
-      authSelectDay: "Select day",
-      authSelectYear: "Select year",
-      authInvalidBirthday: "Select a valid birthday.",
-      authUnderageBirthday: "You must be at least 18 years old.",
-      authEnterBirthday: "Enter your date of birth.",
-      authCancel: "Cancel",
-      authSet: "Set",
-    en: {
-      authWelcome: 'Welcome to Miimiid',
-      authSignInSubtitle: 'Sign in to continue learning',
+  const MIIMIID_TRANSLATIONS = {    en: {
       authLoginIdentifier: 'Email or phone number',
       authPassword: 'Password',
       authSignIn: 'Sign In',
       authCreateAccountLink: 'Create an account',
-      authRegisterWelcomeText: 'Build better money habits, understand your finances, and make smarter financial decisions.',
-      authGetStarted: 'Get started',
-      authFirstName: 'First name',
-      authGenderBirthday: 'Gender and date of birth',
-      authGender: 'Gender',
-      authSelectGender: 'Select your gender',
-      authGenderMale: 'Male',
-      authGenderFemale: 'Female',
-      authGenderOther: 'Other',
-      authGenderPreferNotToSay: 'Prefer not to say',
-      authLastName: 'Last name',
-      authNameQuestion: "What's your name?",
-      authEmailTitle: 'Email',
-      authEmailInstruction: 'Enter your valid email address.',
-      authBirthday: "What's your birthday?",
-      authPasswordTitle: 'Enter your password',
-      authPassword: 'Password',
-      authConfirmPassword: 'Password confirmation',
-      authVerifyEmail: 'Verify your email',
-      authVerificationInstruction: 'Enter the 6-digit code sent to your email address.',
-      authBack: 'Back',
-
-      authEnterFirstName: 'Enter your first name.',
-      authEnterLastName: 'Enter your last name.',
-      authEnterValidEmail: 'Enter a valid email address.',
-
-      authPasswordMinLength: 'Password must be at least 8 characters.',
-      authPasswordMismatch: 'Passwords do not match.',
-      authCreatingAccount: 'Creating your account...',
-      authVerifyingAccount: 'Verifying your account...',
-      authAccountVerified: 'Account verified successfully.',
-      authVerificationCodeRequired: 'Enter the 6-digit verification code.',
-      authSendingVerificationCode: 'Sending a new verification code...',
-      authVerificationCodeSent: 'A new verification code has been sent.',
-      authVerificationSessionMissing: 'Your verification session is missing. Please start again.',
-      authUnableCreateAccount: 'Unable to create your account.',
-      authUnableVerifyAccount: 'Unable to verify your account.',
-      authUnableSendVerification: 'Unable to send a new verification code.',
-      authCodeExpired: 'Code expired. Request a new code.',
-      authCodeExpiresIn: 'Code expires in',
-
-      authLastName: 'Last name',
-      authDateOfBirth: 'Date of birth',
-      authConfirmPassword: 'Confirm password',
-      authAccountVerification: 'Account verification',
-      authContinue: 'Continue',
-      authVerifyAccount: 'Verify account',
-      authResendCode: 'Resend code',
       authForgotPassword: 'Forgot password?',
       authName: 'Name',
       authEmail: 'Email',
@@ -10808,8 +6807,6 @@ async function submitQuiz() {
       authBackToSignIn: 'Back to sign in',
       authEmailAddress: 'Email address',
       authSendResetInstructions: 'Send Reset Instructions',
-      authResetPassword: 'Reset Password',
-      authResetSubtitle: 'Enter your email address to receive instructions to reset your password',
       authNewPassword: 'New password',
       authConfirmNewPassword: 'Confirm new password',
       authResetPasswordButton: 'Reset Password',
@@ -10886,18 +6883,6 @@ async function submitQuiz() {
 
     },
 
-      authBirthday: "¿Cuál es tu fecha de nacimiento?",
-      authMonth: "Mes",
-      authDay: "Día",
-      authYear: "Año",
-      authSelectMonth: "Selecciona el mes",
-      authSelectDay: "Selecciona el día",
-      authSelectYear: "Selecciona el año",
-      authInvalidBirthday: "Selecciona una fecha de nacimiento válida.",
-      authUnderageBirthday: "Debes tener al menos 18 años.",
-      authEnterBirthday: "Introduce tu fecha de nacimiento.",
-      authCancel: "Cancelar",
-      authSet: "Establecer",
     es: {
       authWelcome: 'Bienvenido a Miimiid',
       authSignInSubtitle: 'Inicia sesión para continuar aprendiendo',
@@ -11006,18 +6991,6 @@ async function submitQuiz() {
 
     },
 
-      authBirthday: "Quelle est votre date de naissance ?",
-      authMonth: "Mois",
-      authDay: "Jour",
-      authYear: "Année",
-      authSelectMonth: "Sélectionner le mois",
-      authSelectDay: "Sélectionner le jour",
-      authSelectYear: "Sélectionner l'année",
-      authInvalidBirthday: "Sélectionnez une date de naissance valide.",
-      authUnderageBirthday: "Vous devez avoir au moins 18 ans.",
-      authEnterBirthday: "Entrez votre date de naissance.",
-      authCancel: "Annuler",
-      authSet: "Définir",
     fr: {
       authWelcome: 'Bienvenue sur Miimiid',
       authSignInSubtitle: 'Connectez-vous pour continuer votre apprentissage',
@@ -11127,18 +7100,6 @@ async function submitQuiz() {
 
     },
 
-      authBirthday: "Wann bist du geboren?",
-      authMonth: "Monat",
-      authDay: "Tag",
-      authYear: "Jahr",
-      authSelectMonth: "Monat auswählen",
-      authSelectDay: "Tag auswählen",
-      authSelectYear: "Jahr auswählen",
-      authInvalidBirthday: "Wähle ein gültiges Geburtsdatum.",
-      authUnderageBirthday: "Du musst mindestens 18 Jahre alt sein.",
-      authEnterBirthday: "Gib dein Geburtsdatum ein.",
-      authCancel: "Abbrechen",
-      authSet: "Festlegen",
     de: {
       authWelcome: 'Willkommen bei Miimiid',
       authSignInSubtitle: 'Melden Sie sich an, um weiterzulernen',
@@ -11248,18 +7209,6 @@ async function submitQuiz() {
 
     },
 
-      authBirthday: "Qual é a sua data de nascimento?",
-      authMonth: "Mês",
-      authDay: "Dia",
-      authYear: "Ano",
-      authSelectMonth: "Selecionar mês",
-      authSelectDay: "Selecionar dia",
-      authSelectYear: "Selecionar ano",
-      authInvalidBirthday: "Selecione uma data de nascimento válida.",
-      authUnderageBirthday: "Você deve ter pelo menos 18 anos.",
-      authEnterBirthday: "Digite sua data de nascimento.",
-      authCancel: "Cancelar",
-      authSet: "Definir",
     pt: {
       authWelcome: 'Bem-vindo ao Miimiid',
       authSignInSubtitle: 'Entre para continuar aprendendo',
@@ -11369,18 +7318,6 @@ async function submitQuiz() {
 
     },
 
-      authBirthday: "Qual è la tua data di nascita?",
-      authMonth: "Mese",
-      authDay: "Giorno",
-      authYear: "Anno",
-      authSelectMonth: "Seleziona il mese",
-      authSelectDay: "Seleziona il giorno",
-      authSelectYear: "Seleziona l'anno",
-      authInvalidBirthday: "Seleziona una data di nascita valida.",
-      authUnderageBirthday: "Devi avere almeno 18 anni.",
-      authEnterBirthday: "Inserisci la tua data di nascita.",
-      authCancel: "Annulla",
-      authSet: "Imposta",
     it: {
       authWelcome: 'Benvenuto su Miimiid',
       authSignInSubtitle: 'Accedi per continuare a imparare',
@@ -11490,18 +7427,6 @@ async function submitQuiz() {
 
     },
 
-      authBirthday: "Wat is je geboortedatum?",
-      authMonth: "Maand",
-      authDay: "Dag",
-      authYear: "Jaar",
-      authSelectMonth: "Selecteer maand",
-      authSelectDay: "Selecteer dag",
-      authSelectYear: "Selecteer jaar",
-      authInvalidBirthday: "Selecteer een geldige geboortedatum.",
-      authUnderageBirthday: "Je moet minimaal 18 jaar oud zijn.",
-      authEnterBirthday: "Voer je geboortedatum in.",
-      authCancel: "Annuleren",
-      authSet: "Instellen",
     nl: {
       authWelcome: 'Welkom bij Miimiid',
       authSignInSubtitle: 'Log in om verder te leren',
@@ -11611,18 +7536,6 @@ async function submitQuiz() {
 
     },
 
-      authBirthday: "Jaka jest Twoja data urodzenia?",
-      authMonth: "Miesiąc",
-      authDay: "Dzień",
-      authYear: "Rok",
-      authSelectMonth: "Wybierz miesiąc",
-      authSelectDay: "Wybierz dzień",
-      authSelectYear: "Wybierz rok",
-      authInvalidBirthday: "Wybierz prawidłową datę urodzenia.",
-      authUnderageBirthday: "Musisz mieć co najmniej 18 lat.",
-      authEnterBirthday: "Wprowadź swoją datę urodzenia.",
-      authCancel: "Anuluj",
-      authSet: "Ustaw",
     pl: {
       authWelcome: 'Witamy w Miimiid',
       authSignInSubtitle: 'Zaloguj się, aby kontynuować naukę',
@@ -11732,18 +7645,6 @@ async function submitQuiz() {
 
     },
 
-      authBirthday: "Doğum tarihiniz nedir?",
-      authMonth: "Ay",
-      authDay: "Gün",
-      authYear: "Yıl",
-      authSelectMonth: "Ay seçin",
-      authSelectDay: "Gün seçin",
-      authSelectYear: "Yıl seçin",
-      authInvalidBirthday: "Geçerli bir doğum tarihi seçin.",
-      authUnderageBirthday: "En az 18 yaşında olmalısınız.",
-      authEnterBirthday: "Doğum tarihinizi girin.",
-      authCancel: "İptal",
-      authSet: "Ayarla",
     tr: {
       authWelcome: 'Miimiid\'e Hoş Geldiniz',
       authSignInSubtitle: 'Öğrenmeye devam etmek için giriş yapın',
@@ -11853,18 +7754,6 @@ async function submitQuiz() {
 
     },
 
-      authBirthday: "Когда вы родились?",
-      authMonth: "Месяц",
-      authDay: "День",
-      authYear: "Год",
-      authSelectMonth: "Выберите месяц",
-      authSelectDay: "Выберите день",
-      authSelectYear: "Выберите год",
-      authInvalidBirthday: "Выберите действительную дату рождения.",
-      authUnderageBirthday: "Вам должно быть не менее 18 лет.",
-      authEnterBirthday: "Введите дату рождения.",
-      authCancel: "Отмена",
-      authSet: "Установить",
     ru: {
       authWelcome: 'Добро пожаловать в Miimiid',
       authSignInSubtitle: 'Войдите, чтобы продолжить обучение',
@@ -11974,18 +7863,6 @@ async function submitQuiz() {
 
     },
 
-      authBirthday: "Яка у вас дата народження?",
-      authMonth: "Місяць",
-      authDay: "День",
-      authYear: "Рік",
-      authSelectMonth: "Виберіть місяць",
-      authSelectDay: "Виберіть день",
-      authSelectYear: "Виберіть рік",
-      authInvalidBirthday: "Виберіть дійсну дату народження.",
-      authUnderageBirthday: "Вам має бути щонайменше 18 років.",
-      authEnterBirthday: "Введіть дату народження.",
-      authCancel: "Скасувати",
-      authSet: "Встановити",
     uk: {
       authWelcome: 'Ласкаво просимо до Miimiid',
       authSignInSubtitle: 'Увійдіть, щоб продовжити навчання',
@@ -12095,18 +7972,6 @@ async function submitQuiz() {
 
     },
 
-      authBirthday: "ما تاريخ ميلادك؟",
-      authMonth: "الشهر",
-      authDay: "اليوم",
-      authYear: "السنة",
-      authSelectMonth: "اختر الشهر",
-      authSelectDay: "اختر اليوم",
-      authSelectYear: "اختر السنة",
-      authInvalidBirthday: "اختر تاريخ ميلاد صالحًا.",
-      authUnderageBirthday: "يجب أن يكون عمرك 18 عامًا على الأقل.",
-      authEnterBirthday: "أدخل تاريخ ميلادك.",
-      authCancel: "إلغاء",
-      authSet: "تعيين",
     ar: {
       authWelcome: 'مرحبًا بك في Miimiid',
       authSignInSubtitle: 'سجّل الدخول لمواصلة التعلّم',
@@ -12216,18 +8081,6 @@ async function submitQuiz() {
 
     },
 
-      authBirthday: "מה תאריך הלידה שלך?",
-      authMonth: "חודש",
-      authDay: "יום",
-      authYear: "שנה",
-      authSelectMonth: "בחר חודש",
-      authSelectDay: "בחר יום",
-      authSelectYear: "בחר שנה",
-      authInvalidBirthday: "בחר תאריך לידה תקין.",
-      authUnderageBirthday: "עליך להיות בן 18 לפחות.",
-      authEnterBirthday: "הזן את תאריך הלידה שלך.",
-      authCancel: "ביטול",
-      authSet: "הגדר",
     he: {
       authWelcome: 'ברוכים הבאים ל-Miimiid',
       authSignInSubtitle: 'התחבר כדי להמשיך ללמוד',
@@ -12337,18 +8190,6 @@ async function submitQuiz() {
 
     },
 
-      authBirthday: "تاریخ تولد شما چیست؟",
-      authMonth: "ماه",
-      authDay: "روز",
-      authYear: "سال",
-      authSelectMonth: "ماه را انتخاب کنید",
-      authSelectDay: "روز را انتخاب کنید",
-      authSelectYear: "سال را انتخاب کنید",
-      authInvalidBirthday: "یک تاریخ تولد معتبر انتخاب کنید.",
-      authUnderageBirthday: "باید حداقل ۱۸ سال داشته باشید.",
-      authEnterBirthday: "تاریخ تولد خود را وارد کنید.",
-      authCancel: "لغو",
-      authSet: "تنظیم",
     fa: {
       authWelcome: 'به Miimiid خوش آمدید',
       authSignInSubtitle: 'برای ادامه یادگیری وارد شوید',
@@ -12458,18 +8299,6 @@ async function submitQuiz() {
 
     },
 
-      authBirthday: "आपका जन्मदिन कब है?",
-      authMonth: "महीना",
-      authDay: "दिन",
-      authYear: "वर्ष",
-      authSelectMonth: "महीना चुनें",
-      authSelectDay: "दिन चुनें",
-      authSelectYear: "वर्ष चुनें",
-      authInvalidBirthday: "मान्य जन्मतिथि चुनें।",
-      authUnderageBirthday: "आपकी आयु कम से कम 18 वर्ष होनी चाहिए।",
-      authEnterBirthday: "अपनी जन्मतिथि दर्ज करें।",
-      authCancel: "रद्द करें",
-      authSet: "सेट करें",
     hi: {
       authWelcome: 'Miimiid में आपका स्वागत है',
       authSignInSubtitle: 'सीखना जारी रखने के लिए साइन इन करें',
@@ -12579,18 +8408,6 @@ async function submitQuiz() {
 
     },
 
-      authBirthday: "আপনার জন্মতারিখ কী?",
-      authMonth: "মাস",
-      authDay: "দিন",
-      authYear: "বছর",
-      authSelectMonth: "মাস নির্বাচন করুন",
-      authSelectDay: "দিন নির্বাচন করুন",
-      authSelectYear: "বছর নির্বাচন করুন",
-      authInvalidBirthday: "একটি বৈধ জন্মতারিখ নির্বাচন করুন।",
-      authUnderageBirthday: "আপনার বয়স কমপক্ষে ১৮ বছর হতে হবে।",
-      authEnterBirthday: "আপনার জন্মতারিখ লিখুন।",
-      authCancel: "বাতিল করুন",
-      authSet: "সেট করুন",
     bn: {
       authWelcome: 'Miimiid-এ স্বাগতম',
       authSignInSubtitle: 'শেখা চালিয়ে যেতে সাইন ইন করুন',
@@ -12700,18 +8517,6 @@ async function submitQuiz() {
 
     },
 
-      authBirthday: "آپ کی تاریخ پیدائش کیا ہے؟",
-      authMonth: "مہینہ",
-      authDay: "دن",
-      authYear: "سال",
-      authSelectMonth: "مہینہ منتخب کریں",
-      authSelectDay: "دن منتخب کریں",
-      authSelectYear: "سال منتخب کریں",
-      authInvalidBirthday: "درست تاریخ پیدائش منتخب کریں۔",
-      authUnderageBirthday: "آپ کی عمر کم از کم 18 سال ہونی چاہیے۔",
-      authEnterBirthday: "اپنی تاریخ پیدائش درج کریں۔",
-      authCancel: "منسوخ کریں",
-      authSet: "سیٹ کریں",
     ur: {
       authWelcome: 'Miimiid میں خوش آمدید',
       authSignInSubtitle: 'سیکھنا جاری رکھنے کے لیے سائن ان کریں',
@@ -12821,18 +8626,6 @@ async function submitQuiz() {
 
     },
 
-      authBirthday: "Kapan tanggal lahir Anda?",
-      authMonth: "Bulan",
-      authDay: "Hari",
-      authYear: "Tahun",
-      authSelectMonth: "Pilih bulan",
-      authSelectDay: "Pilih hari",
-      authSelectYear: "Pilih tahun",
-      authInvalidBirthday: "Pilih tanggal lahir yang valid.",
-      authUnderageBirthday: "Anda harus berusia minimal 18 tahun.",
-      authEnterBirthday: "Masukkan tanggal lahir Anda.",
-      authCancel: "Batal",
-      authSet: "Atur",
     id: {
       authWelcome: 'Selamat datang di Miimiid',
       authSignInSubtitle: 'Masuk untuk melanjutkan belajar',
@@ -12942,18 +8735,6 @@ async function submitQuiz() {
 
     },
 
-      authBirthday: "Apakah tarikh lahir anda?",
-      authMonth: "Bulan",
-      authDay: "Hari",
-      authYear: "Tahun",
-      authSelectMonth: "Pilih bulan",
-      authSelectDay: "Pilih hari",
-      authSelectYear: "Pilih tahun",
-      authInvalidBirthday: "Pilih tarikh lahir yang sah.",
-      authUnderageBirthday: "Anda mestilah berumur sekurang-kurangnya 18 tahun.",
-      authEnterBirthday: "Masukkan tarikh lahir anda.",
-      authCancel: "Batal",
-      authSet: "Tetapkan",
     ms: {
       authWelcome: 'Selamat datang ke Miimiid',
       authSignInSubtitle: 'Log masuk untuk terus belajar',
@@ -13063,18 +8844,6 @@ async function submitQuiz() {
 
     },
 
-      authBirthday: "Ngày sinh của bạn là gì?",
-      authMonth: "Tháng",
-      authDay: "Ngày",
-      authYear: "Năm",
-      authSelectMonth: "Chọn tháng",
-      authSelectDay: "Chọn ngày",
-      authSelectYear: "Chọn năm",
-      authInvalidBirthday: "Hãy chọn ngày sinh hợp lệ.",
-      authUnderageBirthday: "Bạn phải từ 18 tuổi trở lên.",
-      authEnterBirthday: "Nhập ngày sinh của bạn.",
-      authCancel: "Hủy",
-      authSet: "Đặt",
     vi: {
       authWelcome: 'Chào mừng bạn đến với Miimiid',
       authSignInSubtitle: 'Đăng nhập để tiếp tục học',
@@ -13184,18 +8953,6 @@ async function submitQuiz() {
 
     },
 
-      authBirthday: "วันเกิดของคุณคือวันไหน?",
-      authMonth: "เดือน",
-      authDay: "วัน",
-      authYear: "ปี",
-      authSelectMonth: "เลือกเดือน",
-      authSelectDay: "เลือกวัน",
-      authSelectYear: "เลือกปี",
-      authInvalidBirthday: "เลือกวันเกิดที่ถูกต้อง",
-      authUnderageBirthday: "คุณต้องมีอายุอย่างน้อย 18 ปี",
-      authEnterBirthday: "ป้อนวันเกิดของคุณ",
-      authCancel: "ยกเลิก",
-      authSet: "ตั้งค่า",
     th: {
       authWelcome: 'ยินดีต้อนรับสู่ Miimiid',
       authSignInSubtitle: 'ลงชื่อเข้าใช้เพื่อเรียนรู้ต่อ',
@@ -13303,18 +9060,6 @@ async function submitQuiz() {
 
     },
 
-      authBirthday: "你的生日是什么时候？",
-      authMonth: "月",
-      authDay: "日",
-      authYear: "年",
-      authSelectMonth: "选择月份",
-      authSelectDay: "选择日期",
-      authSelectYear: "选择年份",
-      authInvalidBirthday: "请选择有效的出生日期。",
-      authUnderageBirthday: "你必须年满18岁。",
-      authEnterBirthday: "请输入你的出生日期。",
-      authCancel: "取消",
-      authSet: "设置",
     zh: {
       authWelcome: '欢迎来到 Miimiid',
       authSignInSubtitle: '登录以继续学习',
@@ -13424,18 +9169,6 @@ async function submitQuiz() {
 
     },
 
-      authBirthday: "あなたの誕生日はいつですか？",
-      authMonth: "月",
-      authDay: "日",
-      authYear: "年",
-      authSelectMonth: "月を選択",
-      authSelectDay: "日を選択",
-      authSelectYear: "年を選択",
-      authInvalidBirthday: "有効な生年月日を選択してください。",
-      authUnderageBirthday: "18歳以上である必要があります。",
-      authEnterBirthday: "生年月日を入力してください。",
-      authCancel: "キャンセル",
-      authSet: "設定",
     ja: {
       authWelcome: 'Miimiidへようこそ',
       authSignInSubtitle: 'サインインして学習を続ける',
@@ -13545,18 +9278,6 @@ async function submitQuiz() {
 
     },
 
-      authBirthday: "생년월일이 언제인가요?",
-      authMonth: "월",
-      authDay: "일",
-      authYear: "년",
-      authSelectMonth: "월 선택",
-      authSelectDay: "일 선택",
-      authSelectYear: "연도 선택",
-      authInvalidBirthday: "유효한 생년월일을 선택하세요.",
-      authUnderageBirthday: "만 18세 이상이어야 합니다.",
-      authEnterBirthday: "생년월일을 입력하세요.",
-      authCancel: "취소",
-      authSet: "설정",
     ko: {
       authWelcome: 'Miimiid에 오신 것을 환영합니다',
       authSignInSubtitle: '로그인하여 학습을 계속하세요',
@@ -13666,18 +9387,6 @@ async function submitQuiz() {
 
     },
 
-      authBirthday: "Tarehe yako ya kuzaliwa ni ipi?",
-      authMonth: "Mwezi",
-      authDay: "Siku",
-      authYear: "Mwaka",
-      authSelectMonth: "Chagua mwezi",
-      authSelectDay: "Chagua siku",
-      authSelectYear: "Chagua mwaka",
-      authInvalidBirthday: "Chagua tarehe halali ya kuzaliwa.",
-      authUnderageBirthday: "Lazima uwe na umri wa angalau miaka 18.",
-      authEnterBirthday: "Weka tarehe yako ya kuzaliwa.",
-      authCancel: "Ghairi",
-      authSet: "Weka",
     sw: {
       authWelcome: 'Karibu Miimiid',
       authSignInSubtitle: 'Ingia ili kuendelea kujifunza',
@@ -13787,18 +9496,6 @@ async function submitQuiz() {
 
     },
 
-      authBirthday: "Kí ni ọjọ́ ìbí rẹ?",
-      authMonth: "Oṣù",
-      authDay: "Ọjọ́",
-      authYear: "Ọdún",
-      authSelectMonth: "Yan oṣù",
-      authSelectDay: "Yan ọjọ́",
-      authSelectYear: "Yan ọdún",
-      authInvalidBirthday: "Yan ọjọ́ ìbí tó wúlò.",
-      authUnderageBirthday: "O gbọdọ̀ jẹ́ ọmọ ọdún 18 tàbí ju bẹẹ lọ.",
-      authEnterBirthday: "Tẹ ọjọ́ ìbí rẹ sílẹ̀.",
-      authCancel: "Fagilee",
-      authSet: "Ṣètò",
     yo: {
       authWelcome: 'Kaabo si Miimiid',
       authSignInSubtitle: 'Wọlé láti tẹ̀síwájú nínú ẹ̀kọ́',
@@ -13908,18 +9605,6 @@ async function submitQuiz() {
 
     },
 
-      authBirthday: "Kedu ụbọchị ọmụmụ gị?",
-      authMonth: "Ọnwa",
-      authDay: "Ụbọchị",
-      authYear: "Afọ",
-      authSelectMonth: "Họrọ ọnwa",
-      authSelectDay: "Họrọ ụbọchị",
-      authSelectYear: "Họrọ afọ",
-      authInvalidBirthday: "Họrọ ụbọchị ọmụmụ ziri ezi.",
-      authUnderageBirthday: "Ị ga-abụrịrị opekata mpe afọ 18.",
-      authEnterBirthday: "Tinye ụbọchị ọmụmụ gị.",
-      authCancel: "Kagbuo",
-      authSet: "Tọọ",
     ig: {
       authWelcome: 'Nnọọ na Miimiid',
       authSignInSubtitle: 'Banye ka ị gaa n\'ihu n\'ịmụ ihe',
@@ -14029,18 +9714,6 @@ async function submitQuiz() {
 
     },
 
-      authBirthday: "Yaushe ne ranar haihuwarka?",
-      authMonth: "Wata",
-      authDay: "Rana",
-      authYear: "Shekara",
-      authSelectMonth: "Zaɓi wata",
-      authSelectDay: "Zaɓi rana",
-      authSelectYear: "Zaɓi shekara",
-      authInvalidBirthday: "Zaɓi ingantacciyar ranar haihuwa.",
-      authUnderageBirthday: "Dole ne ka kasance aƙalla shekara 18.",
-      authEnterBirthday: "Shigar da ranar haihuwarka.",
-      authCancel: "Soke",
-      authSet: "Saita",
     ha: {
       authWelcome: 'Barka da zuwa Miimiid',
       authSignInSubtitle: 'Shiga don ci gaba da koyo',
@@ -14591,13 +10264,6 @@ async function submitQuiz() {
   } else {
     initializeMiimiidApplication();
   }
-
-
-    /*
-     * MIIMIID REGISTRATION INITIALIZATION
-     * Programmatic initialization fix.
-     */
-    initializeMiimiidRegistrationFlow();
 
 </script>
 
