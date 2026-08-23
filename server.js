@@ -15,12 +15,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 /*
- * Authentication engine bootstrap
- *
- * index.html remains the product shell, but the production
- * authentication engine is loaded before the legacy inline
- * application code. This lets the controller own auth events
- * without duplicating the authentication UI itself.
+ * Authentication engine bootstrap.
+ * The product shell remains index.html, while authentication behavior
+ * and its state-driven UI primitives are loaded before the legacy
+ * inline application code. This keeps the migration reversible until
+ * legacy auth ownership has been fully removed and verified.
  */
 app.get(['/', '/index.html'], (req, res, next) => {
   try {
@@ -31,6 +30,13 @@ app.get(['/', '/index.html'], (req, res, next) => {
       html = html.replace(
         /<\/head>/i,
         '  <script src="/miimiid-auth-engine-v2.js" defer></script>\n</head>'
+      );
+    }
+
+    if (!html.includes('/miimiid-auth-engine.css')) {
+      html = html.replace(
+        /<\/head>/i,
+        '  <link rel="stylesheet" href="/miimiid-auth-engine.css">\n</head>'
       );
     }
 
