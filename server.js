@@ -13,24 +13,24 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-/* Auth Engine v5 is the single authentication runtime owner. */
+/* Miimiid Auth Engine is the single authentication runtime owner. */
 app.get(['/', '/index.html'], (req, res, next) => {
   try {
     const indexPath = path.join(__dirname, 'public', 'index.html');
     let html = fs.readFileSync(indexPath, 'utf8');
 
-    html = html.replace(/<script\s+src=["']\/miimiid-auth-engine-(?:v2|v3|v4|v5)\.js["'][^>]*><\/script>/gi, '');
+    html = html.replace(/<script\s+src=["']\/miimiid-auth-engine(?:-v[2-9])?\.js["'][^>]*><\/script>/gi, '');
     html = html.replace(/<link\s+rel=["']stylesheet["']\s+href=["']\/miimiid-auth-engine\.css["'][^>]*>/gi, '');
     html = html.replace(/<\/head>/i,
-      '  <link rel="stylesheet" href="/miimiid-auth-engine.css">\n  <script src="/miimiid-auth-engine-v5.js"></script>\n</head>'
+      '  <script type="module" src="/auth-engine.js"></script>\n</head>'
     );
 
-    // Auth v5 owns application boot. Keep legacy boot paths inert.
+    // The auth engine owns authentication/application bootstrap.
     html = html.replace(/\n\s*fetchCourses\(\);\s*\n\s*<\/script>/,
       '\n    /* Authentication engine owns application boot. */\n\n  </script>'
     );
     html = html.replace(/\n\s*if \(document\.readyState === "loading"\) \{\s*document\.addEventListener\(\s*"DOMContentLoaded",\s*initializeMiimiidApplication\s*\);\s*\} else \{\s*initializeMiimiidApplication\(\);\s*\}\s*/,
-      '\n    /* Auth v5 owns authentication/application bootstrap. */\n\n'
+      '\n    /* Authentication engine owns authentication/application bootstrap. */\n\n'
     );
 
     res.type('html').send(html);
@@ -41,7 +41,6 @@ app.get(['/', '/index.html'], (req, res, next) => {
 
 app.use(express.static('public'));
 
-// Existing MongoDB configuration is intentionally unchanged.
 const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/xylotix';
 
 mongoose
