@@ -1,0 +1,11 @@
+/* Miimiid Authentication Engine UI primitives. State is controlled by the engine. */
+.miimiid-async-button { position: relative; display: inline-flex; align-items: center; justify-content: center; gap: .5rem; }
+.miimiid-async-button .miimiid-engine-content { display: inline-flex; align-items: center; justify-content: center; }
+.miimiid-async-button .miimiid-engine-spinner { width: 1.05rem; height: 1.05rem; border: 2px solid currentColor; border-right-color: transparent; border-radius: 50%; display: none; flex: 0 0 auto; animation: miimiid-auth-spin .7s linear infinite; }
+.miimiid-async-button[data-auth-action-state="submitting"] .miimiid-engine-content { visibility: hidden; }
+.miimiid-async-button[data-auth-action-state="submitting"] .miimiid-engine-spinner { display: inline-block; }
+.miimiid-async-button[aria-busy="true"] { pointer-events: none; }
+.miimiid-auth-field-error { min-height: 1.1em; }
+.miimiid-auth-field [aria-invalid="true"] { outline: none; }
+@keyframes miimiid-auth-spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .miimiid-async-button .miimiid-engine-spinner { animation-duration: 1.4s; } }
