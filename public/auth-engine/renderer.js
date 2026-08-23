@@ -3,9 +3,18 @@ import { AUTH_FLOW, AUTH_MODE_ACTIONS } from './config.js';
 
 const FORM_IDS = { login: 'miimiid-login-form', register: 'miimiid-register-form', forgot: 'miimiid-forgot-form', reset: 'miimiid-reset-form' };
 const FALLBACK_MESSAGES = {
-  authRequired: 'This field is required.', authInvalidEmail: 'Enter a valid email address.', authPasswordTooShort: 'Password must be at least 8 characters.', authPasswordMismatch: 'Passwords do not match.', authBirthdayInvalid: 'Select a valid birthday.', authUnderageBirthday: 'You must be at least 18 years old.', authVerificationCodeRequired: 'Enter the 6-digit verification code.', authVerificationCodeInvalid: 'Enter a valid 6-digit verification code.', authGenderRequired: 'Select your gender.', authAuthenticated: 'You are authenticated.', authResetInstructionsSent: 'Password reset instructions have been sent.', authPasswordResetSuccess: 'Your password has been reset successfully.'
+  authRequired: 'This field is required.',
+  authEnterValidEmail: 'Enter a valid email address.',
+  authPasswordMinLength: 'Password must be at least 8 characters.',
+  authPasswordMismatch: 'Passwords do not match.',
+  authBirthdayInvalid: 'Select a valid birthday.',
+  authGenderRequired: 'Select your gender.',
+  authVerificationCodeRequired: 'Enter the 6-digit verification code.',
+  authAuthenticated: 'You are authenticated.',
+  authResetInstructionsSent: 'Password reset instructions have been sent.',
+  authPasswordResetSuccess: 'Your password has been reset successfully.'
 };
-function t(key) { try { const translated = window.miimiidDashboardTranslate?.(key); if (translated && translated !== key) return translated; } catch (_) {} return FALLBACK_MESSAGES[key] || key; }
+function t(key) { try { const translated = window.miimiidDashboardTranslate?.(key); if (translated && translated !== key) return translated; } catch (_) {} return FALLBACK_MESSAGES[key] || 'Please check this field and try again.'; }
 
 export class AuthRenderer {
   constructor(controller) { this.controller = controller; this.style(); }
@@ -19,7 +28,7 @@ export class AuthRenderer {
     const field = this.controller.flow.steps.birthday?.fields?.find(f => f.id === 'gender'); if (!field || document.getElementById(field.domId)) return;
     const dobField = this.controller.flow.steps.birthday.fields.find(f => f.id === 'dateOfBirth'); const dob = document.getElementById(dobField?.domId); if (!dob) return;
     const p = dob.closest('.miimiid-auth-field') || dob.parentElement; const w = document.createElement('div'); w.className = p?.className || 'miimiid-auth-field';
-    w.innerHTML = `<label for="${field.domId}">${t('authGender') || 'Gender'}</label><select id="${field.domId}"><option value="">${t('authSelectGender') || 'Select gender'}</option>${(field.options || []).map(v => `<option value="${v}">${t(v === 'male' ? 'authMale' : 'authFemale')}</option>`).join('')}</select>`;
+    w.innerHTML = `<label for="${field.domId}">${t('authGender')}</label><select id="${field.domId}"><option value="">${t('authSelectGender')}</option>${(field.options || []).map(v => `<option value="${v}">${t(v === 'male' ? 'authMale' : 'authFemale')}</option>`).join('')}</select>`;
     (p?.parentElement || dob.parentElement).insertBefore(w, p || dob);
   }
   prepareSteps() {
