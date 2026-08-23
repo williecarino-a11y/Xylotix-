@@ -9,36 +9,23 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-/*
- * Authentication engine bootstrap.
- * The product shell remains index.html, while authentication behavior
- * and its state-driven UI primitives are loaded before the legacy
- * inline application code. This keeps the migration reversible until
- * legacy auth ownership has been fully removed and verified.
- */
+/* Unified authentication engine bootstrap. */
 app.get(['/', '/index.html'], (req, res, next) => {
   try {
     const indexPath = path.join(__dirname, 'public', 'index.html');
     let html = fs.readFileSync(indexPath, 'utf8');
 
-    if (!html.includes('/miimiid-auth-engine-v2.js')) {
-      html = html.replace(
-        /<\/head>/i,
-        '  <script src="/miimiid-auth-engine-v2.js" defer></script>\n</head>'
-      );
-    }
+    html = html.replace(/<script\s+src=["']\/miimiid-auth-engine-(?:v2|v3)\.js["'][^>]*><\/script>/gi, '');
+    html = html.replace(/<link\s+rel=["']stylesheet["']\s+href=["']\/miimiid-auth-engine\.css["'][^>]*>/gi, '');
 
-    if (!html.includes('/miimiid-auth-engine.css')) {
-      html = html.replace(
-        /<\/head>/i,
-        '  <link rel="stylesheet" href="/miimiid-auth-engine.css">\n</head>'
-      );
-    }
+    html = html.replace(
+      /<\/head>/i,
+      '  <link rel="stylesheet" href="/miimiid-auth-engine.css">\n  <script src="/miimiid-auth-engine-v3.js" defer></script>\n</head>'
+    );
 
     res.type('html').send(html);
   } catch (error) {
@@ -48,46 +35,27 @@ app.get(['/', '/index.html'], (req, res, next) => {
 
 app.use(express.static('public'));
 
-// Database Connection
-const MONGO_URI =
-  process.env.MONGO_URI ||
-  'mongodb://localhost:27017/xylotix';
+const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/xylotix';
 
 mongoose
   .connect(MONGO_URI)
   .then(() => console.log('MongoDB connected successfully'))
-  .catch((err) =>
-    console.error('MongoDB connection error:', err)
-  );
+  .catch((err) => console.error('MongoDB connection error:', err));
 
-// Authentication API
-const { router: authRoutes } =
-  require('./routes/authRoutes');
-
+const { router: authRoutes } = require('./routes/authRoutes');
 app.use('/api/auth', authRoutes);
 
-// Learning API
 const learningRoutes = require('./routes/learningRoutes');
 app.use('/api/learn', learningRoutes);
 
-const funCenterRoutes =
-  require('./routes/funCenterRoutes');
+const funCenterRoutes = require('./routes/funCenterRoutes');
+app.use('/api/fun-center', funCenterRoutes);
 
-app.use(
-  '/api/fun-center',
-  funCenterRoutes
-);
-
-// Miimiid AI Tutor API
 const aiTutorRoutes = require('./routes/aiTutorRoutes');
 app.use('/api/ai-tutor', aiTutorRoutes);
 
-// Health check
 app.get('/api/health', (req, res) => {
-  res.status(200).json({
-    status: 'OK',
-    message: 'Server is running cleanly.'
-  });
+  res.status(200).json({ status: 'OK', message: 'Server is running cleanly.' });
 });
 
 app.listen(PORT, () => {
