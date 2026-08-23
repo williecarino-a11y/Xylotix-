@@ -51,7 +51,19 @@ export class AuthRenderer {
   }
 
   errors() {
-    for(const f of this.controller.step?.fields||[]){const el=document.getElementById(E[this.controller.state.step]?.[f.id]||'');if(!el)continue;const er=this.controller.state.form.errors[f.id];el.setAttribute('aria-invalid',String(Boolean(er)));const p=el.closest('.miimiid-auth-field')||el.parentElement;if(!p)continue;let n=p.querySelector('[data-auth-engine-error]');if(!n){n=document.createElement('div');n.dataset.authEngineError='1';n.className='miimiid-auth-field-error';p.appendChild(n);}n.textContent=er?t(er.code,'Please check this field.'):'';n.hidden=!er;}
+    const state = this.controller.state;
+    for(const f of this.controller.step?.fields||[]){
+      const el=document.getElementById(E[state.step]?.[f.id]||'');
+      if(!el)continue;
+      const er=state.form.touched[f.id] ? state.form.errors[f.id] : null;
+      el.setAttribute('aria-invalid',String(Boolean(er)));
+      const p=el.closest('.miimiid-auth-field')||el.parentElement;
+      if(!p)continue;
+      let n=p.querySelector('[data-auth-engine-error]');
+      if(!n){n=document.createElement('div');n.dataset.authEngineError='1';n.className='miimiid-auth-field-error';p.appendChild(n);}
+      n.textContent=er?t(er.code,'Please check this field.'):'';
+      n.hidden=!er;
+    }
   }
 
   render(){const s=this.controller.state;this.prepareGender();this.prepareSteps();Object.entries(FORM_IDS).forEach(([m,id])=>document.getElementById(id)?.classList.toggle('hidden',m!==s.flow));if(s.flow==='register'){const n={welcome:1,name:2,email:3,birthday:4,password:5,verification:6}[s.step];document.querySelectorAll('#miimiid-register-form [data-register-step]').forEach(x=>x.classList.toggle('hidden',Number(x.dataset.registerStep)!==n));}if(this.controller.step?.primaryAction)this.button(this.controller.step.primaryAction,s.step);this.errors();const status=document.getElementById('miimiid-auth-status');if(status){status.textContent=s.error?.message||'';status.classList.toggle('hidden',!s.error);}}
