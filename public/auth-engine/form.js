@@ -11,7 +11,13 @@ export const FIELD_STATES = Object.freeze({
 export class FormEngine {
   constructor() { this.reset(); }
 
-  reset() { this.values = {}; this.touched = {}; this.dirty = {}; this.errors = {}; this.fields = {}; }
+  reset() {
+    this.values = {};
+    this.touched = {};
+    this.dirty = {};
+    this.errors = {};
+    this.fields = {};
+  }
 
   configure(fields, source = {}) {
     const previous = this.values;
@@ -35,14 +41,17 @@ export class FormEngine {
     this.values[field] = value;
     this.touched[field] = true;
     this.dirty[field] = true;
-    this.fields[field] = { ...(this.fields[field] || {}), state: value ? FIELD_STATES.FILLED : FIELD_STATES.UNTOUCHED };
+    this.fields[field] = {
+      ...(this.fields[field] || {}),
+      state: value ? FIELD_STATES.FILLED : FIELD_STATES.UNTOUCHED
+    };
   }
 
   setFocused(field, focused = true) {
     if (!this.fields[field] || this.fields[field].disabled) return;
     this.fields[field].state = focused
       ? FIELD_STATES.FOCUSED
-      : (this.errors[field] && this.touched[field] ? FIELD_STATES.INVALID : (this.values[field] ? FIELD_STATES.FILLED : FIELD_STATES.UNTOUCHED));
+      : (this.errors[field] ? FIELD_STATES.INVALID : (this.values[field] ? FIELD_STATES.FILLED : FIELD_STATES.UNTOUCHED));
   }
 
   touch(field) {
@@ -60,14 +69,13 @@ export class FormEngine {
     this.errors = errors || {};
     for (const id of Object.keys(this.fields)) {
       if (this.fields[id].disabled) continue;
-      this.fields[id].state = this.errors[id] && this.touched[id]
+      this.fields[id].state = this.errors[id]
         ? FIELD_STATES.INVALID
         : (this.values[id] ? FIELD_STATES.VALID : FIELD_STATES.UNTOUCHED);
     }
   }
 
   get canContinue() {
-    return Object.values(this.fields).every(field => !field.disabled) &&
-      Object.keys(this.errors).every(id => !this.touched[id]);
+    return Object.keys(this.errors).length === 0 && Object.values(this.fields).every(field => !field.disabled);
   }
 }
