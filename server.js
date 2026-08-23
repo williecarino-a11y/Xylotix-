@@ -13,24 +13,24 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-/* Auth Engine v4 is the single authentication runtime owner. */
+/* Auth Engine v5 is the single authentication runtime owner. */
 app.get(['/', '/index.html'], (req, res, next) => {
   try {
     const indexPath = path.join(__dirname, 'public', 'index.html');
     let html = fs.readFileSync(indexPath, 'utf8');
 
-    html = html.replace(/<script\s+src=["']\/miimiid-auth-engine-(?:v2|v3|v4)\.js["'][^>]*><\/script>/gi, '');
+    html = html.replace(/<script\s+src=["']\/miimiid-auth-engine-(?:v2|v3|v4|v5)\.js["'][^>]*><\/script>/gi, '');
     html = html.replace(/<link\s+rel=["']stylesheet["']\s+href=["']\/miimiid-auth-engine\.css["'][^>]*>/gi, '');
     html = html.replace(/<\/head>/i,
-      '  <link rel="stylesheet" href="/miimiid-auth-engine.css">\n  <script src="/miimiid-auth-engine-v4.js"></script>\n</head>'
+      '  <link rel="stylesheet" href="/miimiid-auth-engine.css">\n  <script src="/miimiid-auth-engine-v5.js"></script>\n</head>'
     );
 
-    // Auth v4 owns application boot. Keep legacy boot paths inert.
+    // Auth v5 owns application boot. Keep legacy boot paths inert.
     html = html.replace(/\n\s*fetchCourses\(\);\s*\n\s*<\/script>/,
       '\n    /* Authentication engine owns application boot. */\n\n  </script>'
     );
     html = html.replace(/\n\s*if \(document\.readyState === "loading"\) \{\s*document\.addEventListener\(\s*"DOMContentLoaded",\s*initializeMiimiidApplication\s*\);\s*\} else \{\s*initializeMiimiidApplication\(\);\s*\}\s*/,
-      '\n    /* Auth v4 owns authentication/application bootstrap. */\n\n'
+      '\n    /* Auth v5 owns authentication/application bootstrap. */\n\n'
     );
 
     res.type('html').send(html);
