@@ -36,7 +36,7 @@ export class ActionController {
     } catch (error) {
       this.store.patch(s => ({ ...s, status: AUTH_STATUS.FAILURE, request: { status: 'failure', action: action.id }, error }));
       this.onRender?.();
-      throw error;
+      return false;
     } finally {
       this.running = false;
       if (this.store.getState().request.status === 'loading') this.store.patch(s => ({ ...s, request: { status: 'idle', action: null }, status: AUTH_STATUS.IDLE }));
@@ -74,7 +74,17 @@ export class AuthController {
   configureStep() {
     const source = this.store.getState().form.values;
     this.form.configure(this.step?.fields || [], source);
-    this.store.patch(s => ({ ...s, form: { ...s.form, values: { ...s.form.values, ...this.form.values }, errors: {} } }));
+    this.store.patch(s => ({
+      ...s,
+      form: {
+        ...s.form,
+        values: { ...s.form.values, ...this.form.values },
+        touched: {},
+        dirty: {},
+        errors: {},
+        fields: this.form.fields
+      }
+    }));
     this.render(this);
   }
 
@@ -85,48 +95,71 @@ export class AuthController {
     this.configureStep();
   }
 
+  fieldFocused(id) {
+    this.form.setFocused(id, true);
+    this.store.patch(s => ({ ...s, form: { ...s.form, fields: this.form.fields } }));
+    this.render(this);
+  }
+
+  fieldBlurred(id) {
+    this.form.setFocused(id, false);
+    this.form.touch(id);
+    this.store.patch(s => ({ ...s, form: { ...s.form, touched: { ...s.form.touched, [id]: true }, fields: this.form.fields } }));
+    this.render(this);
+  }
+
   fieldChanged(id, value) {
     this.form.setValue(id, value);
     const values = { ...this.store.getState().form.values, ...this.form.values };
     const errors = this.validation.validateStep(this.step, values);
     this.form.setErrors(errors);
-    this.store.patch(s => ({ ...s, status: AUTH_STATUS.IDLE, form: { ...s.form, values, touched: { ...s.form.touched, [id]: true }, dirty: { ...s.form.dirty, [id]: true }, errors } }));
+    this.store.patch(s => ({
+      ...s,
+      status: AUTH_STATUS.IDLE,
+      error: null,
+      form: {
+        ...s.form,
+        values,
+        touched: { ...s.form.touched, [id]: true },
+        dirty: { ...s.form.dirty, [id]: true },
+        errors,
+        fields: this.form.fields
+      }
+    }));
     this.render(this);
   }
 
-  fieldFocused(id) { this.form.setFocused(id, true); this.render(this); }
-  fieldBlurred(id) { this.form.setFocused(id, false); this.form.touch(id); this.render(this); }
-
   get canContinue() {
     const state = this.state;
-    return state.status !== AUTH_STATUS.SUBMITTING && state.status !== AUTH_STATUS.VALIDATING && this.form.canContinue;
+    return Boolean(this.step?.primaryAction) && state.request.status !== 'loading' && state.status !== AUTH_STATUS.SUBMITTING && state.status !== AUTH_STATUS.VALIDATING && this.form.canContinue;
   }
 
   async primaryAction() {
-    if (this.actions.running) return false;
+    if (this.actions.running || this.state.request.status === 'loading') return false;
     const fields = this.step?.fields || [];
     const values = { ...this.state.form.values, ...this.form.values };
     this.store.patch(s => ({ ...s, status: AUTH_STATUS.VALIDATING }));
     this.form.touchAll(fields);
     const errors = this.validation.validateStep(this.step, values);
     this.form.setErrors(errors);
+    this.store.patch(s => ({ ...s, form: { ...s.form, touched: Object.fromEntries(fields.map(f => [f.id, true])), errors, fields: this.form.fields } }));
     if (Object.keys(errors).length) {
-      this.store.patch(s => ({ ...s, status: AUTH_STATUS.FAILURE, form: { ...s.form, touched: Object.fromEntries(fields.map(f => [f.id, true])), errors }, error: null }));
+      this.store.patch(s => ({ ...s, status: AUTH_STATUS.FAILURE, error: null }));
       this.render(this);
       return false;
     }
-    this.store.patch(s => ({ ...s, form: { ...s.form, errors: {} } }));
+    this.store.patch(s => ({ ...s, form: { ...s.form, errors: {} }, error: null }));
     this.render(this);
-    try { await this.actions.execute(this.step?.primaryAction, values); return true; }
-    catch (_) { return false; }
+    const result = await this.actions.execute(this.step?.primaryAction, values);
+    return result !== false;
   }
 
   async secondaryAction(id) {
-    if (this.actions.running) return false;
+    if (this.actions.running || this.state.request.status === 'loading') return false;
     const action = (this.step?.secondaryActions || []).find(x => x.id === id);
     if (!action) return false;
-    try { await this.actions.execute(action, { ...this.state.form.values, ...this.form.values }); return true; }
-    catch (_) { return false; }
+    const result = await this.actions.execute(action, { ...this.state.form.values, ...this.form.values });
+    return result !== false;
   }
 
   back() {
