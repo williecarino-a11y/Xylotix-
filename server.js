@@ -13,7 +13,17 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-/* Unified authentication engine bootstrap. */
+/*
+ * Unified authentication engine bootstrap.
+ *
+ * The engine is intentionally loaded synchronously in <head> so it can
+ * establish the single authentication event owner before the large legacy
+ * inline application script attaches its handlers.
+ *
+ * Authentication also owns application boot: the legacy immediate
+ * fetchCourses() call is suppressed so authenticated data cannot be
+ * requested before /api/auth/me establishes the session.
+ */
 app.get(['/', '/index.html'], (req, res, next) => {
   try {
     const indexPath = path.join(__dirname, 'public', 'index.html');
@@ -24,7 +34,12 @@ app.get(['/', '/index.html'], (req, res, next) => {
 
     html = html.replace(
       /<\/head>/i,
-      '  <link rel="stylesheet" href="/miimiid-auth-engine.css">\n  <script src="/miimiid-auth-engine-v3.js" defer></script>\n</head>'
+      '  <link rel="stylesheet" href="/miimiid-auth-engine.css">\n  <script src="/miimiid-auth-engine-v3.js"></script>\n</head>'
+    );
+
+    html = html.replace(
+      /\n\s*fetchCourses\(\);\n\s*\n\s*<\/script>/,
+      '\n    /* Authentication engine owns application boot. */\n\n  </script>'
     );
 
     res.type('html').send(html);
