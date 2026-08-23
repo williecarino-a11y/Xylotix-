@@ -19,18 +19,39 @@ app.get(['/', '/index.html'], (req, res, next) => {
     const indexPath = path.join(__dirname, 'public', 'index.html');
     let html = fs.readFileSync(indexPath, 'utf8');
 
+    /*
+     * Authentication is a viewport boundary, not another dashboard mode.
+     * Remove legacy auth-engine script variants and inject the one canonical
+     * ES-module entry point exactly once.
+     */
     html = html.replace(/<script\s+src=["']\/miimiid-auth-engine(?:-v[2-9])?\.js["'][^>]*><\/script>/gi, '');
+    html = html.replace(/<script\s+type=["']module["']\s+src=["']\/auth-engine\.js["'][^>]*><\/script>/gi, '');
     html = html.replace(/<link\s+rel=["']stylesheet["']\s+href=["']\/miimiid-auth-engine\.css["'][^>]*>/gi, '');
     html = html.replace(/<\/head>/i,
       '  <script type="module" src="/auth-engine.js"></script>\n</head>'
     );
 
-    // The auth engine owns authentication/application bootstrap.
-    html = html.replace(/\n\s*fetchCourses\(\);\s*\n\s*<\/script>/,
-      '\n    /* Authentication engine owns application boot. */\n\n  </script>'
+    /*
+     * The legacy application bootstrap must never race the Auth Engine.
+     * These are invocation sites only; the function definitions remain in
+     * index.html for legacy course/dashboard code that the authenticated
+     * shell may still use.
+     */
+    html = html.replace(/(^|[\r\n])([ \t]*)fetchCourses\(\s*\);(?=[ \t]*(?:[\r\n]|<\/script>))/g,
+      '$1$2/* Auth Engine owns application bootstrap. */$3'
     );
-    html = html.replace(/\n\s*if \(document\.readyState === "loading"\) \{\s*document\.addEventListener\(\s*"DOMContentLoaded",\s*initializeMiimiidApplication\s*\);\s*\} else \{\s*initializeMiimiidApplication\(\);\s*\}\s*/,
-      '\n    /* Authentication engine owns authentication/application bootstrap. */\n\n'
+    html = html.replace(/(^|[\r\n])([ \t]*)initializeMiimiidApplication\(\s*\);(?=[ \t]*(?:[\r\n]|<\/script>))/g,
+      '$1$2/* Auth Engine owns authentication/application bootstrap. */'
+    );
+
+    /*
+     * Also remove the common DOMContentLoaded/readyState wrapper when it is
+     * solely invoking initializeMiimiidApplication(). This prevents an older
+     * boot path from becoming active if its formatting differs from the old
+     * exact-string replacement.
+     */
+    html = html.replace(/\s*if\s*\(\s*document\.readyState\s*===\s*["']loading["']\s*\)\s*\{\s*document\.addEventListener\(\s*["']DOMContentLoaded["']\s*,\s*initializeMiimiidApplication\s*\)\s*;?\s*\}\s*else\s*\{\s*initializeMiimiidApplication\s*\(\s*\)\s*;?\s*\}/gi,
+      '\n    /* Auth Engine owns authentication/application bootstrap. */\n'
     );
 
     res.type('html').send(html);
