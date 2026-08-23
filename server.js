@@ -20,9 +20,10 @@ app.use(cookieParser());
  * establish the single authentication event owner before the large legacy
  * inline application script attaches its handlers.
  *
- * Authentication also owns application boot: the legacy immediate
- * fetchCourses() call is suppressed so authenticated data cannot be
- * requested before /api/auth/me establishes the session.
+ * Authentication owns application boot: legacy authentication bootstrap
+ * and the immediate course bootstrap are suppressed. Auth v3 is therefore
+ * the only runtime owner responsible for session restoration and crossing
+ * the authenticated application boundary.
  */
 app.get(['/', '/index.html'], (req, res, next) => {
   try {
@@ -37,9 +38,16 @@ app.get(['/', '/index.html'], (req, res, next) => {
       '  <link rel="stylesheet" href="/miimiid-auth-engine.css">\n  <script src="/miimiid-auth-engine-v3.js"></script>\n</head>'
     );
 
+    // Prevent the legacy learning bootstrap from running before auth.
     html = html.replace(
       /\n\s*fetchCourses\(\);\n\s*\n\s*<\/script>/,
       '\n    /* Authentication engine owns application boot. */\n\n  </script>'
+    );
+
+    // Prevent the legacy authentication bootstrap from competing with v3.
+    html = html.replace(
+      /\n\s*if \(document\.readyState === "loading"\) \{\s*document\.addEventListener\(\s*"DOMContentLoaded",\s*initializeMiimiidApplication\s*\);\s*\} else \{\s*initializeMiimiidApplication\(\);\s*\}\s*/,
+      '\n    /* Auth v3 owns authentication/application bootstrap. */\n\n'
     );
 
     res.type('html').send(html);
