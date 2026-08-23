@@ -45,9 +45,9 @@ export class AuthRenderer {
   button(action,step) {
     const b=document.getElementById(E[step]?.action); if(!b)return;
     const loading=this.controller.state.request.status==='loading'&&this.controller.state.request.action===action.id;
-    const disabled=loading||this.controller.state.status===AUTH_STATUS.VALIDATING;
+    const disabled=loading||this.controller.state.status===AUTH_STATUS.VALIDATING||!this.controller.canContinue;
     if(!b.querySelector('.miimiid-auth-v5-spinner')){const h=b.innerHTML;b.innerHTML=`<span class="miimiid-auth-v5-label">${h}</span><span class="miimiid-auth-v5-spinner" aria-hidden="true"></span>`;}
-    b.disabled=disabled;b.setAttribute('aria-busy',String(loading));b.classList.toggle('miimiid-auth-v5-loading',loading);b.querySelector('.miimiid-auth-v5-spinner').style.display=loading?'block':'none';
+    b.disabled=disabled;b.setAttribute('aria-busy',String(loading));b.setAttribute('aria-disabled',String(disabled));b.classList.toggle('miimiid-auth-v5-loading',loading);b.querySelector('.miimiid-auth-v5-spinner').style.display=loading?'block':'none';
   }
 
   errors() {
