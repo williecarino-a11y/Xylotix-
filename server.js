@@ -3,6 +3,8 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
+const fs = require('fs');
+const path = require('path');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -11,6 +13,33 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+
+/*
+ * Authentication engine bootstrap
+ *
+ * index.html remains the product shell, but the production
+ * authentication engine is loaded before the legacy inline
+ * application code. This lets the controller own auth events
+ * without duplicating the authentication UI itself.
+ */
+app.get(['/', '/index.html'], (req, res, next) => {
+  try {
+    const indexPath = path.join(__dirname, 'public', 'index.html');
+    let html = fs.readFileSync(indexPath, 'utf8');
+
+    if (!html.includes('/miimiid-auth-engine-v2.js')) {
+      html = html.replace(
+        /<\/head>/i,
+        '  <script src="/miimiid-auth-engine-v2.js" defer></script>\n</head>'
+      );
+    }
+
+    res.type('html').send(html);
+  } catch (error) {
+    next(error);
+  }
+});
+
 app.use(express.static('public'));
 
 // Database Connection
