@@ -11,13 +11,7 @@ export const FIELD_STATES = Object.freeze({
 export class FormEngine {
   constructor() { this.reset(); }
 
-  reset() {
-    this.values = {};
-    this.touched = {};
-    this.dirty = {};
-    this.errors = {};
-    this.fields = {};
-  }
+  reset() { this.values = {}; this.touched = {}; this.dirty = {}; this.errors = {}; this.fields = {}; }
 
   configure(fields, source = {}) {
     const previous = this.values;
@@ -73,6 +67,7 @@ export class FormEngine {
   }
 
   get canContinue() {
-    return Object.entries(this.errors).every(([id]) => !this.touched[id]) && Object.values(this.fields).every(field => !field.disabled);
+    return Object.values(this.fields).every(field => !field.disabled) &&
+      Object.keys(this.errors).every(id => !this.touched[id]);
   }
 }
