@@ -14,10 +14,15 @@ export class FormEngine {
   }
 
   configure(fields, source = {}) {
+    const previous = this.values;
+    this.touched = {};
+    this.dirty = {};
+    this.errors = {};
+    this.fields = {};
     this.values = {};
     for (const field of fields || []) {
-      this.values[field.id] = source[field.id] ?? '';
-      this.fields[field.id] = { state: FIELD_STATES.UNTOUCHED, disabled: false };
+      this.values[field.id] = source[field.id] ?? previous[field.id] ?? '';
+      this.fields[field.id] = { state: FIELD_STATES.UNTOUCHED, disabled: Boolean(field.disabled) };
     }
   }
 
@@ -28,9 +33,14 @@ export class FormEngine {
     this.fields[field] = { ...(this.fields[field] || {}), state: value ? FIELD_STATES.FILLED : FIELD_STATES.UNTOUCHED };
   }
 
+  setFocused(field, focused = true) {
+    if (!this.fields[field]) return;
+    this.fields[field].state = focused ? FIELD_STATES.FOCUSED : (this.values[field] ? FIELD_STATES.FILLED : FIELD_STATES.UNTOUCHED);
+  }
+
   touch(field) {
     this.touched[field] = true;
-    if (this.fields[field]) this.fields[field].state = this.values[field] ? FIELD_STATES.FILLED : FIELD_STATES.UNTOUCHED;
+    if (this.fields[field] && !this.errors[field]) this.fields[field].state = this.values[field] ? FIELD_STATES.FILLED : FIELD_STATES.UNTOUCHED;
   }
 
   touchAll(fields) { for (const field of fields || []) this.touch(field.id); }
