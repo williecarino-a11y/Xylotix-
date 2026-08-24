@@ -13,25 +13,21 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-/* Miimiid Auth Engine is the single authentication runtime owner. */
+/* Miimiid authentication bootstrap lives in public/index.html. */
 app.get(['/', '/index.html'], (req, res, next) => {
   try {
     const indexPath = path.join(__dirname, 'public', 'index.html');
     let html = fs.readFileSync(indexPath, 'utf8');
 
+    // Do not inject the retired standalone auth engine. The current page
+    // already contains the authoritative authentication runtime and UI.
     html = html.replace(/<script\s+src=["']\/miimiid-auth-engine(?:-v[2-9])?\.js["'][^>]*><\/script>/gi, '');
     html = html.replace(/<link\s+rel=["']stylesheet["']\s+href=["']\/miimiid-auth-engine\.css["'][^>]*>/gi, '');
-    html = html.replace(/<\/head>/i,
-      '  <script type="module" src="/auth-engine.js"></script>\n</head>'
-    );
 
-    // The auth engine owns authentication/application bootstrap.
-    html = html.replace(/\n\s*fetchCourses\(\);\s*\n\s*<\/script>/,
-      '\n    /* Authentication engine owns application boot. */\n\n  </script>'
-    );
-    html = html.replace(/\n\s*if \(document\.readyState === "loading"\) \{\s*document\.addEventListener\(\s*"DOMContentLoaded",\s*initializeMiimiidApplication\s*\);\s*\} else \{\s*initializeMiimiidApplication\(\);\s*\}\s*/,
-      '\n    /* Authentication engine owns authentication/application bootstrap. */\n\n'
-    );
+    // Prevent the legacy learning bootstrap from fetching courses before the
+    // authentication state has been established. Keep the real auth
+    // application initializer intact so unauthenticated users enter auth.
+    html = html.replace(/\n\s*fetchCourses\(\);\s*\n\s*<\/script>/, '\n    /* Courses load only after authenticated learning navigation. */\n\n  </script>');
 
     res.type('html').send(html);
   } catch (error) {
