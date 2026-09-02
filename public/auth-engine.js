@@ -87,6 +87,25 @@ import { AUTH_FLOW, AUTH_MODE_ACTIONS } from './auth-engine/config.js';
     if (typeof window.initializeMiimiidDashboard === 'function') window.initializeMiimiidDashboard(user).catch?.(console.error);
   }
 
+  /*
+   * FIX: this is the missing counterpart to showAuthenticated().
+   *
+   * Previously, nothing ever explicitly asserted the logged-out state.
+   * The code relied on the static HTML's default `hidden` class on both
+   * #miimiid-auth-view and #miimiid-app-shell to "just happen" to be
+   * correct at rest. That's fragile: it silently depends on no other
+   * script ever touching those elements or their ancestors, and it
+   * gives no explicit signal of intent. This function makes the
+   * logged-out state an active, deliberate assertion instead of an
+   * assumption -- mirroring showAuthenticated() exactly, just inverted.
+   */
+  function showUnauthenticated() {
+    const authView = document.getElementById('miimiid-auth-view');
+    const appShell = document.getElementById('miimiid-app-shell');
+    if (appShell) { appShell.style.display = 'none'; appShell.style.visibility = 'hidden'; appShell.setAttribute('aria-hidden', 'true'); }
+    if (authView) { authView.style.display = 'flex'; authView.classList.remove('hidden'); authView.removeAttribute('aria-hidden'); }
+  }
+
   function boot() {
     if (window.MIIMIID_AUTH_ENGINE) return;
     createAuthShell();
@@ -101,7 +120,22 @@ import { AUTH_FLOW, AUTH_MODE_ACTIONS } from './auth-engine/config.js';
     renderer.render();
     window.MIIMIID_AUTH_ENGINE = controller;
     window.MiimiidAuthController = controller;
-    if (!resetToken && !forceAuth) controller.restoreSession().then(user => { if (user) showAuthenticated(user); });
+
+    if (!resetToken && !forceAuth) {
+      // FIX: explicitly handle BOTH outcomes of restoreSession(), not just
+      // the truthy one. A falsy/null user now actively shows the login
+      // form instead of silently doing nothing.
+      controller.restoreSession().then(user => {
+        if (user) showAuthenticated(user);
+        else showUnauthenticated();
+      });
+    } else {
+      // FIX: the reset-password and forced-auth entry points skipped
+      // restoreSession() entirely and, as a result, never called either
+      // show function -- meaning the auth view's visibility was left
+      // entirely to the static HTML default here too. Assert it explicitly.
+      showUnauthenticated();
+    }
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot, { once: true });
