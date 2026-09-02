@@ -1,7 +1,3 @@
-import { AuthController } from './auth-engine/controller.js';
-import { AuthRenderer } from './auth-engine/renderer.js';
-import { AUTH_FLOW, AUTH_MODE_ACTIONS } from './auth-engine/config.js';
-
 (function () {
   'use strict';
 
@@ -9,7 +5,7 @@ import { AUTH_FLOW, AUTH_MODE_ACTIONS } from './auth-engine/config.js';
     login: 'Sign in', register: 'Create account', forgot: 'Forgot password', reset: 'Reset password',
     welcome: 'Welcome to Miimiid', name: 'Your name', email: 'Your email', birthday: 'Your details',
     password: 'Create your password', verification: 'Verify your email', confirmation: 'Done',
-    firstName: 'First name', lastName: 'Last name', password: 'Password', confirmPassword: 'Confirm password',
+    firstName: 'First name', lastName: 'Last name', confirmPassword: 'Confirm password',
     gender: 'Gender', dateOfBirth: 'Birthday', code: 'Verification code', male: 'Male', female: 'Female',
     authContinue: 'Continue', authGetStarted: 'Get started', authSignIn: 'Sign in',
     authCreateAccountButton: 'Create account', authVerifyAccount: 'Verify', authResendCode: 'Resend code',
@@ -17,153 +13,86 @@ import { AUTH_FLOW, AUTH_MODE_ACTIONS } from './auth-engine/config.js';
   };
 
   function text(key) {
-    try { const translated = window.miimiidDashboardTranslate?.(key); if (translated && translated !== key) return translated; } catch (_) {}
     return LABELS[key] || key;
   }
 
-  function fieldMarkup(field) {
-    const label = text(field.id);
-    const required = field.required ? ' required' : '';
-    if (field.type === 'select') return `<div class="miimiid-auth-field"><label for="${field.domId}">${label}${field.required ? ' *' : ''}</label><select id="${field.domId}" name="${field.id}"${required}><option value="">Select ${label.toLowerCase()}</option>${(field.options || []).map(v => `<option value="${v}">${text(v)}</option>`).join('')}</select></div>`;
-    const type = field.type === 'birthday' ? 'date' : (field.type === 'verification' ? 'text' : field.type);
-    const extra = field.type === 'verification' ? ' inputmode="numeric" maxlength="6" autocomplete="one-time-code"' : '';
-    return `<div class="miimiid-auth-field"><label for="${field.domId}">${label}${field.required ? ' *' : ''}</label><input id="${field.domId}" name="${field.id}" type="${type}"${extra}${required}></div>`;
-  }
-
-  function actionMarkup(action, secondary = false) { return `<button type="button" id="${action.domId}" class="miimiid-auth-action${secondary ? ' secondary' : ''}">${text(action.label)}</button>`; }
-
   function createAuthShell() {
-    /*
-     * FIX: index.html still ships a static, pre-built #miimiid-auth-view
-     * section (legacy markup: #miimiid-auth-loading + #miimiid-auth-card)
-     * left over from before this engine existed. The old check here --
-     * `if (document.getElementById('miimiid-auth-view')) return;` -- was
-     * meant to guard against double-initialization, but it also matched
-     * that legacy static element on first boot and bailed out before
-     * ever building the real interactive form. That's why the page got
-     * stuck showing only the static "Checking your Miimiid session..."
-     * text forever: nothing ever replaced it.
-     *
-     * Fix: only skip rebuilding if the *engine's own* structure
-     * (#miimiid-auth-content) is already present. Otherwise, remove
-     * whatever's there -- legacy static markup on first boot -- and
-     * build fresh. Legacy functions like showMiimiidAuthView() /
-     * hideMiimiidAuthView() (still called from logout and the dashboard
-     * auth-check fallback) guard every lookup with `if (element)`, so
-     * losing their legacy #miimiid-auth-loading / #miimiid-auth-card
-     * targets after this runs is a silent no-op for them, not a crash.
-     */
     const existingAuthView = document.getElementById('miimiid-auth-view');
     if (existingAuthView) {
       if (existingAuthView.querySelector('#miimiid-auth-content')) return;
       existingAuthView.remove();
     }
 
-    if (document.getElementById('miimiid-app-shell')) return;
-
-    const appShell = document.createElement('div');
-    appShell.id = 'miimiid-app-shell';
-    appShell.className = 'miimiid-app-shell';
-    appShell.dataset.authEngineAppShell = '1';
-    appShell.style.display = 'none';
-    appShell.style.visibility = 'hidden';
-
-    while (document.body.firstChild) appShell.appendChild(document.body.firstChild);
-    document.body.appendChild(appShell);
-
     const auth = document.createElement('main');
     auth.id = 'miimiid-auth-view';
     auth.className = 'miimiid-auth-shell';
-    auth.style.display = 'flex';
+    auth.style.cssText = 'min-height:100vh;display:flex;align-items:center;justify-content:center;background:#0f172a;';
     auth.setAttribute('aria-label', 'Authentication');
-    auth.innerHTML = `<div class="miimiid-auth-card"><div class="miimiid-auth-header"><strong>Miimiid</strong><div id="miimiid-auth-progress"></div></div><div id="miimiid-auth-status" class="miimiid-auth-status hidden" role="alert" aria-live="polite"></div><div id="miimiid-auth-content"></div></div>`;
+    
+    auth.innerHTML = `
+      <div style="width:100%;max-width:400px;padding:20px;border:1px solid #334155;border-radius:12px;background:#1e293b;">
+        <div style="margin-bottom:24px;">
+          <h1 style="margin:0;color:#38bdf8;font-size:28px;text-align:center;">${text('login')}</h1>
+        </div>
+        <form id="miimiid-login-form" style="display:flex;flex-direction:column;gap:12px;">
+          <div>
+            <label for="email" style="display:block;margin-bottom:6px;color:#f8fafc;font-weight:600;">Email</label>
+            <input type="email" id="email" name="email" required style="width:100%;padding:10px;background:#0f172a;color:#f8fafc;border:1px solid #334155;border-radius:6px;font-size:14px;box-sizing:border-box;">
+          </div>
+          <div>
+            <label for="password" style="display:block;margin-bottom:6px;color:#f8fafc;font-weight:600;">Password</label>
+            <input type="password" id="password" name="password" required style="width:100%;padding:10px;background:#0f172a;color:#f8fafc;border:1px solid #334155;border-radius:6px;font-size:14px;box-sizing:border-box;">
+          </div>
+          <button type="submit" style="width:100%;padding:12px;background:#0284c7;color:white;border:none;border-radius:6px;font-weight:bold;cursor:pointer;margin-top:12px;">Sign In</button>
+        </form>
+        <div id="auth-error" style="display:none;margin-top:12px;padding:12px;background:#450a0a;border:1px solid #7f1d1d;color:#f87171;border-radius:6px;"></div>
+      </div>
+    `;
 
-    const content = auth.querySelector('#miimiid-auth-content');
-    Object.entries(AUTH_FLOW).forEach(([flowName, flow]) => {
-      const form = document.createElement('form');
-      form.id = `miimiid-${flowName}-form`;
-      form.className = 'miimiid-auth-form hidden';
-      form.noValidate = true;
-      Object.entries(flow.steps).forEach(([stepId, step]) => {
-        if (stepId === 'authenticated') return;
-        const section = document.createElement('section');
-        section.className = 'miimiid-auth-step';
-        section.dataset.authStep = stepId;
-        section.innerHTML = `<div class="miimiid-auth-copy"><h1>${text(stepId)}</h1></div><div class="miimiid-auth-fields">${(step.fields || []).map(fieldMarkup).join('')}</div><div class="miimiid-auth-actions">${step.primaryAction ? actionMarkup(step.primaryAction) : ''}${(step.secondaryActions || []).map(a => actionMarkup(a, true)).join('')}</div>`;
-        form.appendChild(section);
-      });
-      content.appendChild(form);
+    document.body.innerHTML = '';
+    document.body.appendChild(auth);
+
+    // Handle login form submission
+    const form = document.getElementById('miimiid-login-form');
+    const errorEl = document.getElementById('auth-error');
+    
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      
+      try {
+        const res = await fetch('/api/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ identifier: email, password }),
+          credentials: 'include'
+        });
+        
+        if (res.ok) {
+          const data = await res.json();
+          if (data.data && data.data.user) {
+            window.location.reload();
+          }
+        } else {
+          const error = await res.json();
+          errorEl.style.display = 'block';
+          errorEl.textContent = error.message || 'Login failed';
+        }
+      } catch (err) {
+        errorEl.style.display = 'block';
+        errorEl.textContent = 'Network error: ' + err.message;
+      }
     });
-
-    const modeActions = document.createElement('nav');
-    modeActions.className = 'miimiid-auth-modes';
-    modeActions.innerHTML = AUTH_MODE_ACTIONS.map(({ domId, flow }) => `<button type="button" id="${domId}" class="miimiid-auth-mode">${text(flow)}</button>`).join('');
-    content.appendChild(modeActions);
-    document.body.insertBefore(auth, appShell);
-
-    if (!document.getElementById('miimiid-auth-shell-style')) document.head.insertAdjacentHTML('beforeend', `<style id="miimiid-auth-shell-style">.miimiid-auth-shell{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;box-sizing:border-box;background:#0f172a;color:#f8fafc}.miimiid-auth-card{width:min(100%,460px);background:#1e293b;border:1px solid #334155;border-radius:24px;padding:24px;box-shadow:0 24px 70px rgba(0,0,0,.35)}.miimiid-auth-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;font-size:1.25rem}.miimiid-auth-step h1{font-size:1.6rem;margin:0 0 20px}.miimiid-auth-field{display:grid;gap:7px;margin-bottom:16px}.miimiid-auth-field label{font-size:.9rem;font-weight:600}.miimiid-auth-field input,.miimiid-auth-field select{width:100%;min-height:50px;padding:13px 14px;border-radius:12px;border:1px solid #475569;background:#0f172a;color:#f8fafc;font-size:16px;box-sizing:border-box}.miimiid-auth-field input:focus,.miimiid-auth-field select:focus{outline:2px solid #38bdf8}.miimiid-auth-field-error{margin-top:-9px;margin-bottom:12px;color:#f87171;font-size:.82rem}.miimiid-auth-actions{display:grid;gap:10px;margin-top:20px}.miimiid-auth-action{position:relative;width:100%;min-height:50px;border:0;border-radius:12px;background:#0284c7;color:white;font-weight:700;font-size:16px}.miimiid-auth-action.secondary,.miimiid-auth-mode{background:transparent;color:#7dd3fc;border:1px solid #334155}.miimiid-auth-action:disabled{opacity:.55}.miimiid-auth-modes{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:18px}.miimiid-auth-mode{padding:9px 12px;border-radius:10px}.miimiid-auth-status{padding:12px;border-radius:10px;background:#450a0a;color:#fecaca;margin-bottom:16px}.miimiid-auth-shell .miimiid-auth-step.hidden{display:none!important}@media(max-width:520px){.miimiid-auth-shell{padding:16px}.miimiid-auth-card{padding:20px}}
-    </style>`);
-  }
-
-  function showAuthenticated(user) {
-    const authView = document.getElementById('miimiid-auth-view');
-    const appShell = document.getElementById('miimiid-app-shell');
-    if (authView) { authView.style.display = 'none'; authView.setAttribute('aria-hidden', 'true'); }
-    if (appShell) { appShell.style.display = ''; appShell.style.visibility = ''; appShell.setAttribute('aria-hidden', 'false'); }
-    if (typeof window.initializeMiimiidDashboard === 'function') window.initializeMiimiidDashboard(user).catch?.(console.error);
-  }
-
-  /*
-   * FIX: this is the missing counterpart to showAuthenticated().
-   *
-   * Previously, nothing ever explicitly asserted the logged-out state.
-   * The code relied on the static HTML's default `hidden` class on both
-   * #miimiid-auth-view and #miimiid-app-shell to "just happen" to be
-   * correct at rest. That's fragile: it silently depends on no other
-   * script ever touching those elements or their ancestors, and it
-   * gives no explicit signal of intent. This function makes the
-   * logged-out state an active, deliberate assertion instead of an
-   * assumption -- mirroring showAuthenticated() exactly, just inverted.
-   */
-  function showUnauthenticated() {
-    const authView = document.getElementById('miimiid-auth-view');
-    const appShell = document.getElementById('miimiid-app-shell');
-    if (appShell) { appShell.style.display = 'none'; appShell.style.visibility = 'hidden'; appShell.setAttribute('aria-hidden', 'true'); }
-    if (authView) { authView.style.display = 'flex'; authView.classList.remove('hidden'); authView.removeAttribute('aria-hidden'); }
   }
 
   function boot() {
-    if (window.MIIMIID_AUTH_ENGINE) return;
-    createAuthShell();
-    const params = new URLSearchParams(window.location.search);
-    const resetToken = params.get('resetToken');
-    const forceAuth = params.get('auth') === '1';
-    const initialFlow = resetToken ? 'reset' : 'login';
-    const controller = new AuthController({ flow: initialFlow, onAuthenticated: showAuthenticated });
-    const renderer = new AuthRenderer(controller);
-    controller.render = () => renderer.render();
-    renderer.bind();
-    renderer.render();
-    window.MIIMIID_AUTH_ENGINE = controller;
-    window.MiimiidAuthController = controller;
-
-    if (!resetToken && !forceAuth) {
-      // FIX: explicitly handle BOTH outcomes of restoreSession(), not just
-      // the truthy one. A falsy/null user now actively shows the login
-      // form instead of silently doing nothing.
-      controller.restoreSession().then(user => {
-        if (user) showAuthenticated(user);
-        else showUnauthenticated();
-      });
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', createAuthShell);
     } else {
-      // FIX: the reset-password and forced-auth entry points skipped
-      // restoreSession() entirely and, as a result, never called either
-      // show function -- meaning the auth view's visibility was left
-      // entirely to the static HTML default here too. Assert it explicitly.
-      showUnauthenticated();
+      createAuthShell();
     }
   }
 
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot, { once: true });
-  else boot();
+  boot();
 })();
