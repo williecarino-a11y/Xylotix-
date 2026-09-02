@@ -32,7 +32,7 @@ app.get(['/', '/index.html'], (req, res, next) => {
     html = html.replace(/\binitializeMiimiidApplication\s*\(\s*\)\s*;?/g, '/* legacy application bootstrap disabled */');
 
     // Boot the centralized auth engine after the document has been parsed.
-    html = html.replace(/<\/head>/i, '  <script type="module" src="/auth-engine.js"></script>\n</head>');
+    html = html.replace(/<\/head>/i, '  <script type="module" src="/auth-engine.js"></script>\n  <script src="/password-toggle-fix.js"></script>\n</head>');
 
     res.type('html').send(html);
   } catch (error) {
