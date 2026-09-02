@@ -14,25 +14,17 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 /*
- * index.html still contains legacy authentication markup and its legacy
- * application bootstrap. Until that legacy bootstrap is removed from the
- * page itself, the server must establish the runtime boundary explicitly.
+ * Serve index.html with auth-engine properly injected
  */
 app.get(['/', '/index.html'], (req, res, next) => {
   try {
     const indexPath = path.join(__dirname, 'public', 'index.html');
     let html = fs.readFileSync(indexPath, 'utf8');
 
-    // Ensure there is exactly one authentication-engine runtime.
-    html = html.replace(/<script\s+type=["']module["']\s+src=["']\/auth-engine\.js["'][^>]*><\/script>/gi, '');
-    html = html.replace(/<script\s+src=["']\/miimiid-auth-engine(?:-v[2-9])?\.js["'][^>]*><\/script>/gi, '');
-
-    // Prevent the legacy application initializer from owning the page.
-    html = html.replace(/if\s*\(document\.readyState\s*===\s*["']loading["']\s*\)\s*\{[\s\S]*?document\.addEventListener\(\s*["']DOMContentLoaded["']\s*,\s*initializeMiimiidApplication\s*\)\s*;?\s*\}\s*else\s*\{[\s\S]*?initializeMiimiidApplication\s*\(\s*\)\s*;?\s*\}/g, '/* Authentication engine owns application bootstrap. */');
-    html = html.replace(/(?<!function\s)\binitializeMiimiidApplication\s*\(\s*\)\s*;?/g, '/* legacy application bootstrap disabled */');
-
-    // Boot the centralized auth engine after the document has been parsed.
-    html = html.replace(/<\/head>/i, '  <script type="module" src="/auth-engine.js"></script>\n  <script src="/password-toggle-fix.js"></script>\n</head>');
+    // Ensure auth-engine.js is loaded
+    if (!html.includes('auth-engine.js')) {
+      html = html.replace(/<\/head>/i, '  <script type="module" src="/auth-engine.js"></script>\n</head>');
+    }
 
     res.type('html').send(html);
   } catch (error) {
