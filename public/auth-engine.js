@@ -33,7 +33,33 @@ import { AUTH_FLOW, AUTH_MODE_ACTIONS } from './auth-engine/config.js';
   function actionMarkup(action, secondary = false) { return `<button type="button" id="${action.domId}" class="miimiid-auth-action${secondary ? ' secondary' : ''}">${text(action.label)}</button>`; }
 
   function createAuthShell() {
-    if (document.getElementById('miimiid-auth-view')) return;
+    /*
+     * FIX: index.html still ships a static, pre-built #miimiid-auth-view
+     * section (legacy markup: #miimiid-auth-loading + #miimiid-auth-card)
+     * left over from before this engine existed. The old check here --
+     * `if (document.getElementById('miimiid-auth-view')) return;` -- was
+     * meant to guard against double-initialization, but it also matched
+     * that legacy static element on first boot and bailed out before
+     * ever building the real interactive form. That's why the page got
+     * stuck showing only the static "Checking your Miimiid session..."
+     * text forever: nothing ever replaced it.
+     *
+     * Fix: only skip rebuilding if the *engine's own* structure
+     * (#miimiid-auth-content) is already present. Otherwise, remove
+     * whatever's there -- legacy static markup on first boot -- and
+     * build fresh. Legacy functions like showMiimiidAuthView() /
+     * hideMiimiidAuthView() (still called from logout and the dashboard
+     * auth-check fallback) guard every lookup with `if (element)`, so
+     * losing their legacy #miimiid-auth-loading / #miimiid-auth-card
+     * targets after this runs is a silent no-op for them, not a crash.
+     */
+    const existingAuthView = document.getElementById('miimiid-auth-view');
+    if (existingAuthView) {
+      if (existingAuthView.querySelector('#miimiid-auth-content')) return;
+      existingAuthView.remove();
+    }
+
+    if (document.getElementById('miimiid-app-shell')) return;
 
     const appShell = document.createElement('div');
     appShell.id = 'miimiid-app-shell';
