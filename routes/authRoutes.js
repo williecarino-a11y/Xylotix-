@@ -1,6 +1,7 @@
 const express = require('express');
 const crypto = require('crypto');
 const nodemailer = require('nodemailer');
+const rateLimit = require('express-rate-limit');
 
 const User = require('../models/User');
 const UserSession = require('../models/UserSession');
@@ -11,6 +12,47 @@ const VerificationToken =
   require('../models/VerificationToken');
 
 const router = express.Router();
+
+/*
+ * Rate limiting.
+ *
+ * loginLimiter: keyed by IP, catches password brute-forcing.
+ * registerLimiter: prevents mass account creation from one source.
+ * codeRequestLimiter: covers resend-verification and forgot-password,
+ * where each request triggers an outbound email.
+ */
+const loginLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  limit: 10,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: {
+    status: 'error',
+    message: 'Too many login attempts. Try again in a few minutes.'
+  }
+});
+
+const registerLimiter = rateLimit({
+  windowMs: 60 * 60 * 1000,
+  limit: 10,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: {
+    status: 'error',
+    message: 'Too many accounts created from this location. Try again later.'
+  }
+});
+
+const codeRequestLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  limit: 5,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: {
+    status: 'error',
+    message: 'Too many requests. Try again in a few minutes.'
+  }
+});
 
 const SESSION_DAYS = 30;
 const RESET_MINUTES = 30;
@@ -278,6 +320,7 @@ function getMailer() {
  */
 router.post(
   '/register',
+  registerLimiter,
   async (req, res) => {
     try {
       const firstName =
@@ -338,13 +381,6 @@ router.post(
       }
 
       if (!gender || gender.length > 50) {
-        return res.status(400).json({
-          status: 'error',
-          message: 'Select your gender.'
-        });
-      }
-
-      if (!gender) {
         return res.status(400).json({
           status: 'error',
           message: 'Select your gender.'
@@ -560,6 +596,7 @@ router.post(
  */
 router.post(
   '/verify-account',
+  loginLimiter,
   async (req, res) => {
     try {
       const email =
@@ -649,10 +686,17 @@ router.post(
       const submittedHash =
         hashVerificationCode(code);
 
-      if (
-        submittedHash !==
-        verification.tokenHash
-      ) {
+      const submittedHashBuffer =
+        Buffer.from(submittedHash, 'hex');
+
+      const storedHashBuffer =
+        Buffer.from(verification.tokenHash, 'hex');
+
+      const codeMatches =
+        submittedHashBuffer.length === storedHashBuffer.length &&
+        crypto.timingSafeEqual(submittedHashBuffer, storedHashBuffer);
+
+      if (!codeMatches) {
         verification.attempts =
           Number(
             verification.attempts || 0
@@ -717,6 +761,7 @@ router.post(
  */
 router.post(
   '/resend-verification',
+  codeRequestLimiter,
   async (req, res) => {
     try {
       const email =
@@ -853,6 +898,7 @@ router.post(
  */
 router.post(
   '/login',
+  loginLimiter,
   async (req, res) => {
     try {
       const identifier =
@@ -910,6 +956,18 @@ router.post(
           status: 'error',
           message:
             'Invalid login details.'
+        });
+      }
+
+      if (!user.accountVerified) {
+        return res.status(403).json({
+          status: 'error',
+          code: 'ACCOUNT_NOT_VERIFIED',
+          message:
+            'Please verify your email before logging in.',
+          data: {
+            maskedEmail: maskEmail(user.email)
+          }
         });
       }
 
@@ -1024,6 +1082,7 @@ router.post(
  */
 router.post(
   '/forgot-password',
+  codeRequestLimiter,
   async (req, res) => {
     try {
       const email =

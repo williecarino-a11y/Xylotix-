@@ -1,9 +1,54 @@
 const express = require("express");
+const rateLimit = require("express-rate-limit");
+
+const { getAuthenticatedUser } = require("./authRoutes");
 
 const router = express.Router();
 
 const aiTutorService =
   require("../services/aiTutorService");
+
+/*
+ * The AI Tutor proxies to a paid OpenAI API using a server-side key.
+ * Without auth + a rate limit, an unauthenticated caller could run
+ * up the OpenAI bill indefinitely.
+ */
+const aiTutorLimiter = rateLimit({
+  windowMs: 60 * 1000,
+  limit: 15,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: {
+    success: false,
+    code: "AI_TUTOR_RATE_LIMITED",
+    message: "You're sending messages too quickly. Please slow down."
+  }
+});
+
+async function requireAuth(req, res, next) {
+  try {
+    const user = await getAuthenticatedUser(req);
+
+    if (!user) {
+      return res.status(401).json({
+        success: false,
+        code: "AI_TUTOR_AUTH_REQUIRED",
+        message: "Please log in to use the AI Tutor."
+      });
+    }
+
+    req.authUser = user;
+    return next();
+  } catch (error) {
+    console.error("AI Tutor auth check error:", error);
+
+    return res.status(500).json({
+      success: false,
+      code: "AI_TUTOR_AUTH_CHECK_FAILED",
+      message: "Unable to verify authentication."
+    });
+  }
+}
 
 /*
  * MIIMIID AI TUTOR
@@ -17,6 +62,8 @@ const aiTutorService =
 
 router.post(
   "/chat",
+  requireAuth,
+  aiTutorLimiter,
   async (req, res) => {
     try {
       const {

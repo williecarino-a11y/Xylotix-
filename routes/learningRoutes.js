@@ -1,6 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
 
+const { getAuthenticatedUser } = require('./authRoutes');
+
 const router = express.Router();
 
 const learningService =
@@ -9,6 +11,38 @@ const learningService =
 const {
   getFunCenterActivities
 } = require('../scripts/learningData/funCenter');
+
+/*
+ * requireAuth
+ *
+ * Attaches the authenticated user to req.authUser and rejects
+ * unauthenticated requests. Every route below that touches a
+ * specific user's progress/dashboard uses req.authUser._id instead
+ * of trusting a :userId param or body field, which previously let
+ * any caller read or write any other user's learning progress.
+ */
+async function requireAuth(req, res, next) {
+  try {
+    const user = await getAuthenticatedUser(req);
+
+    if (!user) {
+      return res.status(401).json({
+        status: 'error',
+        message: 'Authentication required.'
+      });
+    }
+
+    req.authUser = user;
+    return next();
+  } catch (error) {
+    console.error('Learning auth check error:', error);
+
+    return res.status(500).json({
+      status: 'error',
+      message: 'Unable to verify authentication.'
+    });
+  }
+}
 
 /**
  * GET /api/learn/courses
@@ -60,6 +94,7 @@ router.get('/courses', async (req, res) => {
  */
 router.get(
   '/courses/:courseId/progress/:userId',
+  requireAuth,
   async (req, res) => {
     try {
       const {
@@ -86,6 +121,13 @@ router.get(
         return res.status(400).json({
           status: 'error',
           message: 'Invalid user ID.'
+        });
+      }
+
+      if (userId !== req.authUser._id.toString()) {
+        return res.status(403).json({
+          status: 'error',
+          message: 'You may only view your own progress.'
         });
       }
 
@@ -335,14 +377,16 @@ router.post(
  */
 router.post(
   '/lessons/:lessonId/complete',
+  requireAuth,
   async (req, res) => {
     try {
       const { lessonId } = req.params;
 
       const {
-        userId,
         submittedAnswers
       } = req.body;
+
+      const userId = req.authUser._id.toString();
 
       if (
         !mongoose.Types.ObjectId.isValid(
@@ -352,24 +396,6 @@ router.post(
         return res.status(400).json({
           status: 'error',
           message: 'Invalid lesson ID.'
-        });
-      }
-
-      if (!userId) {
-        return res.status(400).json({
-          status: 'error',
-          message: 'User ID is required.'
-        });
-      }
-
-      if (
-        !mongoose.Types.ObjectId.isValid(
-          userId
-        )
-      ) {
-        return res.status(400).json({
-          status: 'error',
-          message: 'Invalid user ID.'
         });
       }
 
@@ -428,6 +454,7 @@ router.post(
  */
 router.get(
   '/dashboard/:userId',
+  requireAuth,
   async (req, res) => {
     try {
       const { userId } = req.params;
@@ -440,6 +467,13 @@ router.get(
         return res.status(400).json({
           status: 'error',
           message: 'Invalid user ID.'
+        });
+      }
+
+      if (userId !== req.authUser._id.toString()) {
+        return res.status(403).json({
+          status: 'error',
+          message: 'You may only view your own dashboard.'
         });
       }
 
