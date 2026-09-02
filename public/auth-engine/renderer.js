@@ -1,96 +1,58 @@
-import { AUTH_FLOW, AUTH_MODE_ACTIONS } from './config.js';
+import { AUTH_STATUS } from './state.js';
+
+const FORM_IDS = { login: 'miimiid-login-form', register: 'miimiid-register-form', forgot: 'miimiid-forgot-form', reset: 'miimiid-reset-form' };
+const E = { welcome: { action: 'miimiid-register-get-started' }, login: { email: 'miimiid-login-identifier', password: 'miimiid-login-password', action: 'miimiid-login-submit' }, name: { firstName: 'miimiid-register-first-name', lastName: 'miimiid-register-last-name', action: 'miimiid-register-name-submit' }, email: { email: 'miimiid-register-email', action: 'miimiid-register-email-submit' }, birthday: { dob: 'miimiid-register-dob', action: 'miimiid-register-birthday-submit' }, password: { password: 'miimiid-register-password', confirmPassword: 'miimiid-register-confirm-password', action: 'miimiid-register-password-submit' }, verification: { code: 'miimiid-verification-code', action: 'miimiid-verification-submit', resend: 'miimiid-verification-resend' }, confirmation: {}, forgot: { email: 'miimiid-forgot-email', action: 'miimiid-forgot-submit' }, reset: { password: 'miimiid-reset-password', confirmPassword: 'miimiid-reset-confirm-password', action: 'miimiid-reset-submit' }, authenticated: {} };
+function t(k, f) { try { const v = window.miimiidDashboardTranslate?.(k); if (v && v !== k) return v; } catch (_) {} return f || k; }
 
 export class AuthRenderer {
-  constructor(controller) {
-    this.controller = controller;
+  constructor(controller) { this.controller = controller; this.style(); }
+
+  style() {
+    if (document.getElementById('miimiid-auth-engine-style')) return;
+    const s = document.createElement('style');
+    s.id = 'miimiid-auth-engine-style';
+    s.textContent = '.miimiid-auth-v5-loading{position:relative!important;pointer-events:none!important}.miimiid-auth-v5-loading .miimiid-auth-v5-label{visibility:hidden}.miimiid-auth-v5-spinner{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}.miimiid-auth-v5-spinner::after{content:"";width:20px;height:20px;border:2px solid currentColor;border-radius:50%;border-top-color:transparent;animation:spin .6s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}';
+    document.head.appendChild(s);
+  }
+
+  prepareGender() {
+    if (document.getElementById('miimiid-register-gender')) return;
+    const dob = document.getElementById('miimiid-register-dob');
+    if (!dob) return;
+    const p = dob.closest('.miimiid-auth-field') || dob.parentElement;
+    const w = document.createElement('div');
+    w.className = p?.className || 'miimiid-auth-field';
+    w.innerHTML = `<label for="miimiid-register-gender">${t('authGender','Gender')}</label><select id="miimiid-register-gender"><option value="">${t('authSelectGender','Select gender')}</option><option value="male">${t('authMale','Male')}</option><option value="female">${t('authFemale','Female')}</option></select>`;
+    (p?.parentElement || dob.parentElement).insertBefore(w, p || dob);
+  }
+
+  prepareSteps() {
+    const f = document.getElementById(FORM_IDS.register);
+    if (!f || f.querySelectorAll('[data-register-step]').length >= 6) return;
+    [['miimiid-register-get-started'],['miimiid-register-first-name','miimiid-register-last-name'],['miimiid-register-email'],['miimiid-register-gender','miimiid-register-dob'],['miimiid-register-password','miimiid-register-confirm-password'],['miimiid-verification-code']].forEach((ids,i)=>{const s=f.querySelector(`[data-register-step="${i}"]`)||document.createElement('fieldset');s.dataset.registerStep=i;s.className='miimiid-auth-step';ids.forEach(id=>{const el=document.getElementById(id);if(el&&!el.closest('[data-register-step]'))s.appendChild(el)});if(!s.closest('form'))f.appendChild(s)});
   }
 
   bind() {
-    const form = this.getForm();
-    if (!form) return;
-
-    form.addEventListener('input', (e) => {
-      if (e.target.name) {
-        const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
-        this.controller.fieldChanged(e.target.name, value);
-      }
-    });
-
-    form.addEventListener('focus', (e) => {
-      if (e.target.name) this.controller.fieldFocused(e.target.name);
-    }, true);
-
-    form.addEventListener('blur', (e) => {
-      if (e.target.name) this.controller.fieldBlurred(e.target.name);
-    }, true);
-
-    const stepContainer = form.querySelector('[data-auth-step]');
-    if (stepContainer) {
-      const step = this.controller.state.step;
-      const buttons = stepContainer.querySelectorAll('button');
-      buttons.forEach((btn) => {
-        if (btn.dataset.action === 'primary' && step?.primaryAction) {
-          btn.addEventListener('click', () => this.controller.primaryAction());
-        } else if (btn.dataset.action === 'secondary') {
-          const actionId = btn.id.replace(/^miimiid-/, '').replace(/-action$/, '');
-          btn.addEventListener('click', () => this.controller.secondaryAction(actionId));
-        }
-      });
-    }
-
-    const modeButtons = document.querySelectorAll('.miimiid-auth-mode');
-    modeButtons.forEach((btn) => {
-      btn.addEventListener('click', (e) => {
-        const flow = e.target.dataset.flow || (e.target.id.includes('login') ? 'login' : e.target.id.includes('register') ? 'register' : 'login');
-        this.controller.setFlow(flow);
-      });
-    });
+    this.prepareGender(); this.prepareSteps();
+    const fields = new Map();
+    Object.values(E).forEach(g => Object.entries(g).forEach(([k,id]) => { if (k !== 'action' && k !== 'resend') fields.set(id,k); }));
+    fields.forEach((field,id)=>{const el=document.getElementById(id);if(!el||el.dataset.authEngineBound)return;el.dataset.authEngineBound='1';el.addEventListener('input',()=>this.controller.fieldChanged(field,el.value));el.addEventListener('focus',()=>this.controller.fieldFocused(field));el.addEventListener('blur',()=>this.controller.fieldBlurred(field))});
+    Object.entries(E).forEach(([step,g])=>{if(!g.action)return;const b=document.getElementById(g.action);if(b&&!b.dataset.authEngineActionBound){b.dataset.authEngineActionBound='1';b.addEventListener('click',e=>{e.preventDefault();this.controller.primaryAction()})}});
+    const r=document.getElementById(E.verification.resend);if(r&&!r.dataset.authEngineActionBound){r.dataset.authEngineActionBound='1';r.addEventListener('click',e=>{e.preventDefault();this.controller.secondaryAction('resend')})}
+    Object.entries({'miimiid-show-register':'register','miimiid-show-forgot':'forgot','miimiid-show-login-from-register':'login','miimiid-show-login-from-forgot':'login','miimiid-show-login-from-reset':'login'}).forEach(([id,flow])=>{const b=document.getElementById(id);if(b&&!b.dataset.authEngineFlowBound){b.dataset.authEngineFlowBound='1';b.addEventListener('click',e=>{e.preventDefault();this.controller.setFlow(flow)})}});
   }
 
-  getForm() {
-    const flowName = this.controller.state.flow;
-    return document.getElementById(`miimiid-${flowName}-form`);
+  button(action,step) {
+    const b=document.getElementById(E[step]?.action); if(!b)return;
+    const loading=this.controller.state.request.status==='loading'&&this.controller.state.request.action===action.id;
+    const disabled=loading||this.controller.state.status===AUTH_STATUS.VALIDATING;
+    if(!b.querySelector('.miimiid-auth-v5-spinner')){const h=b.innerHTML;b.innerHTML=`<span class="miimiid-auth-v5-label">${h}</span><span class="miimiid-auth-v5-spinner" aria-hidden="true"></span>`}
+    b.disabled=disabled;b.setAttribute('aria-busy',String(loading));b.classList.toggle('miimiid-auth-v5-loading',loading);b.querySelector('.miimiid-auth-v5-spinner').style.display=loading?'block':'none';
   }
 
-  render() {
-    const state = this.controller.state;
-    const form = this.getForm();
-    if (!form) return;
-
-    const currentStep = form.querySelector(`[data-auth-step="${state.step}"]`);
-    form.querySelectorAll('[data-auth-step]').forEach((step) => {
-      step.style.display = step === currentStep ? 'block' : 'none';
-    });
-
-    if (currentStep) {
-      const statusEl = currentStep.querySelector('.miimiid-auth-status');
-      if (statusEl) {
-        statusEl.textContent = '';
-        if (state.error) {
-          statusEl.textContent = typeof state.error === 'string' ? state.error : state.error.message || 'An error occurred';
-          statusEl.className = 'miimiid-auth-status error';
-        }
-      }
-
-      const fields = currentStep.querySelectorAll('input, select, textarea');
-      fields.forEach((field) => {
-        const id = field.name;
-        const fieldState = state.form.fields[id];
-        if (fieldState) {
-          field.value = fieldState.value || '';
-          const errorEl = field.parentElement?.querySelector('.error-message');
-          if (errorEl) {
-            errorEl.textContent = state.form.errors[id] || '';
-            errorEl.style.display = state.form.errors[id] ? 'block' : 'none';
-          }
-        }
-      });
-
-      const primaryBtn = currentStep.querySelector('[data-action="primary"]');
-      if (primaryBtn) {
-        primaryBtn.disabled = !this.controller.canContinue || state.status === 'submitting';
-        primaryBtn.textContent = state.request.status === 'loading' ? 'Loading...' : 'Continue';
-      }
-    }
+  errors() {
+    for(const f of this.controller.step?.fields||[]){const el=document.getElementById(E[this.controller.state.step]?.[f.id]||'');if(!el)continue;const er=this.controller.state.form.errors[f.id];el.classList.toggle('miimiid-auth-field-error',!!er);el.setAttribute('aria-invalid',String(!!er))}
   }
+
+  render(){const s=this.controller.state;this.prepareGender();this.prepareSteps();Object.entries(FORM_IDS).forEach(([m,id])=>document.getElementById(id)?.classList.toggle('hidden',m!==s.flow));if(s.step==='authenticated')return;this.button(this.controller.step?.primaryAction,s.step);this.errors()}
 }
