@@ -49,6 +49,7 @@ app.get(['/', '/index.html'], (req, res, next) => {
       '<script defer src="/continue-loading.js"></script>',
       '<script defer src="/miimiid-auth-engine.js"></script>',
       '<script defer src="/auth-bootstrap-guard.js"></script>',
+      '<script defer src="/password-validation.js"></script>',
       '<script defer src="/pwa.js"></script>'
     ];
 
@@ -90,6 +91,9 @@ mongoose
 
 const { router: authRoutes } = require('./routes/authRoutes');
 app.use('/api/auth', authRoutes);
+
+const passwordRoutes = require('./routes/passwordRoutes');
+app.use('/api/password', passwordRoutes);
 
 const learningRoutes = require('./routes/learningRoutes');
 app.use('/api/learn', learningRoutes);
@@ -133,7 +137,9 @@ app.use('/api', (req, res) => {
 app.use((error, req, res, next) => {
   console.error('Unhandled server error:', error);
 
-  if (res.headersSent) return next(error);
+  if (res.headersSent) {
+    return next(error);
+  }
 
   res.status(500).json({
     status: 'error',
