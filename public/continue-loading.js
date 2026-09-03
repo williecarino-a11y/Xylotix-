@@ -25,6 +25,29 @@
     generic: 'Please wait…'
   };
 
+  function installBrandAssets() {
+    if (!document.head) return;
+
+    const favicon = document.head.querySelector('link[data-miimiid-favicon]');
+    if (!favicon) {
+      const link = document.createElement('link');
+      link.rel = 'icon';
+      link.type = 'image/svg+xml';
+      link.href = '/favicon.svg';
+      link.dataset.miimiidFavicon = 'true';
+      document.head.appendChild(link);
+    }
+
+    const touchIcon = document.head.querySelector('link[data-miimiid-touch-icon]');
+    if (!touchIcon) {
+      const link = document.createElement('link');
+      link.rel = 'apple-touch-icon';
+      link.href = '/icons/icon-192.svg';
+      link.dataset.miimiidTouchIcon = 'true';
+      document.head.appendChild(link);
+    }
+  }
+
   function resolveMessage(context, explicit) {
     if (explicit) return explicit;
     return messages[context] || DEFAULTS.message;
@@ -308,6 +331,7 @@
   });
 
   function boot() {
+    installBrandAssets();
     ensureStyles();
     installFetchBridge();
   }
