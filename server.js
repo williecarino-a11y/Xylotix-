@@ -33,7 +33,7 @@ app.use(cookieParser());
 
 /*
  * Serve the authored application shell without replacing its DOM.
- * Only small, DOM-safe global helpers are injected here.
+ * Small global assets are injected here so the existing index.html stays the source of truth.
  */
 app.get(['/', '/index.html'], (req, res, next) => {
   try {
@@ -41,10 +41,13 @@ app.get(['/', '/index.html'], (req, res, next) => {
     let html = fs.readFileSync(indexPath, 'utf8');
 
     const headAssets = [
+      '<link rel="manifest" href="/manifest.json">',
+      '<meta name="theme-color" content="#0f172a">',
       '<link rel="stylesheet" href="/responsive.css">',
       '<script defer src="/auth-shell-fix.js"></script>',
       '<script defer src="/continue-loading.js"></script>',
-      '<script defer src="/auth-bootstrap-guard.js"></script>'
+      '<script defer src="/auth-bootstrap-guard.js"></script>',
+      '<script defer src="/pwa.js"></script>'
     ];
 
     for (const asset of headAssets) {
