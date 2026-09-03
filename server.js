@@ -122,19 +122,45 @@ app.get('/api/health', (req, res) => {
   });
 });
 
-app.use((err, req, res, next) => {
-  console.error('Unhandled server error:', err);
-
-  if (res.headersSent) {
-    return next(err);
-  }
-
-  res.status(500).json({
+app.use('/api', (req, res) => {
+  res.status(404).json({
     status: 'error',
-    message: 'An unexpected server error occurred.'
+    code: 'API_ROUTE_NOT_FOUND',
+    message: 'API route not found.'
   });
 });
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+app.use((error, req, res, next) => {
+  console.error('Unhandled server error:', error);
+
+  if (res.headersSent) return next(error);
+
+  res.status(500).json({
+    status: 'error',
+    code: 'INTERNAL_SERVER_ERROR',
+    message: 'Something went wrong on the server.'
+  });
 });
+
+const server = app.listen(PORT, () => {
+  console.log(`Miimiid server running on port ${PORT}`);
+});
+
+function shutdown(signal) {
+  console.log(`${signal} received. Shutting down Miimiid server...`);
+
+  server.close(async () => {
+    try {
+      await mongoose.connection.close(false);
+    } catch (error) {
+      console.error('MongoDB shutdown error:', error.message);
+    } finally {
+      process.exit(0);
+    }
+  });
+
+  setTimeout(() => process.exit(1), 10000).unref();
+}
+
+process.once('SIGTERM', () => shutdown('SIGTERM'));
+process.once('SIGINT', () => shutdown('SIGINT'));
