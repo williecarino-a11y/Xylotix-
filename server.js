@@ -3,62 +3,40 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
-const fs = require('fs');
 const path = require('path');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.disable('x-powered-by');
+
+app.use(express.json({ limit: '1mb' }));
+app.use(express.urlencoded({ extended: true, limit: '1mb' }));
 app.use(cookieParser());
 
 /*
- * Serve index.html with the production authentication UI injected.
+ * Serve the existing application shell exactly as authored.
+ *
+ * Authentication is already implemented inside public/index.html.
+ * Do not inject a second auth renderer here: a second renderer can
+ * replace the DOM, duplicate event handlers, and destroy the app shell
+ * that the authenticated dashboard depends on.
  */
-app.get(['/', '/index.html'], (req, res, next) => {
-  try {
-    const indexPath = path.join(__dirname, 'public', 'index.html');
-    let html = fs.readFileSync(indexPath, 'utf8');
+app.use(express.static(path.join(__dirname, 'public'), {
+  index: 'index.html',
+  extensions: ['html']
+}));
 
-    // Ensure the authentication engine is loaded once.
-    if (!html.includes('auth-engine.js')) {
-      html = html.replace(
-        /<\/head>/i,
-        '  <script type="module" src="/auth-engine.js"></script>\n</head>'
-      );
-    }
-
-    // Enhance the auth experience after the engine mounts its UI.
-    if (!html.includes('auth-ui-enhancements.js')) {
-      html = html.replace(
-        /<\/head>/i,
-        '  <script defer src="/auth-ui-enhancements.js"></script>\n</head>'
-      );
-    }
-
-    // Apply a final delegated tab-visibility fix after the auth UI exists.
-    if (!html.includes('auth-tab-fix.js')) {
-      html = html.replace(
-        /<\/head>/i,
-        '  <script defer src="/auth-tab-fix.js"></script>\n</head>'
-      );
-    }
-
-    res.type('html').send(html);
-  } catch (error) {
-    next(error);
-  }
-});
-
-app.use(express.static('public'));
-
-const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/xylotix';
+const MONGO_URI =
+  process.env.MONGO_URI ||
+  'mongodb://localhost:27017/xylotix';
 
 mongoose
   .connect(MONGO_URI)
   .then(() => console.log('MongoDB connected successfully'))
-  .catch((err) => console.error('MongoDB connection error:', err));
+  .catch(error => {
+    console.error('MongoDB connection error:', error);
+  });
 
 const { router: authRoutes } = require('./routes/authRoutes');
 app.use('/api/auth', authRoutes);
@@ -73,7 +51,35 @@ const aiTutorRoutes = require('./routes/aiTutorRoutes');
 app.use('/api/ai-tutor', aiTutorRoutes);
 
 app.get('/api/health', (req, res) => {
-  res.status(200).json({ status: 'OK', message: 'Server is running cleanly.' });
+  res.status(200).json({
+    status: 'OK',
+    message: 'Server is running cleanly.'
+  });
+});
+
+/*
+ * Keep API 404s machine-readable instead of returning the app shell.
+ */
+app.use('/api', (req, res) => {
+  res.status(404).json({
+    status: 'error',
+    code: 'API_ROUTE_NOT_FOUND',
+    message: 'API route not found.'
+  });
+});
+
+app.use((error, req, res, next) => {
+  console.error('Unhandled server error:', error);
+
+  if (res.headersSent) {
+    return next(error);
+  }
+
+  res.status(500).json({
+    status: 'error',
+    code: 'INTERNAL_SERVER_ERROR',
+    message: 'Something went wrong on the server.'
+  });
 });
 
 app.listen(PORT, () => {
