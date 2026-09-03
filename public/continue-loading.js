@@ -4,7 +4,7 @@
   const DEFAULTS = {
     message: 'Please wait…',
     context: 'global',
-    delay: 120
+    delay: 0
   };
 
   const active = new Map();
@@ -89,11 +89,11 @@
         width: 20px;
         height: 20px;
         flex: 0 0 20px;
-        border: 3px solid rgba(148, 163, 184, 0.25);
-        border-top-color: currentColor;
-        border-right-color: currentColor;
+        border: 3px solid currentColor;
+        border-right-color: transparent;
         border-radius: 50%;
-        animation: continue-loading-spin 0.72s linear infinite;
+        animation: continue-loading-spin 0.68s linear infinite;
+        will-change: transform;
       }
 
       .continue-loading-text {
@@ -220,6 +220,7 @@
     button.replaceChildren(makeArc());
 
     const text = document.createElement('span');
+    text.className = 'continue-loading-text';
     text.textContent = resolveMessage(config.context, config.message);
     button.appendChild(text);
 
