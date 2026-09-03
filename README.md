@@ -259,9 +259,63 @@ Contributions, suggestions, and improvements are welcome.
 4. Test your changes
 5. Open a pull request
 
+## 🔒 Production Principles
+
+Miimiid is being developed with several principles in mind:
+
+## No fake functionality.
+
+Interface elements should represent real application behavior rather than decorative placeholders.
+
+## Data-driven UI.
+
+Courses, lessons, translations, and application state should be driven by structured data wherever practical.
+
+## Centralized systems.
+
+Shared behavior such as authentication, loading states, validation, and localization should not be unnecessarily duplicated.
+
+## Mobile-first.
+
+The primary experience should work naturally on touch devices before being expanded to larger screens.
+
+## Accessibility.
+
+The application should remain usable across different devices, input methods, and user needs.
+
+## Production-oriented development.
+
+Features should be designed with maintainability, reliability, security, and deployment in mind.
+
+## 🧪 Testing
+
+Miimiid includes automated and development-oriented testing infrastructure.
+
+Testing focuses on maintaining reliability across:
+
+•Authentication
+
+•API behavior
+
+•Learning systems
+
+•Application logic
+
+•Regression prevention
+
+Additional production testing and accessibility validation are part of the ongoing development process.
+
+
+
 ## 📄 License
 
-This project is licensed under the **MIT License**.
+This project is licensed under the **MIT License**
+
+## Built for better financial decisions
+
+Miimiid is being built to make financial literacy more practical, interactive, and accessible.
+
+**Learn. Play. Understand. Improve**
 
 ---
 
