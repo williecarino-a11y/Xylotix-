@@ -27,7 +27,7 @@
     bootstrapHandle = window.ContinueLoading.start({
       id: 'auth-bootstrap',
       context: 'auth',
-      message: 'Starting Xylotix…',
+      message: 'Starting Miimiid…',
       delay: 0
     });
   }
