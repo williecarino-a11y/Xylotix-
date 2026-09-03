@@ -145,6 +145,7 @@
       credentials: "same-origin",
       headers: {
         Accept: "application/json",
+        "X-Continue-Loading": "false",
         ...(payload === undefined
           ? {}
           : { "Content-Type": "application/json" }),
@@ -182,6 +183,19 @@
     return result;
   }
 
+  function loadingContext(action) {
+    const contexts = {
+      login: "auth",
+      register: "register",
+      "verify-account": "verification",
+      logout: "auth",
+      forgot: "verification",
+      reset: "auth"
+    };
+
+    return contexts[action] || "auth";
+  }
+
   async function execute(action, operation, options) {
     if (typeof operation !== "function") {
       throw new TypeError("Authentication operation must be a function.");
@@ -197,6 +211,8 @@
       error: null
     });
 
+    let loadingHandle = null;
+
     try {
       if (typeof options?.validate === "function") {
         await options.validate();
@@ -207,6 +223,21 @@
         status: STATES.SUBMITTING,
         error: null
       });
+
+      if (window.ContinueLoading?.start) {
+        loadingHandle = window.ContinueLoading.start({
+          id: `auth-action:${action}`,
+          context: loadingContext(action),
+          message: action === "register"
+            ? "Creating your account…"
+            : action === "verify-account"
+              ? "Verifying your account…"
+              : action === "logout"
+                ? "Signing you out…"
+                : "Signing you in…",
+          delay: 120
+        });
+      }
 
       const result = await operation();
 
@@ -239,6 +270,10 @@
       });
 
       throw normalized;
+    } finally {
+      if (loadingHandle && window.ContinueLoading?.stop) {
+        window.ContinueLoading.stop(loadingHandle);
+      }
     }
   }
 
@@ -257,7 +292,7 @@
       throw { code: "EMAIL_REQUIRED", message: "Enter your email address." };
     }
 
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    if (!/^\S+@\S+\.\S+$/.test(email)) {
       throw { code: "EMAIL_INVALID", message: "Enter a valid email address." };
     }
 
@@ -386,21 +421,38 @@
   }
 
   async function loadCurrentUser() {
-    const result = await request("/api/auth/me", undefined, {
-      method: "GET"
-    });
+    let loadingHandle = null;
 
-    const user = result?.data?.user || null;
-
-    state.user = user;
-
-    if (user) {
-      window.currentUser = user;
-      window.MIIMIID_CURRENT_USER = user;
+    if (window.ContinueLoading?.start) {
+      loadingHandle = window.ContinueLoading.start({
+        id: "auth-session-restore",
+        context: "auth",
+        message: "Restoring your session…",
+        delay: 120
+      });
     }
 
-    emit();
-    return user;
+    try {
+      const result = await request("/api/auth/me", undefined, {
+        method: "GET"
+      });
+
+      const user = result?.data?.user || null;
+
+      state.user = user;
+
+      if (user) {
+        window.currentUser = user;
+        window.MIIMIID_CURRENT_USER = user;
+      }
+
+      emit();
+      return user;
+    } finally {
+      if (loadingHandle && window.ContinueLoading?.stop) {
+        window.ContinueLoading.stop(loadingHandle);
+      }
+    }
   }
 
   async function logout() {
