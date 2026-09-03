@@ -78,10 +78,21 @@
     }
   }
 
+  function loadNavigationIcons() {
+    if (document.querySelector('script[data-miimiid-navigation-icons]')) return;
+
+    const script = document.createElement('script');
+    script.src = '/miimiid-navigation-icons.js';
+    script.defer = true;
+    script.dataset.miimiidNavigationIcons = 'true';
+    document.head.appendChild(script);
+  }
+
   function boot() {
     if (initialized) return;
     initialized = true;
 
+    loadNavigationIcons();
     startBootstrapLoading();
     recoverIfBlank();
 
