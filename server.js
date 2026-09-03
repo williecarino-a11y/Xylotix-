@@ -11,6 +11,20 @@ const PORT = process.env.PORT || 3000;
 
 app.disable('x-powered-by');
 
+/* Baseline browser hardening without requiring a CSP rewrite of the authored inline UI. */
+app.use((req, res, next) => {
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  res.setHeader('X-Frame-Options', 'SAMEORIGIN');
+  res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+  res.setHeader('Permissions-Policy', 'camera=(), microphone=(), geolocation=()');
+
+  if (process.env.NODE_ENV === 'production') {
+    res.setHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
+  }
+
+  next();
+});
+
 app.use(express.json({ limit: '1mb' }));
 app.use(express.urlencoded({ extended: true, limit: '1mb' }));
 app.use(cookieParser());
@@ -76,13 +90,21 @@ const aiTutorRoutes = require('./routes/aiTutorRoutes');
 app.use('/api/ai-tutor', aiTutorRoutes);
 
 app.get('/api/health', (req, res) => {
+  const database = mongoose.connection.readyState === 1 ? 'connected' : 'connecting';
+  const verificationEmail = process.env.SMTP_HOST && process.env.SMTP_USER && process.env.SMTP_PASSWORD
+    ? 'configured'
+    : 'not_configured';
+  const aiTutor = process.env.OPENAI_API_KEY ? 'configured' : 'pending';
+  const appBaseUrl = process.env.APP_BASE_URL || '';
+
   res.status(200).json({
     status: 'OK',
     message: 'Server is running cleanly.',
     services: {
-      database: mongoose.connection.readyState === 1 ? 'connected' : 'connecting',
-      verificationEmail: process.env.SMTP_HOST && process.env.SMTP_USER && process.env.SMTP_PASSWORD ? 'configured' : 'not_configured',
-      aiTutor: process.env.OPENAI_API_KEY ? 'configured' : 'pending'
+      database,
+      verificationEmail,
+      aiTutor,
+      passwordResetBaseUrl: appBaseUrl ? 'configured' : 'not_configured'
     }
   });
 });
