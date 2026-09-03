@@ -52,7 +52,7 @@
   border: 0;
   border-radius: 12px;
   background: transparent;
-  color: #94a3b8;
+  color: #cbd5e1;
   font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   font-size: 11px;
   font-weight: 600;
@@ -68,6 +68,14 @@
   transition: background-color 160ms ease, color 160ms ease, transform 160ms ease;
 }
 
+.miimiid-bottom-nav .miimiid-nav-icon {
+  width: 24px;
+  height: 24px;
+  flex: 0 0 24px;
+  color: currentColor;
+  display: block;
+}
+
 .miimiid-bottom-nav button:hover { color: #e2e8f0; background: rgba(56, 189, 248, 0.08); }
 .miimiid-bottom-nav button:focus-visible { outline: 2px solid rgba(125, 211, 252, 0.9); outline-offset: -2px; }
 .miimiid-bottom-nav button:active { transform: scale(0.96); }
@@ -75,7 +83,7 @@
 .miimiid-bottom-nav button[aria-current="page"],
 .miimiid-bottom-nav button.active,
 .miimiid-bottom-nav button[aria-selected="true"] {
-  color: #7dd3fc;
+  color: #38bdf8;
   background: rgba(56, 189, 248, 0.12);
   font-weight: 700;
 }
@@ -185,7 +193,7 @@ body.miimiid-drawer-open .miimiid-bottom-nav {
     border-radius: 12px !important;
     font-size: 13px !important;
     font-weight: 650 !important;
-    color: #a8b5c5 !important;
+    color: #cbd5e1 !important;
   }
 
   .miimiid-bottom-nav button:hover,
@@ -196,7 +204,7 @@ body.miimiid-drawer-open .miimiid-bottom-nav {
 
   .miimiid-bottom-nav button.active,
   .miimiid-bottom-nav button[aria-current="page"] {
-    color: #7dd3fc !important;
+    color: #38bdf8 !important;
     background: rgba(14, 165, 233, 0.14) !important;
     box-shadow: inset 0 0 0 1px rgba(56, 189, 248, 0.14);
   }
