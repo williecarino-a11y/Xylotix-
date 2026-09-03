@@ -1,10 +1,18 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
+import fs from 'node:fs';
+import path from 'node:path';
 
 import { AUTH_FLOW } from '../public/auth-engine/config.js';
 import { AUTH_STATUS, createAuthState, AuthStore } from '../public/auth-engine/state.js';
 import { FormEngine } from '../public/auth-engine/form.js';
 import { ValidationEngine } from '../public/auth-engine/validation.js';
+
+const root = path.join(process.cwd());
+const authEngine = fs.readFileSync(path.join(root, 'public', 'miimiid-auth-engine.js'), 'utf8');
+const loader = fs.readFileSync(path.join(root, 'public', 'continue-loading.js'), 'utf8');
+const server = fs.readFileSync(path.join(root, 'server.js'), 'utf8');
+const authCss = fs.readFileSync(path.join(root, 'public', 'miimiid-auth-engine.css'), 'utf8');
 
 const validation = new ValidationEngine();
 
@@ -26,8 +34,7 @@ test('invalid birthday is rejected while a valid adult birthday passes', () => {
   const invalid = validation.validateStep(step, { gender: 'female', dateOfBirth: '2026-99-99' });
   assert.equal(invalid.dateOfBirth.code, 'authBirthdayInvalid');
 
-  const validDate = '1990-01-01';
-  const valid = validation.validateStep(step, { gender: 'female', dateOfBirth: validDate });
+  const valid = validation.validateStep(step, { gender: 'female', dateOfBirth: '1990-01-01' });
   assert.equal(valid.dateOfBirth, undefined);
 });
 
@@ -69,4 +76,21 @@ test('auth store exposes explicit request lifecycle states', () => {
   assert.equal(store.getState().request.status, 'loading');
   store.transition(AUTH_STATUS.SUCCESS, { request: { status: 'success', action: 'login' } });
   assert.equal(store.getState().status, AUTH_STATUS.SUCCESS);
+});
+
+test('current browser auth architecture uses one central auth engine', () => {
+  assert.match(authEngine, /window\.MIIMIID_AUTH_ENGINE/);
+  assert.match(authEngine, /SESSION_STATES/);
+  assert.match(authEngine, /activeOperation/);
+  assert.match(authEngine, /X-Continue-Loading/);
+  assert.match(server, /miimiid-auth-engine\.js/);
+  assert.doesNotMatch(server, /auth-shell-fix\.js/);
+});
+
+test('shared ContinueLoading owns the C-shaped registration loader', () => {
+  assert.match(loader, /continue-loading-arc/);
+  assert.match(loader, /border-right-color:\s*transparent/);
+  assert.match(loader, /window\.ContinueLoading/);
+  assert.match(authCss, /continue-loading-arc/);
+  assert.doesNotMatch(authCss, /miimiid-engine-spinner/);
 });
