@@ -11,7 +11,7 @@ export class AuthRenderer {
     if (document.getElementById('miimiid-auth-engine-style')) return;
     const s = document.createElement('style');
     s.id = 'miimiid-auth-engine-style';
-    s.textContent = '.miimiid-auth-v5-loading{position:relative!important;pointer-events:none!important}.miimiid-auth-v5-loading .miimiid-auth-v5-label{visibility:hidden}.miimiid-auth-v5-spinner{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}.miimiid-auth-v5-spinner::after{content:"";width:20px;height:20px;border:2px solid currentColor;border-radius:50%;border-top-color:transparent;animation:spin .6s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}.miimiid-auth-logo{display:grid!important;place-items:center!important;width:56px!important;height:56px!important;padding:0!important;overflow:hidden!important;border-radius:16px!important;background:transparent!important}.miimiid-auth-logo img{display:block;width:100%;height:100%;object-fit:cover;border-radius:inherit}';
+    s.textContent = '.miimiid-auth-v5-loading{position:relative!important;pointer-events:none!important}.miimiid-auth-v5-loading .miimiid-auth-v5-label{visibility:hidden}.miimiid-auth-v5-spinner{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}.miimiid-auth-v5-spinner .continue-loading-arc{width:20px;height:20px}.miimiid-auth-logo{display:grid!important;place-items:center!important;width:56px!important;height:56px!important;padding:0!important;overflow:hidden!important;border-radius:16px!important;background:transparent!important}.miimiid-auth-logo img{display:block;width:100%;height:100%;object-fit:cover;border-radius:inherit}';
     document.head.appendChild(s);
   }
 
@@ -59,10 +59,17 @@ export class AuthRenderer {
 
   button(action,step) {
     const b=document.getElementById(E[step]?.action); if(!b)return;
-    const loading=this.controller.state.request.status==='loading'&&this.controller.state.request.action===action.id;
-    const disabled=loading||this.controller.state.status===AUTH_STATUS.VALIDATING;
-    if(!b.querySelector('.miimiid-auth-v5-spinner')){const h=b.innerHTML;b.innerHTML=`<span class="miimiid-auth-v5-label">${h}</span><span class="miimiid-auth-v5-spinner" aria-hidden="true"></span>`;}
-    b.disabled=disabled;b.setAttribute('aria-busy',String(loading));b.classList.toggle('miimiid-auth-v5-loading',loading);b.querySelector('.miimiid-auth-v5-spinner').style.display=loading?'block':'none';
+    const loading=this.controller.state.request.status==='loading'&&this.controller.state.request.action===action?.id;
+    const disabled=loading||this.controller.state.status===AUTH_STATUS.VALIDATING||this.controller.actions?.running;
+    if(!b.querySelector('.miimiid-auth-v5-spinner')){
+      const h=b.innerHTML;
+      b.innerHTML=`<span class="miimiid-auth-v5-label">${h}</span><span class="miimiid-auth-v5-spinner" aria-hidden="true"><span class="continue-loading-arc"></span></span>`;
+    }
+    b.disabled=Boolean(disabled);
+    b.setAttribute('aria-busy',String(loading));
+    b.classList.toggle('miimiid-auth-v5-loading',loading);
+    const spinner=b.querySelector('.miimiid-auth-v5-spinner');
+    if(spinner) spinner.style.display=loading?'flex':'none';
   }
 
   errors() {
