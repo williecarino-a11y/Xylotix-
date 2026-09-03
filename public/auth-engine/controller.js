@@ -163,14 +163,19 @@ export class AuthController {
   }
 
   back() {
+    if (this.actions.running || this.state.request.status === 'loading') return false;
     const previous = this.step?.previousStep || this.state.navigation.history.at(-1);
     if (previous) this.navigation.back(previous);
+    return true;
   }
 
   async restoreSession() {
+    if (this.state.session.status === SESSION_STATUS.REFRESHING) return this.state.session.user;
     this.store.patch(s => ({ ...s, session: { ...s.session, status: SESSION_STATUS.REFRESHING } }));
+    this.render(this);
     const user = await this.session.restore();
     this.store.patch(s => ({ ...s, session: { status: user ? SESSION_STATUS.AUTHENTICATED : SESSION_STATUS.UNAUTHENTICATED, user } }));
+    this.render(this);
     return user;
   }
 }
