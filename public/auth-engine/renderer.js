@@ -11,8 +11,23 @@ export class AuthRenderer {
     if (document.getElementById('miimiid-auth-engine-style')) return;
     const s = document.createElement('style');
     s.id = 'miimiid-auth-engine-style';
-    s.textContent = '.miimiid-auth-v5-loading{position:relative!important;pointer-events:none!important}.miimiid-auth-v5-loading .miimiid-auth-v5-label{visibility:hidden}.miimiid-auth-v5-spinner{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}.miimiid-auth-v5-spinner::after{content:"";width:20px;height:20px;border:2px solid currentColor;border-radius:50%;border-top-color:transparent;animation:spin .6s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}';
+    s.textContent = '.miimiid-auth-v5-loading{position:relative!important;pointer-events:none!important}.miimiid-auth-v5-loading .miimiid-auth-v5-label{visibility:hidden}.miimiid-auth-v5-spinner{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}.miimiid-auth-v5-spinner::after{content:"";width:20px;height:20px;border:2px solid currentColor;border-radius:50%;border-top-color:transparent;animation:spin .6s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}.miimiid-auth-logo{display:grid!important;place-items:center!important;width:56px!important;height:56px!important;padding:0!important;overflow:hidden!important;border-radius:16px!important;background:transparent!important}.miimiid-auth-logo img{display:block;width:100%;height:100%;object-fit:cover;border-radius:inherit}';
     document.head.appendChild(s);
+  }
+
+  installLogo() {
+    const logo = document.querySelector('.miimiid-auth-logo');
+    if (!logo || logo.dataset.xylotixLogo === 'true') return;
+    const img = document.createElement('img');
+    img.src = '/icons/icon-512.svg';
+    img.alt = 'Miimiid';
+    img.width = 56;
+    img.height = 56;
+    img.loading = 'eager';
+    img.decoding = 'async';
+    logo.replaceChildren(img);
+    logo.setAttribute('aria-label', 'Miimiid logo');
+    logo.dataset.xylotixLogo = 'true';
   }
 
   prepareGender() {
@@ -29,30 +44,30 @@ export class AuthRenderer {
   prepareSteps() {
     const f = document.getElementById(FORM_IDS.register);
     if (!f || f.querySelectorAll('[data-register-step]').length >= 6) return;
-    [['miimiid-register-get-started'],['miimiid-register-first-name','miimiid-register-last-name'],['miimiid-register-email'],['miimiid-register-gender','miimiid-register-dob'],['miimiid-register-password','miimiid-register-confirm-password'],['miimiid-verification-code']].forEach((ids,i)=>{const s=f.querySelector(`[data-register-step="${i}"]`)||document.createElement('fieldset');s.dataset.registerStep=i;s.className='miimiid-auth-step';ids.forEach(id=>{const el=document.getElementById(id);if(el&&!el.closest('[data-register-step]'))s.appendChild(el)});if(!s.closest('form'))f.appendChild(s)});
+    [['miimiid-register-get-started'],['miimiid-register-first-name','miimiid-register-last-name'],['miimiid-register-email'],['miimiid-register-gender','miimiid-register-dob'],['miimiid-register-password','miimiid-register-confirm-password'],['miimiid-verification-code']].forEach((ids,i)=>{const s=f.querySelector(`[data-register-step="${i}"]`)||document.createElement('fieldset');s.dataset.registerStep=i;s.className='miimiid-auth-step';ids.forEach(id=>{const el=document.getElementById(id);if(el&&!el.closest('[data-register-step]'))s.appendChild(el)});if(!s.closest('form'))f.appendChild(s);});
   }
 
   bind() {
-    this.prepareGender(); this.prepareSteps();
+    this.prepareGender(); this.prepareSteps(); this.installLogo();
     const fields = new Map();
     Object.values(E).forEach(g => Object.entries(g).forEach(([k,id]) => { if (k !== 'action' && k !== 'resend') fields.set(id,k); }));
-    fields.forEach((field,id)=>{const el=document.getElementById(id);if(!el||el.dataset.authEngineBound)return;el.dataset.authEngineBound='1';el.addEventListener('input',()=>this.controller.fieldChanged(field,el.value));el.addEventListener('focus',()=>this.controller.fieldFocused(field));el.addEventListener('blur',()=>this.controller.fieldBlurred(field))});
-    Object.entries(E).forEach(([step,g])=>{if(!g.action)return;const b=document.getElementById(g.action);if(b&&!b.dataset.authEngineActionBound){b.dataset.authEngineActionBound='1';b.addEventListener('click',e=>{e.preventDefault();this.controller.primaryAction()})}});
-    const r=document.getElementById(E.verification.resend);if(r&&!r.dataset.authEngineActionBound){r.dataset.authEngineActionBound='1';r.addEventListener('click',e=>{e.preventDefault();this.controller.secondaryAction('resend')})}
-    Object.entries({'miimiid-show-register':'register','miimiid-show-forgot':'forgot','miimiid-show-login-from-register':'login','miimiid-show-login-from-forgot':'login','miimiid-show-login-from-reset':'login'}).forEach(([id,flow])=>{const b=document.getElementById(id);if(b&&!b.dataset.authEngineFlowBound){b.dataset.authEngineFlowBound='1';b.addEventListener('click',e=>{e.preventDefault();this.controller.setFlow(flow)})}});
+    fields.forEach((field,id)=>{const el=document.getElementById(id);if(!el||el.dataset.authEngineBound)return;el.dataset.authEngineBound='1';el.addEventListener('input',()=>this.controller.fieldChanged(field,el.value));el.addEventListener('focus',()=>this.controller.fieldFocused(field));el.addEventListener('blur',()=>this.controller.fieldBlurred(field));});
+    Object.entries(E).forEach(([step,g])=>{if(!g.action)return;const b=document.getElementById(g.action);if(b&&!b.dataset.authEngineActionBound){b.dataset.authEngineActionBound='1';b.addEventListener('click',e=>{e.preventDefault();this.controller.primaryAction();});}});
+    const r=document.getElementById(E.verification.resend);if(r&&!r.dataset.authEngineActionBound){r.dataset.authEngineActionBound='1';r.addEventListener('click',e=>{e.preventDefault();this.controller.secondaryAction('resend');});}
+    Object.entries({'miimiid-show-register':'register','miimiid-show-forgot':'forgot','miimiid-show-login-from-register':'login','miimiid-show-login-from-forgot':'login','miimiid-show-login-from-reset':'login'}).forEach(([id,flow])=>{const b=document.getElementById(id);if(b&&!b.dataset.authEngineFlowBound){b.dataset.authEngineFlowBound='1';b.addEventListener('click',e=>{e.preventDefault();this.controller.setFlow(flow);});}});
   }
 
   button(action,step) {
     const b=document.getElementById(E[step]?.action); if(!b)return;
     const loading=this.controller.state.request.status==='loading'&&this.controller.state.request.action===action.id;
     const disabled=loading||this.controller.state.status===AUTH_STATUS.VALIDATING;
-    if(!b.querySelector('.miimiid-auth-v5-spinner')){const h=b.innerHTML;b.innerHTML=`<span class="miimiid-auth-v5-label">${h}</span><span class="miimiid-auth-v5-spinner" aria-hidden="true"></span>`}
+    if(!b.querySelector('.miimiid-auth-v5-spinner')){const h=b.innerHTML;b.innerHTML=`<span class="miimiid-auth-v5-label">${h}</span><span class="miimiid-auth-v5-spinner" aria-hidden="true"></span>`;}
     b.disabled=disabled;b.setAttribute('aria-busy',String(loading));b.classList.toggle('miimiid-auth-v5-loading',loading);b.querySelector('.miimiid-auth-v5-spinner').style.display=loading?'block':'none';
   }
 
   errors() {
-    for(const f of this.controller.step?.fields||[]){const el=document.getElementById(E[this.controller.state.step]?.[f.id]||'');if(!el)continue;const er=this.controller.state.form.errors[f.id];el.classList.toggle('miimiid-auth-field-error',!!er);el.setAttribute('aria-invalid',String(!!er))}
+    for(const f of this.controller.step?.fields||[]){const el=document.getElementById(E[this.controller.state.step]?.[f.id]||'');if(!el)continue;const er=this.controller.state.form.errors[f.id];el.classList.toggle('miimiid-auth-field-error',!!er);el.setAttribute('aria-invalid',String(!!er));}
   }
 
-  render(){const s=this.controller.state;this.prepareGender();this.prepareSteps();Object.entries(FORM_IDS).forEach(([m,id])=>document.getElementById(id)?.classList.toggle('hidden',m!==s.flow));if(s.step==='authenticated')return;this.button(this.controller.step?.primaryAction,s.step);this.errors()}
+  render(){const s=this.controller.state;this.prepareGender();this.prepareSteps();this.installLogo();Object.entries(FORM_IDS).forEach(([m,id])=>document.getElementById(id)?.classList.toggle('hidden',m!==s.flow));if(s.step==='authenticated')return;this.button(this.controller.step?.primaryAction,s.step);this.errors();}
 }
