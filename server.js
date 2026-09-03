@@ -96,7 +96,7 @@ app.use('/api/learn', learningRoutes);
 const funCenterRoutes = require('./routes/funCenterRoutes');
 app.use('/api/fun-center', funCenterRoutes);
 
-const aiTutorRoutes = require('./routes/ai-tutorRoutes');
+const aiTutorRoutes = require('./routes/aiTutorRoutes');
 app.use('/api/ai-tutor', aiTutorRoutes);
 
 app.get('/api/health', (req, res) => {
