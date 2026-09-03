@@ -89,7 +89,9 @@ mongoose
     console.error('MongoDB connection error:', error.message);
   });
 
+const passwordValidation = require('./middleware/passwordValidation');
 const { router: authRoutes } = require('./routes/authRoutes');
+app.use('/api/auth/register', passwordValidation);
 app.use('/api/auth', authRoutes);
 
 const passwordRoutes = require('./routes/passwordRoutes');
