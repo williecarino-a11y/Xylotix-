@@ -4,7 +4,7 @@
   "description": "Miimiid learning application backend",
   "main": "server.js",
   "scripts": {
-    "test": "node --check server.js && node --check routes/authRoutes.js && node --check routes/learningRoutes.js && node --check routes/aiTutorRoutes.js && node --check services/learningService.js && node --check services/aiTutorService.js",
+    "test": "node --check server.js && node --check routes/authRoutes.js && node --check routes/learningRoutes.js && node --check routes/aiTutorRoutes.js && node --check services/learningService.js && node --check services/aiTutorService.js && node --check services/emailService.js",
     "check": "npm test"
   },
   "repository": {
