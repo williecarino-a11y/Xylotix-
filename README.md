@@ -50,6 +50,96 @@ Screenshots will be added as the interface evolves.
 - 🧩 Reusable components
 - 🔄 Smooth navigation and transitions
 
+## 📚 Learn
+
+The Learn experience provides structured financial education through:
+
+## Course → Module → Lesson → Quiz → Completion
+
+Courses are organized into practical learning experiences covering areas such as:
+
+•Money fundamentals
+
+•Personal finance
+
+•Income and earning
+
+•Investing
+
+•Wealth building
+
+•Financial psychology
+
+Learning content is data-driven so courses, modules, lessons, questions, and progression can evolve independently from the application interface.
+
+.
+
+## 🎮 Fun Center
+
+The Fun Center turns financial concepts into interactive experiences.
+
+Games are intended to provide genuine interaction rather than decorative UI, including:
+
+•Game logic
+
+•Scoring
+
+•Progression
+
+•Rewards
+
+•Coins / XP
+
+•Animation
+
+•Feedback
+
+•Interactive decision-making
+
+The goal is to make financial learning enjoyable even for users who do not naturally enjoy reading traditional educational material.
+
+## 🤖 Miimiid AI Tutor
+
+Miimiid includes an AI Tutor concept designed to help users understand financial concepts through conversational learning.
+
+The AI Tutor is intended to complement structured courses by helping users:
+
+•Ask questions
+
+•Clarify concepts
+
+•Explore financial decisions
+
+•Understand unfamiliar terminology
+
+•Receive contextual explanations
+
+AI functionality depends on the configured AI provider and production environment.
+
+## 🏆 Progress & Gamification
+
+Miimiid uses progression mechanics to make learning more engaging.
+
+Planned and implemented concepts include:
+
+•Learning progress
+
+•Coins
+
+•XP
+
+•Achievements
+
+•Learning streaks
+
+•Course completion
+
+•Quiz performance
+
+•Activity tracking
+
+
+
 ## 🛠️ Tech Stack
 
 | Technology | Purpose |
