@@ -127,49 +127,20 @@ body.miimiid-drawer-open .miimiid-bottom-nav {
       #07111f;
   }
 
-  /* The authenticated shell owns the desktop header. */
   .miimiid-app-shell:not(.hidden) {
     width: min(1320px, 100%);
+    min-height: 100vh;
     margin: 0 auto;
-    padding: 0 0 48px;
+    padding: 96px 0 48px;
   }
 
-  /* A global .hidden rule uses !important, so match it with a
-     stronger desktop selector. The header must not remain hidden
-     after authentication succeeds. */
+  /* The nav is the complete desktop chrome. The separate mobile
+     header is intentionally removed to avoid two competing bars. */
+  .miimiid-app-shell:not(.hidden) .miimiid-header,
   .miimiid-app-shell:not(.hidden) .miimiid-header.hidden {
-    display: flex !important;
+    display: none !important;
   }
 
-  .miimiid-header {
-    position: sticky;
-    top: 0;
-    z-index: 1900;
-    width: 100%;
-    min-height: var(--miimiid-nav-height);
-    margin: 0 0 28px;
-    padding: 10px 0;
-    display: flex !important;
-    align-items: center;
-    justify-content: space-between;
-    gap: 24px;
-    background: rgba(7, 17, 31, 0.94);
-    border-bottom: 1px solid rgba(148, 163, 184, 0.12);
-    backdrop-filter: blur(22px) saturate(140%);
-    -webkit-backdrop-filter: blur(22px) saturate(140%);
-  }
-
-  .miimiid-brand {
-    flex: 0 0 auto;
-    margin: 0 !important;
-    color: #38bdf8;
-    font-size: clamp(1.45rem, 2vw, 1.8rem);
-    font-weight: 800;
-    letter-spacing: -0.035em;
-  }
-
-  /* Desktop primary navigation is rendered inside the nav element.
-     It stays visible regardless of dashboard state. */
   .miimiid-bottom-nav {
     position: fixed !important;
     inset: 0 0 auto 0 !important;
@@ -179,7 +150,7 @@ body.miimiid-drawer-open .miimiid-bottom-nav {
     transform: none !important;
     padding: 8px max(24px, calc((100vw - 1320px) / 2)) !important;
     display: grid !important;
-    grid-template-columns: repeat(4, minmax(110px, 1fr)) !important;
+    grid-template-columns: minmax(130px, 1.35fr) repeat(4, minmax(110px, 1fr)) !important;
     gap: 8px !important;
     border: 0 !important;
     border-bottom: 1px solid rgba(148, 163, 184, 0.12) !important;
@@ -188,6 +159,20 @@ body.miimiid-drawer-open .miimiid-bottom-nav {
     box-shadow: 0 10px 35px rgba(0, 0, 0, 0.24) !important;
     backdrop-filter: blur(24px) saturate(145%);
     -webkit-backdrop-filter: blur(24px) saturate(145%);
+  }
+
+  /* Brand occupies the first desktop navigation cell. */
+  .miimiid-bottom-nav::before {
+    content: "Miimiid";
+    display: flex;
+    align-items: center;
+    padding-left: 4px;
+    color: #38bdf8;
+    font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 1.55rem;
+    font-weight: 800;
+    letter-spacing: -0.035em;
+    -webkit-font-smoothing: antialiased;
   }
 
   .miimiid-bottom-nav button {
@@ -215,7 +200,6 @@ body.miimiid-drawer-open .miimiid-bottom-nav {
     box-shadow: inset 0 0 0 1px rgba(56, 189, 248, 0.14);
   }
 
-  /* Do not let an empty/closed drawer affect desktop primary nav. */
   body.miimiid-drawer-open .miimiid-bottom-nav,
   body:has(.miimiid-dashboard-menu-panel:not(.hidden)) .miimiid-bottom-nav {
     opacity: 1 !important;
@@ -224,7 +208,9 @@ body.miimiid-drawer-open .miimiid-bottom-nav {
     transform: none !important;
   }
 
-  .miimiid-menu-toggle {
+  .miimiid-menu-toggle,
+  .miimiid-dashboard-menu-panel,
+  .miimiid-drawer-backdrop {
     display: none !important;
   }
 
@@ -260,14 +246,6 @@ body.miimiid-drawer-open .miimiid-bottom-nav {
 
   .miimiid-dashboard-content {
     gap: 20px;
-  }
-
-  .miimiid-dashboard-menu-panel {
-    display: none !important;
-  }
-
-  .miimiid-drawer-backdrop {
-    display: none !important;
   }
 }
 
