@@ -1,14 +1,15 @@
 /*
  * MIIMIID NAVIGATION POLISH
  *
- * Keeps the app navigation above the device/browser safe area, prevents the
- * mobile drawer from competing with the bottom navigation, and gives the
- * bottom navigation a cleaner app-native type system.
+ * App-native bottom navigation with safe-area spacing, clean typography,
+ * predictable touch targets, and a non-competing mobile drawer.
  */
 
 :root {
   --miimiid-nav-height: 64px;
-  --miimiid-nav-gap: 8px;
+  --miimiid-nav-side: 12px;
+  --miimiid-nav-bottom: 10px;
+  --miimiid-nav-gap: 6px;
   --miimiid-nav-radius: 20px;
   --miimiid-nav-blur: 22px;
 }
@@ -20,27 +21,25 @@
   z-index: 1100;
   left: 50%;
   right: auto;
-  bottom: max(10px, env(safe-area-inset-bottom));
+  bottom: calc(var(--miimiid-nav-bottom) + env(safe-area-inset-bottom, 0px));
   transform: translateX(-50%);
 
-  width: min(760px, calc(100vw - 24px));
+  width: min(760px, calc(100vw - (var(--miimiid-nav-side) * 2)));
   min-height: var(--miimiid-nav-height);
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
   align-items: stretch;
   gap: var(--miimiid-nav-gap);
 
-  padding: 7px;
-  padding-bottom: 7px;
+  padding: 6px;
   border: 1px solid rgba(148, 163, 184, 0.16);
   border-radius: var(--miimiid-nav-radius);
-  background: rgba(7, 17, 31, 0.94);
+  background: rgba(7, 17, 31, 0.95);
   box-shadow:
     0 18px 50px rgba(0, 0, 0, 0.38),
     0 4px 18px rgba(0, 0, 0, 0.18);
   backdrop-filter: blur(var(--miimiid-nav-blur)) saturate(140%);
   -webkit-backdrop-filter: blur(var(--miimiid-nav-blur)) saturate(140%);
-
   isolation: isolate;
 }
 
@@ -61,7 +60,6 @@
   background: transparent;
   color: #94a3b8;
 
-  /* Clean system UI typography, rather than browser-default button text. */
   font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   font-size: 11px;
   font-weight: 600;
@@ -74,15 +72,18 @@
 
   cursor: pointer;
   touch-action: manipulation;
-  transition:
-    background-color 160ms ease,
-    color 160ms ease,
-    transform 160ms ease;
+  -webkit-tap-highlight-color: transparent;
+  transition: background-color 160ms ease, color 160ms ease, transform 160ms ease;
 }
 
 .miimiid-bottom-nav button:hover {
   color: #e2e8f0;
   background: rgba(56, 189, 248, 0.08);
+}
+
+.miimiid-bottom-nav button:focus-visible {
+  outline: 2px solid rgba(125, 211, 252, 0.9);
+  outline-offset: -2px;
 }
 
 .miimiid-bottom-nav button:active {
@@ -101,70 +102,86 @@
 .miimiid-bottom-nav button > small,
 .miimiid-bottom-nav button .nav-label,
 .miimiid-bottom-nav button .label {
-  font: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
   line-height: 1.15;
   letter-spacing: inherit;
 }
 
 .miimiid-bottom-nav button small {
-  font-size: inherit;
+  margin: 0;
 }
 
-/* Keep icons visually stronger than their labels without making labels huge. */
 .miimiid-bottom-nav button > svg,
 .miimiid-bottom-nav button > i,
 .miimiid-bottom-nav button .nav-icon,
 .miimiid-bottom-nav button .icon {
   flex: 0 0 auto;
+  width: 19px;
+  height: 19px;
   font-size: 19px;
   line-height: 1;
 }
 
-/* Reserve enough document space so content never disappears behind the bar. */
+/* Prevent page content from hiding behind the fixed navigation. */
 .miimiid-app-shell {
-  padding-bottom: calc(var(--miimiid-nav-height) + 34px + env(safe-area-inset-bottom));
+  padding-bottom: calc(
+    var(--miimiid-nav-height) + 34px + env(safe-area-inset-bottom, 0px)
+  );
 }
 
-/* ---------- Mobile menu / phone navigation ---------- */
+/* ---------- Mobile menu / drawer ---------- */
 
 .miimiid-dashboard-menu-panel {
   z-index: 1200;
-  padding-bottom: max(20px, env(safe-area-inset-bottom));
+  padding-bottom: max(20px, env(safe-area-inset-bottom, 0px));
+  overscroll-behavior: contain;
 }
 
 .miimiid-menu-toggle {
   z-index: 1210;
   touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 
-/*
- * When the drawer is open, it owns the screen. Hiding the app bottom nav
- * removes the visual collision with the phone/device navigation area and
- * prevents two navigation systems from competing for taps.
- */
+/* The drawer owns the screen while open. */
 body:has(.miimiid-dashboard-menu-panel:not(.hidden)) .miimiid-bottom-nav {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transform: translate(-50%, 14px);
+  transform: translate(-50%, 18px);
 }
 
 .miimiid-dashboard-menu-panel:not(.hidden) {
   box-shadow: 0 24px 70px rgba(0, 0, 0, 0.5);
 }
 
-/* ---------- Device safe-area handling ---------- */
+/* ---------- Safe-area support ---------- */
 
 @supports (padding: max(0px)) {
   .miimiid-bottom-nav {
-    bottom: max(10px, env(safe-area-inset-bottom));
+    padding-bottom: max(6px, env(safe-area-inset-bottom, 0px));
   }
 }
 
-/* Phones in landscape have very little vertical room. */
-@media (max-width: 767px) and (orientation: landscape) {
+/* ---------- Tablets / desktop ---------- */
+
+@media (min-width: 768px) {
   .miimiid-bottom-nav {
-    min-height: 54px;
+    --miimiid-nav-side: 24px;
+  }
+}
+
+/* ---------- Landscape phones ---------- */
+
+@media (max-width: 767px) and (orientation: landscape) {
+  :root {
+    --miimiid-nav-height: 54px;
+    --miimiid-nav-bottom: 7px;
+  }
+
+  .miimiid-bottom-nav {
     padding: 4px;
     border-radius: 16px;
   }
@@ -180,26 +197,26 @@ body:has(.miimiid-dashboard-menu-panel:not(.hidden)) .miimiid-bottom-nav {
   .miimiid-bottom-nav button > i,
   .miimiid-bottom-nav button .nav-icon,
   .miimiid-bottom-nav button .icon {
+    width: 16px;
+    height: 16px;
     font-size: 16px;
   }
 }
 
-/* Small phones: give labels room without letting the nav become chunky. */
+/* ---------- Small phones ---------- */
+
 @media (max-width: 480px) {
   :root {
     --miimiid-nav-height: 60px;
+    --miimiid-nav-side: 7px;
+    --miimiid-nav-bottom: 7px;
   }
 
   .miimiid-bottom-nav {
-    left: 7px;
-    right: 7px;
-    bottom: max(7px, env(safe-area-inset-bottom));
     width: auto;
-    transform: none;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 2px;
     padding: 5px;
     border-radius: 18px;
+    gap: 2px;
   }
 
   .miimiid-bottom-nav button {
@@ -207,22 +224,38 @@ body:has(.miimiid-dashboard-menu-panel:not(.hidden)) .miimiid-bottom-nav {
     padding: 5px 2px;
     border-radius: 13px;
     font-size: 10.5px;
-    font-weight: 600;
   }
 
   .miimiid-bottom-nav button > svg,
   .miimiid-bottom-nav button > i,
   .miimiid-bottom-nav button .nav-icon,
   .miimiid-bottom-nav button .icon {
+    width: 18px;
+    height: 18px;
     font-size: 18px;
   }
 
-  body:has(.miimiid-dashboard-menu-panel:not(.hidden)) .miimiid-bottom-nav {
-    transform: translateY(14px);
+  .miimiid-app-shell {
+    padding-bottom: calc(
+      var(--miimiid-nav-height) + 30px + env(safe-area-inset-bottom, 0px)
+    );
+  }
+}
+
+/* Extra-short screens: keep navigation usable without swallowing the page. */
+@media (max-height: 640px) and (max-width: 767px) {
+  .miimiid-bottom-nav {
+    min-height: 54px;
+  }
+
+  .miimiid-bottom-nav button {
+    min-height: 44px;
+    padding-top: 4px;
+    padding-bottom: 4px;
   }
 
   .miimiid-app-shell {
-    padding-bottom: calc(var(--miimiid-nav-height) + 30px + env(safe-area-inset-bottom));
+    padding-bottom: calc(70px + env(safe-area-inset-bottom, 0px));
   }
 }
 
