@@ -1,8 +1,9 @@
 /*
  * MIIMIID NAVIGATION POLISH
  *
- * App-native navigation with desktop visibility, mobile safe-area spacing,
- * clean typography, predictable touch targets, and a non-competing drawer.
+ * Responsive app navigation. Desktop uses a persistent top bar;
+ * mobile uses the bottom navigation. Navigation never depends on
+ * JavaScript to become visible.
  */
 
 :root {
@@ -16,7 +17,7 @@
 
 .miimiid-bottom-nav {
   position: fixed !important;
-  z-index: 1100 !important;
+  z-index: 2000 !important;
   left: 50% !important;
   right: auto !important;
   bottom: calc(var(--miimiid-nav-bottom) + env(safe-area-inset-bottom, 0px)) !important;
@@ -24,13 +25,13 @@
   width: min(760px, calc(100vw - (var(--miimiid-nav-side) * 2))) !important;
   min-height: var(--miimiid-nav-height);
   display: grid !important;
-  grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   align-items: stretch;
   gap: var(--miimiid-nav-gap);
   padding: 6px;
   border: 1px solid rgba(148, 163, 184, 0.16);
   border-radius: var(--miimiid-nav-radius);
-  background: rgba(7, 17, 31, 0.95);
+  background: rgba(7, 17, 31, 0.96);
   box-shadow: 0 18px 50px rgba(0, 0, 0, 0.38), 0 4px 18px rgba(0, 0, 0, 0.18);
   backdrop-filter: blur(var(--miimiid-nav-blur)) saturate(140%);
   -webkit-backdrop-filter: blur(var(--miimiid-nav-blur)) saturate(140%);
@@ -40,7 +41,7 @@
 .miimiid-bottom-nav button {
   min-width: 0;
   min-height: 50px;
-  margin: 0;
+  margin: 0 !important;
   padding: 7px 5px;
   display: flex !important;
   flex-direction: column;
@@ -86,136 +87,149 @@
   font-size: inherit;
   font-weight: inherit;
   line-height: 1.15;
-  letter-spacing: inherit;
 }
 
 .miimiid-bottom-nav button small { margin: 0; }
 
-.miimiid-bottom-nav button > svg,
-.miimiid-bottom-nav button > i,
-.miimiid-bottom-nav button .nav-icon,
-.miimiid-bottom-nav button .icon {
-  flex: 0 0 auto;
-  width: 19px;
-  height: 19px;
-  font-size: 19px;
-  line-height: 1;
-}
-
 .miimiid-app-shell {
+  min-height: 100vh;
   padding-bottom: calc(var(--miimiid-nav-height) + 34px + env(safe-area-inset-bottom, 0px));
 }
 
 .miimiid-dashboard-menu-panel {
-  z-index: 1200;
+  z-index: 2100;
   padding-bottom: max(20px, env(safe-area-inset-bottom, 0px));
   overscroll-behavior: contain;
 }
 
 .miimiid-menu-toggle {
-  z-index: 1210;
+  z-index: 2110;
   touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
 }
 
-body.miimiid-drawer-open .miimiid-bottom-nav,
-body:has(.miimiid-dashboard-menu-panel:not(.hidden)) .miimiid-bottom-nav {
+body.miimiid-drawer-open .miimiid-bottom-nav {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transform: translate(-50%, 18px) !important;
 }
-
-.miimiid-dashboard-menu-panel:not(.hidden) {
-  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.5);
-}
-
-@supports (padding: max(0px)) {
-  .miimiid-bottom-nav {
-    padding-bottom: max(6px, env(safe-area-inset-bottom, 0px));
-  }
-}
-
-/* =========================================================
-   DESKTOP APP SHELL
-   ========================================================= */
 
 @media (min-width: 768px) {
   :root {
-    --miimiid-nav-height: 76px;
-    --miimiid-nav-side: 0px;
-    --miimiid-nav-bottom: 0px;
+    --miimiid-nav-height: 72px;
   }
 
   body {
-    padding-top: 96px;
-    padding-left: 24px;
-    padding-right: 24px;
+    padding: 0 24px 48px;
     background:
       radial-gradient(circle at 12% 0%, rgba(14, 165, 233, 0.09), transparent 28rem),
       radial-gradient(circle at 88% 0%, rgba(99, 102, 241, 0.07), transparent 30rem),
       #07111f;
   }
 
-  .miimiid-bottom-nav {
-    top: 0 !important;
-    bottom: auto !important;
-    left: 0 !important;
-    right: 0 !important;
-    transform: none !important;
-    width: 100% !important;
-    height: var(--miimiid-nav-height);
+  /* The authenticated shell owns the desktop header. */
+  .miimiid-app-shell:not(.hidden) {
+    width: min(1320px, 100%);
+    margin: 0 auto;
+    padding: 0 0 48px;
+  }
+
+  /* A global .hidden rule uses !important, so match it with a
+     stronger desktop selector. The header must not remain hidden
+     after authentication succeeds. */
+  .miimiid-app-shell:not(.hidden) .miimiid-header.hidden {
+    display: flex !important;
+  }
+
+  .miimiid-header {
+    position: sticky;
+    top: 0;
+    z-index: 1900;
+    width: 100%;
     min-height: var(--miimiid-nav-height);
-    padding: 10px max(24px, calc((100vw - 1320px) / 2));
-    display: grid !important;
-    grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
-    gap: 6px;
-    border: 0;
+    margin: 0 0 28px;
+    padding: 10px 0;
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    background: rgba(7, 17, 31, 0.94);
     border-bottom: 1px solid rgba(148, 163, 184, 0.12);
-    border-radius: 0;
-    background: rgba(5, 15, 28, 0.94);
-    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.24);
+    backdrop-filter: blur(22px) saturate(140%);
+    -webkit-backdrop-filter: blur(22px) saturate(140%);
+  }
+
+  .miimiid-brand {
+    flex: 0 0 auto;
+    margin: 0 !important;
+    color: #38bdf8;
+    font-size: clamp(1.45rem, 2vw, 1.8rem);
+    font-weight: 800;
+    letter-spacing: -0.035em;
+  }
+
+  /* Desktop primary navigation is rendered inside the nav element.
+     It stays visible regardless of dashboard state. */
+  .miimiid-bottom-nav {
+    position: fixed !important;
+    inset: 0 0 auto 0 !important;
+    width: 100% !important;
+    height: var(--miimiid-nav-height) !important;
+    min-height: var(--miimiid-nav-height) !important;
+    transform: none !important;
+    padding: 8px max(24px, calc((100vw - 1320px) / 2)) !important;
+    display: grid !important;
+    grid-template-columns: repeat(4, minmax(110px, 1fr)) !important;
+    gap: 8px !important;
+    border: 0 !important;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.12) !important;
+    border-radius: 0 !important;
+    background: rgba(5, 15, 28, 0.96) !important;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.24) !important;
     backdrop-filter: blur(24px) saturate(145%);
     -webkit-backdrop-filter: blur(24px) saturate(145%);
   }
 
-  .miimiid-bottom-nav[data-desktop-visible="true"] {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-  }
-
   .miimiid-bottom-nav button {
-    min-height: 54px;
-    padding: 7px 14px;
-    gap: 4px;
-    border-radius: 12px;
-    font-size: 13px;
-    font-weight: 600;
-    flex-direction: row;
-    white-space: nowrap;
+    min-height: 52px !important;
+    padding: 7px 16px !important;
+    flex-direction: row !important;
+    justify-content: center !important;
+    gap: 7px !important;
+    border-radius: 12px !important;
+    font-size: 13px !important;
+    font-weight: 650 !important;
+    color: #a8b5c5 !important;
   }
 
-  .miimiid-bottom-nav button[aria-current="page"],
+  .miimiid-bottom-nav button:hover,
+  .miimiid-bottom-nav button:focus-visible {
+    color: #f8fafc !important;
+    background: rgba(56, 189, 248, 0.09) !important;
+  }
+
   .miimiid-bottom-nav button.active,
-  .miimiid-bottom-nav button[aria-selected="true"] {
-    background: rgba(14, 165, 233, 0.13);
+  .miimiid-bottom-nav button[aria-current="page"] {
+    color: #7dd3fc !important;
+    background: rgba(14, 165, 233, 0.14) !important;
     box-shadow: inset 0 0 0 1px rgba(56, 189, 248, 0.14);
   }
 
-  .miimiid-bottom-nav button > svg,
-  .miimiid-bottom-nav button > i,
-  .miimiid-bottom-nav button .nav-icon,
-  .miimiid-bottom-nav button .icon {
-    width: 20px;
-    height: 20px;
-    font-size: 20px;
+  /* Do not let an empty/closed drawer affect desktop primary nav. */
+  body.miimiid-drawer-open .miimiid-bottom-nav,
+  body:has(.miimiid-dashboard-menu-panel:not(.hidden)) .miimiid-bottom-nav {
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    transform: none !important;
   }
 
-  .miimiid-app-shell {
-    width: min(1320px, 100%);
-    margin: 0 auto;
-    padding-bottom: 48px;
+  .miimiid-menu-toggle {
+    display: none !important;
+  }
+
+  .miimiid-dashboard {
+    width: 100%;
   }
 
   .miimiid-dashboard-header {
@@ -225,11 +239,6 @@ body:has(.miimiid-dashboard-menu-panel:not(.hidden)) .miimiid-bottom-nav {
   .miimiid-dashboard-brand {
     font-size: clamp(2rem, 3vw, 2.8rem);
     letter-spacing: -0.03em;
-  }
-
-  /* The desktop shell uses the top nav, so the hamburger is unnecessary. */
-  .miimiid-menu-toggle {
-    display: none !important;
   }
 
   .miimiid-dashboard-stat-grid {
@@ -249,25 +258,26 @@ body:has(.miimiid-dashboard-menu-panel:not(.hidden)) .miimiid-bottom-nav {
     font-size: 2rem;
   }
 
-  /* If the app already exposes a desktop content grid, keep it spacious. */
   .miimiid-dashboard-content {
     gap: 20px;
   }
 
-  body:has(.miimiid-dashboard.active) .miimiid-dashboard-menu-panel {
-    display: none;
+  .miimiid-dashboard-menu-panel {
+    display: none !important;
   }
 
-  body:has(.miimiid-dashboard.active) .miimiid-bottom-nav {
-    z-index: 2000 !important;
+  .miimiid-drawer-backdrop {
+    display: none !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .miimiid-bottom-nav {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
-  body.miimiid-drawer-open .miimiid-bottom-nav,
-  body:has(.miimiid-dashboard-menu-panel:not(.hidden)) .miimiid-bottom-nav {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-    transform: none !important;
+  .miimiid-app-shell {
+    padding-bottom: calc(64px + 34px + env(safe-area-inset-bottom, 0px));
   }
 }
 
@@ -275,27 +285,17 @@ body:has(.miimiid-dashboard-menu-panel:not(.hidden)) .miimiid-bottom-nav {
   :root { --miimiid-nav-height: 54px; --miimiid-nav-bottom: 7px; }
   .miimiid-bottom-nav { padding: 4px; border-radius: 16px; }
   .miimiid-bottom-nav button { min-height: 44px; padding: 4px; gap: 2px; font-size: 10px; }
-  .miimiid-bottom-nav button > svg,
-  .miimiid-bottom-nav button > i,
-  .miimiid-bottom-nav button .nav-icon,
-  .miimiid-bottom-nav button .icon { width: 16px; height: 16px; font-size: 16px; }
 }
 
 @media (max-width: 480px) {
   :root { --miimiid-nav-height: 60px; --miimiid-nav-side: 7px; --miimiid-nav-bottom: 7px; }
-  .miimiid-bottom-nav { width: auto !important; padding: 5px; border-radius: 18px; gap: 2px; }
+  .miimiid-bottom-nav { width: calc(100vw - 14px) !important; padding: 5px; border-radius: 18px; gap: 2px; }
   .miimiid-bottom-nav button { min-height: 48px; padding: 5px 2px; border-radius: 13px; font-size: 10.5px; }
-  .miimiid-bottom-nav button > svg,
-  .miimiid-bottom-nav button > i,
-  .miimiid-bottom-nav button .nav-icon,
-  .miimiid-bottom-nav button .icon { width: 18px; height: 18px; font-size: 18px; }
-  .miimiid-app-shell { padding-bottom: calc(var(--miimiid-nav-height) + 30px + env(safe-area-inset-bottom, 0px)); }
 }
 
 @media (max-height: 640px) and (max-width: 767px) {
   .miimiid-bottom-nav { min-height: 54px; }
   .miimiid-bottom-nav button { min-height: 44px; padding-top: 4px; padding-bottom: 4px; }
-  .miimiid-app-shell { padding-bottom: calc(70px + env(safe-area-inset-bottom, 0px)); }
 }
 
 @media (prefers-reduced-motion: reduce) {
