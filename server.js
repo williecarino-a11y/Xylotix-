@@ -14,16 +14,27 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 /*
- * Serve index.html with auth-engine properly injected
+ * Serve index.html with the production authentication UI injected.
  */
 app.get(['/', '/index.html'], (req, res, next) => {
   try {
     const indexPath = path.join(__dirname, 'public', 'index.html');
     let html = fs.readFileSync(indexPath, 'utf8');
 
-    // Ensure auth-engine.js is loaded
+    // Ensure the authentication engine is loaded once.
     if (!html.includes('auth-engine.js')) {
-      html = html.replace(/<\/head>/i, '  <script type="module" src="/auth-engine.js"></script>\n</head>');
+      html = html.replace(
+        /<\/head>/i,
+        '  <script type="module" src="/auth-engine.js"></script>\n</head>'
+      );
+    }
+
+    // Enhance the auth experience after the engine mounts its UI.
+    if (!html.includes('auth-ui-enhancements.js')) {
+      html = html.replace(
+        /<\/head>/i,
+        '  <script defer src="/auth-ui-enhancements.js"></script>\n</head>'
+      );
     }
 
     res.type('html').send(html);
