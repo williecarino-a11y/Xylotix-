@@ -46,7 +46,6 @@ app.get(['/', '/index.html'], (req, res, next) => {
       '<link rel="stylesheet" href="/responsive.css">',
       '<link rel="stylesheet" href="/pwa.css">',
       '<link rel="stylesheet" href="/navigation-polish.css">',
-      '<script defer src="/auth-shell-fix.js"></script>',
       '<script defer src="/continue-loading.js"></script>',
       '<script defer src="/miimiid-auth-engine.js"></script>',
       '<script defer src="/auth-bootstrap-guard.js"></script>',
