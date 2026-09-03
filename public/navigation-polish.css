@@ -1,0 +1,235 @@
+/*
+ * MIIMIID NAVIGATION POLISH
+ *
+ * Keeps the app navigation above the device/browser safe area, prevents the
+ * mobile drawer from competing with the bottom navigation, and gives the
+ * bottom navigation a cleaner app-native type system.
+ */
+
+:root {
+  --miimiid-nav-height: 64px;
+  --miimiid-nav-gap: 8px;
+  --miimiid-nav-radius: 20px;
+  --miimiid-nav-blur: 22px;
+}
+
+/* ---------- App bottom navigation ---------- */
+
+.miimiid-bottom-nav {
+  position: fixed;
+  z-index: 1100;
+  left: 50%;
+  right: auto;
+  bottom: max(10px, env(safe-area-inset-bottom));
+  transform: translateX(-50%);
+
+  width: min(760px, calc(100vw - 24px));
+  min-height: var(--miimiid-nav-height);
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: stretch;
+  gap: var(--miimiid-nav-gap);
+
+  padding: 7px;
+  padding-bottom: 7px;
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  border-radius: var(--miimiid-nav-radius);
+  background: rgba(7, 17, 31, 0.94);
+  box-shadow:
+    0 18px 50px rgba(0, 0, 0, 0.38),
+    0 4px 18px rgba(0, 0, 0, 0.18);
+  backdrop-filter: blur(var(--miimiid-nav-blur)) saturate(140%);
+  -webkit-backdrop-filter: blur(var(--miimiid-nav-blur)) saturate(140%);
+
+  isolation: isolate;
+}
+
+.miimiid-bottom-nav button {
+  min-width: 0;
+  min-height: 50px;
+  margin: 0;
+  padding: 7px 5px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+
+  border: 0;
+  border-radius: 14px;
+  background: transparent;
+  color: #94a3b8;
+
+  /* Clean system UI typography, rather than browser-default button text. */
+  font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: 0.01em;
+  text-align: center;
+  white-space: nowrap;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+
+  cursor: pointer;
+  touch-action: manipulation;
+  transition:
+    background-color 160ms ease,
+    color 160ms ease,
+    transform 160ms ease;
+}
+
+.miimiid-bottom-nav button:hover {
+  color: #e2e8f0;
+  background: rgba(56, 189, 248, 0.08);
+}
+
+.miimiid-bottom-nav button:active {
+  transform: scale(0.96);
+}
+
+.miimiid-bottom-nav button[aria-current="page"],
+.miimiid-bottom-nav button.active,
+.miimiid-bottom-nav button[aria-selected="true"] {
+  color: #7dd3fc;
+  background: rgba(56, 189, 248, 0.12);
+  font-weight: 700;
+}
+
+.miimiid-bottom-nav button > span,
+.miimiid-bottom-nav button > small,
+.miimiid-bottom-nav button .nav-label,
+.miimiid-bottom-nav button .label {
+  font: inherit;
+  line-height: 1.15;
+  letter-spacing: inherit;
+}
+
+.miimiid-bottom-nav button small {
+  font-size: inherit;
+}
+
+/* Keep icons visually stronger than their labels without making labels huge. */
+.miimiid-bottom-nav button > svg,
+.miimiid-bottom-nav button > i,
+.miimiid-bottom-nav button .nav-icon,
+.miimiid-bottom-nav button .icon {
+  flex: 0 0 auto;
+  font-size: 19px;
+  line-height: 1;
+}
+
+/* Reserve enough document space so content never disappears behind the bar. */
+.miimiid-app-shell {
+  padding-bottom: calc(var(--miimiid-nav-height) + 34px + env(safe-area-inset-bottom));
+}
+
+/* ---------- Mobile menu / phone navigation ---------- */
+
+.miimiid-dashboard-menu-panel {
+  z-index: 1200;
+  padding-bottom: max(20px, env(safe-area-inset-bottom));
+}
+
+.miimiid-menu-toggle {
+  z-index: 1210;
+  touch-action: manipulation;
+}
+
+/*
+ * When the drawer is open, it owns the screen. Hiding the app bottom nav
+ * removes the visual collision with the phone/device navigation area and
+ * prevents two navigation systems from competing for taps.
+ */
+body:has(.miimiid-dashboard-menu-panel:not(.hidden)) .miimiid-bottom-nav {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translate(-50%, 14px);
+}
+
+.miimiid-dashboard-menu-panel:not(.hidden) {
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.5);
+}
+
+/* ---------- Device safe-area handling ---------- */
+
+@supports (padding: max(0px)) {
+  .miimiid-bottom-nav {
+    bottom: max(10px, env(safe-area-inset-bottom));
+  }
+}
+
+/* Phones in landscape have very little vertical room. */
+@media (max-width: 767px) and (orientation: landscape) {
+  .miimiid-bottom-nav {
+    min-height: 54px;
+    padding: 4px;
+    border-radius: 16px;
+  }
+
+  .miimiid-bottom-nav button {
+    min-height: 44px;
+    padding: 4px;
+    gap: 2px;
+    font-size: 10px;
+  }
+
+  .miimiid-bottom-nav button > svg,
+  .miimiid-bottom-nav button > i,
+  .miimiid-bottom-nav button .nav-icon,
+  .miimiid-bottom-nav button .icon {
+    font-size: 16px;
+  }
+}
+
+/* Small phones: give labels room without letting the nav become chunky. */
+@media (max-width: 480px) {
+  :root {
+    --miimiid-nav-height: 60px;
+  }
+
+  .miimiid-bottom-nav {
+    left: 7px;
+    right: 7px;
+    bottom: max(7px, env(safe-area-inset-bottom));
+    width: auto;
+    transform: none;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 2px;
+    padding: 5px;
+    border-radius: 18px;
+  }
+
+  .miimiid-bottom-nav button {
+    min-height: 48px;
+    padding: 5px 2px;
+    border-radius: 13px;
+    font-size: 10.5px;
+    font-weight: 600;
+  }
+
+  .miimiid-bottom-nav button > svg,
+  .miimiid-bottom-nav button > i,
+  .miimiid-bottom-nav button .nav-icon,
+  .miimiid-bottom-nav button .icon {
+    font-size: 18px;
+  }
+
+  body:has(.miimiid-dashboard-menu-panel:not(.hidden)) .miimiid-bottom-nav {
+    transform: translateY(14px);
+  }
+
+  .miimiid-app-shell {
+    padding-bottom: calc(var(--miimiid-nav-height) + 30px + env(safe-area-inset-bottom));
+  }
+}
+
+/* Respect reduced-motion preferences. */
+@media (prefers-reduced-motion: reduce) {
+  .miimiid-bottom-nav,
+  .miimiid-bottom-nav button {
+    transition: none;
+  }
+}
