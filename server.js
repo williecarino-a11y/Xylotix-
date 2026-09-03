@@ -37,6 +37,14 @@ app.get(['/', '/index.html'], (req, res, next) => {
       );
     }
 
+    // Apply a final delegated tab-visibility fix after the auth UI exists.
+    if (!html.includes('auth-tab-fix.js')) {
+      html = html.replace(
+        /<\/head>/i,
+        '  <script defer src="/auth-tab-fix.js"></script>\n</head>'
+      );
+    }
+
     res.type('html').send(html);
   } catch (error) {
     next(error);
