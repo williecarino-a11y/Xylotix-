@@ -1,10 +1,10 @@
 {
-  "name": "dual-finance-engine",
+  "name": "miimiid",
   "version": "1.0.0",
   "description": "Miimiid learning application backend",
   "main": "server.js",
   "scripts": {
-    "test": "node --check server.js && node --check routes/authRoutes.js && node --check routes/learningRoutes.js && node --check routes/aiTutorRoutes.js && node --check services/learningService.js && node --check services/aiTutorService.js && node --check services/emailService.js",
+    "test": "node --check server.js && node --check routes/authRoutes.js && node --check routes/learningRoutes.js && node --check routes/aiTutorRoutes.js && node --check routes/passwordRoutes.js && node --check middleware/passwordValidation.js && node --check utils/passwordValidator.js && node --check services/learningService.js && node --check services/aiTutorService.js && node --check services/emailService.js",
     "check": "npm test"
   },
   "repository": {
