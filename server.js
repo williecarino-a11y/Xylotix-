@@ -44,6 +44,7 @@ app.get(['/', '/index.html'], (req, res, next) => {
       '<link rel="manifest" href="/manifest.json">',
       '<meta name="theme-color" content="#0f172a">',
       '<link rel="stylesheet" href="/responsive.css">',
+      '<link rel="stylesheet" href="/pwa.css">',
       '<script defer src="/auth-shell-fix.js"></script>',
       '<script defer src="/continue-loading.js"></script>',
       '<script defer src="/auth-bootstrap-guard.js"></script>',
@@ -95,7 +96,7 @@ app.use('/api/learn', learningRoutes);
 const funCenterRoutes = require('./routes/funCenterRoutes');
 app.use('/api/fun-center', funCenterRoutes);
 
-const aiTutorRoutes = require('./routes/aiTutorRoutes');
+const aiTutorRoutes = require('./routes/ai-tutorRoutes');
 app.use('/api/ai-tutor', aiTutorRoutes);
 
 app.get('/api/health', (req, res) => {
