@@ -68,9 +68,9 @@
       return;
     }
 
-    if (shellVisible || (authVisible && !isHidden(card))) {
-      markBootstrapReady();
-      return;
+    if (authVisible && !isHidden(card)) {
+  markBootstrapReady();
+  return;
     }
 
     if (authVisible && isHidden(card) && loading && isHidden(loading)) {
