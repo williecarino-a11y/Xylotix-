@@ -4,6 +4,8 @@
   const BOOT_TIMEOUT_MS = 18000;
   let initialized = false;
   let recoveryTimer = null;
+  let bootstrapHandle = null;
+  let bootstrapFinished = false;
 
   function elements() {
     return {
@@ -17,6 +19,30 @@
 
   function isHidden(element) {
     return !element || element.classList.contains('hidden');
+  }
+
+  function startBootstrapLoading() {
+    if (bootstrapHandle || !window.ContinueLoading?.start) return;
+
+    bootstrapHandle = window.ContinueLoading.start({
+      id: 'auth-bootstrap',
+      context: 'auth',
+      message: 'Starting Xylotix…',
+      delay: 0
+    });
+  }
+
+  function stopBootstrapLoading() {
+    if (!bootstrapHandle || !window.ContinueLoading?.stop) return;
+
+    window.ContinueLoading.stop(bootstrapHandle);
+    bootstrapHandle = null;
+  }
+
+  function markBootstrapReady() {
+    if (bootstrapFinished) return;
+    bootstrapFinished = true;
+    stopBootstrapLoading();
   }
 
   function showBootstrap() {
@@ -42,6 +68,11 @@
       return;
     }
 
+    if (shellVisible || (authVisible && !isHidden(card))) {
+      markBootstrapReady();
+      return;
+    }
+
     if (authVisible && isHidden(card) && loading && isHidden(loading)) {
       loading.classList.remove('hidden');
     }
@@ -51,6 +82,7 @@
     if (initialized) return;
     initialized = true;
 
+    startBootstrapLoading();
     recoverIfBlank();
 
     const { auth, shell } = elements();
@@ -68,6 +100,7 @@
     recoveryTimer = window.setTimeout(() => {
       recoveryTimer = null;
       recoverIfBlank();
+      markBootstrapReady();
     }, BOOT_TIMEOUT_MS);
 
     window.addEventListener('pageshow', recoverIfBlank, { passive: true });
