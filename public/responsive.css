@@ -1,0 +1,377 @@
+/* Miimiid responsive foundation: phone-first, tablet-safe, desktop-friendly. */
+
+html {
+  min-width: 0;
+  overflow-x: hidden;
+}
+
+body {
+  width: 100%;
+  min-width: 0;
+  overflow-x: hidden;
+  padding: clamp(10px, 2vw, 24px);
+}
+
+button,
+input,
+select,
+textarea {
+  max-width: 100%;
+  font: inherit;
+}
+
+button {
+  touch-action: manipulation;
+}
+
+.miimiid-app-shell {
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding-bottom: 92px;
+}
+
+.miimiid-header,
+.miimiid-dashboard-header {
+  min-width: 0;
+}
+
+.miimiid-dashboard-header {
+  flex-wrap: wrap;
+}
+
+.miimiid-dashboard-brand {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.miimiid-auth-user {
+  min-width: 0;
+}
+
+.miimiid-auth-user-name {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.miimiid-dashboard-content,
+.miimiid-dashboard-stat-grid,
+#courses-container,
+#modules-container,
+#lesson-content,
+#fun-center-content {
+  min-width: 0;
+}
+
+.miimiid-dashboard-stat {
+  min-height: 104px;
+  width: 100%;
+  cursor: pointer;
+}
+
+#course-list-view,
+#course-detail-view,
+#lesson-view {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+
+#course-list-view .card,
+#course-detail-view .card,
+#lesson-view.card {
+  width: 100%;
+  min-width: 0;
+}
+
+.lesson-row {
+  width: 100%;
+}
+
+.lesson-row span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.content-formula,
+.content-example,
+.content-callout,
+.content-summary,
+.quiz-option,
+.calculation-input {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
+.content-formula {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.miimiid-ai-tutor-view,
+.miimiid-fun-center-view {
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  min-width: 0;
+}
+
+.miimiid-ai-tutor-card,
+.miimiid-fun-center-card {
+  width: 100%;
+  min-width: 0;
+}
+
+.miimiid-ai-tutor-messages {
+  min-width: 0;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+.miimiid-ai-tutor-message {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.miimiid-ai-tutor-form {
+  min-width: 0;
+}
+
+.miimiid-ai-tutor-input {
+  min-width: 0;
+  width: 100%;
+}
+
+.miimiid-bottom-nav {
+  padding-bottom: max(8px, env(safe-area-inset-bottom));
+}
+
+.miimiid-dashboard-menu-panel {
+  padding-bottom: max(18px, env(safe-area-inset-bottom));
+}
+
+.miimiid-auth-view {
+  width: 100%;
+  max-width: 100%;
+}
+
+#miimiid-auth-card {
+  width: min(100%, 520px);
+}
+
+#miimiid-auth-card .miimiid-auth-field,
+#miimiid-auth-card input,
+#miimiid-auth-card select,
+#miimiid-auth-card .btn {
+  max-width: 100%;
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+  body {
+    padding: 8px;
+  }
+
+  .miimiid-app-shell {
+    padding-bottom: 88px;
+  }
+
+  .miimiid-header {
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+
+  .miimiid-brand {
+    font-size: 1.25rem;
+  }
+
+  .miimiid-dashboard-header {
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .miimiid-dashboard-header .miimiid-auth-user {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .miimiid-dashboard-stat-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .miimiid-dashboard-stat {
+    min-height: 92px;
+    padding: 13px 10px;
+    border-radius: 13px;
+  }
+
+  .miimiid-dashboard-stat-value {
+    font-size: 1.35rem;
+  }
+
+  .miimiid-dashboard-stat-label {
+    font-size: 0.76rem;
+  }
+
+  .miimiid-bottom-nav {
+    gap: 2px;
+    padding: 6px 5px;
+  }
+
+  .miimiid-bottom-nav button {
+    min-height: 48px;
+    padding: 6px 3px;
+    font-size: 0.7rem;
+  }
+
+  .miimiid-dashboard-menu-panel {
+    width: min(320px, 92vw);
+  }
+
+  .lesson-row {
+    align-items: stretch;
+  }
+
+  .lesson-row .btn,
+  .lesson-row button {
+    width: 100%;
+  }
+
+  .lesson-navigation {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .miimiid-ai-tutor-view,
+  .miimiid-fun-center-view {
+    padding: 8px;
+  }
+
+  .miimiid-ai-tutor-card,
+  .miimiid-fun-center-card {
+    padding: 12px;
+    border-radius: 14px;
+  }
+
+  .miimiid-ai-tutor-messages {
+    min-height: 280px;
+    max-height: 48vh;
+  }
+
+  .miimiid-auth-view {
+    padding-left: max(14px, env(safe-area-inset-left)) !important;
+    padding-right: max(14px, env(safe-area-inset-right)) !important;
+  }
+
+  #miimiid-auth-card {
+    padding-top: 20px !important;
+  }
+
+  #miimiid-auth-card h1 {
+    font-size: 1.7rem !important;
+  }
+
+  #miimiid-auth-card .miimiid-auth-field input,
+  #miimiid-auth-card .btn {
+    min-height: 50px !important;
+  }
+
+  .miimiid-register-welcome h2 {
+    font-size: clamp(1.8rem, 10vw, 2.3rem);
+  }
+
+  .miimiid-register-visual-icon {
+    width: 84px;
+    height: 84px;
+    font-size: 3rem;
+  }
+
+  .miimiid-birthday-picker-overlay {
+    align-items: flex-end;
+    padding: 8px;
+  }
+
+  .miimiid-birthday-picker-card {
+    width: 100%;
+    max-height: calc(100dvh - 16px);
+    overflow-y: auto;
+  }
+
+  .miimiid-birthday-wheel {
+    height: 190px;
+  }
+}
+
+/* Tablets and normal desktop layouts */
+@media (min-width: 481px) and (max-width: 767px) {
+  .miimiid-dashboard-stat-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .miimiid-bottom-nav {
+    width: min(680px, calc(100vw - 24px));
+  }
+}
+
+@media (min-width: 768px) {
+  body {
+    padding: 18px clamp(18px, 3vw, 40px);
+  }
+
+  .miimiid-app-shell {
+    padding-bottom: 100px;
+  }
+
+  #course-list-view,
+  #course-detail-view,
+  #lesson-view {
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media (min-width: 1100px) {
+  .miimiid-app-shell {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+
+/* Keyboard/short viewport safety */
+@media (max-height: 620px) and (orientation: landscape) {
+  .miimiid-auth-view {
+    align-items: flex-start !important;
+  }
+
+  #miimiid-auth-card {
+    padding-top: 14px !important;
+    padding-bottom: 14px !important;
+  }
+
+  .miimiid-register-welcome {
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+
+  .miimiid-register-visual {
+    margin-bottom: 12px;
+  }
+
+  .miimiid-register-visual-icon {
+    width: 70px;
+    height: 70px;
+    font-size: 2.4rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+  }
+}
