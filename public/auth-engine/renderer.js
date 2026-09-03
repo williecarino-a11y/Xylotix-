@@ -17,7 +17,7 @@ export class AuthRenderer {
 
   installLogo() {
     const logo = document.querySelector('.miimiid-auth-logo');
-    if (!logo || logo.dataset.xylotixLogo === 'true') return;
+    if (!logo || logo.dataset.miimiidLogo === 'true') return;
     const img = document.createElement('img');
     img.src = '/icons/icon-512.svg';
     img.alt = 'Miimiid';
@@ -27,7 +27,7 @@ export class AuthRenderer {
     img.decoding = 'async';
     logo.replaceChildren(img);
     logo.setAttribute('aria-label', 'Miimiid logo');
-    logo.dataset.xylotixLogo = 'true';
+    logo.dataset.miimiidLogo = 'true';
   }
 
   prepareGender() {
