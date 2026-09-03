@@ -1,7 +1,7 @@
 {
-  "name": "Xylotix",
-  "short_name": "Xylotix",
-  "description": "An interactive learning platform for modern learners.",
+  "name": "Miimiid",
+  "short_name": "Miimiid",
+  "description": "Miimiid is an interactive learning platform for modern learners.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
