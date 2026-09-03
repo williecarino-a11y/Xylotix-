@@ -19,7 +19,10 @@
 
 ## ✨ Overview
 
-**Miimiid** is a modern web application focused on delivering a clean, responsive, and intuitive experience across desktop and mobile devices.
+Miimiid
+**Miimiid is a modern, mobile-first financial literacy platform designed to make learning about money practical, interactive, and engaging.
+It combines structured financial education, interactive learning experiences, gamification, and an AI-powered tutor into one unified experience.
+Learn money. Understand decisions. Build better financial habits.
 
 The project is currently under active development, with authentication, onboarding, loading states, and application branding being refined for production use.
 
