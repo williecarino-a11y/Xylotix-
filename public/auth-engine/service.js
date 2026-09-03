@@ -1,95 +1,84 @@
 import { SESSION_STATUS } from './state.js';
 
+async function request(url, options = {}) {
+  const response = await fetch(url, {
+    credentials: 'include',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      ...(options.headers || {})
+    },
+    ...options
+  });
+
+  let payload = null;
+  try {
+    payload = await response.json();
+  } catch (_) {
+    payload = null;
+  }
+
+  if (!response.ok) {
+    const error = new Error(
+      payload?.message ||
+      payload?.error ||
+      `Request failed with status ${response.status}.`
+    );
+    error.code = payload?.code || `HTTP_${response.status}`;
+    error.status = response.status;
+    error.data = payload?.data;
+    throw error;
+  }
+
+  return payload;
+}
+
+function post(url, data) {
+  return request(url, {
+    method: 'POST',
+    body: JSON.stringify(data)
+  });
+}
+
 export class AuthService {
   async register(data) {
-    const res = await fetch('/api/auth/register', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
-      credentials: 'include'
-    });
-    if (!res.ok) throw new Error(`Registration failed: ${res.statusText}`);
-    return res.json();
+    return post('/api/auth/register', data);
   }
 
   async verifyAccount(data) {
-    const res = await fetch('/api/auth/verify-account', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
-      credentials: 'include'
-    });
-    if (!res.ok) throw new Error(`Verification failed: ${res.statusText}`);
-    return res.json();
+    return post('/api/auth/verify-account', data);
   }
 
   async resendVerification(data) {
-    const res = await fetch('/api/auth/resend-verification', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
-      credentials: 'include'
-    });
-    if (!res.ok) throw new Error(`Resend verification failed: ${res.statusText}`);
-    return res.json();
+    return post('/api/auth/resend-verification', data);
   }
 
   async login(data) {
-    const res = await fetch('/api/auth/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
-      credentials: 'include'
-    });
-    if (!res.ok) throw new Error(`Login failed: ${res.statusText}`);
-    return res.json();
+    return post('/api/auth/login', data);
   }
 
   async logout() {
     try {
-      await fetch('/api/auth/logout', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        credentials: 'include'
-      });
-    } catch (e) {
-      console.error('Logout error:', e);
+      await request('/api/auth/logout', { method: 'POST' });
+    } catch (error) {
+      console.error('Logout error:', error);
     }
   }
 
   async forgotPassword(data) {
-    const res = await fetch('/api/auth/forgot-password', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
-      credentials: 'include'
-    });
-    if (!res.ok) throw new Error(`Forgot password failed: ${res.statusText}`);
-    return res.json();
+    return post('/api/auth/forgot-password', data);
   }
 
   async resetPassword(data) {
-    const res = await fetch('/api/auth/reset-password', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
-      credentials: 'include'
-    });
-    if (!res.ok) throw new Error(`Reset password failed: ${res.statusText}`);
-    return res.json();
+    return post('/api/auth/reset-password', data);
   }
 
   async getMe() {
     try {
-      const res = await fetch('/api/auth/me', {
-        method: 'GET',
-        headers: { 'Content-Type': 'application/json' },
-        credentials: 'include'
-      });
-      if (!res.ok) return null;
-      return res.json();
-    } catch (e) {
-      console.error('Get authenticated user failed:', e);
+      return await request('/api/auth/me', { method: 'GET' });
+    } catch (error) {
+      if (error.status === 401) return null;
+      console.error('Get authenticated user failed:', error);
       return null;
     }
   }
@@ -110,13 +99,15 @@ export class SessionManager {
   async restore() {
     try {
       const result = await this.service.getMe();
-      if (result && result.data && result.data.user) {
+      if (result?.data?.user) {
         this.setAuthenticated(result.data.user);
         return result.data.user;
       }
+      this.setAuthenticated(null);
       return null;
-    } catch (e) {
-      console.error('Session restore failed:', e);
+    } catch (error) {
+      console.error('Session restore failed:', error);
+      this.setAuthenticated(null);
       return null;
     }
   }
