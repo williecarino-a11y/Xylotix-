@@ -3,6 +3,7 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
+const fs = require('fs');
 const path = require('path');
 
 const app = express();
@@ -15,13 +16,27 @@ app.use(express.urlencoded({ extended: true, limit: '1mb' }));
 app.use(cookieParser());
 
 /*
- * Serve the existing application shell exactly as authored.
- *
- * Authentication is already implemented inside public/index.html.
- * Do not inject a second auth renderer here: a second renderer can
- * replace the DOM, duplicate event handlers, and destroy the app shell
- * that the authenticated dashboard depends on.
+ * Serve the authored application shell without replacing its DOM.
+ * A small visibility guard is the only script injected here.
  */
+app.get(['/', '/index.html'], (req, res, next) => {
+  try {
+    const indexPath = path.join(__dirname, 'public', 'index.html');
+    let html = fs.readFileSync(indexPath, 'utf8');
+
+    if (!html.includes('auth-shell-fix.js')) {
+      html = html.replace(
+        /<\/head>/i,
+        '  <script defer src="/auth-shell-fix.js"></script>\n</head>'
+      );
+    }
+
+    res.type('html').send(html);
+  } catch (error) {
+    next(error);
+  }
+});
+
 app.use(express.static(path.join(__dirname, 'public'), {
   index: 'index.html',
   extensions: ['html']
@@ -57,9 +72,6 @@ app.get('/api/health', (req, res) => {
   });
 });
 
-/*
- * Keep API 404s machine-readable instead of returning the app shell.
- */
 app.use('/api', (req, res) => {
   res.status(404).json({
     status: 'error',
@@ -71,9 +83,7 @@ app.use('/api', (req, res) => {
 app.use((error, req, res, next) => {
   console.error('Unhandled server error:', error);
 
-  if (res.headersSent) {
-    return next(error);
-  }
+  if (res.headersSent) return next(error);
 
   res.status(500).json({
     status: 'error',
