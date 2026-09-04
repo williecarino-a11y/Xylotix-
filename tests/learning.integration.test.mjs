@@ -52,29 +52,23 @@ const quiz = {
   toObject() { return { ...this }; }
 };
 
-function sortedResult(items) {
+function queryResult(items) {
   return { sort: async () => items };
 }
 
-Course.find = async () => sortedResult([course]);
+Course.find = () => queryResult([course]);
 Course.findOne = async filter => filter._id?.toString() === courseId.toString() ? course : null;
-Module.find = async () => sortedResult([moduleDoc]);
-Module.findById = async () => moduleDoc;
-Module.find = async () => sortedResult([moduleDoc]);
-Module.findOne = async () => moduleDoc;
-Module.find = async () => ({ sort: async () => [moduleDoc] });
+Module.find = () => queryResult([moduleDoc]);
 Lesson.findOne = async () => lesson;
 Lesson.findById = async () => lesson;
-Lesson.find = async () => ({ sort: async () => [lesson] });
-Lesson.find = async () => ({ sort: async () => [lesson] });
-Quiz.find = async () => ({ sort: async () => [quiz] });
+Lesson.find = () => queryResult([lesson]);
+Quiz.find = () => queryResult([quiz]);
 
 let progressRecord;
 UserProgress.findOneAndUpdate = async (filter, update) => {
   progressRecord = { ...filter, ...update };
   return progressRecord;
 };
-UserProgress.find = async () => ({ sort: async () => [], select: async () => [] });
 
 
 test('quiz responses never expose the correct answer', () => {
