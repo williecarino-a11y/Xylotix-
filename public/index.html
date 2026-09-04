@@ -849,14 +849,12 @@ body.miimiid-drawer-open {
     border-radius: 14px 14px 0 0;
   }
 }
-
-
-
+    
     /* =========================================
    MIIMIID AI TUTOR
    ========================================= */
 
- .miimiid-ai-tutor-view {
+.miimiid-ai-tutor-view {
   width: 100%;
   padding: 20px;
   padding-bottom: calc(var(--miimiid-nav-height, 64px) + 20px + env(safe-area-inset-bottom, 0px));
@@ -878,92 +876,6 @@ body.miimiid-drawer-open {
   color: var(--text-color, #e6e9f0);
 }
 
-.miimiid-ai-tutor-header {
-  margin-bottom: 16px;
-}
-
-.miimiid-ai-tutor-header h1 {
-  margin: 0 0 6px;
-  color: var(--accent-color, #4da3ff);
-}
-
-.miimiid-ai-tutor-header p {
-  margin: 0;
-  opacity: 0.75;
-}
-
-.miimiid-ai-tutor-context {
-  margin-bottom: 14px;
-  padding: 10px 12px;
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.05);
-  font-size: 0.9rem;
-  color: #b8c0d4;
-}
-
-.miimiid-ai-tutor-starters {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 14px;
-}
-
-.miimiid-ai-tutor-starter {
-  border: 1px solid var(--border-color, #2c3652);
-  background: rgba(255, 255, 255, 0.04);
-  color: var(--text-color, #e6e9f0);
-  border-radius: 999px;
-  padding: 8px 12px;
-  font: inherit;
-  cursor: pointer;
-  transition: background 0.15s ease;
-}
-
-.miimiid-ai-tutor-starter:hover {
-  background: rgba(255, 255, 255, 0.1);
-}
-
-.miimiid-ai-tutor-messages {
-  min-height: 360px;
-  max-height: 55vh;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  padding: 8px 2px;
-}
-
-.miimiid-ai-tutor-message {
-  max-width: 88%;
-  padding: 11px 14px;
-  border-radius: 14px;
-  line-height: 1.5;
-  white-space: pre-wrap;
-  overflow-wrap: anywhere;
-}
-
-.miimiid-ai-tutor-message.user {
-  align-self: flex-end;
-  background: var(--accent-color, #1f6feb);
-  color: #ffffff;
-}
-
-
-/* =========================================
-   MIIMIID AI TUTOR
-   ========================================= */
-
-.miimiid-ai-tutor-view {
-  width: 100%;
-  height: 100vh;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  background: #0b0f1a;
-  overflow: hidden;
-  padding-bottom: calc(var(--miimiid-nav-height, 64px) + 6px + env(safe-area-inset-bottom, 0px));
-}
-
 /* --- App bar --- */
 .miimiid-ai-tutor-appbar {
   display: flex;
@@ -971,6 +883,7 @@ body.miimiid-drawer-open {
   justify-content: space-between;
   padding: 14px 16px;
   border-bottom: 1px solid #1c2438;
+  margin: -20px -20px 16px -20px;
 }
 
 .miimiid-ai-tutor-appbar h1 {
@@ -990,19 +903,6 @@ body.miimiid-drawer-open {
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-/* --- Card / chat area --- */
-.miimiid-ai-tutor-card {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 20px;
-  box-sizing: border-box;
-  overflow-y: auto;
 }
 
 .miimiid-ai-tutor-greeting {
@@ -1143,12 +1043,16 @@ body.miimiid-drawer-open {
 
 /* --- Input bar --- */
 .miimiid-ai-tutor-form {
+  position: sticky;
+  bottom: 0;
   display: flex;
   gap: 10px;
   align-items: center;
   padding: 12px 16px;
+  margin: 0 -20px -20px -20px;
   border-top: 1px solid #1c2438;
-  background: #0b0f1a;
+  background: var(--card-bg, #131a2c);
+  z-index: 10;
 }
 
 .miimiid-ai-tutor-input {
@@ -1186,8 +1090,7 @@ body.miimiid-drawer-open {
 
 .miimiid-ai-tutor-send:hover {
   opacity: 0.9;
-    }
-    
+      }
 
     /* =========================================
        MIIMIID AUTHENTICATION
