@@ -11,6 +11,7 @@ const files = globSync('**/*.js', {
     '**/*-backup-*.js',
     '**/*.backup*.js',
     '**/*.before-*.js',
+    '**/*broken-backup*.js',
     '**/backup/**'
   ]
 });
