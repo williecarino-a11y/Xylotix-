@@ -106,7 +106,7 @@ app.use('/api/fun-center', funCenterRoutes);
 const aiTutorRoutes = require('./routes/aiTutorRoutes');
 app.use('/api/ai-tutor', aiTutorRoutes);
 
-app.get('/api/health', (req, res) => {
+function getDependencyHealth() {
   const database = mongoose.connection.readyState === 1 ? 'connected' : 'connecting';
   const verificationEmail = process.env.SMTP_HOST && process.env.SMTP_USER && process.env.SMTP_PASSWORD
     ? 'configured'
@@ -114,17 +114,39 @@ app.get('/api/health', (req, res) => {
   const aiTutor = process.env.OPENAI_API_KEY ? 'configured' : 'pending';
   const appBaseUrl = process.env.APP_BASE_URL || '';
 
-  const healthy = database === 'connected';
+  return {
+    database,
+    verificationEmail,
+    aiTutor,
+    passwordResetBaseUrl: appBaseUrl ? 'configured' : 'not_configured'
+  };
+}
+
+/* Liveness only answers whether the Node process can serve requests. */
+app.get('/api/health/live', (req, res) => {
+  res.status(200).json({ status: 'OK', message: 'Miimiid is alive.' });
+});
+
+/* Readiness verifies the database dependency required for normal operation. */
+app.get('/api/health/ready', (req, res) => {
+  const services = getDependencyHealth();
+  const ready = services.database === 'connected';
+
+  res.status(ready ? 200 : 503).json({
+    status: ready ? 'OK' : 'DEGRADED',
+    message: ready ? 'Miimiid is ready to serve traffic.' : 'Miimiid is not ready because the database is unavailable.',
+    services
+  });
+});
+
+app.get('/api/health', (req, res) => {
+  const services = getDependencyHealth();
+  const healthy = services.database === 'connected';
 
   res.status(healthy ? 200 : 503).json({
     status: healthy ? 'OK' : 'DEGRADED',
     message: healthy ? 'Server is running cleanly.' : 'Server is running but the database is not ready.',
-    services: {
-      database,
-      verificationEmail,
-      aiTutor,
-      passwordResetBaseUrl: appBaseUrl ? 'configured' : 'not_configured'
-    }
+    services
   });
 });
 
