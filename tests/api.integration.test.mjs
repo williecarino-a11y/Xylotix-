@@ -1,7 +1,9 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
+import mongoose from 'mongoose';
 
 process.env.NODE_ENV = 'test';
+mongoose.set('bufferTimeoutMS', 100);
 
 const { app } = await import('../server.js');
 const supertest = (await import('supertest')).default;
@@ -45,13 +47,10 @@ test('security headers are present on API responses', async () => {
   assert.equal(response.headers['x-powered-by'], undefined);
 });
 
-test('public learning catalog route responds without authentication', async () => {
+test('public learning catalog route reports a deterministic database failure without authentication', async () => {
   const response = await request.get('/api/learn/courses');
-  assert.ok([200, 500].includes(response.status));
-  if (response.status === 200) {
-    assert.ok(['success', 'empty'].includes(response.body.status));
-    assert.ok(Array.isArray(response.body.data));
-  }
+  assert.equal(response.status, 500);
+  assert.equal(response.body.status, 'error');
 });
 
 test('public Fun Center games route responds without authentication', async () => {
