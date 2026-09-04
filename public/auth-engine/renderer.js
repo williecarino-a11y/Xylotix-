@@ -1,7 +1,19 @@
 import { AUTH_STATUS } from './state.js';
 
 const FORM_IDS = { login: 'miimiid-login-form', register: 'miimiid-register-form', forgot: 'miimiid-forgot-form', reset: 'miimiid-reset-form' };
-const E = { welcome: { action: 'miimiid-register-get-started' }, login: { email: 'miimiid-login-identifier', password: 'miimiid-login-password', action: 'miimiid-login-submit' }, name: { firstName: 'miimiid-register-first-name', lastName: 'miimiid-register-last-name', action: 'miimiid-register-name-submit' }, email: { email: 'miimiid-register-email', action: 'miimiid-register-email-submit' }, birthday: { dob: 'miimiid-register-dob', action: 'miimiid-register-birthday-submit' }, password: { password: 'miimiid-register-password', confirmPassword: 'miimiid-register-confirm-password', action: 'miimiid-register-password-submit' }, verification: { code: 'miimiid-verification-code', action: 'miimiid-verification-submit', resend: 'miimiid-verification-resend' }, confirmation: {}, forgot: { email: 'miimiid-forgot-email', action: 'miimiid-forgot-submit' }, reset: { password: 'miimiid-reset-password', confirmPassword: 'miimiid-reset-confirm-password', action: 'miimiid-reset-submit' }, authenticated: {} };
+const E = {
+  welcome: { action: 'miimiid-register-get-started' },
+  login: { email: 'miimiid-login-identifier', password: 'miimiid-login-password', action: 'miimiid-login-submit' },
+  name: { firstName: 'miimiid-register-first-name', lastName: 'miimiid-register-last-name', action: 'miimiid-register-name-next' },
+  email: { email: 'miimiid-register-email', action: 'miimiid-register-contact-next' },
+  birthday: { gender: 'miimiid-register-gender', dob: 'miimiid-register-dob', action: 'miimiid-register-details-next' },
+  password: { password: 'miimiid-register-password', confirmPassword: 'miimiid-register-confirm', action: 'miimiid-register-submit' },
+  verification: { code: 'miimiid-register-verification-code', action: 'miimiid-verify-account-submit', resend: 'miimiid-resend-verification' },
+  confirmation: {},
+  forgot: { email: 'miimiid-forgot-identifier', action: 'miimiid-forgot-submit' },
+  reset: { password: 'miimiid-reset-password', confirmPassword: 'miimiid-reset-confirm', action: 'miimiid-reset-submit' },
+  authenticated: {}
+};
 function t(k, f) { try { const v = window.miimiidDashboardTranslate?.(k); if (v && v !== k) return v; } catch (_) {} return f || k; }
 
 export class AuthRenderer {
@@ -44,7 +56,7 @@ export class AuthRenderer {
   prepareSteps() {
     const f = document.getElementById(FORM_IDS.register);
     if (!f || f.querySelectorAll('[data-register-step]').length >= 6) return;
-    [['miimiid-register-get-started'],['miimiid-register-first-name','miimiid-register-last-name'],['miimiid-register-email'],['miimiid-register-gender','miimiid-register-dob'],['miimiid-register-password','miimiid-register-confirm-password'],['miimiid-verification-code']].forEach((ids,i)=>{const s=f.querySelector(`[data-register-step="${i}"]`)||document.createElement('fieldset');s.dataset.registerStep=i;s.className='miimiid-auth-step';ids.forEach(id=>{const el=document.getElementById(id);if(el&&!el.closest('[data-register-step]'))s.appendChild(el)});if(!s.closest('form'))f.appendChild(s);});
+    [['miimiid-register-get-started'],['miimiid-register-first-name','miimiid-register-last-name'],['miimiid-register-email'],['miimiid-register-gender','miimiid-register-dob'],['miimiid-register-password','miimiid-register-confirm'],['miimiid-register-verification-code']].forEach((ids,i)=>{const s=f.querySelector(`[data-register-step="${i}"]`)||document.createElement('fieldset');s.dataset.registerStep=i;s.className='miimiid-auth-step';ids.forEach(id=>{const el=document.getElementById(id);if(el&&!el.closest('[data-register-step]'))s.appendChild(el)});if(!s.closest('form'))f.appendChild(s);});
   }
 
   bind() {
