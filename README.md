@@ -158,37 +158,39 @@ Planned and implemented concepts include:
 
 •Activity tracking
 
-
-
-## 🛠️ Tech Stack
-
+## Tech Stack
 | Technology | Purpose |
 |---|---|
-| HTML | Application structure |
-| CSS | Styling and responsive design |
-| JavaScript | Application logic |
-| SVG | Branding and icons |
+| Node.js / Express 5 | Backend server & API routes |
+| MongoDB (Mongoose) | Database & data models |
+| OpenAI API | Powers the AI Tutor |
+| Nodemailer | Transactional email (verification, password reset, etc.) |
+| cookie-parser | Session/auth cookie handling |
+| express-rate-limit | Rate limiting (likely on auth endpoints) |
+| HTML / CSS / JS | Frontend, served from `public/` |
 | PWA | Installable app experience |
-| Git | Version control |
-| GitHub | Repository and collaboration |
 
-## 📁 Project Structure
-
-```text
-Miimiid/
+## Project Structure
+Xylotix-/
+├── routes/
+│   ├── authRoutes.js
+│   ├── learningRoutes.js
+│   ├── aiTutorRoutes.js
+│   └── passwordRoutes.js
+├── middleware/
+│   └── passwordValidation.js
+├── services/
+│   ├── learningService.js
+│   ├── aiTutorService.js
+│   └── emailService.js
+├── utils/
+│   └── passwordValidator.js
+├── models/
 ├── public/
-│   ├── icon-192.svg
-│   ├── icon-512.svg
-│   └── ...
-├── src/
-│   ├── components/
-│   ├── pages/
-│   ├── styles/
-│   └── ...
-├── index.html
-├── package.json
-├── README.md
-└── ...
+├── learningData/
+├── tests/
+├── server.js
+└── package.json
 ```
 
 ## 🔐 Authentication
