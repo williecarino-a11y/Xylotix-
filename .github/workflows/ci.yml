@@ -34,17 +34,6 @@ jobs:
     name: Miimiid MongoDB integration smoke test
     runs-on: ubuntu-latest
     timeout-minutes: 10
-    services:
-      mongodb:
-        image: mongo:7
-        ports:
-          - 27017:27017
-        options: >-
-          --health-cmd "mongosh --quiet --eval 'db.runCommand({ ping: 1 }).ok'"
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 10
-        command: ["mongod", "--replSet", "rs0", "--bind_ip_all"]
 
     steps:
       - name: Checkout Miimiid
@@ -55,37 +44,14 @@ jobs:
         with:
           node-version: 22
 
+      - name: Start MongoDB replica set
+        uses: supercharge/mongodb-github-action@1.12.1
+        with:
+          mongodb-version: 7.0
+          mongodb-replica-set: rs0
+
       - name: Install dependencies
         run: npm install
-
-      - name: Initialize MongoDB replica set
-        run: |
-          node --input-type=module <<'NODE'
-          import mongoose from 'mongoose';
-          const uri = 'mongodb://127.0.0.1:27017/miimiid_ci_bootstrap';
-          for (let attempt = 1; attempt <= 20; attempt += 1) {
-            try {
-              await mongoose.connect(uri, { serverSelectionTimeoutMS: 2000 });
-              try {
-                await mongoose.connection.db.admin().command({
-                  replSetInitiate: {
-                    _id: 'rs0',
-                    members: [{ _id: 0, host: '127.0.0.1:27017' }]
-                  }
-                });
-              } catch (error) {
-                if (!String(error.message).includes('already initialized') && error.codeName !== 'AlreadyInitialized') throw error;
-              }
-              await mongoose.disconnect();
-              console.log('MongoDB replica set initialized.');
-              process.exit(0);
-            } catch (error) {
-              try { await mongoose.disconnect(); } catch {}
-              if (attempt === 20) throw error;
-              await new Promise(resolve => setTimeout(resolve, 1000));
-            }
-          }
-          NODE
 
       - name: Run MongoDB integration smoke tests
         run: node --test tests/mongodb.smoke.test.mjs
@@ -97,17 +63,6 @@ jobs:
     name: Miimiid real MongoDB auth and SMTP E2E
     runs-on: ubuntu-latest
     timeout-minutes: 10
-    services:
-      mongodb:
-        image: mongo:7
-        ports:
-          - 27017:27017
-        options: >-
-          --health-cmd "mongosh --quiet --eval 'db.runCommand({ ping: 1 }).ok'"
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 10
-        command: ["mongod", "--replSet", "rs0", "--bind_ip_all"]
 
     steps:
       - name: Checkout Miimiid
@@ -118,37 +73,14 @@ jobs:
         with:
           node-version: 22
 
+      - name: Start MongoDB replica set
+        uses: supercharge/mongodb-github-action@1.12.1
+        with:
+          mongodb-version: 7.0
+          mongodb-replica-set: rs0
+
       - name: Install dependencies
         run: npm install
-
-      - name: Initialize MongoDB replica set
-        run: |
-          node --input-type=module <<'NODE'
-          import mongoose from 'mongoose';
-          const uri = 'mongodb://127.0.0.1:27017/miimiid_ci_bootstrap';
-          for (let attempt = 1; attempt <= 20; attempt += 1) {
-            try {
-              await mongoose.connect(uri, { serverSelectionTimeoutMS: 2000 });
-              try {
-                await mongoose.connection.db.admin().command({
-                  replSetInitiate: {
-                    _id: 'rs0',
-                    members: [{ _id: 0, host: '127.0.0.1:27017' }]
-                  }
-                });
-              } catch (error) {
-                if (!String(error.message).includes('already initialized') && error.codeName !== 'AlreadyInitialized') throw error;
-              }
-              await mongoose.disconnect();
-              console.log('MongoDB replica set initialized.');
-              process.exit(0);
-            } catch (error) {
-              try { await mongoose.disconnect(); } catch {}
-              if (attempt === 20) throw error;
-              await new Promise(resolve => setTimeout(resolve, 1000));
-            }
-          }
-          NODE
 
       - name: Run real authentication E2E tests
         run: node --test tests/auth.mongodb-e2e.test.mjs
