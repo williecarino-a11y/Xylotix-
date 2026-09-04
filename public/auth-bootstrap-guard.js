@@ -124,11 +124,21 @@
     document.head.appendChild(script);
   }
 
+  function loadFunCenterMiniGame() {
+    if (document.querySelector('script[data-miimiid-fun-center-mini-game]')) return;
+    const script = document.createElement('script');
+    script.src = '/fun-center-mini-game.js';
+    script.defer = true;
+    script.dataset.miimiidFunCenterMiniGame = 'true';
+    document.head.appendChild(script);
+  }
+
   function boot() {
     if (initialized) return;
     initialized = true;
 
     loadNavigationIcons();
+    loadFunCenterMiniGame();
     startBootstrapLoading();
     showBootstrap();
 
