@@ -853,150 +853,173 @@ body.miimiid-drawer-open {
 
 
     /* =========================================
-       MIIMIID AI TUTOR
-       ========================================= */
+   MIIMIID AI TUTOR
+   ========================================= */
 
-    .miimiid-ai-tutor-view {
-      width: 100%;
-      padding: 20px;
-      box-sizing: border-box;
-    }
+.miimiid-ai-tutor-view {
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+}
 
-    .miimiid-ai-tutor-card {
-      width: 100%;
-      max-width: 900px;
-      margin: 0 auto;
-      border-radius: 18px;
-      padding: 20px;
-      box-sizing: border-box;
-      background: var(--card-bg, #ffffff);
-      border: 1px solid var(--border-color, #e5e7eb);
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
-    }
+.miimiid-ai-tutor-card {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  border-radius: 18px;
+  padding: 20px;
+  box-sizing: border-box;
+  background: var(--card-bg, #131a2c);
+  border: 1px solid var(--border-color, #232c42);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+  color: var(--text-color, #e6e9f0);
+}
 
-    .miimiid-ai-tutor-header {
-      margin-bottom: 16px;
-    }
+.miimiid-ai-tutor-header {
+  margin-bottom: 16px;
+}
 
-    .miimiid-ai-tutor-header h1 {
-      margin: 0 0 6px;
-    }
+.miimiid-ai-tutor-header h1 {
+  margin: 0 0 6px;
+  color: var(--accent-color, #4da3ff);
+}
 
-    .miimiid-ai-tutor-header p {
-      margin: 0;
-      opacity: 0.75;
-    }
+.miimiid-ai-tutor-header p {
+  margin: 0;
+  opacity: 0.75;
+}
 
-    .miimiid-ai-tutor-context {
-      margin-bottom: 14px;
-      padding: 10px 12px;
-      border-radius: 10px;
-      background: rgba(0, 0, 0, 0.04);
-      font-size: 0.9rem;
-    }
+.miimiid-ai-tutor-context {
+  margin-bottom: 14px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  font-size: 0.9rem;
+  color: #b8c0d4;
+}
 
-    .miimiid-ai-tutor-starters {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 14px;
-    }
+.miimiid-ai-tutor-starters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 14px;
+}
 
-    .miimiid-ai-tutor-starter {
-      border: 1px solid var(--border-color, #d1d5db);
-      background: var(--card-bg, #ffffff);
-      border-radius: 999px;
-      padding: 8px 12px;
-      font: inherit;
-      cursor: pointer;
-    }
+.miimiid-ai-tutor-starter {
+  border: 1px solid var(--border-color, #2c3652);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-color, #e6e9f0);
+  border-radius: 999px;
+  padding: 8px 12px;
+  font: inherit;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
 
-    .miimiid-ai-tutor-starter:hover {
-      opacity: 0.85;
-    }
+.miimiid-ai-tutor-starter:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
 
-    .miimiid-ai-tutor-messages {
-      min-height: 360px;
-      max-height: 55vh;
-      overflow-y: auto;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      padding: 8px 2px;
-    }
+.miimiid-ai-tutor-messages {
+  min-height: 360px;
+  max-height: 55vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 8px 2px;
+}
 
-    .miimiid-ai-tutor-message {
-      max-width: 88%;
-      padding: 11px 14px;
-      border-radius: 14px;
-      line-height: 1.5;
-      white-space: pre-wrap;
-      overflow-wrap: anywhere;
-    }
+.miimiid-ai-tutor-message {
+  max-width: 88%;
+  padding: 11px 14px;
+  border-radius: 14px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
 
-    .miimiid-ai-tutor-message.user {
-      align-self: flex-end;
-      background: rgba(0, 0, 0, 0.08);
-    }
+.miimiid-ai-tutor-message.user {
+  align-self: flex-end;
+  background: var(--accent-color, #1f6feb);
+  color: #ffffff;
+}
 
-    .miimiid-ai-tutor-message.assistant {
-      align-self: flex-start;
-      background: rgba(0, 0, 0, 0.04);
-    }
+.miimiid-ai-tutor-message.assistant {
+  align-self: flex-start;
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text-color, #e6e9f0);
+}
 
-    .miimiid-ai-tutor-status {
-      min-height: 22px;
-      margin: 8px 0;
-      font-size: 0.9rem;
-      opacity: 0.75;
-    }
+.miimiid-ai-tutor-status {
+  min-height: 22px;
+  margin: 8px 0;
+  font-size: 0.9rem;
+  opacity: 0.75;
+}
 
-    .miimiid-ai-tutor-form {
-      display: flex;
-      gap: 10px;
-      align-items: flex-end;
-      margin-top: 8px;
-    }
+.miimiid-ai-tutor-form {
+  display: flex;
+  gap: 10px;
+  align-items: flex-end;
+  margin-top: 8px;
+}
 
-    .miimiid-ai-tutor-input {
-      flex: 1;
-      min-height: 48px;
-      max-height: 180px;
-      resize: vertical;
-      box-sizing: border-box;
-      padding: 12px;
-      border-radius: 12px;
-      border: 1px solid var(--border-color, #d1d5db);
-      font: inherit;
-    }
+.miimiid-ai-tutor-input {
+  flex: 1;
+  min-height: 48px;
+  max-height: 180px;
+  resize: vertical;
+  box-sizing: border-box;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid var(--border-color, #2c3652);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text-color, #e6e9f0);
+  font: inherit;
+}
 
-    .miimiid-ai-tutor-send {
-      min-height: 48px;
-      white-space: nowrap;
-    }
+.miimiid-ai-tutor-input::placeholder {
+  color: #7c869e;
+}
 
-    @media (max-width: 640px) {
-      .miimiid-ai-tutor-view {
-        padding: 12px;
-      }
+.miimiid-ai-tutor-send {
+  min-height: 48px;
+  white-space: nowrap;
+  background: var(--accent-color, #1f6feb);
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  padding: 0 18px;
+  cursor: pointer;
+}
 
-      .miimiid-ai-tutor-card {
-        padding: 14px;
-      }
+.miimiid-ai-tutor-send:hover {
+  opacity: 0.9;
+}
 
-      .miimiid-ai-tutor-message {
-        max-width: 94%;
-      }
+@media (max-width: 640px) {
+  .miimiid-ai-tutor-view {
+    padding: 12px;
+  }
 
-      .miimiid-ai-tutor-form {
-        flex-direction: column;
-        align-items: stretch;
-      }
+  .miimiid-ai-tutor-card {
+    padding: 14px;
+  }
 
-      .miimiid-ai-tutor-send {
-        width: 100%;
-      }
-    }
+  .miimiid-ai-tutor-message {
+    max-width: 94%;
+  }
+
+  .miimiid-ai-tutor-form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .miimiid-ai-tutor-send {
+    width: 100%;
+  }
+}
 
 
     /* =========================================
