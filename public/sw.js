@@ -1,11 +1,15 @@
-const CACHE_NAME = 'xylotix-shell-v2';
+const CACHE_NAME = 'miimiid-shell-v3';
 const APP_SHELL = [
   '/',
   '/index.html',
   '/manifest.json',
   '/responsive.css',
+  '/pwa.css',
+  '/navigation-polish.css',
   '/continue-loading.js',
+  '/miimiid-auth-engine.js',
   '/auth-bootstrap-guard.js',
+  '/password-validation.js',
   '/pwa.js'
 ];
 
