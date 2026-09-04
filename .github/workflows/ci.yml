@@ -63,3 +63,43 @@ jobs:
         env:
           NODE_ENV: test
           MONGO_URI: mongodb://127.0.0.1:27017/miimiid_test?replicaSet=rs0
+
+  auth-e2e:
+    name: Miimiid real MongoDB auth and SMTP E2E
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    services:
+      mongodb:
+        image: mongo:7
+        ports:
+          - 27017:27017
+        options: >-
+          --health-cmd "mongosh --quiet --eval 'db.runCommand({ ping: 1 }).ok'"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 10
+        command: ["mongod", "--replSet", "rs0", "--bind_ip_all"]
+
+    steps:
+      - name: Checkout Miimiid
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run real authentication E2E tests
+        run: node --test tests/auth.mongodb-e2e.test.mjs
+        env:
+          NODE_ENV: test
+          MONGO_URI: mongodb://127.0.0.1:27017/miimiid_auth_e2e?replicaSet=rs0
+          SMTP_HOST: 127.0.0.1
+          SMTP_PORT: 2525
+          SMTP_USER: miimiid-test
+          SMTP_PASSWORD: miimiid-test-password
+          SMTP_FROM: no-reply@miimiid.test
+          APP_BASE_URL: http://localhost:3000
