@@ -9,6 +9,7 @@ const path = require('path');
 const app = express();
 const PORT = Number(process.env.PORT || 3000);
 const IS_PRODUCTION = process.env.NODE_ENV === 'production';
+const IS_TEST = process.env.NODE_ENV === 'test';
 
 app.disable('x-powered-by');
 app.set('trust proxy', IS_PRODUCTION ? 1 : false);
@@ -31,10 +32,6 @@ app.use(express.json({ limit: '1mb' }));
 app.use(express.urlencoded({ extended: true, limit: '1mb' }));
 app.use(cookieParser());
 
-/*
- * Serve the authored application shell without replacing its DOM.
- * Small global assets are injected here so the existing index.html stays the source of truth.
- */
 app.get(['/', '/index.html'], (req, res, next) => {
   try {
     const indexPath = path.join(__dirname, 'public', 'index.html');
@@ -75,19 +72,14 @@ app.use(express.static(path.join(__dirname, 'public'), {
   fallthrough: true
 }));
 
-const MONGO_URI =
-  process.env.MONGO_URI ||
-  'mongodb://localhost:27017/xylotix';
+const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/xylotix';
 
-mongoose
-  .connect(MONGO_URI, {
-    serverSelectionTimeoutMS: 10000,
-    maxPoolSize: 10
-  })
-  .then(() => console.log('MongoDB connected successfully'))
-  .catch(error => {
-    console.error('MongoDB connection error:', error.message);
-  });
+if (!IS_TEST) {
+  mongoose
+    .connect(MONGO_URI, { serverSelectionTimeoutMS: 10000, maxPoolSize: 10 })
+    .then(() => console.log('MongoDB connected successfully'))
+    .catch(error => console.error('MongoDB connection error:', error.message));
+}
 
 const passwordValidation = require('./middleware/passwordValidation');
 const { router: authRoutes } = require('./routes/authRoutes');
@@ -108,30 +100,19 @@ app.use('/api/ai-tutor', aiTutorRoutes);
 
 function getDependencyHealth() {
   const database = mongoose.connection.readyState === 1 ? 'connected' : 'connecting';
-  const verificationEmail = process.env.SMTP_HOST && process.env.SMTP_USER && process.env.SMTP_PASSWORD
-    ? 'configured'
-    : 'not_configured';
+  const verificationEmail = process.env.SMTP_HOST && process.env.SMTP_USER && process.env.SMTP_PASSWORD ? 'configured' : 'not_configured';
   const aiTutor = process.env.OPENAI_API_KEY ? 'configured' : 'pending';
   const appBaseUrl = process.env.APP_BASE_URL || '';
-
-  return {
-    database,
-    verificationEmail,
-    aiTutor,
-    passwordResetBaseUrl: appBaseUrl ? 'configured' : 'not_configured'
-  };
+  return { database, verificationEmail, aiTutor, passwordResetBaseUrl: appBaseUrl ? 'configured' : 'not_configured' };
 }
 
-/* Liveness only answers whether the Node process can serve requests. */
 app.get('/api/health/live', (req, res) => {
   res.status(200).json({ status: 'OK', message: 'Miimiid is alive.' });
 });
 
-/* Readiness verifies the database dependency required for normal operation. */
 app.get('/api/health/ready', (req, res) => {
   const services = getDependencyHealth();
   const ready = services.database === 'connected';
-
   res.status(ready ? 200 : 503).json({
     status: ready ? 'OK' : 'DEGRADED',
     message: ready ? 'Miimiid is ready to serve traffic.' : 'Miimiid is not ready because the database is unavailable.',
@@ -142,7 +123,6 @@ app.get('/api/health/ready', (req, res) => {
 app.get('/api/health', (req, res) => {
   const services = getDependencyHealth();
   const healthy = services.database === 'connected';
-
   res.status(healthy ? 200 : 503).json({
     status: healthy ? 'OK' : 'DEGRADED',
     message: healthy ? 'Server is running cleanly.' : 'Server is running but the database is not ready.',
@@ -151,46 +131,33 @@ app.get('/api/health', (req, res) => {
 });
 
 app.use('/api', (req, res) => {
-  res.status(404).json({
-    status: 'error',
-    code: 'API_ROUTE_NOT_FOUND',
-    message: 'API route not found.'
-  });
+  res.status(404).json({ status: 'error', code: 'API_ROUTE_NOT_FOUND', message: 'API route not found.' });
 });
 
 app.use((error, req, res, next) => {
   console.error('Unhandled server error:', error);
-
-  if (res.headersSent) {
-    return next(error);
-  }
-
-  res.status(500).json({
-    status: 'error',
-    code: 'INTERNAL_SERVER_ERROR',
-    message: 'Something went wrong on the server.'
-  });
+  if (res.headersSent) return next(error);
+  res.status(500).json({ status: 'error', code: 'INTERNAL_SERVER_ERROR', message: 'Something went wrong on the server.' });
 });
 
-const server = app.listen(PORT, () => {
-  console.log(`Miimiid server running on port ${PORT}`);
-});
+function startServer() {
+  return app.listen(PORT, () => console.log(`Miimiid server running on port ${PORT}`));
+}
 
-function shutdown(signal) {
+function shutdown(signal, server) {
   console.log(`${signal} received. Shutting down Miimiid server...`);
-
   server.close(async () => {
-    try {
-      await mongoose.connection.close(false);
-    } catch (error) {
-      console.error('MongoDB shutdown error:', error.message);
-    } finally {
-      process.exit(0);
-    }
+    try { await mongoose.connection.close(false); }
+    catch (error) { console.error('MongoDB shutdown error:', error.message); }
+    finally { process.exit(0); }
   });
-
   setTimeout(() => process.exit(1), 10000).unref();
 }
 
-process.once('SIGTERM', () => shutdown('SIGTERM'));
-process.once('SIGINT', () => shutdown('SIGINT'));
+if (require.main === module) {
+  const server = startServer();
+  process.once('SIGTERM', () => shutdown('SIGTERM', server));
+  process.once('SIGINT', () => shutdown('SIGINT', server));
+}
+
+module.exports = { app, startServer };
