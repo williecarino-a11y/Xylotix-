@@ -5,58 +5,26 @@ on:
     branches: [main]
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
-  repair:
+  diagnose:
     runs-on: ubuntu-latest
     steps:
-      - name: Identify malformed string
+      - name: Checkout
         uses: actions/checkout@v4
-      - name: Diagnose
+      - name: Find suspicious quote lines
         run: |
           python3 - <<'PY'
           from pathlib import Path
-
           text = Path('scripts/learningData/moneyBasics.js').read_text(encoding='utf-8')
-          quote = None
-          start = None
-          escaped = False
-          line_comment = block_comment = False
-          i = 0
-          long_strings = []
-
-          while i < len(text):
-              ch = text[i]
-              nxt = text[i + 1] if i + 1 < len(text) else ''
-              if line_comment:
-                  if ch == '\n': line_comment = False
-                  i += 1; continue
-              if block_comment:
-                  if ch == '*' and nxt == '/': block_comment = False; i += 2
-                  else: i += 1
-                  continue
-              if quote:
-                  if escaped:
-                      escaped = False
-                  elif ch == '\\':
-                      escaped = True
-                  elif ch == quote:
-                      end_line = text.count('\n', 0, i) + 1
-                      start_line = text.count('\n', 0, start) + 1
-                      if end_line - start_line > 1:
-                          long_strings.append((start_line, end_line, start, i, text[start:i+1][:500]))
-                      quote = start = None
-                  i += 1
-                  continue
-              if ch == '/' and nxt == '/': line_comment = True; i += 2; continue
-              if ch == '/' and nxt == '*': block_comment = True; i += 2; continue
-              if ch in "'\"`": quote = ch; start = i; i += 1; continue
-              i += 1
-
-          print('Cross-line strings:', len(long_strings))
-          for item in long_strings[:20]:
-              print(item)
+          for number, line in enumerate(text.splitlines(), 1):
+              # A normal source line containing one single-quoted string has
+              # two delimiters. An odd count strongly indicates an embedded
+              # apostrophe that is being parsed as a delimiter.
+              count = line.count("'")
+              if count % 2 == 1:
+                  print(f'ODD_QUOTE line={number}: {line}')
           PY
       - name: Verify syntax
         run: node --check scripts/learningData/moneyBasics.js
