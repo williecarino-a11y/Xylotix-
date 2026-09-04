@@ -75,3 +75,21 @@ test('protected Fun Center session route rejects unauthenticated requests', asyn
   assert.equal(response.status, 401);
   assert.equal(response.body.message, 'Authentication required.');
 });
+
+test('protected AI Tutor route rejects unauthenticated requests', async () => {
+  const response = await request.post('/api/ai-tutor/chat').send({ message: 'Explain budgeting.' });
+  assert.equal(response.status, 401);
+  assert.equal(response.body.code, 'AI_TUTOR_AUTH_REQUIRED');
+});
+
+test('learning progress route rejects malformed user IDs before database access', async () => {
+  const response = await request.get('/api/learn/courses/507f1f77bcf86cd799439011/progress/not-an-object-id');
+  assert.equal(response.status, 401);
+  assert.equal(response.body.code, 'AUTHENTICATION_REQUIRED');
+});
+
+test('dashboard route rejects malformed user IDs before database access', async () => {
+  const response = await request.get('/api/learn/dashboard/not-an-object-id');
+  assert.equal(response.status, 401);
+  assert.equal(response.body.code, 'AUTHENTICATION_REQUIRED');
+});
