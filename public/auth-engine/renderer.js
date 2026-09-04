@@ -14,6 +14,16 @@ const E = {
   reset: { password: 'miimiid-reset-password', confirmPassword: 'miimiid-reset-confirm', action: 'miimiid-reset-submit' },
   authenticated: {}
 };
+
+const REGISTER_STEPS = [
+  ['miimiid-register-get-started'],
+  ['miimiid-register-first-name', 'miimiid-register-last-name'],
+  ['miimiid-register-email'],
+  ['miimiid-register-gender', 'miimiid-register-dob'],
+  ['miimiid-register-password', 'miimiid-register-confirm'],
+  ['miimiid-register-verification-code']
+];
+
 function t(k, f) { try { const v = window.miimiidDashboardTranslate?.(k); if (v && v !== k) return v; } catch (_) {} return f || k; }
 
 export class AuthRenderer {
@@ -23,7 +33,7 @@ export class AuthRenderer {
     if (document.getElementById('miimiid-auth-engine-style')) return;
     const s = document.createElement('style');
     s.id = 'miimiid-auth-engine-style';
-    s.textContent = '.miimiid-auth-v5-loading{position:relative!important;pointer-events:none!important}.miimiid-auth-v5-loading .miimiid-auth-v5-label{visibility:hidden}.miimiid-auth-v5-spinner{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}.miimiid-auth-v5-spinner .continue-loading-arc{width:20px;height:20px}.miimiid-auth-logo{display:grid!important;place-items:center!important;width:56px!important;height:56px!important;padding:0!important;overflow:hidden!important;border-radius:16px!important;background:transparent!important}.miimiid-auth-logo img{display:block;width:100%;height:100%;object-fit:cover;border-radius:inherit}';
+    s.textContent = '.miimiid-auth-v5-loading{position:relative!important;pointer-events:none!important}.miimiid-auth-v5-loading .miimiid-auth-v5-label{visibility:hidden}.miimiid-auth-v5-spinner{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}.miimiid-auth-v5-spinner .continue-loading-arc{width:20px;height:20px}.miimiid-auth-logo{display:grid!important;place-items:center!important;width:56px!important;height:56px!important;padding:0!important;overflow:hidden!important;border-radius:16px!important;background:transparent!important}.miimiid-auth-logo img{display:block;width:100%;height:100%;object-fit:cover;border-radius:inherit}.miimiid-auth-step{border:0!important;margin:0!important;padding:0!important;min-width:0!important}.miimiid-auth-step[hidden]{display:none!important}';
     document.head.appendChild(s);
   }
 
@@ -53,14 +63,85 @@ export class AuthRenderer {
     (p?.parentElement || dob.parentElement).insertBefore(w, p || dob);
   }
 
+  findStepContainer(form, index) {
+    return form.querySelector(`[data-register-step="${index}"]`);
+  }
+
+  createStepContainer(form, index) {
+    const step = document.createElement('fieldset');
+    step.className = 'miimiid-auth-step';
+    step.dataset.registerStep = String(index);
+    step.hidden = true;
+    return step;
+  }
+
   prepareSteps() {
-    const f = document.getElementById(FORM_IDS.register);
-    if (!f || f.querySelectorAll('[data-register-step]').length >= 6) return;
-    [['miimiid-register-get-started'],['miimiid-register-first-name','miimiid-register-last-name'],['miimiid-register-email'],['miimiid-register-gender','miimiid-register-dob'],['miimiid-register-password','miimiid-register-confirm'],['miimiid-register-verification-code']].forEach((ids,i)=>{const s=f.querySelector(`[data-register-step="${i}"]`)||document.createElement('fieldset');s.dataset.registerStep=i;s.className='miimiid-auth-step';ids.forEach(id=>{const el=document.getElementById(id);if(el&&!el.closest('[data-register-step]'))s.appendChild(el)});if(!s.closest('form'))f.appendChild(s);});
+    const form = document.getElementById(FORM_IDS.register);
+    if (!form) return;
+
+    // If authored step containers exist, keep them intact. This avoids moving
+    // inputs away from their labels, validation messages, or layout wrappers.
+    const authored = Array.from(form.querySelectorAll('[data-register-step]'));
+    if (authored.length >= REGISTER_STEPS.length) return;
+
+    const containers = Array.from({ length: REGISTER_STEPS.length }, (_, index) => {
+      return this.findStepContainer(form, index) || this.createStepContainer(form, index);
+    });
+
+    containers.forEach((step, index) => {
+      if (!step.parentElement) form.appendChild(step);
+      step.dataset.registerStep = String(index);
+      step.classList.add('miimiid-auth-step');
+
+      REGISTER_STEPS[index].forEach(id => {
+        const el = document.getElementById(id);
+        if (!el || step.contains(el)) return;
+
+        // Move the complete field wrapper, not the raw control. That preserves
+        // the label, hint, validation message, and existing field styling.
+        const wrapper = el.closest('.miimiid-auth-field');
+        if (wrapper && wrapper.closest('form') === form && !wrapper.closest('[data-register-step]')) {
+          step.appendChild(wrapper);
+        } else if (el.closest('form') === form && !el.closest('[data-register-step]')) {
+          step.appendChild(el);
+        }
+      });
+
+      const actionId = Object.values(E).find(group => group.action && REGISTER_STEPS[index].includes(group.action))?.action;
+      if (actionId) {
+        const action = document.getElementById(actionId);
+        if (action && !step.contains(action)) {
+          const actions = action.closest('.miimiid-auth-actions');
+          if (actions && actions.closest('form') === form && !actions.closest('[data-register-step]')) step.appendChild(actions);
+          else if (action.closest('form') === form && !action.closest('[data-register-step]')) step.appendChild(action);
+        }
+      }
+
+      if (index === 0 && !step.contains(document.getElementById('miimiid-register-get-started'))) {
+        const welcome = document.getElementById('miimiid-register-get-started');
+        if (welcome?.closest('form') === form) step.appendChild(welcome);
+      }
+    });
+  }
+
+  syncRegistrationSteps() {
+    const form = document.getElementById(FORM_IDS.register);
+    if (!form) return;
+    const active = REGISTER_STEPS.findIndex(ids => ids.includes(E[this.controller.state.step]?.[Object.keys(E[this.controller.state.step] || {}).find(k => k !== 'action' && k !== 'resend')]));
+    const stepIndex = ['welcome', 'name', 'email', 'birthday', 'password', 'verification'].indexOf(this.controller.state.step);
+    const containers = Array.from(form.querySelectorAll('[data-register-step]'));
+    containers.forEach((container, index) => {
+      const visible = index === (stepIndex >= 0 ? stepIndex : active);
+      container.hidden = !visible;
+      container.setAttribute('aria-hidden', String(!visible));
+    });
   }
 
   bind() {
-    this.prepareGender(); this.prepareSteps(); this.installLogo();
+    this.prepareGender();
+    this.prepareSteps();
+    this.installLogo();
+    this.syncRegistrationSteps();
     const fields = new Map();
     Object.values(E).forEach(g => Object.entries(g).forEach(([k,id]) => { if (k !== 'action' && k !== 'resend') fields.set(id,k); }));
     fields.forEach((field,id)=>{const el=document.getElementById(id);if(!el||el.dataset.authEngineBound)return;el.dataset.authEngineBound='1';el.addEventListener('input',()=>this.controller.fieldChanged(field,el.value));el.addEventListener('focus',()=>this.controller.fieldFocused(field));el.addEventListener('blur',()=>this.controller.fieldBlurred(field));});
@@ -88,5 +169,15 @@ export class AuthRenderer {
     for(const f of this.controller.step?.fields||[]){const el=document.getElementById(E[this.controller.state.step]?.[f.id]||'');if(!el)continue;const er=this.controller.state.form.errors[f.id];el.classList.toggle('miimiid-auth-field-error',!!er);el.setAttribute('aria-invalid',String(!!er));}
   }
 
-  render(){const s=this.controller.state;this.prepareGender();this.prepareSteps();this.installLogo();Object.entries(FORM_IDS).forEach(([m,id])=>document.getElementById(id)?.classList.toggle('hidden',m!==s.flow));if(s.step==='authenticated')return;this.button(this.controller.step?.primaryAction,s.step);this.errors();}
+  render(){
+    const s=this.controller.state;
+    this.prepareGender();
+    this.prepareSteps();
+    this.installLogo();
+    Object.entries(FORM_IDS).forEach(([m,id])=>document.getElementById(id)?.classList.toggle('hidden',m!==s.flow));
+    if(s.flow==='register') this.syncRegistrationSteps();
+    if(s.step==='authenticated') return;
+    this.button(this.controller.step?.primaryAction,s.step);
+    this.errors();
+  }
 }
