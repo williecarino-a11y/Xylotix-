@@ -29,3 +29,36 @@ jobs:
 
       - name: Run Miimiid checks
         run: npm run check
+
+  mongodb-smoke:
+    name: Miimiid MongoDB smoke test
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    services:
+      mongodb:
+        image: mongo:7
+        ports:
+          - 27017:27017
+        options: >-
+          --health-cmd "mongosh --quiet --eval 'db.runCommand({ ping: 1 }).ok'"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 10
+
+    steps:
+      - name: Checkout Miimiid
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run MongoDB smoke test
+        run: node --test tests/mongodb.smoke.test.mjs
+        env:
+          NODE_ENV: test
+          MONGO_URI: mongodb://127.0.0.1:27017/miimiid_test
