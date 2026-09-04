@@ -24,6 +24,15 @@ const REGISTER_STEPS = [
   ['miimiid-register-verification-code']
 ];
 
+const REGISTER_ACTIONS = [
+  'miimiid-register-get-started',
+  'miimiid-register-name-next',
+  'miimiid-register-contact-next',
+  'miimiid-register-details-next',
+  'miimiid-register-submit',
+  'miimiid-verify-account-submit'
+];
+
 function t(k, f) { try { const v = window.miimiidDashboardTranslate?.(k); if (v && v !== k) return v; } catch (_) {} return f || k; }
 
 export class AuthRenderer {
@@ -79,8 +88,6 @@ export class AuthRenderer {
     const form = document.getElementById(FORM_IDS.register);
     if (!form) return;
 
-    // If authored step containers exist, keep them intact. This avoids moving
-    // inputs away from their labels, validation messages, or layout wrappers.
     const authored = Array.from(form.querySelectorAll('[data-register-step]'));
     if (authored.length >= REGISTER_STEPS.length) return;
 
@@ -96,9 +103,6 @@ export class AuthRenderer {
       REGISTER_STEPS[index].forEach(id => {
         const el = document.getElementById(id);
         if (!el || step.contains(el)) return;
-
-        // Move the complete field wrapper, not the raw control. That preserves
-        // the label, hint, validation message, and existing field styling.
         const wrapper = el.closest('.miimiid-auth-field');
         if (wrapper && wrapper.closest('form') === form && !wrapper.closest('[data-register-step]')) {
           step.appendChild(wrapper);
@@ -107,19 +111,12 @@ export class AuthRenderer {
         }
       });
 
-      const actionId = Object.values(E).find(group => group.action && REGISTER_STEPS[index].includes(group.action))?.action;
-      if (actionId) {
-        const action = document.getElementById(actionId);
-        if (action && !step.contains(action)) {
-          const actions = action.closest('.miimiid-auth-actions');
-          if (actions && actions.closest('form') === form && !actions.closest('[data-register-step]')) step.appendChild(actions);
-          else if (action.closest('form') === form && !action.closest('[data-register-step]')) step.appendChild(action);
-        }
-      }
-
-      if (index === 0 && !step.contains(document.getElementById('miimiid-register-get-started'))) {
-        const welcome = document.getElementById('miimiid-register-get-started');
-        if (welcome?.closest('form') === form) step.appendChild(welcome);
+      const actionId = REGISTER_ACTIONS[index];
+      const action = document.getElementById(actionId);
+      if (action && !step.contains(action)) {
+        const actions = action.closest('.miimiid-auth-actions');
+        if (actions && actions.closest('form') === form && !actions.closest('[data-register-step]')) step.appendChild(actions);
+        else if (action.closest('form') === form && !action.closest('[data-register-step]')) step.appendChild(action);
       }
     });
   }
@@ -127,11 +124,10 @@ export class AuthRenderer {
   syncRegistrationSteps() {
     const form = document.getElementById(FORM_IDS.register);
     if (!form) return;
-    const active = REGISTER_STEPS.findIndex(ids => ids.includes(E[this.controller.state.step]?.[Object.keys(E[this.controller.state.step] || {}).find(k => k !== 'action' && k !== 'resend')]));
     const stepIndex = ['welcome', 'name', 'email', 'birthday', 'password', 'verification'].indexOf(this.controller.state.step);
     const containers = Array.from(form.querySelectorAll('[data-register-step]'));
     containers.forEach((container, index) => {
-      const visible = index === (stepIndex >= 0 ? stepIndex : active);
+      const visible = index === stepIndex;
       container.hidden = !visible;
       container.setAttribute('aria-hidden', String(!visible));
     });
