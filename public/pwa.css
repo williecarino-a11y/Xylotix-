@@ -1,5 +1,5 @@
 /* PWA install surface */
-.xylotix-install-prompt {
+.miimiid-install-prompt {
   position: fixed;
   z-index: 9999;
   left: max(14px, env(safe-area-inset-left));
@@ -21,31 +21,31 @@
   -webkit-backdrop-filter: blur(18px);
 }
 
-.xylotix-install-copy {
+.miimiid-install-copy {
   min-width: 0;
   display: grid;
   gap: 3px;
 }
 
-.xylotix-install-copy strong {
+.miimiid-install-copy strong {
   font-size: 0.96rem;
 }
 
-.xylotix-install-copy span {
+.miimiid-install-copy span {
   color: #94a3b8;
   font-size: 0.78rem;
   line-height: 1.35;
 }
 
-.xylotix-install-actions {
+.miimiid-install-actions {
   flex: 0 0 auto;
   display: flex;
   align-items: center;
   gap: 7px;
 }
 
-.xylotix-install-btn,
-.xylotix-install-dismiss {
+.miimiid-install-btn,
+.miimiid-install-dismiss {
   min-height: 42px;
   border: 0;
   border-radius: 12px;
@@ -53,18 +53,18 @@
   touch-action: manipulation;
 }
 
-.xylotix-install-btn {
+.miimiid-install-btn {
   padding: 0 15px;
   background: #0284c7;
   color: #fff;
   font-weight: 700;
 }
 
-.xylotix-install-btn:hover {
+.miimiid-install-btn:hover {
   background: #0369a1;
 }
 
-.xylotix-install-dismiss {
+.miimiid-install-dismiss {
   width: 42px;
   padding: 0;
   background: rgba(148, 163, 184, 0.1);
@@ -73,22 +73,22 @@
 }
 
 @media (max-width: 480px) {
-  .xylotix-install-prompt {
+  .miimiid-install-prompt {
     align-items: flex-start;
     padding: 13px;
   }
 
-  .xylotix-install-copy span {
+  .miimiid-install-copy span {
     font-size: 0.74rem;
   }
 
-  .xylotix-install-btn {
+  .miimiid-install-btn {
     padding: 0 12px;
   }
 }
 
 @media (display-mode: standalone) {
-  .xylotix-install-prompt {
+  .miimiid-install-prompt {
     display: none !important;
   }
 }
