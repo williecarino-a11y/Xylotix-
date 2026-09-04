@@ -29,6 +29,7 @@
     "openai": "^7.4.0"
   },
   "devDependencies": {
+    "smtp-server": "^3.13.6",
     "supertest": "^7.1.4"
   }
 }
