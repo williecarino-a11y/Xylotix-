@@ -2,7 +2,7 @@ require('dotenv').config();
 const mongoose = require('mongoose');
 const Course = require('./models/Course');
 
-const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/xylotix';
+const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/miimiid';
 
 async function seedDatabase() {
   try {
