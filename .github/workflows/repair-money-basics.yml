@@ -1,0 +1,46 @@
+name: Repair Money Basics Syntax
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Repair apostrophes inside JS strings
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+
+          path = Path('scripts/learningData/moneyBasics.js')
+          text = path.read_text(encoding='utf-8')
+          repaired = re.sub(r"(?<=\w)'(?=\w)", '’', text)
+          if repaired == text:
+              print('No repair needed.')
+          else:
+              path.write_text(repaired, encoding='utf-8')
+              print('Repaired internal apostrophes in moneyBasics.js')
+          PY
+
+      - name: Verify syntax
+        run: node --check scripts/learningData/moneyBasics.js
+
+      - name: Commit repair
+        run: |
+          if git diff --quiet -- scripts/learningData/moneyBasics.js; then
+            echo 'No changes to commit.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add scripts/learningData/moneyBasics.js
+          git commit -m 'fix: repair money basics JavaScript syntax'
+          git push
