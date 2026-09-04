@@ -50,56 +50,33 @@
     try {
       if (score > getBestScore()) window.localStorage.setItem(BEST_SCORE_KEY, String(score));
     } catch (error) {
-      // Storage is optional. The game still works without it.
+      // Best score persistence is optional.
     }
-  }
-
-  function styles() {
-    if (document.querySelector('style[data-miimiid-money-match]')) return;
-    const style = document.createElement('style');
-    style.dataset.miimiidMoneyMatch = 'true';
-    style.textContent = `
-      .miimiid-money-match{display:flex;flex-direction:column;gap:14px;width:100%;margin:18px 0;padding:20px;border:1px solid rgba(127,127,127,.22);border-radius:18px;background:var(--miimiid-card-bg,#fff);box-sizing:border-box}
-      .miimiid-money-match *{box-sizing:border-box}
-      .miimiid-money-match-badge{width:max-content;padding:5px 9px;border-radius:999px;font-size:.75rem;font-weight:700;letter-spacing:.03em;background:rgba(127,127,127,.12)}
-      .miimiid-money-match h3{margin:0;font-size:1.25rem}
-      .miimiid-money-match p{margin:0;line-height:1.5}
-      .miimiid-money-match-meta{display:flex;justify-content:space-between;gap:12px;font-size:.85rem;opacity:.8}
-      .miimiid-money-match-progress{height:7px;border-radius:999px;overflow:hidden;background:rgba(127,127,127,.15)}
-      .miimiid-money-match-progress span{display:block;height:100%;width:0;border-radius:inherit;background:currentColor;transition:width .2s ease}
-      .miimiid-money-match-question{font-weight:700;line-height:1.5}
-      .miimiid-money-match-choices{display:grid;gap:9px}
-      .miimiid-money-match-choice,.miimiid-money-match-next{width:100%;padding:12px 14px;border:1px solid rgba(127,127,127,.28);border-radius:12px;background:transparent;color:inherit;text-align:left;font:inherit;cursor:pointer}
-      .miimiid-money-match-choice:hover,.miimiid-money-match-choice:focus-visible,.miimiid-money-match-next:hover,.miimiid-money-match-next:focus-visible{outline:2px solid currentColor;outline-offset:2px}
-      .miimiid-money-match-choice:disabled{cursor:default;opacity:.78}
-      .miimiid-money-match-feedback{padding:11px 12px;border-radius:12px;background:rgba(127,127,127,.1);line-height:1.45}
-      .miimiid-money-match-next{background:currentColor;color:var(--miimiid-card-bg,#fff);text-align:center;font-weight:700}
-      .miimiid-money-match-result{text-align:center;padding:8px 0}
-      .miimiid-money-match-result strong{display:block;font-size:1.65rem;margin-bottom:4px}
-      @media (max-width:480px){.miimiid-money-match{padding:16px;margin:14px 0}.miimiid-money-match-choice,.miimiid-money-match-next{padding:11px 12px}}
-      @media (prefers-reduced-motion:reduce){.miimiid-money-match-progress span{transition:none}}
-    `;
-    document.head.appendChild(style);
   }
 
   function createGame() {
     const root = document.createElement('section');
-    root.className = 'miimiid-money-match';
+    root.className = 'miimiid-fun-center-card miimiid-money-match';
     root.setAttribute(ROOT_MARKER, 'true');
     root.setAttribute('aria-labelledby', 'miimiid-money-match-title');
 
     root.innerHTML = `
-      <span class="miimiid-money-match-badge">Mini game</span>
-      <div>
+      <div class="miimiid-money-match-header">
+        <span class="miimiid-money-match-badge">Mini game</span>
         <h3 id="miimiid-money-match-title">Money Match</h3>
         <p>5 quick choices. Pick the smarter money move.</p>
       </div>
-      <div class="miimiid-money-match-meta"><span data-mm-round>Round 1 of 5</span><span data-mm-score>Score: 0</span></div>
-      <div class="miimiid-money-match-progress" aria-hidden="true"><span data-mm-progress></span></div>
+      <div class="miimiid-money-match-meta" aria-live="polite">
+        <span data-mm-round>Round 1 of 5</span>
+        <span data-mm-score>Score: 0</span>
+      </div>
+      <div class="miimiid-money-match-progress" aria-hidden="true">
+        <span data-mm-progress></span>
+      </div>
       <div class="miimiid-money-match-question" data-mm-question></div>
       <div class="miimiid-money-match-choices" data-mm-choices role="group" aria-label="Money choices"></div>
-      <div class="miimiid-money-match-feedback" data-mm-feedback aria-live="polite" hidden></div>
-      <button type="button" class="miimiid-money-match-next" data-mm-next hidden>Next</button>
+      <div class="content-callout miimiid-money-match-feedback" data-mm-feedback aria-live="polite" hidden></div>
+      <button type="button" class="btn miimiid-money-match-next" data-mm-next hidden>Next</button>
     `;
 
     const state = { round: 0, score: 0 };
@@ -124,7 +101,7 @@
       item.choices.forEach((choice, index) => {
         const button = document.createElement('button');
         button.type = 'button';
-        button.className = 'miimiid-money-match-choice';
+        button.className = 'quiz-option miimiid-money-match-choice';
         button.textContent = choice;
         button.addEventListener('click', () => answer(index));
         choices.appendChild(button);
@@ -133,9 +110,7 @@
 
     function answer(index) {
       const item = ROUNDS[state.round];
-      const buttons = choices.querySelectorAll('button');
-      buttons.forEach((button) => { button.disabled = true; });
-
+      choices.querySelectorAll('button').forEach((button) => { button.disabled = true; });
       const correct = index === item.answer;
       if (correct) state.score += 1;
       scoreLabel.textContent = `Score: ${state.score}`;
@@ -155,35 +130,28 @@
           : 'Good start. Try another round and see if you can beat your score.';
 
       root.innerHTML = `
-        <span class="miimiid-money-match-badge">Mini game complete</span>
-        <div class="miimiid-money-match-result">
+        <div class="miimiid-money-match-result" aria-live="polite">
+          <span class="miimiid-money-match-badge">Mini game complete</span>
+          <h3>Money Match</h3>
           <strong>${state.score}/${ROUNDS.length}</strong>
           <p>${message}</p>
           <p>Best score: ${best}/${ROUNDS.length}</p>
         </div>
-        <button type="button" class="miimiid-money-match-next" data-mm-restart>Play again</button>
+        <button type="button" class="btn miimiid-money-match-next" data-mm-restart>Play again</button>
       `;
       root.querySelector('[data-mm-restart]').addEventListener('click', () => {
-        state.round = 0;
-        state.score = 0;
-        root.innerHTML = '';
-        root.appendChild(document.createElement('span'));
-        // Rebuild the component so all event handlers are fresh.
-        const replacement = createGame();
-        root.replaceWith(replacement);
+        root.replaceWith(createGame());
       });
     }
 
-    function nextRound() {
-      if (state.round === ROUNDS.length - 1) {
-        finish();
-        return;
+    next.addEventListener('click', () => {
+      if (state.round === ROUNDS.length - 1) finish();
+      else {
+        state.round += 1;
+        renderRound();
       }
-      state.round += 1;
-      renderRound();
-    }
+    });
 
-    next.addEventListener('click', nextRound);
     renderRound();
     return root;
   }
@@ -195,9 +163,8 @@
   }
 
   function init() {
-    styles();
     mount();
-    const observer = new MutationObserver(() => mount());
+    const observer = new MutationObserver(mount);
     observer.observe(document.body, { childList: true, subtree: true });
   }
 
