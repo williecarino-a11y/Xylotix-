@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
-import test from 'node:test';
+import test, { after, before } from 'node:test';
 import mongoose from 'mongoose';
 
 process.env.NODE_ENV = 'test';
@@ -48,13 +48,15 @@ async function prepareReplicaSet() {
   throw new Error('MongoDB replica set did not become PRIMARY in time.');
 }
 
-test('application reports ready against a real MongoDB replica set', async (t) => {
-  t.after(async () => {
-    await mongoose.disconnect();
-  });
-
+before(async () => {
   await prepareReplicaSet();
+});
 
+after(async () => {
+  await mongoose.disconnect();
+});
+
+test('application reports ready against a real MongoDB replica set', async () => {
   assert.equal(mongoose.connection.readyState, 1);
 
   const response = await request.get('/api/health/ready');
