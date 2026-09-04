@@ -12,6 +12,12 @@ const root = path.join(process.cwd());
 const authEngine = fs.readFileSync(path.join(root, 'public', 'miimiid-auth-engine.js'), 'utf8');
 const loader = fs.readFileSync(path.join(root, 'public', 'continue-loading.js'), 'utf8');
 const server = fs.readFileSync(path.join(root, 'server.js'), 'utf8');
+const authRoutes = fs.readFileSync(path.join(root, 'routes', 'authRoutes.js'), 'utf8');
+const passwordRoutes = fs.readFileSync(path.join(root, 'routes', 'passwordRoutes.js'), 'utf8');
+const passwordValidator = fs.readFileSync(path.join(root, 'utils', 'passwordValidator.js'), 'utf8');
+const userModel = fs.readFileSync(path.join(root, 'models', 'User.js'), 'utf8');
+const sessionModel = fs.readFileSync(path.join(root, 'models', 'UserSession.js'), 'utf8');
+const resetModel = fs.readFileSync(path.join(root, 'models', 'PasswordResetToken.js'), 'utf8');
 const authCss = fs.readFileSync(path.join(root, 'public', 'miimiid-auth-engine.css'), 'utf8');
 
 const validation = new ValidationEngine();
@@ -93,4 +99,35 @@ test('shared ContinueLoading owns the C-shaped registration loader', () => {
   assert.match(loader, /window\.ContinueLoading/);
   assert.match(authCss, /continue-loading-arc/);
   assert.doesNotMatch(authCss, /miimiid-engine-spinner/);
+});
+
+test('security lifecycle protections are present', () => {
+  assert.match(authRoutes, /Cache-Control.*no-store/);
+  assert.match(authRoutes, /expiresAt:\s*\{ \$gt:/);
+  assert.match(authRoutes, /clearSessionCookie\(res\)/);
+  assert.match(authRoutes, /error\.code === 11000/);
+  assert.match(authRoutes, /ACCOUNT_EXISTS/);
+  assert.match(authRoutes, /usedAt: null/);
+  assert.match(authRoutes, /findOneAndUpdate\(/);
+  assert.match(authRoutes, /UserSession\.deleteMany\(\{ userId: reset\.userId \}\)/);
+  assert.match(authRoutes, /PASSWORD_RESET_RATE_LIMITED/);
+  assert.match(passwordRoutes, /validatePassword/);
+  assert.match(userModel, /unique:\s*true/);
+  assert.match(sessionModel, /expireAfterSeconds:\s*0/);
+  assert.match(resetModel, /usedAt/);
+  assert.match(resetModel, /expireAfterSeconds:\s*0/);
+});
+
+test('health endpoints distinguish liveness from readiness', () => {
+  assert.match(server, /\/api\/health\/live/);
+  assert.match(server, /\/api\/health\/ready/);
+  assert.match(server, /Miimiid is alive/);
+  assert.match(server, /Miimiid is ready to serve traffic/);
+  assert.match(server, /status\(ready \? 200 : 503\)/);
+});
+
+test('password validation remains centralized', () => {
+  assert.match(passwordValidator, /function validatePassword/);
+  assert.match(authRoutes, /const passwordResult = validatePassword\(password\)/);
+  assert.match(passwordRoutes, /const result = validatePassword\(password\)/);
 });
