@@ -41,6 +41,17 @@ function latestMessageContaining(text) {
   return [...receivedMessages].reverse().find(message => message.includes(text));
 }
 
+function decodeQuotedPrintable(value) {
+  return value
+    .replace(/=\r?\n/g, '')
+    .replace(/=([0-9A-F]{2})/gi, (_, hex) => String.fromCharCode(Number.parseInt(hex, 16)));
+}
+
+function extractResetUrl(message) {
+  const normalized = decodeQuotedPrintable(message);
+  return normalized.match(/https?:\/\/[^\s<]+\?resetToken=[^\s<&]+/)?.[0];
+}
+
 async function waitFor(predicate, timeoutMs = 5000) {
   const started = Date.now();
   while (Date.now() - started < timeoutMs) {
@@ -120,7 +131,7 @@ test('real MongoDB + SMTP auth lifecycle: register → verify → session → lo
   assert.equal(await VerificationToken.countDocuments({ userId: userAfterRegister._id }), 1);
 
   const verificationMail = await waitFor(() => latestMessageContaining('Miimiid verification code'));
-  const code = verificationMail.match(/\b(\d{6})\b/)?.[1];
+  const code = decodeQuotedPrintable(verificationMail).match(/\b(\d{6})\b/)?.[1];
   assert.ok(code, 'verification email must contain a six-digit code');
 
   const verify = await request(app).post('/api/auth/verify-account').send({ email, code });
@@ -156,9 +167,9 @@ test('real MongoDB + SMTP password reset: email → reset → old password rejec
   assert.match(forgot.body.message, /If an account exists/);
 
   const resetMail = await waitFor(() => latestMessageContaining('Reset your Miimiid password'));
-  const resetUrl = resetMail.match(/https?:\/\/[^\s<]+\?resetToken=[^\s<&]+/)?.[0];
+  const resetUrl = extractResetUrl(resetMail);
   assert.ok(resetUrl, 'reset email must contain a reset URL');
-  const resetToken = decodeURIComponent(new URL(resetUrl).searchParams.get('resetToken'));
+  const resetToken = new URL(resetUrl).searchParams.get('resetToken');
   assert.ok(resetToken);
 
   const user = await User.findOne({ email });
