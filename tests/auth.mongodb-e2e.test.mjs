@@ -21,8 +21,12 @@ const VerificationToken = (await import('../models/VerificationToken.js')).defau
 
 const receivedMessages = [];
 const smtp = new SMTPServer({
-  authOptional: true,
+  authOptional: false,
   disabledCommands: ['STARTTLS'],
+  onAuth(auth, session, callback) {
+    if (auth.username === process.env.SMTP_USER && auth.password === process.env.SMTP_PASSWORD) return callback(null, { user: auth.username });
+    return callback(new Error('Invalid SMTP test credentials.'));
+  },
   onData(stream, session, callback) {
     let data = '';
     stream.on('data', chunk => { data += chunk.toString(); });
@@ -53,12 +57,32 @@ function cookieHeader(response) {
   return cookies.map(cookie => cookie.split(';')[0]).join('; ');
 }
 
+async function prepareReplicaSet() {
+  const bootstrapUri = process.env.MONGO_URI.replace(/[?].*$/, '');
+  await mongoose.connect(bootstrapUri, { serverSelectionTimeoutMS: 5000, connectTimeoutMS: 5000 });
+  try {
+    await mongoose.connection.db.admin().command({ replSetInitiate: {} });
+  } catch (error) {
+    if (!['AlreadyInitialized', 23, 93].includes(error.codeName) && !String(error.message).includes('already initialized')) throw error;
+  }
+  await mongoose.disconnect();
+  await mongoose.connect(process.env.MONGO_URI, { serverSelectionTimeoutMS: 10000, connectTimeoutMS: 10000, replicaSet: 'rs0' });
+  for (let attempt = 0; attempt < 20; attempt += 1) {
+    try {
+      const status = await mongoose.connection.db.admin().command({ replSetGetStatus: 1 });
+      if (status.myState === 1) return;
+    } catch {}
+    await new Promise(resolve => setTimeout(resolve, 500));
+  }
+  throw new Error('MongoDB replica set did not become PRIMARY in time.');
+}
+
 const email = `e2e-${Date.now()}@example.test`;
 const password = 'Miimiid!Secure123';
 const replacementPassword = 'Miimiid!Reset456';
 
 before(async () => {
-  await mongoose.connect(process.env.MONGO_URI, { serverSelectionTimeoutMS: 5000 });
+  await prepareReplicaSet();
   await Promise.all([
     User.deleteMany({ email }),
     VerificationToken.deleteMany({}),
@@ -69,7 +93,6 @@ before(async () => {
 });
 
 after(async () => {
-  await User.deleteMany({ email });
   const user = await User.findOne({ email });
   if (user) {
     await Promise.all([
@@ -78,20 +101,15 @@ after(async () => {
       UserSession.deleteMany({ userId: user._id })
     ]);
   }
+  await User.deleteMany({ email });
   await smtp.close();
   await mongoose.disconnect();
 });
 
-test('real MongoDB auth lifecycle: register → verify → session → logout', async () => {
+test('real MongoDB + SMTP auth lifecycle: register → verify → session → logout', async () => {
   const register = await request(app).post('/api/auth/register').send({
-    firstName: 'E2E',
-    lastName: 'Tester',
-    email,
-    gender: 'Prefer not to say',
-    dateOfBirth: '1995-01-01',
-    password
+    firstName: 'E2E', lastName: 'Tester', email, gender: 'Prefer not to say', dateOfBirth: '1995-01-01', password
   });
-
   assert.equal(register.status, 201);
   assert.equal(register.body.data.verificationRequired, true);
 
@@ -128,7 +146,7 @@ test('real MongoDB auth lifecycle: register → verify → session → logout', 
   assert.equal(afterLogout.status, 401);
 });
 
-test('real MongoDB password reset: email → reset → old password rejected → new password accepted', async () => {
+test('real MongoDB + SMTP password reset: email → reset → old password rejected → new password accepted', async () => {
   const loginBeforeReset = await request(app).post('/api/auth/login').send({ identifier: email, password });
   assert.equal(loginBeforeReset.status, 200);
   const oldSession = cookieHeader(loginBeforeReset);
@@ -143,7 +161,8 @@ test('real MongoDB password reset: email → reset → old password rejected →
   const resetToken = decodeURIComponent(new URL(resetUrl).searchParams.get('resetToken'));
   assert.ok(resetToken);
 
-  const resetRecord = await PasswordResetToken.findOne({ userId: (await User.findOne({ email }))._id }).lean();
+  const user = await User.findOne({ email });
+  const resetRecord = await PasswordResetToken.findOne({ userId: user._id }).lean();
   assert.ok(resetRecord);
   assert.equal(resetRecord.usedAt, null);
   assert.notEqual(resetRecord.tokenHash, resetToken);
