@@ -14,31 +14,28 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Repair unmatched final delimiter
+      - name: Locate malformed string
         run: |
           python3 - <<'PY'
           from pathlib import Path
 
           path = Path('scripts/learningData/moneyBasics.js')
           text = path.read_text(encoding='utf-8')
-
-          stack = []
-          i = 0
           quote = None
+          quote_start = None
           escaped = False
           line_comment = False
           block_comment = False
+          i = 0
 
           while i < len(text):
               ch = text[i]
               nxt = text[i + 1] if i + 1 < len(text) else ''
 
               if line_comment:
-                  if ch == '\n':
-                      line_comment = False
+                  if ch == '\n': line_comment = False
                   i += 1
                   continue
-
               if block_comment:
                   if ch == '*' and nxt == '/':
                       block_comment = False
@@ -46,7 +43,6 @@ jobs:
                   else:
                       i += 1
                   continue
-
               if quote:
                   if escaped:
                       escaped = False
@@ -54,9 +50,9 @@ jobs:
                       escaped = True
                   elif ch == quote:
                       quote = None
+                      quote_start = None
                   i += 1
                   continue
-
               if ch == '/' and nxt == '/':
                   line_comment = True
                   i += 2
@@ -67,46 +63,28 @@ jobs:
                   continue
               if ch in "'\"`":
                   quote = ch
+                  quote_start = i
                   i += 1
                   continue
-
-              if ch in '([{':
-                  stack.append((ch, i))
-              elif ch in ')]}':
-                  expected = {')': '(', ']': '[', '}': '{'}[ch]
-                  if not stack or stack[-1][0] != expected:
-                      print(f'Unmatched closing delimiter {ch} at offset {i}')
-                      break
-                  stack.pop()
               i += 1
 
-          print('Remaining opening delimiters:', len(stack))
-          if stack:
-              print(stack[-10:])
+          if quote:
+              line = text.count('\n', 0, quote_start) + 1
+              print(f'Unclosed {quote} string begins at line {line}, offset {quote_start}')
+              start = max(0, quote_start - 300)
+              end = min(len(text), quote_start + 2500)
+              snippet = text[start:end]
+              print(snippet)
+              print('ASCII apostrophes in affected region:')
+              for pos in range(start, end):
+                  if text[pos] == "'":
+                      print(pos, repr(text[max(start, pos-70):min(end, pos+90)]))
           else:
-              print('No unmatched opening delimiters.')
-
-          # The CI failure points at the final `};`. If the source is already
-          # structurally closed before that terminator, remove that redundant
-          # terminator rather than weakening the syntax check.
-          stripped = text.rstrip()
-          if stripped.endswith('};') and not stack:
-              candidate = stripped[:-2].rstrip() + '\n'
-              path.write_text(candidate, encoding='utf-8')
-              print('Removed redundant final `};`.')
+              print('No unclosed quote detected.')
           PY
 
       - name: Verify syntax
         run: node --check scripts/learningData/moneyBasics.js
 
-      - name: Commit repair
-        run: |
-          if git diff --quiet -- scripts/learningData/moneyBasics.js; then
-            echo 'No changes to commit.'
-            exit 0
-          fi
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add scripts/learningData/moneyBasics.js
-          git commit -m 'fix: repair money basics JavaScript syntax'
-          git push
+      - name: Stop after diagnosis
+        run: exit 1
