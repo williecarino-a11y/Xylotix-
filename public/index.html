@@ -4364,542 +4364,298 @@ body:has(#miimiid-auth-view:not(.hidden)) {
       renderMiimiidBottomNavigation();
     }
 
-    /* =========================================
-       MIIMIID AI TUTOR FRONTEND
-       ========================================= */
+   /* =========================================
+   MIIMIID AI TUTOR FRONTEND
+   ========================================= */
 
-    let miimiidAITutorHistory = [];
-    let miimiidAITutorInitialized = false;
+let miimiidAITutorHistory = [];
+let miimiidAITutorInitialized = false;
+let miimiidAITutorLessonContext = null;
 
-    /*
-     * Current learning context for Miimiid AI Tutor.
-     *
-     * This is intentionally frontend-only for now.
-     * It allows the Tutor UI to understand what lesson
-     * the learner is studying before the OpenAI API is
-     * configured.
-     */
-    let miimiidAITutorLessonContext = null;
+function setMiimiidAITutorLessonContext(context) {
+  if (!context || typeof context !== "object") {
+    miimiidAITutorLessonContext = null;
+    return;
+  }
 
-    function setMiimiidAITutorLessonContext(context) {
-      if (!context || typeof context !== "object") {
-        miimiidAITutorLessonContext = null;
-        return;
-      }
+  miimiidAITutorLessonContext = {
+    courseId: context.courseId || null,
+    courseTitle: context.courseTitle || "",
+    moduleTitle: context.moduleTitle || "",
+    moduleNumber: Number(context.moduleNumber) || 0,
+    lessonId: context.lessonId || null,
+    lessonTitle: context.lessonTitle || "",
+    lessonDescription: context.lessonDescription || "",
+    contentBlocks: Array.isArray(context.contentBlocks) ? context.contentBlocks : [],
+    language: context.language || (typeof getSavedLanguage === "function" ? getSavedLanguage() : "en")
+  };
 
-      miimiidAITutorLessonContext = {
-        courseId: context.courseId || null,
-        courseTitle: context.courseTitle || "",
-        moduleTitle: context.moduleTitle || "",
-        moduleNumber:
-          Number(context.moduleNumber) || 0,
-        lessonId: context.lessonId || null,
-        lessonTitle: context.lessonTitle || "",
-        lessonDescription:
-          context.lessonDescription || "",
-        contentBlocks:
-          Array.isArray(context.contentBlocks)
-            ? context.contentBlocks
-            : [],
-        language:
-          context.language ||
-          (
-            typeof getSavedLanguage === "function"
-              ? getSavedLanguage()
-              : "en"
-          )
-      };
+  renderMiimiidAITutorContext();
+}
 
-      renderMiimiidAITutorContext();
-    }
+function renderMiimiidAITutorStarters() {
+  const container = document.getElementById("ai-tutor-starters");
+  if (!container) return;
 
-    function renderMiimiidAITutorStarters() {
-      const container =
-        document.getElementById(
-          "ai-tutor-starters"
-        );
+  const context = miimiidAITutorLessonContext;
+  if (!context || !context.lessonTitle) {
+    container.innerHTML = "";
+    return;
+  }
 
-      if (!container) {
-        return;
-      }
+  const starters = [
+    { key: "aiTutorExplain", fallback: "Explain this lesson", prompt: "Explain this lesson to me in simple, practical terms. Use examples I can relate to." },
+    { key: "aiTutorExample", fallback: "Give me a real-life example", prompt: "Give me a realistic real-life example that shows how this lesson applies to everyday money decisions." },
+    { key: "aiTutorQuiz", fallback: "Test me", prompt: "Test me on this lesson with a short interactive quiz. Ask one question at a time and wait for my answer." },
+    { key: "aiTutorRemember", fallback: "What should I remember?", prompt: "What are the most important practical things I should remember from this lesson?" },
+    { key: "aiTutorHelp", fallback: "I don't understand this", prompt: "Help me understand this lesson more simply. Break down the difficult parts step by step and avoid unnecessary jargon." }
+  ];
 
-      const context =
-        miimiidAITutorLessonContext;
+  container.innerHTML = starters.map(item => `
+    <button type="button" class="miimiid-ai-tutor-starter" data-ai-tutor-prompt="${escapeHtml(item.prompt)}">
+      ${escapeHtml(miimiidAITutorTranslate(item.key, item.fallback))}
+    </button>
+  `).join("");
 
-      if (!context || !context.lessonTitle) {
-        container.innerHTML = "";
-        return;
-      }
+  container.querySelectorAll("[data-ai-tutor-prompt]").forEach(button => {
+    button.addEventListener("click", () => {
+      const input = document.getElementById("ai-tutor-input");
+      if (!input) return;
+      input.value = button.dataset.aiTutorPrompt || "";
+      input.focus();
+    });
+  });
+}
 
-      const starters = [
-        {
-          key: "aiTutorExplain",
-          fallback: "Explain this lesson",
-          prompt:
-            "Explain this lesson to me in simple, practical terms. Use examples I can relate to."
-        },
-        {
-          key: "aiTutorExample",
-          fallback: "Give me a real-life example",
-          prompt:
-            "Give me a realistic real-life example that shows how this lesson applies to everyday money decisions."
-        },
-        {
-          key: "aiTutorQuiz",
-          fallback: "Test me",
-          prompt:
-            "Test me on this lesson with a short interactive quiz. Ask one question at a time and wait for my answer."
-        },
-        {
-          key: "aiTutorRemember",
-          fallback: "What should I remember?",
-          prompt:
-            "What are the most important practical things I should remember from this lesson?"
-        },
-        {
-          key: "aiTutorHelp",
-          fallback: "I don't understand this",
-          prompt:
-            "Help me understand this lesson more simply. Break down the difficult parts step by step and avoid unnecessary jargon."
+function renderMiimiidAITutorContext() {
+  const contextElement = document.getElementById("ai-tutor-context");
+  if (!contextElement) return;
+
+  const context = miimiidAITutorLessonContext;
+  if (!context || !context.lessonTitle) {
+    contextElement.textContent = "";
+    contextElement.classList.add("hidden");
+    return;
+  }
+
+  const moduleText = context.moduleTitle
+    ? context.moduleTitle
+    : (context.moduleNumber > 0 ? `Module ${context.moduleNumber}` : "");
+
+  const prefix = miimiidAITutorTranslate("aiTutorStudying", "Studying");
+
+  contextElement.textContent = moduleText
+    ? `${prefix}: ${moduleText} → ${context.lessonTitle}`
+    : `${prefix}: ${context.lessonTitle}`;
+
+  contextElement.classList.remove("hidden");
+  renderMiimiidAITutorStarters();
+}
+
+function miimiidAITutorTranslate(key, fallback) {
+  if (typeof miimiidTranslate === "function") {
+    const translated = miimiidTranslate(key, getSavedLanguage());
+    if (translated && translated !== key) return translated;
+  }
+  return fallback;
+}
+
+/* --- NEW: greeting with username --- */
+function renderMiimiidAITutorGreeting() {
+  const nameEl = document.getElementById("ai-tutor-username");
+  if (!nameEl) return;
+
+  // Assumes a global `currentUser` object exists elsewhere in your app
+  // (e.g. set after login). Adjust the property name if yours differs.
+  const firstName =
+    (typeof currentUser !== "undefined" && currentUser && currentUser.firstName) ||
+    (typeof currentUser !== "undefined" && currentUser && currentUser.name) ||
+    "there";
+
+  nameEl.textContent = firstName;
+}
+
+/* --- NEW: formats a Date as "10:32 AM" --- */
+function formatMiimiidAITutorTime(date) {
+  return date.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
+}
+
+function renderMiimiidAITutorWelcome() {
+  const messages = document.getElementById("ai-tutor-messages");
+  if (!messages) return;
+
+  messages.innerHTML = "";
+
+  addMiimiidAITutorMessage(
+    "assistant",
+    miimiidAITutorTranslate(
+      "aiTutorWelcome",
+      "Hi! I'm Miimiid AI Tutor. Ask me anything about money, saving, spending, investing, or building better financial habits."
+    )
+  );
+}
+
+function initializeMiimiidAITutor() {
+  const input = document.getElementById("ai-tutor-input");
+  const form = document.getElementById("ai-tutor-form");
+  const backBtn = document.getElementById("ai-tutor-back-btn");
+
+  if (!input || !form) return;
+
+  renderMiimiidAITutorGreeting();
+
+  input.placeholder = miimiidAITutorTranslate("aiTutorPlaceholder", "Type your question...");
+
+  if (!miimiidAITutorInitialized) {
+    form.addEventListener("submit", handleMiimiidAITutorSubmit);
+
+    if (backBtn) {
+      backBtn.addEventListener("click", () => {
+        if (typeof showView === "function") {
+          showView("home"); // adjust to whatever your nav function/view name is
+        } else {
+          history.back();
         }
-      ];
-
-      container.innerHTML =
-        starters
-          .map(item => `
-            <button
-              type="button"
-              class="miimiid-ai-tutor-starter"
-              data-ai-tutor-prompt="${escapeHtml(item.prompt)}"
-            >
-              ${escapeHtml(
-                miimiidAITutorTranslate(
-                  item.key,
-                  item.fallback
-                )
-              )}
-            </button>
-          `)
-          .join("");
-
-      container
-        .querySelectorAll(
-          "[data-ai-tutor-prompt]"
-        )
-        .forEach(button => {
-          button.addEventListener(
-            "click",
-            () => {
-              const input =
-                document.getElementById(
-                  "ai-tutor-input"
-                );
-
-              if (!input) {
-                return;
-              }
-
-              input.value =
-                button.dataset.aiTutorPrompt || "";
-
-              input.focus();
-            }
-          );
-        });
-    }
-
-    function renderMiimiidAITutorContext() {
-      const contextElement =
-        document.getElementById(
-          "ai-tutor-context"
-        );
-
-      if (!contextElement) {
-        return;
-      }
-
-      const context =
-        miimiidAITutorLessonContext;
-
-      if (
-        !context ||
-        !context.lessonTitle
-      ) {
-        contextElement.textContent = "";
-        contextElement.classList.add("hidden");
-        return;
-      }
-
-      const moduleText =
-        context.moduleTitle
-          ? context.moduleTitle
-          : (
-              context.moduleNumber > 0
-                ? `Module ${context.moduleNumber}`
-                : ""
-            );
-
-      const prefix =
-        miimiidAITutorTranslate(
-          "aiTutorStudying",
-          "Studying"
-        );
-
-      contextElement.textContent =
-        moduleText
-          ? `${prefix}: ${moduleText} → ${context.lessonTitle}`
-          : `${prefix}: ${context.lessonTitle}`;
-
-      contextElement.classList.remove("hidden");
-
-      renderMiimiidAITutorStarters();
-    }
-
-    function miimiidAITutorTranslate(
-      key,
-      fallback
-    ) {
-      if (typeof miimiidTranslate === "function") {
-        const translated =
-          miimiidTranslate(
-            key,
-            getSavedLanguage()
-          );
-
-        if (
-          translated &&
-          translated !== key
-        ) {
-          return translated;
-        }
-      }
-
-      return fallback;
-    }
-
-    function renderMiimiidAITutorWelcome() {
-      const messages =
-        document.getElementById(
-          "ai-tutor-messages"
-        );
-
-      if (!messages) {
-        return;
-      }
-
-      messages.innerHTML = "";
-
-      const welcome =
-        document.createElement("div");
-
-      welcome.className =
-        "miimiid-ai-tutor-message assistant";
-
-      welcome.textContent =
-        miimiidAITutorTranslate(
-          "aiTutorWelcome",
-          "Hi! I'm Miimiid AI Tutor. Ask me anything about money, saving, spending, investing, or building better financial habits."
-        );
-
-      messages.appendChild(welcome);
-    }
-
-    function initializeMiimiidAITutor() {
-      const input =
-        document.getElementById(
-          "ai-tutor-input"
-        );
-
-      const form =
-        document.getElementById(
-          "ai-tutor-form"
-        );
-
-      const title =
-        document.getElementById(
-          "ai-tutor-title"
-        );
-
-      const subtitle =
-        document.getElementById(
-          "ai-tutor-subtitle"
-        );
-
-      if (!input || !form) {
-        return;
-      }
-
-      if (title) {
-        title.textContent =
-          miimiidAITutorTranslate(
-            "aiTutor",
-            "Miimiid AI Tutor"
-          );
-      }
-
-      if (subtitle) {
-        subtitle.textContent =
-          miimiidAITutorTranslate(
-            "aiTutorSubtitle",
-            "Your personal financial-learning tutor."
-          );
-      }
-
-      input.placeholder =
-        miimiidAITutorTranslate(
-          "aiTutorPlaceholder",
-          "Ask Miimiid AI Tutor anything about money..."
-        );
-
-      if (!miimiidAITutorInitialized) {
-        form.addEventListener(
-          "submit",
-          handleMiimiidAITutorSubmit
-        );
-
-        miimiidAITutorInitialized = true;
-      }
-
-      renderMiimiidAITutorContext();
-      renderMiimiidAITutorStarters();
-
-      if (
-        miimiidAITutorHistory.length === 0
-      ) {
-        renderMiimiidAITutorWelcome();
-      }
-    }
-
-    function addMiimiidAITutorMessage(
-      role,
-      content
-    ) {
-      const messages =
-        document.getElementById(
-          "ai-tutor-messages"
-        );
-
-      if (!messages) {
-        return;
-      }
-
-      const message =
-        document.createElement("div");
-
-      message.className =
-        `miimiid-ai-tutor-message ${role}`;
-
-      message.textContent = content;
-
-      messages.appendChild(message);
-      messages.scrollTop =
-        messages.scrollHeight;
-    }
-
-    async function handleMiimiidAITutorSubmit(
-      event
-    ) {
-      event.preventDefault();
-
-      const input =
-        document.getElementById(
-          "ai-tutor-input"
-        );
-
-      const status =
-        document.getElementById(
-          "ai-tutor-status"
-        );
-
-      const sendButton =
-        document.getElementById(
-          "ai-tutor-send-btn"
-        );
-
-      if (!input) {
-        return;
-      }
-
-      const message =
-        input.value.trim();
-
-      if (!message) {
-        if (status) {
-          status.textContent =
-            miimiidAITutorTranslate(
-              "aiTutorEmptyMessage",
-              "Type a question first."
-            );
-        }
-
-        input.focus();
-        return;
-      }
-
-      addMiimiidAITutorMessage(
-        "user",
-        message
-      );
-
-      miimiidAITutorHistory.push({
-        role: "user",
-        content: message
       });
-
-      input.value = "";
-
-      if (status) {
-        status.textContent =
-          miimiidAITutorTranslate(
-            "aiTutorThinking",
-            "Miimiid AI Tutor is thinking..."
-          );
-      }
-
-      if (sendButton) {
-        sendButton.disabled = true;
-      }
-
-      try {
-        const response =
-          await fetch(
-            "/api/ai-tutor/chat",
-            {
-              method: "POST",
-              headers: {
-                "Content-Type":
-                  "application/json"
-              },
-              body: JSON.stringify({
-                message,
-                history:
-                  miimiidAITutorHistory
-                    .slice(-12),
-                language:
-                  getSavedLanguage
-                    ? getSavedLanguage()
-                    : "en",
-                courseTitle:
-                  typeof currentCourseTitle !==
-                  "undefined"
-                    ? currentCourseTitle
-                    : "",
-                moduleTitle:
-                  typeof currentModuleTitle !==
-                  "undefined"
-                    ? currentModuleTitle
-                    : "",
-                lessonTitle:
-                  typeof currentLessonTitle !==
-                  "undefined"
-                    ? currentLessonTitle
-                    : ""
-              })
-            }
-          );
-
-        let data = null;
-
-        try {
-          data = await response.json();
-        } catch (_) {
-          data = null;
-        }
-
-        if (
-          !response.ok
-        ) {
-          if (
-            data &&
-            data.code ===
-              "AI_TUTOR_NOT_CONFIGURED"
-          ) {
-            addMiimiidAITutorMessage(
-              "assistant",
-              miimiidAITutorTranslate(
-                "aiTutorComingSoon",
-                "Miimiid AI Tutor is being prepared. AI conversations will be available soon."
-              )
-            );
-
-            if (status) {
-              status.textContent =
-                miimiidAITutorTranslate(
-                  "aiTutorComingSoonStatus",
-                  "AI Tutor is not connected yet."
-                );
-            }
-
-            return;
-          }
-
-          throw new Error(
-            data &&
-            data.message
-              ? data.message
-              : "Unable to reach Miimiid AI Tutor."
-          );
-        }
-
-        const answer =
-          data &&
-          typeof data.answer ===
-            "string"
-            ? data.answer.trim()
-            : "";
-
-        if (!answer) {
-          throw new Error(
-            "The AI Tutor returned an empty response."
-          );
-        }
-
-        addMiimiidAITutorMessage(
-          "assistant",
-          answer
-        );
-
-        miimiidAITutorHistory.push({
-          role: "assistant",
-          content: answer
-        });
-
-        if (status) {
-          status.textContent = "";
-        }
-
-      } catch (error) {
-        console.error(
-          "Miimiid AI Tutor frontend error:",
-          error
-        );
-
-        addMiimiidAITutorMessage(
-          "assistant",
-          miimiidAITutorTranslate(
-            "aiTutorError",
-            "I couldn't connect to Miimiid AI Tutor right now. Please try again later."
-          )
-        );
-
-        if (status) {
-          status.textContent =
-            miimiidAITutorTranslate(
-              "aiTutorErrorStatus",
-              "Connection unavailable."
-            );
-        }
-
-      } finally {
-        if (sendButton) {
-          sendButton.disabled = false;
-        }
-
-        input.focus();
-      }
     }
 
+    miimiidAITutorInitialized = true;
+  }
 
+  renderMiimiidAITutorContext();
+  renderMiimiidAITutorStarters();
+
+  if (miimiidAITutorHistory.length === 0) {
+    renderMiimiidAITutorWelcome();
+  }
+}
+
+/* --- UPDATED: builds avatar + bubble + timestamp row --- */
+function addMiimiidAITutorMessage(role, content) {
+  const messages = document.getElementById("ai-tutor-messages");
+  if (!messages) return;
+
+  const row = document.createElement("div");
+  row.className = `miimiid-ai-tutor-message-row ${role}`;
+
+  if (role === "assistant") {
+    const avatar = document.createElement("div");
+    avatar.className = "miimiid-ai-tutor-avatar";
+    avatar.textContent = "🤖";
+    row.appendChild(avatar);
+  }
+
+  const bubbleWrap = document.createElement("div");
+
+  const bubble = document.createElement("div");
+  bubble.className = `miimiid-ai-tutor-message ${role}`;
+  bubble.textContent = content;
+  bubbleWrap.appendChild(bubble);
+
+  const timestamp = document.createElement("div");
+  timestamp.className = "miimiid-ai-tutor-timestamp";
+  timestamp.style.textAlign = role === "user" ? "right" : "left";
+  timestamp.textContent = formatMiimiidAITutorTime(new Date());
+  bubbleWrap.appendChild(timestamp);
+
+  row.appendChild(bubbleWrap);
+  messages.appendChild(row);
+  messages.scrollTop = messages.scrollHeight;
+}
+
+async function handleMiimiidAITutorSubmit(event) {
+  event.preventDefault();
+
+  const input = document.getElementById("ai-tutor-input");
+  const status = document.getElementById("ai-tutor-status");
+  const sendButton = document.getElementById("ai-tutor-send-btn");
+
+  if (!input) return;
+
+  const message = input.value.trim();
+
+  if (!message) {
+    if (status) {
+      status.textContent = miimiidAITutorTranslate("aiTutorEmptyMessage", "Type a question first.");
+    }
+    input.focus();
+    return;
+  }
+
+  addMiimiidAITutorMessage("user", message);
+  miimiidAITutorHistory.push({ role: "user", content: message });
+
+  input.value = "";
+
+  if (status) {
+    status.textContent = miimiidAITutorTranslate("aiTutorThinking", "Miimiid AI Tutor is thinking...");
+  }
+
+  if (sendButton) sendButton.disabled = true;
+
+  try {
+    const response = await fetch("/api/ai-tutor/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        message,
+        history: miimiidAITutorHistory.slice(-12),
+        language: getSavedLanguage ? getSavedLanguage() : "en",
+        courseTitle: typeof currentCourseTitle !== "undefined" ? currentCourseTitle : "",
+        moduleTitle: typeof currentModuleTitle !== "undefined" ? currentModuleTitle : "",
+        lessonTitle: typeof currentLessonTitle !== "undefined" ? currentLessonTitle : ""
+      })
+    });
+
+    let data = null;
+    try {
+      data = await response.json();
+    } catch (_) {
+      data = null;
+    }
+
+    if (!response.ok) {
+      if (data && data.code === "AI_TUTOR_NOT_CONFIGURED") {
+        addMiimiidAITutorMessage(
+          "assistant",
+          miimiidAITutorTranslate("aiTutorComingSoon", "Miimiid AI Tutor is being prepared. AI conversations will be available soon.")
+        );
+        if (status) {
+          status.textContent = miimiidAITutorTranslate("aiTutorComingSoonStatus", "AI Tutor is not connected yet.");
+        }
+        return;
+      }
+      throw new Error(data && data.message ? data.message : "Unable to reach Miimiid AI Tutor.");
+    }
+
+    const answer = data && typeof data.answer === "string" ? data.answer.trim() : "";
+
+    if (!answer) {
+      throw new Error("The AI Tutor returned an empty response.");
+    }
+
+    addMiimiidAITutorMessage("assistant", answer);
+    miimiidAITutorHistory.push({ role: "assistant", content: answer });
+
+    if (status) status.textContent = "";
+
+  } catch (error) {
+    console.error("Miimiid AI Tutor frontend error:", error);
+
+    addMiimiidAITutorMessage(
+      "assistant",
+      miimiidAITutorTranslate("aiTutorError", "I couldn't connect to Miimiid AI Tutor right now. Please try again later.")
+    );
+
+    if (status) {
+      status.textContent = miimiidAITutorTranslate("aiTutorErrorStatus", "Connection unavailable.");
+    }
+
+  } finally {
+    if (sendButton) sendButton.disabled = false;
+    input.focus();
+  }
+    }
 
     /* =========================================
        MIIMIID AUTHENTICATION STATE
