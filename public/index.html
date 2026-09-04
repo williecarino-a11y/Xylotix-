@@ -961,12 +961,14 @@ body.miimiid-drawer-open {
 
 .miimiid-ai-tutor-view {
   width: 100%;
-  min-height: 100vh;
+  height: 100vh;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   background: #0b0f1a;
-}
+  overflow: hidden;
+  padding-bottom: var(--bottom-nav-height, 64px); /* reserves space for the nav bar */
+    }
 
 /* --- App bar --- */
 .miimiid-ai-tutor-appbar {
