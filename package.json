@@ -1,11 +1,11 @@
-
 {
   "name": "miimiid",
   "version": "1.0.0",
   "description": "Miimiid learning application backend",
   "main": "server.js",
   "scripts": {
-    "test": "node --check server.js && node --check routes/authRoutes.js && node --check routes/learningRoutes.js && node --check routes/aiTutorRoutes.js && node --check routes/passwordRoutes.js && node --check middleware/passwordValidation.js && node --check utils/passwordValidator.js && node --check services/learningService.js && node --check services/aiTutorService.js && node --check services/emailService.js && node --test tests/auth-engine.test.mjs tests/api.integration.test.mjs tests/auth.integration.test.mjs tests/learning.integration.test.mjs tests/fun-center.integration.test.mjs",
+    "test:syntax": "node scripts/check-syntax.mjs",
+    "test": "npm run test:syntax && node --test tests/",
     "check": "npm test"
   },
   "repository": {
@@ -26,7 +26,9 @@
     "express-rate-limit": "^8.7.0",
     "mongoose": "^9.9.1",
     "nodemailer": "^9.0.5",
-    "openai": "^7.4.0",
+    "openai": "^7.4.0"
+  },
+  "devDependencies": {
     "supertest": "^7.1.4"
   }
 }
