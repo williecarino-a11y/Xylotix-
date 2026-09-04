@@ -858,17 +858,12 @@ body.miimiid-drawer-open {
 
  .miimiid-ai-tutor-view {
   width: 100%;
-  height: 100vh;
+  padding: 20px;
+  padding-bottom: calc(var(--miimiid-nav-height, 64px) + 20px + env(safe-area-inset-bottom, 0px));
   box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  background: #0b0f1a;
-  overflow: hidden;
-  padding-bottom: calc(var(--miimiid-nav-height, 64px) + 6px + env(safe-area-inset-bottom, 0px));
- }
+}
 
 .miimiid-ai-tutor-card {
-  flex: 1;
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -877,8 +872,6 @@ body.miimiid-drawer-open {
   border-radius: 18px;
   padding: 20px;
   box-sizing: border-box;
-  overflow: hidden;
-  min-height: 0;
   background: var(--card-bg, #131a2c);
   border: 1px solid var(--border-color, #232c42);
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
@@ -1081,13 +1074,12 @@ body.miimiid-drawer-open {
 
 /* --- Messages --- */
 .miimiid-ai-tutor-messages {
-  flex: 1;
+  max-height: 50vh;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
   gap: 14px;
   padding: 8px 2px;
-  min-height: 0;
 }
 
 .miimiid-ai-tutor-message-row {
