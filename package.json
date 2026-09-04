@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test:syntax": "node scripts/check-syntax.mjs",
-    "test": "npm run test:syntax && node --test tests/",
+    "test": "npm run test:syntax && node --test tests/auth-engine.test.mjs tests/api.integration.test.mjs tests/auth.integration.test.mjs tests/learning.integration.test.mjs tests/fun-center.integration.test.mjs",
     "check": "npm test"
   },
   "repository": {
