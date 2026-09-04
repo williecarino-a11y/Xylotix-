@@ -43,34 +43,10 @@ body {
   color: var(--miimiid-text);
 }
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
-button,
-input,
-select,
-textarea {
-  max-width: 100%;
-  font: inherit;
-}
-
-button {
-  touch-action: manipulation;
-}
-
-button:focus-visible,
-a:focus-visible,
-input:focus-visible,
-select:focus-visible,
-textarea:focus-visible {
-  outline: 2px solid var(--miimiid-accent);
-  outline-offset: 2px;
-}
-
-/* ---------- App shell ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+button, input, select, textarea { max-width: 100%; font: inherit; }
+button { touch-action: manipulation; }
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 2px solid var(--miimiid-accent); outline-offset: 2px; }
 
 .miimiid-app-shell {
   width: min(100%, 1180px);
@@ -80,534 +56,164 @@ textarea:focus-visible {
   padding-bottom: 96px;
 }
 
-.miimiid-header,
-.miimiid-dashboard-header,
-.miimiid-dashboard-content {
-  min-width: 0;
-}
+.miimiid-header, .miimiid-dashboard-header, .miimiid-dashboard-content { min-width: 0; }
+.miimiid-header, .miimiid-dashboard-header { gap: 12px; }
+.miimiid-dashboard-header { flex-wrap: wrap; }
+.miimiid-dashboard-brand, .miimiid-auth-user, .miimiid-auth-user-name { min-width: 0; }
+.miimiid-dashboard-brand, .miimiid-auth-user-name { overflow-wrap: anywhere; }
 
-.miimiid-header,
-.miimiid-dashboard-header {
-  gap: 12px;
-}
-
-.miimiid-dashboard-header {
-  flex-wrap: wrap;
-}
-
-.miimiid-dashboard-brand,
-.miimiid-auth-user,
-.miimiid-auth-user-name {
-  min-width: 0;
-}
-
-.miimiid-dashboard-brand,
-.miimiid-auth-user-name {
-  overflow-wrap: anywhere;
-}
-
-/* ---------- Cards ---------- */
-
-.card,
-.miimiid-dashboard-stat,
-.course-progress-card,
-.miimiid-ai-tutor-card,
-.miimiid-fun-center-card {
+.card, .miimiid-dashboard-stat, .course-progress-card, .miimiid-ai-tutor-card, .miimiid-fun-center-card {
   border: 1px solid var(--miimiid-border);
   border-radius: var(--miimiid-radius);
   background: linear-gradient(145deg, rgba(30, 41, 59, 0.86), rgba(15, 27, 45, 0.78));
   box-shadow: 0 10px 35px rgba(0, 0, 0, 0.14);
 }
+.card { overflow: hidden; }
+.miimiid-dashboard-stat { width: 100%; min-height: 112px; cursor: pointer; transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease; }
+.miimiid-dashboard-stat:hover { transform: translateY(-2px); border-color: var(--miimiid-border-strong); box-shadow: var(--miimiid-shadow); }
+.miimiid-dashboard-stat:active { transform: translateY(0); }
 
-.card {
-  overflow: hidden;
-}
+.miimiid-dashboard-stat-grid, #courses-container, #modules-container, #lesson-content, #fun-center-content { min-width: 0; }
+.miimiid-dashboard-stat-grid { gap: 12px; }
+.miimiid-dashboard-stat-value { line-height: 1.05; }
+.miimiid-dashboard-stat-label { color: var(--miimiid-muted); }
+#course-list-view, #course-detail-view, #lesson-view { width: 100%; max-width: 100%; min-width: 0; margin-left: auto; margin-right: auto; }
+#course-list-view .card, #course-detail-view .card, #lesson-view.card { width: 100%; min-width: 0; }
+.course-progress-card { margin: 18px 0 24px; }
+.course-progress-track { background: rgba(148, 163, 184, 0.14); }
+.course-progress-bar { background: linear-gradient(90deg, var(--miimiid-accent-strong), var(--miimiid-accent)); }
 
-.miimiid-dashboard-stat {
-  width: 100%;
-  min-height: 112px;
-  cursor: pointer;
-  transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
-}
+.lesson-row { width: 100%; min-width: 0; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.lesson-row span { min-width: 0; flex: 1 1 220px; overflow-wrap: anywhere; }
+.lesson-row.completed { opacity: 0.92; }
+.lesson-completed { white-space: nowrap; }
+.lesson-meta { border-radius: 14px; border-left-width: 3px; background: rgba(56, 189, 248, 0.055); }
+.content-formula, .content-example, .content-callout, .content-summary, .quiz-option, .calculation-input { max-width: 100%; overflow-wrap: anywhere; }
+.content-formula { max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.lesson-navigation { min-width: 0; }
 
-.miimiid-dashboard-stat:hover {
-  transform: translateY(-2px);
-  border-color: var(--miimiid-border-strong);
-  box-shadow: var(--miimiid-shadow);
-}
+.miimiid-ai-tutor-view, .miimiid-fun-center-view { width: 100%; max-width: 1180px; min-width: 0; margin: 0 auto; }
+.miimiid-ai-tutor-card, .miimiid-fun-center-card { width: 100%; min-width: 0; overflow: hidden; }
+.miimiid-ai-tutor-messages { min-width: 0; overflow-x: hidden; -webkit-overflow-scrolling: touch; scrollbar-width: thin; }
+.miimiid-ai-tutor-message { min-width: 0; max-width: 100%; overflow-wrap: anywhere; word-break: break-word; }
+.miimiid-ai-tutor-form, .miimiid-ai-tutor-input { min-width: 0; }
+.miimiid-ai-tutor-input { width: 100%; }
 
-.miimiid-dashboard-stat:active {
-  transform: translateY(0);
-}
+.miimiid-bottom-nav { max-width: 760px; padding: 7px 8px; padding-bottom: max(7px, env(safe-area-inset-bottom)); border: 1px solid var(--miimiid-border); background: rgba(7, 17, 31, 0.9); box-shadow: 0 16px 45px rgba(0, 0, 0, 0.35); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); }
+.miimiid-bottom-nav button { min-width: 0; min-height: 50px; border-radius: 12px; transition: background 0.18s ease, color 0.18s ease, transform 0.18s ease; }
+.miimiid-bottom-nav button:hover { background: rgba(56, 189, 248, 0.08); }
+.miimiid-dashboard-menu-panel { max-width: calc(100vw - 24px); padding-bottom: max(18px, env(safe-area-inset-bottom)); }
 
-/* ---------- Dashboard ---------- */
+.miimiid-auth-view { width: 100%; max-width: 100%; min-width: 0; }
+#miimiid-auth-card { width: min(100%, 540px); max-width: 540px; }
+#miimiid-auth-card .miimiid-auth-field, #miimiid-auth-card input, #miimiid-auth-card select, #miimiid-auth-card textarea, #miimiid-auth-card .btn { width: 100%; max-width: 100%; }
+#miimiid-auth-card input, #miimiid-auth-card select, #miimiid-auth-card textarea { min-height: 48px; border-radius: 12px; }
+#miimiid-auth-card .btn { min-height: 48px; border-radius: 12px; }
+.miimiid-register-welcome, .miimiid-register-visual, .miimiid-register-steps, .miimiid-register-form { min-width: 0; max-width: 100%; }
+.miimiid-register-visual-icon { max-width: 100%; }
+.miimiid-birthday-picker-overlay { padding: max(10px, env(safe-area-inset-top)) max(10px, env(safe-area-inset-right)) max(10px, env(safe-area-inset-bottom)) max(10px, env(safe-area-inset-left)); }
+.miimiid-birthday-picker-card { max-width: min(100%, 520px); }
 
-.miimiid-dashboard-stat-grid,
-#courses-container,
-#modules-container,
-#lesson-content,
-#fun-center-content {
-  min-width: 0;
-}
-
-.miimiid-dashboard-stat-grid {
-  gap: 12px;
-}
-
-.miimiid-dashboard-stat-value {
-  line-height: 1.05;
-}
-
-.miimiid-dashboard-stat-label {
-  color: var(--miimiid-muted);
-}
-
-#course-list-view,
-#course-detail-view,
-#lesson-view {
-  width: 100%;
-  max-width: 100%;
-  min-width: 0;
-}
-
-#course-list-view,
-#course-detail-view,
-#lesson-view {
-  margin-left: auto;
-  margin-right: auto;
-}
-
-#course-list-view .card,
-#course-detail-view .card,
-#lesson-view.card {
-  width: 100%;
-  min-width: 0;
-}
-
-.course-progress-card {
-  margin: 18px 0 24px;
-}
-
-.course-progress-track {
-  background: rgba(148, 163, 184, 0.14);
-}
-
-.course-progress-bar {
-  background: linear-gradient(90deg, var(--miimiid-accent-strong), var(--miimiid-accent));
-}
-
-/* ---------- Lessons ---------- */
-
-.lesson-row {
-  width: 100%;
-  min-width: 0;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-
-.lesson-row span {
-  min-width: 0;
-  flex: 1 1 220px;
-  overflow-wrap: anywhere;
-}
-
-.lesson-row.completed {
-  opacity: 0.92;
-}
-
-.lesson-completed {
-  white-space: nowrap;
-}
-
-.lesson-meta {
-  border-radius: 14px;
-  border-left-width: 3px;
-  background: rgba(56, 189, 248, 0.055);
-}
-
-.content-formula,
-.content-example,
-.content-callout,
-.content-summary,
-.quiz-option,
-.calculation-input {
-  max-width: 100%;
-  overflow-wrap: anywhere;
-}
-
-.content-formula {
-  max-width: 100%;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-}
-
-.lesson-navigation {
-  min-width: 0;
-}
-
-/* ---------- AI Tutor / Fun Center ---------- */
-
-.miimiid-ai-tutor-view,
-.miimiid-fun-center-view {
-  width: 100%;
-  max-width: 1180px;
-  min-width: 0;
-  margin: 0 auto;
-}
-
-.miimiid-ai-tutor-card,
-.miimiid-fun-center-card {
-  width: 100%;
-  min-width: 0;
-  overflow: hidden;
-}
-
-.miimiid-ai-tutor-messages {
-  min-width: 0;
-  overflow-x: hidden;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: thin;
-}
-
-.miimiid-ai-tutor-message {
-  min-width: 0;
-  max-width: 100%;
-  overflow-wrap: anywhere;
-  word-break: break-word;
-}
-
-.miimiid-ai-tutor-form,
-.miimiid-ai-tutor-input {
-  min-width: 0;
-}
-
-.miimiid-ai-tutor-input {
-  width: 100%;
-}
-
-/* ---------- Bottom navigation ---------- */
-
-.miimiid-bottom-nav {
-  max-width: 760px;
-  padding: 7px 8px;
-  padding-bottom: max(7px, env(safe-area-inset-bottom));
-  border: 1px solid var(--miimiid-border);
-  background: rgba(7, 17, 31, 0.9);
-  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.35);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-}
-
-.miimiid-bottom-nav button {
-  min-width: 0;
-  min-height: 50px;
-  border-radius: 12px;
-  transition: background 0.18s ease, color 0.18s ease, transform 0.18s ease;
-}
-
-.miimiid-bottom-nav button:hover {
-  background: rgba(56, 189, 248, 0.08);
-}
-
-.miimiid-dashboard-menu-panel {
-  max-width: calc(100vw - 24px);
-  padding-bottom: max(18px, env(safe-area-inset-bottom));
-}
-
-/* ---------- Auth ---------- */
-
-.miimiid-auth-view {
-  width: 100%;
-  max-width: 100%;
-  min-width: 0;
-}
-
-#miimiid-auth-card {
-  width: min(100%, 540px);
-  max-width: 540px;
-}
-
-#miimiid-auth-card .miimiid-auth-field,
-#miimiid-auth-card input,
-#miimiid-auth-card select,
-#miimiid-auth-card textarea,
-#miimiid-auth-card .btn {
-  width: 100%;
-  max-width: 100%;
-}
-
-#miimiid-auth-card input,
-#miimiid-auth-card select,
-#miimiid-auth-card textarea {
-  min-height: 48px;
-  border-radius: 12px;
-}
-
-#miimiid-auth-card .btn {
-  min-height: 48px;
-  border-radius: 12px;
-}
-
-/* Keep legacy registration visuals contained on narrow screens. */
-
-.miimiid-register-welcome,
-.miimiid-register-visual,
-.miimiid-register-steps,
-.miimiid-register-form {
-  min-width: 0;
-  max-width: 100%;
-}
-
-.miimiid-register-visual-icon {
-  max-width: 100%;
-}
-
-.miimiid-birthday-picker-overlay {
-  padding: max(10px, env(safe-area-inset-top)) max(10px, env(safe-area-inset-right)) max(10px, env(safe-area-inset-bottom)) max(10px, env(safe-area-inset-left));
-}
-
-.miimiid-birthday-picker-card {
-  max-width: min(100%, 520px);
-}
-
-/* ---------- Small phones ---------- */
-
-@media (max-width: 480px) {
-  body {
-    padding: 7px;
-  }
+@media (max-width: 767px) {
+  body { padding: 0; }
 
   .miimiid-app-shell {
-    padding-bottom: 88px;
-  }
-
-  .miimiid-header,
-  .miimiid-dashboard-header {
-    gap: 8px;
-    margin-bottom: 12px;
-  }
-
-  .miimiid-brand {
-    font-size: 1.22rem;
-  }
-
-  .miimiid-dashboard-header {
-    align-items: stretch;
-  }
-
-  .miimiid-dashboard-header .miimiid-auth-user {
     width: 100%;
-    justify-content: space-between;
+    max-width: none;
+    padding-top: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-bottom: calc(var(--miimiid-nav-height, 60px) + 24px + env(safe-area-inset-bottom, 0px));
   }
 
-  .miimiid-dashboard-stat-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 8px;
-  }
-
-  .miimiid-dashboard-stat {
-    min-height: 94px;
-    padding: 12px 10px;
-    border-radius: 14px;
-  }
-
-  .miimiid-dashboard-stat-value {
-    font-size: 1.35rem;
-  }
-
-  .miimiid-dashboard-stat-label {
-    font-size: 0.75rem;
-  }
-
-  .miimiid-bottom-nav {
-    left: 7px;
-    right: 7px;
-    width: auto;
-    gap: 2px;
-    padding: 5px;
-  }
-
-  .miimiid-bottom-nav button {
-    min-height: 48px;
-    padding: 5px 3px;
-    font-size: 0.69rem;
-  }
-
-  .miimiid-dashboard-menu-panel {
-    width: min(330px, calc(100vw - 16px));
-  }
-
-  .lesson-row {
-    align-items: stretch;
-  }
-
-  .lesson-row .btn,
-  .lesson-row button {
+  .miimiid-ai-tutor-view {
     width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 0 8px;
   }
 
-  .lesson-navigation {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 8px;
-  }
-
-  .miimiid-ai-tutor-view,
-  .miimiid-fun-center-view {
-    padding: 4px;
-  }
-
-  .miimiid-ai-tutor-card,
-  .miimiid-fun-center-card {
-    padding: 11px;
-    border-radius: 15px;
+  .miimiid-ai-tutor-card {
+    width: 100%;
+    min-height: calc(100dvh - var(--miimiid-nav-height, 60px) - env(safe-area-inset-bottom, 0px));
+    margin: 0;
+    border-radius: 0 0 16px 16px;
+    display: flex;
+    flex-direction: column;
   }
 
   .miimiid-ai-tutor-messages {
-    min-height: 260px;
-    max-height: 50vh;
+    flex: 1 1 auto;
+    min-height: 0;
+    max-height: none;
   }
 
-  .miimiid-auth-view {
-    padding-left: max(10px, env(safe-area-inset-left)) !important;
-    padding-right: max(10px, env(safe-area-inset-right)) !important;
+  .miimiid-ai-tutor-form {
+    position: sticky;
+    bottom: calc(var(--miimiid-nav-height, 60px) + env(safe-area-inset-bottom, 0px));
+    z-index: 20;
+    margin-top: auto;
+    padding: 8px 0 4px;
+    background: rgba(7, 17, 31, 0.98);
   }
 
-  #miimiid-auth-card {
-    padding: 20px 15px !important;
-    border-radius: 18px !important;
-  }
+  .miimiid-ai-tutor-input { min-height: 46px; }
 
-  #miimiid-auth-card h1,
-  #miimiid-auth-card .miimiid-auth-heading {
-    font-size: 1.65rem !important;
-    line-height: 1.12;
-  }
-
-  #miimiid-auth-card .miimiid-auth-field input,
-  #miimiid-auth-card select,
-  #miimiid-auth-card .btn {
-    min-height: 49px !important;
-  }
-
-  .miimiid-checks {
-    grid-template-columns: 1fr !important;
-  }
-
-  .miimiid-register-welcome h2 {
-    font-size: clamp(1.75rem, 10vw, 2.25rem);
-  }
-
-  .miimiid-register-visual-icon {
-    width: 76px;
-    height: 76px;
-    font-size: 2.7rem;
-  }
-
-  .miimiid-birthday-picker-overlay {
-    align-items: flex-end;
-    padding: 8px;
-  }
-
-  .miimiid-birthday-picker-card {
-    width: 100%;
-    max-height: calc(100dvh - 16px);
-    overflow-y: auto;
-    border-radius: 18px 18px 12px 12px;
-  }
-
-  .miimiid-birthday-wheel {
-    height: 190px;
-  }
+  .miimiid-fun-center-view { width: 100%; max-width: none; margin: 0; padding: 8px; }
 }
 
-/* ---------- Tablets ---------- */
+@media (max-width: 480px) {
+  .miimiid-header, .miimiid-dashboard-header { gap: 8px; margin-bottom: 12px; }
+  .miimiid-brand { font-size: 1.22rem; }
+  .miimiid-dashboard-header { align-items: stretch; }
+  .miimiid-dashboard-header .miimiid-auth-user { width: 100%; justify-content: space-between; }
+  .miimiid-dashboard-stat-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .miimiid-dashboard-stat { min-height: 94px; padding: 12px 10px; border-radius: 14px; }
+  .miimiid-dashboard-stat-value { font-size: 1.35rem; }
+  .miimiid-dashboard-stat-label { font-size: 0.75rem; }
+  .miimiid-bottom-nav { left: 0; right: 0; width: 100%; max-width: none; gap: 2px; padding: 5px max(5px, env(safe-area-inset-left)) calc(5px + env(safe-area-inset-bottom)) max(5px, env(safe-area-inset-right)); border-radius: 0; }
+  .miimiid-bottom-nav button { min-height: 48px; padding: 5px 3px; font-size: 0.69rem; }
+  .miimiid-dashboard-menu-panel { width: min(330px, calc(100vw - 16px)); }
+  .lesson-row { align-items: stretch; }
+  .lesson-row .btn, .lesson-row button { width: 100%; }
+  .lesson-navigation { display: grid; grid-template-columns: 1fr; gap: 8px; }
+  .miimiid-ai-tutor-view { padding: 0 4px; }
+  .miimiid-ai-tutor-card { padding: 10px; border-radius: 0 0 15px 15px; }
+  .miimiid-auth-view { padding-left: max(10px, env(safe-area-inset-left)) !important; padding-right: max(10px, env(safe-area-inset-right)) !important; }
+  #miimiid-auth-card { padding: 20px 15px !important; border-radius: 18px !important; }
+  #miimiid-auth-card h1, #miimiid-auth-card .miimiid-auth-heading { font-size: 1.65rem !important; line-height: 1.12; }
+  #miimiid-auth-card .miimiid-auth-field input, #miimiid-auth-card select, #miimiid-auth-card .btn { min-height: 49px !important; }
+  .miimiid-checks { grid-template-columns: 1fr !important; }
+  .miimiid-register-welcome h2 { font-size: clamp(1.75rem, 10vw, 2.25rem); }
+  .miimiid-register-visual-icon { width: 76px; height: 76px; font-size: 2.7rem; }
+  .miimiid-birthday-picker-overlay { align-items: flex-end; padding: 8px; }
+  .miimiid-birthday-picker-card { width: 100%; max-height: calc(100dvh - 16px); overflow-y: auto; border-radius: 18px 18px 12px 12px; }
+  .miimiid-birthday-wheel { height: 190px; }
+}
 
 @media (min-width: 481px) and (max-width: 767px) {
-  body {
-    padding: 12px;
-  }
-
-  .miimiid-dashboard-stat-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .miimiid-bottom-nav {
-    width: min(680px, calc(100vw - 24px));
-  }
+  body { padding: 0; }
+  .miimiid-dashboard-stat-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .miimiid-bottom-nav { width: 100%; max-width: none; }
 }
-
-/* ---------- Desktop ---------- */
 
 @media (min-width: 768px) {
-  body {
-    padding: 18px clamp(18px, 3vw, 40px);
-  }
-
-  .miimiid-app-shell {
-    padding-bottom: 104px;
-  }
-
-  #course-list-view,
-  #course-detail-view,
-  #lesson-view {
-    max-width: 1020px;
-  }
-
-  .miimiid-ai-tutor-view,
-  .miimiid-fun-center-view {
-    padding-left: 0;
-    padding-right: 0;
-  }
+  body { padding: 18px clamp(18px, 3vw, 40px); }
+  .miimiid-app-shell { padding-bottom: 104px; }
+  #course-list-view, #course-detail-view, #lesson-view { max-width: 1020px; }
+  .miimiid-ai-tutor-view, .miimiid-fun-center-view { padding-left: 0; padding-right: 0; }
 }
 
-@media (min-width: 1100px) {
-  .miimiid-app-shell {
-    padding-left: 8px;
-    padding-right: 8px;
-  }
-}
-
-/* ---------- Short landscape screens / virtual keyboards ---------- */
+@media (min-width: 1100px) { .miimiid-app-shell { padding-left: 8px; padding-right: 8px; } }
 
 @media (max-height: 620px) and (orientation: landscape) {
-  .miimiid-auth-view {
-    align-items: flex-start !important;
-  }
-
-  #miimiid-auth-card {
-    padding-top: 14px !important;
-    padding-bottom: 14px !important;
-  }
-
-  .miimiid-register-welcome {
-    padding-top: 10px;
-    padding-bottom: 10px;
-  }
-
-  .miimiid-register-visual {
-    margin-bottom: 10px;
-  }
-
-  .miimiid-register-visual-icon {
-    width: 64px;
-    height: 64px;
-    font-size: 2.2rem;
-  }
+  .miimiid-auth-view { align-items: flex-start !important; }
+  #miimiid-auth-card { padding-top: 14px !important; padding-bottom: 14px !important; }
+  .miimiid-register-welcome { padding-top: 10px; padding-bottom: 10px; }
+  .miimiid-register-visual { margin-bottom: 10px; }
+  .miimiid-register-visual-icon { width: 64px; height: 64px; font-size: 2.2rem; }
 }
 
-/* ---------- Accessibility ---------- */
-
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    scroll-behavior: auto !important;
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
+  *, *::before, *::after { scroll-behavior: auto !important; animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
 }
