@@ -19,12 +19,9 @@ jobs:
           from pathlib import Path
           text = Path('scripts/learningData/moneyBasics.js').read_text(encoding='utf-8')
           for number, line in enumerate(text.splitlines(), 1):
-              # A normal source line containing one single-quoted string has
-              # two delimiters. An odd count strongly indicates an embedded
-              # apostrophe that is being parsed as a delimiter.
               count = line.count("'")
-              if count % 2 == 1:
-                  print(f'ODD_QUOTE line={number}: {line}')
+              if count > 2:
+                  print(f'MULTI_QUOTE line={number} count={count}: {line}')
           PY
       - name: Verify syntax
         run: node --check scripts/learningData/moneyBasics.js
