@@ -22,7 +22,7 @@ async function connectDatabase() {
   const mongoUri =
     process.env.MONGO_URL ||
     process.env.MONGO_URI ||
-    'mongodb://localhost:27017/xylotix';
+    'mongodb://localhost:27017/miimiid';
 
   await mongoose.connect(mongoUri);
 
@@ -200,6 +200,7 @@ function normalizeContentBlocks(contentBlocks) {
     };
   });
 }
+
 async function seedLesson(moduleId, lessonData) {
   return Lesson.findOneAndUpdate(
     {
