@@ -31,7 +31,7 @@ jobs:
         run: npm run check
 
   mongodb-smoke:
-    name: Miimiid MongoDB smoke test
+    name: Miimiid MongoDB integration smoke test
     runs-on: ubuntu-latest
     timeout-minutes: 10
     services:
@@ -44,6 +44,7 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 10
+        command: ["mongod", "--replSet", "rs0", "--bind_ip_all"]
 
     steps:
       - name: Checkout Miimiid
@@ -57,8 +58,8 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Run MongoDB smoke test
+      - name: Run MongoDB integration smoke tests
         run: node --test tests/mongodb.smoke.test.mjs
         env:
           NODE_ENV: test
-          MONGO_URI: mongodb://127.0.0.1:27017/miimiid_test
+          MONGO_URI: mongodb://127.0.0.1:27017/miimiid_test?replicaSet=rs0
