@@ -4,7 +4,7 @@
   "description": "Miimiid learning application backend",
   "main": "server.js",
   "scripts": {
-    "test": "node --check server.js && node --check routes/authRoutes.js && node --check routes/learningRoutes.js && node --check routes/aiTutorRoutes.js && node --check routes/passwordRoutes.js && node --check middleware/passwordValidation.js && node --check utils/passwordValidator.js && node --check services/learningService.js && node --check services/aiTutorService.js && node --check services/emailService.js && node --test tests/auth-engine.test.mjs tests/api.integration.test.mjs",
+    "test": "node --check server.js && node --check routes/authRoutes.js && node --check routes/learningRoutes.js && node --check routes/aiTutorRoutes.js && node --check routes/passwordRoutes.js && node --check middleware/passwordValidation.js && node --check utils/passwordValidator.js && node --check services/learningService.js && node --check services/aiTutorService.js && node --check services/emailService.js && node --test tests/auth-engine.test.mjs tests/api.integration.test.mjs tests/auth.integration.test.mjs",
     "check": "npm test"
   },
   "repository": {
@@ -14,7 +14,6 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
   "bugs": {
     "url": "https://github.com/williecarino-a11y/Xylotix-/issues"
   },
