@@ -11,6 +11,29 @@ const PORT = Number(process.env.PORT || 3000);
 const IS_PRODUCTION = process.env.NODE_ENV === 'production';
 const IS_TEST = process.env.NODE_ENV === 'test';
 
+function validateProductionConfig() {
+  if (!IS_PRODUCTION) return;
+
+  const required = ['MONGO_URI', 'APP_BASE_URL', 'SMTP_HOST', 'SMTP_USER', 'SMTP_PASSWORD'];
+  const missing = required.filter(name => !String(process.env[name] || '').trim());
+  if (missing.length) {
+    throw new Error(`Missing required production environment variables: ${missing.join(', ')}`);
+  }
+
+  let appUrl;
+  try {
+    appUrl = new URL(process.env.APP_BASE_URL);
+  } catch {
+    throw new Error('APP_BASE_URL must be a valid absolute URL in production.');
+  }
+
+  if (appUrl.protocol !== 'https:') {
+    throw new Error('APP_BASE_URL must use HTTPS in production.');
+  }
+}
+
+validateProductionConfig();
+
 app.disable('x-powered-by');
 app.set('trust proxy', IS_PRODUCTION ? 1 : false);
 
@@ -72,7 +95,7 @@ app.use(express.static(path.join(__dirname, 'public'), {
   fallthrough: true
 }));
 
-const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/xylotix';
+const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/miimiid';
 
 if (!IS_TEST) {
   mongoose
