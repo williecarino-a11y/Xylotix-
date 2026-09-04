@@ -4,7 +4,7 @@ const Course = require('./models/Course'); // Adjust path to your Course model i
 
 async function updateMoneyBasics() {
   try {
-    await mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/xylotix');
+    await mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/miimiid');
     console.log('Connected to MongoDB');
 
     const updatedModules = [
