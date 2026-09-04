@@ -21,21 +21,21 @@ export const AUTH_FLOW = Object.freeze({
       email: { id: 'email', type: 'form', fields: [{ id: 'email', domId: 'miimiid-register-email', type: 'email', required: true, rules: ['required', 'email'] }], primaryAction: { id: 'contact-next', domId: 'miimiid-register-contact-next', label: 'authContinue', nextStep: 'birthday' }, previousStep: 'name' },
       birthday: { id: 'birthday', type: 'form', fields: [{ id: 'gender', domId: 'miimiid-register-gender', type: 'select', required: true, options: ['male', 'female'], rules: ['required', 'gender'] }, { id: 'dateOfBirth', domId: 'miimiid-register-dob', type: 'birthday', required: true, rules: ['required', 'birthday'] }], primaryAction: { id: 'details-next', domId: 'miimiid-register-details-next', label: 'authContinue', nextStep: 'password' }, previousStep: 'email' },
       password: { id: 'password', type: 'form', fields: [{ id: 'password', domId: 'miimiid-register-password', type: 'password', required: true, rules: ['required', 'password'] }, { id: 'confirmPassword', domId: 'miimiid-register-confirm', type: 'password', required: true, rules: ['required', 'confirmation'] }], primaryAction: { id: 'register', domId: 'miimiid-register-submit', label: 'authCreateAccountButton', apiAction: 'register', nextStep: 'verification' }, previousStep: 'birthday' },
-      verification: { id: 'verification', type: 'verification', fields: [{ id: 'code', domId: 'miimiid-register-verification-code', type: 'verification', required: true, rules: ['required', 'verification'] }], primaryAction: { id: 'verify', domId: 'miimiid-verify-account-submit', label: 'authVerifyAccount', apiAction: 'verify', nextStep: 'authenticated' }, secondaryActions: [{ id: 'resend', domId: 'miimiid-resend-verification', label: 'authResendCode', apiAction: 'resend' }], previousStep: 'password' },
+      verification: { id: 'verification', type: 'verification', fields: [{ id: 'code', domId: 'miimiid-register-verification-code', type: 'verification', required: true, rules: ['required', 'verification'] }], primaryAction: { id: 'verify', domId: 'miimiid-verify-account-submit', label: 'authVerifyAccount', apiAction: 'verifyAccount', nextStep: 'authenticated' }, secondaryActions: [{ id: 'resend', domId: 'miimiid-resend-verification', label: 'authResendCode', apiAction: 'resendVerification' }], previousStep: 'password' },
       authenticated: { id: 'authenticated', type: 'confirmation', fields: [] }
     }
   },
   forgot: {
     initial: 'forgot',
     steps: {
-      forgot: { id: 'forgot', type: 'recovery', fields: [{ id: 'email', domId: 'miimiid-forgot-identifier', type: 'email', required: true, rules: ['required', 'email'] }], primaryAction: { id: 'forgot', domId: 'miimiid-forgot-submit', label: 'authSendResetInstructions', apiAction: 'forgot', nextStep: 'confirmation' } },
+      forgot: { id: 'forgot', type: 'recovery', fields: [{ id: 'email', domId: 'miimiid-forgot-identifier', type: 'email', required: true, rules: ['required', 'email'] }], primaryAction: { id: 'forgot', domId: 'miimiid-forgot-submit', label: 'authSendResetInstructions', apiAction: 'forgotPassword', nextStep: 'confirmation' } },
       confirmation: { id: 'confirmation', type: 'confirmation', fields: [] }
     }
   },
   reset: {
     initial: 'reset',
     steps: {
-      reset: { id: 'reset', type: 'form', fields: [{ id: 'password', domId: 'miimiid-reset-password', type: 'password', required: true, rules: ['required', 'password'] }, { id: 'confirmPassword', domId: 'miimiid-reset-confirm', type: 'password', required: true, rules: ['required', 'confirmation'] }], primaryAction: { id: 'reset', domId: 'miimiid-reset-submit', label: 'authResetPasswordButton', apiAction: 'reset', nextStep: 'confirmation' } },
+      reset: { id: 'reset', type: 'form', fields: [{ id: 'password', domId: 'miimiid-reset-password', type: 'password', required: true, rules: ['required', 'password'] }, { id: 'confirmPassword', domId: 'miimiid-reset-confirm', type: 'password', required: true, rules: ['required', 'confirmation'] }], primaryAction: { id: 'reset', domId: 'miimiid-reset-submit', label: 'authResetPasswordButton', apiAction: 'resetPassword', nextStep: 'confirmation' } },
       confirmation: { id: 'confirmation', type: 'confirmation', fields: [] }
     }
   }
