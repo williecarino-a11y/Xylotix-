@@ -134,8 +134,42 @@ function validateFunCenterAnswer(gameId, roundIndex, answer) {
   return round.answer === answer;
 }
 
+const funCenterActivities = [
+  {
+    id: 'needs-vs-wants',
+    titleKey: 'funCenterNeedsWantsTitle',
+    resultTitleKey: 'funCenterNeedsWantsResultTitle',
+    resultMessageKey: 'funCenterNeedsWantsResultMessage',
+    answers: [
+      { id: 'need', key: 'funCenterAnswerNeed' },
+      { id: 'want', key: 'funCenterAnswerWant' }
+    ],
+    rounds: [
+      { id: 'rent', textKey: 'funCenterRoundRent', visual: '🏠', answer: 'need' },
+      { id: 'groceries', textKey: 'funCenterRoundGroceries', visual: '🛒', answer: 'need' },
+      { id: 'concert', textKey: 'funCenterRoundConcert', visual: '🎵', answer: 'want' },
+      { id: 'medicine', textKey: 'funCenterRoundMedicine', visual: '💊', answer: 'need' },
+      { id: 'headphones', textKey: 'funCenterRoundHeadphones', visual: '🎧', answer: 'want' },
+      { id: 'savings', textKey: 'funCenterRoundSavings', visual: '🛡️', answer: 'need' },
+      { id: 'watch', textKey: 'funCenterRoundWatch', visual: '⌚', answer: 'want' },
+      { id: 'electricity', textKey: 'funCenterRoundElectricity', visual: '💡', answer: 'need' },
+      { id: 'console', textKey: 'funCenterRoundConsole', visual: '🎮', answer: 'want' },
+      { id: 'clothing', textKey: 'funCenterRoundClothing', visual: '👕', answer: 'need' }
+    ]
+  }
+];
+
+function getFunCenterActivities() {
+  return funCenterActivities.map(activity => ({
+    ...activity,
+    answers: activity.answers.map(answer => ({ ...answer })),
+    rounds: activity.rounds.map(round => ({ ...round }))
+  }));
+}
+
 module.exports = {
   getFunCenterGames,
   getFunCenterGame,
   validateFunCenterAnswer
+  getFunCenterActivities
 };
