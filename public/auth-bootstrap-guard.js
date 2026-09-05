@@ -34,28 +34,43 @@
     if (header) header.classList.add('hidden');
   }
 
-  function initializeDashboard() {
-    if (dashboardInitializing || typeof window.initializeMiimiidDashboard !== 'function') return;
+  async function initializeDashboard() {
+    if (dashboardInitializing) return false;
+    if (typeof window.initializeMiimiidDashboard !== 'function') return false;
 
     dashboardInitializing = true;
-    Promise.resolve()
-      .then(() => window.initializeMiimiidDashboard())
-      .catch((error) => {
-        console.error('Miimiid dashboard bootstrap failed:', error);
-      })
-      .finally(() => {
-        dashboardInitializing = false;
-      });
+    try {
+      return await window.initializeMiimiidDashboard() === true;
+    } catch (error) {
+      console.error('Miimiid dashboard bootstrap failed:', error);
+      return false;
+    } finally {
+      dashboardInitializing = false;
+    }
   }
 
-  function showAuthenticated() {
+  async function showAuthenticated() {
     const { auth, loading, card, shell, header } = elements();
+
     if (auth) auth.classList.add('hidden');
     if (loading) loading.classList.add('hidden');
     if (card) card.classList.add('hidden');
+
+    // Keep the authenticated shell hidden until the real dashboard
+    // initializer has completed successfully.
+    if (shell) shell.classList.add('hidden');
+    if (header) header.classList.add('hidden');
+
+    const dashboardReady = await initializeDashboard();
+
+    if (!dashboardReady) {
+      showUnauthenticated();
+      return false;
+    }
+
     if (shell) shell.classList.remove('hidden');
     if (header) header.classList.remove('hidden');
-    initializeDashboard();
+    return true;
   }
 
   function showUnauthenticated() {
@@ -93,13 +108,10 @@
         break;
       case 'authenticated':
         stopBootstrapLoading();
-        showAuthenticated();
+        void showAuthenticated();
         break;
       case 'unauthenticated':
       case 'expired':
-        stopBootstrapLoading();
-        showUnauthenticated();
-        break;
       case 'error':
         stopBootstrapLoading();
         showUnauthenticated();
