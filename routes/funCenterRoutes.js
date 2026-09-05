@@ -39,12 +39,19 @@ router.get('/games', async (req, res) => {
     const safeGames = games.map(game => ({
       id: game.id,
       type: game.type,
-      titleKey: game.titleKey,
-      subtitleKey: game.subtitleKey,
-      resultTitleKey: game.resultTitleKey,
-      resultMessageKey: game.resultMessageKey,
-      answers: game.answers,
-      rounds: game.rounds.map(round => ({ id: round.id, textKey: round.textKey, category: round.category, visual: round.visual }))
+      title: game.title,
+      subtitle: game.subtitle,
+      resultTitle: game.resultTitle,
+      resultMessage: game.resultMessage,
+      answers: game.answers.map(answer => ({ id: answer.id, label: answer.label })),
+      rounds: game.rounds.map(round => ({
+        id: round.id,
+        prompt: round.prompt,
+        category: round.category,
+        visual: round.visual,
+        feedback: round.feedback,
+        choices: round.choices ? round.choices.map(choice => ({ id: choice.id, label: choice.label })) : undefined
+      }))
     }));
     return res.json({ status: 'success', data: safeGames });
   } catch (error) {
