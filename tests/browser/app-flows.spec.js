@@ -4,6 +4,10 @@ test.describe('Miimiid browser application flows', () => {
   test('exposes the registration flow and advances through the first steps', async ({ page }) => {
     await page.goto('/');
 
+    const showRegister = page.locator('#miimiid-show-register');
+    await expect(showRegister).toBeVisible();
+    await showRegister.click();
+
     const start = page.locator('#miimiid-register-get-started');
     await expect(start).toBeVisible();
     await start.click();
@@ -23,7 +27,7 @@ test.describe('Miimiid browser application flows', () => {
 
     const login = page.locator('#miimiid-login-form');
     await expect(login).toBeAttached();
-    await expect(page.locator('#miimiid-login-identifier')).toHaveAttribute('type', 'email');
+    await expect(page.locator('#miimiid-login-identifier')).toHaveAttribute('autocomplete', 'username');
     await expect(page.locator('#miimiid-login-password')).toHaveAttribute('type', 'password');
     await expect(page.locator('#miimiid-login-submit')).toBeAttached();
   });
