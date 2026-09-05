@@ -116,7 +116,9 @@ function getFunCenterGames() {
       ...round,
       choices: round.choices ? round.choices.map(choice => ({ ...choice })) : undefined
     })),
-    answers: game.answers.map(answer => ({ ...answer }))
+    answers: Array.isArray(game.answers)
+      ? game.answers.map(answer => ({ ...answer }))
+      : []
   }));
 }
 
