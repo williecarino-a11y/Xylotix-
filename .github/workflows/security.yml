@@ -8,16 +8,15 @@ on:
   schedule:
     - cron: '17 3 * * 1'
 
-permissions:
-  contents: read
-  security-events: write
-  actions: read
+permissions: {}
 
 jobs:
   dependency-audit:
     name: Dependency vulnerability audit
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    permissions:
+      contents: read
 
     steps:
       - name: Checkout Miimiid
@@ -38,6 +37,9 @@ jobs:
     name: CodeQL JavaScript analysis
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    permissions:
+      contents: read
+      security-events: write
 
     steps:
       - name: Checkout Miimiid
