@@ -15,7 +15,9 @@ test.describe('Miimiid browser smoke', () => {
 
     expect(response.status()).toBe(200);
     await expect(response).toBeOK();
-    await expect(response).toHaveJSON({
+
+    const body = await response.json();
+    expect(body).toEqual({
       status: 'OK',
       message: 'Miimiid is alive.'
     });
