@@ -2,14 +2,25 @@ const { test, expect } = require('@playwright/test');
 
 test.describe('Miimiid browser application flows', () => {
   test('exposes the registration flow and advances through the first steps', async ({ page }) => {
+    await page.route('**/api/auth/me', async route => {
+      await route.fulfill({
+        status: 401,
+        contentType: 'application/json',
+        body: JSON.stringify({ status: 'error', message: 'Authentication required.' })
+      });
+    });
+
     await page.goto('/');
 
+    const authCard = page.locator('#miimiid-auth-card');
+    await expect(authCard).toBeVisible({ timeout: 10000 });
+
     const showRegister = page.locator('#miimiid-show-register');
-    await expect(showRegister).toBeVisible();
+    await expect(showRegister).toBeVisible({ timeout: 10000 });
     await showRegister.click();
 
     const start = page.locator('#miimiid-register-get-started');
-    await expect(start).toBeVisible();
+    await expect(start).toBeVisible({ timeout: 10000 });
     await start.click();
 
     await expect(page.locator('#miimiid-register-first-name')).toBeVisible();
@@ -41,7 +52,7 @@ test.describe('Miimiid browser application flows', () => {
           status: 'success',
           data: {
             user: {
-              id: 'browser-e2e-user',
+              id: '507f1f77bcf86cd799439011',
               firstName: 'Browser',
               lastName: 'Test',
               name: 'Browser Test',
@@ -51,6 +62,22 @@ test.describe('Miimiid browser application flows', () => {
               emailVerified: true,
               accountVerified: true
             }
+          }
+        })
+      });
+    });
+
+    await page.route('**/api/learn/dashboard/**', async route => {
+      await route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify({
+          status: 'success',
+          data: {
+            totalXP: 120,
+            streak: 4,
+            totalLessonsCompleted: 6,
+            averageQuizScore: 88
           }
         })
       });
@@ -92,7 +119,7 @@ test.describe('Miimiid browser application flows', () => {
         contentType: 'application/json',
         body: JSON.stringify({
           success: true,
-          data: { message: 'A budget is a plan for how you will use your money.' }
+          answer: 'A budget is a plan for how you will use your money.'
         })
       });
     });
@@ -108,32 +135,26 @@ test.describe('Miimiid browser application flows', () => {
     );
 
     const appShell = page.locator('#miimiid-app-shell');
-    await expect(appShell).toBeAttached();
-    await expect(appShell).not.toHaveClass(/\bhidden\b/);
+    await expect(appShell).toBeVisible({ timeout: 15000 });
 
     const dashboard = page.locator('.miimiid-dashboard.active');
-    await expect(dashboard).toBeAttached();
+    await expect(dashboard).toBeAttached({ timeout: 15000 });
     await expect(dashboard).toHaveClass(/\bactive\b/);
 
-    // The production navigation uses the same user-facing labels across the
-    // desktop bottom bar and the responsive navigation. Do not couple the E2E
-    // test to an implementation-only data attribute.
-    const aiTutorNav = page.locator('button, a').filter({ hasText: /^\s*AI Tutor\s*$/i }).first();
-    const funCenterNav = page.locator('button, a').filter({ hasText: /^\s*Fun Center\s*$/i }).first();
+    const aiTutorNav = page.getByRole('button', { name: 'AI Tutor', exact: true });
+    const funCenterNav = page.getByRole('button', { name: 'Fun Center', exact: true });
 
-    await expect(aiTutorNav).toBeAttached({ timeout: 10000 });
-    await expect(funCenterNav).toBeAttached({ timeout: 10000 });
+    await expect(aiTutorNav).toBeVisible({ timeout: 10000 });
+    await expect(funCenterNav).toBeVisible({ timeout: 10000 });
 
     await aiTutorNav.click();
     await expect(page.locator('.miimiid-ai-tutor-view')).toBeVisible();
 
     const tutorInput = page.locator('.miimiid-ai-tutor-input').first();
-    if (await tutorInput.count()) {
-      await tutorInput.fill('What is a budget?');
-      const tutorForm = page.locator('.miimiid-ai-tutor-form').first();
-      await tutorForm.locator('button[type="submit"]').click();
-      await expect(page.locator('.miimiid-ai-tutor-message').filter({ hasText: 'budget' }).last()).toBeVisible();
-    }
+    await expect(tutorInput).toBeVisible();
+    await tutorInput.fill('What is a budget?');
+    await page.locator('.miimiid-ai-tutor-form button[type="submit"]').click();
+    await expect(page.locator('.miimiid-ai-tutor-message.assistant').filter({ hasText: 'budget' }).last()).toBeVisible();
 
     await funCenterNav.click();
     await expect(page.locator('.miimiid-fun-center-view')).toBeVisible();
