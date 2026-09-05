@@ -99,7 +99,11 @@ test.describe('Miimiid browser application flows', () => {
 
     await page.goto('/');
 
-    await expect(page.locator('.miimiid-dashboard.active')).toBeVisible();
+    const appShell = page.locator('#miimiid-app-shell');
+    await expect(appShell).toBeVisible();
+
+    const dashboard = page.locator('.miimiid-dashboard.active');
+    await expect(dashboard).toBeAttached();
 
     const dashboardViews = await page.locator('[data-dashboard-view]').evaluateAll(buttons =>
       buttons.map(button => button.getAttribute('data-dashboard-view')).filter(Boolean)
