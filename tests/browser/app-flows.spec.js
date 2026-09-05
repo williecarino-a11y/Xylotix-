@@ -104,24 +104,30 @@ test.describe('Miimiid browser application flows', () => {
 
     const dashboard = page.locator('.miimiid-dashboard.active');
     await expect(dashboard).toBeAttached();
+    await expect(dashboard).toHaveClass(/\bactive\b/);
 
     const dashboardViews = await page.locator('[data-dashboard-view]').evaluateAll(buttons =>
       buttons.map(button => button.getAttribute('data-dashboard-view')).filter(Boolean)
     );
     expect(dashboardViews).toEqual(expect.arrayContaining(['aiTutor', 'funCenter']));
 
-    await page.locator('[data-dashboard-view="aiTutor"]').first().click();
+    const aiTutorNav = page.locator('[data-dashboard-view="aiTutor"]').first();
+    await expect(aiTutorNav).toBeAttached();
+    await aiTutorNav.click();
     await expect(page.locator('.miimiid-ai-tutor-view')).toBeVisible();
 
     const tutorInput = page.locator('.miimiid-ai-tutor-input').first();
-    if (await tutorInput.count()) {
+    if (await tutorInput.count() && await tutorInput.isVisible()) {
       await tutorInput.fill('What is a budget?');
       const tutorForm = page.locator('.miimiid-ai-tutor-form').first();
+      await expect(tutorForm).toBeVisible();
       await tutorForm.locator('button[type="submit"]').click();
       await expect(page.locator('.miimiid-ai-tutor-message').filter({ hasText: 'budget' }).last()).toBeVisible();
     }
 
-    await page.locator('[data-dashboard-view="funCenter"]').first().click();
+    const funCenterNav = page.locator('[data-dashboard-view="funCenter"]').first();
+    await expect(funCenterNav).toBeAttached();
+    await funCenterNav.click();
     await expect(page.locator('.miimiid-fun-center-view')).toBeVisible();
     await expect(page.locator('.miimiid-money-match')).toBeVisible();
   });
