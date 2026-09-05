@@ -99,9 +99,6 @@ test.describe('Miimiid browser application flows', () => {
 
     await page.goto('/');
 
-    // The production shell is bootstrapped by deferred scripts. Wait for the
-    // auth engine itself before forcing the same session restore the bootstrap
-    // guard performs, which avoids racing DOMContentLoaded in CI.
     await page.waitForFunction(() => Boolean(window.MIIMIID_AUTH_ENGINE), null, { timeout: 10000 });
     await page.evaluate(() => window.MIIMIID_AUTH_ENGINE.loadCurrentUser());
     await page.waitForFunction(
@@ -118,13 +115,14 @@ test.describe('Miimiid browser application flows', () => {
     await expect(dashboard).toBeAttached();
     await expect(dashboard).toHaveClass(/\bactive\b/);
 
-    // Navigation controls can be populated by the dashboard after the
-    // authenticated state is rendered. Locator assertions auto-retry, unlike
-    // evaluateAll(), which would take a one-time DOM snapshot.
-    const aiTutorNav = page.locator('[data-dashboard-view="aiTutor"]').first();
-    const funCenterNav = page.locator('[data-dashboard-view="funCenter"]').first();
-    await expect(aiTutorNav).toBeAttached();
-    await expect(funCenterNav).toBeAttached();
+    // The production navigation uses the same user-facing labels across the
+    // desktop bottom bar and the responsive navigation. Do not couple the E2E
+    // test to an implementation-only data attribute.
+    const aiTutorNav = page.locator('button, a').filter({ hasText: /^\s*AI Tutor\s*$/i }).first();
+    const funCenterNav = page.locator('button, a').filter({ hasText: /^\s*Fun Center\s*$/i }).first();
+
+    await expect(aiTutorNav).toBeAttached({ timeout: 10000 });
+    await expect(funCenterNav).toBeAttached({ timeout: 10000 });
 
     await aiTutorNav.click();
     await expect(page.locator('.miimiid-ai-tutor-view')).toBeVisible();
