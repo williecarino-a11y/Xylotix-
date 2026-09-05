@@ -6,6 +6,14 @@ const DEFAULT_MODEL =
 
 const MAX_MESSAGE_LENGTH = 4000;
 const MAX_HISTORY_MESSAGES = 12;
+const MAX_HISTORY_TOTAL_LENGTH = 12000;
+const MAX_CONTEXT_FIELD_LENGTH = 200;
+const SUPPORTED_LANGUAGES = new Set([
+  "en",
+  "yo",
+  "ig",
+  "ha"
+]);
 
 class AITutorService {
   constructor() {
@@ -53,7 +61,7 @@ class AITutorService {
       return [];
     }
 
-    return history
+    const normalized = history
       .slice(-MAX_HISTORY_MESSAGES)
       .filter(
         message =>
@@ -69,6 +77,37 @@ class AITutorService {
           .slice(0, MAX_MESSAGE_LENGTH)
       }))
       .filter(message => message.content);
+
+    let totalLength = 0;
+    const bounded = [];
+
+    for (let index = normalized.length - 1; index >= 0; index -= 1) {
+      const message = normalized[index];
+      if (totalLength + message.content.length > MAX_HISTORY_TOTAL_LENGTH) {
+        break;
+      }
+      bounded.unshift(message);
+      totalLength += message.content.length;
+    }
+
+    return bounded;
+  }
+
+  normalizeContextField(value) {
+    return typeof value === "string"
+      ? value.trim().slice(0, MAX_CONTEXT_FIELD_LENGTH)
+      : "";
+  }
+
+  normalizeLanguage(language) {
+    const normalized =
+      typeof language === "string"
+        ? language.trim().toLowerCase()
+        : "en";
+
+    return SUPPORTED_LANGUAGES.has(normalized)
+      ? normalized
+      : "en";
   }
 
   buildInstructions({
@@ -77,15 +116,20 @@ class AITutorService {
     moduleTitle = "",
     lessonTitle = ""
   } = {}) {
+    const safeLanguage = this.normalizeLanguage(language);
+    const safeCourseTitle = this.normalizeContextField(courseTitle);
+    const safeModuleTitle = this.normalizeContextField(moduleTitle);
+    const safeLessonTitle = this.normalizeContextField(lessonTitle);
+
     const context = [
-      courseTitle
-        ? `Course: ${courseTitle}`
+      safeCourseTitle
+        ? `Course: ${safeCourseTitle}`
         : "",
-      moduleTitle
-        ? `Module: ${moduleTitle}`
+      safeModuleTitle
+        ? `Module: ${safeModuleTitle}`
         : "",
-      lessonTitle
-        ? `Lesson: ${lessonTitle}`
+      safeLessonTitle
+        ? `Lesson: ${safeLessonTitle}`
         : ""
     ]
       .filter(Boolean)
@@ -112,7 +156,7 @@ CORE BEHAVIOR:
 - If the learner asks about something outside financial learning, answer briefly when appropriate and guide the conversation back toward useful learning.
 
 LANGUAGE:
-Respond in the learner's selected language: ${language}.
+Respond in the learner's selected language: ${safeLanguage}.
 
 CURRENT LEARNING CONTEXT:
 ${context || "No specific lesson context is currently available."}
