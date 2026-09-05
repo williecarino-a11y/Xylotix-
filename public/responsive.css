@@ -71,23 +71,6 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .miimiid-fun-center-view { display: grid; gap: 16px; }
 .miimiid-fun-center-card { padding: clamp(18px, 3vw, 28px); }
 .miimiid-fun-center-card > * { min-width: 0; }
-.miimiid-money-match { position: relative; isolation: isolate; }
-.miimiid-money-match-header { display: grid; gap: 6px; margin-bottom: 16px; }
-.miimiid-money-match-header h3, .miimiid-money-match-result h3 { margin: 0; font-size: clamp(1.25rem, 2.5vw, 1.65rem); line-height: 1.15; }
-.miimiid-money-match-header p, .miimiid-money-match-result p { margin: 0; color: var(--miimiid-muted); }
-.miimiid-money-match-badge { display: inline-flex; width: fit-content; max-width: 100%; padding: 5px 9px; border: 1px solid var(--miimiid-border-strong); border-radius: 999px; color: var(--miimiid-accent); background: rgba(56, 189, 248, 0.08); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; }
-.miimiid-money-match-meta { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 9px; color: var(--miimiid-muted); font-size: 0.85rem; font-weight: 600; }
-.miimiid-money-match-progress { width: 100%; height: 7px; margin-bottom: 22px; overflow: hidden; border-radius: 999px; background: rgba(148, 163, 184, 0.14); }
-.miimiid-money-match-progress span { display: block; width: 0; height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--miimiid-accent-strong), var(--miimiid-accent)); transition: width 0.25s ease; }
-.miimiid-money-match-question { margin-bottom: 16px; font-size: clamp(1.05rem, 2vw, 1.25rem); font-weight: 700; line-height: 1.45; overflow-wrap: anywhere; }
-.miimiid-money-match-choices { display: grid; gap: 10px; }
-.miimiid-money-match-choice { width: 100%; min-height: 52px; text-align: left; }
-.miimiid-money-match-choice:disabled { cursor: default; opacity: 0.72; }
-.miimiid-money-match-feedback { margin: 14px 0 0; }
-.miimiid-money-match-next { width: 100%; margin-top: 12px; }
-.miimiid-money-match-result { display: grid; justify-items: start; gap: 9px; text-align: left; }
-.miimiid-money-match-result > strong { font-size: clamp(2.5rem, 8vw, 4rem); line-height: 0.95; color: var(--miimiid-text); }
-.miimiid-money-match-result + .miimiid-money-match-next { margin-top: 18px; }
 
 .miimiid-bottom-nav { max-width: 760px; padding: 7px 8px; padding-bottom: max(7px, env(safe-area-inset-bottom)); border: 1px solid var(--miimiid-border); background: rgba(7, 17, 31, 0.9); box-shadow: 0 16px 45px rgba(0, 0, 0, 0.35); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); }
 .miimiid-bottom-nav button { min-width: 0; min-height: 50px; border-radius: 12px; transition: background 0.18s ease, color 0.18s ease, transform 0.18s ease; }
@@ -114,7 +97,6 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   .miimiid-ai-tutor-input { min-height: 46px; }
   .miimiid-fun-center-view { width: 100%; max-width: none; margin: 0; padding: 8px; gap: 10px; }
   .miimiid-fun-center-card { padding: 16px; }
-  .miimiid-money-match-meta { font-size: 0.78rem; }
 }
 
 @media (max-width: 480px) {
@@ -136,8 +118,6 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   .miimiid-ai-tutor-card { padding: 10px; border-radius: 0 0 15px 15px; }
   .miimiid-fun-center-view { padding: 4px; }
   .miimiid-fun-center-card { padding: 14px; border-radius: 16px; }
-  .miimiid-money-match-meta { align-items: flex-start; }
-  .miimiid-money-match-choice { min-height: 50px; }
   .miimiid-auth-view { padding-left: max(10px, env(safe-area-inset-left)) !important; padding-right: max(10px, env(safe-area-inset-right)) !important; }
   #miimiid-auth-card { padding: 20px 15px !important; border-radius: 18px !important; }
   #miimiid-auth-card h1, #miimiid-auth-card .miimiid-auth-heading { font-size: 1.65rem !important; line-height: 1.12; }
@@ -161,7 +141,6 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   .miimiid-app-shell { padding-bottom: 104px; }
   #course-list-view, #course-detail-view, #lesson-view { max-width: 1020px; }
   .miimiid-ai-tutor-view, .miimiid-fun-center-view { padding-left: 0; padding-right: 0; }
-  .miimiid-money-match { max-width: 760px; margin: 0 auto; }
 }
 
 @media (min-width: 1100px) { .miimiid-app-shell { padding-left: 8px; padding-right: 8px; } }
