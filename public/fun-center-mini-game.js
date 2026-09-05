@@ -137,7 +137,7 @@
       </div>
       <div class="miimiid-money-match-meta" aria-live="polite">
         <span data-mm-round>Round 1 of 5</span>
-        <span data-mm-score>Score: 0</span>
+        <span data-mm-score>Score: 0/5</span>
       </div>
       <div class="miimiid-money-match-progress" role="progressbar" aria-label="Money Match progress" aria-valuemin="0" aria-valuemax="5" aria-valuenow="1">
         <span data-mm-progress></span>
@@ -148,7 +148,14 @@
       <button type="button" class="btn miimiid-money-match-next" data-mm-next hidden>Next</button>
     `;
 
-    const state = { round: 0, score: 0, sessionId: null, serverReady: false, busy: false };
+    const state = {
+      round: 0,
+      score: 0,
+      sessionId: null,
+      serverReady: false,
+      busy: false,
+      sessionPromise: null
+    };
     const question = root.querySelector('[data-mm-question]');
     const choices = root.querySelector('[data-mm-choices]');
     const feedback = root.querySelector('[data-mm-feedback]');
@@ -171,6 +178,7 @@
       choices.innerHTML = '';
       feedback.hidden = true;
       next.hidden = true;
+      next.disabled = false;
       state.busy = false;
 
       item.choices.forEach((choice) => {
@@ -189,6 +197,12 @@
       setChoicesDisabled(true);
 
       const item = ROUNDS[state.round];
+      const session = state.sessionPromise ? await state.sessionPromise : null;
+      if (session && session.sessionId) {
+        state.sessionId = session.sessionId;
+        state.serverReady = true;
+      }
+
       const serverResult = state.serverReady
         ? await submitServerAnswer(state.sessionId, state.round, answerId)
         : null;
@@ -249,7 +263,8 @@
       }
     });
 
-    startServerSession().then((session) => {
+    state.sessionPromise = startServerSession();
+    state.sessionPromise.then((session) => {
       if (!session || !session.sessionId) return;
       state.sessionId = session.sessionId;
       state.serverReady = true;
