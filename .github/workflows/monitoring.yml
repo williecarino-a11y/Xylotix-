@@ -1,0 +1,34 @@
+name: Production health monitor
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '*/15 * * * *'
+
+permissions:
+  contents: read
+
+jobs:
+  health-check:
+    name: Check production readiness
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Validate monitoring target
+        env:
+          HEALTHCHECK_URL: ${{ secrets.HEALTHCHECK_URL }}
+        run: |
+          if [ -z "$HEALTHCHECK_URL" ]; then
+            echo "HEALTHCHECK_URL secret is not configured; skipping production monitor."
+            exit 0
+          fi
+
+      - name: Check production health
+        env:
+          HEALTHCHECK_URL: ${{ secrets.HEALTHCHECK_URL }}
+        run: |
+          set -euo pipefail
+          status=$(curl --silent --show-error --output /tmp/health.json --write-out '%{http_code}' --max-time 20 "$HEALTHCHECK_URL")
+          cat /tmp/health.json
+          test "$status" = "200"
