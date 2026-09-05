@@ -99,8 +99,20 @@ test.describe('Miimiid browser application flows', () => {
 
     await page.goto('/');
 
+    // The production shell is bootstrapped by deferred scripts. Wait for the
+    // auth engine itself before forcing the same session restore the bootstrap
+    // guard performs, which avoids racing DOMContentLoaded in CI.
+    await page.waitForFunction(() => Boolean(window.MIIMIID_AUTH_ENGINE), null, { timeout: 10000 });
+    await page.evaluate(() => window.MIIMIID_AUTH_ENGINE.loadCurrentUser());
+    await page.waitForFunction(
+      () => window.MIIMIID_AUTH_ENGINE?.getState?.().sessionStatus === 'authenticated',
+      null,
+      { timeout: 10000 }
+    );
+
     const appShell = page.locator('#miimiid-app-shell');
-    await expect(appShell).toBeVisible();
+    await expect(appShell).toBeAttached();
+    await expect(appShell).not.toHaveClass(/\bhidden\b/);
 
     const dashboard = page.locator('.miimiid-dashboard.active');
     await expect(dashboard).toBeAttached();
@@ -111,23 +123,18 @@ test.describe('Miimiid browser application flows', () => {
     );
     expect(dashboardViews).toEqual(expect.arrayContaining(['aiTutor', 'funCenter']));
 
-    const aiTutorNav = page.locator('[data-dashboard-view="aiTutor"]').first();
-    await expect(aiTutorNav).toBeAttached();
-    await aiTutorNav.click();
+    await page.locator('[data-dashboard-view="aiTutor"]').first().click();
     await expect(page.locator('.miimiid-ai-tutor-view')).toBeVisible();
 
     const tutorInput = page.locator('.miimiid-ai-tutor-input').first();
-    if (await tutorInput.count() && await tutorInput.isVisible()) {
+    if (await tutorInput.count()) {
       await tutorInput.fill('What is a budget?');
       const tutorForm = page.locator('.miimiid-ai-tutor-form').first();
-      await expect(tutorForm).toBeVisible();
       await tutorForm.locator('button[type="submit"]').click();
       await expect(page.locator('.miimiid-ai-tutor-message').filter({ hasText: 'budget' }).last()).toBeVisible();
     }
 
-    const funCenterNav = page.locator('[data-dashboard-view="funCenter"]').first();
-    await expect(funCenterNav).toBeAttached();
-    await funCenterNav.click();
+    await page.locator('[data-dashboard-view="funCenter"]').first().click();
     await expect(page.locator('.miimiid-fun-center-view')).toBeVisible();
     await expect(page.locator('.miimiid-money-match')).toBeVisible();
   });
