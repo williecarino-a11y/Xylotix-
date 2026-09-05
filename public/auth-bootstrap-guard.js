@@ -7,6 +7,7 @@
   let bootstrapHandle = null;
   let unsubscribe = null;
   let restoring = false;
+  let dashboardInitializing = false;
 
   function elements() {
     return {
@@ -27,23 +28,41 @@
     if (!auth) return;
 
     auth.classList.remove('hidden');
-    if (loading && isHidden(card)) loading.classList.remove('hidden');
+    if (loading) loading.classList.remove('hidden');
+    if (card) card.classList.add('hidden');
     if (shell) shell.classList.add('hidden');
     if (header) header.classList.add('hidden');
   }
 
+  function initializeDashboard() {
+    if (dashboardInitializing || typeof window.initializeMiimiidDashboard !== 'function') return;
+
+    dashboardInitializing = true;
+    Promise.resolve()
+      .then(() => window.initializeMiimiidDashboard())
+      .catch((error) => {
+        console.error('Miimiid dashboard bootstrap failed:', error);
+      })
+      .finally(() => {
+        dashboardInitializing = false;
+      });
+  }
+
   function showAuthenticated() {
-    const { auth, loading, shell, header } = elements();
+    const { auth, loading, card, shell, header } = elements();
     if (auth) auth.classList.add('hidden');
     if (loading) loading.classList.add('hidden');
+    if (card) card.classList.add('hidden');
     if (shell) shell.classList.remove('hidden');
     if (header) header.classList.remove('hidden');
+    initializeDashboard();
   }
 
   function showUnauthenticated() {
-    const { auth, loading, shell, header } = elements();
+    const { auth, loading, card, shell, header } = elements();
     if (auth) auth.classList.remove('hidden');
     if (loading) loading.classList.add('hidden');
+    if (card) card.classList.remove('hidden');
     if (shell) shell.classList.add('hidden');
     if (header) header.classList.add('hidden');
   }
