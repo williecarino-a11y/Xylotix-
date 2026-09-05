@@ -32,6 +32,96 @@ test.describe('Miimiid browser application flows', () => {
     await expect(page.locator('#miimiid-login-submit')).toBeAttached();
   });
 
+  test('authenticated browser shell exposes dashboard, AI Tutor, and Fun Center views', async ({ page }) => {
+    await page.route('**/api/auth/me', async route => {
+      await route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify({
+          status: 'success',
+          data: {
+            user: {
+              id: 'browser-e2e-user',
+              firstName: 'Browser',
+              lastName: 'Test',
+              name: 'Browser Test',
+              email: 'browser-e2e@example.com',
+              gender: 'unspecified',
+              dateOfBirth: '1990-01-01',
+              emailVerified: true,
+              accountVerified: true
+            }
+          }
+        })
+      });
+    });
+
+    await page.route('**/api/fun-center/games', async route => {
+      await route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify({
+          status: 'success',
+          data: [{
+            id: 'money-match',
+            type: 'money-match',
+            title: 'Money Match',
+            subtitle: 'Browser test game',
+            resultTitle: 'Done',
+            resultMessage: 'Good work.',
+            answers: [{ id: 'needs', label: 'Needs' }, { id: 'wants', label: 'Wants' }],
+            rounds: [{
+              id: 'browser-round',
+              prompt: 'Which category fits?',
+              category: 'needs',
+              visual: '🧾',
+              feedback: 'Correct.',
+              choices: [
+                { id: 'needs', label: 'Needs' },
+                { id: 'wants', label: 'Wants' }
+              ]
+            }]
+          }]
+        })
+      });
+    });
+
+    await page.route('**/api/ai-tutor/chat', async route => {
+      await route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify({
+          success: true,
+          data: { message: 'A budget is a plan for how you will use your money.' }
+        })
+      });
+    });
+
+    await page.goto('/');
+
+    await expect(page.locator('.miimiid-dashboard.active')).toBeVisible();
+
+    const dashboardViews = await page.locator('[data-dashboard-view]').evaluateAll(buttons =>
+      buttons.map(button => button.getAttribute('data-dashboard-view')).filter(Boolean)
+    );
+    expect(dashboardViews).toEqual(expect.arrayContaining(['aiTutor', 'funCenter']));
+
+    await page.locator('[data-dashboard-view="aiTutor"]').first().click();
+    await expect(page.locator('.miimiid-ai-tutor-view')).toBeVisible();
+
+    const tutorInput = page.locator('.miimiid-ai-tutor-input').first();
+    if (await tutorInput.count()) {
+      await tutorInput.fill('What is a budget?');
+      const tutorForm = page.locator('.miimiid-ai-tutor-form').first();
+      await tutorForm.locator('button[type="submit"]').click();
+      await expect(page.locator('.miimiid-ai-tutor-message').filter({ hasText: 'budget' }).last()).toBeVisible();
+    }
+
+    await page.locator('[data-dashboard-view="funCenter"]').first().click();
+    await expect(page.locator('.miimiid-fun-center-view')).toBeVisible();
+    await expect(page.locator('.miimiid-money-match')).toBeVisible();
+  });
+
   test('Fun Center games endpoint returns server-owned game data', async ({ request }) => {
     const response = await request.get('/api/fun-center/games');
 
