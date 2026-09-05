@@ -105,25 +105,28 @@ const funCenterGames = [
           { id: 'buy-two', label: 'Buy two because it is a sale' }
         ]
       }
-    ]
+    ],
+    answers: []
   }
 ];
 
 function getFunCenterGames() {
-  return funCenterGames.map(game => ({
+  return funCenterGames.map((game) => ({
     ...game,
-    rounds: game.rounds.map(round => ({
+    rounds: game.rounds.map((round) => ({
       ...round,
-      choices: round.choices ? round.choices.map(choice => ({ ...choice })) : undefined
+      choices: Array.isArray(round.choices)
+        ? round.choices.map((choice) => ({ ...choice }))
+        : undefined
     })),
     answers: Array.isArray(game.answers)
-      ? game.answers.map(answer => ({ ...answer }))
+      ? game.answers.map((answer) => ({ ...answer }))
       : []
   }));
 }
 
 function getFunCenterGame(gameId) {
-  return funCenterGames.find(game => game.id === gameId);
+  return funCenterGames.find((game) => game.id === gameId);
 }
 
 function validateFunCenterAnswer(gameId, roundIndex, answer) {
@@ -160,10 +163,10 @@ const funCenterActivities = [
 ];
 
 function getFunCenterActivities() {
-  return funCenterActivities.map(activity => ({
+  return funCenterActivities.map((activity) => ({
     ...activity,
-    answers: activity.answers.map(answer => ({ ...answer })),
-    rounds: activity.rounds.map(round => ({ ...round }))
+    answers: activity.answers.map((answer) => ({ ...answer })),
+    rounds: activity.rounds.map((round) => ({ ...round }))
   }));
 }
 
