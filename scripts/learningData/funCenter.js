@@ -170,6 +170,6 @@ function getFunCenterActivities() {
 module.exports = {
   getFunCenterGames,
   getFunCenterGame,
-  validateFunCenterAnswer
+  validateFunCenterAnswer,
   getFunCenterActivities
 };
