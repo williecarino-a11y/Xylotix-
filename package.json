@@ -6,6 +6,7 @@
   "scripts": {
     "test:syntax": "node scripts/check-syntax.mjs",
     "test": "npm run test:syntax && node --test tests/auth-engine.test.mjs tests/api.integration.test.mjs tests/auth.integration.test.mjs tests/learning.integration.test.mjs tests/fun-center.integration.test.mjs",
+    "test:e2e": "playwright test",
     "check": "npm test"
   },
   "repository": {
@@ -29,6 +30,7 @@
     "openai": "^7.4.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.55.0",
     "smtp-server": "^3.13.6",
     "supertest": "^7.1.4"
   }
