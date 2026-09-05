@@ -3,176 +3,108 @@
  *
  * DATA DEFINITIONS ONLY.
  *
- * The frontend owns presentation, animation and interaction.
- * The server owns validation and rewards.
+ * The server owns game content, validation and rewards.
+ * The frontend renders the data returned by the Fun Center API.
  */
 
 const funCenterGames = [
   {
     id: 'needs-vs-wants',
-
     type: 'classification',
-
-    titleKey: 'funNeedsVsWants',
-
-    subtitleKey: 'funNeedsVsWantsSubtitle',
-
-    resultTitleKey: 'funRoundComplete',
-
-    resultMessageKey: 'funNeedsVsWantsResult',
-
+    title: 'Needs vs Wants',
+    subtitle: 'Sort everyday spending into needs and wants.',
+    resultTitle: 'Round complete',
+    resultMessage: 'You are getting better at separating essentials from extras.',
     rounds: [
-      {
-        id: 'rent',
-        textKey: 'funNeedsVsWantsRent',
-        category: 'housing',
-        answer: 'need',
-        visual: '🏠'
-      },
-
-      {
-        id: 'groceries',
-        textKey: 'funNeedsVsWantsGroceries',
-        category: 'food',
-        answer: 'need',
-        visual: '🛒'
-      },
-
-      {
-        id: 'concert',
-        textKey: 'funNeedsVsWantsConcert',
-        category: 'entertainment',
-        answer: 'want',
-        visual: '🎵'
-      },
-
-      {
-        id: 'medicine',
-        textKey: 'funNeedsVsWantsMedicine',
-        category: 'health',
-        answer: 'need',
-        visual: '💊'
-      },
-
-      {
-        id: 'headphones',
-        textKey: 'funNeedsVsWantsHeadphones',
-        category: 'shopping',
-        answer: 'want',
-        visual: '🎧'
-      },
-
-      {
-        id: 'emergency-savings',
-        textKey: 'funNeedsVsWantsEmergencySavings',
-        category: 'saving',
-        answer: 'need',
-        visual: '🛡️'
-      },
-
-      {
-        id: 'luxury-watch',
-        textKey: 'funNeedsVsWantsLuxuryWatch',
-        category: 'shopping',
-        answer: 'want',
-        visual: '⌚'
-      },
-
-      {
-        id: 'electricity',
-        textKey: 'funNeedsVsWantsElectricity',
-        category: 'utilities',
-        answer: 'need',
-        visual: '💡'
-      },
-
-      {
-        id: 'gaming-console',
-        textKey: 'funNeedsVsWantsGamingConsole',
-        category: 'entertainment',
-        answer: 'want',
-        visual: '🎮'
-      },
-
-      {
-        id: 'basic-clothing',
-        textKey: 'funNeedsVsWantsBasicClothing',
-        category: 'clothing',
-        answer: 'need',
-        visual: '👕'
-      }
+      { id: 'rent', prompt: 'Rent', category: 'housing', visual: '🏠', answer: 'need' },
+      { id: 'groceries', prompt: 'Groceries', category: 'food', visual: '🛒', answer: 'need' },
+      { id: 'concert', prompt: 'Concert ticket', category: 'entertainment', visual: '🎵', answer: 'want' },
+      { id: 'medicine', prompt: 'Medicine', category: 'health', visual: '💊', answer: 'need' },
+      { id: 'headphones', prompt: 'New headphones', category: 'shopping', visual: '🎧', answer: 'want' },
+      { id: 'emergency-savings', prompt: 'Emergency savings', category: 'saving', visual: '🛡️', answer: 'need' },
+      { id: 'luxury-watch', prompt: 'Luxury watch', category: 'shopping', visual: '⌚', answer: 'want' },
+      { id: 'electricity', prompt: 'Electricity bill', category: 'utilities', visual: '💡', answer: 'need' },
+      { id: 'gaming-console', prompt: 'Gaming console', category: 'entertainment', visual: '🎮', answer: 'want' },
+      { id: 'basic-clothing', prompt: 'Basic clothing', category: 'clothing', visual: '👕', answer: 'need' }
     ],
-
     answers: [
-      {
-        id: 'need',
-        key: 'funNeed'
-      },
-
-      {
-        id: 'want',
-        key: 'funWant'
-      }
+      { id: 'need', label: 'Need' },
+      { id: 'want', label: 'Want' }
     ]
   },
-
   {
     id: 'money-match',
-
     type: 'multiple-choice',
-
-    titleKey: 'funMoneyMatch',
-
-    subtitleKey: 'funMoneyMatchSubtitle',
-
-    resultTitleKey: 'funRoundComplete',
-
-    resultMessageKey: 'funMoneyMatchResult',
-
+    title: 'Money Match',
+    subtitle: '5 quick choices. Pick the smarter money move.',
+    resultTitle: 'Money Match complete',
+    resultMessage: 'Keep practicing these small decisions and smart money habits become easier.',
     rounds: [
       {
         id: 'transport-buffer',
-        textKey: 'funMoneyMatchTransport',
+        prompt: 'You get ₦5,000 and need ₦2,000 for transport this week. What is the smarter move?',
         category: 'planning',
+        visual: '🚌',
         answer: 'set-aside',
-        visual: '🚌'
+        feedback: 'Covering a known need first and keeping the rest gives you a buffer.',
+        choices: [
+          { id: 'spend-all', label: 'Spend the full ₦5,000 now' },
+          { id: 'set-aside', label: 'Set aside the ₦2,000 and keep the remaining ₦3,000' },
+          { id: 'lend-all', label: 'Lend all ₦5,000 to someone' }
+        ]
       },
       {
         id: 'game-skin',
-        textKey: 'funMoneyMatchGameSkin',
+        prompt: 'You want a new game skin, but buying it would use all your spare money. What is the smarter move?',
         category: 'spending',
+        visual: '🎮',
         answer: 'wait',
-        visual: '🎮'
+        feedback: 'A want can wait when buying it would wipe out your spare cash.',
+        choices: [
+          { id: 'buy-now', label: 'Buy it immediately' },
+          { id: 'wait', label: 'Wait and keep your buffer' },
+          { id: 'borrow', label: 'Borrow money for it' }
+        ]
       },
       {
         id: 'unexpected-money',
-        textKey: 'funMoneyMatchUnexpected',
+        prompt: 'You receive an unexpected ₦10,000. What is a good first step?',
         category: 'saving',
+        visual: '💰',
         answer: 'save-first',
-        visual: '💰'
+        feedback: 'Saving part first turns unexpected money into a useful opportunity.',
+        choices: [
+          { id: 'spend-all', label: 'Spend it all because it was unexpected' },
+          { id: 'save-first', label: 'Set aside part of it before spending' },
+          { id: 'buy-expensive', label: 'Buy the most expensive thing you can find' }
+        ]
       },
       {
         id: 'friend-loan',
-        textKey: 'funMoneyMatchFriendLoan',
+        prompt: 'A friend wants to borrow money you may need tomorrow. What is the smarter move?',
         category: 'boundaries',
+        visual: '🤝',
         answer: 'protect-needs',
-        visual: '🤝'
+        feedback: 'Helping others should not leave you unable to handle your own essentials.',
+        choices: [
+          { id: 'give-away', label: 'Give away everything you have' },
+          { id: 'protect-needs', label: 'Keep enough for your own needs before deciding' },
+          { id: 'borrow-to-lend', label: 'Borrow more money so you can lend it' }
+        ]
       },
       {
         id: 'sale-purchase',
-        textKey: 'funMoneyMatchSale',
+        prompt: 'Something is on sale, but you were not planning to buy it. What should you do?',
         category: 'spending',
+        visual: '🏷️',
         answer: 'check-plan',
-        visual: '🏷️'
+        feedback: 'A discount is only useful when the purchase makes sense for you.',
+        choices: [
+          { id: 'buy-sale', label: 'Buy it because the price is lower' },
+          { id: 'check-plan', label: 'Check whether it fits your plan before buying' },
+          { id: 'buy-two', label: 'Buy two because it is a sale' }
+        ]
       }
-    ],
-
-    answers: [
-      { id: 'set-aside', key: 'funMoneyMatchSetAside' },
-      { id: 'wait', key: 'funMoneyMatchWait' },
-      { id: 'save-first', key: 'funMoneyMatchSaveFirst' },
-      { id: 'protect-needs', key: 'funMoneyMatchProtectNeeds' },
-      { id: 'check-plan', key: 'funMoneyMatchCheckPlan' }
     ]
   }
 ];
@@ -180,40 +112,23 @@ const funCenterGames = [
 function getFunCenterGames() {
   return funCenterGames.map(game => ({
     ...game,
-
     rounds: game.rounds.map(round => ({
-      ...round
+      ...round,
+      choices: round.choices ? round.choices.map(choice => ({ ...choice })) : undefined
     })),
-
-    answers: game.answers.map(answer => ({
-      ...answer
-    }))
+    answers: game.answers.map(answer => ({ ...answer }))
   }));
 }
 
 function getFunCenterGame(gameId) {
-  return funCenterGames.find(
-    game => game.id === gameId
-  );
+  return funCenterGames.find(game => game.id === gameId);
 }
 
-function validateFunCenterAnswer(
-  gameId,
-  roundIndex,
-  answer
-) {
+function validateFunCenterAnswer(gameId, roundIndex, answer) {
   const game = getFunCenterGame(gameId);
-
-  if (!game) {
-    return false;
-  }
-
+  if (!game) return false;
   const round = game.rounds[roundIndex];
-
-  if (!round) {
-    return false;
-  }
-
+  if (!round) return false;
   return round.answer === answer;
 }
 
