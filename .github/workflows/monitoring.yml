@@ -10,25 +10,57 @@ permissions:
 
 jobs:
   health-check:
-    name: Check production readiness
+    name: Check production health
     runs-on: ubuntu-latest
     timeout-minutes: 5
 
     steps:
       - name: Validate monitoring target
         env:
-          HEALTHCHECK_URL: ${{ secrets.HEALTHCHECK_URL }}
+          HEALTHCHECK_URL: ${{ secrets.HEALTHCHECK_URL || vars.HEALTHCHECK_URL }}
         run: |
+          set -euo pipefail
           if [ -z "$HEALTHCHECK_URL" ]; then
-            echo "HEALTHCHECK_URL secret is not configured; skipping production monitor."
-            exit 0
+            echo "ERROR: Configure HEALTHCHECK_URL as a repository secret or variable before enabling production monitoring."
+            exit 1
           fi
+
+          case "$HEALTHCHECK_URL" in
+            http://*|https://*) ;;
+            *)
+              echo "ERROR: HEALTHCHECK_URL must start with http:// or https://."
+              exit 1
+              ;;
+          esac
 
       - name: Check production health
         env:
-          HEALTHCHECK_URL: ${{ secrets.HEALTHCHECK_URL }}
+          HEALTHCHECK_URL: ${{ secrets.HEALTHCHECK_URL || vars.HEALTHCHECK_URL }}
         run: |
           set -euo pipefail
-          status=$(curl --silent --show-error --output /tmp/health.json --write-out '%{http_code}' --max-time 20 "$HEALTHCHECK_URL")
+
+          status=$(curl \
+            --silent \
+            --show-error \
+            --fail-with-body \
+            --output /tmp/health.json \
+            --write-out '%{http_code}' \
+            --max-time 20 \
+            "$HEALTHCHECK_URL")
+
+          echo "HTTP status: $status"
           cat /tmp/health.json
           test "$status" = "200"
+
+          node -e '
+            const fs = require("fs");
+            const body = JSON.parse(fs.readFileSync("/tmp/health.json", "utf8"));
+            if (body.status !== "OK") {
+              console.error("Health endpoint returned an unexpected status:", body.status);
+              process.exit(1);
+            }
+            if (body.message !== "Miimiid is alive.") {
+              console.error("Health endpoint returned an unexpected message:", body.message);
+              process.exit(1);
+            }
+          '
