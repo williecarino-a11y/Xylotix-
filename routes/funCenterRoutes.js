@@ -91,15 +91,31 @@ router.post('/session/:sessionId/answer', async (req, res) => {
     if (roundIndex !== session.roundsCompleted) return res.status(409).json({ status: 'error', message: 'Invalid game progression.' });
 
     const correct = validateFunCenterAnswer(session.gameId, roundIndex, answer);
-    if (correct) {
-      session.correctAnswers++;
-      session.score += 100;
-      session.maxCombo = Math.max(session.maxCombo, session.correctAnswers);
-    }
-    session.roundsCompleted++;
-    await session.save();
+    const update = {
+      $inc: {
+        roundsCompleted: 1,
+        ...(correct ? { correctAnswers: 1, score: 100 } : {})
+      }
+    };
 
-    return res.json({ status: 'success', data: { correct, score: session.score, correctAnswers: session.correctAnswers, roundsCompleted: session.roundsCompleted, totalRounds: game.rounds.length, complete: session.roundsCompleted >= game.rounds.length } });
+    // The progression check is repeated inside the write so two concurrent
+    // requests cannot both claim the same round between read and save.
+    const updatedSession = await FunGameSession.findOneAndUpdate(
+      {
+        sessionId,
+        userId: user._id,
+        completed: false,
+        roundsCompleted: roundIndex
+      },
+      update,
+      { new: true, runValidators: true }
+    );
+
+    if (!updatedSession) {
+      return res.status(409).json({ status: 'error', message: 'Invalid or already submitted game round.' });
+    }
+
+    return res.json({ status: 'success', data: { correct, score: updatedSession.score, correctAnswers: updatedSession.correctAnswers, roundsCompleted: updatedSession.roundsCompleted, totalRounds: game.rounds.length, complete: updatedSession.roundsCompleted >= game.rounds.length } });
   } catch (error) {
     console.error('Fun Center answer error:', error);
     return res.status(500).json({ status: 'error', message: 'Unable to process game answer.' });
