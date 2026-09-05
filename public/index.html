@@ -1998,6 +1998,31 @@ body:has(#miimiid-auth-view:not(.hidden)) {
 
 </style>
 
+<style id="miimiid-fun-center-styles">
+  .miimiid-fun-center-card { background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 16px; }
+  .miimiid-fun-hub { display: flex; flex-direction: column; gap: 10px; }
+  .miimiid-fun-node { display: flex; align-items: center; gap: 12px; width: 100%; text-align: left; padding: 14px; border-radius: 10px; border: 1px solid #334155; background: #0f172a; color: #f8fafc; font: inherit; cursor: pointer; opacity: 0; transform: translateY(8px); animation: miimiidFunNodeIn 0.35s ease forwards; animation-delay: var(--fun-node-delay, 0ms); transition: transform 0.15s ease, border-color 0.15s ease; }
+  .miimiid-fun-node:hover, .miimiid-fun-node:active { border-color: #38bdf8; transform: translateY(-2px); }
+  .miimiid-fun-node-icon { font-size: 22px; }
+  @keyframes miimiidFunNodeIn { to { opacity: 1; transform: translateY(0); } }
+  .miimiid-fun-meta { display: flex; justify-content: space-between; font-size: 0.85rem; color: #94a3b8; margin-bottom: 10px; }
+  .miimiid-fun-card { display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 28px 16px; border-radius: 12px; background: #0f172a; border: 1px solid #334155; margin-bottom: 14px; animation: miimiidFunCardIn 0.3s ease; transition: box-shadow 0.2s ease; }
+  @keyframes miimiidFunCardIn { from { opacity: 0; transform: translateY(10px) scale(0.97); } to { opacity: 1; transform: translateY(0) scale(1); } }
+  .miimiid-fun-card.is-correct { box-shadow: 0 0 0 2px #4ade80 inset; }
+  .miimiid-fun-card.is-wrong { box-shadow: 0 0 0 2px #f87171 inset; animation: miimiidFunShake 0.4s ease; }
+  @keyframes miimiidFunShake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
+  .miimiid-fun-card-visual { font-size: 2.6rem; line-height: 1; }
+  .miimiid-fun-card-text { margin: 0; font-size: 1.05rem; text-align: center; color: #f1f5f9; }
+  .miimiid-fun-center-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .miimiid-fun-answer { padding: 14px 10px; border-radius: 10px; border: 2px solid #334155; background: #1e293b; color: #f8fafc; font-weight: 600; font: inherit; cursor: pointer; transition: transform 0.12s ease, border-color 0.15s ease; }
+  .miimiid-fun-answer:active { transform: scale(0.96); }
+  .miimiid-fun-answer:disabled { opacity: 0.7; cursor: default; }
+  .miimiid-fun-answer.is-correct { border-color: #4ade80 !important; background: rgba(74, 222, 128, 0.15) !important; }
+  .miimiid-fun-answer.is-wrong { border-color: #f87171 !important; background: rgba(248, 113, 113, 0.15) !important; }
+  .miimiid-fun-result { text-align: center; animation: miimiidFunCardIn 0.35s ease; }
+  .miimiid-fun-back { margin-top: 12px; }
+  </style>
+
 </head><body>
 <!-- =========================================
        MIIMIID AUTHENTICATION
