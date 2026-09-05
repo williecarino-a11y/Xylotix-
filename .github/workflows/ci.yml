@@ -23,6 +23,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
+          cache: npm
 
       - name: Install dependencies
         run: npm install
@@ -43,6 +44,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
+          cache: npm
 
       - name: Start MongoDB replica set
         uses: supercharge/mongodb-github-action@1.12.1
@@ -72,6 +74,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
+          cache: npm
 
       - name: Start MongoDB replica set
         uses: supercharge/mongodb-github-action@1.12.1
@@ -93,3 +96,29 @@ jobs:
           SMTP_PASSWORD: miimiid-test-password
           SMTP_FROM: no-reply@miimiid.test
           APP_BASE_URL: http://localhost:3000
+
+  browser-e2e:
+    name: Miimiid browser E2E smoke test
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout Miimiid
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Run browser E2E tests
+        run: npm run test:e2e
+        env:
+          CI: true
