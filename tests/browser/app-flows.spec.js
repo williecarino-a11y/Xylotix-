@@ -118,12 +118,15 @@ test.describe('Miimiid browser application flows', () => {
     await expect(dashboard).toBeAttached();
     await expect(dashboard).toHaveClass(/\bactive\b/);
 
-    const dashboardViews = await page.locator('[data-dashboard-view]').evaluateAll(buttons =>
-      buttons.map(button => button.getAttribute('data-dashboard-view')).filter(Boolean)
-    );
-    expect(dashboardViews).toEqual(expect.arrayContaining(['aiTutor', 'funCenter']));
+    // Navigation controls can be populated by the dashboard after the
+    // authenticated state is rendered. Locator assertions auto-retry, unlike
+    // evaluateAll(), which would take a one-time DOM snapshot.
+    const aiTutorNav = page.locator('[data-dashboard-view="aiTutor"]').first();
+    const funCenterNav = page.locator('[data-dashboard-view="funCenter"]').first();
+    await expect(aiTutorNav).toBeAttached();
+    await expect(funCenterNav).toBeAttached();
 
-    await page.locator('[data-dashboard-view="aiTutor"]').first().click();
+    await aiTutorNav.click();
     await expect(page.locator('.miimiid-ai-tutor-view')).toBeVisible();
 
     const tutorInput = page.locator('.miimiid-ai-tutor-input').first();
@@ -134,7 +137,7 @@ test.describe('Miimiid browser application flows', () => {
       await expect(page.locator('.miimiid-ai-tutor-message').filter({ hasText: 'budget' }).last()).toBeVisible();
     }
 
-    await page.locator('[data-dashboard-view="funCenter"]').first().click();
+    await funCenterNav.click();
     await expect(page.locator('.miimiid-fun-center-view')).toBeVisible();
     await expect(page.locator('.miimiid-money-match')).toBeVisible();
   });
