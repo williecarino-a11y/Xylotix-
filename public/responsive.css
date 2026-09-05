@@ -22,57 +22,25 @@
   --miimiid-shadow: 0 18px 55px rgba(0, 0, 0, 0.28);
 }
 
-html {
-  min-width: 0;
-  overflow-x: hidden;
-  background: var(--miimiid-bg);
-  color-scheme: dark;
-}
-
-body {
-  width: 100%;
-  min-width: 0;
-  min-height: 100vh;
-  margin: 0;
-  padding: clamp(10px, 2vw, 24px);
-  overflow-x: hidden;
-  background:
-    radial-gradient(circle at 12% 0%, rgba(56, 189, 248, 0.075), transparent 30rem),
-    radial-gradient(circle at 92% 18%, rgba(37, 99, 235, 0.06), transparent 28rem),
-    var(--miimiid-bg);
-  color: var(--miimiid-text);
-}
-
+html { min-width: 0; overflow-x: hidden; background: var(--miimiid-bg); color-scheme: dark; }
+body { width: 100%; min-width: 0; min-height: 100vh; margin: 0; padding: clamp(10px, 2vw, 24px); overflow-x: hidden; background: radial-gradient(circle at 12% 0%, rgba(56, 189, 248, 0.075), transparent 30rem), radial-gradient(circle at 92% 18%, rgba(37, 99, 235, 0.06), transparent 28rem), var(--miimiid-bg); color: var(--miimiid-text); }
 *, *::before, *::after { box-sizing: border-box; }
 button, input, select, textarea { max-width: 100%; font: inherit; }
 button { touch-action: manipulation; }
 button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 2px solid var(--miimiid-accent); outline-offset: 2px; }
 
-.miimiid-app-shell {
-  width: min(100%, 1180px);
-  max-width: 1180px;
-  min-width: 0;
-  margin: 0 auto;
-  padding-bottom: 96px;
-}
-
+.miimiid-app-shell { width: min(100%, 1180px); max-width: 1180px; min-width: 0; margin: 0 auto; padding-bottom: 96px; }
 .miimiid-header, .miimiid-dashboard-header, .miimiid-dashboard-content { min-width: 0; }
 .miimiid-header, .miimiid-dashboard-header { gap: 12px; }
 .miimiid-dashboard-header { flex-wrap: wrap; }
 .miimiid-dashboard-brand, .miimiid-auth-user, .miimiid-auth-user-name { min-width: 0; }
 .miimiid-dashboard-brand, .miimiid-auth-user-name { overflow-wrap: anywhere; }
 
-.card, .miimiid-dashboard-stat, .course-progress-card, .miimiid-ai-tutor-card, .miimiid-fun-center-card {
-  border: 1px solid var(--miimiid-border);
-  border-radius: var(--miimiid-radius);
-  background: linear-gradient(145deg, rgba(30, 41, 59, 0.86), rgba(15, 27, 45, 0.78));
-  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.14);
-}
+.card, .miimiid-dashboard-stat, .course-progress-card, .miimiid-ai-tutor-card, .miimiid-fun-center-card { border: 1px solid var(--miimiid-border); border-radius: var(--miimiid-radius); background: linear-gradient(145deg, rgba(30, 41, 59, 0.86), rgba(15, 27, 45, 0.78)); box-shadow: 0 10px 35px rgba(0, 0, 0, 0.14); }
 .card { overflow: hidden; }
 .miimiid-dashboard-stat { width: 100%; min-height: 112px; cursor: pointer; transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease; }
 .miimiid-dashboard-stat:hover { transform: translateY(-2px); border-color: var(--miimiid-border-strong); box-shadow: var(--miimiid-shadow); }
 .miimiid-dashboard-stat:active { transform: translateY(0); }
-
 .miimiid-dashboard-stat-grid, #courses-container, #modules-container, #lesson-content, #fun-center-content { min-width: 0; }
 .miimiid-dashboard-stat-grid { gap: 12px; }
 .miimiid-dashboard-stat-value { line-height: 1.05; }
@@ -99,6 +67,28 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .miimiid-ai-tutor-form, .miimiid-ai-tutor-input { min-width: 0; }
 .miimiid-ai-tutor-input { width: 100%; }
 
+/* Fun Center uses the existing card, button, quiz and callout system. */
+.miimiid-fun-center-view { display: grid; gap: 16px; }
+.miimiid-fun-center-card { padding: clamp(18px, 3vw, 28px); }
+.miimiid-fun-center-card > * { min-width: 0; }
+.miimiid-money-match { position: relative; isolation: isolate; }
+.miimiid-money-match-header { display: grid; gap: 6px; margin-bottom: 16px; }
+.miimiid-money-match-header h3, .miimiid-money-match-result h3 { margin: 0; font-size: clamp(1.25rem, 2.5vw, 1.65rem); line-height: 1.15; }
+.miimiid-money-match-header p, .miimiid-money-match-result p { margin: 0; color: var(--miimiid-muted); }
+.miimiid-money-match-badge { display: inline-flex; width: fit-content; max-width: 100%; padding: 5px 9px; border: 1px solid var(--miimiid-border-strong); border-radius: 999px; color: var(--miimiid-accent); background: rgba(56, 189, 248, 0.08); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; }
+.miimiid-money-match-meta { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 9px; color: var(--miimiid-muted); font-size: 0.85rem; font-weight: 600; }
+.miimiid-money-match-progress { width: 100%; height: 7px; margin-bottom: 22px; overflow: hidden; border-radius: 999px; background: rgba(148, 163, 184, 0.14); }
+.miimiid-money-match-progress span { display: block; width: 0; height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--miimiid-accent-strong), var(--miimiid-accent)); transition: width 0.25s ease; }
+.miimiid-money-match-question { margin-bottom: 16px; font-size: clamp(1.05rem, 2vw, 1.25rem); font-weight: 700; line-height: 1.45; overflow-wrap: anywhere; }
+.miimiid-money-match-choices { display: grid; gap: 10px; }
+.miimiid-money-match-choice { width: 100%; min-height: 52px; text-align: left; }
+.miimiid-money-match-choice:disabled { cursor: default; opacity: 0.72; }
+.miimiid-money-match-feedback { margin: 14px 0 0; }
+.miimiid-money-match-next { width: 100%; margin-top: 12px; }
+.miimiid-money-match-result { display: grid; justify-items: start; gap: 9px; text-align: left; }
+.miimiid-money-match-result > strong { font-size: clamp(2.5rem, 8vw, 4rem); line-height: 0.95; color: var(--miimiid-text); }
+.miimiid-money-match-result + .miimiid-money-match-next { margin-top: 18px; }
+
 .miimiid-bottom-nav { max-width: 760px; padding: 7px 8px; padding-bottom: max(7px, env(safe-area-inset-bottom)); border: 1px solid var(--miimiid-border); background: rgba(7, 17, 31, 0.9); box-shadow: 0 16px 45px rgba(0, 0, 0, 0.35); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); }
 .miimiid-bottom-nav button { min-width: 0; min-height: 50px; border-radius: 12px; transition: background 0.18s ease, color 0.18s ease, transform 0.18s ease; }
 .miimiid-bottom-nav button:hover { background: rgba(56, 189, 248, 0.08); }
@@ -116,50 +106,15 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 
 @media (max-width: 767px) {
   body { padding: 0; }
-
-  .miimiid-app-shell {
-    width: 100%;
-    max-width: none;
-    padding-top: 0;
-    padding-left: 0;
-    padding-right: 0;
-    padding-bottom: calc(var(--miimiid-nav-height, 60px) + 24px + env(safe-area-inset-bottom, 0px));
-  }
-
-  .miimiid-ai-tutor-view {
-    width: 100%;
-    max-width: none;
-    margin: 0;
-    padding: 0 8px;
-  }
-
-  .miimiid-ai-tutor-card {
-    width: 100%;
-    min-height: calc(100dvh - var(--miimiid-nav-height, 60px) - env(safe-area-inset-bottom, 0px));
-    margin: 0;
-    border-radius: 0 0 16px 16px;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .miimiid-ai-tutor-messages {
-    flex: 1 1 auto;
-    min-height: 0;
-    max-height: none;
-  }
-
-  .miimiid-ai-tutor-form {
-    position: sticky;
-    bottom: calc(var(--miimiid-nav-height, 60px) + env(safe-area-inset-bottom, 0px));
-    z-index: 20;
-    margin-top: auto;
-    padding: 8px 0 4px;
-    background: rgba(7, 17, 31, 0.98);
-  }
-
+  .miimiid-app-shell { width: 100%; max-width: none; padding-top: 0; padding-left: 0; padding-right: 0; padding-bottom: calc(var(--miimiid-nav-height, 60px) + 24px + env(safe-area-inset-bottom, 0px)); }
+  .miimiid-ai-tutor-view { width: 100%; max-width: none; margin: 0; padding: 0 8px; }
+  .miimiid-ai-tutor-card { width: 100%; min-height: calc(100dvh - var(--miimiid-nav-height, 60px) - env(safe-area-inset-bottom, 0px)); margin: 0; border-radius: 0 0 16px 16px; display: flex; flex-direction: column; }
+  .miimiid-ai-tutor-messages { flex: 1 1 auto; min-height: 0; max-height: none; }
+  .miimiid-ai-tutor-form { position: sticky; bottom: calc(var(--miimiid-nav-height, 60px) + env(safe-area-inset-bottom, 0px)); z-index: 20; margin-top: auto; padding: 8px 0 4px; background: rgba(7, 17, 31, 0.98); }
   .miimiid-ai-tutor-input { min-height: 46px; }
-
-  .miimiid-fun-center-view { width: 100%; max-width: none; margin: 0; padding: 8px; }
+  .miimiid-fun-center-view { width: 100%; max-width: none; margin: 0; padding: 8px; gap: 10px; }
+  .miimiid-fun-center-card { padding: 16px; }
+  .miimiid-money-match-meta { font-size: 0.78rem; }
 }
 
 @media (max-width: 480px) {
@@ -179,6 +134,10 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   .lesson-navigation { display: grid; grid-template-columns: 1fr; gap: 8px; }
   .miimiid-ai-tutor-view { padding: 0 4px; }
   .miimiid-ai-tutor-card { padding: 10px; border-radius: 0 0 15px 15px; }
+  .miimiid-fun-center-view { padding: 4px; }
+  .miimiid-fun-center-card { padding: 14px; border-radius: 16px; }
+  .miimiid-money-match-meta { align-items: flex-start; }
+  .miimiid-money-match-choice { min-height: 50px; }
   .miimiid-auth-view { padding-left: max(10px, env(safe-area-inset-left)) !important; padding-right: max(10px, env(safe-area-inset-right)) !important; }
   #miimiid-auth-card { padding: 20px 15px !important; border-radius: 18px !important; }
   #miimiid-auth-card h1, #miimiid-auth-card .miimiid-auth-heading { font-size: 1.65rem !important; line-height: 1.12; }
@@ -202,10 +161,10 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   .miimiid-app-shell { padding-bottom: 104px; }
   #course-list-view, #course-detail-view, #lesson-view { max-width: 1020px; }
   .miimiid-ai-tutor-view, .miimiid-fun-center-view { padding-left: 0; padding-right: 0; }
+  .miimiid-money-match { max-width: 760px; margin: 0 auto; }
 }
 
 @media (min-width: 1100px) { .miimiid-app-shell { padding-left: 8px; padding-right: 8px; } }
-
 @media (max-height: 620px) and (orientation: landscape) {
   .miimiid-auth-view { align-items: flex-start !important; }
   #miimiid-auth-card { padding-top: 14px !important; padding-bottom: 14px !important; }
@@ -213,7 +172,6 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   .miimiid-register-visual { margin-bottom: 10px; }
   .miimiid-register-visual-icon { width: 64px; height: 64px; font-size: 2.2rem; }
 }
-
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
 }
