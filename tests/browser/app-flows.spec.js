@@ -43,7 +43,7 @@ test.describe('Miimiid browser application flows', () => {
     await expect(page.locator('#miimiid-login-submit')).toBeAttached();
   });
 
-  test('authenticated browser shell exposes dashboard, AI Tutor, and Fun Center views', async ({ page }) => {
+  test('authenticated browser shell exposes dashboard, AI Tutor, and the original Fun Center view', async ({ page }) => {
     await page.route('**/api/auth/me', async route => {
       await route.fulfill({
         status: 200,
@@ -79,36 +79,6 @@ test.describe('Miimiid browser application flows', () => {
             totalLessonsCompleted: 6,
             averageQuizScore: 88
           }
-        })
-      });
-    });
-
-    await page.route('**/api/fun-center/games', async route => {
-      await route.fulfill({
-        status: 200,
-        contentType: 'application/json',
-        body: JSON.stringify({
-          status: 'success',
-          data: [{
-            id: 'money-match',
-            type: 'money-match',
-            title: 'Money Match',
-            subtitle: 'Browser test game',
-            resultTitle: 'Done',
-            resultMessage: 'Good work.',
-            answers: [{ id: 'needs', label: 'Needs' }, { id: 'wants', label: 'Wants' }],
-            rounds: [{
-              id: 'browser-round',
-              prompt: 'Which category fits?',
-              category: 'needs',
-              visual: '🧾',
-              feedback: 'Correct.',
-              choices: [
-                { id: 'needs', label: 'Needs' },
-                { id: 'wants', label: 'Wants' }
-              ]
-            }]
-          }]
         })
       });
     });
@@ -158,10 +128,12 @@ test.describe('Miimiid browser application flows', () => {
 
     await funCenterNav.click();
     await expect(page.locator('.miimiid-fun-center-view')).toBeVisible();
-    await expect(page.locator('.miimiid-money-match')).toBeVisible();
+    await expect(page.locator('.miimiid-fun-node')).toHaveCount(1);
+    await expect(page.locator('.miimiid-fun-node-label')).toContainText('Needs vs Wants');
+    await expect(page.locator('.miimiid-money-match')).toHaveCount(0);
   });
 
-  test('Fun Center games endpoint returns server-owned game data', async ({ request }) => {
+  test('Fun Center games endpoint returns server-owned game data without answer leakage', async ({ request }) => {
     const response = await request.get('/api/fun-center/games');
 
     expect(response.status()).toBe(200);
@@ -170,7 +142,8 @@ test.describe('Miimiid browser application flows', () => {
     const body = await response.json();
     expect(body.status).toBe('success');
     expect(Array.isArray(body.data)).toBe(true);
-    expect(body.data.length).toBeGreaterThan(0);
+    expect(body.data).toHaveLength(1);
+    expect(body.data[0].id).toBe('needs-vs-wants');
 
     for (const game of body.data) {
       expect(game.id).toEqual(expect.any(String));
@@ -197,7 +170,7 @@ test.describe('Miimiid browser application flows', () => {
 
   test('Fun Center session creation requires authentication', async ({ request }) => {
     const response = await request.post('/api/fun-center/session', {
-      data: { gameId: 'money-match' }
+      data: { gameId: 'needs-vs-wants' }
     });
 
     expect(response.status()).toBe(401);
