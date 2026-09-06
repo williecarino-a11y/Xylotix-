@@ -56,8 +56,6 @@
     if (loading) loading.classList.add('hidden');
     if (card) card.classList.add('hidden');
 
-    // Keep the authenticated shell hidden until the real dashboard
-    // initializer has completed successfully.
     if (shell) shell.classList.add('hidden');
     if (header) header.classList.add('hidden');
 
@@ -155,21 +153,11 @@
     document.head.appendChild(script);
   }
 
-  function loadFunCenterMiniGame() {
-    if (document.querySelector('script[data-miimiid-fun-center-mini-game]')) return;
-    const script = document.createElement('script');
-    script.src = '/fun-center-mini-game.js';
-    script.defer = true;
-    script.dataset.miimiidFunCenterMiniGame = 'true';
-    document.head.appendChild(script);
-  }
-
   function boot() {
     if (initialized) return;
     initialized = true;
 
     loadNavigationIcons();
-    loadFunCenterMiniGame();
     startBootstrapLoading();
     showBootstrap();
 
