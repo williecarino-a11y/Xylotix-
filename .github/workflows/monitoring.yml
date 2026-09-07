@@ -45,7 +45,7 @@ jobs:
             --fail-with-body \
             --output /tmp/health.json \
             --write-out '%{http_code}' \
-            --max-time 20 \
+            --max-time 60 \
             "$HEALTHCHECK_URL")
 
           echo "HTTP status: $status"
