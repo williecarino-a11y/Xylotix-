@@ -70,7 +70,8 @@ app.get(['/', '/index.html'], (req, res, next) => {
       '<script defer src="/miimiid-auth-engine.js"></script>',
       '<script defer src="/auth-bootstrap-guard.js"></script>',
       '<script defer src="/password-validation.js"></script>',
-      '<script defer src="/pwa.js"></script>'
+      '<script defer src="/pwa.js"></script>',
+      '<script defer src="/fun-center-runtime.js"></script>'
     ];
 
     for (const asset of headAssets) {
@@ -129,58 +130,59 @@ function getDependencyHealth() {
   return { database, verificationEmail, aiTutor, passwordResetBaseUrl: appBaseUrl ? 'configured' : 'not_configured' };
 }
 
-app.get('/api/health/live', (req, res) => {
-  res.status(200).json({ status: 'OK', message: 'Miimiid is alive.' });
+app.get('/health', (req, res) => {
+  const database = mongoose.connection.readyState === 1 ? 'connected' : 'connecting';
+  const status = database === 'connected' ? 'ok' : 'degraded';
+  return res.status(status === 'ok' ? 200 : 503).json({ status, database });
 });
 
-app.get('/api/health/ready', (req, res) => {
-  const services = getDependencyHealth();
-  const ready = services.database === 'connected';
-  res.status(ready ? 200 : 503).json({
-    status: ready ? 'OK' : 'DEGRADED',
-    message: ready ? 'Miimiid is ready to serve traffic.' : 'Miimiid is not ready because the database is unavailable.',
-    services
-  });
-});
-
-app.get('/api/health', (req, res) => {
-  const services = getDependencyHealth();
-  const healthy = services.database === 'connected';
-  res.status(healthy ? 200 : 503).json({
-    status: healthy ? 'OK' : 'DEGRADED',
-    message: healthy ? 'Server is running cleanly.' : 'Server is running but the database is not ready.',
-    services
-  });
+app.get('/health/dependencies', (req, res) => {
+  const dependencies = getDependencyHealth();
+  const status = dependencies.database === 'connected' ? 'ok' : 'degraded';
+  return res.status(status === 'ok' ? 200 : 503).json({ status, dependencies });
 });
 
 app.use('/api', (req, res) => {
-  res.status(404).json({ status: 'error', code: 'API_ROUTE_NOT_FOUND', message: 'API route not found.' });
+  return res.status(404).json({ status: 'error', code: 'API_ROUTE_NOT_FOUND', message: 'API route not found.' });
 });
 
 app.use((error, req, res, next) => {
   console.error('Unhandled server error:', error);
   if (res.headersSent) return next(error);
-  res.status(500).json({ status: 'error', code: 'INTERNAL_SERVER_ERROR', message: 'Something went wrong on the server.' });
+  return res.status(500).json({ status: 'error', code: 'INTERNAL_SERVER_ERROR', message: 'Internal server error.' });
 });
 
-function startServer() {
-  return app.listen(PORT, () => console.log(`Miimiid server running on port ${PORT}`));
-}
+let server;
 
-function shutdown(signal, server) {
-  console.log(`${signal} received. Shutting down Miimiid server...`);
-  server.close(async () => {
-    try { await mongoose.connection.close(false); }
-    catch (error) { console.error('MongoDB shutdown error:', error.message); }
-    finally { process.exit(0); }
+async function startServer() {
+  if (server) return server;
+
+  server = app.listen(PORT, () => {
+    console.log(`Miimiid server listening on port ${PORT}`);
   });
-  setTimeout(() => process.exit(1), 10000).unref();
+
+  return server;
 }
 
-if (require.main === module) {
-  const server = startServer();
-  process.once('SIGTERM', () => shutdown('SIGTERM', server));
-  process.once('SIGINT', () => shutdown('SIGINT', server));
+async function shutdown(signal) {
+  console.log(`Received ${signal}, shutting down Miimiid server...`);
+
+  if (server) {
+    await new Promise(resolve => server.close(resolve));
+    server = null;
+  }
+
+  if (mongoose.connection.readyState !== 0) {
+    await mongoose.connection.close();
+  }
 }
+
+process.once('SIGINT', () => {
+  shutdown('SIGINT').finally(() => process.exit(0));
+});
+
+process.once('SIGTERM', () => {
+  shutdown('SIGTERM').finally(() => process.exit(0));
+});
 
 module.exports = { app, startServer };
