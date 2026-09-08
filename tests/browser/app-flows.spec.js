@@ -43,7 +43,7 @@ test.describe('Miimiid browser application flows', () => {
     await expect(page.locator('#miimiid-login-submit')).toBeAttached();
   });
 
-  test('authenticated browser shell exposes dashboard, AI Tutor, and the original Fun Center view', async ({ page }) => {
+  test('authenticated browser shell exposes dashboard, AI Tutor, and Fun Center', async ({ page }) => {
     await page.route('**/api/auth/me', async route => {
       await route.fulfill({
         status: 200,
@@ -184,6 +184,7 @@ await expect(needsVsWantsGame).toHaveCount(1, {
 await expect(
   needsVsWantsGame.locator('.miimiid-fun-center-game-title')
 ).toContainText('Needs vs Wants');
+    });
 
   test('Fun Center games endpoint returns server-owned game data without answer leakage', async ({ request }) => {
     const response = await request.get('/api/fun-center/games');
