@@ -89,6 +89,15 @@
   }
 
   function init() {
+    // Preload the server-owned activity data as soon as the runtime starts.
+    // The legacy navigation function is not guaranteed to be exposed on
+    // window, so relying only on a navigation wrapper can leave the renderer
+    // with an empty activity list. Preloading makes the runtime independent
+    // of that implementation detail while retaining the navigation hook for
+    // later refreshes.
+    loadActivities().catch((error) => {
+      console.error('Miimiid Fun Center preload failed:', error);
+    });
     installNavigationHook();
   }
 
