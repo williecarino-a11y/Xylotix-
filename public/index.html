@@ -2038,26 +2038,7 @@ body:has(#miimiid-auth-view:not(.hidden)) {
           });
           </script>
 
-<script>
-  window.addEventListener('load', function() {
-    setTimeout(function() {
-        var content = document.getElementById('fun-center-content');
-            if (!content) return;
-                var realLoad = window.loadMiimiidFunCenter;
-                    if (typeof realLoad !== 'function') {
-                          content.innerHTML = '<p style="color:red">DEBUG: loadMiimiidFunCenter not defined</p>';
-                                return;
-                                    }
-                                        window.loadMiimiidFunCenter = async function() {
-                                              try {
-                                                      await realLoad();
-                                                            } catch (err) {
-                                                                    content.innerHTML = '<pre style="color:red;white-space:pre-wrap;font-size:11px">RENDER ERROR: ' + (err && err.stack ? err.stack : err) + '</pre>';
-                                                                          }
-                                                                              };
-                                                                                }, 500);
-                                                                                });
-                                                                                </script>
+
 
 </head><body>
 <!-- =========================================
