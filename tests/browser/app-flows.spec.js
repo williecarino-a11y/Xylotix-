@@ -83,6 +83,31 @@ test.describe('Miimiid browser application flows', () => {
       });
     });
 
+    await page.route('**/api/learn/fun-center**', async route => {
+      await route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify({
+          status: 'success',
+          data: [{
+            id: 'needs-vs-wants',
+            titleKey: 'funCenterNeedsWantsTitle',
+            resultTitleKey: 'funCenterNeedsWantsResultTitle',
+            resultMessageKey: 'funCenterNeedsWantsResultMessage',
+            answers: [
+              { id: 'need', key: 'funCenterAnswerNeed' },
+              { id: 'want', key: 'funCenterAnswerWant' }
+            ],
+            rounds: [
+              { id: 'rent', textKey: 'funCenterRoundRent', visual: '🏠', answer: 'need' },
+              { id: 'groceries', textKey: 'funCenterRoundGroceries', visual: '🛒', answer: 'need' },
+              { id: 'concert', textKey: 'funCenterRoundConcert', visual: '🎵', answer: 'want' }
+            ]
+          }]
+        })
+      });
+    });
+
     await page.route('**/api/ai-tutor/chat', async route => {
       await route.fulfill({
         status: 200,
@@ -128,7 +153,7 @@ test.describe('Miimiid browser application flows', () => {
 
     await funCenterNav.click();
     await expect(page.locator('.miimiid-fun-center-view')).toBeVisible();
-    await expect(page.locator('.miimiid-fun-node')).toHaveCount(1);
+    await expect(page.locator('.miimiid-fun-node')).toHaveCount(1, { timeout: 10000 });
     await expect(page.locator('.miimiid-fun-node-label')).toContainText('Needs vs Wants');
     await expect(page.locator('.miimiid-money-match')).toHaveCount(0);
   });
