@@ -2037,6 +2037,30 @@ body:has(#miimiid-auth-view:not(.hidden)) {
           document.body.appendChild(el);
           });
           </script>
+
+<script>
+  window.addEventListener('load', function() {
+    setTimeout(function() {
+        var content = document.getElementById('fun-center-content');
+            if (!content) return;
+                var original = window.loadMiimiidFunCenter;
+                    if (typeof original !== 'function') {
+                          content.innerHTML = '<p style="color:red">DEBUG: loadMiimiidFunCenter is not defined</p>';
+                                return;
+                                    }
+                                        window.loadMiimiidFunCenter = async function() {
+                                              try {
+                                                      var response = await fetch('/api/learn/fun-center?language=en');
+                                                              var text = await response.text();
+                                                                      content.innerHTML = '<pre style="color:lime;white-space:pre-wrap;font-size:10px">STATUS: ' + response.status + '\n' + text.slice(0, 500) + '</pre>';
+                                                                            } catch (err) {
+                                                                                    content.innerHTML = '<p style="color:red">DEBUG FETCH ERROR: ' + err.message + '</p>';
+                                                                                          }
+                                                                                              };
+                                                                                                }, 500);
+                                                                                                });
+                                                                                                </script>
+
 </head><body>
 <!-- =========================================
        MIIMIID AUTHENTICATION
