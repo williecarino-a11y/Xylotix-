@@ -2,7 +2,10 @@
   'use strict';
 
   const FUN_CENTER_PATH = '/api/learn/fun-center';
+  const INSTALL_RETRY_MS = 25;
+  const INSTALL_TIMEOUT_MS = 10000;
   let activitiesPromise = null;
+  let wrapped = false;
 
   async function loadActivities() {
     if (!activitiesPromise) {
@@ -20,10 +23,16 @@
             ? payload.data
             : [];
 
-          if (typeof miimiidFunCenterActivities !== 'undefined') {
-            miimiidFunCenterActivities = activities;
-          } else {
-            window.miimiidFunCenterActivities = activities;
+          // Keep both bindings populated because the legacy renderer may read
+          // either the global property or the global lexical binding.
+          window.miimiidFunCenterActivities = activities;
+          try {
+            if (typeof miimiidFunCenterActivities !== 'undefined') {
+              miimiidFunCenterActivities = activities;
+            }
+          } catch (_) {
+            // The window property above is the fallback for lexical bindings
+            // that are not writable from this script context.
           }
 
           return activities;
@@ -38,11 +47,12 @@
   }
 
   function wrapNavigation() {
-    if (typeof window.miimiidNavigate !== 'function' || window.miimiidNavigate.__miimiidFunCenterRuntimeWrapped) {
+    if (wrapped) return true;
+
+    const navigate = window.miimiidNavigate;
+    if (typeof navigate !== 'function' || navigate.__miimiidFunCenterRuntimeWrapped) {
       return false;
     }
-
-    const originalNavigate = window.miimiidNavigate;
 
     const wrappedNavigate = async function (view) {
       if (view === 'funCenter') {
@@ -53,18 +63,33 @@
         }
       }
 
-      return originalNavigate.apply(this, arguments);
+      return navigate.apply(this, arguments);
     };
 
     wrappedNavigate.__miimiidFunCenterRuntimeWrapped = true;
     window.miimiidNavigate = wrappedNavigate;
+    wrapped = true;
     return true;
   }
 
+  function installNavigationHook() {
+    if (wrapNavigation()) return;
+
+    const startedAt = Date.now();
+    const retry = () => {
+      if (wrapNavigation()) return;
+      if (Date.now() - startedAt < INSTALL_TIMEOUT_MS) {
+        window.setTimeout(retry, INSTALL_RETRY_MS);
+      } else {
+        console.warn('Miimiid Fun Center runtime could not attach to navigation.');
+      }
+    };
+
+    window.setTimeout(retry, INSTALL_RETRY_MS);
+  }
+
   function init() {
-    if (!wrapNavigation()) {
-      queueMicrotask(() => wrapNavigation());
-    }
+    installNavigationHook();
   }
 
   if (document.readyState === 'loading') {
