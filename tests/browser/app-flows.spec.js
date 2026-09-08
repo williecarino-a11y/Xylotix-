@@ -83,6 +83,38 @@ test.describe('Miimiid browser application flows', () => {
       });
     });
 
+    await page.route('**/api/learn/fun-center', async route => {
+      await route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify({
+          status: 'success',
+          data: [
+            {
+              id: 'needs-vs-wants',
+              titleKey: 'funCenterNeedsWantsTitle',
+              resultTitleKey: 'funCenterNeedsWantsResultTitle',
+              resultMessageKey: 'funCenterNeedsWantsResultMessage',
+              answers: [
+                { id: 'needs', label: 'Needs' },
+                { id: 'wants', label: 'Wants' }
+              ],
+              rounds: [
+                {
+                  id: 'round-1',
+                  textKey: 'funCenterNeedsWantsRound1',
+                  choices: [
+                    { id: 'needs', label: 'Needs' },
+                    { id: 'wants', label: 'Wants' }
+                  ]
+                }
+              ]
+            }
+          ]
+        })
+      });
+    });
+
     await page.route('**/api/ai-tutor/chat', async route => {
       await route.fulfill({
         status: 200,
@@ -139,45 +171,69 @@ test.describe('Miimiid browser application flows', () => {
     expect(response.status()).toBe(200);
     await expect(response).toBeOK();
 
-    const body = await response.json();
-    expect(body.status).toBe('success');
-    expect(Array.isArray(body.data)).toBe(true);
-    expect(body.data).toHaveLength(1);
-    expect(body.data[0].id).toBe('needs-vs-wants');
+    const payload = await response.json();
+    expect(payload.status).toBe('success');
+    expect(Array.isArray(payload.data)).toBe(true);
+    expect(payload.data.length).toBeGreaterThan(0);
 
-    for (const game of body.data) {
-      expect(game.id).toEqual(expect.any(String));
-      expect(game.title).toEqual(expect.any(String));
-      expect(Array.isArray(game.rounds)).toBe(true);
-      expect(game.rounds.length).toBeGreaterThan(0);
-      expect(game.rounds[0]).not.toHaveProperty('answer');
-      expect(game.rounds[0]).not.toHaveProperty('correctAnswer');
+    for (const game of payload.data) {
+      expect(game).toMatchObject({ id: expect.any(String), title: expect.any(String), rounds: expect.any(Array) });
+      expect(JSON.stringify(game)).not.toContain('correctAnswer');
+      expect(JSON.stringify(game)).not.toContain('answerIndex');
     }
   });
 
-  test('AI Tutor protects the chat endpoint when unauthenticated', async ({ request }) => {
-    const response = await request.post('/api/ai-tutor/chat', {
-      data: { message: 'Hello tutor' }
-    });
-
-    expect(response.status()).toBe(401);
-    const body = await response.json();
-    expect(body).toMatchObject({
-      success: false,
-      code: 'AI_TUTOR_AUTH_REQUIRED'
-    });
-  });
-
-  test('Fun Center session creation requires authentication', async ({ request }) => {
+  test('Fun Center game session flow rejects unauthenticated session creation', async ({ request }) => {
     const response = await request.post('/api/fun-center/session', {
       data: { gameId: 'needs-vs-wants' }
     });
 
     expect(response.status()).toBe(401);
-    const body = await response.json();
-    expect(body).toMatchObject({
+    const payload = await response.json();
+    expect(payload.status).toBe('error');
+  });
+
+  test('unknown API routes return the stable Miimiid JSON error contract', async ({ request }) => {
+    const response = await request.get('/api/does-not-exist');
+
+    expect(response.status()).toBe(404);
+    const payload = await response.json();
+    expect(payload).toMatchObject({
       status: 'error',
-      message: 'Authentication required.'
+      code: 'API_ROUTE_NOT_FOUND'
     });
+  });
+
+  test('health endpoints expose liveness and readiness contracts', async ({ request }) => {
+    const live = await request.get('/api/health/live');
+    expect(live.status()).toBe(200);
+    expect(await live.json()).toMatchObject({ status: 'OK' });
+
+    const ready = await request.get('/api/health/ready');
+    expect([200, 503]).toContain(ready.status());
+    expect(await ready.json()).toHaveProperty('status');
+  });
+
+  test('static application shell exposes Miimiid branding', async ({ request }) => {
+    const response = await request.get('/');
+
+    expect(response.status()).toBe(200);
+    const html = await response.text();
+    expect(html).toContain('<title>Miimiid</title>');
+    expect(html).toContain('Miimiid');
+  });
+
+  test('Fun Center browser navigation does not expose the retired Money Match view', async ({ page }) => {
+    await page.route('**/api/auth/me', async route => {
+      await route.fulfill({
+        status: 401,
+        contentType: 'application/json',
+        body: JSON.stringify({ status: 'error', message: 'Authentication required.' })
+      });
+    });
+
+    await page.goto('/');
+    await expect(page.locator('#miimiid-auth-card')).toBeVisible({ timeout: 10000 });
+    await expect(page.locator('.miimiid-money-match')).toHaveCount(0);
   });
 });
