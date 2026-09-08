@@ -43,7 +43,7 @@ test.describe('Miimiid browser application flows', () => {
     await expect(page.locator('#miimiid-login-submit')).toBeAttached();
   });
 
-  test('authenticated browser shell exposes dashboard, AI Tutor, and Fun Center views', async ({ page }) => {
+  test('authenticated browser shell exposes dashboard, AI Tutor, and the original Fun Center view', async ({ page }) => {
     await page.route('**/api/auth/me', async route => {
       await route.fulfill({
         status: 200,
@@ -79,29 +79,6 @@ test.describe('Miimiid browser application flows', () => {
             totalLessonsCompleted: 6,
             averageQuizScore: 88
           }
-        })
-      });
-    });
-
-    await page.route('**/api/learn/fun-center*', async route => {
-      await route.fulfill({
-        status: 200,
-        contentType: 'application/json',
-        body: JSON.stringify({
-          status: 'success',
-          data: [{
-            id: 'needs-vs-wants',
-            titleKey: 'funCenterNeedsWantsTitle',
-            resultTitleKey: 'funCenterNeedsWantsResultTitle',
-            resultMessageKey: 'funCenterNeedsWantsResultMessage',
-            answers: [
-              { id: 'need', key: 'funCenterAnswerNeed' },
-              { id: 'want', key: 'funCenterAnswerWant' }
-            ],
-            rounds: [
-              { id: 'browser-round', textKey: 'funCenterRoundRent', visual: '🏠', answer: 'need' }
-            ]
-          }]
         })
       });
     });
@@ -151,7 +128,8 @@ test.describe('Miimiid browser application flows', () => {
 
     await funCenterNav.click();
     await expect(page.locator('.miimiid-fun-center-view')).toBeVisible();
-    await expect(page.locator('.miimiid-fun-node').first()).toBeVisible();
+    await expect(page.locator('.miimiid-fun-node')).toHaveCount(1);
+    await expect(page.locator('.miimiid-fun-node-label')).toContainText('Needs vs Wants');
     await expect(page.locator('.miimiid-money-match')).toHaveCount(0);
   });
 
@@ -164,8 +142,8 @@ test.describe('Miimiid browser application flows', () => {
     const body = await response.json();
     expect(body.status).toBe('success');
     expect(Array.isArray(body.data)).toBe(true);
-    expect(body.data.length).toBeGreaterThan(0);
-    expect(body.data.some(game => game.id === 'money-match')).toBe(false);
+    expect(body.data).toHaveLength(1);
+    expect(body.data[0].id).toBe('needs-vs-wants');
 
     for (const game of body.data) {
       expect(game.id).toEqual(expect.any(String));
