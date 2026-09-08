@@ -54,9 +54,9 @@ app.get(['/', '/index.html'], (req, res, next) => {
       '<script defer src="/miimiid-auth-engine.js"></script>',
       '<script defer src="/auth-bootstrap-guard.js"></script>',
       '<script defer src="/password-validation.js"></script>',
-      '<script defer src="/pwa.js"></script>',
-      '<script defer src="/fun-center-runtime.js"></script>'
+      '<script defer src="/pwa.js"></script>'
     ];
+    
     for (const asset of headAssets) {
       const marker = asset.includes('href=') ? asset.match(/href="([^"]+)"/)?.[1] : asset.match(/src="([^"]+)"/)?.[1];
       if (!marker || !html.includes(marker)) html = html.replace(/<\/head>/i, `  ${asset}\n</head>`);
