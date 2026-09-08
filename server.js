@@ -105,9 +105,19 @@ function getDependencyHealth() {
 
 function healthResponse(res, ready) {
   const database = getDatabaseStatus();
-  if (!ready) return res.status(200).json({ status: 'OK', message: 'Miimiid is alive.' });
+
+  if (!ready) {
+    return res.status(200).json({ status: 'OK', message: 'Miimiid is alive.' });
+  }
+
   const ok = database === 'connected';
-  return res.status(ok ? 200 : 503).json({ status: ok ? 'OK' : 'DEGRADED', services: { database } });
+  const statusCode = ok ? 200 : 503;
+  // Contract checked by the health lifecycle test: status(ready ? 200 : 503).
+  return res.status(statusCode).json({
+    status: ok ? 'OK' : 'DEGRADED',
+    message: ok ? 'Miimiid is ready to serve traffic.' : 'Miimiid is not ready to serve traffic.',
+    services: { database }
+  });
 }
 
 app.get('/api/health/live', (req, res) => healthResponse(res, false));
