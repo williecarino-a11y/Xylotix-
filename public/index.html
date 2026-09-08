@@ -2038,7 +2038,32 @@ body:has(#miimiid-auth-view:not(.hidden)) {
           });
           </script>
 
+<script>
+  window.addEventListener('load', function() {
+    setTimeout(function() {
+        var content = document.getElementById('fun-center-content');
+            var realLoad = window.loadMiimiidFunCenter;
+                if (!content || typeof realLoad !== 'function') return;
 
+                    window.loadMiimiidFunCenter = async function() {
+                          var banner = document.createElement('div');
+                                banner.style.cssText = 'position:fixed;bottom:70px;left:0;right:0;z-index:99999;background:orange;color:black;padding:8px;font-size:11px;white-space:pre-wrap;max-height:200px;overflow:auto;';
+                                      document.body.appendChild(banner);
+                                            try {
+                                                    await realLoad();
+                                                            setTimeout(function() {
+                                                                      banner.textContent = 'ACTIVITIES: ' + (window.miimiidFunCenterActivities || []).length +
+                                                                                  ' | CONTENT HTML LENGTH: ' + content.innerHTML.length +
+                                                                                              ' | NODES FOUND: ' + content.querySelectorAll('.miimiid-fun-node, button').length +
+                                                                                                          ' | HTML SNIPPET: ' + content.innerHTML.slice(0, 300);
+                                                                                                                  }, 300);
+                                                                                                                        } catch (err) {
+                                                                                                                                banner.textContent = 'ERROR: ' + (err && err.stack ? err.stack : err);
+                                                                                                                                      }
+                                                                                                                                          };
+                                                                                                                                            }, 500);
+                                                                                                                                            });
+                                                                                                                                            </script>
 
 </head><body>
 <!-- =========================================
