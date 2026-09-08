@@ -54,7 +54,8 @@ app.get(['/', '/index.html'], (req, res, next) => {
       '<script defer src="/miimiid-auth-engine.js"></script>',
       '<script defer src="/auth-bootstrap-guard.js"></script>',
       '<script defer src="/password-validation.js"></script>',
-      '<script defer src="/pwa.js"></script>'
+      '<script defer src="/pwa.js"></script>',
+      '<script defer src="/fun-center.js"></script>'
     ];
     
     for (const asset of headAssets) {
