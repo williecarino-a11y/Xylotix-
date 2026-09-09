@@ -467,6 +467,12 @@ function renderMiimiidFunGameResult(result) {
 
   const title = typeof game.resultTitle === 'string' ? game.resultTitle : 'Round complete';
   const message = typeof game.resultMessage === 'string' ? game.resultMessage : '';
+  const ratio = totalRounds > 0 ? correctAnswers / totalRounds : 0;
+  const performanceMessage = ratio === 1
+    ? 'Perfect round! You know your needs from your wants.'
+    : ratio >= 0.6
+      ? 'Solid run — you\'re getting the hang of smart money choices.'
+      : 'Good start. Try again and sharpen your instincts.';
   const correctAnswers = Number.isFinite(result.correctAnswers) ? result.correctAnswers : miimiidFunCenterState.correctAnswers;
   const totalRounds = Number.isFinite(result.totalRounds) ? result.totalRounds : miimiidFunCenterState.totalRounds;
   const xp = Number.isFinite(result.xp) ? result.xp : 0;
@@ -477,7 +483,7 @@ function renderMiimiidFunGameResult(result) {
   content.innerHTML = `
     <div class="miimiid-fun-hero miimiid-fun-result">
       <div class="miimiid-fun-hero-label">${miimiidFunCenterEscapeHtml(title)}</div>
-      ${message ? `<div class="miimiid-fun-hero-subtitle">${miimiidFunCenterEscapeHtml(message)}</div>` : ''}
+      ${message ? `<div class="miimiid-fun-hero-subtitle">${miimiidFunCenterEscapeHtml(performanceMessage)}</div>` : ''}
       <div class="miimiid-fun-result-score">${correctAnswers} / ${totalRounds}</div>
       <div class="miimiid-fun-result-rewards">
         <span class="miimiid-fun-pill xp">+${xp} XP</span>
