@@ -198,6 +198,7 @@ function renderMiimiidFunCenter() {
           <div class="miimiid-fun-track-item">
             <button type="button" class="miimiid-fun-track-node ${stateClass}" data-fun-center-game="${miimiidFunCenterEscapeHtml(game.id)}" aria-label="${miimiidFunCenterEscapeHtml(typeof game.title === 'string' ? game.title : 'Game')}">
               <span aria-hidden="true">${icon}</span>
+               <span class="miimiid-fun-center-game-title" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;">${miimiidFunCenterEscapeHtml(typeof game.title === 'string' ? game.title : 'Game')}</span>
             </button>
             <span class="miimiid-fun-track-label">${miimiidFunCenterEscapeHtml(typeof game.title === 'string' ? game.title.split(' ')[0] : '')}</span>
           </div>
