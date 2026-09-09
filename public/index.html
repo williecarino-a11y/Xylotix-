@@ -2048,6 +2048,22 @@ body:has(#miimiid-auth-view:not(.hidden)) {
   .miimiid-fun-center-rewards { display: flex; justify-content: center; gap: 16px; margin: 16px 0; font-weight: 600; color: #4ade80; }
   </style>
 
+<style id="miimiid-fun-center-v3-anim">
+  .miimiid-fun-hub { display: flex; flex-direction: column; gap: 10px; }
+  .miimiid-fun-node { display: flex; align-items: center; gap: 12px; opacity: 0; transform: translateY(8px); animation: miimiidFunNodeIn 0.35s ease forwards; animation-delay: var(--fun-node-delay, 0ms); }
+  .miimiid-fun-node-icon { font-size: 22px; }
+  .miimiid-fun-node-text { display: flex; flex-direction: column; }
+  @keyframes miimiidFunNodeIn { to { opacity: 1; transform: translateY(0); } }
+  .miimiid-fun-card { animation: miimiidFunCardIn 0.3s ease; transition: box-shadow 0.2s ease; }
+  @keyframes miimiidFunCardIn { from { opacity: 0; transform: translateY(10px) scale(0.97); } to { opacity: 1; transform: translateY(0) scale(1); } }
+  .miimiid-fun-card.is-correct { box-shadow: 0 0 0 2px #4ade80 inset; }
+  .miimiid-fun-card.is-wrong { box-shadow: 0 0 0 2px #f87171 inset; animation: miimiidFunShake 0.4s ease; }
+  @keyframes miimiidFunShake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
+  .miimiid-fun-center-activity.is-correct { border-color: #4ade80 !important; background: rgba(74, 222, 128, 0.15) !important; }
+  .miimiid-fun-center-activity.is-wrong { border-color: #f87171 !important; background: rgba(248, 113, 113, 0.15) !important; }
+  .miimiid-fun-center-result { animation: miimiidFunCardIn 0.35s ease; }
+  </style>
+
 </head><body>
 <!-- =========================================
        MIIMIID AUTHENTICATION
