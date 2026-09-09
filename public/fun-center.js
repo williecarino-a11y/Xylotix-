@@ -467,7 +467,9 @@ function renderMiimiidFunGameResult(result) {
 
   const title = typeof game.resultTitle === 'string' ? game.resultTitle : 'Round complete';
   const message = typeof game.resultMessage === 'string' ? game.resultMessage : '';
-  const ratio = totalRounds > 0 ? correctAnswers / totalRounds : 0;
+  const totalRoundsForRatio = Number.isFinite(result.totalRounds) ? result.totalRounds : miimiidFunCenterState.totalRounds;
+  const correctAnswersForRatio = Number.isFinite(result.correctAnswers) ? result.correctAnswers : miimiidFunCenterState.correctAnswers;
+  const ratio = totalRoundsForRatio > 0 ? correctAnswersForRatio / totalRoundsForRatio : 0;
   const performanceMessage = ratio === 1
     ? 'Perfect round! You know your needs from your wants.'
     : ratio >= 0.6
