@@ -180,7 +180,7 @@ function renderMiimiidFunCenter() {
       <div class="miimiid-fun-hero-label">Continue your journey</div>
       <div class="miimiid-fun-hero-title">${miimiidFunCenterEscapeHtml(heroTitle)}</div>
       ${heroSubtitle ? `<div class="miimiid-fun-hero-subtitle">${miimiidFunCenterEscapeHtml(heroSubtitle)}</div>` : ''}
-      <button type="button" class="miimiid-fun-hero-play" data-fun-center-game="${miimiidFunCenterEscapeHtml(heroGame.id)}">
+      <button type="button" class="miimiid-fun-hero-play" data-fun-hero-play="${miimiidFunCenterEscapeHtml(heroGame.id)}">
         <span aria-hidden="true">&#9654;</span> Play now
       </button>
     </div>
@@ -213,6 +213,14 @@ function renderMiimiidFunCenter() {
       startMiimiidFunGame(button.dataset.funCenterGame);
     });
   });
+
+  const heroPlayButton = content.querySelector('[data-fun-hero-play]');
+  if (heroPlayButton) {
+    heroPlayButton.addEventListener('click', () => {
+      miimiidFunPlayTap();
+      startMiimiidFunGame(heroPlayButton.dataset.funHeroPlay);
+    });
+  }
 }
 
 function miimiidFunGameIcon(game) {
