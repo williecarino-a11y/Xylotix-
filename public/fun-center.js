@@ -62,6 +62,45 @@ function miimiidFunPlayComplete() {
 
 
 /* =========================================================
+ * MASCOT (hand-drawn with CSS shapes, no image assets)
+ * ========================================================= */
+
+function miimiidFunMascot(mood, size) {
+  const dimension = size || 56;
+  const eyeSize = Math.max(5, Math.round(dimension * 0.14));
+  const eyeTop = Math.round(dimension * 0.32);
+  const eyeSide = Math.round(dimension * 0.22);
+  const mouthTop = Math.round(dimension * 0.55);
+  const mouthLeft = Math.round(dimension * 0.32);
+  const mouthWidth = Math.round(dimension * 0.36);
+
+  const moods = {
+    idle: { body: '#1D9E75', ink: '#04342C', mouth: 'smile', tilt: 0 },
+    correct: { body: '#1D9E75', ink: '#04342C', mouth: 'smile', tilt: 0 },
+    wrong: { body: '#F0997B', ink: '#4A1B0C', mouth: 'flat', tilt: -4 },
+    celebrate: { body: '#7F77DD', ink: '#26215C', mouth: 'smile', tilt: 0 }
+  };
+  const m = moods[mood] || moods.idle;
+
+  const mouthMarkup = m.mouth === 'smile'
+    ? `<div style="position:absolute; top:${mouthTop}px; left:${mouthLeft}px; width:${mouthWidth}px; height:${Math.round(dimension * 0.18)}px; border-bottom:3px solid ${m.ink}; border-radius:0 0 12px 12px;"></div>`
+    : `<div style="position:absolute; top:${mouthTop}px; left:${mouthLeft}px; width:${mouthWidth}px; height:2px; background:${m.ink};"></div>`;
+
+  const animation = mood === 'celebrate'
+    ? 'miimiidFunMascotCelebrate 0.6s ease-in-out infinite'
+    : (mood === 'wrong' ? 'none' : 'miimiidFunMascotBounce 1.1s ease-in-out infinite');
+
+  return `
+    <div class="miimiid-fun-mascot" style="width:${dimension}px; height:${dimension}px; border-radius:50%; background:${m.body}; position:relative; flex-shrink:0; transform:rotate(${m.tilt}deg); animation:${animation};">
+      <div style="position:absolute; top:${eyeTop}px; left:${eyeSide}px; width:${eyeSize}px; height:${eyeSize}px; border-radius:50%; background:${m.ink};"></div>
+      <div style="position:absolute; top:${eyeTop}px; right:${eyeSide}px; width:${eyeSize}px; height:${eyeSize}px; border-radius:50%; background:${m.ink};"></div>
+      ${mouthMarkup}
+    </div>
+  `;
+}
+
+
+/* =========================================================
  * LOCAL COMPLETION TRACKING (purely cosmetic - server owns truth)
  * ========================================================= */
 
@@ -152,7 +191,7 @@ async function loadMiimiidFunCenter() {
 
 
 /* =========================================================
- * FUN CENTER HOME - hero card + level track
+ * FUN CENTER HOME - hero card + mascot + level track
  * ========================================================= */
 
 function renderMiimiidFunCenter() {
@@ -173,13 +212,17 @@ function renderMiimiidFunCenter() {
   const heroGame = miimiidFunCenterGames.find(game => !completed.includes(game.id)) || miimiidFunCenterGames[0];
   const heroTitle = typeof heroGame.title === 'string' ? heroGame.title : 'Fun Center Game';
   const heroSubtitle = typeof heroGame.subtitle === 'string' ? heroGame.subtitle : '';
-  const heroIcon = miimiidFunGameIcon(heroGame);
 
   content.innerHTML = `
     <div class="miimiid-fun-hero">
-      <div class="miimiid-fun-hero-label">Continue your journey</div>
-      <div class="miimiid-fun-hero-title">${miimiidFunCenterEscapeHtml(heroTitle)}</div>
-      ${heroSubtitle ? `<div class="miimiid-fun-hero-subtitle">${miimiidFunCenterEscapeHtml(heroSubtitle)}</div>` : ''}
+      <div class="miimiid-fun-hero-row">
+        ${miimiidFunMascot('idle', 52)}
+        <div>
+          <div class="miimiid-fun-hero-label">Continue your journey</div>
+          <div class="miimiid-fun-hero-title">${miimiidFunCenterEscapeHtml(heroTitle)}</div>
+          ${heroSubtitle ? `<div class="miimiid-fun-hero-subtitle">${miimiidFunCenterEscapeHtml(heroSubtitle)}</div>` : ''}
+        </div>
+      </div>
       <button type="button" class="miimiid-fun-hero-play" data-fun-hero-play="${miimiidFunCenterEscapeHtml(heroGame.id)}">
         <span aria-hidden="true">&#9654;</span> Play now
       </button>
@@ -198,7 +241,7 @@ function renderMiimiidFunCenter() {
           <div class="miimiid-fun-track-item">
             <button type="button" class="miimiid-fun-track-node ${stateClass}" data-fun-center-game="${miimiidFunCenterEscapeHtml(game.id)}" aria-label="${miimiidFunCenterEscapeHtml(typeof game.title === 'string' ? game.title : 'Game')}">
               <span aria-hidden="true">${icon}</span>
-               <span class="miimiid-fun-center-game-title" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;">${miimiidFunCenterEscapeHtml(typeof game.title === 'string' ? game.title : 'Game')}</span>
+              <span class="miimiid-fun-center-game-title" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;">${miimiidFunCenterEscapeHtml(typeof game.title === 'string' ? game.title : 'Game')}</span>
             </button>
             <span class="miimiid-fun-track-label">${miimiidFunCenterEscapeHtml(typeof game.title === 'string' ? game.title.split(' ')[0] : '')}</span>
           </div>
@@ -317,7 +360,10 @@ function renderMiimiidFunGameRound() {
       </div>
       <div class="miimiid-fun-progress-label">${progress} / ${rounds.length}</div>
 
-      ${visual ? `<div class="miimiid-fun-round-icon">${miimiidFunCenterEscapeHtml(visual)}</div>` : ''}
+      <div class="miimiid-fun-round-mascot-row">
+        ${miimiidFunMascot('idle', 48)}
+        ${visual ? `<div class="miimiid-fun-round-icon">${miimiidFunCenterEscapeHtml(visual)}</div>` : ''}
+      </div>
       <p class="miimiid-fun-round-prompt">${miimiidFunCenterEscapeHtml(prompt)}</p>
 
       <div class="miimiid-fun-choices">
@@ -354,6 +400,7 @@ async function submitMiimiidFunAnswer(button) {
 
   const content = document.getElementById('fun-center-content');
   const card = content ? content.querySelector('[data-fun-round]') : null;
+  const mascotEl = content ? content.querySelector('.miimiid-fun-round-mascot-row .miimiid-fun-mascot') : null;
 
   if (content) {
     content.querySelectorAll('[data-fun-answer]').forEach(answerButton => { answerButton.disabled = true; });
@@ -378,10 +425,12 @@ async function submitMiimiidFunAnswer(button) {
       miimiidFunPlayCorrect();
       if (card) card.classList.add('is-correct');
       button.classList.add('is-correct');
+      if (mascotEl) { mascotEl.style.background = '#1D9E75'; }
     } else {
       miimiidFunPlayWrong();
       if (card) card.classList.add('is-wrong');
       button.classList.add('is-wrong');
+      if (mascotEl) { mascotEl.style.background = '#F0997B'; mascotEl.style.transform = 'rotate(-4deg)'; mascotEl.style.animation = 'none'; }
     }
 
     state.roundIndex++;
@@ -466,26 +515,22 @@ function renderMiimiidFunGameResult(result) {
   if (!game) { renderMiimiidFunCenter(); return; }
 
   const title = typeof game.resultTitle === 'string' ? game.resultTitle : 'Round complete';
-  const message = typeof game.resultMessage === 'string' ? game.resultMessage : '';
-  const totalRoundsForRatio = Number.isFinite(result.totalRounds) ? result.totalRounds : miimiidFunCenterState.totalRounds;
-  const correctAnswersForRatio = Number.isFinite(result.correctAnswers) ? result.correctAnswers : miimiidFunCenterState.correctAnswers;
-  const ratio = totalRoundsForRatio > 0 ? correctAnswersForRatio / totalRoundsForRatio : 0;
+  const correctAnswers = Number.isFinite(result.correctAnswers) ? result.correctAnswers : miimiidFunCenterState.correctAnswers;
+  const totalRounds = Number.isFinite(result.totalRounds) ? result.totalRounds : miimiidFunCenterState.totalRounds;
+  const ratio = totalRounds > 0 ? correctAnswers / totalRounds : 0;
   const performanceMessage = ratio === 1
     ? 'Perfect round! You know your needs from your wants.'
     : ratio >= 0.6
       ? 'Solid run — you\'re getting the hang of smart money choices.'
       : 'Good start. Try again and sharpen your instincts.';
-  const correctAnswers = Number.isFinite(result.correctAnswers) ? result.correctAnswers : miimiidFunCenterState.correctAnswers;
-  const totalRounds = Number.isFinite(result.totalRounds) ? result.totalRounds : miimiidFunCenterState.totalRounds;
   const xp = Number.isFinite(result.xp) ? result.xp : 0;
   const coins = Number.isFinite(result.coins) ? result.coins : 0;
-
   miimiidFunPlayComplete();
-
   content.innerHTML = `
     <div class="miimiid-fun-hero miimiid-fun-result">
+      ${miimiidFunMascot('celebrate', 60)}
       <div class="miimiid-fun-hero-label">${miimiidFunCenterEscapeHtml(title)}</div>
-      ${message ? `<div class="miimiid-fun-hero-subtitle">${miimiidFunCenterEscapeHtml(performanceMessage)}</div>` : ''}
+      <div class="miimiid-fun-hero-subtitle">${miimiidFunCenterEscapeHtml(performanceMessage)}</div>
       <div class="miimiid-fun-result-score">${correctAnswers} / ${totalRounds}</div>
       <div class="miimiid-fun-result-rewards">
         <span class="miimiid-fun-pill xp">+${xp} XP</span>
@@ -497,19 +542,14 @@ function renderMiimiidFunGameResult(result) {
       <button type="button" class="miimiid-fun-btn-ghost" data-fun-center-back>Back to games</button>
     </div>
   `;
-
   const playAgainButton = content.querySelector('[data-fun-center-play-again]');
   if (playAgainButton) playAgainButton.addEventListener('click', () => startMiimiidFunGame(game.id));
-
   const backButton = content.querySelector('[data-fun-center-back]');
   if (backButton) backButton.addEventListener('click', () => { miimiidFunCenterState = null; renderMiimiidFunCenter(); });
 }
-
-
 /* =========================================================
  * HTML ESCAPING
  * ========================================================= */
-
 function miimiidFunCenterEscapeHtml(value) {
   return String(value ?? '')
     .replace(/&/g, '&amp;')
@@ -517,5 +557,4 @@ function miimiidFunCenterEscapeHtml(value) {
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#039;');
-      }
-    
+}
