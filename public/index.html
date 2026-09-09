@@ -2064,6 +2064,64 @@ body:has(#miimiid-auth-view:not(.hidden)) {
   .miimiid-fun-center-result { animation: miimiidFunCardIn 0.35s ease; }
   </style>
 
+<style id="miimiid-fun-center-v4-premium">
+  .miimiid-fun-loading, .miimiid-fun-empty, .miimiid-fun-error { text-align: center; color: #94a3b8; padding: 24px; }
+  .miimiid-fun-error-message { color: #f87171; font-size: 0.85rem; margin-bottom: 8px; }
+
+  .miimiid-fun-btn { display: block; width: 100%; padding: 12px 16px; margin-top: 10px; border-radius: 12px; border: 1px solid #334155; background: #1e293b; color: #f8fafc; font: inherit; cursor: pointer; }
+  .miimiid-fun-btn-ghost { display: block; width: 100%; padding: 10px 16px; margin-top: 8px; border-radius: 12px; border: none; background: transparent; color: #94a3b8; font: inherit; cursor: pointer; }
+
+  .miimiid-fun-hero { background: #111d33; border: 0.5px solid #1e2b45; border-radius: 18px; padding: 20px; margin-bottom: 18px; text-align: left; animation: miimiidFunHeroIn 0.35s ease; }
+  @keyframes miimiidFunHeroIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  .miimiid-fun-hero-label { color: #93c5fd; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; }
+  .miimiid-fun-hero-title { color: #f8fafc; font-size: 19px; font-weight: 600; margin-bottom: 4px; }
+  .miimiid-fun-hero-subtitle { color: #94a3b8; font-size: 12px; margin-bottom: 14px; }
+  .miimiid-fun-hero-play { background: #3b82f6; color: #f8fafc; border: none; border-radius: 12px; padding: 11px 20px; font-size: 14px; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; cursor: pointer; }
+  .miimiid-fun-hero-play:active { transform: scale(0.97); }
+
+  .miimiid-fun-track-heading { color: #f1f5f9; font-size: 13px; font-weight: 600; margin-bottom: 10px; }
+  .miimiid-fun-track { display: flex; align-items: center; gap: 4px; overflow-x: auto; padding-bottom: 6px; }
+  .miimiid-fun-track-item { display: flex; flex-direction: column; align-items: center; gap: 6px; flex-shrink: 0; }
+  .miimiid-fun-track-line { flex: 1; height: 2px; background: #1e2b45; min-width: 16px; }
+  .miimiid-fun-track-node { width: 46px; height: 46px; border-radius: 14px; border: 2px solid #334155; background: #1e293b; display: flex; align-items: center; justify-content: center; font-size: 20px; cursor: pointer; opacity: 0; animation: miimiidFunNodeIn 0.3s ease forwards; }
+  .miimiid-fun-track-item:nth-child(1) .miimiid-fun-track-node { animation-delay: 0ms; }
+  .miimiid-fun-track-item:nth-child(3) .miimiid-fun-track-node { animation-delay: 80ms; }
+  .miimiid-fun-track-item:nth-child(5) .miimiid-fun-track-node { animation-delay: 160ms; }
+  .miimiid-fun-track-item:nth-child(7) .miimiid-fun-track-node { animation-delay: 240ms; }
+  @keyframes miimiidFunNodeIn { to { opacity: 1; } }
+  .miimiid-fun-track-node.is-completed { background: #166534; border-color: #22c55e; color: #dcfce7; }
+  .miimiid-fun-track-node.is-current { background: #3b82f6; border-color: #93c5fd; }
+  .miimiid-fun-track-node.is-available { background: #1e293b; border-color: #334155; }
+  .miimiid-fun-track-node:active { transform: scale(0.94); }
+  .miimiid-fun-track-label { color: #64748b; font-size: 9px; max-width: 50px; text-align: center; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+  .miimiid-fun-round-card { background: #111d33; border: 0.5px solid #1e2b45; border-radius: 18px; padding: 20px; animation: miimiidFunHeroIn 0.3s ease; transition: box-shadow 0.2s ease; }
+  .miimiid-fun-round-card.is-correct { box-shadow: 0 0 0 2px #22c55e inset; }
+  .miimiid-fun-round-card.is-wrong { box-shadow: 0 0 0 2px #ef4444 inset; animation: miimiidFunShake 0.4s ease; }
+  @keyframes miimiidFunShake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
+
+  .miimiid-fun-progress-track { height: 5px; border-radius: 999px; background: #1e2b45; overflow: hidden; margin-bottom: 6px; }
+  .miimiid-fun-progress-fill { height: 100%; background: #3b82f6; border-radius: 999px; transition: width 0.3s ease; }
+  .miimiid-fun-progress-label { color: #64748b; font-size: 11px; text-align: right; margin-bottom: 14px; }
+
+  .miimiid-fun-round-icon { text-align: center; font-size: 2.6rem; margin-bottom: 10px; }
+  .miimiid-fun-round-prompt { color: #f1f5f9; font-size: 1.05rem; text-align: center; margin-bottom: 18px; }
+
+  .miimiid-fun-choices { display: flex; flex-direction: column; gap: 8px; }
+  .miimiid-fun-choice { padding: 13px 16px; border-radius: 12px; border: 2px solid #1e2b45; background: #0b1220; color: #f8fafc; font: inherit; font-weight: 500; cursor: pointer; }
+  .miimiid-fun-choice:active { transform: scale(0.98); }
+  .miimiid-fun-choice:disabled { opacity: 0.7; }
+  .miimiid-fun-choice.is-correct { border-color: #22c55e !important; background: rgba(34, 197, 94, 0.15) !important; }
+  .miimiid-fun-choice.is-wrong { border-color: #ef4444 !important; background: rgba(239, 68, 68, 0.15) !important; }
+
+  .miimiid-fun-result { text-align: center; }
+  .miimiid-fun-result-score { color: #f8fafc; font-size: 1.6rem; font-weight: 700; margin: 8px 0; }
+  .miimiid-fun-result-rewards { display: flex; justify-content: center; gap: 10px; margin: 12px 0 18px; }
+  .miimiid-fun-pill { font-size: 12px; padding: 5px 10px; border-radius: 8px; font-weight: 600; }
+  .miimiid-fun-pill.xp { background: #422006; color: #facc15; }
+  .miimiid-fun-pill.coins { background: #052e16; color: #4ade80; }
+  </style>
+
 </head><body>
 <!-- =========================================
        MIIMIID AUTHENTICATION
