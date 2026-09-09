@@ -17,6 +17,59 @@ let miimiidFunCenterState = null;
 
 
 /* =========================================================
+ * SOUND (no audio files needed)
+ * ========================================================= */
+
+const miimiidFunSoundCtx = { ctx: null };
+
+function miimiidFunGetAudioCtx() {
+  if (!miimiidFunSoundCtx.ctx) {
+    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+    if (!AudioContextClass) return null;
+    miimiidFunSoundCtx.ctx = new AudioContextClass();
+  }
+  return miimiidFunSoundCtx.ctx;
+}
+
+function miimiidFunTone(freq, duration, type, gainValue) {
+  const ctx = miimiidFunGetAudioCtx();
+  if (!ctx) return;
+  if (ctx.state === 'suspended') ctx.resume();
+  const osc = ctx.createOscillator();
+  const gain = ctx.createGain();
+  osc.type = type || 'sine';
+  osc.frequency.value = freq;
+  const now = ctx.currentTime;
+  gain.gain.setValueAtTime(gainValue || 0.08, now);
+  gain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
+  osc.connect(gain);
+  gain.connect(ctx.destination);
+  osc.start(now);
+  osc.stop(now + duration);
+}
+
+function miimiidFunPlayTap() {
+  miimiidFunTone(520, 0.08, 'sine', 0.05);
+}
+
+function miimiidFunPlayCorrect() {
+  miimiidFunTone(660, 0.12, 'triangle', 0.09);
+  setTimeout(() => miimiidFunTone(880, 0.16, 'triangle', 0.09), 90);
+}
+
+function miimiidFunPlayWrong() {
+  miimiidFunTone(220, 0.18, 'sawtooth', 0.07);
+  setTimeout(() => miimiidFunTone(160, 0.22, 'sawtooth', 0.07), 80);
+}
+
+function miimiidFunPlayComplete() {
+  [660, 780, 990, 1180].forEach((freq, i) => {
+    setTimeout(() => miimiidFunTone(freq, 0.18, 'triangle', 0.09), i * 110);
+  });
+}
+
+
+/* =========================================================
  * API
  * ========================================================= */
 
@@ -67,30 +120,14 @@ async function miimiidFunCenterRequest(url, options = {}) {
  * ========================================================= */
 
 async function loadMiimiidFunCenter() {
-  const content =
-    document.getElementById('fun-center-content');
+  const content = document.getElementById('fun-center-content');
+  if (!content) return;
 
-  if (!content) {
-    return;
-  }
-
-  content.innerHTML = `
-    <div class="miimiid-fun-center-loading">
-      Loading games…
-    </div>
-  `;
+  content.innerHTML = `<div class="miimiid-fun-center-loading">Loading games…</div>`;
 
   try {
-    const games =
-      await miimiidFunCenterRequest(
-        '/api/fun-center/games'
-      );
-
-    if (!Array.isArray(games)) {
-      throw new Error(
-        'Fun Center games response was invalid.'
-      );
-    }
+    const games = await miimiidFunCenterRequest('/api/fun-center/games');
+    if (!Array.isArray(games)) throw new Error('Fun Center games response was invalid.');
 
     miimiidFunCenterGames = games;
     miimiidFunCenterState = null;
@@ -98,43 +135,19 @@ async function loadMiimiidFunCenter() {
     renderMiimiidFunCenter();
 
   } catch (error) {
-    console.error(
-      'Miimiid Fun Center loading error:',
-      error
-    );
-
+    console.error('Miimiid Fun Center loading error:', error);
     miimiidFunCenterGames = [];
     miimiidFunCenterState = null;
 
     content.innerHTML = `
       <div class="miimiid-fun-center-error">
-        <p>
-          Unable to load the Fun Center right now.
-        </p>
-
-        <button
-          type="button"
-          class="miimiid-fun-center-activity"
-          data-fun-center-retry
-        >
-          Try again
-        </button>
+        <p>Unable to load the Fun Center right now.</p>
+        <button type="button" class="miimiid-fun-center-activity" data-fun-center-retry>Try again</button>
       </div>
     `;
 
-    const retryButton =
-      content.querySelector(
-        '[data-fun-center-retry]'
-      );
-
-    if (retryButton) {
-      retryButton.addEventListener(
-        'click',
-        () => {
-          loadMiimiidFunCenter();
-        }
-      );
-    }
+    const retryButton = content.querySelector('[data-fun-center-retry]');
+    if (retryButton) retryButton.addEventListener('click', () => loadMiimiidFunCenter());
   }
 }
 
@@ -144,105 +157,43 @@ async function loadMiimiidFunCenter() {
  * ========================================================= */
 
 function renderMiimiidFunCenter() {
-  const title =
-    document.getElementById(
-      'fun-center-title'
-    );
+  const title = document.getElementById('fun-center-title');
+  const subtitle = document.getElementById('fun-center-subtitle');
+  const content = document.getElementById('fun-center-content');
+  if (!title || !subtitle || !content) return;
 
-  const subtitle =
-    document.getElementById(
-      'fun-center-subtitle'
-    );
+  title.textContent = miimiidDashboardTranslate('funCenter');
+  subtitle.textContent = miimiidDashboardTranslate('funCenterSubtitle');
 
-  const content =
-    document.getElementById(
-      'fun-center-content'
-    );
-
-  if (!title || !subtitle || !content) {
+  if (!Array.isArray(miimiidFunCenterGames) || miimiidFunCenterGames.length === 0) {
+    content.innerHTML = `<div class="miimiid-fun-center-empty"><p>No games are available right now.</p></div>`;
     return;
   }
 
-  title.textContent =
-    miimiidDashboardTranslate(
-      'funCenter'
-    );
-
-  subtitle.textContent =
-    miimiidDashboardTranslate(
-      'funCenterSubtitle'
-    );
-
-  if (
-    !Array.isArray(miimiidFunCenterGames) ||
-    miimiidFunCenterGames.length === 0
-  ) {
-    content.innerHTML = `
-      <div class="miimiid-fun-center-empty">
-        <p>
-          No games are available right now.
-        </p>
-      </div>
-    `;
-
-    return;
-  }
-
-  content.innerHTML =
-    miimiidFunCenterGames
-      .map(game => {
-        const title =
-          typeof game.title === 'string'
-            ? game.title
-            : 'Fun Center Game';
-
-        const subtitle =
-          typeof game.subtitle === 'string'
-            ? game.subtitle
-            : '';
-
+  content.innerHTML = `
+    <div class="miimiid-fun-hub">
+      ${miimiidFunCenterGames.map((game, index) => {
+        const gameTitle = typeof game.title === 'string' ? game.title : 'Fun Center Game';
+        const gameSubtitle = typeof game.subtitle === 'string' ? game.subtitle : '';
         return `
-          <button
-            type="button"
-            class="miimiid-fun-center-activity"
-            data-fun-center-game="${miimiidFunCenterEscapeHtml(game.id)}"
-          >
-            <span
-              class="miimiid-fun-center-game-title"
-            >
-              ${miimiidFunCenterEscapeHtml(title)}
+          <button type="button" class="miimiid-fun-center-activity miimiid-fun-node" style="--fun-node-delay: ${index * 90}ms" data-fun-center-game="${miimiidFunCenterEscapeHtml(game.id)}">
+            <span class="miimiid-fun-node-icon">🗂️</span>
+            <span class="miimiid-fun-node-text">
+              <span class="miimiid-fun-center-game-title">${miimiidFunCenterEscapeHtml(gameTitle)}</span>
+              ${gameSubtitle ? `<span class="miimiid-fun-center-game-subtitle">${miimiidFunCenterEscapeHtml(gameSubtitle)}</span>` : ''}
             </span>
-
-            ${
-              subtitle
-                ? `
-                  <span
-                    class="miimiid-fun-center-game-subtitle"
-                  >
-                    ${miimiidFunCenterEscapeHtml(subtitle)}
-                  </span>
-                `
-                : ''
-            }
           </button>
         `;
-      })
-      .join('');
+      }).join('')}
+    </div>
+  `;
 
-  content
-    .querySelectorAll(
-      '[data-fun-center-game]'
-    )
-    .forEach(button => {
-      button.addEventListener(
-        'click',
-        () => {
-          startMiimiidFunGame(
-            button.dataset.funCenterGame
-          );
-        }
-      );
+  content.querySelectorAll('[data-fun-center-game]').forEach(button => {
+    button.addEventListener('click', () => {
+      miimiidFunPlayTap();
+      startMiimiidFunGame(button.dataset.funCenterGame);
     });
+  });
 }
 
 
@@ -251,50 +202,22 @@ function renderMiimiidFunCenter() {
  * ========================================================= */
 
 async function startMiimiidFunGame(gameId) {
-  const content =
-    document.getElementById(
-      'fun-center-content'
-    );
+  const content = document.getElementById('fun-center-content');
+  if (!content) return;
 
-  if (!content) {
-    return;
-  }
+  const game = miimiidFunCenterGames.find(item => item.id === gameId);
+  if (!game) { renderMiimiidFunCenter(); return; }
 
-  const game =
-    miimiidFunCenterGames.find(
-      item => item.id === gameId
-    );
-
-  if (!game) {
-    renderMiimiidFunCenter();
-    return;
-  }
-
-  content.innerHTML = `
-    <div class="miimiid-fun-center-loading">
-      Starting game…
-    </div>
-  `;
+  content.innerHTML = `<div class="miimiid-fun-center-loading">Starting game…</div>`;
 
   try {
-    const session =
-      await miimiidFunCenterRequest(
-        '/api/fun-center/session',
-        {
-          method: 'POST',
-          body: JSON.stringify({
-            gameId: game.id
-          })
-        }
-      );
+    const session = await miimiidFunCenterRequest('/api/fun-center/session', {
+      method: 'POST',
+      body: JSON.stringify({ gameId: game.id })
+    });
 
-    if (
-      !session ||
-      typeof session.sessionId !== 'string'
-    ) {
-      throw new Error(
-        'The Fun Center session could not be started.'
-      );
+    if (!session || typeof session.sessionId !== 'string') {
+      throw new Error('The Fun Center session could not be started.');
     }
 
     miimiidFunCenterState = {
@@ -304,56 +227,24 @@ async function startMiimiidFunGame(gameId) {
       score: 0,
       correctAnswers: 0,
       roundsCompleted: 0,
-      totalRounds:
-        Number.isInteger(session.totalRounds)
-          ? session.totalRounds
-          : Array.isArray(game.rounds)
-            ? game.rounds.length
-            : 0,
+      totalRounds: Number.isInteger(session.totalRounds) ? session.totalRounds : (Array.isArray(game.rounds) ? game.rounds.length : 0),
       submitting: false
     };
 
     renderMiimiidFunGameRound();
 
   } catch (error) {
-    console.error(
-      'Miimiid Fun Center start error:',
-      error
-    );
+    console.error('Miimiid Fun Center start error:', error);
 
     content.innerHTML = `
       <div class="miimiid-fun-center-error">
-        <p>
-          ${miimiidFunCenterEscapeHtml(
-            error.message ||
-              'Unable to start this game.'
-          )}
-        </p>
-
-        <button
-          type="button"
-          class="miimiid-fun-center-activity"
-          data-fun-center-back
-        >
-          Back to games
-        </button>
+        <p>${miimiidFunCenterEscapeHtml(error.message || 'Unable to start this game.')}</p>
+        <button type="button" class="miimiid-fun-center-activity" data-fun-center-back>Back to games</button>
       </div>
     `;
 
-    const backButton =
-      content.querySelector(
-        '[data-fun-center-back]'
-      );
-
-    if (backButton) {
-      backButton.addEventListener(
-        'click',
-        () => {
-          miimiidFunCenterState = null;
-          renderMiimiidFunCenter();
-        }
-      );
-    }
+    const backButton = content.querySelector('[data-fun-center-back]');
+    if (backButton) backButton.addEventListener('click', () => { miimiidFunCenterState = null; renderMiimiidFunCenter(); });
   }
 }
 
@@ -363,145 +254,47 @@ async function startMiimiidFunGame(gameId) {
  * ========================================================= */
 
 function renderMiimiidFunGameRound() {
-  const content =
-    document.getElementById(
-      'fun-center-content'
-    );
+  const content = document.getElementById('fun-center-content');
+  if (!content || !miimiidFunCenterState) return;
 
-  if (
-    !content ||
-    !miimiidFunCenterState
-  ) {
-    return;
-  }
+  const game = miimiidFunCenterGames.find(item => item.id === miimiidFunCenterState.gameId);
+  if (!game) { renderMiimiidFunCenter(); return; }
 
-  const game =
-    miimiidFunCenterGames.find(
-      item =>
-        item.id ===
-        miimiidFunCenterState.gameId
-    );
+  const rounds = Array.isArray(game.rounds) ? game.rounds : [];
+  const roundIndex = miimiidFunCenterState.roundIndex;
 
-  if (!game) {
-    renderMiimiidFunCenter();
-    return;
-  }
+  if (roundIndex >= rounds.length) { completeMiimiidFunGame(); return; }
 
-  const rounds =
-    Array.isArray(game.rounds)
-      ? game.rounds
-      : [];
+  const currentRound = rounds[roundIndex];
+  const prompt = typeof currentRound.prompt === 'string' ? currentRound.prompt : '';
+  const visual = typeof currentRound.visual === 'string' ? currentRound.visual : '';
+  const choices = Array.isArray(currentRound.choices) && currentRound.choices.length > 0
+    ? currentRound.choices
+    : (Array.isArray(game.answers) ? game.answers : []);
 
-  const roundIndex =
-    miimiidFunCenterState.roundIndex;
-
-  if (roundIndex >= rounds.length) {
-    completeMiimiidFunGame();
-    return;
-  }
-
-  const currentRound =
-    rounds[roundIndex];
-
-  const prompt =
-    typeof currentRound.prompt === 'string'
-      ? currentRound.prompt
-      : '';
-
-  const visual =
-    typeof currentRound.visual === 'string'
-      ? currentRound.visual
-      : '';
-
-  const choices =
-    Array.isArray(currentRound.choices) &&
-    currentRound.choices.length > 0
-      ? currentRound.choices
-      : Array.isArray(game.answers)
-        ? game.answers
-        : [];
-
-  const progress =
-    roundIndex + 1;
+  const progress = roundIndex + 1;
 
   content.innerHTML = `
-    <div
-      class="miimiid-fun-center-round"
-      data-fun-round="${miimiidFunCenterEscapeHtml(
-        currentRound.id || ''
-      )}"
-    >
-
-      <div
-        class="miimiid-fun-center-progress"
-      >
-        ${progress} / ${rounds.length}
-      </div>
-
-      ${
-        visual
-          ? `
-            <div
-              class="miimiid-fun-center-visual"
-              aria-hidden="true"
-            >
-              ${miimiidFunCenterEscapeHtml(
-                visual
-              )}
-            </div>
-          `
-          : ''
-      }
-
-      <p
-        class="miimiid-fun-center-prompt"
-      >
-        ${miimiidFunCenterEscapeHtml(
-          prompt
-        )}
-      </p>
-
-      <div
-        class="miimiid-fun-center-actions"
-      >
-        ${choices
-          .map(choice => {
-            const label =
-              typeof choice.label === 'string'
-                ? choice.label
-                : '';
-
-            return `
-              <button
-                type="button"
-                class="miimiid-fun-center-activity"
-                data-fun-answer="${miimiidFunCenterEscapeHtml(
-                  choice.id
-                )}"
-              >
-                ${miimiidFunCenterEscapeHtml(
-                  label
-                )}
-              </button>
-            `;
-          })
-          .join('')}
+    <div class="miimiid-fun-center-round miimiid-fun-card" data-fun-round="${miimiidFunCenterEscapeHtml(currentRound.id || '')}">
+      <div class="miimiid-fun-center-progress">${progress} / ${rounds.length}</div>
+      ${visual ? `<div class="miimiid-fun-center-visual" aria-hidden="true">${miimiidFunCenterEscapeHtml(visual)}</div>` : ''}
+      <p class="miimiid-fun-center-prompt">${miimiidFunCenterEscapeHtml(prompt)}</p>
+      <div class="miimiid-fun-center-actions">
+        ${choices.map(choice => {
+          const label = typeof choice.label === 'string' ? choice.label : '';
+          return `
+            <button type="button" class="miimiid-fun-center-activity" data-fun-answer="${miimiidFunCenterEscapeHtml(choice.id)}">
+              ${miimiidFunCenterEscapeHtml(label)}
+            </button>
+          `;
+        }).join('')}
       </div>
     </div>
   `;
 
-  content
-    .querySelectorAll(
-      '[data-fun-answer]'
-    )
-    .forEach(button => {
-      button.addEventListener(
-        'click',
-        () => {
-          submitMiimiidFunAnswer(button);
-        }
-      );
-    });
+  content.querySelectorAll('[data-fun-answer]').forEach(button => {
+    button.addEventListener('click', () => submitMiimiidFunAnswer(button));
+  });
 }
 
 
@@ -510,129 +303,71 @@ function renderMiimiidFunGameRound() {
  * ========================================================= */
 
 async function submitMiimiidFunAnswer(button) {
-  if (
-    !button ||
-    !miimiidFunCenterState ||
-    miimiidFunCenterState.submitting
-  ) {
-    return;
-  }
+  if (!button || !miimiidFunCenterState || miimiidFunCenterState.submitting) return;
 
-  const state =
-    miimiidFunCenterState;
-
-  const answer =
-    button.dataset.funAnswer;
-
-  if (!answer) {
-    return;
-  }
+  const state = miimiidFunCenterState;
+  const answer = button.dataset.funAnswer;
+  if (!answer) return;
 
   state.submitting = true;
 
-  const content =
-    document.getElementById(
-      'fun-center-content'
-    );
+  const content = document.getElementById('fun-center-content');
+  const card = content ? content.querySelector('[data-fun-round]') : null;
 
   if (content) {
-    content
-      .querySelectorAll(
-        '[data-fun-answer]'
-      )
-      .forEach(answerButton => {
-        answerButton.disabled = true;
-      });
+    content.querySelectorAll('[data-fun-answer]').forEach(answerButton => { answerButton.disabled = true; });
   }
 
   try {
-    const result =
-      await miimiidFunCenterRequest(
-        `/api/fun-center/session/${encodeURIComponent(
-          state.sessionId
-        )}/answer`,
-        {
-          method: 'POST',
-          body: JSON.stringify({
-            roundIndex: state.roundIndex,
-            answer
-          })
-        }
-      );
+    const result = await miimiidFunCenterRequest(
+      `/api/fun-center/session/${encodeURIComponent(state.sessionId)}/answer`,
+      { method: 'POST', body: JSON.stringify({ roundIndex: state.roundIndex, answer }) }
+    );
 
-    state.score =
-      Number.isFinite(result.score)
-        ? result.score
-        : state.score;
+    const previousCorrect = state.correctAnswers;
 
-    state.correctAnswers =
-      Number.isFinite(result.correctAnswers)
-        ? result.correctAnswers
-        : state.correctAnswers;
+    state.score = Number.isFinite(result.score) ? result.score : state.score;
+    state.correctAnswers = Number.isFinite(result.correctAnswers) ? result.correctAnswers : state.correctAnswers;
+    state.roundsCompleted = Number.isFinite(result.roundsCompleted) ? result.roundsCompleted : state.roundsCompleted;
+    state.totalRounds = Number.isFinite(result.totalRounds) ? result.totalRounds : state.totalRounds;
 
-    state.roundsCompleted =
-      Number.isFinite(result.roundsCompleted)
-        ? result.roundsCompleted
-        : state.roundsCompleted;
+    const wasCorrect = state.correctAnswers > previousCorrect;
 
-    state.totalRounds =
-      Number.isFinite(result.totalRounds)
-        ? result.totalRounds
-        : state.totalRounds;
+    if (wasCorrect) {
+      miimiidFunPlayCorrect();
+      if (card) card.classList.add('is-correct');
+      button.classList.add('is-correct');
+    } else {
+      miimiidFunPlayWrong();
+      if (card) card.classList.add('is-wrong');
+      button.classList.add('is-wrong');
+    }
 
     state.roundIndex++;
 
-    if (result.complete) {
-      await completeMiimiidFunGame();
-      return;
-    }
-
-    state.submitting = false;
-
-    renderMiimiidFunGameRound();
+    setTimeout(async () => {
+      if (result.complete) {
+        await completeMiimiidFunGame();
+        return;
+      }
+      state.submitting = false;
+      renderMiimiidFunGameRound();
+    }, 550);
 
   } catch (error) {
-    console.error(
-      'Miimiid Fun Center answer error:',
-      error
-    );
-
+    console.error('Miimiid Fun Center answer error:', error);
     state.submitting = false;
 
     if (content) {
-      const existingError =
-        content.querySelector(
-          '[data-fun-answer-error]'
-        );
-
+      const existingError = content.querySelector('[data-fun-answer-error]');
       if (!existingError) {
-        const errorElement =
-          document.createElement('p');
-
-        errorElement.dataset.funAnswerError =
-          '';
-
-        errorElement.className =
-          'miimiid-fun-center-error-message';
-
-        errorElement.textContent =
-          error.message ||
-          'Unable to submit your answer.';
-
-        content
-          .querySelector(
-            '.miimiid-fun-center-actions'
-          )
-          ?.prepend(errorElement);
+        const errorElement = document.createElement('p');
+        errorElement.dataset.funAnswerError = '';
+        errorElement.className = 'miimiid-fun-center-error-message';
+        errorElement.textContent = error.message || 'Unable to submit your answer.';
+        content.querySelector('.miimiid-fun-center-actions')?.prepend(errorElement);
       }
-
-      content
-        .querySelectorAll(
-          '[data-fun-answer]'
-        )
-        .forEach(answerButton => {
-          answerButton.disabled = false;
-        });
+      content.querySelectorAll('[data-fun-answer]').forEach(answerButton => { answerButton.disabled = false; });
     }
   }
 }
@@ -643,101 +378,37 @@ async function submitMiimiidFunAnswer(button) {
  * ========================================================= */
 
 async function completeMiimiidFunGame() {
-  if (!miimiidFunCenterState) {
-    return;
-  }
+  if (!miimiidFunCenterState) return;
 
-  const state =
-    miimiidFunCenterState;
+  const state = miimiidFunCenterState;
+  const content = document.getElementById('fun-center-content');
 
-  const content =
-    document.getElementById(
-      'fun-center-content'
-    );
-
-  if (content) {
-    content.innerHTML = `
-      <div class="miimiid-fun-center-loading">
-        Finishing game…
-      </div>
-    `;
-  }
+  if (content) content.innerHTML = `<div class="miimiid-fun-center-loading">Finishing game…</div>`;
 
   try {
-    const result =
-      await miimiidFunCenterRequest(
-        `/api/fun-center/session/${encodeURIComponent(
-          state.sessionId
-        )}/complete`,
-        {
-          method: 'POST'
-        }
-      );
-
+    const result = await miimiidFunCenterRequest(
+      `/api/fun-center/session/${encodeURIComponent(state.sessionId)}/complete`,
+      { method: 'POST' }
+    );
     renderMiimiidFunGameResult(result);
 
   } catch (error) {
-    console.error(
-      'Miimiid Fun Center completion error:',
-      error
-    );
+    console.error('Miimiid Fun Center completion error:', error);
 
     if (content) {
       content.innerHTML = `
         <div class="miimiid-fun-center-error">
-          <p>
-            ${miimiidFunCenterEscapeHtml(
-              error.message ||
-                'Unable to finish the game.'
-            )}
-          </p>
-
-          <button
-            type="button"
-            class="miimiid-fun-center-activity"
-            data-fun-center-retry-complete
-          >
-            Try again
-          </button>
-
-          <button
-            type="button"
-            class="miimiid-fun-center-activity"
-            data-fun-center-back
-          >
-            Back to games
-          </button>
+          <p>${miimiidFunCenterEscapeHtml(error.message || 'Unable to finish the game.')}</p>
+          <button type="button" class="miimiid-fun-center-activity" data-fun-center-retry-complete>Try again</button>
+          <button type="button" class="miimiid-fun-center-activity" data-fun-center-back>Back to games</button>
         </div>
       `;
 
-      const retryButton =
-        content.querySelector(
-          '[data-fun-center-retry-complete]'
-        );
+      const retryButton = content.querySelector('[data-fun-center-retry-complete]');
+      if (retryButton) retryButton.addEventListener('click', () => completeMiimiidFunGame());
 
-      if (retryButton) {
-        retryButton.addEventListener(
-          'click',
-          () => {
-            completeMiimiidFunGame();
-          }
-        );
-      }
-
-      const backButton =
-        content.querySelector(
-          '[data-fun-center-back]'
-        );
-
-      if (backButton) {
-        backButton.addEventListener(
-          'click',
-          () => {
-            miimiidFunCenterState = null;
-            renderMiimiidFunCenter();
-          }
-        );
-      }
+      const backButton = content.querySelector('[data-fun-center-back]');
+      if (backButton) backButton.addEventListener('click', () => { miimiidFunCenterState = null; renderMiimiidFunCenter(); });
     }
   }
 }
@@ -748,153 +419,45 @@ async function completeMiimiidFunGame() {
  * ========================================================= */
 
 function renderMiimiidFunGameResult(result) {
-  const content =
-    document.getElementById(
-      'fun-center-content'
-    );
+  const content = document.getElementById('fun-center-content');
+  if (!content || !miimiidFunCenterState) return;
 
-  if (
-    !content ||
-    !miimiidFunCenterState
-  ) {
-    return;
-  }
+  const game = miimiidFunCenterGames.find(item => item.id === miimiidFunCenterState.gameId);
+  if (!game) { renderMiimiidFunCenter(); return; }
 
-  const game =
-    miimiidFunCenterGames.find(
-      item =>
-        item.id ===
-        miimiidFunCenterState.gameId
-    );
+  const title = typeof game.resultTitle === 'string' ? game.resultTitle : 'Round complete';
+  const message = typeof game.resultMessage === 'string' ? game.resultMessage : '';
+  const score = Number.isFinite(result.score) ? result.score : miimiidFunCenterState.score;
+  const correctAnswers = Number.isFinite(result.correctAnswers) ? result.correctAnswers : miimiidFunCenterState.correctAnswers;
+  const totalRounds = Number.isFinite(result.totalRounds) ? result.totalRounds : miimiidFunCenterState.totalRounds;
+  const xp = Number.isFinite(result.xp) ? result.xp : 0;
+  const coins = Number.isFinite(result.coins) ? result.coins : 0;
 
-  if (!game) {
-    renderMiimiidFunCenter();
-    return;
-  }
-
-  const title =
-    typeof game.resultTitle === 'string'
-      ? game.resultTitle
-      : 'Round complete';
-
-  const message =
-    typeof game.resultMessage === 'string'
-      ? game.resultMessage
-      : '';
-
-  const score =
-    Number.isFinite(result.score)
-      ? result.score
-      : miimiidFunCenterState.score;
-
-  const correctAnswers =
-    Number.isFinite(result.correctAnswers)
-      ? result.correctAnswers
-      : miimiidFunCenterState.correctAnswers;
-
-  const totalRounds =
-    Number.isFinite(result.totalRounds)
-      ? result.totalRounds
-      : miimiidFunCenterState.totalRounds;
-
-  const xp =
-    Number.isFinite(result.xp)
-      ? result.xp
-      : 0;
-
-  const coins =
-    Number.isFinite(result.coins)
-      ? result.coins
-      : 0;
+  miimiidFunPlayComplete();
 
   content.innerHTML = `
-    <div
-      class="miimiid-fun-center-result"
-    >
-      <h2>
-        ${miimiidFunCenterEscapeHtml(title)}
-      </h2>
-
-      ${
-        message
-          ? `
-            <p>
-              ${miimiidFunCenterEscapeHtml(
-                message
-              )}
-            </p>
-          `
-          : ''
-      }
-
-      <strong>
-        ${correctAnswers} / ${totalRounds}
-      </strong>
-
-      <div
-        class="miimiid-fun-center-rewards"
-      >
-        <span>
-          +${xp} XP
-        </span>
-
-        <span>
-          +${coins} Coins
-        </span>
+    <div class="miimiid-fun-center-result">
+      <h2>${miimiidFunCenterEscapeHtml(title)}</h2>
+      ${message ? `<p>${miimiidFunCenterEscapeHtml(message)}</p>` : ''}
+      <strong>${correctAnswers} / ${totalRounds}</strong>
+      <div class="miimiid-fun-center-rewards">
+        <span>+${xp} XP</span>
+        <span>+${coins} Coins</span>
       </div>
-
-      <button
-        type="button"
-        class="miimiid-fun-center-activity"
-        data-fun-center-play-again
-      >
-        Play again
-      </button>
-
-      <button
-        type="button"
-        class="miimiid-fun-center-activity"
-        data-fun-center-back
-      >
-        Back to games
-      </button>
+      <button type="button" class="miimiid-fun-center-activity" data-fun-center-play-again>Play again</button>
+      <button type="button" class="miimiid-fun-center-activity" data-fun-center-back>Back to games</button>
     </div>
   `;
 
-  const playAgainButton =
-    content.querySelector(
-      '[data-fun-center-play-again]'
-    );
+  const playAgainButton = content.querySelector('[data-fun-center-play-again]');
+  if (playAgainButton) playAgainButton.addEventListener('click', () => startMiimiidFunGame(game.id));
 
-  if (playAgainButton) {
-    playAgainButton.addEventListener(
-      'click',
-      () => {
-        startMiimiidFunGame(game.id);
-      }
-    );
-  }
-
-  const backButton =
-    content.querySelector(
-      '[data-fun-center-back]'
-    );
-
-  if (backButton) {
-    backButton.addEventListener(
-      'click',
-      () => {
-        miimiidFunCenterState = null;
-        renderMiimiidFunCenter();
-      }
-    );
-  }
+  const backButton = content.querySelector('[data-fun-center-back]');
+  if (backButton) backButton.addEventListener('click', () => { miimiidFunCenterState = null; renderMiimiidFunCenter(); });
 
   miimiidFunCenterState.score = score;
-  miimiidFunCenterState.correctAnswers =
-    correctAnswers;
-  miimiidFunCenterState.roundsCompleted =
-    totalRounds;
+  miimiidFunCenterState.correctAnswers = correctAnswers;
+  miimiidFunCenterState.roundsCompleted = totalRounds;
 }
 
 
@@ -909,4 +472,5 @@ function miimiidFunCenterEscapeHtml(value) {
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#039;');
-          }
+}
+  
