@@ -2,22 +2,19 @@
  * MIIMIID FUN CENTER
  *
  * Server-authoritative Fun Center.
- *
- * The frontend:
- * - loads public game definitions from the API
- * - starts a server-side game session
- * - submits answers to the server
- * - renders server-validated results
- * - never knows the correct answer
- * - never calculates rewards
+ * Frontend loads game definitions, starts sessions, submits answers,
+ * and renders server-validated results. Never knows correct answers
+ * or calculates rewards itself.
  */
 
 let miimiidFunCenterGames = [];
 let miimiidFunCenterState = null;
 
+const MIIMIID_FUN_COMPLETED_KEY = 'miimiid-fun-completed-games';
+
 
 /* =========================================================
- * SOUND (no audio files needed)
+ * SOUND
  * ========================================================= */
 
 const miimiidFunSoundCtx = { ctx: null };
@@ -48,24 +45,42 @@ function miimiidFunTone(freq, duration, type, gainValue) {
   osc.stop(now + duration);
 }
 
-function miimiidFunPlayTap() {
-  miimiidFunTone(520, 0.08, 'sine', 0.05);
-}
-
+function miimiidFunPlayTap() { miimiidFunTone(520, 0.08, 'sine', 0.05); }
 function miimiidFunPlayCorrect() {
   miimiidFunTone(660, 0.12, 'triangle', 0.09);
   setTimeout(() => miimiidFunTone(880, 0.16, 'triangle', 0.09), 90);
 }
-
 function miimiidFunPlayWrong() {
   miimiidFunTone(220, 0.18, 'sawtooth', 0.07);
   setTimeout(() => miimiidFunTone(160, 0.22, 'sawtooth', 0.07), 80);
 }
-
 function miimiidFunPlayComplete() {
   [660, 780, 990, 1180].forEach((freq, i) => {
     setTimeout(() => miimiidFunTone(freq, 0.18, 'triangle', 0.09), i * 110);
   });
+}
+
+
+/* =========================================================
+ * LOCAL COMPLETION TRACKING (purely cosmetic - server owns truth)
+ * ========================================================= */
+
+function miimiidFunGetCompletedGames() {
+  try {
+    const raw = window.localStorage.getItem(MIIMIID_FUN_COMPLETED_KEY);
+    const parsed = raw ? JSON.parse(raw) : [];
+    return Array.isArray(parsed) ? parsed : [];
+  } catch { return []; }
+}
+
+function miimiidFunMarkGameCompleted(gameId) {
+  try {
+    const completed = miimiidFunGetCompletedGames();
+    if (!completed.includes(gameId)) {
+      completed.push(gameId);
+      window.localStorage.setItem(MIIMIID_FUN_COMPLETED_KEY, JSON.stringify(completed));
+    }
+  } catch { /* best effort only */ }
 }
 
 
@@ -77,26 +92,14 @@ async function miimiidFunCenterRequest(url, options = {}) {
   const response = await fetch(url, {
     credentials: 'same-origin',
     ...options,
-    headers: {
-      'Content-Type': 'application/json',
-      ...(options.headers || {})
-    }
+    headers: { 'Content-Type': 'application/json', ...(options.headers || {}) }
   });
 
   let result = null;
-
-  try {
-    result = await response.json();
-  } catch {
-    result = null;
-  }
+  try { result = await response.json(); } catch { result = null; }
 
   if (!response.ok) {
-    const message =
-      result && typeof result.message === 'string'
-        ? result.message
-        : `Fun Center request failed: ${response.status}`;
-
+    const message = result && typeof result.message === 'string' ? result.message : `Fun Center request failed: ${response.status}`;
     const error = new Error(message);
     error.status = response.status;
     error.data = result;
@@ -104,11 +107,7 @@ async function miimiidFunCenterRequest(url, options = {}) {
   }
 
   if (!result || result.status !== 'success') {
-    throw new Error(
-      result && typeof result.message === 'string'
-        ? result.message
-        : 'Fun Center response was invalid.'
-    );
+    throw new Error(result && typeof result.message === 'string' ? result.message : 'Fun Center response was invalid.');
   }
 
   return result.data;
@@ -123,7 +122,7 @@ async function loadMiimiidFunCenter() {
   const content = document.getElementById('fun-center-content');
   if (!content) return;
 
-  content.innerHTML = `<div class="miimiid-fun-center-loading">Loading games…</div>`;
+  content.innerHTML = `<div class="miimiid-fun-loading">Loading games…</div>`;
 
   try {
     const games = await miimiidFunCenterRequest('/api/fun-center/games');
@@ -140,9 +139,9 @@ async function loadMiimiidFunCenter() {
     miimiidFunCenterState = null;
 
     content.innerHTML = `
-      <div class="miimiid-fun-center-error">
+      <div class="miimiid-fun-error">
         <p>Unable to load the Fun Center right now.</p>
-        <button type="button" class="miimiid-fun-center-activity" data-fun-center-retry>Try again</button>
+        <button type="button" class="miimiid-fun-btn" data-fun-center-retry>Try again</button>
       </div>
     `;
 
@@ -153,7 +152,7 @@ async function loadMiimiidFunCenter() {
 
 
 /* =========================================================
- * FUN CENTER HOME
+ * FUN CENTER HOME - hero card + level track
  * ========================================================= */
 
 function renderMiimiidFunCenter() {
@@ -166,23 +165,43 @@ function renderMiimiidFunCenter() {
   subtitle.textContent = miimiidDashboardTranslate('funCenterSubtitle');
 
   if (!Array.isArray(miimiidFunCenterGames) || miimiidFunCenterGames.length === 0) {
-    content.innerHTML = `<div class="miimiid-fun-center-empty"><p>No games are available right now.</p></div>`;
+    content.innerHTML = `<div class="miimiid-fun-empty"><p>No games are available right now.</p></div>`;
     return;
   }
 
+  const completed = miimiidFunGetCompletedGames();
+  const heroGame = miimiidFunCenterGames.find(game => !completed.includes(game.id)) || miimiidFunCenterGames[0];
+  const heroTitle = typeof heroGame.title === 'string' ? heroGame.title : 'Fun Center Game';
+  const heroSubtitle = typeof heroGame.subtitle === 'string' ? heroGame.subtitle : '';
+  const heroIcon = miimiidFunGameIcon(heroGame);
+
   content.innerHTML = `
-    <div class="miimiid-fun-hub">
+    <div class="miimiid-fun-hero">
+      <div class="miimiid-fun-hero-label">Continue your journey</div>
+      <div class="miimiid-fun-hero-title">${miimiidFunCenterEscapeHtml(heroTitle)}</div>
+      ${heroSubtitle ? `<div class="miimiid-fun-hero-subtitle">${miimiidFunCenterEscapeHtml(heroSubtitle)}</div>` : ''}
+      <button type="button" class="miimiid-fun-hero-play" data-fun-center-game="${miimiidFunCenterEscapeHtml(heroGame.id)}">
+        <span aria-hidden="true">&#9654;</span> Play now
+      </button>
+    </div>
+
+    <div class="miimiid-fun-track-heading">Your path</div>
+
+    <div class="miimiid-fun-track">
       ${miimiidFunCenterGames.map((game, index) => {
-        const gameTitle = typeof game.title === 'string' ? game.title : 'Fun Center Game';
-        const gameSubtitle = typeof game.subtitle === 'string' ? game.subtitle : '';
+        const isCompleted = completed.includes(game.id);
+        const isCurrent = game.id === heroGame.id;
+        const stateClass = isCompleted ? 'is-completed' : (isCurrent ? 'is-current' : 'is-available');
+        const icon = isCompleted ? '&#10003;' : miimiidFunGameIcon(game);
+        const connector = index < miimiidFunCenterGames.length - 1 ? '<div class="miimiid-fun-track-line"></div>' : '';
         return `
-          <button type="button" class="miimiid-fun-center-activity miimiid-fun-node" style="--fun-node-delay: ${index * 90}ms" data-fun-center-game="${miimiidFunCenterEscapeHtml(game.id)}">
-            <span class="miimiid-fun-node-icon">🗂️</span>
-            <span class="miimiid-fun-node-text">
-              <span class="miimiid-fun-center-game-title">${miimiidFunCenterEscapeHtml(gameTitle)}</span>
-              ${gameSubtitle ? `<span class="miimiid-fun-center-game-subtitle">${miimiidFunCenterEscapeHtml(gameSubtitle)}</span>` : ''}
-            </span>
-          </button>
+          <div class="miimiid-fun-track-item">
+            <button type="button" class="miimiid-fun-track-node ${stateClass}" data-fun-center-game="${miimiidFunCenterEscapeHtml(game.id)}" aria-label="${miimiidFunCenterEscapeHtml(typeof game.title === 'string' ? game.title : 'Game')}">
+              <span aria-hidden="true">${icon}</span>
+            </button>
+            <span class="miimiid-fun-track-label">${miimiidFunCenterEscapeHtml(typeof game.title === 'string' ? game.title.split(' ')[0] : '')}</span>
+          </div>
+          ${connector}
         `;
       }).join('')}
     </div>
@@ -194,6 +213,13 @@ function renderMiimiidFunCenter() {
       startMiimiidFunGame(button.dataset.funCenterGame);
     });
   });
+}
+
+function miimiidFunGameIcon(game) {
+  if (game && Array.isArray(game.rounds) && game.rounds[0] && typeof game.rounds[0].visual === 'string' && game.rounds[0].visual) {
+    return miimiidFunCenterEscapeHtml(game.rounds[0].visual);
+  }
+  return '&#127919;';
 }
 
 
@@ -208,7 +234,7 @@ async function startMiimiidFunGame(gameId) {
   const game = miimiidFunCenterGames.find(item => item.id === gameId);
   if (!game) { renderMiimiidFunCenter(); return; }
 
-  content.innerHTML = `<div class="miimiid-fun-center-loading">Starting game…</div>`;
+  content.innerHTML = `<div class="miimiid-fun-loading">Starting game…</div>`;
 
   try {
     const session = await miimiidFunCenterRequest('/api/fun-center/session', {
@@ -237,9 +263,9 @@ async function startMiimiidFunGame(gameId) {
     console.error('Miimiid Fun Center start error:', error);
 
     content.innerHTML = `
-      <div class="miimiid-fun-center-error">
+      <div class="miimiid-fun-error">
         <p>${miimiidFunCenterEscapeHtml(error.message || 'Unable to start this game.')}</p>
-        <button type="button" class="miimiid-fun-center-activity" data-fun-center-back>Back to games</button>
+        <button type="button" class="miimiid-fun-btn" data-fun-center-back>Back to games</button>
       </div>
     `;
 
@@ -273,17 +299,23 @@ function renderMiimiidFunGameRound() {
     : (Array.isArray(game.answers) ? game.answers : []);
 
   const progress = roundIndex + 1;
+  const progressPct = Math.round((progress / rounds.length) * 100);
 
   content.innerHTML = `
-    <div class="miimiid-fun-center-round miimiid-fun-card" data-fun-round="${miimiidFunCenterEscapeHtml(currentRound.id || '')}">
-      <div class="miimiid-fun-center-progress">${progress} / ${rounds.length}</div>
-      ${visual ? `<div class="miimiid-fun-center-visual" aria-hidden="true">${miimiidFunCenterEscapeHtml(visual)}</div>` : ''}
-      <p class="miimiid-fun-center-prompt">${miimiidFunCenterEscapeHtml(prompt)}</p>
-      <div class="miimiid-fun-center-actions">
+    <div class="miimiid-fun-round-card" data-fun-round="${miimiidFunCenterEscapeHtml(currentRound.id || '')}">
+      <div class="miimiid-fun-progress-track">
+        <div class="miimiid-fun-progress-fill" style="width:${progressPct}%"></div>
+      </div>
+      <div class="miimiid-fun-progress-label">${progress} / ${rounds.length}</div>
+
+      ${visual ? `<div class="miimiid-fun-round-icon">${miimiidFunCenterEscapeHtml(visual)}</div>` : ''}
+      <p class="miimiid-fun-round-prompt">${miimiidFunCenterEscapeHtml(prompt)}</p>
+
+      <div class="miimiid-fun-choices">
         ${choices.map(choice => {
           const label = typeof choice.label === 'string' ? choice.label : '';
           return `
-            <button type="button" class="miimiid-fun-center-activity" data-fun-answer="${miimiidFunCenterEscapeHtml(choice.id)}">
+            <button type="button" class="miimiid-fun-choice" data-fun-answer="${miimiidFunCenterEscapeHtml(choice.id)}">
               ${miimiidFunCenterEscapeHtml(label)}
             </button>
           `;
@@ -346,10 +378,7 @@ async function submitMiimiidFunAnswer(button) {
     state.roundIndex++;
 
     setTimeout(async () => {
-      if (result.complete) {
-        await completeMiimiidFunGame();
-        return;
-      }
+      if (result.complete) { await completeMiimiidFunGame(); return; }
       state.submitting = false;
       renderMiimiidFunGameRound();
     }, 550);
@@ -363,9 +392,9 @@ async function submitMiimiidFunAnswer(button) {
       if (!existingError) {
         const errorElement = document.createElement('p');
         errorElement.dataset.funAnswerError = '';
-        errorElement.className = 'miimiid-fun-center-error-message';
+        errorElement.className = 'miimiid-fun-error-message';
         errorElement.textContent = error.message || 'Unable to submit your answer.';
-        content.querySelector('.miimiid-fun-center-actions')?.prepend(errorElement);
+        content.querySelector('.miimiid-fun-choices')?.prepend(errorElement);
       }
       content.querySelectorAll('[data-fun-answer]').forEach(answerButton => { answerButton.disabled = false; });
     }
@@ -383,13 +412,15 @@ async function completeMiimiidFunGame() {
   const state = miimiidFunCenterState;
   const content = document.getElementById('fun-center-content');
 
-  if (content) content.innerHTML = `<div class="miimiid-fun-center-loading">Finishing game…</div>`;
+  if (content) content.innerHTML = `<div class="miimiid-fun-loading">Finishing game…</div>`;
 
   try {
     const result = await miimiidFunCenterRequest(
       `/api/fun-center/session/${encodeURIComponent(state.sessionId)}/complete`,
       { method: 'POST' }
     );
+
+    miimiidFunMarkGameCompleted(state.gameId);
     renderMiimiidFunGameResult(result);
 
   } catch (error) {
@@ -397,10 +428,10 @@ async function completeMiimiidFunGame() {
 
     if (content) {
       content.innerHTML = `
-        <div class="miimiid-fun-center-error">
+        <div class="miimiid-fun-error">
           <p>${miimiidFunCenterEscapeHtml(error.message || 'Unable to finish the game.')}</p>
-          <button type="button" class="miimiid-fun-center-activity" data-fun-center-retry-complete>Try again</button>
-          <button type="button" class="miimiid-fun-center-activity" data-fun-center-back>Back to games</button>
+          <button type="button" class="miimiid-fun-btn" data-fun-center-retry-complete>Try again</button>
+          <button type="button" class="miimiid-fun-btn" data-fun-center-back>Back to games</button>
         </div>
       `;
 
@@ -427,7 +458,6 @@ function renderMiimiidFunGameResult(result) {
 
   const title = typeof game.resultTitle === 'string' ? game.resultTitle : 'Round complete';
   const message = typeof game.resultMessage === 'string' ? game.resultMessage : '';
-  const score = Number.isFinite(result.score) ? result.score : miimiidFunCenterState.score;
   const correctAnswers = Number.isFinite(result.correctAnswers) ? result.correctAnswers : miimiidFunCenterState.correctAnswers;
   const totalRounds = Number.isFinite(result.totalRounds) ? result.totalRounds : miimiidFunCenterState.totalRounds;
   const xp = Number.isFinite(result.xp) ? result.xp : 0;
@@ -436,16 +466,18 @@ function renderMiimiidFunGameResult(result) {
   miimiidFunPlayComplete();
 
   content.innerHTML = `
-    <div class="miimiid-fun-center-result">
-      <h2>${miimiidFunCenterEscapeHtml(title)}</h2>
-      ${message ? `<p>${miimiidFunCenterEscapeHtml(message)}</p>` : ''}
-      <strong>${correctAnswers} / ${totalRounds}</strong>
-      <div class="miimiid-fun-center-rewards">
-        <span>+${xp} XP</span>
-        <span>+${coins} Coins</span>
+    <div class="miimiid-fun-hero miimiid-fun-result">
+      <div class="miimiid-fun-hero-label">${miimiidFunCenterEscapeHtml(title)}</div>
+      ${message ? `<div class="miimiid-fun-hero-subtitle">${miimiidFunCenterEscapeHtml(message)}</div>` : ''}
+      <div class="miimiid-fun-result-score">${correctAnswers} / ${totalRounds}</div>
+      <div class="miimiid-fun-result-rewards">
+        <span class="miimiid-fun-pill xp">+${xp} XP</span>
+        <span class="miimiid-fun-pill coins">+${coins} coins</span>
       </div>
-      <button type="button" class="miimiid-fun-center-activity" data-fun-center-play-again>Play again</button>
-      <button type="button" class="miimiid-fun-center-activity" data-fun-center-back>Back to games</button>
+      <button type="button" class="miimiid-fun-hero-play" data-fun-center-play-again>
+        <span aria-hidden="true">&#9654;</span> Play again
+      </button>
+      <button type="button" class="miimiid-fun-btn-ghost" data-fun-center-back>Back to games</button>
     </div>
   `;
 
@@ -454,10 +486,6 @@ function renderMiimiidFunGameResult(result) {
 
   const backButton = content.querySelector('[data-fun-center-back]');
   if (backButton) backButton.addEventListener('click', () => { miimiidFunCenterState = null; renderMiimiidFunCenter(); });
-
-  miimiidFunCenterState.score = score;
-  miimiidFunCenterState.correctAnswers = correctAnswers;
-  miimiidFunCenterState.roundsCompleted = totalRounds;
 }
 
 
@@ -472,5 +500,5 @@ function miimiidFunCenterEscapeHtml(value) {
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#039;');
-}
-  
+      }
+    
