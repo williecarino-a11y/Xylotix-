@@ -1,0 +1,280 @@
+/* =========================================================
+   MIIMIID FUN CENTER — REFERENCE HOME
+   ========================================================= */
+
+.miimiid-fun-center-view {
+  width: 100%;
+  min-height: calc(100vh - 82px);
+  box-sizing: border-box;
+  padding: 0;
+}
+
+.miimiid-fun-center-card {
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+
+.miimiid-fun-page {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.miimiid-fun-hero-visual {
+  position: relative;
+  min-height: 440px;
+  overflow: hidden;
+  padding: 38px 24px 24px;
+  box-sizing: border-box;
+  background:
+    radial-gradient(circle at 78% 42%, rgba(14, 165, 233, 0.22), transparent 30%),
+    linear-gradient(180deg, #071b38 0%, #062a52 60%, #06345a 100%);
+}
+
+.miimiid-fun-hero-visual::after {
+  content: "";
+  position: absolute;
+  left: -10%;
+  right: -10%;
+  bottom: -45px;
+  height: 125px;
+  background: radial-gradient(ellipse at center, #075985 0%, #06345a 55%, transparent 70%);
+  opacity: 0.95;
+}
+
+.miimiid-fun-hero-copy {
+  position: relative;
+  z-index: 5;
+  width: 55%;
+}
+
+.miimiid-fun-title {
+  display: flex;
+  flex-direction: column;
+  font-size: clamp(3rem, 12vw, 5.5rem);
+  font-weight: 900;
+  line-height: 0.86;
+  letter-spacing: -0.06em;
+}
+
+.miimiid-fun-title span { color: #f8fafc; }
+.miimiid-fun-title strong { color: #22d3ee; font-weight: 900; }
+
+.miimiid-fun-tagline {
+  margin: 24px 0 0;
+  color: #dbeafe;
+  font-size: clamp(1rem, 4vw, 1.35rem);
+  line-height: 1.4;
+  font-weight: 500;
+}
+
+.miimiid-fun-hero-mascot {
+  position: absolute;
+  z-index: 4;
+  right: -8px;
+  bottom: 20px;
+  width: 58%;
+  max-width: 390px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  filter: drop-shadow(0 0 20px rgba(34, 211, 238, 0.25)) drop-shadow(0 18px 25px rgba(0, 0, 0, 0.3));
+}
+
+.miimiid-fun-hero-mascot img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.miimiid-fun-hero-mascot-fallback[hidden] { display: none; }
+
+.miimiid-fun-hero-coins {
+  position: absolute;
+  z-index: 6;
+  right: 27%;
+  bottom: 25px;
+}
+
+.fun-coin {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #fde68a, #f59e0b 55%, #b45309);
+  border: 4px solid #fbbf24;
+  color: #fff7ed;
+  font-size: 2rem;
+  font-weight: 900;
+  box-shadow: inset 0 0 0 3px rgba(255,255,255,.2), 0 8px 18px rgba(0,0,0,.25);
+}
+
+.coin-one { position: relative; transform: rotate(-8deg); }
+.coin-two { width: 50px; height: 50px; left: 70px; bottom: -8px; transform: rotate(9deg); }
+
+.miimiid-fun-hero-decoration {
+  position: absolute;
+  z-index: 5;
+  color: #facc15;
+  font-size: 1.8rem;
+  animation: miimiidFunSparkle 2.4s ease-in-out infinite;
+}
+
+.decoration-one { left: 48%; top: 90px; }
+.decoration-two { right: 12%; top: 55px; color: #22d3ee; animation-delay: .5s; }
+.decoration-three { right: 34%; top: 30px; font-size: 1.3rem; animation-delay: 1s; }
+
+@keyframes miimiidFunSparkle {
+  0%, 100% { transform: scale(1) rotate(0deg); opacity: .7; }
+  50% { transform: scale(1.3) rotate(20deg); opacity: 1; }
+}
+
+.miimiid-fun-game-card {
+  position: relative;
+  z-index: 10;
+  margin: -4px 16px 28px;
+  overflow: hidden;
+  border: 2px solid #075985;
+  border-radius: 22px;
+  background: linear-gradient(180deg, #08284d 0%, #061b37 100%);
+  box-shadow: 0 14px 35px rgba(0, 0, 0, .28);
+}
+
+.miimiid-fun-progress-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 22px 24px 12px;
+}
+
+.miimiid-fun-progress-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #22d3ee;
+  font-size: .95rem;
+  font-weight: 900;
+  letter-spacing: .02em;
+}
+
+.miimiid-fun-progress-icon { font-size: 1.7rem; }
+.miimiid-fun-progress-count { color: #cbd5e1; font-size: 1rem; font-weight: 700; }
+
+.miimiid-fun-progress-track {
+  height: 20px;
+  margin: 0 24px 22px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #193557;
+}
+
+.miimiid-fun-progress-fill {
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #0ea5e9, #22d3ee);
+  transition: width .35s ease;
+}
+
+.miimiid-fun-game-divider { height: 1px; background: #16466e; }
+
+.miimiid-fun-current-game { padding: 34px 24px 28px; text-align: center; }
+
+.miimiid-fun-game-visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  min-height: 92px;
+}
+
+.miimiid-fun-game-visual .miimiid-fun-mascot { animation: none !important; }
+
+.miimiid-fun-round-icon { font-size: 4rem; line-height: 1; }
+
+.miimiid-fun-current-title {
+  margin: 20px 0 8px;
+  color: #f8fafc;
+  font-size: clamp(1.8rem, 7vw, 2.35rem);
+  font-weight: 900;
+}
+
+.miimiid-fun-current-subtitle {
+  max-width: 430px;
+  margin: 0 auto 28px;
+  color: #a9c5e4;
+  font-size: 1.08rem;
+  line-height: 1.45;
+}
+
+.miimiid-fun-home-choices { display: grid; gap: 16px; max-width: 580px; margin: 0 auto; }
+
+.miimiid-fun-home-choice {
+  position: relative;
+  width: 100%;
+  min-height: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px 54px 15px 24px;
+  border-radius: 18px;
+  font-size: 1.25rem;
+  font-weight: 900;
+  cursor: pointer;
+  transition: transform .15s ease, filter .15s ease;
+}
+
+.miimiid-fun-home-choice:hover { filter: brightness(1.1); }
+.miimiid-fun-home-choice:active { transform: scale(.985); }
+
+.miimiid-fun-home-choice.is-need {
+  border: 3px solid #0ea5e9;
+  background: #071b38;
+  color: #f8fafc;
+}
+
+.miimiid-fun-home-choice.is-want {
+  border: 3px solid #f0abfc;
+  background: linear-gradient(135deg, #ec008c, #8b0bbf);
+  color: #fff;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.18), 0 7px 20px rgba(236, 0, 140, .2);
+}
+
+.miimiid-fun-choice-arrow { position: absolute; right: 22px; font-size: 1.8rem; font-weight: 400; }
+
+.miimiid-fun-home-play {
+  width: 100%;
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  border: 0;
+  border-radius: 16px;
+  background: #0ea5e9;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+@media (max-width: 520px) {
+  .miimiid-fun-hero-visual { min-height: 390px; padding: 34px 20px 20px; }
+  .miimiid-fun-hero-copy { width: 58%; }
+  .miimiid-fun-title { font-size: 3.5rem; }
+  .miimiid-fun-tagline { font-size: 1rem; }
+  .miimiid-fun-hero-mascot { width: 57%; right: -5px; bottom: 18px; }
+  .miimiid-fun-game-card { margin-left: 14px; margin-right: 14px; }
+  .miimiid-fun-current-game { padding-left: 18px; padding-right: 18px; }
+  .miimiid-fun-progress-header { padding-left: 18px; padding-right: 18px; }
+  .miimiid-fun-progress-track { margin-left: 18px; margin-right: 18px; }
+}
+  
