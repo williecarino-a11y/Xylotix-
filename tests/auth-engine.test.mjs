@@ -11,6 +11,7 @@ import { ValidationEngine } from '../public/auth-engine/validation.js';
 const root = path.join(process.cwd());
 const authEngine = fs.readFileSync(path.join(root, 'public', 'miimiid-auth-engine.js'), 'utf8');
 const loader = fs.readFileSync(path.join(root, 'public', 'continue-loading.js'), 'utf8');
+const manifest = fs.readFileSync(path.join(root, 'public', 'manifest.json'), 'utf8');
 const server = fs.readFileSync(path.join(root, 'server.js'), 'utf8');
 const authRoutes = fs.readFileSync(path.join(root, 'routes', 'authRoutes.js'), 'utf8');
 const passwordRoutes = fs.readFileSync(path.join(root, 'routes', 'passwordRoutes.js'), 'utf8');
@@ -122,4 +123,12 @@ test('password validation remains centralized', () => {
   assert.match(passwordValidator, /function validatePassword/);
   assert.match(authRoutes, /const passwordResult = validatePassword\(password\)/);
   assert.match(passwordRoutes, /const result = validatePassword\(password\)/);
+});
+
+test('PWA branding uses the canonical Miimiid icon set', () => {
+  assert.match(manifest, /"name":\s*"Miimiid"/);
+  assert.match(manifest, /\/icons\/icon-192\.svg/);
+  assert.match(manifest, /\/icons\/icon-512\.svg/);
+  assert.doesNotMatch(manifest, /\/icons\/nb-192\.png/);
+  assert.doesNotMatch(manifest, /\/icons\/nb-512\.png/);
 });
