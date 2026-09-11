@@ -4,6 +4,7 @@
 
 .miimiid-fun-center-view {
   width: 100%;
+  min-height: calc(100vh - 82px);
   box-sizing: border-box;
   padding: 0;
 }
