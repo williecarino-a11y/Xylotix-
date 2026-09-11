@@ -154,7 +154,7 @@ test('server canonicalizes legacy static PWA brand assets', () => {
   assert.match(server, /legacyBrandAssets/);
   assert.ok(server.includes(String.raw`href="\/favicon\.ico"`));
   assert.ok(server.includes(String.raw`href="\/icons\/nb-192\.png"`));
-  assert.ok(server.includes(String.raw`href="\/icons\/icon-192\.svg"`));
+  assert.ok(server.includes('href="/icons/icon-192.svg"'));
   assert.ok(server.includes('href="/favicon.svg"'));
   assert.match(server, /for \(const legacyAsset of legacyBrandAssets\)/);
 });
