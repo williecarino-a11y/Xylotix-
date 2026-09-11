@@ -152,9 +152,9 @@ test('ContinueLoading respects the explicit fetch opt-out header', () => {
 
 test('server canonicalizes legacy static PWA brand assets', () => {
   assert.match(server, /legacyBrandAssets/);
-  assert.match(server, /\/favicon\\\.ico/);
-  assert.match(server, /\/icons\\\/nb-192\\\.png/);
-  assert.match(server, /\/icons\\\/icon-192\\\.svg/);
-  assert.match(server, /\/favicon\\\.svg/);
+  assert.match(server, /\/favicon\.ico/);
+  assert.match(server, /\/icons\/nb-192\.png/);
+  assert.match(server, /\/icons\/icon-192\.svg/);
+  assert.match(server, /\/favicon\.svg/);
   assert.match(server, /for \(const legacyAsset of legacyBrandAssets\)/);
 });
