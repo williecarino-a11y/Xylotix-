@@ -194,87 +194,193 @@ async function loadMiimiidFunCenter() {
  * FUN CENTER HOME - hero card + mascot + level track
  * ========================================================= */
 
-function renderMiimiidFunCenter() {
+ function renderMiimiidFunCenter() {
   const title = document.getElementById('fun-center-title');
   const subtitle = document.getElementById('fun-center-subtitle');
   const content = document.getElementById('fun-center-content');
+
   if (!title || !subtitle || !content) return;
 
-  title.textContent = miimiidDashboardTranslate('funCenter');
-  subtitle.textContent = miimiidDashboardTranslate('funCenterSubtitle');
+  title.textContent = '';
+  subtitle.textContent = '';
 
-  if (!Array.isArray(miimiidFunCenterGames) || miimiidFunCenterGames.length === 0) {
-    content.innerHTML = `<div class="miimiid-fun-empty"><p>No games are available right now.</p></div>`;
+  if (
+    !Array.isArray(miimiidFunCenterGames) ||
+    miimiidFunCenterGames.length === 0
+  ) {
+    content.innerHTML = `
+      <div class="miimiid-fun-empty">
+        <p>No games are available right now.</p>
+      </div>
+    `;
     return;
   }
 
   const completed = miimiidFunGetCompletedGames();
-  const heroGame = miimiidFunCenterGames.find(game => !completed.includes(game.id)) || miimiidFunCenterGames[0];
-  const heroTitle = typeof heroGame.title === 'string' ? heroGame.title : 'Fun Center Game';
-  const heroSubtitle = typeof heroGame.subtitle === 'string' ? heroGame.subtitle : '';
+
+  const heroGame =
+    miimiidFunCenterGames.find(
+      game => !completed.includes(game.id)
+    ) || miimiidFunCenterGames[0];
+
+  const rounds = Array.isArray(heroGame.rounds) ? heroGame.rounds : [];
+  const firstRound = rounds.length > 0 ? rounds[0] : null;
+
+  const gameTitle = typeof heroGame.title === 'string' ? heroGame.title : 'Fun Center';
+  const gameSubtitle = typeof heroGame.subtitle === 'string' ? heroGame.subtitle : 'Build smarter money habits through play.';
+  const visual = firstRound && typeof firstRound.visual === 'string' ? firstRound.visual : '';
+
+  const totalRounds = rounds.length > 0 ? rounds.length : 10;
+
+  const displayedProgress =
+    miimiidFunCenterState && miimiidFunCenterState.gameId === heroGame.id
+      ? Math.min(miimiidFunCenterState.roundIndex, totalRounds)
+      : 0;
+
+  const progressPercent = Math.max(0, Math.min(100, Math.round((displayedProgress / totalRounds) * 100)));
 
   content.innerHTML = `
-    <div class="miimiid-fun-hero">
-      <div class="miimiid-fun-hero-row">
-        ${miimiidFunMascot('idle', 52)}
-        <div>
-          <div class="miimiid-fun-hero-label">Continue your journey</div>
-          <div class="miimiid-fun-hero-title">${miimiidFunCenterEscapeHtml(heroTitle)}</div>
-          ${heroSubtitle ? `<div class="miimiid-fun-hero-subtitle">${miimiidFunCenterEscapeHtml(heroSubtitle)}</div>` : ''}
-        </div>
-      </div>
-      <button type="button" class="miimiid-fun-hero-play" data-fun-hero-play="${miimiidFunCenterEscapeHtml(heroGame.id)}">
-        <span aria-hidden="true">&#9654;</span> Play now
-      </button>
-    </div>
+    <section class="miimiid-fun-page">
 
-    <div class="miimiid-fun-track-heading">Your path</div>
+      <div class="miimiid-fun-hero-visual">
 
-    <div class="miimiid-fun-track">
-      ${miimiidFunCenterGames.map((game, index) => {
-        const isCompleted = completed.includes(game.id);
-        const isCurrent = game.id === heroGame.id;
-        const stateClass = isCompleted ? 'is-completed' : (isCurrent ? 'is-current' : 'is-available');
-        const icon = isCompleted ? '&#10003;' : miimiidFunGameIcon(game);
-        const connector = index < miimiidFunCenterGames.length - 1 ? '<div class="miimiid-fun-track-line"></div>' : '';
-        return `
-          <div class="miimiid-fun-track-item">
-            <button type="button" class="miimiid-fun-track-node ${stateClass}" data-fun-center-game="${miimiidFunCenterEscapeHtml(game.id)}" aria-label="${miimiidFunCenterEscapeHtml(typeof game.title === 'string' ? game.title : 'Game')}">
-              <span aria-hidden="true">${icon}</span>
-              <span class="miimiid-fun-center-game-title" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;">${miimiidFunCenterEscapeHtml(typeof game.title === 'string' ? game.title : 'Game')}</span>
-            </button>
-            <span class="miimiid-fun-track-label">${miimiidFunCenterEscapeHtml(typeof game.title === 'string' ? game.title.split(' ')[0] : '')}</span>
+        <div class="miimiid-fun-hero-copy">
+          <div class="miimiid-fun-title">
+            <span>Fun</span>
+            <strong>Center</strong>
           </div>
-          ${connector}
-        `;
-      }).join('')}
-    </div>
+          <p class="miimiid-fun-tagline">
+            Play. Learn. Build your<br>financial superpowers!
+          </p>
+        </div>
+
+        <div class="miimiid-fun-hero-decoration decoration-one">&#10022;</div>
+        <div class="miimiid-fun-hero-decoration decoration-two">&#10022;</div>
+        <div class="miimiid-fun-hero-decoration decoration-three">&#10022;</div>
+
+        <div class="miimiid-fun-hero-coins">
+          <span class="fun-coin coin-one">$</span>
+          <span class="fun-coin coin-two">$</span>
+        </div>
+
+        <div class="miimiid-fun-hero-mascot">
+          <img
+            src="/assets/fun-center/miimiid-fun-robot.png"
+            alt=""
+            aria-hidden="true"
+            onerror="miimiidFunHeroImageError(this)"
+          >
+          <div class="miimiid-fun-hero-mascot-fallback" hidden>
+            ${miimiidFunMascot('idle', 150)}
+          </div>
+        </div>
+
+      </div>
+
+      <section class="miimiid-fun-game-card">
+
+        <div class="miimiid-fun-progress-header">
+          <div class="miimiid-fun-progress-title">
+            <span class="miimiid-fun-progress-icon" aria-hidden="true">&#9678;</span>
+            <span>YOUR PROGRESS</span>
+          </div>
+          <span class="miimiid-fun-progress-count">${displayedProgress} / ${totalRounds}</span>
+        </div>
+
+        <div class="miimiid-fun-progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="${totalRounds}" aria-valuenow="${displayedProgress}">
+          <div class="miimiid-fun-progress-fill" style="width:${progressPercent}%"></div>
+        </div>
+
+        <div class="miimiid-fun-game-divider"></div>
+
+        <div class="miimiid-fun-current-game">
+
+          <div class="miimiid-fun-game-visual">
+            ${miimiidFunMascot('idle', 82)}
+            ${visual ? `<div class="miimiid-fun-round-icon">${miimiidFunCenterEscapeHtml(visual)}</div>` : ''}
+          </div>
+
+          <h2 class="miimiid-fun-current-title">${miimiidFunCenterEscapeHtml(gameTitle)}</h2>
+          <p class="miimiid-fun-current-subtitle">${miimiidFunCenterEscapeHtml(gameSubtitle)}</p>
+
+          ${
+            firstRound && Array.isArray(firstRound.choices) && firstRound.choices.length > 0
+              ? `
+                <div class="miimiid-fun-home-choices">
+                  ${firstRound.choices.map(choice => {
+                    const label = typeof choice.label === 'string' ? choice.label : '';
+                    const isWant = /want/i.test(label);
+                    return `
+                      <button
+                        type="button"
+                        class="miimiid-fun-home-choice ${isWant ? 'is-want' : 'is-need'}"
+                        data-fun-home-answer="${miimiidFunCenterEscapeHtml(choice.id)}"
+                        data-fun-home-game="${miimiidFunCenterEscapeHtml(heroGame.id)}"
+                      >
+                        <span>${miimiidFunCenterEscapeHtml(label)}</span>
+                        <span class="miimiid-fun-choice-arrow" aria-hidden="true">&#8594;</span>
+                      </button>
+                    `;
+                  }).join('')}
+                </div>
+              `
+              : `
+                <button type="button" class="miimiid-fun-home-play" data-fun-home-play="${miimiidFunCenterEscapeHtml(heroGame.id)}">
+                  Play now <span aria-hidden="true">&#8594;</span>
+                </button>
+              `
+          }
+
+        </div>
+
+      </section>
+
+    </section>
   `;
 
-  content.querySelectorAll('[data-fun-center-game]').forEach(button => {
-    button.addEventListener('click', () => {
+  content.querySelectorAll('[data-fun-home-answer]').forEach(button => {
+    button.addEventListener('click', async () => {
       miimiidFunPlayTap();
-      startMiimiidFunGame(button.dataset.funCenterGame);
+      button.disabled = true;
+
+      const gameId = button.dataset.funHomeGame;
+      const answerId = button.dataset.funHomeAnswer;
+
+      if (!miimiidFunCenterState || miimiidFunCenterState.gameId !== gameId) {
+        await startMiimiidFunGame(gameId);
+      }
+
+      if (!miimiidFunCenterState || miimiidFunCenterState.gameId !== gameId) {
+        return;
+      }
+
+      const content = document.getElementById('fun-center-content');
+      const roundAnswerButton = content
+        ? content.querySelector(`[data-fun-answer="${CSS.escape(answerId)}"]`)
+        : null;
+
+      if (roundAnswerButton) {
+        await submitMiimiidFunAnswer(roundAnswerButton);
+      }
     });
   });
 
-  const heroPlayButton = content.querySelector('[data-fun-hero-play]');
-  if (heroPlayButton) {
-    heroPlayButton.addEventListener('click', () => {
+  const playButton = content.querySelector('[data-fun-home-play]');
+  if (playButton) {
+    playButton.addEventListener('click', () => {
       miimiidFunPlayTap();
-      startMiimiidFunGame(heroPlayButton.dataset.funHeroPlay);
+      startMiimiidFunGame(playButton.dataset.funHomePlay);
     });
   }
 }
 
-function miimiidFunGameIcon(game) {
-  if (game && Array.isArray(game.rounds) && game.rounds[0] && typeof game.rounds[0].visual === 'string' && game.rounds[0].visual) {
-    return miimiidFunCenterEscapeHtml(game.rounds[0].visual);
+function miimiidFunHeroImageError(img) {
+  img.style.display = 'none';
+  const wrapper = img.closest('.miimiid-fun-hero-mascot');
+  const fallback = wrapper ? wrapper.querySelector('.miimiid-fun-hero-mascot-fallback') : null;
+  if (fallback) fallback.hidden = false;
   }
-  return '&#127919;';
-}
-
-
+  
 /* =========================================================
  * START GAME
  * ========================================================= */
