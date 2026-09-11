@@ -84,46 +84,46 @@ test.describe('Miimiid browser application flows', () => {
     });
 
     await page.route('**/api/fun-center/games', async route => {
-  await route.fulfill({
-    status: 200,
-    contentType: 'application/json',
-    body: JSON.stringify({
-      status: 'success',
-      data: [{
-        id: 'needs-vs-wants',
-        type: 'classification',
-        title: 'Needs vs Wants',
-        subtitle: 'Sort everyday spending into needs and wants.',
-        resultTitle: 'Round complete',
-        resultMessage: 'You are learning to separate needs from wants.',
-        answers: [
-          { id: 'need', label: 'Need' },
-          { id: 'want', label: 'Want' }
-        ],
-        rounds: [
-          {
-            id: 'rent',
-            prompt: 'Rent',
-            category: 'housing',
-            visual: '🏠'
-          },
-          {
-            id: 'groceries',
-            prompt: 'Groceries',
-            category: 'food',
-            visual: '🛒'
-          },
-          {
-            id: 'concert',
-            prompt: 'Concert tickets',
-            category: 'entertainment',
-            visual: '🎵'
-          }
-        ]
-      }]
-    })
-  });
-});
+      await route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify({
+          status: 'success',
+          data: [{
+            id: 'needs-vs-wants',
+            type: 'classification',
+            title: 'Needs vs Wants',
+            subtitle: 'Sort everyday spending into needs and wants.',
+            resultTitle: 'Round complete',
+            resultMessage: 'You are learning to separate needs from wants.',
+            answers: [
+              { id: 'need', label: 'Need' },
+              { id: 'want', label: 'Want' }
+            ],
+            rounds: [
+              {
+                id: 'rent',
+                prompt: 'Rent',
+                category: 'housing',
+                visual: '🏠'
+              },
+              {
+                id: 'groceries',
+                prompt: 'Groceries',
+                category: 'food',
+                visual: '🛒'
+              },
+              {
+                id: 'concert',
+                prompt: 'Concert tickets',
+                category: 'entertainment',
+                visual: '🎵'
+              }
+            ]
+          }]
+        })
+      });
+    });
 
     await page.route('**/api/ai-tutor/chat', async route => {
       await route.fulfill({
@@ -170,21 +170,18 @@ test.describe('Miimiid browser application flows', () => {
 
     await funCenterNav.click();
 
-await expect(
-  page.locator('.miimiid-fun-center-view')
-).toBeVisible();
+    const funCenterView = page.locator('.miimiid-fun-center-view');
+    await expect(funCenterView).toBeVisible();
 
-const needsVsWantsGame =
-  page.locator('[data-fun-center-game="needs-vs-wants"]');
+    const funCenterPage = page.locator('.miimiid-fun-page');
+    await expect(funCenterPage).toBeVisible();
 
-await expect(needsVsWantsGame).toHaveCount(1, {
-  timeout: 10000
-});
+    const currentGameTitle = funCenterPage.locator('.miimiid-fun-current-title');
+    await expect(currentGameTitle).toContainText('Needs vs Wants');
 
-await expect(
-  needsVsWantsGame.locator('.miimiid-fun-center-game-title')
-).toContainText('Needs vs Wants');
-    });
+    const playButton = funCenterPage.locator('[data-fun-home-play="needs-vs-wants"]');
+    await expect(playButton).toBeVisible();
+  });
 
   test('Fun Center games endpoint returns server-owned game data without answer leakage', async ({ request }) => {
     const response = await request.get('/api/fun-center/games');
