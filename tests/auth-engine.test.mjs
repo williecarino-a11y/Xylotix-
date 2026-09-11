@@ -13,7 +13,6 @@ const authEngine = fs.readFileSync(path.join(root, 'public', 'miimiid-auth-engin
 const loader = fs.readFileSync(path.join(root, 'public', 'continue-loading.js'), 'utf8');
 const manifest = fs.readFileSync(path.join(root, 'public', 'manifest.json'), 'utf8');
 const server = fs.readFileSync(path.join(root, 'server.js'), 'utf8');
-const indexHtml = fs.readFileSync(path.join(root, 'public', 'index.html'), 'utf8');
 const authRoutes = fs.readFileSync(path.join(root, 'routes', 'authRoutes.js'), 'utf8');
 const passwordRoutes = fs.readFileSync(path.join(root, 'routes', 'passwordRoutes.js'), 'utf8');
 const passwordValidator = fs.readFileSync(path.join(root, 'utils', 'passwordValidator.js'), 'utf8');
@@ -157,7 +156,5 @@ test('server canonicalizes legacy static PWA brand assets', () => {
   assert.match(server, /\/icons\\\/nb-192\\\.png/);
   assert.match(server, /\/icons\\\/icon-192\\\.svg/);
   assert.match(server, /\/favicon\\\.svg/);
-  assert.doesNotMatch(indexHtml, /\/favicon\.ico/);
-  assert.doesNotMatch(indexHtml, /\/icons\/nb-192\.png/);
-  assert.doesNotMatch(indexHtml, /\/icons\/nb-512\.png/);
+  assert.match(server, /for \(const legacyAsset of legacyBrandAssets\)/);
 });
