@@ -93,6 +93,11 @@ test('current browser auth architecture uses one central auth engine', () => {
   assert.doesNotMatch(server, /auth-shell-fix\.js/);
 });
 
+test('legacy modular auth engine is not loaded by the browser entrypoint', () => {
+  assert.doesNotMatch(server, /auth-engine\/(?:config|controller|form|registry|renderer|service|state|validation)\.js/);
+  assert.doesNotMatch(authEngine, /auth-engine\//);
+});
+
 test('shared ContinueLoading owns the C-shaped registration loader', () => {
   assert.match(loader, /continue-loading-arc/);
   assert.match(loader, /border-right-color:\s*transparent/);
