@@ -132,3 +132,20 @@ test('PWA branding uses the canonical Miimiid icon set', () => {
   assert.doesNotMatch(manifest, /\/icons\/nb-192\.png/);
   assert.doesNotMatch(manifest, /\/icons\/nb-512\.png/);
 });
+
+test('ContinueLoading installs canonical brand assets and avoids duplicate bridges', () => {
+  assert.match(loader, /link\.type = 'image\/svg\+xml'/);
+  assert.match(loader, /link\.href = '\/favicon\.svg'/);
+  assert.match(loader, /link\.href = '\/icons\/icon-192\.svg'/);
+  assert.match(loader, /data-miimiid-favicon/);
+  assert.match(loader, /data-miimiid-touch-icon/);
+  assert.match(loader, /window\.__continueLoadingFetchInstalled/);
+  assert.match(loader, /window\.__continueLoadingFetchInstalled = true/);
+});
+
+test('ContinueLoading respects the explicit fetch opt-out header', () => {
+  assert.match(loader, /X-Continue-Loading/);
+  assert.match(loader, /headers\.get\('X-Continue-Loading'\) === 'false'/);
+  assert.match(loader, /String\(headers\['X-Continue-Loading'\] \|\| ''\)\.toLowerCase\(\) === 'false'/);
+  assert.match(loader, /if \(disabled\) return nativeFetch\(input, init\);/);
+});
