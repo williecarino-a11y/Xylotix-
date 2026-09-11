@@ -278,3 +278,249 @@
   .miimiid-fun-progress-track { margin-left: 18px; margin-right: 18px; }
 }
   
+/* =========================================================
+   MIIMIID FUN CENTER — GAME / ROUND / RESULT UI
+   ========================================================= */
+
+.miimiid-fun-center-loading,
+.miimiid-fun-center-empty {
+  text-align: center;
+  color: #94a3b8;
+  padding: 24px;
+}
+
+.miimiid-fun-center-error {
+  text-align: center;
+  color: #f87171;
+  padding: 24px;
+}
+
+.miimiid-fun-center-error-message {
+  color: #f87171;
+  font-size: 0.85rem;
+  margin-bottom: 8px;
+}
+
+.miimiid-fun-center-activity {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 14px 16px;
+  margin: 8px 0;
+  border-radius: 10px;
+  border: 1px solid #334155;
+  background: #1e293b;
+  color: #f8fafc;
+  font: inherit;
+  cursor: pointer;
+}
+
+.miimiid-fun-center-activity:active {
+  transform: scale(0.98);
+}
+
+.miimiid-fun-center-game-title {
+  display: block;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #f8fafc;
+}
+
+.miimiid-fun-center-game-subtitle {
+  display: block;
+  font-size: 0.85rem;
+  color: #94a3b8;
+  margin-top: 4px;
+}
+
+.miimiid-fun-center-round {
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.miimiid-fun-center-progress {
+  text-align: center;
+  color: #94a3b8;
+  font-size: 0.85rem;
+  margin-bottom: 10px;
+}
+
+.miimiid-fun-center-visual {
+  text-align: center;
+  font-size: 2.8rem;
+  margin-bottom: 10px;
+}
+
+.miimiid-fun-center-prompt {
+  text-align: center;
+  font-size: 1.05rem;
+  color: #f1f5f9;
+  margin-bottom: 16px;
+}
+
+.miimiid-fun-center-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.miimiid-fun-center-actions .miimiid-fun-center-activity {
+  text-align: center;
+}
+
+.miimiid-fun-center-result {
+  text-align: center;
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 12px;
+  padding: 24px;
+}
+
+.miimiid-fun-center-result h2 {
+  color: #38bdf8;
+  margin-top: 0;
+}
+
+.miimiid-fun-center-rewards {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin: 16px 0;
+  font-weight: 600;
+  color: #4ade80;
+}
+
+.miimiid-fun-round-card {
+  background: #111d33;
+  border: 0.5px solid #1e2b45;
+  border-radius: 18px;
+  padding: 20px;
+  animation: miimiidFunHeroIn 0.3s ease;
+  transition: box-shadow 0.2s ease;
+}
+
+.miimiid-fun-round-card.is-correct {
+  box-shadow: 0 0 0 2px #22c55e inset;
+}
+
+.miimiid-fun-round-card.is-wrong {
+  box-shadow: 0 0 0 2px #ef4444 inset;
+  animation: miimiidFunShake 0.4s ease;
+}
+
+.miimiid-fun-progress-label {
+  color: #64748b;
+  font-size: 11px;
+  text-align: right;
+  margin-bottom: 14px;
+}
+
+.miimiid-fun-round-prompt {
+  color: #f1f5f9;
+  font-size: 1.05rem;
+  text-align: center;
+  margin-bottom: 18px;
+}
+
+.miimiid-fun-choices {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.miimiid-fun-choice {
+  padding: 13px 16px;
+  border-radius: 12px;
+  border: 2px solid #1e2b45;
+  background: #0b1220;
+  color: #f8fafc;
+  font: inherit;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.miimiid-fun-choice:active {
+  transform: scale(0.98);
+}
+
+.miimiid-fun-choice:disabled {
+  opacity: 0.7;
+}
+
+.miimiid-fun-choice.is-correct {
+  border-color: #22c55e !important;
+  background: rgba(34, 197, 94, 0.15) !important;
+}
+
+.miimiid-fun-choice.is-wrong {
+  border-color: #ef4444 !important;
+  background: rgba(239, 68, 68, 0.15) !important;
+}
+
+.miimiid-fun-result {
+  text-align: center;
+}
+
+.miimiid-fun-result-score {
+  color: #f8fafc;
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin: 8px 0;
+}
+
+.miimiid-fun-result-rewards {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 12px 0 18px;
+}
+
+.miimiid-fun-pill {
+  font-size: 12px;
+  padding: 5px 10px;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.miimiid-fun-pill.xp {
+  background: #422006;
+  color: #facc15;
+}
+
+.miimiid-fun-pill.coins {
+  background: #052e16;
+  color: #4ade80;
+}
+
+.miimiid-fun-hero-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.miimiid-fun-hero-row .miimiid-fun-hero-label {
+  margin-bottom: 4px;
+}
+
+.miimiid-fun-hero-row .miimiid-fun-hero-title {
+  margin-bottom: 2px;
+}
+
+.miimiid-fun-hero-row .miimiid-fun-hero-subtitle {
+  margin-bottom: 0;
+}
+
+.miimiid-fun-round-mascot-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.miimiid-fun-result .miimiid-fun-mascot {
+  margin: 0 auto 10px;
+}
