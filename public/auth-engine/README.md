@@ -6,7 +6,7 @@ This directory contains the original modular authentication implementation retai
 
 The live Miimiid browser runtime uses `../miimiid-auth-engine.js` as the single authentication state and request coordinator. It is loaded by the application shell and coordinated by `../auth-bootstrap-guard.js`.
 
-Files in this directory must not be added to the browser entrypoint unless the authentication architecture is intentionally migrated back to this modular implementation.
+Files in this directory are not part of the browser entrypoint. Do not add them to the live page without intentionally migrating the authentication architecture.
 
 ## Why this remains
 
