@@ -44,7 +44,18 @@ app.get(['/', '/index.html'], (req, res, next) => {
   try {
     const indexPath = path.join(__dirname, 'public', 'index.html');
     let html = fs.readFileSync(indexPath, 'utf8');
+
+    const legacyBrandAssets = [
+      /<link\s+rel="icon"\s+href="\/favicon\.ico"\s*\/?>\s*/gi,
+      /<link\s+rel="icon"\s+type="image\/png"\s+sizes="192x192"\s+href="\/icons\/nb-192\.png"\s*\/?>\s*/gi,
+      /<link\s+rel="apple-touch-icon"\s+sizes="192x192"\s+href="\/icons\/nb-192\.png"\s*\/?>\s*/gi
+    ];
+    for (const legacyAsset of legacyBrandAssets) html = html.replace(legacyAsset, '');
+
     const headAssets = [
+      '<link rel="icon" type="image/svg+xml" href="/favicon.svg">',
+      '<link rel="icon" type="image/svg+xml" sizes="192x192" href="/icons/icon-192.svg">',
+      '<link rel="apple-touch-icon" sizes="192x192" href="/icons/icon-192.svg">',
       '<link rel="manifest" href="/manifest.json">',
       '<meta name="theme-color" content="#0f172a">',
       '<link rel="stylesheet" href="/responsive.css">',
