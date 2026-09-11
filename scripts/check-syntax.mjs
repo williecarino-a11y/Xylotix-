@@ -2,7 +2,7 @@
 // Syntax-checks project JavaScript while excluding generated/development
 // artifacts and archived backup snapshots that are not runtime source.
 
-import { execSync } from 'node:child_process';
+import { spawnSync } from 'node:child_process';
 import { globSync } from 'node:fs';
 
 const files = globSync('**/*.js', {
@@ -24,7 +24,17 @@ if (files.length === 0) {
 console.log(`Checking syntax for ${files.length} runtime file(s)...`);
 
 for (const file of files) {
-  execSync(`node --check "${file}"`, { stdio: 'inherit' });
+  const result = spawnSync(process.execPath, ['--check', file], {
+    stdio: 'inherit'
+  });
+
+  if (result.error) {
+    throw result.error;
+  }
+
+  if (result.status !== 0) {
+    process.exit(result.status ?? 1);
+  }
 }
 
 console.log('All runtime JavaScript files passed syntax check.');
