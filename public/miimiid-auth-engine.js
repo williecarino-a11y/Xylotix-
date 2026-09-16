@@ -56,6 +56,7 @@
 
   const listeners = new Set();
   let activeOperation = null;
+  let sessionRestorePromise = null;
   let internalRequestDepth = 0;
   let observerInstalled = false;
 
@@ -239,8 +240,10 @@
 
         if (action === "logout") {
           setUser(null, SESSION_STATES.UNAUTHENTICATED);
+          sessionRestorePromise = null;
         } else if (user) {
           setUser(user, SESSION_STATES.AUTHENTICATED);
+          sessionRestorePromise = null;
         }
 
         setState({
@@ -352,40 +355,49 @@
   }
 
   async function loadCurrentUser() {
+    if (sessionRestorePromise) return sessionRestorePromise;
     if (activeOperation) return state.user;
 
-    setState({ sessionStatus: SESSION_STATES.RESTORING, error: null });
-    let loadingHandle = null;
+    sessionRestorePromise = (async function () {
+      setState({ sessionStatus: SESSION_STATES.RESTORING, error: null });
+      let loadingHandle = null;
 
-    if (window.ContinueLoading?.start) {
-      loadingHandle = window.ContinueLoading.start({
-        id: "auth-session-restore",
-        context: "auth",
-        message: "Restoring your session…",
-        delay: 120
-      });
-    }
+      if (window.ContinueLoading?.start) {
+        loadingHandle = window.ContinueLoading.start({
+          id: "auth-session-restore",
+          context: "auth",
+          message: "Restoring your session…",
+          delay: 120
+        });
+      }
+
+      try {
+        const result = await request("/api/auth/me", undefined, { method: "GET" });
+        const user = result?.data?.user || null;
+        setUser(user, user ? SESSION_STATES.AUTHENTICATED : SESSION_STATES.UNAUTHENTICATED);
+        setState({ status: STATES.IDLE, action: null, error: null });
+        return user;
+      } catch (error) {
+        const normalized = normalizeError(error, "We could not restore your session.");
+        if (normalized.status === 401 || normalized.code === "HTTP_401") {
+          setUser(null, SESSION_STATES.UNAUTHENTICATED);
+          setState({ status: STATES.IDLE, action: null, error: null });
+          return null;
+        }
+        setUser(null, SESSION_STATES.ERROR);
+        setState({ status: STATES.ERROR, action: null, error: normalized });
+        throw normalized;
+      } finally {
+        if (loadingHandle && window.ContinueLoading?.stop) {
+          window.ContinueLoading.stop(loadingHandle);
+        }
+      }
+    })();
 
     try {
-      const result = await request("/api/auth/me", undefined, { method: "GET" });
-      const user = result?.data?.user || null;
-      setUser(user, user ? SESSION_STATES.AUTHENTICATED : SESSION_STATES.UNAUTHENTICATED);
-      setState({ status: STATES.IDLE, action: null, error: null });
-      return user;
-    } catch (error) {
-      const normalized = normalizeError(error, "We could not restore your session.");
-      if (normalized.status === 401 || normalized.code === "HTTP_401") {
-        setUser(null, SESSION_STATES.UNAUTHENTICATED);
-        setState({ status: STATES.IDLE, action: null, error: null });
-        return null;
-      }
-      setUser(null, SESSION_STATES.ERROR);
-      setState({ status: STATES.ERROR, action: null, error: normalized });
-      throw normalized;
+      return await sessionRestorePromise;
     } finally {
-      if (loadingHandle && window.ContinueLoading?.stop) {
-        window.ContinueLoading.stop(loadingHandle);
-      }
+      sessionRestorePromise = null;
     }
   }
 
