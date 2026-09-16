@@ -57,6 +57,7 @@
   const listeners = new Set();
   let activeOperation = null;
   let sessionRestorePromise = null;
+  let sessionRestoreCompleted = false;
   let internalRequestDepth = 0;
   let observerInstalled = false;
 
@@ -241,9 +242,11 @@
         if (action === "logout") {
           setUser(null, SESSION_STATES.UNAUTHENTICATED);
           sessionRestorePromise = null;
+          sessionRestoreCompleted = false;
         } else if (user) {
           setUser(user, SESSION_STATES.AUTHENTICATED);
           sessionRestorePromise = null;
+          sessionRestoreCompleted = false;
         }
 
         setState({
@@ -356,6 +359,7 @@
 
   async function loadCurrentUser() {
     if (sessionRestorePromise) return sessionRestorePromise;
+    if (sessionRestoreCompleted) return state.user;
     if (activeOperation) return state.user;
 
     sessionRestorePromise = (async function () {
@@ -388,6 +392,7 @@
         setState({ status: STATES.ERROR, action: null, error: normalized });
         throw normalized;
       } finally {
+        sessionRestoreCompleted = true;
         if (loadingHandle && window.ContinueLoading?.stop) {
           window.ContinueLoading.stop(loadingHandle);
         }
