@@ -45,6 +45,22 @@ app.get(['/', '/index.html'], (req, res, next) => {
     const indexPath = path.join(__dirname, 'public', 'index.html');
     let html = fs.readFileSync(indexPath, 'utf8');
 
+    // The legacy inline bootstrap still exists in the large index template, but the
+    // live auth engine now owns session restoration. Keep the legacy UI initializer
+    // while delegating its user lookup to the single auth-engine request coordinator.
+    html = html.replace(
+      /async function loadMiimiidCurrentUser\(\) \{[\s\S]*?(?=\n    async function initializeMiimiidApplication\(\))/,
+      `async function loadMiimiidCurrentUser() {
+      const engine = window.MIIMIID_AUTH_ENGINE;
+      if (!engine?.loadCurrentUser) {
+        throw new Error('Miimiid auth engine is unavailable during authentication bootstrap.');
+      }
+
+      return engine.loadCurrentUser();
+    }
+`
+    );
+
     const legacyBrandAssets = [
       /<link\s+rel="icon"\s+href="\/favicon\.ico"\s*\/?>\s*/gi,
       /<link\s+rel="icon"\s+type="image\/png"\s+sizes="192x192"\s+href="\/icons\/nb-192\.png"\s*\/?>\s*/gi,
