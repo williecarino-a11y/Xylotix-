@@ -83,8 +83,7 @@ test.describe('Miimiid authentication bootstrap', () => {
     await expect(page.locator('#miimiid-app-shell')).toBeVisible({ timeout: 15000 });
     await expect(page.locator('#miimiid-auth-view')).toBeHidden();
     await expect(page.locator('.miimiid-dashboard.active')).toBeVisible({ timeout: 10000 });
-
-    await expect(page.locator('.miimiid-dashboard-brand')).toContainText('Miimiid');
+    await expect(page.locator('.miimiid-dashboard-brand')).toHaveText('Home');
   });
 
   test('authenticated bootstrap fails closed to login when dashboard initialization fails', async ({ page }) => {
