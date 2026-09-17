@@ -56,7 +56,16 @@ app.get(['/', '/index.html'], (req, res, next) => {
         throw new Error('Miimiid auth engine is unavailable during authentication bootstrap.');
       }
 
-      return engine.loadCurrentUser();
+      try {
+        const user = await engine.loadCurrentUser();
+        window.currentUser = user || null;
+        window.MIIMIID_CURRENT_USER = user || null;
+        return user || null;
+      } catch (error) {
+        window.currentUser = null;
+        window.MIIMIID_CURRENT_USER = null;
+        throw error;
+      }
     }
 `
     );
