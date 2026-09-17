@@ -2,12 +2,16 @@
  * Miimiid authentication bootstrap coordinator.
  *
  * Responsibilities:
- * - Own the initial session-restore lifecycle.
- * - Keep auth UI and application shell mutually exclusive during bootstrap.
- * - Initialize the dashboard before exposing authenticated UI.
- * - Delegate authentication state to MIIMIID_AUTH_ENGINE.
+ * - Observe the auth-engine session lifecycle.
+ * - Keep the authentication loading/login state visible while session
+ *   restoration is in progress.
+ * - Keep the legacy application initializer and auth engine as the single
+ *   owners of dashboard initialization and authenticated shell exposure.
  *
- * Authentication state itself remains owned by the auth engine.
+ * Authentication state and the actual session restore request remain owned by
+ * MIIMIID_AUTH_ENGINE. The legacy application initializer already consumes
+ * that state and initializes the dashboard, so this guard must not start a
+ * second restore or a competing dashboard initialization.
  */
 (function () {
   'use strict';
@@ -23,8 +27,6 @@
 
   const refs = {};
   let booted = false;
-  let sessionRestorePromise = null;
-  let dashboardReadyPromise = null;
   let bootstrapLoadingHandle = null;
   let timeoutId = null;
   let unsubscribe = null;
@@ -48,14 +50,6 @@
     setHidden(refs.card, !card);
     setHidden(refs.shell, true);
     setHidden(refs.header, true);
-  }
-
-  function setAppView() {
-    setHidden(refs.auth, true);
-    setHidden(refs.loading, true);
-    setHidden(refs.card, true);
-    setHidden(refs.shell, false);
-    setHidden(refs.header, false);
   }
 
   function showBootstrapView() {
@@ -106,46 +100,7 @@
     }, BOOT_TIMEOUT_MS);
   }
 
-  async function initializeDashboardOnce() {
-    if (dashboardReadyPromise) return dashboardReadyPromise;
-
-    if (typeof window.initializeMiimiidDashboard !== 'function') {
-      throw new Error('Miimiid dashboard initializer is unavailable.');
-    }
-
-    dashboardReadyPromise = Promise.resolve()
-      .then(() => window.initializeMiimiidDashboard())
-      .then((ready) => {
-        if (ready !== true) {
-          throw new Error('Miimiid dashboard initialization did not complete successfully.');
-        }
-        return true;
-      })
-      .catch((error) => {
-        dashboardReadyPromise = null;
-        throw error;
-      });
-
-    return dashboardReadyPromise;
-  }
-
-  async function revealAuthenticatedApp() {
-    try {
-      await initializeDashboardOnce();
-      clearBootstrapTimeout();
-      stopBootstrapLoader();
-      setAppView();
-      return true;
-    } catch (error) {
-      console.error('Miimiid authenticated shell initialization failed:', error);
-      clearBootstrapTimeout();
-      stopBootstrapLoader();
-      showLoginView();
-      return false;
-    }
-  }
-
-  async function reconcileSession(snapshot) {
+  function reconcileSession(snapshot) {
     if (!snapshot) return;
 
     switch (snapshot.sessionStatus) {
@@ -155,7 +110,10 @@
         return;
 
       case 'authenticated':
-        await revealAuthenticatedApp();
+        // initializeMiimiidApplication() already owns the authenticated
+        // dashboard initialization and final shell visibility transition.
+        clearBootstrapTimeout();
+        stopBootstrapLoader();
         return;
 
       case 'unauthenticated':
@@ -170,27 +128,6 @@
         console.warn('Unknown Miimiid session state:', snapshot.sessionStatus);
         showBootstrapView();
     }
-  }
-
-  function restoreSessionOnce() {
-    if (sessionRestorePromise) return sessionRestorePromise;
-
-    const engine = window.MIIMIID_AUTH_ENGINE;
-    if (!engine?.loadCurrentUser) {
-      sessionRestorePromise = Promise.reject(
-        new Error('Miimiid auth engine is unavailable during bootstrap.')
-      );
-      return sessionRestorePromise;
-    }
-
-    sessionRestorePromise = Promise.resolve()
-      .then(() => engine.loadCurrentUser())
-      .catch((error) => {
-        console.error('Miimiid session restoration failed:', error);
-        return null;
-      });
-
-    return sessionRestorePromise;
   }
 
   function loadNavigationIcons() {
@@ -209,7 +146,8 @@
     if (!snapshot) return;
 
     if (snapshot.sessionStatus === 'authenticated') {
-      void revealAuthenticatedApp();
+      clearBootstrapTimeout();
+      stopBootstrapLoader();
     }
   }
 
@@ -233,10 +171,9 @@
     }
 
     unsubscribe = engine.subscribe((snapshot) => {
-      void reconcileSession(snapshot);
+      reconcileSession(snapshot);
     });
 
-    void restoreSessionOnce();
     window.addEventListener('pageshow', handlePageShow, { passive: true });
   }
 
