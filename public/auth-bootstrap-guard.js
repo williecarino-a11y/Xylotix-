@@ -11,7 +11,6 @@
 (function (window, document) {
   'use strict';
 
-  const BOOT_TIMEOUT_MS = 18000;
   let bootPromise = null;
   let dashboardPromise = null;
   let booted = false;
@@ -39,6 +38,16 @@
     loading?.classList.add('hidden');
     auth?.classList.remove('hidden');
     card?.classList.remove('hidden');
+
+    // The legacy UI initializer owns the auth form's internal mode state.
+    // Reuse it when available so the login form and registration link are
+    // restored together instead of only exposing their outer card.
+    if (typeof window.showMiimiidAuthView === 'function') {
+      window.showMiimiidAuthView();
+    }
+    if (typeof window.showMiimiidAuthMode === 'function') {
+      window.showMiimiidAuthMode('login');
+    }
   }
 
   function showBootstrapView() {
