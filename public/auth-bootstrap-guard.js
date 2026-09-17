@@ -31,7 +31,7 @@
     }
   }
 
-  function showLoginView() {
+  function showLoginView(forceLoginMode = false) {
     const { auth, loading, card, shell } = selectors();
     shell?.classList.add('hidden');
     document.querySelectorAll('.miimiid-dashboard').forEach((node) => node.classList.remove('active'));
@@ -39,13 +39,10 @@
     auth?.classList.remove('hidden');
     card?.classList.remove('hidden');
 
-    // The legacy UI initializer owns the auth form's internal mode state.
-    // Reuse it when available so the login form and registration link are
-    // restored together instead of only exposing their outer card.
     if (typeof window.showMiimiidAuthView === 'function') {
       window.showMiimiidAuthView();
     }
-    if (typeof window.showMiimiidAuthMode === 'function') {
+    if (forceLoginMode && typeof window.showMiimiidAuthMode === 'function') {
       window.showMiimiidAuthMode('login');
     }
   }
@@ -62,7 +59,7 @@
   function exposeAuthenticatedShell() {
     const { auth, loading, shell } = selectors();
     if (!window.currentUser && !window.MIIMIID_CURRENT_USER) {
-      showLoginView();
+      showLoginView(true);
       return false;
     }
     loading?.classList.add('hidden');
@@ -80,7 +77,12 @@
 
     dashboardPromise = Promise.resolve()
       .then(() => window.initializeMiimiidDashboard())
-      .then(() => true)
+      .then((ready) => {
+        if (ready !== true) {
+          throw new Error('Miimiid dashboard initialization did not complete successfully.');
+        }
+        return true;
+      })
       .catch((error) => {
         dashboardPromise = null;
         throw error;
@@ -118,14 +120,14 @@
       } catch (error) {
         console.error('Miimiid session restoration failed:', error);
         bootPromise = null;
-        showLoginView();
+        showLoginView(true);
         stopBootstrapLoader();
         return false;
       }
 
       if (!user) {
         bootPromise = null;
-        showLoginView();
+        showLoginView(true);
         stopBootstrapLoader();
         booted = true;
         return false;
@@ -140,7 +142,7 @@
       } catch (error) {
         console.error('Miimiid authenticated shell initialization failed:', error);
         bootPromise = null;
-        showLoginView();
+        showLoginView(true);
         stopBootstrapLoader();
         booted = false;
         return false;
@@ -155,8 +157,10 @@
 
     if (snapshot.sessionStatus === 'unauthenticated' || snapshot.sessionStatus === 'expired' || snapshot.sessionStatus === 'error') {
       booted = false;
-      bootPromise = null;
-      showLoginView();
+      // Do not cancel an in-flight bootstrap or force login mode here.
+      // Session restoration can emit this state before the page has settled,
+      // and a user may already be interacting with the registration form.
+      showLoginView(false);
       return;
     }
 
@@ -173,7 +177,7 @@
         stopBootstrapLoader();
       } catch (error) {
         console.error('Miimiid authenticated session recovery failed:', error);
-        showLoginView();
+        showLoginView(true);
         booted = false;
       }
     }
@@ -192,7 +196,7 @@
   const startBootstrap = () => {
     initializeApplication().catch((error) => {
       console.error('Miimiid authentication bootstrap failed:', error);
-      showLoginView();
+      showLoginView(true);
       stopBootstrapLoader();
     });
   };
