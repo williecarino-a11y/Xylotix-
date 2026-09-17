@@ -113,12 +113,14 @@
         user = await engine.loadCurrentUser();
       } catch (error) {
         console.error('Miimiid session restoration failed:', error);
+        bootPromise = null;
         showLoginView();
         stopBootstrapLoader();
         return false;
       }
 
       if (!user) {
+        bootPromise = null;
         showLoginView();
         stopBootstrapLoader();
         booted = true;
@@ -133,6 +135,7 @@
         return exposed;
       } catch (error) {
         console.error('Miimiid authenticated shell initialization failed:', error);
+        bootPromise = null;
         showLoginView();
         stopBootstrapLoader();
         booted = false;
@@ -143,17 +146,32 @@
     return bootPromise;
   }
 
-  function handleSessionChange(snapshot) {
-    if (!booted || !snapshot) return;
+  async function handleSessionChange(snapshot) {
+    if (!snapshot) return;
 
     if (snapshot.sessionStatus === 'unauthenticated' || snapshot.sessionStatus === 'expired' || snapshot.sessionStatus === 'error') {
       booted = false;
+      bootPromise = null;
       showLoginView();
       return;
     }
 
     if (snapshot.sessionStatus === 'authenticated' && snapshot.user) {
-      exposeAuthenticatedShell();
+      if (booted) {
+        exposeAuthenticatedShell();
+        return;
+      }
+
+      try {
+        await initializeDashboardOnce();
+        exposeAuthenticatedShell();
+        booted = true;
+        stopBootstrapLoader();
+      } catch (error) {
+        console.error('Miimiid authenticated session recovery failed:', error);
+        showLoginView();
+        booted = false;
+      }
     }
   }
 
@@ -162,5 +180,22 @@
   const engine = window.MIIMIID_AUTH_ENGINE;
   if (engine?.subscribe) {
     engine.subscribe(handleSessionChange);
+  }
+
+  // Do not rely exclusively on server-side rewriting of the legacy inline
+  // initializer. The guard owns startup, so it must be able to start itself
+  // even when the legacy listener changes or is absent in a future template.
+  const startBootstrap = () => {
+    initializeApplication().catch((error) => {
+      console.error('Miimiid authentication bootstrap failed:', error);
+      showLoginView();
+      stopBootstrapLoader();
+    });
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', startBootstrap, { once: true });
+  } else {
+    startBootstrap();
   }
 })(window, document);
