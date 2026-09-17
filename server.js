@@ -94,7 +94,7 @@ app.get(['/', '/index.html'], (req, res, next) => {
     // bootstrap owner. The original function remains intact for compatibility,
     // but it is no longer allowed to start a competing bootstrap lifecycle.
     html = html.replace(
-      /document\.addEventListener\((['"])DOMContentLoaded\1,\s*initializeMiimiidApplication\);/g,
+      /document\.addEventListener\(\s*(['"])DOMContentLoaded\1\s*,\s*initializeMiimiidApplication\s*\);/g,
       'document.addEventListener("DOMContentLoaded", () => window.MIIMIID_AUTH_BOOTSTRAP?.() || initializeMiimiidApplication());'
     );
 
