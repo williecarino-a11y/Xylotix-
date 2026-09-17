@@ -49,12 +49,32 @@ app.get(['/', '/index.html'], (req, res, next) => {
     // live auth engine now owns session restoration. Keep the legacy UI initializer
     // while delegating its user lookup to the single auth-engine request coordinator.
     html = html.replace(
-      /async function loadMiimiidCurrentUser\(\) \{[\s\S]*?(?=\n    async function initializeMiimiidApplication\(\))/,
+      /async function loadMiimiidCurrentUser\(\) \{[\s\S]*?(?=\n    async function initializeMiimiidApplication\(\))/, 
       `async function loadMiimiidCurrentUser() {
-      const engine = window.MIIMIID_AUTH_ENGINE;
-      if (!engine?.loadCurrentUser) {
-        throw new Error('Miimiid auth engine is unavailable during authentication bootstrap.');
+      async function getAuthEngine() {
+        if (window.MIIMIID_AUTH_ENGINE?.loadCurrentUser) {
+          return window.MIIMIID_AUTH_ENGINE;
+        }
+
+        return new Promise((resolve, reject) => {
+          const deadline = Date.now() + 10000;
+          const check = () => {
+            const engine = window.MIIMIID_AUTH_ENGINE;
+            if (engine?.loadCurrentUser) {
+              resolve(engine);
+              return;
+            }
+            if (Date.now() >= deadline) {
+              reject(new Error('Miimiid auth engine is unavailable during authentication bootstrap.'));
+              return;
+            }
+            window.setTimeout(check, 25);
+          };
+          check();
+        });
       }
+
+      const engine = await getAuthEngine();
 
       try {
         const user = await engine.loadCurrentUser();
