@@ -31,15 +31,19 @@
     }
   }
 
-  function showLoginView(forceLoginMode = false) {
+  function revealAuthView() {
     const { auth, loading, card, shell } = selectors();
     shell?.classList.add('hidden');
     document.querySelectorAll('.miimiid-dashboard').forEach((node) => node.classList.remove('active'));
     loading?.classList.add('hidden');
     auth?.classList.remove('hidden');
     card?.classList.remove('hidden');
+  }
 
-    if (typeof window.showMiimiidAuthView === 'function') {
+  function showLoginView(forceLoginMode = false) {
+    revealAuthView();
+
+    if (forceLoginMode && typeof window.showMiimiidAuthView === 'function') {
       window.showMiimiidAuthView();
     }
     if (forceLoginMode && typeof window.showMiimiidAuthMode === 'function') {
@@ -157,10 +161,10 @@
 
     if (snapshot.sessionStatus === 'unauthenticated' || snapshot.sessionStatus === 'expired' || snapshot.sessionStatus === 'error') {
       booted = false;
-      // Do not cancel an in-flight bootstrap or force login mode here.
-      // Session restoration can emit this state before the page has settled,
-      // and a user may already be interacting with the registration form.
-      showLoginView(false);
+      // Passive session changes must not invoke the auth renderer. The renderer
+      // resets the mode, which can hide an active registration step immediately
+      // after the user clicks Register. Only reveal the existing auth view here.
+      revealAuthView();
       return;
     }
 
