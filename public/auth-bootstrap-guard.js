@@ -80,12 +80,7 @@
 
     dashboardPromise = Promise.resolve()
       .then(() => window.initializeMiimiidDashboard())
-      .then((ready) => {
-        if (ready !== true) {
-          throw new Error('Miimiid dashboard initialization did not complete successfully.');
-        }
-        return true;
-      })
+      .then(() => true)
       .catch((error) => {
         dashboardPromise = null;
         throw error;
