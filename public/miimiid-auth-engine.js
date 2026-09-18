@@ -380,19 +380,20 @@
         const user = result?.data?.user || null;
         setUser(user, user ? SESSION_STATES.AUTHENTICATED : SESSION_STATES.UNAUTHENTICATED);
         setState({ status: STATES.IDLE, action: null, error: null });
+        sessionRestoreCompleted = true;
         return user;
       } catch (error) {
         const normalized = normalizeError(error, "We could not restore your session.");
         if (normalized.status === 401 || normalized.code === "HTTP_401") {
           setUser(null, SESSION_STATES.UNAUTHENTICATED);
           setState({ status: STATES.IDLE, action: null, error: null });
+          sessionRestoreCompleted = true;
           return null;
         }
         setUser(null, SESSION_STATES.ERROR);
         setState({ status: STATES.ERROR, action: null, error: normalized });
         throw normalized;
       } finally {
-        sessionRestoreCompleted = true;
         if (loadingHandle && window.ContinueLoading?.stop) {
           window.ContinueLoading.stop(loadingHandle);
         }

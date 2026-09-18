@@ -45,6 +45,59 @@ app.get(['/', '/index.html'], (req, res, next) => {
     const indexPath = path.join(__dirname, 'public', 'index.html');
     let html = fs.readFileSync(indexPath, 'utf8');
 
+    // The legacy inline bootstrap still exists in the large index template, but the
+    // live auth engine now owns session restoration. Keep the legacy UI initializer
+    // while delegating its user lookup to the single auth-engine request coordinator.
+    html = html.replace(
+      /async function loadMiimiidCurrentUser\(\) \{[\s\S]*?(?=\n    async function initializeMiimiidApplication\(\))/, 
+      `async function loadMiimiidCurrentUser() {
+      async function getAuthEngine() {
+        if (window.MIIMIID_AUTH_ENGINE?.loadCurrentUser) {
+          return window.MIIMIID_AUTH_ENGINE;
+        }
+
+        return new Promise((resolve, reject) => {
+          const deadline = Date.now() + 10000;
+          const check = () => {
+            const engine = window.MIIMIID_AUTH_ENGINE;
+            if (engine?.loadCurrentUser) {
+              resolve(engine);
+              return;
+            }
+            if (Date.now() >= deadline) {
+              reject(new Error('Miimiid auth engine is unavailable during authentication bootstrap.'));
+              return;
+            }
+            window.setTimeout(check, 25);
+          };
+          check();
+        });
+      }
+
+      const engine = await getAuthEngine();
+
+      try {
+        const user = await engine.loadCurrentUser();
+        window.currentUser = user || null;
+        window.MIIMIID_CURRENT_USER = user || null;
+        return user || null;
+      } catch (error) {
+        window.currentUser = null;
+        window.MIIMIID_CURRENT_USER = null;
+        throw error;
+      }
+    }
+`
+    );
+
+    // Route the legacy DOMContentLoaded registration through the dedicated
+    // bootstrap owner. The original function remains intact for compatibility,
+    // but it is no longer allowed to start a competing bootstrap lifecycle.
+    html = html.replace(
+      /document\.addEventListener\(\s*(['"])DOMContentLoaded\1\s*,\s*initializeMiimiidApplication\s*\);/g,
+      'document.addEventListener("DOMContentLoaded", () => window.MIIMIID_AUTH_BOOTSTRAP?.() || initializeMiimiidApplication());'
+    );
+
     const legacyBrandAssets = [
       /<link\s+rel="icon"\s+href="\/favicon\.ico"\s*\/?>\s*/gi,
       /<link\s+rel="icon"\s+type="image\/png"\s+sizes="192x192"\s+href="\/icons\/nb-192\.png"\s*\/?>\s*/gi,
