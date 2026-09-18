@@ -359,7 +359,6 @@
 
   async function loadCurrentUser() {
     if (sessionRestorePromise) return sessionRestorePromise;
-    if (sessionRestoreCompleted) return state.user;
     if (activeOperation) return state.user;
 
     sessionRestorePromise = (async function () {
