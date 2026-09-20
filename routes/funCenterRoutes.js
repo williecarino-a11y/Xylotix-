@@ -1,6 +1,7 @@
 const express = require('express');
 const crypto = require('crypto');
 const mongoose = require('mongoose');
+const rateLimit = require('express-rate-limit');
 
 const { getAuthenticatedUser } = require('./authRoutes');
 const FunGameSession = require('../models/FunGameSession');
@@ -8,6 +9,22 @@ const FunGameProfile = require('../models/FunGameProfile');
 const { getFunCenterGames, getFunCenterGame, validateFunCenterAnswer } = require('../scripts/learningData/funCenter');
 
 const router = express.Router();
+
+const funSessionStartLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  limit: 60,
+  standardHeaders: true,
+  legacyHeaders: false,
+  handler: (req, res) => res.status(429).json({ status: 'error', code: 'FUN_RATE_LIMITED', message: 'Too many game sessions started. Please wait a few minutes and try again.' })
+});
+
+const funAnswerLimiter = rateLimit({
+  windowMs: 60 * 1000,
+  limit: 120,
+  standardHeaders: true,
+  legacyHeaders: false,
+  handler: (req, res) => res.status(429).json({ status: 'error', code: 'FUN_RATE_LIMITED', message: 'Too many answers submitted. Please slow down and try again.' })
+});
 
 function createSessionId() {
   return crypto.randomUUID();
@@ -60,7 +77,7 @@ router.get('/games', async (req, res) => {
   }
 });
 
-router.post('/session', async (req, res) => {
+router.post('/session', funSessionStartLimiter, async (req, res) => {
   try {
     const user = await requireFunCenterUser(req, res);
     if (!user) return;
@@ -76,7 +93,7 @@ router.post('/session', async (req, res) => {
   }
 });
 
-router.post('/session/:sessionId/answer', async (req, res) => {
+router.post('/session/:sessionId/answer', funAnswerLimiter, async (req, res) => {
   try {
     const user = await requireFunCenterUser(req, res);
     if (!user) return;
@@ -122,7 +139,7 @@ router.post('/session/:sessionId/answer', async (req, res) => {
   }
 });
 
-router.post('/session/:sessionId/complete', async (req, res) => {
+router.post('/session/:sessionId/complete', funSessionStartLimiter, async (req, res) => {
   const mongoSession = await mongoose.startSession();
   try {
     const user = await requireFunCenterUser(req, res);
