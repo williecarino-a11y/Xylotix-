@@ -1,15 +1,4 @@
-<p align="center">
-  <img
-    src="./assets/miimiid-github-welcome.png"
-    alt="Welcome — I'm Willie, Builder of Miimiid"
-    width="100%"
-  />
-</p>
 
-<p align="center">
-  <strong>Builder of Miimiid.</strong><br>
-  FinTech • Full-stack development • AI • Product engineering
-</p>
 
 # Miimiid
 
