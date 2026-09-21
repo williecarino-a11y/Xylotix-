@@ -2134,6 +2134,15 @@ body:has(#miimiid-auth-view:not(.hidden)) {
   .miimiid-fun-result .miimiid-fun-mascot { margin: 0 auto 10px; }
   </style>
 
+  <script>
+window.addEventListener('error', function(e) {
+  var el = document.createElement('div');
+  el.style.cssText = 'position:fixed;top:0;left:0;right:0;z-index:99999;background:red;color:white;padding:10px;font-size:12px;white-space:pre-wrap;';
+  el.textContent = 'JS ERROR: ' + e.message + ' at ' + (e.filename || '') + ':' + e.lineno;
+  document.body.appendChild(el);
+});
+  </script>
+
 </head><body>
 <!-- =========================================
        MIIMIID AUTHENTICATION
