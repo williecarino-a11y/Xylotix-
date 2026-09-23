@@ -120,6 +120,7 @@ app.get(['/', '/index.html'], (req, res, next) => {
       '<script defer src="/auth-bootstrap-guard.js"></script>',
       '<script defer src="/password-validation.js"></script>',
       '<script defer src="/pwa.js"></script>',
+      '<script defer src="/assets/fun-center/assets.js"></script>',
       '<script defer src="/fun-center.js"></script>'
     ];
     
