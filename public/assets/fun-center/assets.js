@@ -45,5 +45,19 @@ const MIIMIID_ASSETS = Object.freeze({
     bank: {}
   },
 
-  products: {}
+    products: {
+    apple: '/assets/fun-center/products/apple.png',
+    banana: '/assets/fun-center/products/banana.png',
+    bread: '/assets/fun-center/products/bread.png',
+    carrot: '/assets/fun-center/products/carrot.png',
+    cheese: '/assets/fun-center/products/cheese.png',
+    chips: '/assets/fun-center/products/chips.png',
+    eggs: '/assets/fun-center/products/eggs.png',
+    milk: '/assets/fun-center/products/milk.png',
+    pasta: '/assets/fun-center/products/pasta.png',
+    sugar: '/assets/fun-center/products/sugar.png',
+    tomato: '/assets/fun-center/products/tomato.png',
+    water: '/assets/fun-center/products/water.png',
+    yogurt: '/assets/fun-center/products/yogurt.png'
+  }
 });
