@@ -42,8 +42,38 @@ const MIIMIID_ASSETS = Object.freeze({
   },
 
   worlds: {
-    bank: {}
-  },
+  bank: {
+    accountantPaycheck:
+      '/assets/fun-center/world-bank/miimiid-bank-accountant-paycheck.png',
+
+    atmMan:
+      '/assets/fun-center/world-bank/miimiid-bank-atm-man.png',
+
+    atmYoungWoman:
+      '/assets/fun-center/world-bank/miimiid-bank-atm-young-woman.png',
+
+    customerSupport:
+      '/assets/fun-center/world-bank/miimiid-bank-customer-support.png',
+
+    lobbyArrivalCap:
+      '/assets/fun-center/world-bank/miimiid-bank-lobby-arrival-cap.png',
+
+    lobbyArrival:
+      '/assets/fun-center/world-bank/miimiid-bank-lobby-arrival.png',
+
+    managerCustomerMeeting:
+      '/assets/fun-center/world-bank/miimiid-bank-manager-customer-meeting.png',
+
+    managerMeetingOlderCustomer:
+      '/assets/fun-center/world-bank/miimiid-bank-manager-meeting-older-customer.png',
+
+    tellerCashService:
+      '/assets/fun-center/world-bank/miimiid-bank-teller-cash-service.png',
+
+    worriedCustomerFraudSupport:
+      '/assets/fun-center/world-bank/miimiid-bank-worried-customer-fraud-support.png'
+  }
+},
 
     products: {
     apple: '/assets/fun-center/products/apple.png',
