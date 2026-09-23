@@ -268,12 +268,12 @@ async function loadMiimiidFunCenter() {
         </div>
 
         <div class="miimiid-fun-hero-mascot">
-          <img
-            src="/assets/fun-center/miimiid-fun-robot.png"
-            alt=""
-            aria-hidden="true"
-            onerror="miimiidFunHeroImageError(this)"
-          >
+     <img
+     src="${MIIMIID_ASSETS.funCenter.heroRobot}"
+      alt=""
+      aria-hidden="true"
+       onerror="miimiidFunHeroImageError(this)"
+        >
           <div class="miimiid-fun-hero-mascot-fallback" hidden>
             ${miimiidFunMascot('idle', 150)}
           </div>
