@@ -74,7 +74,11 @@ const MIIMIID_ASSETS = Object.freeze({
       '/assets/fun-center/world-bank/miimiid-bank-worried-customer-fraud-support.png'
   }
 },
-
+  
+funCenter: {
+  heroRobot: '/assets/fun-center/miimiid-fun-robot.png'
+},
+  
     products: {
     apple: '/assets/fun-center/products/apple.png',
     banana: '/assets/fun-center/products/banana.png',
