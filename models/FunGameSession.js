@@ -1,5 +1,35 @@
 const mongoose = require('mongoose');
 
+const purchasedItemSchema = new mongoose.Schema(
+  {
+    itemId: {
+      type: String,
+      required: true,
+      trim: true
+    },
+
+    price: {
+      type: Number,
+      required: true,
+      min: 0
+    },
+
+    classification: {
+      type: String,
+      enum: ['need', 'want'],
+      default: null
+    },
+
+    correct: {
+      type: Boolean,
+      default: false
+    }
+  },
+  {
+    _id: false
+  }
+);
+
 const funGameSessionSchema = new mongoose.Schema(
   {
     sessionId: {
@@ -21,6 +51,38 @@ const funGameSessionSchema = new mongoose.Schema(
       required: true,
       index: true
     },
+
+    /*
+     * ---------------------------------------------------------
+     * SHOPPING GAME STATE
+     * ---------------------------------------------------------
+     * The server owns these values.
+     * The client must never be trusted to provide prices,
+     * spending totals, or remaining budget.
+     */
+
+    budget: {
+      type: Number,
+      default: 100,
+      min: 0
+    },
+
+    spent: {
+      type: Number,
+      default: 0,
+      min: 0
+    },
+
+    purchasedItems: {
+      type: [purchasedItemSchema],
+      default: []
+    },
+
+    /*
+     * ---------------------------------------------------------
+     * GAME PROGRESSION
+     * ---------------------------------------------------------
+     */
 
     score: {
       type: Number,
@@ -51,6 +113,12 @@ const funGameSessionSchema = new mongoose.Schema(
       default: false
     },
 
+    /*
+     * ---------------------------------------------------------
+     * REWARDS
+     * ---------------------------------------------------------
+     */
+
     rewardGranted: {
       type: Boolean,
       default: false
@@ -67,6 +135,12 @@ const funGameSessionSchema = new mongoose.Schema(
       default: 0,
       min: 0
     },
+
+    /*
+     * ---------------------------------------------------------
+     * TIMESTAMPS
+     * ---------------------------------------------------------
+     */
 
     startedAt: {
       type: Date,
