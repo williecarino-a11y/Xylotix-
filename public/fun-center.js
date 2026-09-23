@@ -10,6 +10,10 @@
 let miimiidFunCenterGames = [];
 let miimiidFunCenterState = null;
 
+if (typeof MIIMIID_ASSETS === 'undefined') {
+  console.error('Miimiid asset registry failed to load.');
+}
+
 const MIIMIID_FUN_COMPLETED_KEY = 'miimiid-fun-completed-games';
 
 
