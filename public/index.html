@@ -6110,14 +6110,6 @@ const MIIMIID_REGISTRATION_DATA = {
       value: "female",
       translationKey: "authGenderFemale"
     },
-    {
-      value: "other",
-      translationKey: "authGenderOther"
-    },
-    {
-      value: "prefer-not-to-say",
-      translationKey: "authGenderPreferNotToSay"
-    }
   ]
 };
 
@@ -10361,7 +10353,8 @@ async function submitQuiz() {
    * =========================================
    */
 
-  const MIIMIID_TRANSLATIONS = {      authBirthday: "What's your birthday?",
+  const MIIMIID_TRANSLATIONS = {
+    en: {
       authMonth: "Month",
       authDay: "Day",
       authYear: "Year",
@@ -10373,11 +10366,10 @@ async function submitQuiz() {
       authEnterBirthday: "Enter your date of birth.",
       authCancel: "Cancel",
       authSet: "Set",
-    en: {
+
       authWelcome: 'Welcome to Miimiid',
       authSignInSubtitle: 'Sign in to continue learning',
-      authLoginIdentifier: 'Email or phone number',
-      authPassword: 'Password',
+      authLoginIdentifier: 'Email address',
       authSignIn: 'Sign In',
       authCreateAccountLink: 'Create an account',
       authRegisterWelcomeText: 'Build better money habits, understand your finances, and make smarter financial decisions.',
@@ -10388,16 +10380,12 @@ async function submitQuiz() {
       authSelectGender: 'Select your gender',
       authGenderMale: 'Male',
       authGenderFemale: 'Female',
-      authGenderOther: 'Other',
-      authGenderPreferNotToSay: 'Prefer not to say',
-      authLastName: 'Last name',
       authNameQuestion: "What's your name?",
       authEmailTitle: 'Email',
       authEmailInstruction: 'Enter your valid email address.',
       authBirthday: "What's your birthday?",
       authPasswordTitle: 'Enter your password',
       authPassword: 'Password',
-      authConfirmPassword: 'Password confirmation',
       authVerifyEmail: 'Verify your email',
       authVerificationInstruction: 'Enter the 6-digit code sent to your email address.',
       authBack: 'Back',
@@ -10423,7 +10411,6 @@ async function submitQuiz() {
 
       authLastName: 'Last name',
       authDateOfBirth: 'Date of birth',
-      authConfirmPassword: 'Confirm password',
       authAccountVerification: 'Account verification',
       authContinue: 'Continue',
       authVerifyAccount: 'Verify account',
@@ -10431,7 +10418,6 @@ async function submitQuiz() {
       authForgotPassword: 'Forgot password?',
       authName: 'Name',
       authEmail: 'Email',
-      authPhone: 'Phone number',
       authConfirmPassword: 'Confirm password',
       authCreateAccountButton: 'Create Account',
       authBackToSignIn: 'Back to sign in',
@@ -10447,7 +10433,6 @@ async function submitQuiz() {
       authHidePassword: 'Hide password',
       authResetPasswordTitle: 'Reset your password',
       authResetPasswordSubtitle: 'Choose a new password for your Miimiid account.',
-      untitledLesson: 'Untitled Lesson',
       noLessonContent: 'No lesson content available.',
       questionUnavailable: 'Question unavailable.',
       unsupportedQuestionType: 'Unsupported question type:',
@@ -10515,6 +10500,7 @@ async function submitQuiz() {
 
     },
 
+    es: {
       authBirthday: "¿Cuál es tu fecha de nacimiento?",
       authMonth: "Mes",
       authDay: "Día",
@@ -10527,7 +10513,7 @@ async function submitQuiz() {
       authEnterBirthday: "Introduce tu fecha de nacimiento.",
       authCancel: "Cancelar",
       authSet: "Establecer",
-    es: {
+
       authWelcome: 'Bienvenido a Miimiid',
       authSignInSubtitle: 'Inicia sesión para continuar aprendiendo',
       authCreateAccount: 'Crea tu cuenta de Miimiid',
@@ -10547,14 +10533,13 @@ async function submitQuiz() {
       authResetPasswordError: 'No se pudo restablecer tu contraseña.',
       authPasswordResetSuccess: 'Tu contraseña se ha restablecido correctamente.',
 
-      authLoginIdentifier: 'Correo electrónico o número de teléfono',
+      authLoginIdentifier: 'Dirección de correo electrónico',
       authPassword: 'Contraseña',
       authSignIn: 'Iniciar sesión',
       authCreateAccountLink: 'Crear una cuenta',
       authForgotPassword: '¿Olvidaste tu contraseña?',
       authName: 'Nombre',
       authEmail: 'Correo electrónico',
-      authPhone: 'Número de teléfono',
       authConfirmPassword: 'Confirmar contraseña',
       authCreateAccountButton: 'Crear cuenta',
       authBackToSignIn: 'Volver a iniciar sesión',
@@ -10635,6 +10620,7 @@ async function submitQuiz() {
 
     },
 
+    fr: {
       authBirthday: "Quelle est votre date de naissance ?",
       authMonth: "Mois",
       authDay: "Jour",
@@ -10647,7 +10633,7 @@ async function submitQuiz() {
       authEnterBirthday: "Entrez votre date de naissance.",
       authCancel: "Annuler",
       authSet: "Définir",
-    fr: {
+
       authWelcome: 'Bienvenue sur Miimiid',
       authSignInSubtitle: 'Connectez-vous pour continuer votre apprentissage',
       authCreateAccount: 'Créez votre compte Miimiid',
@@ -10667,14 +10653,13 @@ async function submitQuiz() {
       authResetPasswordError: 'Impossible de réinitialiser votre mot de passe.',
       authPasswordResetSuccess: 'Votre mot de passe a été réinitialisé avec succès.',
 
-      authLoginIdentifier: 'E-mail ou numéro de téléphone',
+      authLoginIdentifier: 'Adresse e-mail',
       authPassword: 'Mot de passe',
       authSignIn: 'Se connecter',
       authCreateAccountLink: 'Créer un compte',
       authForgotPassword: 'Mot de passe oublié ?',
       authName: 'Nom',
       authEmail: 'E-mail',
-      authPhone: 'Numéro de téléphone',
       authConfirmPassword: 'Confirmer le mot de passe',
       authCreateAccountButton: 'Créer un compte',
       authBackToSignIn: 'Retour à la connexion',
@@ -10756,6 +10741,7 @@ async function submitQuiz() {
 
     },
 
+    de: {
       authBirthday: "Wann bist du geboren?",
       authMonth: "Monat",
       authDay: "Tag",
@@ -10768,7 +10754,7 @@ async function submitQuiz() {
       authEnterBirthday: "Gib dein Geburtsdatum ein.",
       authCancel: "Abbrechen",
       authSet: "Festlegen",
-    de: {
+
       authWelcome: 'Willkommen bei Miimiid',
       authSignInSubtitle: 'Melden Sie sich an, um weiterzulernen',
       authCreateAccount: 'Erstellen Sie Ihr Miimiid-Konto',
@@ -10788,14 +10774,13 @@ async function submitQuiz() {
       authResetPasswordError: 'Ihr Passwort konnte nicht zurückgesetzt werden.',
       authPasswordResetSuccess: 'Ihr Passwort wurde erfolgreich zurückgesetzt.',
 
-      authLoginIdentifier: 'E-Mail oder Telefonnummer',
+      authLoginIdentifier: 'E-Mail-Adresse',
       authPassword: 'Passwort',
       authSignIn: 'Anmelden',
       authCreateAccountLink: 'Konto erstellen',
       authForgotPassword: 'Passwort vergessen?',
       authName: 'Name',
       authEmail: 'E-Mail',
-      authPhone: 'Telefonnummer',
       authConfirmPassword: 'Passwort bestätigen',
       authCreateAccountButton: 'Konto erstellen',
       authBackToSignIn: 'Zur Anmeldung zurück',
@@ -10877,6 +10862,7 @@ async function submitQuiz() {
 
     },
 
+    pt: {
       authBirthday: "Qual é a sua data de nascimento?",
       authMonth: "Mês",
       authDay: "Dia",
@@ -10889,7 +10875,7 @@ async function submitQuiz() {
       authEnterBirthday: "Digite sua data de nascimento.",
       authCancel: "Cancelar",
       authSet: "Definir",
-    pt: {
+
       authWelcome: 'Bem-vindo ao Miimiid',
       authSignInSubtitle: 'Entre para continuar aprendendo',
       authCreateAccount: 'Crie sua conta Miimiid',
@@ -10909,14 +10895,13 @@ async function submitQuiz() {
       authResetPasswordError: 'Não foi possível redefinir sua senha.',
       authPasswordResetSuccess: 'Sua senha foi redefinida com sucesso.',
 
-      authLoginIdentifier: 'E-mail ou número de telefone',
+      authLoginIdentifier: 'Endereço de e-mail',
       authPassword: 'Senha',
       authSignIn: 'Entrar',
       authCreateAccountLink: 'Criar uma conta',
       authForgotPassword: 'Esqueceu a senha?',
       authName: 'Nome',
       authEmail: 'E-mail',
-      authPhone: 'Número de telefone',
       authConfirmPassword: 'Confirmar senha',
       authCreateAccountButton: 'Criar conta',
       authBackToSignIn: 'Voltar para entrar',
@@ -10998,6 +10983,7 @@ async function submitQuiz() {
 
     },
 
+    it: {
       authBirthday: "Qual è la tua data di nascita?",
       authMonth: "Mese",
       authDay: "Giorno",
@@ -11010,7 +10996,7 @@ async function submitQuiz() {
       authEnterBirthday: "Inserisci la tua data di nascita.",
       authCancel: "Annulla",
       authSet: "Imposta",
-    it: {
+
       authWelcome: 'Benvenuto su Miimiid',
       authSignInSubtitle: 'Accedi per continuare a imparare',
       authCreateAccount: 'Crea il tuo account Miimiid',
@@ -11030,14 +11016,13 @@ async function submitQuiz() {
       authResetPasswordError: 'Impossibile reimpostare la password.',
       authPasswordResetSuccess: 'La password è stata reimpostata correttamente.',
 
-      authLoginIdentifier: 'Email o numero di telefono',
+      authLoginIdentifier: 'Indirizzo email',
       authPassword: 'Password',
       authSignIn: 'Accedi',
       authCreateAccountLink: 'Crea un account',
       authForgotPassword: 'Password dimenticata?',
       authName: 'Nome',
       authEmail: 'Email',
-      authPhone: 'Numero di telefono',
       authConfirmPassword: 'Conferma password',
       authCreateAccountButton: 'Crea account',
       authBackToSignIn: 'Torna all\'accesso',
@@ -11119,6 +11104,7 @@ async function submitQuiz() {
 
     },
 
+    nl: {
       authBirthday: "Wat is je geboortedatum?",
       authMonth: "Maand",
       authDay: "Dag",
@@ -11131,7 +11117,7 @@ async function submitQuiz() {
       authEnterBirthday: "Voer je geboortedatum in.",
       authCancel: "Annuleren",
       authSet: "Instellen",
-    nl: {
+
       authWelcome: 'Welkom bij Miimiid',
       authSignInSubtitle: 'Log in om verder te leren',
       authCreateAccount: 'Maak je Miimiid-account',
@@ -11151,14 +11137,13 @@ async function submitQuiz() {
       authResetPasswordError: 'Je wachtwoord kon niet opnieuw worden ingesteld.',
       authPasswordResetSuccess: 'Je wachtwoord is succesvol opnieuw ingesteld.',
 
-      authLoginIdentifier: 'E-mail of telefoonnummer',
+      authLoginIdentifier: 'E-mailadres',
       authPassword: 'Wachtwoord',
       authSignIn: 'Inloggen',
       authCreateAccountLink: 'Account aanmaken',
       authForgotPassword: 'Wachtwoord vergeten?',
       authName: 'Naam',
       authEmail: 'E-mail',
-      authPhone: 'Telefoonnummer',
       authConfirmPassword: 'Wachtwoord bevestigen',
       authCreateAccountButton: 'Account aanmaken',
       authBackToSignIn: 'Terug naar inloggen',
@@ -11240,6 +11225,7 @@ async function submitQuiz() {
 
     },
 
+    pl: {
       authBirthday: "Jaka jest Twoja data urodzenia?",
       authMonth: "Miesiąc",
       authDay: "Dzień",
@@ -11252,7 +11238,7 @@ async function submitQuiz() {
       authEnterBirthday: "Wprowadź swoją datę urodzenia.",
       authCancel: "Anuluj",
       authSet: "Ustaw",
-    pl: {
+
       authWelcome: 'Witamy w Miimiid',
       authSignInSubtitle: 'Zaloguj się, aby kontynuować naukę',
       authCreateAccount: 'Utwórz konto Miimiid',
@@ -11272,14 +11258,13 @@ async function submitQuiz() {
       authResetPasswordError: 'Nie udało się zresetować hasła.',
       authPasswordResetSuccess: 'Hasło zostało pomyślnie zresetowane.',
 
-      authLoginIdentifier: 'E-mail lub numer telefonu',
+      authLoginIdentifier: 'Adres e-mail',
       authPassword: 'Hasło',
       authSignIn: 'Zaloguj się',
       authCreateAccountLink: 'Utwórz konto',
       authForgotPassword: 'Nie pamiętasz hasła?',
       authName: 'Imię i nazwisko',
       authEmail: 'E-mail',
-      authPhone: 'Numer telefonu',
       authConfirmPassword: 'Potwierdź hasło',
       authCreateAccountButton: 'Utwórz konto',
       authBackToSignIn: 'Wróć do logowania',
@@ -11361,6 +11346,7 @@ async function submitQuiz() {
 
     },
 
+    tr: {
       authBirthday: "Doğum tarihiniz nedir?",
       authMonth: "Ay",
       authDay: "Gün",
@@ -11373,7 +11359,7 @@ async function submitQuiz() {
       authEnterBirthday: "Doğum tarihinizi girin.",
       authCancel: "İptal",
       authSet: "Ayarla",
-    tr: {
+
       authWelcome: 'Miimiid\'e Hoş Geldiniz',
       authSignInSubtitle: 'Öğrenmeye devam etmek için giriş yapın',
       authCreateAccount: 'Miimiid hesabınızı oluşturun',
@@ -11393,14 +11379,13 @@ async function submitQuiz() {
       authResetPasswordError: 'Şifreniz sıfırlanamadı.',
       authPasswordResetSuccess: 'Şifreniz başarıyla sıfırlandı.',
 
-      authLoginIdentifier: 'E-posta veya telefon numarası',
+      authLoginIdentifier: 'E-posta adresi',
       authPassword: 'Şifre',
       authSignIn: 'Giriş yap',
       authCreateAccountLink: 'Hesap oluştur',
       authForgotPassword: 'Şifrenizi mi unuttunuz?',
       authName: 'Ad',
       authEmail: 'E-posta',
-      authPhone: 'Telefon numarası',
       authConfirmPassword: 'Şifreyi onayla',
       authCreateAccountButton: 'Hesap oluştur',
       authBackToSignIn: 'Girişe dön',
@@ -11482,6 +11467,7 @@ async function submitQuiz() {
 
     },
 
+    ru: {
       authBirthday: "Когда вы родились?",
       authMonth: "Месяц",
       authDay: "День",
@@ -11494,7 +11480,7 @@ async function submitQuiz() {
       authEnterBirthday: "Введите дату рождения.",
       authCancel: "Отмена",
       authSet: "Установить",
-    ru: {
+
       authWelcome: 'Добро пожаловать в Miimiid',
       authSignInSubtitle: 'Войдите, чтобы продолжить обучение',
       authCreateAccount: 'Создайте аккаунт Miimiid',
@@ -11514,14 +11500,13 @@ async function submitQuiz() {
       authResetPasswordError: 'Не удалось сбросить пароль.',
       authPasswordResetSuccess: 'Ваш пароль успешно сброшен.',
 
-      authLoginIdentifier: 'Электронная почта или номер телефона',
+      authLoginIdentifier: 'Адрес электронной почты',
       authPassword: 'Пароль',
       authSignIn: 'Войти',
       authCreateAccountLink: 'Создать аккаунт',
       authForgotPassword: 'Забыли пароль?',
       authName: 'Имя',
       authEmail: 'Электронная почта',
-      authPhone: 'Номер телефона',
       authConfirmPassword: 'Подтвердите пароль',
       authCreateAccountButton: 'Создать аккаунт',
       authBackToSignIn: 'Вернуться ко входу',
@@ -11603,6 +11588,7 @@ async function submitQuiz() {
 
     },
 
+    uk: {
       authBirthday: "Яка у вас дата народження?",
       authMonth: "Місяць",
       authDay: "День",
@@ -11615,7 +11601,7 @@ async function submitQuiz() {
       authEnterBirthday: "Введіть дату народження.",
       authCancel: "Скасувати",
       authSet: "Встановити",
-    uk: {
+
       authWelcome: 'Ласкаво просимо до Miimiid',
       authSignInSubtitle: 'Увійдіть, щоб продовжити навчання',
       authCreateAccount: 'Створіть обліковий запис Miimiid',
@@ -11635,14 +11621,13 @@ async function submitQuiz() {
       authResetPasswordError: 'Не вдалося скинути пароль.',
       authPasswordResetSuccess: 'Ваш пароль успішно скинуто.',
 
-      authLoginIdentifier: 'Електронна пошта або номер телефону',
+      authLoginIdentifier: 'Адреса електронної пошти',
       authPassword: 'Пароль',
       authSignIn: 'Увійти',
       authCreateAccountLink: 'Створити обліковий запис',
       authForgotPassword: 'Забули пароль?',
       authName: 'Ім\'я',
       authEmail: 'Електронна пошта',
-      authPhone: 'Номер телефону',
       authConfirmPassword: 'Підтвердьте пароль',
       authCreateAccountButton: 'Створити обліковий запис',
       authBackToSignIn: 'Повернутися до входу',
@@ -11724,6 +11709,7 @@ async function submitQuiz() {
 
     },
 
+    ar: {
       authBirthday: "ما تاريخ ميلادك؟",
       authMonth: "الشهر",
       authDay: "اليوم",
@@ -11736,7 +11722,7 @@ async function submitQuiz() {
       authEnterBirthday: "أدخل تاريخ ميلادك.",
       authCancel: "إلغاء",
       authSet: "تعيين",
-    ar: {
+
       authWelcome: 'مرحبًا بك في Miimiid',
       authSignInSubtitle: 'سجّل الدخول لمواصلة التعلّم',
       authCreateAccount: 'أنشئ حساب Miimiid الخاص بك',
@@ -11756,14 +11742,13 @@ async function submitQuiz() {
       authResetPasswordError: 'تعذر إعادة تعيين كلمة المرور.',
       authPasswordResetSuccess: 'تمت إعادة تعيين كلمة المرور بنجاح.',
 
-      authLoginIdentifier: 'البريد الإلكتروني أو رقم الهاتف',
+      authLoginIdentifier: 'عنوان البريد الإلكتروني',
       authPassword: 'كلمة المرور',
       authSignIn: 'تسجيل الدخول',
       authCreateAccountLink: 'إنشاء حساب',
       authForgotPassword: 'هل نسيت كلمة المرور؟',
       authName: 'الاسم',
       authEmail: 'البريد الإلكتروني',
-      authPhone: 'رقم الهاتف',
       authConfirmPassword: 'تأكيد كلمة المرور',
       authCreateAccountButton: 'إنشاء حساب',
       authBackToSignIn: 'العودة إلى تسجيل الدخول',
@@ -11845,6 +11830,7 @@ async function submitQuiz() {
 
     },
 
+    he: {
       authBirthday: "מה תאריך הלידה שלך?",
       authMonth: "חודש",
       authDay: "יום",
@@ -11857,7 +11843,7 @@ async function submitQuiz() {
       authEnterBirthday: "הזן את תאריך הלידה שלך.",
       authCancel: "ביטול",
       authSet: "הגדר",
-    he: {
+
       authWelcome: 'ברוכים הבאים ל-Miimiid',
       authSignInSubtitle: 'התחבר כדי להמשיך ללמוד',
       authCreateAccount: 'צור את חשבון Miimiid שלך',
@@ -11877,14 +11863,13 @@ async function submitQuiz() {
       authResetPasswordError: 'לא ניתן לאפס את הסיסמה שלך.',
       authPasswordResetSuccess: 'הסיסמה שלך אופסה בהצלחה.',
 
-      authLoginIdentifier: 'אימייל או מספר טלפון',
+      authLoginIdentifier: 'כתובת אימייל',
       authPassword: 'סיסמה',
       authSignIn: 'התחברות',
       authCreateAccountLink: 'יצירת חשבון',
       authForgotPassword: 'שכחת את הסיסמה?',
       authName: 'שם',
       authEmail: 'אימייל',
-      authPhone: 'מספר טלפון',
       authConfirmPassword: 'אישור סיסמה',
       authCreateAccountButton: 'יצירת חשבון',
       authBackToSignIn: 'חזרה להתחברות',
@@ -11966,6 +11951,7 @@ async function submitQuiz() {
 
     },
 
+    fa: {
       authBirthday: "تاریخ تولد شما چیست؟",
       authMonth: "ماه",
       authDay: "روز",
@@ -11978,7 +11964,7 @@ async function submitQuiz() {
       authEnterBirthday: "تاریخ تولد خود را وارد کنید.",
       authCancel: "لغو",
       authSet: "تنظیم",
-    fa: {
+
       authWelcome: 'به Miimiid خوش آمدید',
       authSignInSubtitle: 'برای ادامه یادگیری وارد شوید',
       authCreateAccount: 'حساب Miimiid خود را ایجاد کنید',
@@ -11998,14 +11984,13 @@ async function submitQuiz() {
       authResetPasswordError: 'بازنشانی رمز عبور شما امکان‌پذیر نیست.',
       authPasswordResetSuccess: 'رمز عبور شما با موفقیت بازنشانی شد.',
 
-      authLoginIdentifier: 'ایمیل یا شماره تلفن',
+      authLoginIdentifier: 'آدرس ایمیل',
       authPassword: 'رمز عبور',
       authSignIn: 'ورود',
       authCreateAccountLink: 'ایجاد حساب',
       authForgotPassword: 'رمز عبور را فراموش کرده‌اید؟',
       authName: 'نام',
       authEmail: 'ایمیل',
-      authPhone: 'شماره تلفن',
       authConfirmPassword: 'تأیید رمز عبور',
       authCreateAccountButton: 'ایجاد حساب',
       authBackToSignIn: 'بازگشت به ورود',
@@ -12087,6 +12072,7 @@ async function submitQuiz() {
 
     },
 
+    hi: {
       authBirthday: "आपका जन्मदिन कब है?",
       authMonth: "महीना",
       authDay: "दिन",
@@ -12099,7 +12085,7 @@ async function submitQuiz() {
       authEnterBirthday: "अपनी जन्मतिथि दर्ज करें।",
       authCancel: "रद्द करें",
       authSet: "सेट करें",
-    hi: {
+
       authWelcome: 'Miimiid में आपका स्वागत है',
       authSignInSubtitle: 'सीखना जारी रखने के लिए साइन इन करें',
       authCreateAccount: 'अपना Miimiid खाता बनाएं',
@@ -12119,14 +12105,13 @@ async function submitQuiz() {
       authResetPasswordError: 'आपका पासवर्ड रीसेट नहीं किया जा सका।',
       authPasswordResetSuccess: 'आपका पासवर्ड सफलतापूर्वक रीसेट कर दिया गया है।',
 
-      authLoginIdentifier: 'ईमेल या फ़ोन नंबर',
+      authLoginIdentifier: 'ईमेल पता',
       authPassword: 'पासवर्ड',
       authSignIn: 'साइन इन करें',
       authCreateAccountLink: 'खाता बनाएं',
       authForgotPassword: 'पासवर्ड भूल गए?',
       authName: 'नाम',
       authEmail: 'ईमेल',
-      authPhone: 'फ़ोन नंबर',
       authConfirmPassword: 'पासवर्ड की पुष्टि करें',
       authCreateAccountButton: 'खाता बनाएं',
       authBackToSignIn: 'साइन इन पर वापस जाएं',
@@ -12208,6 +12193,7 @@ async function submitQuiz() {
 
     },
 
+    bn: {
       authBirthday: "আপনার জন্মতারিখ কী?",
       authMonth: "মাস",
       authDay: "দিন",
@@ -12220,7 +12206,7 @@ async function submitQuiz() {
       authEnterBirthday: "আপনার জন্মতারিখ লিখুন।",
       authCancel: "বাতিল করুন",
       authSet: "সেট করুন",
-    bn: {
+
       authWelcome: 'Miimiid-এ স্বাগতম',
       authSignInSubtitle: 'শেখা চালিয়ে যেতে সাইন ইন করুন',
       authCreateAccount: 'আপনার Miimiid অ্যাকাউন্ট তৈরি করুন',
@@ -12240,14 +12226,13 @@ async function submitQuiz() {
       authResetPasswordError: 'আপনার পাসওয়ার্ড রিসেট করা যায়নি।',
       authPasswordResetSuccess: 'আপনার পাসওয়ার্ড সফলভাবে রিসেট করা হয়েছে।',
 
-      authLoginIdentifier: 'ইমেল বা ফোন নম্বর',
+      authLoginIdentifier: 'ইমেল ঠিকানা',
       authPassword: 'পাসওয়ার্ড',
       authSignIn: 'সাইন ইন করুন',
       authCreateAccountLink: 'অ্যাকাউন্ট তৈরি করুন',
       authForgotPassword: 'পাসওয়ার্ড ভুলে গেছেন?',
       authName: 'নাম',
       authEmail: 'ইমেল',
-      authPhone: 'ফোন নম্বর',
       authConfirmPassword: 'পাসওয়ার্ড নিশ্চিত করুন',
       authCreateAccountButton: 'অ্যাকাউন্ট তৈরি করুন',
       authBackToSignIn: 'সাইন ইন-এ ফিরে যান',
@@ -12329,6 +12314,7 @@ async function submitQuiz() {
 
     },
 
+    ur: {
       authBirthday: "آپ کی تاریخ پیدائش کیا ہے؟",
       authMonth: "مہینہ",
       authDay: "دن",
@@ -12341,7 +12327,7 @@ async function submitQuiz() {
       authEnterBirthday: "اپنی تاریخ پیدائش درج کریں۔",
       authCancel: "منسوخ کریں",
       authSet: "سیٹ کریں",
-    ur: {
+
       authWelcome: 'Miimiid میں خوش آمدید',
       authSignInSubtitle: 'سیکھنا جاری رکھنے کے لیے سائن ان کریں',
       authCreateAccount: 'اپنا Miimiid اکاؤنٹ بنائیں',
@@ -12361,14 +12347,13 @@ async function submitQuiz() {
       authResetPasswordError: 'آپ کا پاس ورڈ ری سیٹ نہیں کیا جا سکا۔',
       authPasswordResetSuccess: 'آپ کا پاس ورڈ کامیابی سے ری سیٹ ہو گیا ہے۔',
 
-      authLoginIdentifier: 'ای میل یا فون نمبر',
+      authLoginIdentifier: 'ای میل پتہ',
       authPassword: 'پاس ورڈ',
       authSignIn: 'سائن ان کریں',
       authCreateAccountLink: 'اکاؤنٹ بنائیں',
       authForgotPassword: 'پاس ورڈ بھول گئے؟',
       authName: 'نام',
       authEmail: 'ای میل',
-      authPhone: 'فون نمبر',
       authConfirmPassword: 'پاس ورڈ کی تصدیق کریں',
       authCreateAccountButton: 'اکاؤنٹ بنائیں',
       authBackToSignIn: 'سائن ان پر واپس جائیں',
@@ -12450,6 +12435,7 @@ async function submitQuiz() {
 
     },
 
+    id: {
       authBirthday: "Kapan tanggal lahir Anda?",
       authMonth: "Bulan",
       authDay: "Hari",
@@ -12462,7 +12448,7 @@ async function submitQuiz() {
       authEnterBirthday: "Masukkan tanggal lahir Anda.",
       authCancel: "Batal",
       authSet: "Atur",
-    id: {
+
       authWelcome: 'Selamat datang di Miimiid',
       authSignInSubtitle: 'Masuk untuk melanjutkan belajar',
       authCreateAccount: 'Buat akun Miimiid Anda',
@@ -12482,14 +12468,13 @@ async function submitQuiz() {
       authResetPasswordError: 'Kata sandi Anda tidak dapat direset.',
       authPasswordResetSuccess: 'Kata sandi Anda berhasil direset.',
 
-      authLoginIdentifier: 'Email atau nomor telepon',
+      authLoginIdentifier: 'Alamat email',
       authPassword: 'Kata sandi',
       authSignIn: 'Masuk',
       authCreateAccountLink: 'Buat akun',
       authForgotPassword: 'Lupa kata sandi?',
       authName: 'Nama',
       authEmail: 'Email',
-      authPhone: 'Nomor telepon',
       authConfirmPassword: 'Konfirmasi kata sandi',
       authCreateAccountButton: 'Buat akun',
       authBackToSignIn: 'Kembali untuk masuk',
@@ -12571,6 +12556,7 @@ async function submitQuiz() {
 
     },
 
+    ms: {
       authBirthday: "Apakah tarikh lahir anda?",
       authMonth: "Bulan",
       authDay: "Hari",
@@ -12583,7 +12569,7 @@ async function submitQuiz() {
       authEnterBirthday: "Masukkan tarikh lahir anda.",
       authCancel: "Batal",
       authSet: "Tetapkan",
-    ms: {
+
       authWelcome: 'Selamat datang ke Miimiid',
       authSignInSubtitle: 'Log masuk untuk terus belajar',
       authCreateAccount: 'Cipta akaun Miimiid anda',
@@ -12603,14 +12589,13 @@ async function submitQuiz() {
       authResetPasswordError: 'Kata laluan anda tidak dapat ditetapkan semula.',
       authPasswordResetSuccess: 'Kata laluan anda berjaya ditetapkan semula.',
 
-      authLoginIdentifier: 'E-mel atau nombor telefon',
+      authLoginIdentifier: 'Alamat e-mel',
       authPassword: 'Kata laluan',
       authSignIn: 'Log masuk',
       authCreateAccountLink: 'Cipta akaun',
       authForgotPassword: 'Lupa kata laluan?',
       authName: 'Nama',
       authEmail: 'E-mel',
-      authPhone: 'Nombor telefon',
       authConfirmPassword: 'Sahkan kata laluan',
       authCreateAccountButton: 'Cipta akaun',
       authBackToSignIn: 'Kembali ke log masuk',
@@ -12692,6 +12677,7 @@ async function submitQuiz() {
 
     },
 
+    vi: {
       authBirthday: "Ngày sinh của bạn là gì?",
       authMonth: "Tháng",
       authDay: "Ngày",
@@ -12704,7 +12690,7 @@ async function submitQuiz() {
       authEnterBirthday: "Nhập ngày sinh của bạn.",
       authCancel: "Hủy",
       authSet: "Đặt",
-    vi: {
+
       authWelcome: 'Chào mừng bạn đến với Miimiid',
       authSignInSubtitle: 'Đăng nhập để tiếp tục học',
       authCreateAccount: 'Tạo tài khoản Miimiid của bạn',
@@ -12724,14 +12710,13 @@ async function submitQuiz() {
       authResetPasswordError: 'Không thể đặt lại mật khẩu của bạn.',
       authPasswordResetSuccess: 'Mật khẩu của bạn đã được đặt lại thành công.',
 
-      authLoginIdentifier: 'Email hoặc số điện thoại',
+      authLoginIdentifier: 'Địa chỉ email',
       authPassword: 'Mật khẩu',
       authSignIn: 'Đăng nhập',
       authCreateAccountLink: 'Tạo tài khoản',
       authForgotPassword: 'Quên mật khẩu?',
       authName: 'Tên',
       authEmail: 'Email',
-      authPhone: 'Số điện thoại',
       authConfirmPassword: 'Xác nhận mật khẩu',
       authCreateAccountButton: 'Tạo tài khoản',
       authBackToSignIn: 'Quay lại đăng nhập',
@@ -12813,6 +12798,7 @@ async function submitQuiz() {
 
     },
 
+    th: {
       authBirthday: "วันเกิดของคุณคือวันไหน?",
       authMonth: "เดือน",
       authDay: "วัน",
@@ -12825,7 +12811,7 @@ async function submitQuiz() {
       authEnterBirthday: "ป้อนวันเกิดของคุณ",
       authCancel: "ยกเลิก",
       authSet: "ตั้งค่า",
-    th: {
+
       authWelcome: 'ยินดีต้อนรับสู่ Miimiid',
       authSignInSubtitle: 'ลงชื่อเข้าใช้เพื่อเรียนรู้ต่อ',
       authCreateAccount: 'สร้างบัญชี Miimiid ของคุณ',
@@ -12845,14 +12831,13 @@ async function submitQuiz() {
       authResetPasswordError: 'ไม่สามารถรีเซ็ตรหัสผ่านของคุณได้',
       authPasswordResetSuccess: 'รีเซ็ตรหัสผ่านของคุณสำเร็จแล้ว',
 
-      authLoginIdentifier: 'อีเมลหรือหมายเลขโทรศัพท์',
+      authLoginIdentifier: 'ที่อยู่อีเมล',
       authPassword: 'รหัสผ่าน',
       authSignIn: 'เข้าสู่ระบบ',
       authCreateAccountLink: 'สร้างบัญชี',
       authForgotPassword: 'ลืมรหัสผ่าน?',
       authName: 'ชื่อ',
       authEmail: 'อีเมล',
-      authPhone: 'หมายเลขโทรศัพท์',
       authConfirmPassword: 'ยืนยันรหัสผ่าน',
       authCreateAccountButton: 'สร้างบัญชี',
       authBackToSignIn: 'กลับไปเข้าสู่ระบบ',
@@ -12932,6 +12917,7 @@ async function submitQuiz() {
 
     },
 
+    zh: {
       authBirthday: "你的生日是什么时候？",
       authMonth: "月",
       authDay: "日",
@@ -12944,7 +12930,7 @@ async function submitQuiz() {
       authEnterBirthday: "请输入你的出生日期。",
       authCancel: "取消",
       authSet: "设置",
-    zh: {
+
       authWelcome: '欢迎来到 Miimiid',
       authSignInSubtitle: '登录以继续学习',
       authCreateAccount: '创建您的 Miimiid 账户',
@@ -12964,14 +12950,13 @@ async function submitQuiz() {
       authResetPasswordError: '无法重置您的密码。',
       authPasswordResetSuccess: '您的密码已成功重置。',
 
-      authLoginIdentifier: '电子邮件或电话号码',
+      authLoginIdentifier: '电子邮件地址',
       authPassword: '密码',
       authSignIn: '登录',
       authCreateAccountLink: '创建账户',
       authForgotPassword: '忘记密码？',
       authName: '姓名',
       authEmail: '电子邮件',
-      authPhone: '电话号码',
       authConfirmPassword: '确认密码',
       authCreateAccountButton: '创建账户',
       authBackToSignIn: '返回登录',
@@ -13053,6 +13038,7 @@ async function submitQuiz() {
 
     },
 
+    ja: {
       authBirthday: "あなたの誕生日はいつですか？",
       authMonth: "月",
       authDay: "日",
@@ -13065,7 +13051,7 @@ async function submitQuiz() {
       authEnterBirthday: "生年月日を入力してください。",
       authCancel: "キャンセル",
       authSet: "設定",
-    ja: {
+
       authWelcome: 'Miimiidへようこそ',
       authSignInSubtitle: 'サインインして学習を続ける',
       authCreateAccount: 'Miimiidアカウントを作成',
@@ -13085,14 +13071,13 @@ async function submitQuiz() {
       authResetPasswordError: 'パスワードをリセットできませんでした。',
       authPasswordResetSuccess: 'パスワードが正常にリセットされました。',
 
-      authLoginIdentifier: 'メールアドレスまたは電話番号',
+      authLoginIdentifier: 'メールアドレス',
       authPassword: 'パスワード',
       authSignIn: 'ログイン',
       authCreateAccountLink: 'アカウントを作成',
       authForgotPassword: 'パスワードをお忘れですか？',
       authName: '名前',
       authEmail: 'メールアドレス',
-      authPhone: '電話番号',
       authConfirmPassword: 'パスワードを確認',
       authCreateAccountButton: 'アカウントを作成',
       authBackToSignIn: 'ログインに戻る',
@@ -13174,6 +13159,7 @@ async function submitQuiz() {
 
     },
 
+    ko: {
       authBirthday: "생년월일이 언제인가요?",
       authMonth: "월",
       authDay: "일",
@@ -13186,7 +13172,7 @@ async function submitQuiz() {
       authEnterBirthday: "생년월일을 입력하세요.",
       authCancel: "취소",
       authSet: "설정",
-    ko: {
+
       authWelcome: 'Miimiid에 오신 것을 환영합니다',
       authSignInSubtitle: '로그인하여 학습을 계속하세요',
       authCreateAccount: 'Miimiid 계정 만들기',
@@ -13206,14 +13192,13 @@ async function submitQuiz() {
       authResetPasswordError: '비밀번호를 재설정할 수 없습니다.',
       authPasswordResetSuccess: '비밀번호가 성공적으로 재설정되었습니다.',
 
-      authLoginIdentifier: '이메일 또는 전화번호',
+      authLoginIdentifier: '이메일 주소',
       authPassword: '비밀번호',
       authSignIn: '로그인',
       authCreateAccountLink: '계정 만들기',
       authForgotPassword: '비밀번호를 잊으셨나요?',
       authName: '이름',
       authEmail: '이메일',
-      authPhone: '전화번호',
       authConfirmPassword: '비밀번호 확인',
       authCreateAccountButton: '계정 만들기',
       authBackToSignIn: '로그인으로 돌아가기',
@@ -13295,6 +13280,7 @@ async function submitQuiz() {
 
     },
 
+    sw: {
       authBirthday: "Tarehe yako ya kuzaliwa ni ipi?",
       authMonth: "Mwezi",
       authDay: "Siku",
@@ -13307,7 +13293,7 @@ async function submitQuiz() {
       authEnterBirthday: "Weka tarehe yako ya kuzaliwa.",
       authCancel: "Ghairi",
       authSet: "Weka",
-    sw: {
+
       authWelcome: 'Karibu Miimiid',
       authSignInSubtitle: 'Ingia ili kuendelea kujifunza',
       authCreateAccount: 'Unda akaunti yako ya Miimiid',
@@ -13327,14 +13313,13 @@ async function submitQuiz() {
       authResetPasswordError: 'Imeshindikana kuweka upya nenosiri lako.',
       authPasswordResetSuccess: 'Nenosiri lako limewekwa upya kwa mafanikio.',
 
-      authLoginIdentifier: 'Barua pepe au nambari ya simu',
+      authLoginIdentifier: 'Anwani ya barua pepe',
       authPassword: 'Nenosiri',
       authSignIn: 'Ingia',
       authCreateAccountLink: 'Fungua akaunti',
       authForgotPassword: 'Umesahau nenosiri?',
       authName: 'Jina',
       authEmail: 'Barua pepe',
-      authPhone: 'Nambari ya simu',
       authConfirmPassword: 'Thibitisha nenosiri',
       authCreateAccountButton: 'Fungua akaunti',
       authBackToSignIn: 'Rudi kwenye kuingia',
@@ -13416,6 +13401,7 @@ async function submitQuiz() {
 
     },
 
+    yo: {
       authBirthday: "Kí ni ọjọ́ ìbí rẹ?",
       authMonth: "Oṣù",
       authDay: "Ọjọ́",
@@ -13428,7 +13414,7 @@ async function submitQuiz() {
       authEnterBirthday: "Tẹ ọjọ́ ìbí rẹ sílẹ̀.",
       authCancel: "Fagilee",
       authSet: "Ṣètò",
-    yo: {
+
       authWelcome: 'Kaabo si Miimiid',
       authSignInSubtitle: 'Wọlé láti tẹ̀síwájú nínú ẹ̀kọ́',
       authCreateAccount: 'Ṣẹ̀dá àkọọ́lẹ̀ Miimiid rẹ',
@@ -13448,14 +13434,13 @@ async function submitQuiz() {
       authResetPasswordError: 'A kò lè tún ọ̀rọ̀ aṣínà rẹ ṣe.',
       authPasswordResetSuccess: 'A ti tún ọ̀rọ̀ aṣínà rẹ ṣe ní àṣeyọrí.',
 
-      authLoginIdentifier: 'Imeeli tabi nọmba foonu',
+      authLoginIdentifier: 'Adirẹsi imeeli',
       authPassword: 'Ọrọigbaniwọle',
       authSignIn: 'Wọlé',
       authCreateAccountLink: 'Ṣẹda akọọlẹ',
       authForgotPassword: 'O gbagbe ọrọigbaniwọle?',
       authName: 'Orukọ',
       authEmail: 'Imeeli',
-      authPhone: 'Nọmba foonu',
       authConfirmPassword: 'Jẹrisi ọrọigbaniwọle',
       authCreateAccountButton: 'Ṣẹda akọọlẹ',
       authBackToSignIn: 'Pada si iwọle',
@@ -13537,6 +13522,7 @@ async function submitQuiz() {
 
     },
 
+    ig: {
       authBirthday: "Kedu ụbọchị ọmụmụ gị?",
       authMonth: "Ọnwa",
       authDay: "Ụbọchị",
@@ -13549,7 +13535,7 @@ async function submitQuiz() {
       authEnterBirthday: "Tinye ụbọchị ọmụmụ gị.",
       authCancel: "Kagbuo",
       authSet: "Tọọ",
-    ig: {
+
       authWelcome: 'Nnọọ na Miimiid',
       authSignInSubtitle: 'Banye ka ị gaa n\'ihu n\'ịmụ ihe',
       authCreateAccount: 'Mepụta akaụntụ Miimiid gị',
@@ -13569,14 +13555,13 @@ async function submitQuiz() {
       authResetPasswordError: 'Enweghị ike ịtọgharịa okwuntughe gị.',
       authPasswordResetSuccess: 'A tọgharịrị okwuntughe gị nke ọma.',
 
-      authLoginIdentifier: 'Email ma ọ bụ nọmba ekwentị',
+      authLoginIdentifier: 'Adreesị email',
       authPassword: 'Okwuntughe',
       authSignIn: 'Banye',
       authCreateAccountLink: 'Mepụta akaụntụ',
       authForgotPassword: 'Ị chefuru okwuntughe?',
       authName: 'Aha',
       authEmail: 'Email',
-      authPhone: 'Nọmba ekwentị',
       authConfirmPassword: 'Kwenye okwuntughe',
       authCreateAccountButton: 'Mepụta akaụntụ',
       authBackToSignIn: 'Laghachi na nbanye',
@@ -13658,6 +13643,7 @@ async function submitQuiz() {
 
     },
 
+    ha: {
       authBirthday: "Yaushe ne ranar haihuwarka?",
       authMonth: "Wata",
       authDay: "Rana",
@@ -13670,7 +13656,7 @@ async function submitQuiz() {
       authEnterBirthday: "Shigar da ranar haihuwarka.",
       authCancel: "Soke",
       authSet: "Saita",
-    ha: {
+
       authWelcome: 'Barka da zuwa Miimiid',
       authSignInSubtitle: 'Shiga don ci gaba da koyo',
       authCreateAccount: 'Ƙirƙiri asusun Miimiid ɗinka',
@@ -13690,14 +13676,13 @@ async function submitQuiz() {
       authResetPasswordError: 'Ba a iya sake saita kalmar sirrinka ba.',
       authPasswordResetSuccess: 'An sake saita kalmar sirrinka cikin nasara.',
 
-      authLoginIdentifier: 'Imel ko lambar waya',
+      authLoginIdentifier: 'Adireshin imel',
       authPassword: 'Kalmar sirri',
       authSignIn: 'Shiga',
       authCreateAccountLink: 'Ƙirƙiri asusu',
       authForgotPassword: 'An manta kalmar sirri?',
       authName: 'Suna',
       authEmail: 'Imel',
-      authPhone: 'Lambar waya',
       authConfirmPassword: 'Tabbatar da kalmar sirri',
       authCreateAccountButton: 'Ƙirƙiri asusu',
       authBackToSignIn: 'Koma shiga',
