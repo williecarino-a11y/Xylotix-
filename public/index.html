@@ -7853,97 +7853,81 @@ function initializeMiimiidAuth() {
 
       miimiidAuthInitialized = true;
 
-      initializeMiimiidPasswordToggles();
-      applyMiimiidAuthTranslations();
-
+      /*
+       * Wire the authentication controls FIRST.
+       *
+       * Authentication navigation must never depend on the
+       * localization layer, password UI, or registration helpers
+       * completing successfully. A failure in one optional helper
+       * must not leave Sign In, Create Account, or Forgot Password
+       * completely inert.
+       */
       const loginForm =
-        document.getElementById(
-          "miimiid-login-form"
-        );
-
+        document.getElementById("miimiid-login-form");
       const registerForm =
-        document.getElementById(
-          "miimiid-register-form"
-        );
-
+        document.getElementById("miimiid-register-form");
       const forgotForm =
-        document.getElementById(
-          "miimiid-forgot-form"
-        );
+        document.getElementById("miimiid-forgot-form");
+      const resetForm =
+        document.getElementById("miimiid-reset-form");
 
       if (loginForm) {
-        loginForm.addEventListener(
-          "submit",
-          handleMiimiidLogin
-        );
+        loginForm.addEventListener("submit", handleMiimiidLogin);
       }
 
       if (registerForm) {
-        registerForm.addEventListener(
-          "submit",
-          handleMiimiidRegister
-        );
+        registerForm.addEventListener("submit", handleMiimiidRegister);
       }
 
       if (forgotForm) {
-        forgotForm.addEventListener(
-          "submit",
-          handleMiimiidForgotPassword
-        );
+        forgotForm.addEventListener("submit", handleMiimiidForgotPassword);
       }
 
-      const resetForm =
-        document.getElementById(
-          "miimiid-reset-form"
-        );
-
       if (resetForm) {
-        resetForm.addEventListener(
-          "submit",
-          handleMiimiidResetPassword
-        );
+        resetForm.addEventListener("submit", handleMiimiidResetPassword);
       }
 
       document
         .getElementById("miimiid-show-register")
-        ?.addEventListener(
-          "click",
-          () => showMiimiidAuthMode("register")
-        );
+        ?.addEventListener("click", () => showMiimiidAuthMode("register"));
 
       document
         .getElementById("miimiid-show-forgot")
-        ?.addEventListener(
-          "click",
-          () => showMiimiidAuthMode("forgot")
-        );
+        ?.addEventListener("click", () => showMiimiidAuthMode("forgot"));
 
       document
-        .getElementById(
-          "miimiid-show-login-from-register"
-        )
-        ?.addEventListener(
-          "click",
-          () => showMiimiidAuthMode("login")
-        );
+        .getElementById("miimiid-show-login-from-register")
+        ?.addEventListener("click", () => showMiimiidAuthMode("login"));
 
       document
-        .getElementById(
-          "miimiid-show-login-from-forgot"
-        )
-        ?.addEventListener(
-          "click",
-          () => showMiimiidAuthMode("login")
-        );
+        .getElementById("miimiid-show-login-from-forgot")
+        ?.addEventListener("click", () => showMiimiidAuthMode("login"));
 
       document
-        .getElementById(
-          "miimiid-show-login-from-reset"
-        )
-        ?.addEventListener(
-          "click",
-          () => showMiimiidAuthMode("login")
-        );
+        .getElementById("miimiid-show-login-from-reset")
+        ?.addEventListener("click", () => showMiimiidAuthMode("login"));
+
+      /*
+       * Secondary auth UI initialization is deliberately isolated.
+       * These helpers must not be able to disable the core auth flow.
+       */
+      try {
+        initializeMiimiidPasswordToggles();
+      } catch (error) {
+        console.error("Miimiid password UI initialization failed:", error);
+      }
+
+      try {
+        applyMiimiidAuthTranslations();
+      } catch (error) {
+        console.error("Miimiid auth translation initialization failed:", error);
+      }
+
+      try {
+        initializeMiimiidRegistrationFlow();
+      } catch (error) {
+        console.error("Miimiid registration initialization failed:", error);
+      }
     }
 
     async function initializeMiimiidApplication() {
