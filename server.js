@@ -113,6 +113,7 @@ app.get(['/', '/index.html'], (req, res, next) => {
       '<link rel="stylesheet" href="/fun-center-hero.css">',
       '<script defer src="/continue-loading.js"></script>',
       '<script defer src="/miimiid-auth-engine.js"></script>',
+      '<script defer src="/auth-bootstrap-guard.js"></script>',
       '<script defer src="/password-validation.js"></script>',
       '<script defer src="/pwa.js"></script>',
       '<script defer src="/assets/fun-center/assets.js"></script>',
