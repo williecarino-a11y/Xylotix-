@@ -183,14 +183,29 @@
       }
 
       if (!user) {
-        bootPromise = null;
+  bootPromise = null;
 
-        showLoginView(true);
-        stopBootstrapLoader();
+  /*
+   * The user may have entered registration while the initial
+   * session restoration request was still in flight.
+   *
+   * Do not force the login renderer here because doing so can
+   * reset an active registration step.
+   *
+   * If the auth view is already active, preserve its current
+   * mode and step. Otherwise, expose the normal login view.
+   */
+  if (authViewIsActive()) {
+    revealAuthView();
+  } else {
+    showLoginView(true);
+  }
 
-        booted = true;
+  stopBootstrapLoader();
 
-        return false;
+  booted = true;
+
+  return false;
       }
 
       try {
@@ -252,14 +267,14 @@
       snapshot.user
     ) {
       if (booted) {
-        exposeAuthenticatedShell();
-        return;
+  exposeAuthenticatedShell(snapshot.user);
+  return;
       }
 
       try {
         await initializeDashboardOnce();
 
-        exposeAuthenticatedShell();
+        exposeAuthenticatedShell(snapshot.user);
 
         booted = true;
 
@@ -270,7 +285,7 @@
           error
         );
 
-        showLoginView(true);
+        revealAuthView();
 
         booted = false;
       }
@@ -299,7 +314,7 @@
         error
       );
 
-      showLoginView(true);
+      revealAuthView();
       stopBootstrapLoader();
     });
   };
