@@ -94,9 +94,9 @@ app.get(['/', '/index.html'], (req, res, next) => {
     // bootstrap owner. The original function remains intact for compatibility,
     // but it is no longer allowed to start a competing bootstrap lifecycle.
     html = html.replace(
-      /document\.addEventListener\(\s*(['"])DOMContentLoaded\1\s*,\s*initializeMiimiidApplication\s*\);/g,
-      'document.addEventListener("DOMContentLoaded", () => window.MIIMIID_AUTH_BOOTSTRAP?.() || initializeMiimiidApplication());'
-    );
+  /if\s*\(\s*document\.readyState\s*===\s*["']loading["']\s*\)\s*\{\s*document\.addEventListener\(\s*["']DOMContentLoaded["']\s*,\s*initializeMiimiidApplication\s*\)\s*;\s*\}\s*else\s*\{\s*initializeMiimiidApplication\(\s*\)\s*;\s*\}/g,
+  ''
+);
 
     const legacyBrandAssets = [
       /<link\s+rel="icon"\s+href="\/favicon\.ico"\s*\/?>\s*/gi,
