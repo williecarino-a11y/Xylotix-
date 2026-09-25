@@ -77,19 +77,19 @@
     loading?.classList.remove('hidden');
   }
 
-  function exposeAuthenticatedShell() {
-    const { auth, loading, shell } = selectors();
+  function exposeAuthenticatedShell(user) {
+  const { auth, loading, shell } = selectors();
 
-    if (!window.currentUser && !window.MIIMIID_CURRENT_USER) {
-      showLoginView(true);
-      return false;
-    }
+  if (!user) {
+    showLoginView(true);
+    return false;
+  }
 
-    loading?.classList.add('hidden');
-    auth?.classList.add('hidden');
-    shell?.classList.remove('hidden');
+  loading?.classList.add('hidden');
+  auth?.classList.add('hidden');
+  shell?.classList.remove('hidden');
 
-    return true;
+  return true;
   }
 
   function initializeDashboardOnce() {
@@ -196,7 +196,7 @@
       try {
         await initializeDashboardOnce();
 
-        const exposed = exposeAuthenticatedShell();
+        const exposed = exposeAuthenticatedShell(user);
 
         stopBootstrapLoader();
 
