@@ -10181,10 +10181,16 @@ async function submitQuiz() {
 
 
     /* =========================================
-       START APPLICATION
-       ========================================= */
+   START APPLICATION
+   ========================================= */
 
-    fetchCourses();
+/*
+ * Do not fetch courses during page bootstrap.
+ *
+ * Authentication owns the application boundary.
+ * initializeMiimiidDashboard() -> miimiidNavigate("home")
+ * performs the first authenticated course load.
+ */
 
   </script>
 
