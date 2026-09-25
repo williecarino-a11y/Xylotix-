@@ -2143,6 +2143,18 @@ window.addEventListener('error', function(e) {
 });
   </script>
 
+<script>
+  window.addEventListener('unhandledrejection', function(e) {
+    var el = document.createElement('div');
+      el.style.cssText = 'position:fixed;top:0;left:0;right:0;z-index:99999;background:purple;color:white;padding:10px;font-size:12px;white-space:pre-wrap;';
+        var reason = e.reason;
+          var msg = reason && reason.message ? reason.message : String(reason);
+            var stack = reason && reason.stack ? reason.stack : '';
+              el.textContent = 'PROMISE ERROR: ' + msg + '\n' + stack;
+                document.body.appendChild(el);
+                });
+                </script>
+
 </head><body>
 <!-- =========================================
        MIIMIID AUTHENTICATION
