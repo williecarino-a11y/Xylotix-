@@ -7919,6 +7919,8 @@ function initializeMiimiidAuth() {
         .getElementById("miimiid-show-login-from-reset")
         ?.addEventListener("click", () => showMiimiidAuthMode("login"));
 
+      initializeMiimiidRegistrationFlow();
+
       /*
        * Secondary auth UI initialization is deliberately isolated.
        * These helpers must not be able to disable the core auth flow.
