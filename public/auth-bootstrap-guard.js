@@ -178,19 +178,22 @@
       let user;
 
       try {
-        user = await engine.loadCurrentUser();
-      } catch (error) {
-        console.error(
-          'Miimiid session restoration failed:',
-          error
-        );
+  user = await engine.loadCurrentUser();
 
-        bootPromise = null;
+  window.currentUser = user || null;
+  window.MIIMIID_CURRENT_USER = user || null;
+} catch (error) {
+  console.error(
+    'Miimiid session restoration failed:',
+    error
+  );
 
-        showLoginView(true);
-        stopBootstrapLoader();
+  bootPromise = null;
 
-        return false;
+  showLoginView(true);
+  stopBootstrapLoader();
+
+  return false;
       }
 
       if (!user) {
