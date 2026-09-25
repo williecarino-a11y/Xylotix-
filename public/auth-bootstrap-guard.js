@@ -25,6 +25,17 @@
     };
   }
 
+  function authViewIsActive() {
+  const { auth, card } = selectors();
+
+  return Boolean(
+    auth &&
+    !auth.classList.contains('hidden') &&
+    card &&
+    !card.classList.contains('hidden')
+  );
+  }
+
   function stopBootstrapLoader() {
     if (window.ContinueLoading?.stopAll) {
       window.ContinueLoading.stopAll('auth-bootstrap');
