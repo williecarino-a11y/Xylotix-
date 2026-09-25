@@ -95,7 +95,7 @@ app.get(['/', '/index.html'], (req, res, next) => {
     // but it is no longer allowed to start a competing bootstrap lifecycle.
     html = html.replace(
   /if\s*\(\s*document\.readyState\s*===\s*["']loading["']\s*\)\s*\{\s*document\.addEventListener\(\s*["']DOMContentLoaded["']\s*,\s*initializeMiimiidApplication\s*\)\s*;\s*\}\s*else\s*\{\s*initializeMiimiidApplication\(\s*\)\s*;\s*\}/g,
-  ''
+  '/* MIIMIID_AUTH_BOOTSTRAP owns application startup. Legacy initializer disabled. */'
 );
 
     const legacyBrandAssets = [
