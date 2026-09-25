@@ -93,10 +93,6 @@ app.get(['/', '/index.html'], (req, res, next) => {
     // Route the legacy DOMContentLoaded registration through the dedicated
     // bootstrap owner. The original function remains intact for compatibility,
     // but it is no longer allowed to start a competing bootstrap lifecycle.
-    html = html.replace(
-  /if\s*\(\s*document\.readyState\s*===\s*["']loading["']\s*\)\s*\{\s*document\.addEventListener\(\s*["']DOMContentLoaded["']\s*,\s*initializeMiimiidApplication\s*\)\s*;\s*\}\s*else\s*\{\s*initializeMiimiidApplication\(\s*\)\s*;\s*\}/g,
-  '/* MIIMIID_AUTH_BOOTSTRAP owns application startup. Legacy initializer disabled. */'
-);
 
     const legacyBrandAssets = [
       /<link\s+rel="icon"\s+href="\/favicon\.ico"\s*\/?>\s*/gi,
@@ -117,7 +113,6 @@ app.get(['/', '/index.html'], (req, res, next) => {
       '<link rel="stylesheet" href="/fun-center-hero.css">',
       '<script defer src="/continue-loading.js"></script>',
       '<script defer src="/miimiid-auth-engine.js"></script>',
-      '<script defer src="/auth-bootstrap-guard.js"></script>',
       '<script defer src="/password-validation.js"></script>',
       '<script defer src="/pwa.js"></script>',
       '<script defer src="/assets/fun-center/assets.js"></script>',
