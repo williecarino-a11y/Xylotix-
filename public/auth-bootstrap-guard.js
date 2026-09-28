@@ -306,8 +306,6 @@
     engine.subscribe(handleSessionChange);
   }
 
-  window.MIIMIID_AUTH_BOOTSTRAP_READY = true;
-
   /*
    * Do not rely exclusively on server-side rewriting of the legacy
    * inline initializer.
