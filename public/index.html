@@ -13781,6 +13781,8 @@ async function submitQuiz() {
     );
   }
 
+  window.miimiidTranslate = miimiidTranslate;
+  
   function getSavedLanguage() {
     try {
       const saved = localStorage.getItem(MIIMIID_LANGUAGE_KEY);
