@@ -93,6 +93,16 @@ app.get(['/', '/index.html'], (req, res, next) => {
     // Route the legacy DOMContentLoaded registration through the dedicated
     // bootstrap owner. The original function remains intact for compatibility,
     // but it is no longer allowed to start a competing bootstrap lifecycle.
+     html = html.replace(
+  /async function loadMiimiidCurrentUser\(\) \{[\s\S]*?(?=\n    async function initializeMiimiidApplication\(\))/,
+  `...`
+);
+
+// THIS BLOCK MUST BE HERE
+html = html.replace(
+  /document\.addEventListener\(\s*(['"])DOMContentLoaded\1\s*,\s*initializeMiimiidApplication\s*\);/g,
+  'document.addEventListener("DOMContentLoaded", () => window.MIIMIID_AUTH_BOOTSTRAP?.() || initializeMiimiidApplication());'
+);
 
     const legacyBrandAssets = [
       /<link\s+rel="icon"\s+href="\/favicon\.ico"\s*\/?>\s*/gi,
