@@ -14202,6 +14202,15 @@ async function submitQuiz() {
     initializeLanguageSelector();
   }
 
+  if (document.readyState === "loading") {
+  document.addEventListener(
+    "DOMContentLoaded",
+    initializeMiimiidApplication
+  );
+} else {
+  initializeMiimiidApplication();
+  }
+  
     /*
  * MIIMIID REGISTRATION INITIALIZATION
  * Programmatic initialization fix.
