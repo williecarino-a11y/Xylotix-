@@ -1,6 +1,10 @@
 const { test, expect } = require('@playwright/test');
 
 test.describe('Miimiid browser application flows', () => {
+ test.beforeEach(({ page }) => {
+    page.on('console', (msg) => console.log('[browser]', msg.type(), msg.text()));
+    page.on('pageerror', (err) => console.log('[pageerror]', err.message));
+  });
   test('exposes the registration flow and advances through the first steps', async ({ page }) => {
     await page.route('**/api/auth/me', async route => {
       await route.fulfill({
