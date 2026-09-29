@@ -209,10 +209,10 @@
 
   stopBootstrapLoader();
 
-  booted = true;
+  booted = false;
 
   return false;
-      }
+  }
 
       try {
         await initializeDashboardOnce();
