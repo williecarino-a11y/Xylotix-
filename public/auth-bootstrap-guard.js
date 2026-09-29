@@ -10,6 +10,12 @@
  */
 (function (window, document) {
   'use strict';
+  if (typeof window.getMiimiidCurrentUserId !== 'function') {
+    window.getMiimiidCurrentUserId = function () {
+      const user = window.MIIMIID_CURRENT_USER || window.currentUser || null;
+      return user ? (user.id || user._id || '') : '';
+    };
+  }
 
   let bootPromise = null;
   let dashboardPromise = null;
