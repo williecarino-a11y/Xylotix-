@@ -49,7 +49,7 @@ app.get(['/', '/index.html'], (req, res, next) => {
     // live auth engine now owns session restoration. Keep the legacy UI initializer
     // while delegating its user lookup to the single auth-engine request coordinator.
     html = html.replace(
-      /async function loadMiimiidCurrentUser\(\) \{[\s\S]*?(?=\n    async function initializeMiimiidApplication\(\))/, 
+      /async function loadMiimiidCurrentUser\(\) \{[\s\S]*?\n    \}(?=\n)/,
       `async function loadMiimiidCurrentUser() {
       async function getAuthEngine() {
         if (window.MIIMIID_AUTH_ENGINE?.loadCurrentUser) {
