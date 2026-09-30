@@ -568,7 +568,8 @@ async function submitMiimiidFunAnswer(button) {
       if (card) card.classList.add('is-wrong');
       button.classList.add('is-wrong');
       if (mascotEl) miimiidFunSetMascotMood(mascotEl, 'wrong');
-
+    }
+    
     state.roundIndex++;
 
     setTimeout(async () => {
