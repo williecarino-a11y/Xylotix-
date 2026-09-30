@@ -68,8 +68,35 @@ function miimiidFunPlayComplete() {
 /* =========================================================
  * MASCOT (hand-drawn with CSS shapes, no image assets)
  * ========================================================= */
+const MIIMIID_FUN_POSES = {
+  idle: 'thinkingQuestion', correct: 'thumbsUp', wrong: 'sad',
+  celebrate: 'happy', wave: 'waving', sleep: 'sleeping',
+  run: 'running', confused: 'confused'
+};
+
+function miimiidFunMascotAnim(mood) {
+  if (mood === 'wrong') return 'none';
+  return mood === 'celebrate'
+    ? 'miimiidFunMascotCelebrate 0.6s ease-in-out infinite'
+    : 'miimiidFunMascotBounce 1.1s ease-in-out infinite';
+}
 
 function miimiidFunMascot(mood, size) {
+  const dim = size || 56;
+  const pose = MIIMIID_FUN_POSES[mood] || 'happy';
+  const src = MIIMIID_ASSETS.characters.miimiid[pose];
+  return `<img class="miimiid-fun-mascot" data-mood="${mood}" src="${src}" alt="" aria-hidden="true"
+    style="width:${dim}px;height:auto;flex-shrink:0;object-fit:contain;animation:${miimiidFunMascotAnim(mood)};"
+    onerror="this.outerHTML=miimiidFunMascotCss('${mood}',${dim})">`;
+}
+
+function miimiidFunSetMascotMood(el, mood) {
+  el.src = MIIMIID_ASSETS.characters.miimiid[MIIMIID_FUN_POSES[mood] || 'happy'];
+  el.dataset.mood = mood;
+  el.style.animation = miimiidFunMascotAnim(mood);
+}
+
+function miimiidFunMascotCss(mood, size) {
   const dimension = size || 56;
   const eyeSize = Math.max(5, Math.round(dimension * 0.14));
   const eyeTop = Math.round(dimension * 0.32);
@@ -535,13 +562,12 @@ async function submitMiimiidFunAnswer(button) {
       miimiidFunPlayCorrect();
       if (card) card.classList.add('is-correct');
       button.classList.add('is-correct');
-      if (mascotEl) { mascotEl.style.background = '#1D9E75'; }
+      if (mascotEl) miimiidFunSetMascotMood(mascotEl, 'correct');
     } else {
       miimiidFunPlayWrong();
       if (card) card.classList.add('is-wrong');
       button.classList.add('is-wrong');
-      if (mascotEl) { mascotEl.style.background = '#F0997B'; mascotEl.style.transform = 'rotate(-4deg)'; mascotEl.style.animation = 'none'; }
-    }
+      if (mascotEl) miimiidFunSetMascotMood(mascotEl, 'wrong');
 
     state.roundIndex++;
 
