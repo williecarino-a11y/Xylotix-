@@ -340,4 +340,27 @@
   } else {
     startBootstrap();
   }
+
+  /*
+   * Make sure the login screen controls (Sign In, Register, eye icon)
+   * are wired up. initializeMiimiidAuth ignores repeat calls.
+   */
+  function wireAuthControls() {
+    if (typeof initializeMiimiidAuth !== 'function') {
+      return;
+    }
+
+    try {
+      initializeMiimiidAuth();
+    } catch (error) {
+      console.error('Miimiid auth control wiring failed:', error);
+    }
+  }
+
+  if (document.readyState === 'complete') {
+    wireAuthControls();
+  } else {
+    document.addEventListener('DOMContentLoaded', wireAuthControls, { once: true });
+  }
+  
 })(window, document);
