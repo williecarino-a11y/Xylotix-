@@ -1,57 +1,53 @@
 const { test } = require('@playwright/test');
 
-test('diagnostic: served page and auth wiring', async ({ page, request }) => {
+test('diagnostic: startup trace', async ({ page }) => {
   const out = [];
-  const res = await request.get('/');
-  const html = await res.text();
-  out.push('html length ' + html.length);
-  for (const c of [
-    'function handleMiimiidLogin',
-    'function initializeMiimiidAuth',
-    'function initializeMiimiidPasswordToggles',
-    'function showMiimiidAuthMode',
-    'function initializeMiimiidApplication',
-    'function miimiidTranslate'
-  ]) {
-    out.push(c + ' = ' + html.includes(c));
-  }
 
-  page.on('pageerror', e => out.push('PAGEERROR ' + e.message));
-  page.on('console', m => {
-    if (m.type() === 'error') out.push('CONSOLE-ERROR ' + m.text().slice(0, 150));
+  await page.addInitScript(() => {
+    window.__log = [];
+    const log = (m) => window.__log.push(m);
+    const orig = EventTarget.prototype.addEventListener;
+    EventTarget.prototype.addEventListener = function (type, fn, opts) {
+      if (type === 'DOMContentLoaded' && typeof fn === 'function') {
+        const name = fn.name || 'anon';
+        log('register DCL ' + name + ' readyState=' + document.readyState);
+        const wrapped = function () {
+          log('run DCL ' + name);
+          try {
+            const r = fn.apply(this, arguments);
+            if (r && r.catch) r.catch((e) => log('async-reject ' + name + ': ' + e));
+            return r;
+          } catch (e) {
+            log('THROW ' + name + ': ' + e);
+            throw e;
+          }
+        };
+        return orig.call(this, type, wrapped, opts);
+      }
+      return orig.call(this, type, fn, opts);
+    };
+    orig.call(document, 'DOMContentLoaded', () => log('DOMContentLoaded fired'));
+    orig.call(window, 'load', () => log('window load fired'));
+    orig.call(window, 'error', (e) => log('ERR ' + e.message + ' @' + String(e.filename || '').split('/').pop() + ':' + e.lineno));
+    orig.call(window, 'unhandledrejection', (e) => log('REJ ' + (e.reason && e.reason.message || e.reason)));
   });
-  await page.route('**/api/auth/me', r =>
+
+  page.on('pageerror', (e) => out.push('PAGEERROR ' + e.message));
+  page.on('requestfailed', (r) => out.push('REQFAILED ' + r.url()));
+  page.on('response', (r) => { if (r.status() >= 400) out.push('HTTP ' + r.status() + ' ' + r.url()); });
+  await page.route('**/api/auth/me', (r) =>
     r.fulfill({ status: 401, contentType: 'application/json', body: JSON.stringify({ status: 'error' }) }));
 
   await page.goto('/');
   await page.waitForTimeout(3000);
 
-  const before = await page.evaluate(() => ({
+  const state = await page.evaluate(() => ({
+    log: window.__log,
     authInit: typeof miimiidAuthInitialized !== 'undefined' ? miimiidAuthInitialized : 'undeclared',
-    showMode: typeof window.showMiimiidAuthMode,
-    loginForm: document.getElementById('miimiid-login-form')?.className,
-    registerForm: document.getElementById('miimiid-register-form')?.className,
-    scripts: Array.from(document.scripts).map(s => s.src || 'inline').join(' | ')
+    initFn: typeof initializeMiimiidApplication,
+    readyState: document.readyState
   }));
-  out.push('BEFORE ' + JSON.stringify(before));
+  out.push('STATE ' + JSON.stringify(state, null, 1));
 
-  await page.locator('#miimiid-show-register').click();
-  await page.waitForTimeout(1500);
-
-  const after = await page.evaluate(() => {
-    const chain = [];
-    let n = document.getElementById('miimiid-register-get-started');
-    while (n && n !== document.body) {
-      chain.push(n.tagName + '#' + n.id + '.' + n.className);
-      n = n.parentElement;
-    }
-    return {
-      loginForm: document.getElementById('miimiid-login-form')?.className,
-      registerForm: document.getElementById('miimiid-register-form')?.className,
-      chain
-    };
-  });
-  out.push('AFTER ' + JSON.stringify(after));
-
-  throw new Error('DIAG RESULT\n' + out.join('\n'));
+  throw new Error('DIAG2 RESULT\n' + out.join('\n'));
 });
