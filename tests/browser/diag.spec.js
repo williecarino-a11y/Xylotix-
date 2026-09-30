@@ -1,21 +1,25 @@
 const { test } = require('@playwright/test');
 
 test('diagnostic: served page and auth wiring', async ({ page, request }) => {
+  const out = [];
   const res = await request.get('/');
   const html = await res.text();
-  const checks = [
+  out.push('html length ' + html.length);
+  for (const c of [
     'function handleMiimiidLogin',
     'function initializeMiimiidAuth',
     'function initializeMiimiidPasswordToggles',
     'function showMiimiidAuthMode',
     'function initializeMiimiidApplication',
     'function miimiidTranslate'
-  ];
-  console.log('[diag] served html length', html.length);
-  for (const c of checks) console.log('[diag]', c, html.includes(c));
+  ]) {
+    out.push(c + ' = ' + html.includes(c));
+  }
 
-  page.on('console', m => console.log('[diag-browser]', m.type(), m.text()));
-  page.on('pageerror', e => console.log('[diag-pageerror]', e.message));
+  page.on('pageerror', e => out.push('PAGEERROR ' + e.message));
+  page.on('console', m => {
+    if (m.type() === 'error') out.push('CONSOLE-ERROR ' + m.text().slice(0, 150));
+  });
   await page.route('**/api/auth/me', r =>
     r.fulfill({ status: 401, contentType: 'application/json', body: JSON.stringify({ status: 'error' }) }));
 
@@ -29,7 +33,7 @@ test('diagnostic: served page and auth wiring', async ({ page, request }) => {
     registerForm: document.getElementById('miimiid-register-form')?.className,
     scripts: Array.from(document.scripts).map(s => s.src || 'inline').join(' | ')
   }));
-  console.log('[diag] before click', JSON.stringify(before));
+  out.push('BEFORE ' + JSON.stringify(before));
 
   await page.locator('#miimiid-show-register').click();
   await page.waitForTimeout(1500);
@@ -37,12 +41,17 @@ test('diagnostic: served page and auth wiring', async ({ page, request }) => {
   const after = await page.evaluate(() => {
     const chain = [];
     let n = document.getElementById('miimiid-register-get-started');
-    while (n && n !== document.body) { chain.push(n.tagName + '#' + n.id + '.' + n.className); n = n.parentElement; }
+    while (n && n !== document.body) {
+      chain.push(n.tagName + '#' + n.id + '.' + n.className);
+      n = n.parentElement;
+    }
     return {
       loginForm: document.getElementById('miimiid-login-form')?.className,
       registerForm: document.getElementById('miimiid-register-form')?.className,
       chain
     };
   });
-  console.log('[diag] after register click', JSON.stringify(after));
+  out.push('AFTER ' + JSON.stringify(after));
+
+  throw new Error('DIAG RESULT\n' + out.join('\n'));
 });
