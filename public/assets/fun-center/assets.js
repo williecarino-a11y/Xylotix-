@@ -4,94 +4,114 @@
  * Single source of truth for Fun Center frontend assets.
  * Keep asset paths here instead of hardcoding them throughout
  * the frontend.
+ *
+ * Same global name and same shape as before, so existing code
+ * keeps working.
  */
 
-const MIIMIID_ASSETS = Object.freeze({
+const MIIMIID_ASSET_BASE = '/assets/fun-center';
+
+function miimiidDeepFreeze(obj) {
+  Object.values(obj).forEach((value) => {
+    if (value && typeof value === 'object') miimiidDeepFreeze(value);
+  });
+  return Object.freeze(obj);
+}
+
+const MIIMIID_ASSETS = miimiidDeepFreeze({
   characters: {
     miimiid: {
-      confused: '/assets/fun-center/characters/miimiid/confused.png',
-      happy: '/assets/fun-center/characters/miimiid/happy.png',
-      running: '/assets/fun-center/characters/miimiid/running.png',
-      sad: '/assets/fun-center/characters/miimiid/sad.png',
-      sleeping: '/assets/fun-center/characters/miimiid/sleeping.png',
-      thinkingQuestion:
-        '/assets/fun-center/characters/miimiid/thinking-question.png',
-      thumbsUp:
-        '/assets/fun-center/characters/miimiid/thumbs-up.png',
-      waving: '/assets/fun-center/characters/miimiid/waving.png'
+      confused: `${MIIMIID_ASSET_BASE}/characters/miimiid/confused.png`,
+      happy: `${MIIMIID_ASSET_BASE}/characters/miimiid/happy.png`,
+      running: `${MIIMIID_ASSET_BASE}/characters/miimiid/running.png`,
+      sad: `${MIIMIID_ASSET_BASE}/characters/miimiid/sad.png`,
+      sleeping: `${MIIMIID_ASSET_BASE}/characters/miimiid/sleeping.png`,
+      thinkingQuestion: `${MIIMIID_ASSET_BASE}/characters/miimiid/thinking-question.png`,
+      thumbsUp: `${MIIMIID_ASSET_BASE}/characters/miimiid/thumbs-up.png`,
+      waving: `${MIIMIID_ASSET_BASE}/characters/miimiid/waving.png`
     },
 
     engineer: {
-      accident:
-        '/assets/fun-center/characters/engineer/engineer-accident.png',
-      eating:
-        '/assets/fun-center/characters/engineer/engineer-eating.png',
-      explaining:
-        '/assets/fun-center/characters/engineer/engineer-explaining.png',
-      insideCar:
-        '/assets/fun-center/characters/engineer/engineer-inside-car.png',
-      sad:
-        '/assets/fun-center/characters/engineer/engineer-sad.png',
-      success:
-        '/assets/fun-center/characters/engineer/engineer-success.png',
-      withClient:
-        '/assets/fun-center/characters/engineer/engineer-with-client.png',
-      withSon:
-        '/assets/fun-center/characters/engineer/engineer-with-son.png'
+      accident: `${MIIMIID_ASSET_BASE}/characters/engineer/engineer-accident.png`,
+      eating: `${MIIMIID_ASSET_BASE}/characters/engineer/engineer-eating.png`,
+      explaining: `${MIIMIID_ASSET_BASE}/characters/engineer/engineer-explaining.png`,
+      insideCar: `${MIIMIID_ASSET_BASE}/characters/engineer/engineer-inside-car.png`,
+      sad: `${MIIMIID_ASSET_BASE}/characters/engineer/engineer-sad.png`,
+      success: `${MIIMIID_ASSET_BASE}/characters/engineer/engineer-success.png`,
+      withClient: `${MIIMIID_ASSET_BASE}/characters/engineer/engineer-with-client.png`,
+      withSon: `${MIIMIID_ASSET_BASE}/characters/engineer/engineer-with-son.png`
     }
   },
 
   worlds: {
-  bank: {
-    accountantPaycheck:
-      '/assets/fun-center/world-bank/miimiid-bank-accountant-paycheck.png',
+    bank: {
+      accountantPaycheck: `${MIIMIID_ASSET_BASE}/world-bank/miimiid-bank-accountant-paycheck.png`,
+      atmMan: `${MIIMIID_ASSET_BASE}/world-bank/miimiid-bank-atm-man.png`,
+      atmYoungWoman: `${MIIMIID_ASSET_BASE}/world-bank/miimiid-bank-atm-young-woman.png`,
+      customerSupport: `${MIIMIID_ASSET_BASE}/world-bank/miimiid-bank-customer-support.png`,
+      lobbyArrivalCap: `${MIIMIID_ASSET_BASE}/world-bank/miimiid-bank-lobby-arrival-cap.png`,
+      lobbyArrival: `${MIIMIID_ASSET_BASE}/world-bank/miimiid-bank-lobby-arrival.png`,
+      managerCustomerMeeting: `${MIIMIID_ASSET_BASE}/world-bank/miimiid-bank-manager-customer-meeting.png`,
+      managerMeetingOlderCustomer: `${MIIMIID_ASSET_BASE}/world-bank/miimiid-bank-manager-meeting-older-customer.png`,
+      tellerCashService: `${MIIMIID_ASSET_BASE}/world-bank/miimiid-bank-teller-cash-service.png`,
+      worriedCustomerFraudSupport: `${MIIMIID_ASSET_BASE}/world-bank/miimiid-bank-worried-customer-fraud-support.png`
+    }
+  },
 
-    atmMan:
-      '/assets/fun-center/world-bank/miimiid-bank-atm-man.png',
+  funCenter: {
+    // miimiid-fun-robot.png was never added, so the hero uses the waving pose.
+    heroRobot: `${MIIMIID_ASSET_BASE}/characters/miimiid/waving.png`
+  },
 
-    atmYoungWoman:
-      '/assets/fun-center/world-bank/miimiid-bank-atm-young-woman.png',
-
-    customerSupport:
-      '/assets/fun-center/world-bank/miimiid-bank-customer-support.png',
-
-    lobbyArrivalCap:
-      '/assets/fun-center/world-bank/miimiid-bank-lobby-arrival-cap.png',
-
-    lobbyArrival:
-      '/assets/fun-center/world-bank/miimiid-bank-lobby-arrival.png',
-
-    managerCustomerMeeting:
-      '/assets/fun-center/world-bank/miimiid-bank-manager-customer-meeting.png',
-
-    managerMeetingOlderCustomer:
-      '/assets/fun-center/world-bank/miimiid-bank-manager-meeting-older-customer.png',
-
-    tellerCashService:
-      '/assets/fun-center/world-bank/miimiid-bank-teller-cash-service.png',
-
-    worriedCustomerFraudSupport:
-      '/assets/fun-center/world-bank/miimiid-bank-worried-customer-fraud-support.png'
-  }
-},
-  
-funCenter: {
-  heroRobot: '/assets/fun-center/miimiid-fun-robot.png'
-},
-  
-    products: {
-    apple: '/assets/fun-center/products/apple.png',
-    banana: '/assets/fun-center/products/banana.png',
-    bread: '/assets/fun-center/products/bread.png',
-    carrot: '/assets/fun-center/products/carrot.png',
-    cheese: '/assets/fun-center/products/cheese.png',
-    chips: '/assets/fun-center/products/chips.png',
-    eggs: '/assets/fun-center/products/eggs.png',
-    milk: '/assets/fun-center/products/milk.png',
-    pasta: '/assets/fun-center/products/pasta.png',
-    sugar: '/assets/fun-center/products/sugar.png',
-    tomato: '/assets/fun-center/products/tomato.png',
-    water: '/assets/fun-center/products/water.png',
-    yogurt: '/assets/fun-center/products/yogurt.png'
+  products: {
+    apple: `${MIIMIID_ASSET_BASE}/products/apple.png`,
+    banana: `${MIIMIID_ASSET_BASE}/products/banana.png`,
+    bread: `${MIIMIID_ASSET_BASE}/products/bread.png`,
+    carrot: `${MIIMIID_ASSET_BASE}/products/carrot.png`,
+    cheese: `${MIIMIID_ASSET_BASE}/products/cheese.png`,
+    chips: `${MIIMIID_ASSET_BASE}/products/chips.png`,
+    eggs: `${MIIMIID_ASSET_BASE}/products/eggs.png`,
+    milk: `${MIIMIID_ASSET_BASE}/products/milk.png`,
+    pasta: `${MIIMIID_ASSET_BASE}/products/pasta.png`,
+    sugar: `${MIIMIID_ASSET_BASE}/products/sugar.png`,
+    tomato: `${MIIMIID_ASSET_BASE}/products/tomato.png`,
+    water: `${MIIMIID_ASSET_BASE}/products/water.png`,
+    yogurt: `${MIIMIID_ASSET_BASE}/products/yogurt.png`
   }
 });
+
+/*
+ * Preload images before a game starts.
+ *   miimiidPreloadAssets(MIIMIID_ASSETS.products)
+ *   miimiidPreloadAssets(MIIMIID_ASSETS.characters.miimiid)
+ * Never rejects. Resolves to { loaded, failed }; failed paths are
+ * also logged, which makes broken or misspelled files easy to spot.
+ */
+function miimiidPreloadAssets(group) {
+  const paths = [];
+  (function collect(node) {
+    Object.values(node).forEach((v) =>
+      typeof v === 'string' ? paths.push(v) : collect(v)
+    );
+  })(group);
+
+  const failed = [];
+  return Promise.all(
+    paths.map(
+      (src) =>
+        new Promise((resolve) => {
+          const img = new Image();
+          img.onload = () => resolve();
+          img.onerror = () => {
+            failed.push(src);
+            console.warn('[Miimiid assets] failed to load:', src);
+            resolve();
+          };
+          img.src = src;
+        })
+    )
+  ).then(() => ({ loaded: paths.length - failed.length, failed }));
+}
+
+window.MIIMIID_ASSETS = MIIMIID_ASSETS;
+window.miimiidPreloadAssets = miimiidPreloadAssets;
