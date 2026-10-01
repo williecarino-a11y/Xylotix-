@@ -73,7 +73,9 @@ router.get('/games', async (req, res) => {
         prompt: round.prompt,
         category: round.category,
         visual: round.visual,
-        feedback: round.feedback,
+        image: round.image,
+        price: round.price,
+        difficulty: round.difficulty,
         choices: round.choices ? round.choices.map(choice => ({ id: choice.id, label: choice.label })) : undefined
       }))
     }));
@@ -142,7 +144,23 @@ router.post('/session/:sessionId/answer', funAnswerLimiter, async (req, res) => 
     if (!updatedSession) {
       return res.status(409).json({ status: 'error', message: 'Invalid or already submitted game round.' });
     }
-return res.json({ status: 'success', data: { correct, score: updatedSession.score, correctAnswers: updatedSession.correctAnswers, combo: updatedSession.currentCombo, maxCombo: updatedSession.maxCombo, comboBonus, roundsCompleted: updatedSession.roundsCompleted, totalRounds: game.rounds.length, complete: updatedSession.roundsCompleted >= game.rounds.length } });
+const answeredRound = game.rounds[roundIndex];
+    return res.json({
+      status: 'success',
+      data: {
+        correct,
+        score: updatedSession.score,
+        correctAnswers: updatedSession.correctAnswers,
+        combo: updatedSession.currentCombo,
+        maxCombo: updatedSession.maxCombo,
+        comboBonus,
+        roundsCompleted: updatedSession.roundsCompleted,
+        totalRounds: game.rounds.length,
+        complete: updatedSession.roundsCompleted >= game.rounds.length,
+        correctAnswer: answeredRound.answer,
+        explanation: answeredRound.explanation || ''
+      }
+    });
   } catch (error) {
     console.error('Fun Center answer error:', error);
     return res.status(500).json({ status: 'error', message: 'Unable to process game answer.' });
