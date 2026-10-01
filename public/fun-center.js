@@ -518,6 +518,21 @@ async function startMiimiidFunGame(gameId) {
  * RENDER ROUND
  * ========================================================= */
 
+function miimiidFunFormatPrice(value) {
+  if (!Number.isFinite(value)) return '';
+  return Number.isInteger(value) ? `$${value}` : `$${value.toFixed(2)}`;
+}
+
+function miimiidFunProductVisual(round, size) {
+  const dim = size || 120;
+  const emoji = typeof round.visual === 'string' ? round.visual : '';
+  const key = typeof round.image === 'string' ? round.image : '';
+  const src = key && MIIMIID_ASSETS.products ? MIIMIID_ASSETS.products[key] : '';
+  const emojiMarkup = `<span class="miimiid-fun-product-emoji" style="font-size:${Math.round(dim * 0.7)}px;">${miimiidFunCenterEscapeHtml(emoji)}</span>`;
+  if (!src) return emojiMarkup;
+  return `<img class="miimiid-fun-product-img" src="${src}" alt="" style="width:${dim}px;height:${dim}px;" data-fallback="${miimiidFunCenterEscapeHtml(emojiMarkup)}" onerror="this.outerHTML=this.dataset.fallback">`;
+}
+
 function renderMiimiidFunGameRound() {
   const content = document.getElementById('fun-center-content');
   if (!content || !miimiidFunCenterState) return;
@@ -553,7 +568,11 @@ function renderMiimiidFunGameRound() {
 
       <div class="miimiid-fun-round-mascot-row">
         ${miimiidFunMascot('idle', 48)}
-        ${visual ? `<div class="miimiid-fun-round-icon">${miimiidFunCenterEscapeHtml(visual)}</div>` : ''}
+      </div>
+
+      <div class="miimiid-fun-product">
+        <div class="miimiid-fun-product-art">${miimiidFunProductVisual(currentRound, 120)}</div>
+        ${Number.isFinite(currentRound.price) ? `<div class="miimiid-fun-price">${miimiidFunFormatPrice(currentRound.price)}</div>` : ''}
       </div>
       <p class="miimiid-fun-round-prompt">${miimiidFunCenterEscapeHtml(prompt)}</p>
 
