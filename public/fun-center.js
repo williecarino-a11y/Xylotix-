@@ -58,9 +58,57 @@ function miimiidFunPlayWrong() {
   miimiidFunTone(220, 0.18, 'sawtooth', 0.07);
   setTimeout(() => miimiidFunTone(160, 0.22, 'sawtooth', 0.07), 80);
 }
+function miimiidFunTone(freq, duration, type, gainValue, delay) {
+  const ctx = miimiidFunGetAudioCtx();
+  if (!ctx) return;
+  if (ctx.state === 'suspended') ctx.resume();
+  const start = ctx.currentTime + (delay || 0);
+  const peak = gainValue || 0.04;
+
+  const osc = ctx.createOscillator();
+  const gain = ctx.createGain();
+  const filter = ctx.createBiquadFilter();
+
+  osc.type = type || 'sine';
+  osc.frequency.setValueAtTime(freq, start);
+
+  filter.type = 'lowpass';
+  filter.frequency.value = 2600;
+
+  gain.gain.setValueAtTime(0.0001, start);
+  gain.gain.linearRampToValueAtTime(peak, start + 0.012);
+  gain.gain.exponentialRampToValueAtTime(0.0001, start + duration);
+
+  osc.connect(filter);
+  filter.connect(gain);
+  gain.connect(ctx.destination);
+  osc.start(start);
+  osc.stop(start + duration + 0.02);
+}
+
+function miimiidFunBell(freq, duration, gainValue, delay) {
+  miimiidFunTone(freq, duration, 'sine', gainValue, delay);
+  miimiidFunTone(freq * 2, duration * 0.6, 'sine', (gainValue || 0.04) * 0.25, delay);
+}
+
+const MIIMIID_FUN_SCALE = [523.25, 587.33, 659.25, 783.99, 880.0, 1046.5, 1174.66, 1318.51];
+
+function miimiidFunPlayTap() { miimiidFunTone(660, 0.07, 'sine', 0.02); }
+
+function miimiidFunPlayCorrect(combo) {
+  const step = Math.min(Math.max((combo || 1) - 1, 0), MIIMIID_FUN_SCALE.length - 2);
+  miimiidFunBell(MIIMIID_FUN_SCALE[step], 0.35, 0.045);
+  miimiidFunBell(MIIMIID_FUN_SCALE[step + 1], 0.45, 0.04, 0.09);
+}
+
+function miimiidFunPlayWrong() {
+  miimiidFunTone(311, 0.28, 'sine', 0.04);
+  miimiidFunTone(247, 0.4, 'sine', 0.035, 0.1);
+}
+
 function miimiidFunPlayComplete() {
-  [660, 780, 990, 1180].forEach((freq, i) => {
-    setTimeout(() => miimiidFunTone(freq, 0.18, 'triangle', 0.09), i * 110);
+  [523.25, 659.25, 783.99, 1046.5].forEach((freq, i) => {
+    miimiidFunBell(freq, 0.7, 0.04, i * 0.13);
   });
 }
 
@@ -577,7 +625,7 @@ async function submitMiimiidFunAnswer(button) {
     const wasCorrect = state.correctAnswers > previousCorrect;
 
     if (wasCorrect) {
-      miimiidFunPlayCorrect();
+      miimiidFunPlayCorrect(state.combo);
       if (card) card.classList.add('is-correct');
       button.classList.add('is-correct');
       if (mascotEl) miimiidFunSetMascotMood(mascotEl, state.combo >= 3 ? 'celebrate' : 'correct');
