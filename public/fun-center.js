@@ -657,13 +657,21 @@ async function submitMiimiidFunAnswer(button) {
       if (previousCombo >= 2) miimiidFunShowFloat(content, 'Combo lost', true);
     }
 
+    const explanation = typeof result.explanation === 'string' ? result.explanation : '';
+    if (explanation && card) {
+      const note = document.createElement('div');
+      note.className = 'miimiid-fun-feedback ' + (wasCorrect ? 'is-correct' : 'is-wrong');
+      note.textContent = wasCorrect ? explanation : `Not quite. ${explanation}`;
+      card.appendChild(note);
+    }
+
     state.roundIndex++;
 
     setTimeout(async () => {
       if (result.complete) { await completeMiimiidFunGame(); return; }
       state.submitting = false;
       renderMiimiidFunGameRound();
-    }, 550);
+    }, explanation ? 1900 : 550);
 
   } catch (error) {
     console.error('Miimiid Fun Center answer error:', error);
