@@ -35,6 +35,13 @@ function calculateReward(correctAnswers, totalRounds) {
   return { xp: 25 + Math.round(percentage * 75), coins: 5 + Math.round(percentage * 20) };
 }
 
+function calculateComboBonus(combo) {
+  if (combo >= 8) return 50;
+  if (combo >= 5) return 25;
+  if (combo >= 3) return 10;
+  return 0;
+}
+
 async function requireFunCenterUser(req, res) {
   try {
     const user = await getAuthenticatedUser(req, res);
@@ -108,11 +115,15 @@ router.post('/session/:sessionId/answer', funAnswerLimiter, async (req, res) => 
     if (roundIndex !== session.roundsCompleted) return res.status(409).json({ status: 'error', message: 'Invalid game progression.' });
 
     const correct = validateFunCenterAnswer(session.gameId, roundIndex, answer);
+    const newCombo = correct ? (session.currentCombo || 0) + 1 : 0;
+    const comboBonus = correct ? calculateComboBonus(newCombo) : 0;
+    const newMaxCombo = Math.max(session.maxCombo || 0, newCombo);
     const update = {
       $inc: {
         roundsCompleted: 1,
-        ...(correct ? { correctAnswers: 1, score: 100 } : {})
-      }
+        ...(correct ? { correctAnswers: 1, score: 100 + comboBonus } : {})
+      },
+      $set: { currentCombo: newCombo, maxCombo: newMaxCombo }
     };
 
     // The progression check is repeated inside the write so two concurrent
@@ -131,8 +142,7 @@ router.post('/session/:sessionId/answer', funAnswerLimiter, async (req, res) => 
     if (!updatedSession) {
       return res.status(409).json({ status: 'error', message: 'Invalid or already submitted game round.' });
     }
-
-    return res.json({ status: 'success', data: { correct, score: updatedSession.score, correctAnswers: updatedSession.correctAnswers, roundsCompleted: updatedSession.roundsCompleted, totalRounds: game.rounds.length, complete: updatedSession.roundsCompleted >= game.rounds.length } });
+return res.json({ status: 'success', data: { correct, score: updatedSession.score, correctAnswers: updatedSession.correctAnswers, combo: updatedSession.currentCombo, maxCombo: updatedSession.maxCombo, comboBonus, roundsCompleted: updatedSession.roundsCompleted, totalRounds: game.rounds.length, complete: updatedSession.roundsCompleted >= game.rounds.length } });
   } catch (error) {
     console.error('Fun Center answer error:', error);
     return res.status(500).json({ status: 'error', message: 'Unable to process game answer.' });
