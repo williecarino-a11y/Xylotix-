@@ -70,13 +70,19 @@ const MIIMIID_ASSETS = miimiidDeepFreeze({
     carrot: `${MIIMIID_ASSET_BASE}/products/carrot.png`,
     cheese: `${MIIMIID_ASSET_BASE}/products/cheese.png`,
     chips: `${MIIMIID_ASSET_BASE}/products/chips.png`,
-    eggs: `${MIIMIID_ASSET_BASE}/products/eggs.png`,
+    eggs: `${MIIMIID_ASSET_BASE}/products/eggs-12.png`,
     milk: `${MIIMIID_ASSET_BASE}/products/milk.png`,
     pasta: `${MIIMIID_ASSET_BASE}/products/pasta.png`,
     sugar: `${MIIMIID_ASSET_BASE}/products/sugar.png`,
     tomato: `${MIIMIID_ASSET_BASE}/products/tomato.png`,
     water: `${MIIMIID_ASSET_BASE}/products/water.png`,
     yogurt: `${MIIMIID_ASSET_BASE}/products/yogurt.png`
+  },
+
+  game: {
+    shoppingCart: `${MIIMIID_ASSET_BASE}/game/shopping-cart.png`,
+    shoppingBasket: `${MIIMIID_ASSET_BASE}/game/shopping-basket.png`,
+    checkoutCounter: `${MIIMIID_ASSET_BASE}/game/checkout-counter.png`
   }
 });
 
