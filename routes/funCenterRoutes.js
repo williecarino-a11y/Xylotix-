@@ -6,7 +6,7 @@ const rateLimit = require('express-rate-limit');
 const { getAuthenticatedUser } = require('./authRoutes');
 const FunGameSession = require('../models/FunGameSession');
 const FunGameProfile = require('../models/FunGameProfile');
-const { getFunCenterGames, getFunCenterGame, validateFunCenterAnswer } = require('../scripts/learningData/funCenter');
+const { getFunCenterGames, getFunCenterGame, validateFunCenterAnswer, getWeeklyShop, getWeeklyShopDefinition } = require('../scripts/learningData/funCenter');
 
 const router = express.Router();
 
@@ -226,6 +226,214 @@ router.post('/session/:sessionId/complete', funSessionStartLimiter, async (req, 
     if (error.code === 'SESSION_CLAIM_FAILED') return res.status(409).json({ status: 'error', message: 'Game completion could not be claimed.' });
     console.error('Fun Center completion error:', error);
     return res.status(500).json({ status: 'error', message: 'Unable to complete Fun Center game.' });
+  } finally {
+    await mongoSession.endSession();
+  }
+});
+
+/* =========================================================
+ * WEEKLY SHOP (server-authoritative budget)
+ * ========================================================= */
+
+const SHOP_GAME_ID = 'weekly-shop';
+
+function buildShopSummary(shop, session) {
+  const bought = Array.isArray(session.purchasedItems) ? session.purchasedItems : [];
+  const boughtIds = new Set(bought.map(entry => entry.itemId));
+  const byId = new Map(shop.items.map(item => [item.id, item]));
+  const toPublic = entry => {
+    const item = byId.get(entry.itemId || entry.id);
+    return { id: item.id, name: item.name, price: item.price, image: item.image, visual: item.visual };
+  };
+
+  const totalNeeds = shop.items.filter(item => item.classification === 'need');
+  const needsBought = bought.filter(entry => entry.classification === 'need');
+  const wantsBought = bought.filter(entry => entry.classification === 'want');
+  const needsMissed = totalNeeds.filter(item => !boughtIds.has(item.id));
+
+  const spent = session.spent || 0;
+  const wantsSpent = wantsBought.reduce((sum, entry) => sum + entry.price, 0);
+  const needsSpent = spent - wantsSpent;
+  const saved = Math.max(0, shop.budget - spent);
+  const score = Math.max(0, needsBought.length * 100 + saved * 5 - wantsSpent * 5);
+
+  let outcome = 'missing-essentials';
+  let message = 'Many essentials are still missing. Next time, cover your needs first.';
+  if (needsMissed.length === 0) {
+    outcome = 'smart-shopper';
+    message = 'Smart Shopper! You covered every essential and kept some money back.';
+  } else if (wantsSpent > 0 && wantsSpent >= needsSpent) {
+    outcome = 'too-many-wants';
+    message = 'Your wants cost more than your needs this week. Essentials come first.';
+  } else if (needsMissed.length <= 2) {
+    outcome = 'almost-there';
+    message = 'Almost there! You missed a couple of essentials.';
+  }
+
+  return {
+    outcome,
+    message,
+    budget: shop.budget,
+    spent,
+    saved,
+    wantsSpent,
+    score,
+    totalNeeds: totalNeeds.length,
+    needsBought: needsBought.map(toPublic),
+    wantsBought: wantsBought.map(toPublic),
+    needsMissed: needsMissed.map(item => ({ id: item.id, name: item.name, price: item.price, image: item.image, visual: item.visual, explanation: item.explanation }))
+  };
+}
+
+router.get('/shop', (req, res) => {
+  try {
+    return res.json({ status: 'success', data: getWeeklyShop() });
+  } catch (error) {
+    console.error('Fun Center shop error:', error);
+    return res.status(500).json({ status: 'error', message: 'Unable to load the shop.' });
+  }
+});
+
+router.post('/shop/session', funSessionStartLimiter, async (req, res) => {
+  try {
+    const user = await requireFunCenterUser(req, res);
+    if (!user) return;
+    const shop = getWeeklyShopDefinition();
+    const session = await FunGameSession.create({
+      sessionId: createSessionId(),
+      userId: user._id,
+      gameId: SHOP_GAME_ID,
+      budget: shop.budget
+    });
+    return res.status(201).json({
+      status: 'success',
+      data: { sessionId: session.sessionId, gameId: SHOP_GAME_ID, budget: shop.budget, spent: 0, remaining: shop.budget }
+    });
+  } catch (error) {
+    console.error('Fun Center shop session error:', error);
+    return res.status(500).json({ status: 'error', message: 'Unable to start the shopping trip.' });
+  }
+});
+
+router.post('/shop/session/:sessionId/buy', funAnswerLimiter, async (req, res) => {
+  try {
+    const user = await requireFunCenterUser(req, res);
+    if (!user) return;
+
+    const { sessionId } = req.params;
+    const { itemId } = req.body;
+    const shop = getWeeklyShopDefinition();
+    const item = shop.items.find(candidate => candidate.id === itemId);
+    if (!item) return res.status(400).json({ status: 'error', message: 'That item is not in the shop.' });
+
+    // Price, budget and duplicate checks all happen inside one atomic write.
+    const updated = await FunGameSession.findOneAndUpdate(
+      {
+        sessionId,
+        userId: user._id,
+        gameId: SHOP_GAME_ID,
+        completed: false,
+        spent: { $lte: shop.budget - item.price },
+        'purchasedItems.itemId': { $ne: item.id }
+      },
+      {
+        $inc: { spent: item.price },
+        $push: { purchasedItems: { itemId: item.id, price: item.price, classification: item.classification, correct: item.classification === 'need' } }
+      },
+      { new: true, runValidators: true }
+    );
+
+    if (!updated) {
+      const existing = await FunGameSession.findOne({ sessionId, userId: user._id, gameId: SHOP_GAME_ID });
+      if (!existing) return res.status(404).json({ status: 'error', message: 'Shopping trip not found.' });
+      if (existing.completed) return res.status(409).json({ status: 'error', code: 'SHOP_FINISHED', message: 'This shopping trip is already finished.' });
+      if (existing.purchasedItems.some(entry => entry.itemId === item.id)) {
+        return res.status(409).json({ status: 'error', code: 'ALREADY_IN_BASKET', message: `${item.name} is already in your basket.` });
+      }
+      return res.status(409).json({
+        status: 'error',
+        code: 'INSUFFICIENT_FUNDS',
+        message: `Not enough money left for ${item.name}.`,
+        remaining: Math.max(0, shop.budget - (existing.spent || 0))
+      });
+    }
+
+    return res.json({
+      status: 'success',
+      data: {
+        itemId: item.id,
+        name: item.name,
+        price: item.price,
+        classification: item.classification,
+        explanation: item.explanation,
+        budget: shop.budget,
+        spent: updated.spent,
+        remaining: Math.max(0, shop.budget - updated.spent),
+        basketCount: updated.purchasedItems.length
+      }
+    });
+  } catch (error) {
+    console.error('Fun Center shop buy error:', error);
+    return res.status(500).json({ status: 'error', message: 'Unable to add that item.' });
+  }
+});
+
+router.post('/shop/session/:sessionId/checkout', funSessionStartLimiter, async (req, res) => {
+  const mongoSession = await mongoose.startSession();
+  try {
+    const user = await requireFunCenterUser(req, res);
+    if (!user) return;
+
+    const { sessionId } = req.params;
+    const shop = getWeeklyShopDefinition();
+    const needsTotal = shop.items.filter(item => item.classification === 'need').length;
+    let checkoutResult = null;
+
+    await mongoSession.withTransaction(async () => {
+      const existing = await FunGameSession.findOne({ sessionId, userId: user._id, gameId: SHOP_GAME_ID }).session(mongoSession);
+      if (!existing) { const error = new Error('Shopping trip not found.'); error.code = 'SESSION_NOT_FOUND'; throw error; }
+      if (!existing.purchasedItems || existing.purchasedItems.length === 0) { const error = new Error('Add at least one item to your basket first.'); error.code = 'BASKET_EMPTY'; throw error; }
+
+      const summary = buildShopSummary(shop, existing);
+      const reward = calculateReward(Math.max(0, summary.needsBought.length - summary.wantsBought.length), needsTotal);
+
+      const claimed = await FunGameSession.findOneAndUpdate(
+        { sessionId, userId: user._id, gameId: SHOP_GAME_ID, completed: false, rewardGranted: false },
+        { $set: { completed: true, rewardGranted: true, score: summary.score, correctAnswers: summary.needsBought.length, roundsCompleted: existing.purchasedItems.length, xpAwarded: reward.xp, coinsAwarded: reward.coins, completedAt: new Date() } },
+        { new: true, session: mongoSession }
+      );
+
+      if (!claimed) {
+        const done = await FunGameSession.findOne({ sessionId, userId: user._id, gameId: SHOP_GAME_ID }).session(mongoSession);
+        if (done && done.completed && done.rewardGranted) {
+          checkoutResult = { alreadyCompleted: true, ...buildShopSummary(shop, done), xp: done.xpAwarded, coins: done.coinsAwarded };
+          return;
+        }
+        const error = new Error('Checkout could not be claimed.'); error.code = 'SESSION_CLAIM_FAILED'; throw error;
+      }
+
+      const profile = await FunGameProfile.findOneAndUpdate(
+        { userId: user._id },
+        { $inc: { totalXP: reward.xp, totalCoins: reward.coins, gamesPlayed: 1, gamesCompleted: 1, totalRoundsPlayed: claimed.roundsCompleted } },
+        { upsert: true, new: true, session: mongoSession, setDefaultsOnInsert: true }
+      );
+
+      const currentBest = profile.bestScores && typeof profile.bestScores.get === 'function' ? profile.bestScores.get(SHOP_GAME_ID) : null;
+      if (currentBest === undefined || currentBest === null || summary.score > currentBest) {
+        profile.bestScores.set(SHOP_GAME_ID, summary.score);
+        await profile.save({ session: mongoSession });
+      }
+
+      checkoutResult = { alreadyCompleted: false, ...summary, xp: reward.xp, coins: reward.coins, totalXP: profile.totalXP, totalCoins: profile.totalCoins };
+    });
+
+    return res.json({ status: 'success', data: checkoutResult });
+  } catch (error) {
+    if (error.code === 'SESSION_NOT_FOUND') return res.status(404).json({ status: 'error', message: 'Shopping trip not found.' });
+    if (error.code === 'BASKET_EMPTY') return res.status(409).json({ status: 'error', code: 'BASKET_EMPTY', message: 'Add at least one item to your basket first.' });
+    if (error.code === 'SESSION_CLAIM_FAILED') return res.status(409).json({ status: 'error', message: 'Checkout could not be completed.' });
+    console.error('Fun Center shop checkout error:', error);
+    return res.status(500).json({ status: 'error', message: 'Unable to finish the shopping trip.' });
   } finally {
     await mongoSession.endSession();
   }
