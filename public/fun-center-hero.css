@@ -331,3 +331,6 @@
 .miimiid-fun-price { padding: 4px 14px; border-radius: 999px; background: rgba(77, 163, 255, 0.14); border: 1px solid rgba(77, 163, 255, 0.4); color: #4da3ff; font-weight: 700; font-size: 1rem; }
 @keyframes miimiidFunProductPop { from { transform: scale(0.85); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 
+.miimiid-fun-feedback { margin: 14px 4px 0; padding: 10px 14px; border-radius: 14px; font-size: 0.92rem; line-height: 1.4; text-align: center; animation: miimiidFunProductPop 0.25s ease-out; }
+.miimiid-fun-feedback.is-correct { background: rgba(29, 158, 117, 0.16); border: 1px solid rgba(29, 158, 117, 0.5); color: #7ee0bd; }
+.miimiid-fun-feedback.is-wrong { background: rgba(240, 153, 123, 0.14); border: 1px solid rgba(240, 153, 123, 0.5); color: #f6b9a3; }
