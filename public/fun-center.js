@@ -436,15 +436,17 @@ async function startMiimiidFunGame(gameId) {
     }
 
     miimiidFunCenterState = {
-      gameId: game.id,
-      sessionId: session.sessionId,
-      roundIndex: 0,
-      score: 0,
-      correctAnswers: 0,
-      roundsCompleted: 0,
-      totalRounds: Number.isInteger(session.totalRounds) ? session.totalRounds : (Array.isArray(game.rounds) ? game.rounds.length : 0),
-      submitting: false
-    };
+          gameId: game.id,
+          sessionId: session.sessionId,
+          roundIndex: 0,
+          score: 0,
+          correctAnswers: 0,
+          roundsCompleted: 0,
+          combo: 0,
+          maxCombo: 0,
+          totalRounds: Number.isInteger(session.totalRounds) ? session.totalRounds : (Array.isArray(game.rounds) ? game.rounds.length : 0),
+          submitting: false
+        };
 
     renderMiimiidFunGameRound();
 
