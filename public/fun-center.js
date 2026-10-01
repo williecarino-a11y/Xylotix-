@@ -498,6 +498,10 @@ function renderMiimiidFunGameRound() {
         <div class="miimiid-fun-progress-fill" style="width:${progressPct}%"></div>
       </div>
       <div class="miimiid-fun-progress-label">${progress} / ${rounds.length}</div>
+      <div class="miimiid-fun-hud">
+        <span class="miimiid-fun-hud-pill">Score ${miimiidFunCenterState.score}</span>
+        <span class="miimiid-fun-hud-pill combo ${miimiidFunCenterState.combo >= 3 ? 'is-hot' : ''}">Combo x${miimiidFunCenterState.combo}</span>
+      </div>
 
       <div class="miimiid-fun-round-mascot-row">
         ${miimiidFunMascot('idle', 48)}
@@ -527,6 +531,14 @@ function renderMiimiidFunGameRound() {
 /* =========================================================
  * SUBMIT ANSWER
  * ========================================================= */
+function miimiidFunShowFloat(container, text, isBad) {
+  if (!container) return;
+  const el = document.createElement('div');
+  el.className = 'miimiid-fun-float' + (isBad ? ' is-bad' : '');
+  el.textContent = text;
+  container.appendChild(el);
+  setTimeout(() => el.remove(), 600);
+}
 
 async function submitMiimiidFunAnswer(button) {
   if (!button || !miimiidFunCenterState || miimiidFunCenterState.submitting) return;
@@ -552,11 +564,15 @@ async function submitMiimiidFunAnswer(button) {
     );
 
     const previousCorrect = state.correctAnswers;
+    const previousCombo = state.combo || 0;
 
     state.score = Number.isFinite(result.score) ? result.score : state.score;
     state.correctAnswers = Number.isFinite(result.correctAnswers) ? result.correctAnswers : state.correctAnswers;
     state.roundsCompleted = Number.isFinite(result.roundsCompleted) ? result.roundsCompleted : state.roundsCompleted;
     state.totalRounds = Number.isFinite(result.totalRounds) ? result.totalRounds : state.totalRounds;
+    state.combo = Number.isFinite(result.combo) ? result.combo : 0;
+    state.maxCombo = Number.isFinite(result.maxCombo) ? result.maxCombo : (state.maxCombo || 0);
+    const comboBonus = Number.isFinite(result.comboBonus) ? result.comboBonus : 0;
 
     const wasCorrect = state.correctAnswers > previousCorrect;
 
@@ -564,14 +580,16 @@ async function submitMiimiidFunAnswer(button) {
       miimiidFunPlayCorrect();
       if (card) card.classList.add('is-correct');
       button.classList.add('is-correct');
-      if (mascotEl) miimiidFunSetMascotMood(mascotEl, 'correct');
+      if (mascotEl) miimiidFunSetMascotMood(mascotEl, state.combo >= 3 ? 'celebrate' : 'correct');
+      miimiidFunShowFloat(content, comboBonus > 0 ? `+${100 + comboBonus} · Combo x${state.combo}` : '+100');
     } else {
       miimiidFunPlayWrong();
       if (card) card.classList.add('is-wrong');
       button.classList.add('is-wrong');
       if (mascotEl) miimiidFunSetMascotMood(mascotEl, 'wrong');
+      if (previousCombo >= 2) miimiidFunShowFloat(content, 'Combo lost', true);
     }
-    
+
     state.roundIndex++;
 
     setTimeout(async () => {
@@ -671,6 +689,7 @@ function renderMiimiidFunGameResult(result) {
       <div class="miimiid-fun-hero-label">${miimiidFunCenterEscapeHtml(title)}</div>
       <div class="miimiid-fun-hero-subtitle">${miimiidFunCenterEscapeHtml(performanceMessage)}</div>
       <div class="miimiid-fun-result-score">${correctAnswers} / ${totalRounds}</div>
+      <div class="miimiid-fun-result-combo">Best combo x${miimiidFunCenterState.maxCombo || 0}</div>
       <div class="miimiid-fun-result-rewards">
         <span class="miimiid-fun-pill xp">+${xp} XP</span>
         <span class="miimiid-fun-pill coins">+${coins} coins</span>
