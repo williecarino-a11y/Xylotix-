@@ -323,3 +323,11 @@
 }
 
 .miimiid-fun-result-combo { margin-top: 6px; color: #fbbf24; font-weight: 800; }
+
+.miimiid-fun-product { display: flex; flex-direction: column; align-items: center; gap: 10px; margin: 6px 0 14px; }
+.miimiid-fun-product-art { width: 150px; height: 150px; display: flex; align-items: center; justify-content: center; background: #131a2c; border: 1px solid #232c42; border-radius: 18px; animation: miimiidFunProductPop 0.35s ease-out; }
+.miimiid-fun-product-img { object-fit: contain; max-width: 100%; max-height: 100%; filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.35)); }
+.miimiid-fun-product-emoji { line-height: 1; }
+.miimiid-fun-price { padding: 4px 14px; border-radius: 999px; background: rgba(77, 163, 255, 0.14); border: 1px solid rgba(77, 163, 255, 0.4); color: #4da3ff; font-weight: 700; font-size: 1rem; }
+@keyframes miimiidFunProductPop { from { transform: scale(0.85); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
