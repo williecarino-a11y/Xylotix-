@@ -16,16 +16,16 @@ const funCenterGames = [
     resultTitle: 'Round complete',
     resultMessage: 'You are getting better at separating essentials from extras.',
     rounds: [
-      { id: 'rent', prompt: 'Rent', category: 'housing', visual: '🏠', answer: 'need' },
-      { id: 'groceries', prompt: 'Groceries', category: 'food', visual: '🛒', answer: 'need' },
-      { id: 'concert', prompt: 'Concert ticket', category: 'entertainment', visual: '🎵', answer: 'want' },
-      { id: 'medicine', prompt: 'Medicine', category: 'health', visual: '💊', answer: 'need' },
-      { id: 'headphones', prompt: 'New headphones', category: 'shopping', visual: '🎧', answer: 'want' },
-      { id: 'emergency-savings', prompt: 'Emergency savings', category: 'saving', visual: '🛡️', answer: 'need' },
-      { id: 'luxury-watch', prompt: 'Luxury watch', category: 'shopping', visual: '⌚', answer: 'want' },
-      { id: 'electricity', prompt: 'Electricity bill', category: 'utilities', visual: '💡', answer: 'need' },
-      { id: 'gaming-console', prompt: 'Gaming console', category: 'entertainment', visual: '🎮', answer: 'want' },
-      { id: 'basic-clothing', prompt: 'Basic clothing', category: 'clothing', visual: '👕', answer: 'need' }
+      { id: 'milk', prompt: 'Milk', category: 'food', visual: '🥛', image: 'milk', price: 4, difficulty: 1, answer: 'need' },
+      { id: 'bread', prompt: 'Bread', category: 'food', visual: '🍞', image: 'bread', price: 3, difficulty: 1, answer: 'need' },
+      { id: 'chips', prompt: 'Potato chips', category: 'snacks', visual: '🍟', image: 'chips', price: 4, difficulty: 1, answer: 'want' },
+      { id: 'eggs', prompt: 'Eggs (12)', category: 'food', visual: '🥚', image: 'eggs', price: 5, difficulty: 1, answer: 'need' },
+      { id: 'gaming-console', prompt: 'Gaming console', category: 'entertainment', visual: '🎮', price: 300, difficulty: 1, answer: 'want' },
+      { id: 'medicine', prompt: 'Medicine', category: 'health', visual: '💊', price: 12, difficulty: 2, answer: 'need' },
+      { id: 'headphones', prompt: 'New headphones', category: 'shopping', visual: '🎧', price: 60, difficulty: 2, answer: 'want' },
+      { id: 'pasta', prompt: 'Pasta', category: 'food', visual: '🍝', image: 'pasta', price: 2, difficulty: 2, answer: 'need' },
+      { id: 'designer-sneakers', prompt: 'Designer sneakers', category: 'clothing', visual: '👟', price: 120, difficulty: 3, answer: 'want' },
+      { id: 'winter-jacket', prompt: 'Basic winter jacket', category: 'clothing', visual: '🧥', price: 60, difficulty: 3, answer: 'need' }
     ],
     answers: [
       { id: 'need', label: 'Need' },
