@@ -108,6 +108,12 @@ const funGameSessionSchema = new mongoose.Schema(
       min: 0
     },
 
+    currentCombo: {
+      type: Number,
+      default: 0,
+      min: 0
+    },
+
     completed: {
       type: Boolean,
       default: false
