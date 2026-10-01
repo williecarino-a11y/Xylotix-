@@ -280,7 +280,7 @@
 
 #fun-center-content { position: relative; }
 
-.miimiid-fun-hud { display: flex; justify-content: center; gap: 10px; margin: 10px 0 4px; }
+.miimiid-fun-hud { display: flex; justify-content: center; gap: 10px; margin: 10px 0 20px; }
 
 .miimiid-fun-hud-pill {
   padding: 6px 14px;
