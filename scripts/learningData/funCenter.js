@@ -94,9 +94,50 @@ function getFunCenterActivities() {
   }));
 }
 
+const weeklyShop = {
+  id: 'weekly-shop',
+  title: 'Weekly Shop',
+  subtitle: 'You have $40 for this week. Spend it wisely.',
+  budget: 40,
+  items: [
+    { id: 'milk', name: 'Milk', price: 4, image: 'milk', visual: '🥛', classification: 'need', explanation: 'Milk is a need: a weekly staple.' },
+    { id: 'bread', name: 'Bread', price: 3, image: 'bread', visual: '🍞', classification: 'need', explanation: 'Bread is a need: cheap, filling food.' },
+    { id: 'eggs', name: 'Eggs (12)', price: 5, image: 'eggs', visual: '🥚', classification: 'need', explanation: 'Eggs are a need: affordable protein.' },
+    { id: 'pasta', name: 'Pasta', price: 2, image: 'pasta', visual: '🍝', classification: 'need', explanation: 'Pasta is a need: very cheap and filling.' },
+    { id: 'apple', name: 'Apples', price: 3, image: 'apple', visual: '🍎', classification: 'need', explanation: 'Apples are a need: healthy food for the week.' },
+    { id: 'carrot', name: 'Carrots', price: 2, image: 'carrot', visual: '🥕', classification: 'need', explanation: 'Carrots are a need: cheap vegetables.' },
+    { id: 'water', name: 'Water', price: 2, image: 'water', visual: '💧', classification: 'need', explanation: 'Water is a need: your body requires it every day.' },
+    { id: 'medicine', name: 'Medicine', price: 12, visual: '💊', classification: 'need', explanation: 'Medicine is a need: your health comes first.' },
+    { id: 'chips', name: 'Potato chips', price: 4, image: 'chips', visual: '🍟', classification: 'want', explanation: 'Chips are a want: tasty, but not essential.' },
+    { id: 'cookies', name: 'Cookies', price: 5, visual: '🍪', classification: 'want', explanation: 'Cookies are a want: a treat, not a necessity.' },
+    { id: 'pizza', name: 'Pizza night', price: 9, visual: '🍕', classification: 'want', explanation: 'Pizza night is a want: groceries cost far less per meal.' },
+    { id: 'candy', name: 'Candy', price: 3, visual: '🍬', classification: 'want', explanation: 'Candy is a want: small, but it adds up.' },
+    { id: 'movie', name: 'Movie ticket', price: 12, visual: '🎬', classification: 'want', explanation: 'A movie ticket is a want: fun, but not essential.' },
+    { id: 'headphones', name: 'Headphones', price: 60, visual: '🎧', classification: 'want', explanation: 'Headphones are a want: nice, but you can wait.' },
+    { id: 'console', name: 'Gaming console', price: 300, visual: '🎮', classification: 'want', explanation: 'A console is a want: a big purchase to save up for.' },
+    { id: 'sneakers', name: 'Designer sneakers', price: 120, visual: '👟', classification: 'want', explanation: 'Designer sneakers are a want: you need shoes, not the brand.' }
+  ]
+};
+
+function getWeeklyShop() {
+  return {
+    id: weeklyShop.id,
+    title: weeklyShop.title,
+    subtitle: weeklyShop.subtitle,
+    budget: weeklyShop.budget,
+    items: weeklyShop.items.map(({ id, name, price, image, visual }) => ({ id, name, price, image, visual }))
+  };
+}
+
+function getWeeklyShopDefinition() {
+  return weeklyShop;
+}
+
 module.exports = {
   getFunCenterGames,
   getFunCenterGame,
   validateFunCenterAnswer,
-  getFunCenterActivities
+  getFunCenterActivities,
+  getWeeklyShop,
+  getWeeklyShopDefinition
 };
