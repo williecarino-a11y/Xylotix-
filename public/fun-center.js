@@ -451,6 +451,34 @@ async function loadMiimiidFunCenter() {
       startMiimiidFunGame(playButton.dataset.funHomePlay);
     });
   }
+  const shopEntry = document.createElement('button');
+  shopEntry.type = 'button';
+  const storefront = MIIMIID_ASSETS.game && MIIMIID_ASSETS.game.martStorefront;
+  shopEntry.className = 'miimiid-shop-entry' + (storefront ? ' has-storefront' : '');
+  shopEntry.innerHTML = storefront
+    ? `
+      <img class="miimiid-shop-entry-photo" src="${storefront}" alt="" onerror="this.parentNode.classList.remove('has-storefront');this.remove()">
+      <span class="miimiid-shop-entry-label">
+        <strong>Miimiid Mart</strong>
+        <span>You have $40. Tap to go shopping &#8594;</span>
+      </span>
+    `
+    : `
+      <span aria-hidden="true">🛒</span>
+      <span class="miimiid-shop-entry-copy">
+        <strong>Miimiid Mart</strong>
+        <span>You have $40. Fill your basket wisely.</span>
+      </span>
+      <span aria-hidden="true">&#8594;</span>
+    `;
+  const funPage = content.querySelector('.miimiid-fun-page');
+  if (funPage) {
+    funPage.appendChild(shopEntry);
+    shopEntry.addEventListener('click', () => {
+      miimiidFunPlayTap();
+      startMiimiidShop();
+    });
+  }
 }
 
 function miimiidFunHeroImageError(img) {
@@ -791,3 +819,299 @@ function miimiidFunCenterEscapeHtml(value) {
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#039;');
 }
+
+/* =========================================================
+ * WEEKLY SHOP
+ * The server owns the budget, prices and need/want answers.
+ * ========================================================= */
+
+let miimiidShopState = null;
+
+const MIIMIID_SHOP_OUTCOME_MOOD = {
+  'smart-shopper': 'celebrate',
+  'almost-there': 'correct',
+  'too-many-wants': 'wrong',
+  'missing-essentials': 'confused'
+};
+
+const MIIMIID_SHOP_OUTCOME_TITLE = {
+  'smart-shopper': 'Smart Shopper!',
+  'almost-there': 'Almost there!',
+  'too-many-wants': 'Wants took over',
+  'missing-essentials': 'Essentials missing'
+};
+
+function miimiidShopSay(mood, text) {
+  const root = document.querySelector('.miimiid-shop');
+  if (!root) return;
+  const mascot = root.querySelector('.miimiid-shop-miimiid .miimiid-fun-mascot');
+  if (mascot && mascot.tagName === 'IMG') miimiidFunSetMascotMood(mascot, mood);
+  const bubble = root.querySelector('[data-shop-bubble]');
+  if (bubble) bubble.textContent = text;
+}
+
+function miimiidShopRefresh() {
+  const s = miimiidShopState;
+  const root = document.querySelector('.miimiid-shop');
+  if (!s || !root) return;
+
+  const remaining = s.budget - s.spent;
+  const pct = Math.max(0, Math.min(100, Math.round((remaining / s.budget) * 100)));
+  const level = pct <= 20 ? 'low' : pct <= 50 ? 'mid' : 'high';
+
+  const fill = root.querySelector('.miimiid-shop-bar-fill');
+  if (fill) { fill.style.width = `${pct}%`; fill.dataset.level = level; }
+
+  const money = root.querySelector('[data-shop-remaining]');
+  if (money) money.textContent = `$${remaining}`;
+
+  const checkout = root.querySelector('[data-shop-checkout]');
+  if (checkout) {
+    checkout.disabled = s.basket.length === 0;
+    checkout.textContent = s.basket.length === 0
+      ? 'Add items to your basket'
+      : `Checkout (${s.basket.length} ${s.basket.length === 1 ? 'item' : 'items'})`;
+  }
+
+  root.querySelectorAll('[data-shop-item]').forEach(card => {
+    const item = s.shop.items.find(candidate => candidate.id === card.dataset.shopItem);
+    if (!item) return;
+    const inBasket = s.basket.includes(item.id);
+    card.classList.toggle('in-basket', inBasket);
+    card.classList.toggle('is-unaffordable', !inBasket && item.price > remaining);
+  });
+}
+
+async function startMiimiidShop() {
+  const content = document.getElementById('fun-center-content');
+  if (!content) return;
+
+  content.innerHTML = `<div class="miimiid-fun-loading">Entering the store…</div>`;
+
+  try {
+    const shop = await miimiidFunCenterRequest('/api/fun-center/shop');
+    const session = await miimiidFunCenterRequest('/api/fun-center/shop/session', {
+      method: 'POST',
+      body: JSON.stringify({})
+    });
+
+    miimiidShopState = {
+      shop,
+      sessionId: session.sessionId,
+      budget: session.budget,
+      spent: 0,
+      basket: [],
+      needStreak: 0,
+      busy: false
+    };
+
+    renderMiimiidShop();
+  } catch (error) {
+    console.error('Miimiid shop start error:', error);
+    content.innerHTML = `
+      <div class="miimiid-fun-error">
+        <p>${miimiidFunCenterEscapeHtml(error.message || 'Unable to open the store.')}</p>
+        <button type="button" class="miimiid-fun-btn" data-shop-retry>Try again</button>
+        <button type="button" class="miimiid-fun-btn" data-shop-back>Back to Fun Center</button>
+      </div>
+    `;
+    const retry = content.querySelector('[data-shop-retry]');
+    if (retry) retry.addEventListener('click', () => startMiimiidShop());
+    const back = content.querySelector('[data-shop-back]');
+    if (back) back.addEventListener('click', () => { miimiidShopState = null; renderMiimiidFunCenter(); });
+  }
+}
+
+function renderMiimiidShop() {
+  const content = document.getElementById('fun-center-content');
+  const s = miimiidShopState;
+  if (!content || !s) return;
+
+  const interior = MIIMIID_ASSETS.game && MIIMIID_ASSETS.game.martInterior;
+
+  content.innerHTML = `
+    <div class="miimiid-shop">
+      ${interior ? `<div class="miimiid-shop-banner" style="background-image:url('${interior}')"><span>Miimiid Mart</span></div>` : ''}
+      <div class="miimiid-shop-top">
+        <div class="miimiid-shop-miimiid">
+          ${miimiidFunMascot('wave', 64)}
+          <div class="miimiid-shop-bubble" data-shop-bubble></div>
+        </div>
+        <div class="miimiid-shop-budget">
+          <div class="miimiid-shop-budget-row">
+            <span>Budget left</span>
+            <strong data-shop-remaining></strong>
+          </div>
+          <div class="miimiid-shop-bar"><div class="miimiid-shop-bar-fill" data-level="high"></div></div>
+        </div>
+      </div>
+
+      <div class="miimiid-shop-grid">
+        ${s.shop.items.map(item => `
+          <button type="button" class="miimiid-shop-item" data-shop-item="${miimiidFunCenterEscapeHtml(item.id)}">
+            <div class="miimiid-shop-item-art">${miimiidFunProductVisual(item, 64)}</div>
+            <div class="miimiid-shop-item-name">${miimiidFunCenterEscapeHtml(item.name)}</div>
+            <div class="miimiid-shop-item-price">$${item.price}</div>
+          </button>
+        `).join('')}
+      </div>
+
+      <div class="miimiid-shop-basket" data-shop-basket></div>
+
+      <button type="button" class="miimiid-shop-checkout" data-shop-checkout disabled>Add items to your basket</button>
+      <button type="button" class="miimiid-fun-btn-ghost" data-shop-leave>Leave the store</button>
+    </div>
+  `;
+
+  content.querySelectorAll('[data-shop-item]').forEach(card => {
+    card.addEventListener('click', () => buyMiimiidShopItem(card.dataset.shopItem, card));
+  });
+
+  const checkout = content.querySelector('[data-shop-checkout]');
+  if (checkout) checkout.addEventListener('click', () => checkoutMiimiidShop());
+
+  const leave = content.querySelector('[data-shop-leave]');
+  if (leave) leave.addEventListener('click', () => { miimiidShopState = null; renderMiimiidFunCenter(); });
+
+  miimiidShopRefresh();
+  miimiidShopSay('wave', `You have $${s.budget} for this week's essentials. Tap items to add them to your basket!`);
+}
+
+async function buyMiimiidShopItem(itemId, cardEl) {
+  const s = miimiidShopState;
+  if (!s || s.busy) return;
+
+  const item = s.shop.items.find(candidate => candidate.id === itemId);
+  if (!item || s.basket.includes(item.id)) return;
+
+  const remaining = s.budget - s.spent;
+  if (item.price > remaining) {
+    miimiidFunPlayWrong();
+    cardEl.classList.remove('is-shake');
+    void cardEl.offsetWidth;
+    cardEl.classList.add('is-shake');
+    miimiidShopSay('confused', `${item.name} costs $${item.price}, but you only have $${remaining} left.`);
+    return;
+  }
+
+  s.busy = true;
+  const content = document.getElementById('fun-center-content');
+
+  try {
+    const result = await miimiidFunCenterRequest(
+      `/api/fun-center/shop/session/${encodeURIComponent(s.sessionId)}/buy`,
+      { method: 'POST', body: JSON.stringify({ itemId }) }
+    );
+
+    s.spent = result.spent;
+    s.basket.push(item.id);
+
+    if (result.classification === 'need') {
+      s.needStreak++;
+      miimiidFunPlayCorrect(s.needStreak);
+      miimiidShopSay(s.needStreak >= 3 ? 'celebrate' : 'correct', result.explanation);
+      miimiidFunShowFloat(content, `-$${result.price} · Smart pick`);
+    } else {
+      s.needStreak = 0;
+      miimiidFunPlayWrong();
+      miimiidShopSay('wrong', `${result.explanation} You have $${result.remaining} left.`);
+      miimiidFunShowFloat(content, `-$${result.price}`, true);
+    }
+
+    const strip = document.querySelector('[data-shop-basket]');
+    if (strip) {
+      const chip = document.createElement('span');
+      chip.className = 'miimiid-shop-basket-chip';
+      chip.innerHTML = miimiidFunProductVisual(item, 28);
+      strip.appendChild(chip);
+    }
+
+    miimiidShopRefresh();
+  } catch (error) {
+    console.error('Miimiid shop buy error:', error);
+    miimiidShopSay('confused', error.message || 'That did not work. Try again.');
+  } finally {
+    s.busy = false;
+  }
+}
+
+async function checkoutMiimiidShop() {
+  const s = miimiidShopState;
+  if (!s || s.busy || s.basket.length === 0) return;
+
+  s.busy = true;
+  const button = document.querySelector('[data-shop-checkout]');
+  if (button) { button.disabled = true; button.textContent = 'Checking out…'; }
+
+  try {
+    const result = await miimiidFunCenterRequest(
+      `/api/fun-center/shop/session/${encodeURIComponent(s.sessionId)}/checkout`,
+      { method: 'POST', body: JSON.stringify({}) }
+    );
+    miimiidShopState = null;
+    renderMiimiidShopResult(result);
+  } catch (error) {
+    console.error('Miimiid shop checkout error:', error);
+    s.busy = false;
+    miimiidShopRefresh();
+    miimiidShopSay('confused', error.message || 'Checkout failed. Try again.');
+  }
+}
+
+function renderMiimiidShopResult(result) {
+  const content = document.getElementById('fun-center-content');
+  if (!content) return;
+
+  const mood = MIIMIID_SHOP_OUTCOME_MOOD[result.outcome] || 'correct';
+  const title = MIIMIID_SHOP_OUTCOME_TITLE[result.outcome] || 'Shopping complete';
+  const needsBought = Array.isArray(result.needsBought) ? result.needsBought.length : 0;
+  const missed = Array.isArray(result.needsMissed) ? result.needsMissed : [];
+  const xp = Number.isFinite(result.xp) ? result.xp : 0;
+  const coins = Number.isFinite(result.coins) ? result.coins : 0;
+
+  miimiidFunPlayComplete();
+
+  content.innerHTML = `
+    <div class="miimiid-shop miimiid-shop-result">
+      ${miimiidFunMascot(mood, 72)}
+      <div class="miimiid-fun-hero-label">${miimiidFunCenterEscapeHtml(title)}</div>
+      <div class="miimiid-fun-hero-subtitle">${miimiidFunCenterEscapeHtml(result.message || '')}</div>
+
+      <div class="miimiid-shop-stats">
+        <div class="miimiid-shop-stat"><span>Spent</span><strong>$${result.spent}</strong></div>
+        <div class="miimiid-shop-stat"><span>Saved</span><strong>$${result.saved}</strong></div>
+        <div class="miimiid-shop-stat"><span>On wants</span><strong>$${result.wantsSpent}</strong></div>
+      </div>
+
+      <div class="miimiid-fun-result-combo">Needs covered: ${needsBought} / ${result.totalNeeds}</div>
+
+      ${missed.length > 0 ? `
+        <div class="miimiid-shop-missed">
+          <div class="miimiid-shop-missed-title">Essentials you left behind</div>
+          ${missed.map(item => `
+            <div class="miimiid-shop-missed-row">
+              <div class="miimiid-shop-missed-art">${miimiidFunProductVisual(item, 36)}</div>
+              <div class="miimiid-shop-missed-copy">
+                <strong>${miimiidFunCenterEscapeHtml(item.name)} · $${item.price}</strong>
+                <span>${miimiidFunCenterEscapeHtml(item.explanation || '')}</span>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      ` : ''}
+
+      <div class="miimiid-fun-result-rewards">
+        <span class="miimiid-fun-pill xp">+${xp} XP</span>
+        <span class="miimiid-fun-pill coins">+${coins} coins</span>
+      </div>
+
+      <button type="button" class="miimiid-fun-hero-play" data-shop-again><span aria-hidden="true">&#9654;</span> Shop again</button>
+      <button type="button" class="miimiid-fun-btn-ghost" data-shop-back>Back to Fun Center</button>
+    </div>
+  `;
+
+  const again = content.querySelector('[data-shop-again]');
+  if (again) again.addEventListener('click', () => startMiimiidShop());
+  const back = content.querySelector('[data-shop-back]');
+  if (back) back.addEventListener('click', () => renderMiimiidFunCenter());
+        }
