@@ -23,9 +23,9 @@
 
   const OUTCOME_MOOD = {
     'smart-shopper': 'celebrate',
-    'almost-there': 'correct',
-    'too-many-wants': 'wrong',
-    'missing-essentials': 'confused'
+    'almost-there': 'encourage',
+    'too-many-wants': 'concerned',
+    'missing-essentials': 'encourage'
   };
 
   const OUTCOME_TITLE = {
@@ -39,18 +39,18 @@
   // and the item it is about has not been bought yet.
   const EVENTS = [
     {
-      id: 'mom', after: 3, itemId: 'medicine', icon: '📱', title: 'New message from Mom',
-      text: price => `Can you pick up some medicine for me? It will be $${price}.`,
-      yes: "I'll get it", no: 'Not this time',
-      line: 'Ooh, my phone just buzzed! It is Mom.',
-      noMood: 'confused', noLine: 'Mom is counting on that medicine. Health always comes first.'
-    },
-    {
-      id: 'alex', after: 5, itemId: 'movie', icon: '📱', title: 'New message from Alex',
+      id: 'alex', after: 3, itemId: 'movie', icon: '📱', title: 'New message from Alex',
       text: price => `Movie night tonight? Tickets are $${price}. You in?`,
       yes: "I'm in!", no: 'Maybe next time',
       line: 'Another buzz! It is Alex. Do we really need this one?',
-      noMood: 'correct', noLine: 'Good call. Fun can wait until your essentials are covered.'
+      noMood: 'encourage', noLine: 'Good call. Fun can wait until your essentials are covered.'
+    },
+    {
+      id: 'mom', after: 5, itemId: 'medicine', icon: '📱', title: 'New message from Mom',
+      text: price => `Can you pick up some medicine for me? It will be $${price}.`,
+      yes: "I'll get it", no: 'Not this time',
+      line: 'Ooh, my phone just buzzed! It is Mom.',
+      noMood: 'concerned', noLine: 'Mom is counting on that medicine. Health always comes first.'
     }
   ];
 
@@ -289,25 +289,38 @@
       bumpCart();
       addBasketChip(item);
 
+      const left = result.remaining;
       const needsLeft = Number.isFinite(result.needsLeft) ? result.needsLeft : null;
-      const pressure = needsLeft !== null && needsLeft > 0 && result.remaining <= 10;
-      const pressureText = pressure
-        ? ` Only $${result.remaining} left and ${needsLeft} essential${needsLeft === 1 ? '' : 's'} still to buy.`
-        : '';
+      const essentials = needsLeft ? ` ${needsLeft} essential${needsLeft === 1 ? '' : 's'} still to buy.` : '';
+
+      let tail = '';
+      if (needsLeft !== 0 && left <= 5) tail = ` Whoa, only $${left} left!${essentials}`;
+      else if (needsLeft !== 0 && left <= 10) tail = ` We should slow down. $${left} left.${essentials}`;
+
+      const medicine = s.shop.items.find(candidate => candidate.id === 'medicine');
+      const medicineAtRisk = needsLeft !== 0 && !!medicine && s.basket.includes('movie') && !s.basket.includes('medicine') && left < medicine.price;
+      if (medicineAtRisk) tail += ` You still need medicine ($${medicine.price}).`;
 
       if (result.classification === 'need') {
         s.needStreak++;
         miimiidFunPlayCorrect(s.needStreak);
+        let mood = s.needStreak >= 3 ? 'celebrate' : 'correct';
+        let text = result.explanation + tail;
         if (needsLeft === 0) {
-          say('celebrate', `${result.explanation} That is every essential covered! Head to checkout and keep the rest.`);
-        } else {
-          say(s.needStreak >= 3 ? 'celebrate' : 'correct', result.explanation + pressureText);
+          mood = 'celebrate';
+          text = `${result.explanation} That is every essential covered! Head to checkout and keep the rest.`;
+        } else if (medicineAtRisk) {
+          mood = 'concerned';
+        } else if (left <= 5) {
+          mood = 'surprised';
         }
+        say(mood, text);
         miimiidFunShowFloat(content, `-$${result.price} · Smart pick`);
       } else {
         s.needStreak = 0;
         miimiidFunPlayWrong();
-        say('wrong', `${result.explanation} You have $${result.remaining} left.${pressureText}`);
+        const wantTail = tail || ` You have $${left} left.`;
+        say('concerned', `${result.explanation} Do we really need this?${wantTail}`);
         miimiidFunShowFloat(content, `-$${result.price}`, true);
       }
 
@@ -339,7 +352,7 @@
     s.eventOpen = true;
     s.eventsDone.push(ev.id);
     miimiidFunPlayTap();
-    say('confused', ev.line);
+    say('surprised', ev.line);
 
     const card = document.createElement('div');
     card.className = 'mart-event';
