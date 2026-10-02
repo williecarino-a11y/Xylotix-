@@ -82,7 +82,9 @@ const MIIMIID_ASSETS = miimiidDeepFreeze({
   game: {
     shoppingCart: `${MIIMIID_ASSET_BASE}/game/shopping-cart.png`,
     shoppingBasket: `${MIIMIID_ASSET_BASE}/game/shopping-basket.png`,
-    checkoutCounter: `${MIIMIID_ASSET_BASE}/game/checkout-counter.png`
+    checkoutCounter: `${MIIMIID_ASSET_BASE}/game/checkout-counter.png`,
+    martStorefront: `${MIIMIID_ASSET_BASE}/world-mart/miimiid-mart-storefront.jpg`,
+    martInterior: `${MIIMIID_ASSET_BASE}/world-mart/miimiid-mart-interior.jpg`
   }
 });
 
