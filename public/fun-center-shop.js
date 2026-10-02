@@ -69,10 +69,15 @@
 
   function stageHtml(x, mood, withItems) {
     const bg = interiorUrl();
+    const cartSrc = MIIMIID_ASSETS.game && MIIMIID_ASSETS.game.shoppingCart;
+    const cartInner = cartSrc
+      ? `<img src="${cartSrc}" alt="" onerror="this.outerHTML='🛒'">`
+      : '🛒';
     return `
       <div class="mart-stage" ${bg ? `style="background-image:url('${bg}')"` : ''}>
         <div class="mart-bubble" data-mart-bubble></div>
         ${withItems ? '<div class="mart-stage-items" data-mart-shelf></div>' : ''}
+        <div class="mart-stage-cart" data-mart-stage-cart style="left:${Math.min(x + 13, 90)}%">${cartInner}</div>
         <div class="mart-miimiid" data-mart-miimiid style="left:${x}%">${spriteImg(mood)}</div>
       </div>
     `;
@@ -95,6 +100,7 @@
 
   function walkTo(x, done) {
     const wrap = document.querySelector('[data-mart-miimiid]');
+    const cart = document.querySelector('[data-mart-stage-cart]');
     const s = state;
     if (!wrap || !s) { if (done) done(); return; }
 
@@ -106,13 +112,21 @@
 
     if (dist < 1) { if (done) done(); return; }
 
-    const seconds = Math.max(0.6, dist / 28);
+    // Slow, steady walk: 1.2s for short hops, up to 3.2s across the store.
+    const seconds = Math.min(3.2, Math.max(1.2, dist / 14));
     wrap.style.setProperty('--face', forward * dir);
     wrap.style.transitionDuration = `${seconds}s`;
+    wrap.classList.add('is-walking');
     setMood('run');
     wrap.style.left = `${x}%`;
 
+    if (cart) {
+      cart.style.transitionDuration = `${seconds}s`;
+      cart.style.left = `${Math.min(x + 13, 90)}%`;
+    }
+
     s.walkTimer = setTimeout(() => {
+      wrap.classList.remove('is-walking');
       wrap.style.setProperty('--face', forward);
       setMood('wave');
       if (done) done();
@@ -188,7 +202,7 @@
 
   function selectAisle(id) {
     const s = state;
-    if (!s || s.checkingOut || s.missionOpen) return;
+    if (!s || s.checkingOut || s.missionOpen || s.busy) return;
     const aisle = AISLES.find(a => a.id === id);
     if (!aisle) return;
 
@@ -208,7 +222,7 @@
   }
 
   function flyToCart(item, fromEl) {
-    const cart = document.querySelector('[data-mart-cart]');
+    const cart = document.querySelector('[data-mart-stage-cart]') || document.querySelector('[data-mart-cart]');
     const from = fromEl || document.querySelector('.mart-stage');
     if (!cart || !from) return;
     const a = from.getBoundingClientRect();
@@ -220,17 +234,16 @@
     fly.style.top = `${a.top + a.height / 2 - 20}px`;
     document.body.appendChild(fly);
     fly.getBoundingClientRect();
-    fly.style.transform = `translate(${b.left + b.width / 2 - (a.left + a.width / 2)}px, ${b.top + b.height / 2 - (a.top + a.height / 2)}px) scale(0.35)`;
-    fly.style.opacity = '0.3';
+    fly.style.transform = `translate(${b.left + b.width / 2 - (a.left + a.width / 2)}px, ${b.top + b.height / 2 - (a.top + a.height / 2)}px) scale(0.5)`;
+    fly.style.opacity = '0.4';
     setTimeout(() => fly.remove(), 700);
   }
 
   function bumpCart() {
-    const cart = document.querySelector('[data-mart-cart]');
-    if (!cart) return;
-    cart.classList.remove('bump');
-    void cart.offsetWidth;
-    cart.classList.add('bump');
+    const header = document.querySelector('[data-mart-cart]');
+    const stageCart = document.querySelector('[data-mart-stage-cart]');
+    if (header) { header.classList.remove('bump'); void header.offsetWidth; header.classList.add('bump'); }
+    if (stageCart) { stageCart.classList.remove('bump'); void stageCart.offsetWidth; stageCart.classList.add('bump'); }
   }
 
   function addBasketChip(item) {
