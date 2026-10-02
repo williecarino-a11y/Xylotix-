@@ -334,3 +334,55 @@
 .miimiid-fun-feedback { margin: 14px 4px 0; padding: 10px 14px; border-radius: 14px; font-size: 0.92rem; line-height: 1.4; text-align: center; animation: miimiidFunProductPop 0.25s ease-out; }
 .miimiid-fun-feedback.is-correct { background: rgba(29, 158, 117, 0.16); border: 1px solid rgba(29, 158, 117, 0.5); color: #7ee0bd; }
 .miimiid-fun-feedback.is-wrong { background: rgba(240, 153, 123, 0.14); border: 1px solid rgba(240, 153, 123, 0.5); color: #f6b9a3; }
+
+.miimiid-shop-entry { width: 100%; margin-top: 14px; display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-radius: 18px; border: 1px solid #232c42; background: #131a2c; color: #e6e9f0; text-align: left; cursor: pointer; }
+.miimiid-shop-entry img { width: 52px; height: 52px; object-fit: contain; flex-shrink: 0; }
+.miimiid-shop-entry-copy { flex: 1; display: flex; flex-direction: column; gap: 2px; font-size: 0.85rem; color: #9fb0cf; }
+.miimiid-shop-entry-copy strong { color: #4da3ff; font-size: 1.05rem; }
+.miimiid-shop-entry.has-storefront { position: relative; display: block; padding: 0; height: 170px; overflow: hidden; }
+.miimiid-shop-entry .miimiid-shop-entry-photo { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
+.miimiid-shop-entry-label { position: absolute; left: 0; right: 0; bottom: 0; display: flex; flex-direction: column; gap: 2px; padding: 30px 16px 12px; background: linear-gradient(to top, rgba(8, 12, 24, 0.92), rgba(8, 12, 24, 0)); color: #9fb0cf; font-size: 0.85rem; }
+.miimiid-shop-entry-label strong { color: #fff; font-size: 1.15rem; }
+
+.miimiid-shop { padding-bottom: 96px; }
+.miimiid-shop-banner { position: relative; height: 120px; margin-bottom: 4px; border-radius: 18px; border: 1px solid #232c42; background-size: cover; background-position: center 40%; overflow: hidden; }
+.miimiid-shop-banner::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(8, 12, 24, 0.75), rgba(8, 12, 24, 0.05)); }
+.miimiid-shop-banner span { position: absolute; left: 14px; bottom: 10px; z-index: 1; color: #fff; font-weight: 700; font-size: 1.1rem; }
+.miimiid-shop-top { position: sticky; top: 0; z-index: 5; padding: 10px 4px 12px; background: rgba(11, 16, 32, 0.96); }
+.miimiid-shop-miimiid { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.miimiid-shop-bubble { flex: 1; padding: 10px 14px; border-radius: 16px; background: #131a2c; border: 1px solid #232c42; color: #e6e9f0; font-size: 0.9rem; line-height: 1.35; }
+.miimiid-shop-budget-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; color: #9fb0cf; font-size: 0.85rem; }
+.miimiid-shop-budget-row strong { color: #e6e9f0; font-size: 1.3rem; }
+.miimiid-shop-bar { height: 12px; border-radius: 999px; background: #1a2238; overflow: hidden; }
+.miimiid-shop-bar-fill { height: 100%; border-radius: 999px; transition: width 0.35s ease, background 0.35s ease; }
+.miimiid-shop-bar-fill[data-level="high"] { background: #1D9E75; }
+.miimiid-shop-bar-fill[data-level="mid"] { background: #f0b429; }
+.miimiid-shop-bar-fill[data-level="low"] { background: #F0997B; }
+
+.miimiid-shop-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 8px; }
+.miimiid-shop-item { position: relative; display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 12px 8px; border-radius: 18px; border: 1px solid #232c42; background: #131a2c; color: #e6e9f0; cursor: pointer; transition: transform 0.12s ease, opacity 0.2s ease; }
+.miimiid-shop-item:active { transform: scale(0.96); }
+.miimiid-shop-item-art { height: 64px; display: flex; align-items: center; justify-content: center; }
+.miimiid-shop-item-name { font-size: 0.85rem; text-align: center; }
+.miimiid-shop-item-price { font-weight: 700; color: #4da3ff; }
+.miimiid-shop-item.in-basket { opacity: 0.4; pointer-events: none; }
+.miimiid-shop-item.in-basket::after { content: "\2713"; position: absolute; top: 6px; right: 10px; color: #7ee0bd; font-weight: 700; }
+.miimiid-shop-item.is-unaffordable { opacity: 0.55; }
+.miimiid-shop-item.is-unaffordable .miimiid-shop-item-price { color: #F0997B; }
+.miimiid-shop-item.is-shake { animation: miimiidShopShake 0.4s ease; }
+@keyframes miimiidShopShake { 0%, 100% { transform: translateX(0); } 20% { transform: translateX(-7px); } 40% { transform: translateX(7px); } 60% { transform: translateX(-5px); } 80% { transform: translateX(5px); } }
+
+.miimiid-shop-basket { display: flex; flex-wrap: wrap; gap: 6px; margin: 14px 0 4px; min-height: 8px; }
+.miimiid-shop-basket-chip { display: inline-flex; align-items: center; justify-content: center; width: 38px; height: 38px; border-radius: 12px; background: #131a2c; border: 1px solid #232c42; animation: miimiidFunProductPop 0.25s ease-out; }
+.miimiid-shop-checkout { width: 100%; margin: 10px 0 6px; padding: 14px; border: 0; border-radius: 999px; background: #1f6feb; color: #fff; font-weight: 700; font-size: 1rem; cursor: pointer; }
+.miimiid-shop-checkout:disabled { background: #232c42; color: #7d8aa5; cursor: default; }
+
+.miimiid-shop-result { display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center; padding-top: 10px; }
+.miimiid-shop-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; width: 100%; }
+.miimiid-shop-stat { display: flex; flex-direction: column; gap: 2px; padding: 10px 6px; border-radius: 14px; background: #131a2c; border: 1px solid #232c42; color: #9fb0cf; font-size: 0.8rem; }
+.miimiid-shop-stat strong { color: #e6e9f0; font-size: 1.15rem; }
+.miimiid-shop-missed { width: 100%; text-align: left; padding: 12px; border-radius: 16px; background: rgba(240, 153, 123, 0.1); border: 1px solid rgba(240, 153, 123, 0.4); }
+.miimiid-shop-missed-title { font-weight: 700; color: #f6b9a3; margin-bottom: 8px; }
+.miimiid-shop-missed-row { display: flex; align-items: center; gap: 10px; padding: 6px 0; }
+.miimiid-shop-missed-art { width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.miimiid-shop-missed-copy { display: flex; flex-direction: column; font-size: 0.85rem; color: #c9d3e8; }
