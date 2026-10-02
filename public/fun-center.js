@@ -119,14 +119,15 @@ function miimiidFunPlayComplete() {
 const MIIMIID_FUN_POSES = {
   idle: 'thinkingQuestion', correct: 'thumbsUp', wrong: 'sad',
   celebrate: 'happy', wave: 'waving', sleep: 'sleeping',
-  run: 'running', confused: 'confused'
+  run: 'running', confused: 'confused',
+  concerned: 'concerned', surprised: 'surprised', encourage: 'encouraging'
 };
 
 function miimiidFunMascotAnim(mood) {
-  if (mood === 'wrong') return 'none';
-  return mood === 'celebrate'
-    ? 'miimiidFunMascotCelebrate 0.6s ease-in-out infinite'
-    : 'miimiidFunMascotBounce 1.1s ease-in-out infinite';
+  if (mood === 'wrong' || mood === 'concerned') return 'none';
+  if (mood === 'surprised') return 'miimiidFunMascotCelebrate 0.5s ease-in-out 2';
+  if (mood === 'celebrate') return 'miimiidFunMascotCelebrate 0.6s ease-in-out infinite';
+  return 'miimiidFunMascotBounce 1.1s ease-in-out infinite';
 }
 
 function miimiidFunMascot(mood, size) {
