@@ -259,9 +259,12 @@ function buildShopSummary(shop, session) {
 
   let outcome = 'missing-essentials';
   let message = 'Many essentials are still missing. Next time, cover your needs first.';
-  if (needsMissed.length === 0) {
+  if (needsMissed.length === 0 && saved > 0) {
     outcome = 'smart-shopper';
     message = 'Smart Shopper! You covered every essential and kept some money back.';
+  } else if (needsMissed.length === 0) {
+    outcome = 'almost-there';
+    message = 'Every essential covered, but you spent your last dollars on wants. Keep some savings next time!';
   } else if (wantsSpent > 0 && wantsSpent >= needsSpent) {
     outcome = 'too-many-wants';
     message = 'Your wants cost more than your needs this week. Essentials come first.';
