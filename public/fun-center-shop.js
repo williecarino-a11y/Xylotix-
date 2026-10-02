@@ -404,7 +404,8 @@
   }
 
   // Items land on the counter one by one with a scanner beep.
-  function playScan(s, result) {
+  // The wallet counts down as each item scans. Resolves when the player taps Pay.
+  function playScan(s) {
     return new Promise(resolve => {
       const stage = document.querySelector('.mart-stage');
       if (!stage) { resolve(); return; }
@@ -419,23 +420,33 @@
         <div class="mart-scan-head">🧾 CHECKOUT</div>
         <div class="mart-scan-lines" data-mart-scan-lines></div>
         <div class="mart-scan-total"><span>Total</span><strong data-mart-scan-total>$0</strong></div>
-        <div class="mart-scan-wallet" data-mart-scan-wallet></div>
+        <div class="mart-scan-wallet" data-mart-scan-wallet>Wallet $${s.budget}</div>
+        <div class="mart-scan-actions" data-mart-scan-actions></div>
       `;
       stage.appendChild(overlay);
 
       const lines = overlay.querySelector('[data-mart-scan-lines]');
       const totalEl = overlay.querySelector('[data-mart-scan-total]');
       const walletEl = overlay.querySelector('[data-mart-scan-wallet]');
+      const actions = overlay.querySelector('[data-mart-scan-actions]');
 
       let total = 0;
       let index = 0;
 
       const next = () => {
         if (index >= items.length) {
-          walletEl.textContent = `Wallet $${s.budget} → $${result.saved}`;
-          setTimeout(resolve, 1700);
+          const left = s.budget - total;
+          setMood(left <= 5 ? 'concerned' : 'correct');
+          actions.innerHTML = `<button type="button" class="mart-scan-pay" data-mart-pay>Pay $${total}</button>`;
+          actions.querySelector('[data-mart-pay]').addEventListener('click', () => {
+            actions.innerHTML = '';
+            walletEl.textContent = `Paid! Wallet $${s.budget} → $${left}`;
+            miimiidFunBell(1046.5, 0.5, 0.045);
+            setTimeout(resolve, 1100);
+          });
           return;
         }
+
         const item = items[index++];
         total += item.price;
 
@@ -444,6 +455,7 @@
         line.innerHTML = `<span>${esc(item.name)}</span><strong>$${item.price}</strong>`;
         lines.appendChild(line);
         totalEl.textContent = `$${total}`;
+        walletEl.textContent = `Wallet $${s.budget - total}`;
         miimiidFunTone(1180, 0.07, 'square', 0.025);
 
         setTimeout(next, 380);
@@ -470,17 +482,22 @@
     const walk = new Promise(resolve => walkTo(COUNTER_X, resolve));
 
     try {
-      const request = miimiidFunCenterRequest(
+      await walk;
+      await playScan(s);
+      if (state !== s) return;
+
+      const result = await miimiidFunCenterRequest(
         `/api/fun-center/shop/session/${encodeURIComponent(s.sessionId)}/checkout`,
         { method: 'POST', body: JSON.stringify({}) }
       );
-      const [result] = await Promise.all([request, walk]);
-      await playScan(s, result);
       if (state !== s) return;
+
       state = null;
       renderResult(result);
     } catch (error) {
       console.error('Miimiid mart checkout error:', error);
+      const scan = document.querySelector('.mart-scan');
+      if (scan) scan.remove();
       s.busy = false;
       s.checkingOut = false;
       refresh();
@@ -518,6 +535,29 @@
       return { title: 'Risky budgeting', mood: 'concerned', message: 'Your budget got stretched thin. Next time, cover the essentials before anything else.' };
     }
     return { title: 'Overspent', mood: 'concerned', message: 'We learned something today. Want to try again?' };
+  }
+
+  // Plain-language reasons for the result, built from what the player did.
+  function whyLines(tier, result, needs, wants, missed) {
+    const lines = [];
+    lines.push(`You covered ${needs.length} of ${result.totalNeeds} essentials${missed.length ? `, but left behind ${missed.map(item => item.name).join(', ')}` : ''}.`);
+    lines.push(wants.length === 0
+      ? 'You bought no wants.'
+      : `You spent $${result.wantsSpent} on wants (${wants.map(item => item.name).join(', ')}).`);
+    lines.push(`You finished with $${result.saved} left in your wallet.`);
+
+    const verdict = {
+      excellent: 'That is why this is Excellent: needs first, nothing wasted, money left over.',
+      good: 'That is why this is Good: your essentials were protected before anything else.',
+      risky: missed.length > 0
+        ? 'That is why this is Risky: some important needs were still missing.'
+        : 'That is why this is Risky: you covered your needs but spent your last dollars.',
+      overspent: result.saved === 0
+        ? 'That is why this is Overspent: your wallet ran out while important needs were missing.'
+        : 'That is why this is Overspent: too many important needs were missing.'
+    };
+    lines.push(verdict[tier]);
+    return lines;
   }
 
   function renderResult(result) {
@@ -573,6 +613,11 @@
           </div>
           ${smartest ? `<div class="mart-report-line is-good"><span>Smartest decision</span><strong>${esc(smartest.name)} · $${smartest.price}</strong></div>` : ''}
           ${mistake ? `<div class="mart-report-line is-bad"><span>Biggest mistake</span><strong>${esc(mistake.name)} · $${mistake.price}</strong></div>` : ''}
+        </div>
+
+        <div class="mart-why">
+          <div class="mart-why-title">WHY THIS RESULT</div>
+          ${whyLines(tier, result, needs, wants, missed).map(line => `<p>${esc(line)}</p>`).join('')}
         </div>
 
         ${missed.length > 0 ? `
