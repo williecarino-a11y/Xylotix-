@@ -28,7 +28,11 @@ const MIIMIID_ASSETS = miimiidDeepFreeze({
       sleeping: `${MIIMIID_ASSET_BASE}/characters/miimiid/sleeping.png`,
       thinkingQuestion: `${MIIMIID_ASSET_BASE}/characters/miimiid/thinking-question.png`,
       thumbsUp: `${MIIMIID_ASSET_BASE}/characters/miimiid/thumbs-up.png`,
-      waving: `${MIIMIID_ASSET_BASE}/characters/miimiid/waving.png`
+      waving: `${MIIMIID_ASSET_BASE}/characters/miimiid/waving.png`,
+      concerned: `${MIIMIID_ASSET_BASE}/characters/miimiid/concerned.png`,
+      surprised: `${MIIMIID_ASSET_BASE}/characters/miimiid/surprised.png`,
+      encouraging: `${MIIMIID_ASSET_BASE}/characters/miimiid/encouraging.png`
+    },
     },
 
     engineer: {
@@ -40,7 +44,6 @@ const MIIMIID_ASSETS = miimiidDeepFreeze({
       success: `${MIIMIID_ASSET_BASE}/characters/engineer/engineer-success.png`,
       withClient: `${MIIMIID_ASSET_BASE}/characters/engineer/engineer-with-client.png`,
       withSon: `${MIIMIID_ASSET_BASE}/characters/engineer/engineer-with-son.png`
-    }
   },
 
   worlds: {
