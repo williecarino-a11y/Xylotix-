@@ -110,3 +110,12 @@
 .mart-report-line.is-good strong { color: #7ee0bd; }
 .mart-report-line.is-bad { background: rgba(240, 153, 123, 0.12); border: 1px solid rgba(240, 153, 123, 0.45); }
 .mart-report-line.is-bad strong { color: #f6b9a3; }
+
+/* ---- LIVING MART V2.1: walking + cart ---- */
+.mart-stage-cart { position: absolute; z-index: 3; bottom: 3%; width: 17%; transform: translateX(-50%); transition-property: left; transition-duration: 0.8s; transition-timing-function: ease-in-out; pointer-events: none; font-size: 2.4rem; text-align: center; filter: drop-shadow(0 6px 8px rgba(0, 0, 0, 0.4)); }
+.mart-stage-cart img { display: block; width: 100%; height: auto; }
+.mart-stage-cart.bump { animation: martCartBump 0.35s ease; }
+@keyframes martCartBump { 0% { transform: translateX(-50%) scale(1); } 40% { transform: translateX(-50%) scale(1.15); } 100% { transform: translateX(-50%) scale(1); } }
+
+@keyframes martWalkBob { 0%, 100% { transform: translateY(0) rotate(-2deg); } 50% { transform: translateY(-5%) rotate(2deg); } }
+.mart-miimiid.is-walking .mart-miimiid-img { animation: martWalkBob 0.4s ease-in-out infinite !important; }
