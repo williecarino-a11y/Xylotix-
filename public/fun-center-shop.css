@@ -133,3 +133,14 @@
 .mart-result-title.is-good { color: #4da3ff; }
 .mart-result-title.is-risky { color: #fbbf24; }
 .mart-result-title.is-overspent { color: #f6b9a3; }
+
+/* ---- LIVING MART V2.3: pay button + why this result ---- */
+.mart-scan { bottom: 34%; }
+.mart-scan-actions { display: flex; justify-content: center; }
+.mart-scan-actions:not(:empty) { margin-top: 8px; }
+.mart-scan-pay { width: 100%; padding: 11px; border: 0; border-radius: 999px; background: #1D9E75; color: #fff; font-weight: 800; font-size: 1rem; cursor: pointer; animation: martPop 0.25s ease-out; }
+
+.mart-why { width: 100%; box-sizing: border-box; padding: 14px; border-radius: 16px; background: #131a2c; border: 1px solid #232c42; }
+.mart-why-title { margin-bottom: 8px; color: #4da3ff; font-weight: 800; font-size: 0.85rem; letter-spacing: 0.06em; text-align: center; }
+.mart-why p { margin: 0 0 6px; color: #c9d3e8; font-size: 0.9rem; line-height: 1.4; }
+.mart-why p:last-child { margin-bottom: 0; color: #fff; font-weight: 700; }
