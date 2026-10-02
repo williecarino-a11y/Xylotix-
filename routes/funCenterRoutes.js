@@ -372,7 +372,8 @@ router.post('/shop/session/:sessionId/buy', funAnswerLimiter, async (req, res) =
         budget: shop.budget,
         spent: updated.spent,
         remaining: Math.max(0, shop.budget - updated.spent),
-        basketCount: updated.purchasedItems.length
+        basketCount: updated.purchasedItems.length,
+        needsLeft: shop.items.filter(candidate => candidate.classification === 'need' && !updated.purchasedItems.some(entry => entry.itemId === candidate.id)).length
       }
     });
   } catch (error) {
