@@ -403,6 +403,56 @@
     });
   }
 
+  // Items land on the counter one by one with a scanner beep.
+  function playScan(s, result) {
+    return new Promise(resolve => {
+      const stage = document.querySelector('.mart-stage');
+      if (!stage) { resolve(); return; }
+
+      const items = s.basket
+        .map(id => s.shop.items.find(candidate => candidate.id === id))
+        .filter(Boolean);
+
+      const overlay = document.createElement('div');
+      overlay.className = 'mart-scan';
+      overlay.innerHTML = `
+        <div class="mart-scan-head">🧾 CHECKOUT</div>
+        <div class="mart-scan-lines" data-mart-scan-lines></div>
+        <div class="mart-scan-total"><span>Total</span><strong data-mart-scan-total>$0</strong></div>
+        <div class="mart-scan-wallet" data-mart-scan-wallet></div>
+      `;
+      stage.appendChild(overlay);
+
+      const lines = overlay.querySelector('[data-mart-scan-lines]');
+      const totalEl = overlay.querySelector('[data-mart-scan-total]');
+      const walletEl = overlay.querySelector('[data-mart-scan-wallet]');
+
+      let total = 0;
+      let index = 0;
+
+      const next = () => {
+        if (index >= items.length) {
+          walletEl.textContent = `Wallet $${s.budget} → $${result.saved}`;
+          setTimeout(resolve, 1700);
+          return;
+        }
+        const item = items[index++];
+        total += item.price;
+
+        const line = document.createElement('div');
+        line.className = 'mart-scan-line';
+        line.innerHTML = `<span>${esc(item.name)}</span><strong>$${item.price}</strong>`;
+        lines.appendChild(line);
+        totalEl.textContent = `$${total}`;
+        miimiidFunTone(1180, 0.07, 'square', 0.025);
+
+        setTimeout(next, 380);
+      };
+
+      setTimeout(next, 400);
+    });
+  }
+
   async function checkout() {
     const s = state;
     if (!s || s.busy || s.basket.length === 0) return;
@@ -425,6 +475,8 @@
         { method: 'POST', body: JSON.stringify({}) }
       );
       const [result] = await Promise.all([request, walk]);
+      await playScan(s, result);
+      if (state !== s) return;
       state = null;
       renderResult(result);
     } catch (error) {
@@ -440,17 +492,48 @@
     return list.reduce((best, item) => (!best || item.price > best.price ? item : best), null);
   }
 
+  function outcomeTier(result, needs, wants) {
+    const missed = Math.max(0, result.totalNeeds - needs.length);
+    if (missed === 0 && result.saved > 0) return wants.length === 0 ? 'excellent' : 'good';
+    if (missed <= 1 && result.saved > 0) return 'good';
+    if (result.saved === 0 && missed > 0) return 'overspent';
+    if (missed >= 4) return 'overspent';
+    return 'risky';
+  }
+
+  function tierInfo(tier, wantsCount, missedCount) {
+    if (tier === 'excellent') {
+      return { title: 'Excellent budgeting!', mood: 'celebrate', message: 'You covered every essential and kept money in your wallet. That is how it is done!' };
+    }
+    if (tier === 'good') {
+      return {
+        title: 'Good budgeting',
+        mood: 'encourage',
+        message: missedCount === 0 && wantsCount > 0
+          ? 'You treated yourself and still protected every essential. Wants are fine when your needs come first.'
+          : 'You covered most of your essentials. Next time, let us protect even more of your budget.'
+      };
+    }
+    if (tier === 'risky') {
+      return { title: 'Risky budgeting', mood: 'concerned', message: 'Your budget got stretched thin. Next time, cover the essentials before anything else.' };
+    }
+    return { title: 'Overspent', mood: 'concerned', message: 'We learned something today. Want to try again?' };
+  }
+
   function renderResult(result) {
     const content = document.getElementById('fun-center-content');
     if (!content) return;
 
-    const mood = OUTCOME_MOOD[result.outcome] || 'correct';
-    const title = OUTCOME_TITLE[result.outcome] || 'Shopping complete';
     const needs = Array.isArray(result.needsBought) ? result.needsBought : [];
     const wants = Array.isArray(result.wantsBought) ? result.wantsBought : [];
     const missed = Array.isArray(result.needsMissed) ? result.needsMissed : [];
     const xp = Number.isFinite(result.xp) ? result.xp : 0;
     const coins = Number.isFinite(result.coins) ? result.coins : 0;
+
+    const tier = outcomeTier(result, needs, wants);
+    const info = tierInfo(tier, wants.length, missed.length);
+    const mood = info.mood;
+    const title = info.title;
 
     const smartest = priciest(needs);
     const mistake = priciest(wants);
@@ -464,7 +547,7 @@
     content.innerHTML = `
       <div class="mart mart-result">
         ${stageHtml(COUNTER_X, mood, false)}
-        <h2 class="mart-result-title">${esc(title)}</h2>
+        <h2 class="mart-result-title is-${tier}">${esc(title)}</h2>
 
         <div class="mart-receipt">
           <div class="mart-receipt-head">MIIMIID MART</div>
@@ -517,7 +600,7 @@
       </div>
     `;
 
-    say(mood, result.message || '');
+    say(mood, info.message);
     miimiidFunPlayComplete();
 
     content.querySelector('[data-mart-again]').addEventListener('click', () => startMiimiidShop());
