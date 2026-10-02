@@ -1,7 +1,10 @@
 /*
- * MIIMIID FUN CENTER - LIVING MART
+ * MIIMIID FUN CENTER - LIVING MART (V2)
  * Scene-based Weekly Shop. Replaces startMiimiidShop() from fun-center.js.
  * The server still owns budget, prices and need/want answers.
+ *
+ * V2 adds: mission intro, products inside the scene, basket strip,
+ * budget-aware Miimiid reactions, Mom + Alex events, shopping report.
  */
 (function () {
   'use strict';
@@ -32,6 +35,25 @@
     'missing-essentials': 'Essentials missing'
   };
 
+  // Unexpected events. Each fires once, when the basket reaches `after` items
+  // and the item it is about has not been bought yet.
+  const EVENTS = [
+    {
+      id: 'mom', after: 3, itemId: 'medicine', icon: '📱', title: 'New message from Mom',
+      text: price => `Can you pick up some medicine for me? It will be $${price}.`,
+      yes: "I'll get it", no: 'Not this time',
+      line: 'Ooh, my phone just buzzed! It is Mom.',
+      noMood: 'confused', noLine: 'Mom is counting on that medicine. Health always comes first.'
+    },
+    {
+      id: 'alex', after: 5, itemId: 'movie', icon: '📱', title: 'New message from Alex',
+      text: price => `Movie night tonight? Tickets are $${price}. You in?`,
+      yes: "I'm in!", no: 'Maybe next time',
+      line: 'Another buzz! It is Alex. Do we really need this one?',
+      noMood: 'correct', noLine: 'Good call. Fun can wait until your essentials are covered.'
+    }
+  ];
+
   let state = null;
 
   function esc(value) { return miimiidFunCenterEscapeHtml(value); }
@@ -45,11 +67,12 @@
     return `<img class="mart-miimiid-img" data-mood="${mood}" src="${src}" alt="" style="animation:${miimiidFunMascotAnim(mood)}">`;
   }
 
-  function stageHtml(x, mood) {
+  function stageHtml(x, mood, withItems) {
     const bg = interiorUrl();
     return `
       <div class="mart-stage" ${bg ? `style="background-image:url('${bg}')"` : ''}>
         <div class="mart-bubble" data-mart-bubble></div>
+        ${withItems ? '<div class="mart-stage-items" data-mart-shelf></div>' : ''}
         <div class="mart-miimiid" data-mart-miimiid style="left:${x}%">${spriteImg(mood)}</div>
       </div>
     `;
@@ -96,6 +119,17 @@
     }, seconds * 1000 + 40);
   }
 
+  // Miimiid walks to the product you tapped (skipped if already close).
+  function reachItem(el, done) {
+    const stage = document.querySelector('.mart-stage');
+    if (!el || !stage || !state) { done(); return; }
+    const a = stage.getBoundingClientRect();
+    const b = el.getBoundingClientRect();
+    const x = ((b.left + b.width / 2 - a.left) / a.width) * 100;
+    if (Math.abs(x - state.x) < 8) { done(); return; }
+    walkTo(x, done);
+  }
+
   function itemsFor(aisleId) {
     return state.shop.items.filter(item => {
       const aisle = AISLES.find(a => a.items.includes(item.id));
@@ -140,7 +174,7 @@
     if (!shelf || !state) return;
     shelf.innerHTML = itemsFor(state.aisle).map(item => `
       <button type="button" class="mart-item" data-mart-item="${esc(item.id)}">
-        <span class="mart-item-art">${miimiidFunProductVisual(item, 52)}</span>
+        <span class="mart-item-art">${miimiidFunProductVisual(item, 44)}</span>
         <span class="mart-item-name">${esc(item.name)}</span>
         <span class="mart-item-price">$${item.price}</span>
       </button>
@@ -154,7 +188,7 @@
 
   function selectAisle(id) {
     const s = state;
-    if (!s || s.checkingOut) return;
+    if (!s || s.checkingOut || s.missionOpen) return;
     const aisle = AISLES.find(a => a.id === id);
     if (!aisle) return;
 
@@ -199,9 +233,19 @@
     cart.classList.add('bump');
   }
 
+  function addBasketChip(item) {
+    const strip = document.querySelector('[data-mart-basket]');
+    if (!strip) return;
+    const chip = document.createElement('span');
+    chip.className = 'mart-basket-chip';
+    chip.innerHTML = miimiidFunProductVisual(item, 28);
+    strip.appendChild(chip);
+  }
+
   async function buy(itemId, el) {
     const s = state;
-    if (!s || s.busy || s.checkingOut) return;
+    if (!s || s.busy || s.checkingOut || s.missionOpen) return;
+    if (s.eventOpen) { say('confused', 'Answer the message first!'); return; }
 
     const item = s.shop.items.find(candidate => candidate.id === itemId);
     if (!item || s.basket.includes(item.id)) return;
@@ -215,6 +259,9 @@
     }
 
     s.busy = true;
+    await new Promise(resolve => reachItem(el, resolve));
+    if (state !== s) return;
+
     const content = document.getElementById('fun-center-content');
 
     try {
@@ -227,16 +274,27 @@
       s.basket.push(item.id);
       flyToCart(item, el);
       bumpCart();
+      addBasketChip(item);
+
+      const needsLeft = Number.isFinite(result.needsLeft) ? result.needsLeft : null;
+      const pressure = needsLeft !== null && needsLeft > 0 && result.remaining <= 10;
+      const pressureText = pressure
+        ? ` Only $${result.remaining} left and ${needsLeft} essential${needsLeft === 1 ? '' : 's'} still to buy.`
+        : '';
 
       if (result.classification === 'need') {
         s.needStreak++;
         miimiidFunPlayCorrect(s.needStreak);
-        say(s.needStreak >= 3 ? 'celebrate' : 'correct', result.explanation);
+        if (needsLeft === 0) {
+          say('celebrate', `${result.explanation} That is every essential covered! Head to checkout and keep the rest.`);
+        } else {
+          say(s.needStreak >= 3 ? 'celebrate' : 'correct', result.explanation + pressureText);
+        }
         miimiidFunShowFloat(content, `-$${result.price} · Smart pick`);
       } else {
         s.needStreak = 0;
         miimiidFunPlayWrong();
-        say('wrong', `${result.explanation} You have $${result.remaining} left.`);
+        say('wrong', `${result.explanation} You have $${result.remaining} left.${pressureText}`);
         miimiidFunShowFloat(content, `-$${result.price}`, true);
       }
 
@@ -252,35 +310,70 @@
 
   function maybeEvent() {
     const s = state;
-    if (!s || s.eventShown || s.checkingOut || s.basket.length < 3 || s.basket.includes('movie')) return;
-    const movie = s.shop.items.find(item => item.id === 'movie');
-    const stage = document.querySelector('.mart-stage');
-    if (!movie || !stage) return;
+    if (!s || s.checkingOut || s.busy || s.eventOpen || s.missionOpen) return;
 
-    s.eventShown = true;
+    const ev = EVENTS.find(e =>
+      !s.eventsDone.includes(e.id) &&
+      s.basket.length >= e.after &&
+      !s.basket.includes(e.itemId)
+    );
+    if (!ev) return;
+
+    const item = s.shop.items.find(candidate => candidate.id === ev.itemId);
+    const stage = document.querySelector('.mart-stage');
+    if (!item || !stage) return;
+
+    s.eventOpen = true;
+    s.eventsDone.push(ev.id);
     miimiidFunPlayTap();
-    say('confused', 'Ooh, my phone just buzzed!');
+    say('confused', ev.line);
 
     const card = document.createElement('div');
     card.className = 'mart-event';
     card.innerHTML = `
-      <div class="mart-event-title">📱 New message from Alex</div>
-      <div class="mart-event-text">Movie night tonight? Tickets are $${movie.price}. You in?</div>
+      <div class="mart-event-title">${ev.icon} ${esc(ev.title)}</div>
+      <div class="mart-event-text">${esc(ev.text(item.price))}</div>
       <div class="mart-event-actions">
-        <button type="button" class="mart-event-yes" data-mart-event-yes>I'm in!</button>
-        <button type="button" class="mart-event-no" data-mart-event-no>Maybe next time</button>
+        <button type="button" class="mart-event-yes" data-mart-event-yes>${esc(ev.yes)}</button>
+        <button type="button" class="mart-event-no" data-mart-event-no>${esc(ev.no)}</button>
       </div>
     `;
     stage.appendChild(card);
 
     card.querySelector('[data-mart-event-yes]').addEventListener('click', () => {
       card.remove();
-      buy('movie', null);
+      s.eventOpen = false;
+      buy(ev.itemId, null);
     });
     card.querySelector('[data-mart-event-no]').addEventListener('click', () => {
       card.remove();
+      s.eventOpen = false;
       miimiidFunPlayTap();
-      say('correct', 'Good call. Fun can wait until your essentials are covered.');
+      say(ev.noMood, ev.noLine);
+    });
+  }
+
+  function showMission() {
+    const s = state;
+    const stage = document.querySelector('.mart-stage');
+    if (!s || !stage) return;
+
+    s.missionOpen = true;
+    const card = document.createElement('div');
+    card.className = 'mart-mission';
+    card.innerHTML = `
+      <div class="mart-mission-tag">🛒 TODAY'S MISSION</div>
+      <div class="mart-mission-money">$${s.budget}</div>
+      <p class="mart-mission-text">You need food and essentials for the whole week. Cover your needs without wasting your money.</p>
+      <button type="button" class="mart-mission-go" data-mart-go>Let's shop!</button>
+    `;
+    stage.appendChild(card);
+
+    card.querySelector('[data-mart-go]').addEventListener('click', () => {
+      miimiidFunPlayTap();
+      card.remove();
+      s.missionOpen = false;
+      selectAisle('fresh');
     });
   }
 
@@ -290,6 +383,7 @@
 
     s.busy = true;
     s.checkingOut = true;
+    s.eventOpen = false;
 
     const button = document.querySelector('[data-mart-checkout]');
     if (button) { button.disabled = true; button.textContent = 'Heading to the counter…'; }
@@ -316,6 +410,10 @@
     }
   }
 
+  function priciest(list) {
+    return list.reduce((best, item) => (!best || item.price > best.price ? item : best), null);
+  }
+
   function renderResult(result) {
     const content = document.getElementById('fun-center-content');
     if (!content) return;
@@ -328,6 +426,9 @@
     const xp = Number.isFinite(result.xp) ? result.xp : 0;
     const coins = Number.isFinite(result.coins) ? result.coins : 0;
 
+    const smartest = priciest(needs);
+    const mistake = priciest(wants);
+
     const rows = [
       ...needs.map(item => ({ item, kind: 'need' })),
       ...wants.map(item => ({ item, kind: 'want' }))
@@ -336,7 +437,7 @@
 
     content.innerHTML = `
       <div class="mart mart-result">
-        ${stageHtml(COUNTER_X, mood)}
+        ${stageHtml(COUNTER_X, mood, false)}
         <h2 class="mart-result-title">${esc(title)}</h2>
 
         <div class="mart-receipt">
@@ -353,7 +454,17 @@
           <div class="mart-receipt-total" style="animation-delay:${totalDelay + 0.1}s"><span>Left in wallet</span><strong>$${result.saved}</strong></div>
         </div>
 
-        <div class="mart-summary">Needs covered: ${needs.length} / ${result.totalNeeds} · Spent on wants: $${result.wantsSpent}</div>
+        <div class="mart-report">
+          <div class="mart-report-title">🛒 YOUR SHOPPING REPORT</div>
+          <div class="mart-report-grid">
+            <div class="mart-report-stat"><strong>${needs.length} / ${result.totalNeeds}</strong><span>Needs covered</span></div>
+            <div class="mart-report-stat"><strong>${wants.length}</strong><span>Wants bought</span></div>
+            <div class="mart-report-stat"><strong>$${result.spent}</strong><span>Money spent</span></div>
+            <div class="mart-report-stat"><strong>$${result.saved}</strong><span>Money remaining</span></div>
+          </div>
+          ${smartest ? `<div class="mart-report-line is-good"><span>Smartest decision</span><strong>${esc(smartest.name)} · $${smartest.price}</strong></div>` : ''}
+          ${mistake ? `<div class="mart-report-line is-bad"><span>Biggest mistake</span><strong>${esc(mistake.name)} · $${mistake.price}</strong></div>` : ''}
+        </div>
 
         ${missed.length > 0 ? `
           <div class="mart-missed">
@@ -407,13 +518,13 @@
           <div class="mart-cart" data-mart-cart>${cartIcon}<span class="mart-cart-count" data-mart-count>0</span></div>
         </div>
 
-        ${stageHtml(4, 'wave')}
+        ${stageHtml(4, 'wave', true)}
 
         <div class="mart-aisles">
           ${AISLES.map(a => `<button type="button" class="mart-aisle" data-mart-aisle="${a.id}"><span aria-hidden="true">${a.icon}</span> ${esc(a.label)}</button>`).join('')}
         </div>
 
-        <div class="mart-shelf" data-mart-shelf></div>
+        <div class="mart-basket" data-mart-basket></div>
 
         <button type="button" class="mart-checkout" data-mart-checkout disabled>Pick something up first</button>
         <button type="button" class="miimiid-fun-btn-ghost" data-mart-leave>Leave the store</button>
@@ -431,8 +542,8 @@
     });
 
     refresh();
-    say('wave', `Welcome to Miimiid Mart! You have $${s.budget} for this week's essentials. Pick an aisle and let's shop.`);
-    setTimeout(() => { if (state === s) selectAisle('fresh'); }, 900);
+    say('wave', 'Welcome to Miimiid Mart!');
+    showMission();
   }
 
   async function startMiimiidShop() {
@@ -459,7 +570,9 @@
         x: 4,
         busy: false,
         checkingOut: false,
-        eventShown: false,
+        missionOpen: false,
+        eventOpen: false,
+        eventsDone: [],
         walkTimer: null
       };
 
