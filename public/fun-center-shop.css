@@ -174,5 +174,5 @@
 .mart-option-cancel { width: 100%; padding: 8px; border: 0; border-radius: 12px; background: #232c42; color: #c9d3e8; font-weight: 700; font-size: 0.85rem; cursor: pointer; }
 
 /* ---- LIVING MART V2.6: Miimiid holding the cart ---- */
-.mart-stage.cart-art .mart-stage-cart { visibility: hidden; }
-.mart-miimiid.has-cart-art { width: 38%; }
+.mart-stage.cart-art .mart-stage-cart { visibility: hidden; bottom: 8%; }
+.mart-miimiid.has-cart-art { width: 58%; bottom: 1%; }
