@@ -100,9 +100,30 @@ const weeklyShop = {
   subtitle: 'You have $40 for this week. Spend it wisely.',
   budget: 40,
   items: [
-    { id: 'milk', name: 'Milk', price: 4, image: 'milk', visual: '🥛', classification: 'need', explanation: 'Milk is a need: a weekly staple.' },
-    { id: 'bread', name: 'Bread', price: 3, image: 'bread', visual: '🍞', classification: 'need', explanation: 'Bread is a need: cheap, filling food.' },
-    { id: 'eggs', name: 'Eggs (12)', price: 5, image: 'eggs', visual: '🥚', classification: 'need', explanation: 'Eggs are a need: affordable protein.' },
+    {
+      id: 'milk', name: 'Milk', price: 4, image: 'milk', visual: '🥛', classification: 'need', explanation: 'Milk is a need: a weekly staple.',
+      options: [
+        { id: 'premium', label: 'Organic', tier: 'premium', price: 7, note: 'Nicer, but you pay extra for the same job.' },
+        { id: 'regular', label: 'Regular', tier: 'regular', price: 4, note: 'The everyday choice.' },
+        { id: 'budget', label: 'Store brand', tier: 'budget', price: 3, note: 'Does the same job for less.' }
+      ]
+    },
+    {
+      id: 'bread', name: 'Bread', price: 3, image: 'bread', visual: '🍞', classification: 'need', explanation: 'Bread is a need: cheap, filling food.',
+      options: [
+        { id: 'premium', label: 'Bakery', tier: 'premium', price: 6, note: 'Nicer, but you pay extra for the same job.' },
+        { id: 'regular', label: 'Regular', tier: 'regular', price: 3, note: 'The everyday choice.' },
+        { id: 'budget', label: 'Store brand', tier: 'budget', price: 2, note: 'Does the same job for less.' }
+      ]
+    },
+    {
+      id: 'eggs', name: 'Eggs (12)', price: 5, image: 'eggs', visual: '🥚', classification: 'need', explanation: 'Eggs are a need: affordable protein.',
+      options: [
+        { id: 'premium', label: 'Free-range', tier: 'premium', price: 8, note: 'Nicer, but you pay extra for the same job.' },
+        { id: 'regular', label: 'Regular', tier: 'regular', price: 5, note: 'The everyday choice.' },
+        { id: 'budget', label: 'Store brand', tier: 'budget', price: 4, note: 'Does the same job for less.' }
+      ]
+    },
     { id: 'pasta', name: 'Pasta', price: 2, image: 'pasta', visual: '🍝', classification: 'need', explanation: 'Pasta is a need: very cheap and filling.' },
     { id: 'apple', name: 'Apples', price: 3, image: 'apple', visual: '🍎', classification: 'need', explanation: 'Apples are a need: healthy food for the week.' },
     { id: 'carrot', name: 'Carrots', price: 2, image: 'carrot', visual: '🥕', classification: 'need', explanation: 'Carrots are a need: cheap vegetables.' },
@@ -125,7 +146,16 @@ function getWeeklyShop() {
     title: weeklyShop.title,
     subtitle: weeklyShop.subtitle,
     budget: weeklyShop.budget,
-    items: weeklyShop.items.map(({ id, name, price, image, visual }) => ({ id, name, price, image, visual }))
+    items: weeklyShop.items.map(({ id, name, price, image, visual, options }) => ({
+      id,
+      name,
+      price,
+      image,
+      visual,
+      options: Array.isArray(options)
+        ? options.map(option => ({ id: option.id, label: option.label, price: option.price, tier: option.tier, note: option.note }))
+        : undefined
+    }))
   };
 }
 
