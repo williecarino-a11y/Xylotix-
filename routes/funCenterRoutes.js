@@ -241,15 +241,43 @@ function buildShopSummary(shop, session) {
   const bought = Array.isArray(session.purchasedItems) ? session.purchasedItems : [];
   const boughtIds = new Set(bought.map(entry => entry.itemId));
   const byId = new Map(shop.items.map(item => [item.id, item]));
+  const findOption = (item, optionId) =>
+    optionId && Array.isArray(item.options) ? item.options.find(candidate => candidate.id === optionId) : null;
+
   const toPublic = entry => {
     const item = byId.get(entry.itemId || entry.id);
-    return { id: item.id, name: item.name, price: item.price, image: item.image, visual: item.visual };
+    const option = findOption(item, entry.optionId);
+    return {
+      id: item.id,
+      name: option ? `${item.name} (${option.label})` : item.name,
+      price: typeof entry.price === 'number' ? entry.price : item.price,
+      image: item.image,
+      visual: item.visual
+    };
   };
 
   const totalNeeds = shop.items.filter(item => item.classification === 'need');
   const needsBought = bought.filter(entry => entry.classification === 'need');
   const wantsBought = bought.filter(entry => entry.classification === 'want');
   const needsMissed = totalNeeds.filter(item => !boughtIds.has(item.id));
+
+  const tradeoffs = bought
+    .map(entry => {
+      const item = byId.get(entry.itemId);
+      const option = item ? findOption(item, entry.optionId) : null;
+      if (!item || !option) return null;
+      const prices = item.options.map(candidate => candidate.price);
+      const top = item.options.reduce((a, b) => (b.price > a.price ? b : a));
+      return {
+        name: item.name,
+        label: option.label,
+        price: entry.price,
+        saved: Math.max(0, Math.max(...prices) - entry.price),
+        extra: Math.max(0, entry.price - Math.min(...prices)),
+        topLabel: top.label
+      };
+    })
+    .filter(Boolean);
 
   const spent = session.spent || 0;
   const wantsSpent = wantsBought.reduce((sum, entry) => sum + entry.price, 0);
@@ -284,7 +312,8 @@ function buildShopSummary(shop, session) {
     totalNeeds: totalNeeds.length,
     needsBought: needsBought.map(toPublic),
     wantsBought: wantsBought.map(toPublic),
-    needsMissed: needsMissed.map(item => ({ id: item.id, name: item.name, price: item.price, image: item.image, visual: item.visual, explanation: item.explanation }))
+    needsMissed: needsMissed.map(item => ({ id: item.id, name: item.name, price: item.price, image: item.image, visual: item.visual, explanation: item.explanation })),
+    tradeoffs
   };
 }
 
@@ -324,10 +353,18 @@ router.post('/shop/session/:sessionId/buy', funAnswerLimiter, async (req, res) =
     if (!user) return;
 
     const { sessionId } = req.params;
-    const { itemId } = req.body;
+    const { itemId, optionId } = req.body;
     const shop = getWeeklyShopDefinition();
     const item = shop.items.find(candidate => candidate.id === itemId);
     if (!item) return res.status(400).json({ status: 'error', message: 'That item is not in the shop.' });
+
+    // Items with options need a valid choice. The price always comes from the server.
+    let option = null;
+    if (Array.isArray(item.options) && item.options.length > 0) {
+      option = item.options.find(candidate => candidate.id === optionId);
+      if (!option) return res.status(400).json({ status: 'error', message: 'Pick one of the choices for that item.' });
+    }
+    const price = option ? option.price : item.price;
 
     // Price, budget and duplicate checks all happen inside one atomic write.
     const updated = await FunGameSession.findOneAndUpdate(
@@ -336,12 +373,12 @@ router.post('/shop/session/:sessionId/buy', funAnswerLimiter, async (req, res) =
         userId: user._id,
         gameId: SHOP_GAME_ID,
         completed: false,
-        spent: { $lte: shop.budget - item.price },
+        spent: { $lte: shop.budget - price },
         'purchasedItems.itemId': { $ne: item.id }
       },
       {
-        $inc: { spent: item.price },
-        $push: { purchasedItems: { itemId: item.id, price: item.price, classification: item.classification, correct: item.classification === 'need' } }
+        $inc: { spent: price },
+        $push: { purchasedItems: { itemId: item.id, optionId: option ? option.id : null, price, classification: item.classification, correct: item.classification === 'need' } }
       },
       { new: true, runValidators: true }
     );
@@ -365,8 +402,10 @@ router.post('/shop/session/:sessionId/buy', funAnswerLimiter, async (req, res) =
       status: 'success',
       data: {
         itemId: item.id,
+        optionId: option ? option.id : null,
+        optionLabel: option ? option.label : null,
         name: item.name,
-        price: item.price,
+        price,
         classification: item.classification,
         explanation: item.explanation,
         budget: shop.budget,
