@@ -39,10 +39,6 @@
 .mart-aisle { flex: 0 0 auto; padding: 9px 14px; border-radius: 999px; border: 1px solid #232c42; background: #131a2c; color: #c9d3e8; font-size: 0.88rem; font-weight: 600; white-space: nowrap; cursor: pointer; }
 .mart-aisle.is-active { background: #1f6feb; border-color: #4da3ff; color: #fff; }
 
-.mart-shelf { display: flex; gap: 10px; overflow-x: auto; min-height: 138px; padding: 8px 2px 10px; opacity: 0; transform: translateY(8px); transition: opacity 0.25s ease, transform 0.25s ease; scrollbar-width: none; }
-.mart-shelf::-webkit-scrollbar { display: none; }
-.mart-shelf.is-ready { opacity: 1; transform: none; }
-
 .mart-item { position: relative; flex: 0 0 108px; display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 10px 6px; border-radius: 16px; border: 1px solid #232c42; background: #131a2c; color: #e6e9f0; cursor: pointer; transition: transform 0.12s ease, opacity 0.2s ease; }
 .mart-item:active { transform: scale(0.95); }
 .mart-item-art { height: 56px; display: flex; align-items: center; justify-content: center; }
@@ -73,8 +69,6 @@
 .mart-line-price { font-weight: 800; }
 .mart-receipt-total { display: flex; justify-content: space-between; padding-top: 8px; font-weight: 800; opacity: 0; animation: martLineIn 0.3s ease forwards; }
 @keyframes martLineIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
-
-.mart-summary { color: #fbbf24; font-weight: 800; text-align: center; font-size: 0.92rem; }
 
 .mart-missed { width: 100%; box-sizing: border-box; padding: 12px; border-radius: 16px; background: rgba(240, 153, 123, 0.1); border: 1px solid rgba(240, 153, 123, 0.4); }
 .mart-missed-title { font-weight: 700; color: #f6b9a3; margin-bottom: 8px; }
