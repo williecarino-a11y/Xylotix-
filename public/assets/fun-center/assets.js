@@ -33,9 +33,8 @@ const MIIMIID_ASSETS = miimiidDeepFreeze({
       surprised: `${MIIMIID_ASSET_BASE}/characters/miimiid/surprised.png`,
       encouraging: `${MIIMIID_ASSET_BASE}/characters/miimiid/encouraging.png`
     },
-    },
 
-   miimiidCart: {
+    miimiidCart: {
       idle: `${MIIMIID_ASSET_BASE}/miimiid-cart/cart-idle.png`,
       walk1: `${MIIMIID_ASSET_BASE}/miimiid-cart/cart-walk-1.png`,
       walk2: `${MIIMIID_ASSET_BASE}/miimiid-cart/cart-walk-2.png`,
@@ -53,6 +52,7 @@ const MIIMIID_ASSETS = miimiidDeepFreeze({
       success: `${MIIMIID_ASSET_BASE}/characters/engineer/engineer-success.png`,
       withClient: `${MIIMIID_ASSET_BASE}/characters/engineer/engineer-with-client.png`,
       withSon: `${MIIMIID_ASSET_BASE}/characters/engineer/engineer-with-son.png`
+    }
   },
 
   worlds: {
