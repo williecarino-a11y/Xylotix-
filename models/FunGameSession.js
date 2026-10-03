@@ -8,6 +8,12 @@ const purchasedItemSchema = new mongoose.Schema(
       trim: true
     },
 
+    optionId: {
+      type: String,
+      default: null,
+      trim: true
+    },
+
     price: {
       type: Number,
       required: true,
