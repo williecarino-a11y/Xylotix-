@@ -6,7 +6,8 @@
  * V2 adds: mission intro, products inside the scene, basket strip,
  * budget-aware Miimiid reactions, Alex + Mom events, checkout scene with
  * Pay / Keep shopping, four outcome tiers, shopping report, ambient life
- * (idle hints, bobbing shelf, rolling cart) and product pickup arcs.
+ * (idle hints, bobbing shelf, rolling cart), product pickup arcs, and
+ * price choices (premium / regular / store brand).
  */
 (function () {
   'use strict';
@@ -48,6 +49,24 @@
 
   function interiorUrl() {
     return MIIMIID_ASSETS.game && MIIMIID_ASSETS.game.martInterior;
+  }
+
+  function hasOptions(item) {
+    return Array.isArray(item.options) && item.options.length > 0;
+  }
+
+  function lowestPrice(item) {
+    return hasOptions(item) ? Math.min(...item.options.map(option => option.price)) : item.price;
+  }
+
+  function highestPrice(item) {
+    return hasOptions(item) ? Math.max(...item.options.map(option => option.price)) : item.price;
+  }
+
+  function priceLabel(item) {
+    const low = lowestPrice(item);
+    const high = highestPrice(item);
+    return low === high ? `$${low}` : `$${low}–$${high}`;
   }
 
   function spriteImg(mood) {
@@ -169,7 +188,7 @@
       if (!item) return;
       const inBasket = s.basket.includes(item.id);
       btn.classList.toggle('in-basket', inBasket);
-      btn.classList.toggle('is-unaffordable', !inBasket && item.price > remaining);
+      btn.classList.toggle('is-unaffordable', !inBasket && lowestPrice(item) > remaining);
     });
   }
 
@@ -180,7 +199,7 @@
       <button type="button" class="mart-item" data-mart-item="${esc(item.id)}">
         <span class="mart-item-art">${miimiidFunProductVisual(item, 44)}</span>
         <span class="mart-item-name">${esc(item.name)}</span>
-        <span class="mart-item-price">$${item.price}</span>
+        <span class="mart-item-price">${priceLabel(item)}</span>
       </button>
     `).join('');
     shelf.classList.add('is-ready');
@@ -198,6 +217,7 @@
     if (remaining <= 10) options.push(`Careful, only $${remaining} left. Is there anything essential we still need?`);
     options.push('Not sure? Ask yourself: do I need this, or do I just want it?');
     options.push('Try every aisle. Some essentials are hiding in different sections.');
+    options.push('Some products come in cheaper versions. Same job, lower price.');
     s.hintIndex = (s.hintIndex || 0) + 1;
     return options[s.hintIndex % options.length];
   }
@@ -221,6 +241,7 @@
   function selectAisle(id) {
     const s = state;
     if (!s || s.checkingOut || s.missionOpen || s.busy) return;
+    if (s.eventOpen) { say('confused', 'Finish the choice on screen first!'); return; }
     const aisle = AISLES.find(a => a.id === id);
     if (!aisle) return;
 
@@ -311,21 +332,75 @@
     strip.appendChild(chip);
   }
 
-  async function buy(itemId, el) {
+  function cannotAfford(name, price, remaining, el) {
+    miimiidFunPlayWrong();
+    if (el) { el.classList.remove('is-shake'); void el.offsetWidth; el.classList.add('is-shake'); }
+    say('confused', `${name} costs $${price}, but your wallet only has $${remaining} left.`);
+  }
+
+  // Price choices: the player compares versions that do the same job.
+  function showOptions(item, el) {
+    const s = state;
+    const stage = document.querySelector('.mart-stage');
+    if (!s || !stage) return;
+
+    s.eventOpen = true;
+    miimiidFunPlayTap();
+    const remaining = s.budget - s.spent;
+
+    const card = document.createElement('div');
+    card.className = 'mart-event mart-options';
+    card.innerHTML = `
+      <div class="mart-event-title">${esc(item.name)}: same job, pick one</div>
+      <div class="mart-options-list">
+        ${item.options.map(option => `
+          <button type="button" class="mart-option" data-mart-option="${esc(option.id)}" ${option.price > remaining ? 'disabled' : ''}>
+            <span class="mart-option-label">${esc(option.label)}</span>
+            <span class="mart-option-note">${esc(option.note || '')}</span>
+            <strong>$${option.price}</strong>
+          </button>
+        `).join('')}
+      </div>
+      <button type="button" class="mart-option-cancel" data-mart-option-cancel>Never mind</button>
+    `;
+    stage.appendChild(card);
+
+    card.querySelectorAll('[data-mart-option]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        card.remove();
+        s.eventOpen = false;
+        buy(item.id, el, btn.dataset.martOption);
+      });
+    });
+    card.querySelector('[data-mart-option-cancel]').addEventListener('click', () => {
+      card.remove();
+      s.eventOpen = false;
+      say('wave', 'No rush. Look around some more.');
+    });
+  }
+
+  async function buy(itemId, el, optionId) {
     const s = state;
     if (!s || s.busy || s.checkingOut || s.missionOpen) return;
-    if (s.eventOpen) { say('confused', 'Answer the message first!'); return; }
+    if (s.eventOpen) { say('confused', 'Finish the choice on screen first!'); return; }
 
     const item = s.shop.items.find(candidate => candidate.id === itemId);
     if (!item || s.basket.includes(item.id)) return;
 
     const remaining = s.budget - s.spent;
-    if (item.price > remaining) {
-      miimiidFunPlayWrong();
-      if (el) { el.classList.remove('is-shake'); void el.offsetWidth; el.classList.add('is-shake'); }
-      say('confused', `${item.name} costs $${item.price}, but your wallet only has $${remaining} left.`);
+
+    if (hasOptions(item) && !optionId) {
+      if (lowestPrice(item) > remaining) { cannotAfford(item.name, lowestPrice(item), remaining, el); return; }
+      showOptions(item, el);
       return;
     }
+
+    const option = hasOptions(item) ? item.options.find(candidate => candidate.id === optionId) : null;
+    if (hasOptions(item) && !option) return;
+    const price = option ? option.price : item.price;
+    const label = option ? `${item.name} (${option.label})` : item.name;
+
+    if (price > remaining) { cannotAfford(label, price, remaining, el); return; }
 
     s.busy = true;
     scheduleIdle();
@@ -341,11 +416,12 @@
     try {
       const result = await miimiidFunCenterRequest(
         `/api/fun-center/shop/session/${encodeURIComponent(s.sessionId)}/buy`,
-        { method: 'POST', body: JSON.stringify({ itemId }) }
+        { method: 'POST', body: JSON.stringify({ itemId, optionId: option ? option.id : undefined }) }
       );
 
       s.spent = result.spent;
       s.basket.push(item.id);
+      s.purchases.push({ id: item.id, name: label, price: result.price });
       flyToCart(item, el, () => { bumpCart(); addBasketChip(item); });
 
       const left = result.remaining;
@@ -360,14 +436,24 @@
       const medicineAtRisk = needsLeft !== 0 && !!medicine && s.basket.includes('movie') && !s.basket.includes('medicine') && left < medicine.price;
       if (medicineAtRisk) tail += ` You still need medicine ($${medicine.price}).`;
 
+      const plain = item.name.replace(/\s*\(.*\)/, '').toLowerCase();
+      const diff = option ? item.price - option.price : 0;
+
       if (result.classification === 'need') {
         s.needStreak++;
         miimiidFunPlayCorrect(s.needStreak);
         let mood = s.needStreak >= 3 ? 'celebrate' : 'correct';
-        let text = result.explanation + tail;
+        let base = result.explanation;
+        if (option && diff > 0) {
+          base = `Smart swap! Same ${plain} for $${diff} less.`;
+        } else if (option && diff < 0) {
+          base = `That ${option.label.toLowerCase()} ${plain} costs $${-diff} more for the same job.`;
+          mood = 'surprised';
+        }
+        let text = base + tail;
         if (needsLeft === 0) {
           mood = 'celebrate';
-          text = `${result.explanation} That is every essential covered! Head to checkout and keep the rest.`;
+          text = `${base} That is every essential covered! Head to checkout and keep the rest.`;
         } else if (medicineAtRisk) {
           mood = 'concerned';
         } else if (left <= 5) {
@@ -420,7 +506,7 @@
     card.innerHTML = `
       <div class="mart-event-title">${ev.icon} ${esc(ev.title)}</div>
       <div class="mart-event-text">${esc(ev.text(item.price))}</div>
-      <div class="mart-event-actions">
+       <div class="mart-event-actions">
         <button type="button" class="mart-event-yes" data-mart-event-yes>${esc(ev.yes)}</button>
         <button type="button" class="mart-event-no" data-mart-event-no>${esc(ev.no)}</button>
       </div>
@@ -472,9 +558,7 @@
       const stage = document.querySelector('.mart-stage');
       if (!stage) { resolve(false); return; }
 
-      const items = s.basket
-        .map(id => s.shop.items.find(candidate => candidate.id === id))
-        .filter(Boolean);
+      const items = s.purchases.slice();
 
       const overlay = document.createElement('div');
       overlay.className = 'mart-scan';
@@ -646,6 +730,19 @@
     return lines;
   }
 
+  function tradeoffHtml(result) {
+    const tradeoffs = Array.isArray(result.tradeoffs) ? result.tradeoffs : [];
+    const bestSwap = tradeoffs.filter(t => t.saved > 0).sort((a, b) => b.saved - a.saved)[0];
+    const bigSplurge = tradeoffs.filter(t => t.extra > 0).sort((a, b) => b.extra - a.extra)[0];
+    if (bestSwap) {
+      return `<div class="mart-report-line is-good"><span>Biggest tradeoff</span><strong>${esc(bestSwap.label)} ${esc(bestSwap.name.toLowerCase())} · saved $${bestSwap.saved}</strong></div>`;
+    }
+    if (bigSplurge) {
+      return `<div class="mart-report-line is-bad"><span>Biggest tradeoff</span><strong>${esc(bigSplurge.label)} ${esc(bigSplurge.name.toLowerCase())} · $${bigSplurge.extra} extra</strong></div>`;
+    }
+    return '';
+  }
+
   function renderResult(result) {
     const content = document.getElementById('fun-center-content');
     if (!content) return;
@@ -699,6 +796,7 @@
           </div>
           ${smartest ? `<div class="mart-report-line is-good"><span>Smartest decision</span><strong>${esc(smartest.name)} · $${smartest.price}</strong></div>` : ''}
           ${mistake ? `<div class="mart-report-line is-bad"><span>Biggest mistake</span><strong>${esc(mistake.name)} · $${mistake.price}</strong></div>` : ''}
+          ${tradeoffHtml(result)}
         </div>
 
         <div class="mart-why">
@@ -805,6 +903,7 @@
         budget: session.budget,
         spent: 0,
         basket: [],
+        purchases: [],
         needStreak: 0,
         aisle: null,
         x: 4,
