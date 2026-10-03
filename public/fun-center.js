@@ -32,32 +32,6 @@ function miimiidFunGetAudioCtx() {
   return miimiidFunSoundCtx.ctx;
 }
 
-function miimiidFunTone(freq, duration, type, gainValue) {
-  const ctx = miimiidFunGetAudioCtx();
-  if (!ctx) return;
-  if (ctx.state === 'suspended') ctx.resume();
-  const osc = ctx.createOscillator();
-  const gain = ctx.createGain();
-  osc.type = type || 'sine';
-  osc.frequency.value = freq;
-  const now = ctx.currentTime;
-  gain.gain.setValueAtTime(gainValue || 0.08, now);
-  gain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
-  osc.connect(gain);
-  gain.connect(ctx.destination);
-  osc.start(now);
-  osc.stop(now + duration);
-}
-
-function miimiidFunPlayTap() { miimiidFunTone(520, 0.08, 'sine', 0.05); }
-function miimiidFunPlayCorrect() {
-  miimiidFunTone(660, 0.12, 'triangle', 0.09);
-  setTimeout(() => miimiidFunTone(880, 0.16, 'triangle', 0.09), 90);
-}
-function miimiidFunPlayWrong() {
-  miimiidFunTone(220, 0.18, 'sawtooth', 0.07);
-  setTimeout(() => miimiidFunTone(160, 0.22, 'sawtooth', 0.07), 80);
-}
 function miimiidFunTone(freq, duration, type, gainValue, delay) {
   const ctx = miimiidFunGetAudioCtx();
   if (!ctx) return;
