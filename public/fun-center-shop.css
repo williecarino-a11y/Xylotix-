@@ -172,3 +172,7 @@
 .mart-option-note { grid-column: 1; color: #9fb0cf; font-size: 0.7rem; }
 .mart-option strong { grid-row: 1 / span 2; grid-column: 2; color: #4da3ff; font-size: 1.05rem; }
 .mart-option-cancel { width: 100%; padding: 8px; border: 0; border-radius: 12px; background: #232c42; color: #c9d3e8; font-weight: 700; font-size: 0.85rem; cursor: pointer; }
+
+/* ---- LIVING MART V2.6: Miimiid holding the cart ---- */
+.mart-stage.cart-art .mart-stage-cart { visibility: hidden; }
+.mart-miimiid.has-cart-art { width: 38%; }
