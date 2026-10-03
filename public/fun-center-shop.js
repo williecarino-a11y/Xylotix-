@@ -73,10 +73,13 @@
   // If all six cart images load, Miimiid is drawn holding the cart.
   // If any are missing, the game keeps the normal poses and the rolling cart.
   let cartArtReady = false;
+  let cartArtFailed = [];
+  let cartArtPromise = Promise.resolve();
   let walkFrameTimer = null;
 
   if (MIIMIID_ASSETS.characters.miimiidCart && typeof miimiidPreloadAssets === 'function') {
-    miimiidPreloadAssets(MIIMIID_ASSETS.characters.miimiidCart).then(result => {
+    cartArtPromise = miimiidPreloadAssets(MIIMIID_ASSETS.characters.miimiidCart).then(result => {
+      cartArtFailed = result.failed;
       cartArtReady = result.failed.length === 0;
     });
   }
@@ -118,9 +121,17 @@
     return `<img class="mart-miimiid-img" data-mood="${mood}" src="${src}" alt="" style="animation:${miimiidFunMascotAnim(mood)}">`;
   }
 
+  // With the wide cart artwork, keep Miimiid fully inside the store.
+  const CART_ART_MIN_X = 30;
+  const CART_ART_MAX_X = 70;
+
+  function clampCartX(x) {
+    return cartArtReady ? Math.min(CART_ART_MAX_X, Math.max(CART_ART_MIN_X, x)) : x;
+  }
+
   function stageHtml(x, mood, withItems) {
     const bg = interiorUrl();
-    const startX = cartArtReady ? Math.min(80, Math.max(20, x)) : x;
+    const startX = clampCartX(x);
     const cartSrc = MIIMIID_ASSETS.game && MIIMIID_ASSETS.game.shoppingCart;
     const cartInner = cartSrc
       ? `<img src="${cartSrc}" alt="" onerror="this.outerHTML='🛒'">`
@@ -158,8 +169,7 @@
     const s = state;
     if (!wrap || !s) { if (done) done(); return; }
 
-    // With the wide cart artwork, keep Miimiid fully inside the store.
-    const target = cartArtReady ? Math.min(80, Math.max(20, x)) : x;
+    const target = clampCartX(x);
     const forward = SPRITE_FACES_RIGHT ? 1 : -1;
     const currentLeft = parseFloat(wrap.style.left);
     const origin = Number.isFinite(currentLeft) ? currentLeft : s.x;
@@ -977,7 +987,20 @@
         hintIndex: 0
       };
 
+      // Wait (up to 20 seconds) for the cart artwork so the first visit already shows it.
+      await Promise.race([cartArtPromise, new Promise(resolve => setTimeout(resolve, 20000))]);
       renderShop();
+
+      // Temporary check: say what is wrong if the cart artwork is not being used.
+      if (!cartArtReady) {
+        const reason = !MIIMIID_ASSETS.characters.miimiidCart
+          ? 'assets.js has no miimiidCart block'
+          : (cartArtFailed.length > 0
+            ? cartArtFailed.map(path => path.split('/').pop()).join(', ') + ' not found'
+            : 'images still loading');
+        const mart = document.querySelector('.mart');
+        if (mart) mart.insertAdjacentHTML('afterbegin', `<p style="color:#f6b9a3;font-size:0.8rem;margin:0 0 6px;">Cart art: ${esc(reason)}</p>`);
+      }
     } catch (error) {
       console.error('Miimiid mart start error:', error);
       content.innerHTML = `
