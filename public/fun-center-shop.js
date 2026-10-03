@@ -69,30 +69,77 @@
     return low === high ? `$${low}` : `$${low}–$${high}`;
   }
 
+  // ---- Miimiid + cart artwork (optional) ----
+  // If all six cart images load, Miimiid is drawn holding the cart.
+  // If any are missing, the game keeps the normal poses and the rolling cart.
+  let cartArtReady = false;
+  let walkFrameTimer = null;
+
+  if (MIIMIID_ASSETS.characters.miimiidCart && typeof miimiidPreloadAssets === 'function') {
+    miimiidPreloadAssets(MIIMIID_ASSETS.characters.miimiidCart).then(result => {
+      cartArtReady = result.failed.length === 0;
+    });
+  }
+
+  function cartPoseFor(mood) {
+    if (mood === 'run') return 'walk1';
+    if (mood === 'stop') return 'stop';
+    if (mood === 'correct' || mood === 'celebrate' || mood === 'encourage') return 'happy';
+    if (mood === 'wrong' || mood === 'concerned' || mood === 'surprised' || mood === 'confused') return 'concerned';
+    return 'idle';
+  }
+
+  function stopWalkFrames() {
+    if (walkFrameTimer) { clearInterval(walkFrameTimer); walkFrameTimer = null; }
+  }
+
+  // Swaps the two walking frames while Miimiid moves.
+  function applyCartPose(img, mood) {
+    const art = MIIMIID_ASSETS.characters.miimiidCart;
+    stopWalkFrames();
+    img.src = art[cartPoseFor(mood)];
+    img.dataset.mood = mood;
+    img.style.animation = mood === 'run' ? '' : miimiidFunMascotAnim(mood);
+    if (mood === 'run') {
+      let flip = false;
+      walkFrameTimer = setInterval(() => {
+        const current = document.querySelector('[data-mart-miimiid] img');
+        if (!current) { stopWalkFrames(); return; }
+        flip = !flip;
+        current.src = art[flip ? 'walk2' : 'walk1'];
+      }, 260);
+    }
+  }
+
   function spriteImg(mood) {
-    const src = MIIMIID_ASSETS.characters.miimiid[MIIMIID_FUN_POSES[mood] || 'happy'];
+    const src = cartArtReady
+      ? MIIMIID_ASSETS.characters.miimiidCart[cartPoseFor(mood)]
+      : MIIMIID_ASSETS.characters.miimiid[MIIMIID_FUN_POSES[mood] || 'happy'];
     return `<img class="mart-miimiid-img" data-mood="${mood}" src="${src}" alt="" style="animation:${miimiidFunMascotAnim(mood)}">`;
   }
 
   function stageHtml(x, mood, withItems) {
     const bg = interiorUrl();
+    const startX = cartArtReady ? Math.min(80, Math.max(20, x)) : x;
     const cartSrc = MIIMIID_ASSETS.game && MIIMIID_ASSETS.game.shoppingCart;
     const cartInner = cartSrc
       ? `<img src="${cartSrc}" alt="" onerror="this.outerHTML='🛒'">`
       : '🛒';
     return `
-      <div class="mart-stage" ${bg ? `style="background-image:url('${bg}')"` : ''}>
+      <div class="mart-stage${cartArtReady ? ' cart-art' : ''}" ${bg ? `style="background-image:url('${bg}')"` : ''}>
         <div class="mart-bubble" data-mart-bubble></div>
         ${withItems ? '<div class="mart-stage-items" data-mart-shelf></div>' : ''}
-        <div class="mart-stage-cart" data-mart-stage-cart style="left:${Math.min(x + 13, 90)}%"><span class="mart-cart-body">${cartInner}</span></div>
-        <div class="mart-miimiid" data-mart-miimiid style="left:${x}%">${spriteImg(mood)}</div>
+        <div class="mart-stage-cart" data-mart-stage-cart style="left:${Math.min(startX + 13, 90)}%"><span class="mart-cart-body">${cartInner}</span></div>
+        <div class="mart-miimiid${cartArtReady ? ' has-cart-art' : ''}" data-mart-miimiid style="left:${startX}%">${spriteImg(mood)}</div>
       </div>
     `;
   }
 
   function setMood(mood) {
     const img = document.querySelector('[data-mart-miimiid] img');
-    if (img) miimiidFunSetMascotMood(img, mood);
+    if (!img) return;
+    if (cartArtReady) { applyCartPose(img, mood); return; }
+    miimiidFunSetMascotMood(img, mood);
   }
 
   function say(mood, text) {
@@ -111,10 +158,14 @@
     const s = state;
     if (!wrap || !s) { if (done) done(); return; }
 
+    // With the wide cart artwork, keep Miimiid fully inside the store.
+    const target = cartArtReady ? Math.min(80, Math.max(20, x)) : x;
     const forward = SPRITE_FACES_RIGHT ? 1 : -1;
-    const dir = x >= s.x ? 1 : -1;
-    const dist = Math.abs(x - s.x);
-    s.x = x;
+    const currentLeft = parseFloat(wrap.style.left);
+    const origin = Number.isFinite(currentLeft) ? currentLeft : s.x;
+    const dir = target >= origin ? 1 : -1;
+    const dist = Math.abs(target - origin);
+    s.x = target;
     clearTimeout(s.walkTimer);
 
     if (dist < 1) { if (done) done(); return; }
@@ -125,11 +176,11 @@
     wrap.style.transitionDuration = `${seconds}s`;
     wrap.classList.add('is-walking');
     setMood('run');
-    wrap.style.left = `${x}%`;
+    wrap.style.left = `${target}%`;
 
     if (cart) {
       cart.style.transitionDuration = `${seconds}s`;
-      cart.style.left = `${Math.min(x + 13, 90)}%`;
+      cart.style.left = `${Math.min(target + 13, 90)}%`;
       cart.classList.add('is-rolling');
     }
 
@@ -137,8 +188,17 @@
       wrap.classList.remove('is-walking');
       if (cart) cart.classList.remove('is-rolling');
       wrap.style.setProperty('--face', forward);
-      setMood('wave');
-      if (done) done();
+      if (cartArtReady) {
+        // A short "stopping" beat before the next action.
+        setMood('stop');
+        s.walkTimer = setTimeout(() => {
+          setMood('wave');
+          if (done) done();
+        }, 320);
+      } else {
+        setMood('wave');
+        if (done) done();
+      }
     }, seconds * 1000 + 40);
   }
 
