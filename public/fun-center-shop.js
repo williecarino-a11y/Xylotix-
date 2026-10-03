@@ -4,7 +4,9 @@
  * The server still owns budget, prices and need/want answers.
  *
  * V2 adds: mission intro, products inside the scene, basket strip,
- * budget-aware Miimiid reactions, Mom + Alex events, shopping report.
+ * budget-aware Miimiid reactions, Alex + Mom events, checkout scene with
+ * Pay / Keep shopping, four outcome tiers, shopping report, ambient life
+ * (idle hints, bobbing shelf, rolling cart) and product pickup arcs.
  */
 (function () {
   'use strict';
@@ -20,20 +22,6 @@
     { id: 'care', label: 'Personal Care', icon: '💊', x: 64, items: ['medicine'], line: 'Personal Care. Health items live here.' },
     { id: 'fun', label: 'Fun Corner', icon: '🎮', x: 78, items: ['movie', 'headphones', 'console', 'sneakers'], line: 'The Fun Corner. Big prices here, watch your wallet!' }
   ];
-
-  const OUTCOME_MOOD = {
-    'smart-shopper': 'celebrate',
-    'almost-there': 'encourage',
-    'too-many-wants': 'concerned',
-    'missing-essentials': 'encourage'
-  };
-
-  const OUTCOME_TITLE = {
-    'smart-shopper': 'Smart Shopper!',
-    'almost-there': 'Almost there!',
-    'too-many-wants': 'Wants took over',
-    'missing-essentials': 'Essentials missing'
-  };
 
   // Unexpected events. Each fires once, when the basket reaches `after` items
   // and the item it is about has not been bought yet.
@@ -77,7 +65,7 @@
       <div class="mart-stage" ${bg ? `style="background-image:url('${bg}')"` : ''}>
         <div class="mart-bubble" data-mart-bubble></div>
         ${withItems ? '<div class="mart-stage-items" data-mart-shelf></div>' : ''}
-        <div class="mart-stage-cart" data-mart-stage-cart style="left:${Math.min(x + 13, 90)}%">${cartInner}</div>
+        <div class="mart-stage-cart" data-mart-stage-cart style="left:${Math.min(x + 13, 90)}%"><span class="mart-cart-body">${cartInner}</span></div>
         <div class="mart-miimiid" data-mart-miimiid style="left:${x}%">${spriteImg(mood)}</div>
       </div>
     `;
@@ -123,10 +111,12 @@
     if (cart) {
       cart.style.transitionDuration = `${seconds}s`;
       cart.style.left = `${Math.min(x + 13, 90)}%`;
+      cart.classList.add('is-rolling');
     }
 
     s.walkTimer = setTimeout(() => {
       wrap.classList.remove('is-walking');
+      if (cart) cart.classList.remove('is-rolling');
       wrap.style.setProperty('--face', forward);
       setMood('wave');
       if (done) done();
@@ -200,6 +190,34 @@
     refresh();
   }
 
+  // Idle hints: if the player does nothing for a while, Miimiid thinks out loud.
+  function idleHint(s) {
+    const remaining = s.budget - s.spent;
+    const options = [];
+    if (s.basket.length === 0) options.push('Tip: essentials first. Food, water and medicine come before treats.');
+    if (remaining <= 10) options.push(`Careful, only $${remaining} left. Is there anything essential we still need?`);
+    options.push('Not sure? Ask yourself: do I need this, or do I just want it?');
+    options.push('Try every aisle. Some essentials are hiding in different sections.');
+    s.hintIndex = (s.hintIndex || 0) + 1;
+    return options[s.hintIndex % options.length];
+  }
+
+  function scheduleIdle(delay) {
+    const s = state;
+    if (!s) return;
+    clearTimeout(s.idleTimer);
+    s.idleTimer = setTimeout(() => {
+      if (state !== s) return;
+      const walking = document.querySelector('.mart-miimiid.is-walking');
+      if (walking || s.busy || s.checkingOut || s.missionOpen || s.eventOpen) {
+        scheduleIdle(8000);
+        return;
+      }
+      say('idle', idleHint(s));
+      scheduleIdle(20000);
+    }, delay || 8000);
+  }
+
   function selectAisle(id) {
     const s = state;
     if (!s || s.checkingOut || s.missionOpen || s.busy) return;
@@ -207,6 +225,7 @@
     if (!aisle) return;
 
     s.aisle = id;
+    scheduleIdle();
     document.querySelectorAll('[data-mart-aisle]').forEach(b => {
       b.classList.toggle('is-active', b.dataset.martAisle === id);
     });
@@ -221,22 +240,49 @@
     });
   }
 
-  function flyToCart(item, fromEl) {
+  // The item pops off the shelf, arcs up and over, and drops into the cart.
+  function flyToCart(item, fromEl, onLand) {
     const cart = document.querySelector('[data-mart-stage-cart]') || document.querySelector('[data-mart-cart]');
-    const from = fromEl || document.querySelector('.mart-stage');
-    if (!cart || !from) return;
+    const from = fromEl
+      ? (fromEl.querySelector('.mart-item-art') || fromEl)
+      : document.querySelector('.mart-stage');
+    if (!cart || !from) { if (onLand) onLand(); return; }
+
     const a = from.getBoundingClientRect();
     const b = cart.getBoundingClientRect();
+    const dx = (b.left + b.width / 2) - (a.left + a.width / 2);
+    const dy = (b.top + b.height / 2) - (a.top + a.height / 2);
+
     const fly = document.createElement('div');
     fly.className = 'mart-fly';
     fly.innerHTML = miimiidFunProductVisual(item, 40);
+    fly.style.transition = 'none';
     fly.style.left = `${a.left + a.width / 2 - 20}px`;
     fly.style.top = `${a.top + a.height / 2 - 20}px`;
     document.body.appendChild(fly);
-    fly.getBoundingClientRect();
-    fly.style.transform = `translate(${b.left + b.width / 2 - (a.left + a.width / 2)}px, ${b.top + b.height / 2 - (a.top + a.height / 2)}px) scale(0.5)`;
-    fly.style.opacity = '0.4';
-    setTimeout(() => fly.remove(), 700);
+
+    miimiidFunTone(760, 0.06, 'sine', 0.03);
+
+    let landed = false;
+    const land = () => {
+      if (landed) return;
+      landed = true;
+      fly.remove();
+      miimiidFunTone(170, 0.12, 'triangle', 0.05);
+      if (onLand) onLand();
+    };
+
+    if (typeof fly.animate === 'function') {
+      const anim = fly.animate([
+        { transform: 'translate(0px, 0px) scale(1)', opacity: 1 },
+        { transform: `translate(${dx * 0.45}px, ${dy * 0.45 - 70}px) scale(1.2)`, opacity: 1, offset: 0.45 },
+        { transform: `translate(${dx}px, ${dy}px) scale(0.5)`, opacity: 0.85 }
+      ], { duration: 650, easing: 'ease-in-out', fill: 'forwards' });
+      anim.onfinish = land;
+      setTimeout(land, 900);
+    } else {
+      setTimeout(land, 650);
+    }
   }
 
   function bumpCart() {
@@ -244,6 +290,16 @@
     const stageCart = document.querySelector('[data-mart-stage-cart]');
     if (header) { header.classList.remove('bump'); void header.offsetWidth; header.classList.add('bump'); }
     if (stageCart) { stageCart.classList.remove('bump'); void stageCart.offsetWidth; stageCart.classList.add('bump'); }
+  }
+
+  function pulseWallet() {
+    ['.mart-bar', '[data-mart-remaining]'].forEach(selector => {
+      const el = document.querySelector(selector);
+      if (!el) return;
+      el.classList.remove('pulse');
+      void el.offsetWidth;
+      el.classList.add('pulse');
+    });
   }
 
   function addBasketChip(item) {
@@ -272,6 +328,11 @@
     }
 
     s.busy = true;
+    scheduleIdle();
+    if (el) {
+      el.classList.add('is-picked');
+      miimiidFunTone(520, 0.05, 'sine', 0.025);
+    }
     await new Promise(resolve => reachItem(el, resolve));
     if (state !== s) return;
 
@@ -285,9 +346,7 @@
 
       s.spent = result.spent;
       s.basket.push(item.id);
-      flyToCart(item, el);
-      bumpCart();
-      addBasketChip(item);
+      flyToCart(item, el, () => { bumpCart(); addBasketChip(item); });
 
       const left = result.remaining;
       const needsLeft = Number.isFinite(result.needsLeft) ? result.needsLeft : null;
@@ -325,12 +384,14 @@
       }
 
       refresh();
+      pulseWallet();
       setTimeout(maybeEvent, 900);
     } catch (error) {
       console.error('Miimiid mart buy error:', error);
       say('confused', error.message || 'That did not work. Try again.');
     } finally {
       s.busy = false;
+      if (el) el.classList.remove('is-picked');
     }
   }
 
@@ -404,11 +465,12 @@
   }
 
   // Items land on the counter one by one with a scanner beep.
-  // The wallet counts down as each item scans. Resolves when the player taps Pay.
+  // The wallet counts down as each item scans.
+  // Resolves true when the player taps Pay, false if they tap Keep shopping.
   function playScan(s) {
     return new Promise(resolve => {
       const stage = document.querySelector('.mart-stage');
-      if (!stage) { resolve(); return; }
+      if (!stage) { resolve(false); return; }
 
       const items = s.basket
         .map(id => s.shop.items.find(candidate => candidate.id === id))
@@ -421,7 +483,9 @@
         <div class="mart-scan-lines" data-mart-scan-lines></div>
         <div class="mart-scan-total"><span>Total</span><strong data-mart-scan-total>$0</strong></div>
         <div class="mart-scan-wallet" data-mart-scan-wallet>Wallet $${s.budget}</div>
-        <div class="mart-scan-actions" data-mart-scan-actions></div>
+        <div class="mart-scan-actions" data-mart-scan-actions>
+          <button type="button" class="mart-scan-keep" data-mart-keep>Keep shopping</button>
+        </div>
       `;
       stage.appendChild(overlay);
 
@@ -430,19 +494,28 @@
       const walletEl = overlay.querySelector('[data-mart-scan-wallet]');
       const actions = overlay.querySelector('[data-mart-scan-actions]');
 
+      let cancelled = false;
       let total = 0;
       let index = 0;
 
+      overlay.querySelector('[data-mart-keep]').addEventListener('click', () => {
+        cancelled = true;
+        overlay.remove();
+        resolve(false);
+      });
+
       const next = () => {
+        if (cancelled) return;
+
         if (index >= items.length) {
           const left = s.budget - total;
           setMood(left <= 5 ? 'concerned' : 'correct');
-          actions.innerHTML = `<button type="button" class="mart-scan-pay" data-mart-pay>Pay $${total}</button>`;
+          actions.insertAdjacentHTML('beforeend', `<button type="button" class="mart-scan-pay" data-mart-pay>Pay $${total}</button>`);
           actions.querySelector('[data-mart-pay]').addEventListener('click', () => {
             actions.innerHTML = '';
             walletEl.textContent = `Paid! Wallet $${s.budget} → $${left}`;
             miimiidFunBell(1046.5, 0.5, 0.045);
-            setTimeout(resolve, 1100);
+            setTimeout(() => resolve(true), 1100);
           });
           return;
         }
@@ -472,6 +545,7 @@
     s.busy = true;
     s.checkingOut = true;
     s.eventOpen = false;
+    clearTimeout(s.idleTimer);
 
     const button = document.querySelector('[data-mart-checkout]');
     if (button) { button.disabled = true; button.textContent = 'Heading to the counter…'; }
@@ -483,8 +557,20 @@
 
     try {
       await walk;
-      await playScan(s);
+      const paid = await playScan(s);
       if (state !== s) return;
+
+      if (!paid) {
+        s.busy = false;
+        s.checkingOut = false;
+        refresh();
+        const aisle = AISLES.find(a => a.id === s.aisle);
+        walkTo(aisle ? aisle.x : 14, () => {
+          if (state === s) say('encourage', 'No problem, take your time. Add or rethink anything you like.');
+        });
+        scheduleIdle();
+        return;
+      }
 
       const result = await miimiidFunCenterRequest(
         `/api/fun-center/shop/session/${encodeURIComponent(s.sessionId)}/checkout`,
@@ -690,7 +776,7 @@
     });
     content.querySelector('[data-mart-checkout]').addEventListener('click', () => checkout());
     content.querySelector('[data-mart-leave]').addEventListener('click', () => {
-      if (state) clearTimeout(state.walkTimer);
+      if (state) { clearTimeout(state.walkTimer); clearTimeout(state.idleTimer); }
       state = null;
       renderMiimiidFunCenter();
     });
@@ -727,7 +813,9 @@
         missionOpen: false,
         eventOpen: false,
         eventsDone: [],
-        walkTimer: null
+        walkTimer: null,
+        idleTimer: null,
+        hintIndex: 0
       };
 
       renderShop();
