@@ -35,6 +35,15 @@ const MIIMIID_ASSETS = miimiidDeepFreeze({
     },
     },
 
+    miimiidCart: {
+      idle: `${MIIMIID_ASSET_BASE}/characters/miimiid-cart/cart-idle.png`,
+      walk1: `${MIIMIID_ASSET_BASE}/characters/miimiid-cart/cart-walk-1.png`,
+      walk2: `${MIIMIID_ASSET_BASE}/characters/miimiid-cart/cart-walk-2.png`,
+      stop: `${MIIMIID_ASSET_BASE}/characters/miimiid-cart/cart-stop.png`,
+      happy: `${MIIMIID_ASSET_BASE}/characters/miimiid-cart/cart-happy.png`,
+      concerned: `${MIIMIID_ASSET_BASE}/characters/miimiid-cart/cart-concerned.png`
+    },
+
     engineer: {
       accident: `${MIIMIID_ASSET_BASE}/characters/engineer/engineer-accident.png`,
       eating: `${MIIMIID_ASSET_BASE}/characters/engineer/engineer-eating.png`,
