@@ -308,6 +308,221 @@
     }, delay || 8000);
   }
 
+ // ---- WALK MODE: joystick + keyboard + Grab button + reaching hand ----
+  const WALK_SPEED = 34;     // % of stage width per second
+  const WALK_UP_MAX = 40;    // px Miimiid can step up into the store
+  const GRAB_RANGE = 0.3;    // fraction of stage width
+  let walkLoopId = null;
+  let walkKeysBound = false;
+  const walkKeys = {};
+  const joy = { x: 0, y: 0 };
+
+  function walkInput() {
+    let x = joy.x;
+    let y = joy.y;
+    if (walkKeys.ArrowLeft || walkKeys.a) x -= 1;
+    if (walkKeys.ArrowRight || walkKeys.d) x += 1;
+    if (walkKeys.ArrowUp || walkKeys.w) y -= 1;
+    if (walkKeys.ArrowDown || walkKeys.s) y += 1;
+    const len = Math.hypot(x, y);
+    if (len > 1) { x /= len; y /= len; }
+    return { x, y };
+  }
+
+  function nearestItem() {
+    const stage = document.querySelector('.mart-stage');
+    const wrap = document.querySelector('[data-mart-miimiid]');
+    if (!stage || !wrap) return null;
+    const a = stage.getBoundingClientRect();
+    const w = wrap.getBoundingClientRect();
+    const handX = w.left + w.width * 0.6;
+    let best = null;
+    let bestDist = a.width * GRAB_RANGE;
+    document.querySelectorAll('[data-mart-item]').forEach(btn => {
+      if (btn.classList.contains('in-basket')) return;
+      const b = btn.getBoundingClientRect();
+      const d = Math.abs(b.left + b.width / 2 - handX);
+      if (d < bestDist) { best = btn; bestDist = d; }
+    });
+    return best;
+  }
+
+  function updateGrabButton(s) {
+    const near = nearestItem();
+    const id = near ? near.dataset.martItem : '';
+    if (s.nearId === id) return;
+    s.nearId = id;
+    document.querySelectorAll('[data-mart-item]').forEach(btn => {
+      btn.classList.toggle('is-near', btn === near);
+    });
+    const grab = document.querySelector('[data-mart-grab]');
+    if (!grab) return;
+    grab.disabled = !near;
+    const name = near ? near.querySelector('.mart-item-name') : null;
+    grab.innerHTML = near ? `✋ Grab<small>${esc(name ? name.textContent : '')}</small>` : '✋ Grab';
+  }
+
+  // Miimiid's arm stretches out to the product, then pulls back.
+  function reachHand(el) {
+    return new Promise(resolve => {
+      const stage = document.querySelector('.mart-stage');
+      const wrap = document.querySelector('[data-mart-miimiid]');
+      if (!el || !stage || !wrap || typeof stage.animate !== 'function') { resolve(); return; }
+      const a = stage.getBoundingClientRect();
+      const w = wrap.getBoundingClientRect();
+      const t = (el.querySelector('.mart-item-art') || el).getBoundingClientRect();
+      const sx = w.left + w.width * 0.62 - a.left;
+      const sy = w.top + w.height * 0.42 - a.top;
+      const tx = t.left + t.width / 2 - a.left;
+      const ty = t.top + t.height / 2 - a.top;
+      const dist = Math.hypot(tx - sx, ty - sy);
+      const angle = Math.atan2(ty - sy, tx - sx) * 180 / Math.PI;
+
+      const arm = document.createElement('div');
+      arm.className = 'mart-arm';
+      arm.style.left = `${sx}px`;
+      arm.style.top = `${sy}px`;
+      arm.style.width = `${dist}px`;
+      arm.innerHTML = '<span class="mart-arm-hand"></span>';
+      stage.appendChild(arm);
+
+      const from = { transform: `rotate(${angle}deg) scaleX(0.05)` };
+      const to = { transform: `rotate(${angle}deg) scaleX(1)` };
+      miimiidFunTone(440, 0.05, 'sine', 0.02);
+      const out = arm.animate([from, to], { duration: 220, easing: 'ease-out', fill: 'forwards' });
+      out.onfinish = () => {
+        resolve();
+        setTimeout(() => {
+          const back = arm.animate([to, from], { duration: 200, easing: 'ease-in', fill: 'forwards' });
+          back.onfinish = () => arm.remove();
+          setTimeout(() => arm.remove(), 700);
+        }, 160);
+      };
+      setTimeout(resolve, 700);
+    });
+  }
+
+  function startWalkLoop() {
+    cancelAnimationFrame(walkLoopId);
+    let last = performance.now();
+    const tick = now => {
+      const s = state;
+      const stage = document.querySelector('.mart-stage');
+      const wrap = document.querySelector('[data-mart-miimiid]');
+      if (!s || !stage || !wrap || !document.querySelector('[data-mart-joy]')) { walkLoopId = null; return; }
+      const cart = document.querySelector('[data-mart-stage-cart]');
+      const dt = Math.min(0.05, (now - last) / 1000);
+      last = now;
+
+      // Another walk (aisle tab, checkout) took over: step aside.
+      if (s.joyMoving && wrap.style.transitionDuration !== '0s') s.joyMoving = false;
+
+      const locked = s.busy || s.checkingOut || s.missionOpen || s.eventOpen;
+      const autoWalking = wrap.classList.contains('is-walking') && !s.joyMoving;
+      const input = locked || autoWalking ? { x: 0, y: 0 } : walkInput();
+      const moving = Math.hypot(input.x, input.y) > 0.12;
+
+      if (moving) {
+        if (!s.joyMoving) {
+          s.joyMoving = true;
+          s.x = parseFloat(wrap.style.left) || s.x;
+          clearTimeout(s.walkTimer);
+          wrap.classList.add('is-walking');
+          if (cart) cart.classList.add('is-rolling');
+          wrap.style.transitionDuration = '0s';
+          if (cart) cart.style.transitionDuration = '0s';
+          setMood('run');
+          scheduleIdle();
+        }
+        if (Math.abs(input.x) > 0.12) {
+          wrap.style.setProperty('--face', (SPRITE_FACES_RIGHT ? 1 : -1) * (input.x > 0 ? 1 : -1));
+        }
+        s.x = clampCartX(Math.min(92, Math.max(2, s.x + input.x * WALK_SPEED * dt)));
+        s.y = Math.min(0, Math.max(-WALK_UP_MAX, (s.y || 0) + input.y * 40 * dt));
+        wrap.style.left = `${s.x}%`;
+        if (cart) cart.style.left = `${Math.min(s.x + 13, 90)}%`;
+        stage.style.setProperty('--walk-y', `${s.y}px`);
+      } else if (s.joyMoving) {
+        s.joyMoving = false;
+        wrap.classList.remove('is-walking');
+        if (cart) cart.classList.remove('is-rolling');
+        setMood('stop');
+        setTimeout(() => {
+          if (state === s && !s.joyMoving && !s.busy && !s.checkingOut) setMood('wave');
+        }, 320);
+      }
+
+      updateGrabButton(s);
+      walkLoopId = requestAnimationFrame(tick);
+    };
+    walkLoopId = requestAnimationFrame(tick);
+  }
+
+  function setupWalkControls() {
+    const stage = document.querySelector('.mart-stage');
+    if (!stage || !state) return;
+    state.y = 0;
+    state.joyMoving = false;
+    state.nearId = null;
+    joy.x = 0;
+    joy.y = 0;
+
+    stage.insertAdjacentHTML('afterend', `
+      <div class="mart-controls">
+        <div class="mart-joy" data-mart-joy><div class="mart-joy-knob" data-mart-joy-knob></div></div>
+        <button type="button" class="mart-grab" data-mart-grab disabled>✋ Grab</button>
+      </div>
+    `);
+
+    const joyEl = document.querySelector('[data-mart-joy]');
+    const knob = document.querySelector('[data-mart-joy-knob]');
+    const RADIUS = 36;
+
+    const move = e => {
+      const r = joyEl.getBoundingClientRect();
+      let dx = e.clientX - (r.left + r.width / 2);
+      let dy = e.clientY - (r.top + r.height / 2);
+      const len = Math.hypot(dx, dy);
+      const k = len > RADIUS ? RADIUS / len : 1;
+      dx *= k; dy *= k;
+      knob.style.transform = `translate(${dx}px, ${dy}px)`;
+      joy.x = dx / RADIUS;
+      joy.y = dy / RADIUS;
+    };
+    const end = () => { joy.x = 0; joy.y = 0; knob.style.transform = ''; };
+
+    joyEl.addEventListener('pointerdown', e => { joyEl.setPointerCapture(e.pointerId); move(e); e.preventDefault(); });
+    joyEl.addEventListener('pointermove', e => { if (joyEl.hasPointerCapture(e.pointerId)) move(e); });
+    joyEl.addEventListener('pointerup', end);
+    joyEl.addEventListener('pointercancel', end);
+    joyEl.addEventListener('lostpointercapture', end);
+
+    document.querySelector('[data-mart-grab]').addEventListener('click', () => {
+      const el = nearestItem();
+      if (el) buy(el.dataset.martItem, el);
+    });
+
+    if (!walkKeysBound) {
+      walkKeysBound = true;
+      const keyOf = e => (e.key.length === 1 ? e.key.toLowerCase() : e.key);
+      document.addEventListener('keydown', e => {
+        if (!document.querySelector('[data-mart-joy]')) return;
+        if (/INPUT|TEXTAREA|SELECT/.test((e.target && e.target.tagName) || '')) return;
+        const k = keyOf(e);
+        if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(k)) e.preventDefault();
+        if ((k === ' ' || k === 'Enter') && e.target === document.body) {
+          const el = nearestItem();
+          if (el) { e.preventDefault(); buy(el.dataset.martItem, el); }
+          return;
+        }
+        walkKeys[k] = true;
+      });
+      document.addEventListener('keyup', e => { walkKeys[e.key.length === 1 ? e.key.toLowerCase() : e.key] = false; });
+    }
+
+    startWalkLoop();
+  }
+  
   function selectAisle(id) {
     const s = state;
     if (!s || s.checkingOut || s.missionOpen || s.busy) return;
@@ -479,6 +694,8 @@
       miimiidFunTone(520, 0.05, 'sine', 0.025);
     }
     await new Promise(resolve => reachItem(el, resolve));
+    if (state !== s) return;
+    await reachHand(el);
     if (state !== s) return;
 
     const content = document.getElementById('fun-center-content');
@@ -943,6 +1160,7 @@
       btn.addEventListener('click', () => { miimiidFunPlayTap(); selectAisle(btn.dataset.martAisle); });
     });
     content.querySelector('[data-mart-checkout]').addEventListener('click', () => checkout());
+    setupWalkControls();
     content.querySelector('[data-mart-leave]').addEventListener('click', () => {
       if (state) { clearTimeout(state.walkTimer); clearTimeout(state.idleTimer); }
       state = null;
