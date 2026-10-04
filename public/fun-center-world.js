@@ -21,7 +21,7 @@
   const COUNTER_X = 1560;
   const GRAB_RANGE = 130;
 
-  const originalStart = window.startMiimiidShop;
+  let originalStart = window.startMiimiidShop;
   let game = null;
   let phaserPromise = null;
 
