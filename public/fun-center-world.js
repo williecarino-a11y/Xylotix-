@@ -6,7 +6,8 @@
 (function () {
   'use strict';
 
-  const PHASER_URL = 'https://cdn.jsdelivr.net/npm/phaser@3.80.1/dist/phaser.min.js';
+  const PHASER_URL = '/vendor/phaser/phaser.min.js';
+  const PHASER_CDN_FALLBACK = 'https://cdn.jsdelivr.net/npm/phaser@3.80.1/dist/phaser.min.js';
   let WORLD_W = 1800;
   const WORLD_H = 900;
   const VIEW_W = 400;
@@ -42,16 +43,21 @@
 
   function esc(v) { return miimiidFunCenterEscapeHtml(v); }
 
+  function loadScript(src) {
+    return new Promise((resolve, reject) => {
+      const s = document.createElement('script');
+      s.src = src;
+      s.onload = resolve;
+      s.onerror = () => reject(new Error('Could not load ' + src));
+      document.head.appendChild(s);
+    });
+  }
+
   function loadPhaser() {
     if (window.Phaser) return Promise.resolve();
     if (phaserPromise) return phaserPromise;
-    phaserPromise = new Promise((resolve, reject) => {
-      const s = document.createElement('script');
-      s.src = PHASER_URL;
-      s.onload = resolve;
-      s.onerror = () => reject(new Error('Could not load Phaser'));
-      document.head.appendChild(s);
-    });
+    // Our own installed copy first, CDN only as a backup.
+    phaserPromise = loadScript(PHASER_URL).catch(() => loadScript(PHASER_CDN_FALLBACK));
     return phaserPromise;
   }
 
