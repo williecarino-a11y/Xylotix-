@@ -1,30 +1,42 @@
 /*
- * MIIMIID MART WORLD (prototype)
- * Phaser-based walkable store. Server routes are unchanged.
- * Turn on with ?world=1 on the site URL, off with ?world=0.
+ * MIIMIID MART WORLD (v2) - a real walkable store.
+ * Phaser draws the store from parts: floor, wall, shelf units, counter, products.
+ * Miimiid collides with shelves and the counter and is depth-sorted.
+ * The server still owns budget, prices and answers.
+ * Open the site with ?world=0 to use the old Mart.
  */
 (function () {
   'use strict';
 
   const PHASER_URL = '/vendor/phaser.min.js';
   const PHASER_CDN_FALLBACK = 'https://cdn.jsdelivr.net/npm/phaser@3.80.1/dist/phaser.min.js';
-  let WORLD_W = 1800;
-  const WORLD_H = 900;
   const VIEW_W = 400;
   const VIEW_H = 520;
-  const SPEED = 190;
-  const FACES_RIGHT = true;        // set false if Miimiid walks backwards
-  const CORRIDOR = { minX: 40, maxX: 1760, minY: 335, maxY: 650 };
-  const OBSTACLES = [
-    { x: 820, y: 440, w: 220, h: 50 },    // island shelf
-    { x: 1590, y: 330, w: 190, h: 120 }   // checkout counter
+  const W = 1400;
+  const H = 1000;
+  const WALL_H = 200;
+  const SPEED = 210;
+  const FACES_RIGHT = true;          // set false if Miimiid walks backwards
+  const UW = 260;                    // shelf unit width
+  const UH = 140;                    // shelf unit height
+  const UNITS = [
+    { id: 'fresh',  label: 'FRESH FOOD',     x: 60,  y: 200 },
+    { id: 'dairy',  label: 'DAIRY & DRINKS', x: 320, y: 200 },
+    { id: 'snacks', label: 'SNACKS',         x: 580, y: 200 },
+    { id: 'care',   label: 'PERSONAL CARE',  x: 60,  y: 520 },
+    { id: 'fun',    label: 'FUN CORNER',     x: 320, y: 520 }
   ];
-  let COUNTER_X = 1560;
-  // Where the walkable floor is inside your store artwork (fraction of its height).
-  // If Miimiid walks on the shelves, raise FLOOR_TOP. If he can't reach the bottom, raise FLOOR_BOTTOM.
-  const FLOOR_TOP = 0.66;
-  const FLOOR_BOTTOM = 0.96;
-  const GRAB_RANGE = 130;
+  const CATS = {
+    fresh: ['apple', 'carrot', 'bread', 'pasta'],
+    dairy: ['milk', 'eggs', 'water'],
+    snacks: ['chips', 'cookies', 'candy', 'pizza'],
+    care: ['medicine'],
+    fun: ['movie', 'headphones', 'console', 'sneakers']
+  };
+  const COUNTER = { x: 1000, y: 640, w: 300, h: 80 };
+  const ZONE = { x: 960, y: 740, w: 380, h: 170 };
+  const START = { x: 160, y: 800 };
+  const GRAB_RANGE = 105;
 
   let originalStart = window.startMiimiidShop;
   let game = null;
@@ -36,7 +48,6 @@
     if (q === '0') localStorage.setItem('miimiidWorld', '0');
   } catch (e) { /* ignore */ }
 
-  // The new world is ON by default. Open the site with ?world=0 to use the old Mart.
   function worldOn() {
     try { return localStorage.getItem('miimiidWorld') !== '0'; } catch (e) { return true; }
   }
@@ -56,7 +67,6 @@
   function loadPhaser() {
     if (window.Phaser) return Promise.resolve();
     if (phaserPromise) return phaserPromise;
-    // Our own installed copy first, CDN only as a backup.
     phaserPromise = loadScript(PHASER_URL).catch(() => loadScript(PHASER_CDN_FALLBACK));
     return phaserPromise;
   }
@@ -91,7 +101,6 @@
     document.head.appendChild(st);
   }
 
-  // ---- product visuals: reuse the app's existing product art ----
   function productSource(item) {
     const box = document.createElement('div');
     box.innerHTML = miimiidFunProductVisual(item, 44);
@@ -109,11 +118,25 @@
     return lo === hi ? `$${lo}` : `$${lo}-$${hi}`;
   }
 
-  function hitsObstacle(x, y) {
-    return OBSTACLES.some(o => x > o.x - 16 && x < o.x + o.w + 16 && y > o.y && y < o.y + o.h + 6);
+  function nearestProduct(scene) {
+    const px = scene.player.x;
+    const py = scene.player.y;
+    let best = null;
+    let bd = GRAB_RANGE;
+    scene.products.forEach(p => {
+      if (p.taken || py < p.sy + 4) return;     // must stand in front of the shelf
+      const d = Math.hypot(p.x - px, (p.sy + 14) - py);
+      if (d < bd) { bd = d; best = p; }
+    });
+    return best;
   }
 
-  // ---- main ----
+  function inCheckoutZone(scene) {
+    const x = scene.player.x;
+    const y = scene.player.y;
+    return x >= ZONE.x && x <= ZONE.x + ZONE.w && y >= ZONE.y && y <= ZONE.y + ZONE.h;
+  }
+
   async function startWorld() {
     const content = document.getElementById('fun-center-content');
     if (!content) return;
@@ -149,7 +172,7 @@
       busy: false,
       ctl: { x: 0, y: 0 },
       nearId: null,
-      nearKind: null
+      zoneHint: false
     };
 
     content.innerHTML = `
@@ -160,7 +183,7 @@
           <button type="button" class="mw-leave" data-mw-leave>Leave</button>
         </div>
         <div class="mw-holder" data-mw-holder>
-          <div class="mw-bubble" data-mw-bubble>Welcome to Miimiid Mart! Use the stick to walk.</div>
+          <div class="mw-bubble" data-mw-bubble>Welcome to Miimiid Mart! Use the stick to walk to a shelf.</div>
         </div>
         <div class="mw-controls">
           <div class="mw-joy" data-mw-joy><div class="mw-joy-knob" data-mw-knob></div></div>
@@ -214,20 +237,25 @@
     joyEl.addEventListener('pointercancel', joyEnd);
     joyEl.addEventListener('lostpointercapture', joyEnd);
 
-    // assets for Phaser
+    // art for Phaser
     const cartArt = MIIMIID_ASSETS.characters.miimiidCart;
     const plain = MIIMIID_ASSETS.characters.miimiid;
     const fallbackPose = plain[(window.MIIMIID_FUN_POSES && MIIMIID_FUN_POSES.happy) || 'happy'];
     const frames = {
       idle: (cartArt && cartArt.idle) || fallbackPose,
       walk1: (cartArt && cartArt.walk1) || fallbackPose,
-      walk2: (cartArt && cartArt.walk2) || fallbackPose,
-      happy: (cartArt && cartArt.happy) || fallbackPose
+      walk2: (cartArt && cartArt.walk2) || fallbackPose
     };
 
-    const items = shop.items.slice(0, 16);
+    const items = shop.items.slice();
     const sources = {};
     items.forEach(item => { sources[item.id] = productSource(item); });
+
+    const itemsByCat = {};
+    items.forEach(item => {
+      const cat = Object.keys(CATS).find(k => CATS[k].includes(item.id)) || 'fun';
+      (itemsByCat[cat] = itemsByCat[cat] || []).push(item);
+    });
 
     // ---- buying ----
     function pickOption(item) {
@@ -261,7 +289,8 @@
         }
 
         scene.reachAt(product.x, product.y);
-        await new Promise(r => setTimeout(r, 220));
+        if (typeof miimiidFunTone === 'function') miimiidFunTone(520, 0.05, 'sine', 0.025);
+        await new Promise(r => setTimeout(r, 240));
 
         const result = await miimiidFunCenterRequest(
           `/api/fun-center/shop/session/${encodeURIComponent(S.sessionId)}/buy`,
@@ -314,34 +343,20 @@
       }
     }
 
-    function nearestProduct(scene) {
-      const px = scene.player.x;
-      const py = scene.player.y - 40;
-      let best = null;
-      let bd = GRAB_RANGE;
-      scene.products.forEach(p => {
-        if (p.taken) return;
-        const d = Math.hypot(p.x - px, p.y - py);
-        if (d < bd) { bd = d; best = p; }
-      });
-      return best;
-    }
-
     grabBtn.addEventListener('click', () => {
       const scene = game && game.scene.getScene('mart');
       if (!scene || S.busy) return;
       const p = nearestProduct(scene);
       if (p) buyProduct(scene, p);
-      else if (scene.player.x > COUNTER_X) doCheckout();
+      else if (inCheckoutZone(scene)) doCheckout();
+      else say('Walk up to a shelf to grab something, or to the counter to pay.');
     });
 
-    // ---- Phaser scene ----
+    // ---- the store ----
     class MartScene extends Phaser.Scene {
       constructor() { super('mart'); }
 
       preload() {
-        const bgUrl = MIIMIID_ASSETS.game && MIIMIID_ASSETS.game.martInterior;
-        if (bgUrl) this.load.image('mart-bg', bgUrl);
         Object.keys(frames).forEach(k => this.load.image(`pl-${k}`, frames[k]));
         items.forEach(item => {
           const src = sources[item.id];
@@ -349,109 +364,134 @@
         });
       }
 
-      create() {
-        this.products = [];
-        this.faceLeft = false;
-        this.walkFlip = false;
-        this.walkClock = 0;
+      makeTextures() {
+        if (this.textures.exists('floor')) return;
+        const g = this.make.graphics({ x: 0, y: 0, add: false });
+        g.fillStyle(0xe9dfcf, 1).fillRect(0, 0, 100, 100);
+        g.fillStyle(0xe1d5c1, 1).fillRect(0, 0, 50, 50);
+        g.fillRect(50, 50, 50, 50);
+        g.lineStyle(2, 0xcbbda5, 1).strokeRect(0, 0, 100, 100);
+        g.generateTexture('floor', 100, 100);
+        g.destroy();
+      }
 
-        const hasBg = this.textures.exists('mart-bg');
+      blocked(x, y) {
+        return this.obst.some(o => x + 20 > o.x && x - 20 < o.x + o.w && y > o.y && y - 14 < o.y + o.h);
+      }
 
-        if (hasBg) {
-          // Your beautiful Miimiid Mart artwork becomes the world.
-          const bg = this.add.image(0, 0, 'mart-bg').setOrigin(0, 0).setDepth(-100);
-          bg.setScale(WORLD_H / bg.height);
-          WORLD_W = Math.round(bg.displayWidth);
-          CORRIDOR.minX = 60;
-          CORRIDOR.maxX = WORLD_W - 60;
-          CORRIDOR.minY = Math.round(WORLD_H * FLOOR_TOP);
-          CORRIDOR.maxY = Math.round(WORLD_H * FLOOR_BOTTOM);
-          OBSTACLES.length = 0;
-          COUNTER_X = Math.round(WORLD_W * 0.78);
-        } else {
-          // Backup look if the artwork can't load.
-          const g = this.add.graphics().setDepth(-100);
-          g.fillStyle(0x17203a, 1).fillRect(0, 0, WORLD_W, WORLD_H);
-          g.fillStyle(0x1f2a4d, 1).fillRect(0, 300, WORLD_W, WORLD_H - 300);
-          g.lineStyle(1, 0x2b3862, 0.7);
-          for (let x = 0; x <= WORLD_W; x += 100) g.lineBetween(x, 300, x, WORLD_H);
-          for (let y = 300; y <= WORLD_H; y += 100) g.lineBetween(0, y, WORLD_W, y);
-          this.add.text(WORLD_W / 2, 40, 'MIIMIID MART', { fontSize: '34px', color: '#4da3ff', fontStyle: 'bold' })
-            .setOrigin(0.5).setDepth(-50);
-          this.drawShelf(130, 150, 1500, 120);
-          this.drawShelf(130, 660, 1500, 130);
-          OBSTACLES.forEach((o, i) => {
-            const gg = this.add.graphics().setDepth(o.y + o.h);
-            gg.fillStyle(i === 0 ? 0x7a5a3a : 0x2d6a4f, 1).fillRoundedRect(o.x, o.y, o.w, o.h + 6, 10);
-            gg.fillStyle(0xffffff, 0.12).fillRect(o.x, o.y, o.w, 8);
-            if (i === 1) this.add.text(o.x + o.w / 2, o.y + 40, 'CHECKOUT', { fontSize: '18px', color: '#ffffff', fontStyle: 'bold' }).setOrigin(0.5).setDepth(o.y + o.h + 1);
-          });
-        }
+      buildUnit(u, list) {
+        const g = this.add.graphics().setDepth(u.y + UH);
+        g.fillStyle(0x0b1530, 1).fillRect(u.x, u.y, UW, UH);
+        g.fillStyle(0x1a2b52, 1).fillRect(u.x + 6, u.y + 34, UW - 12, 70);
+        g.fillStyle(0xd7deec, 1).fillRect(u.x + 6, u.y + 100, UW - 12, 8);
+        g.fillStyle(0x22386a, 1).fillRect(u.x, u.y + 108, UW, 32);
+        g.fillStyle(0x3b5ca8, 1).fillRect(u.x, u.y + 108, UW, 4);
+        g.fillStyle(0x1f6feb, 1).fillRect(u.x, u.y, UW, 30);
+        g.fillStyle(0x050a18, 1).fillRect(u.x, u.y, 3, UH);
+        g.fillRect(u.x + UW - 3, u.y, 3, UH);
+        this.add.text(u.x + UW / 2, u.y + 15, u.label, {
+          fontSize: '14px', color: '#ffffff', fontStyle: 'bold'
+        }).setOrigin(0.5).setDepth(u.y + UH + 0.5);
 
-        // products: on wooden display crates in two rows on the store floor
-        items.forEach((item, i) => {
-          let x;
-          let y;
-          let depth;
-          let labelY;
-          if (hasBg) {
-            const cols = Math.ceil(items.length / 2);
-            const row = i % 2;
-            const col = Math.floor(i / 2);
-            x = 130 + col * ((WORLD_W - 260) / Math.max(cols - 1, 1));
-            const crateY = Math.round(WORLD_H * (row === 0 ? 0.72 : 0.89));
-            const crate = this.add.graphics().setDepth(crateY);
-            crate.fillStyle(0x7a5a3a, 1).fillRoundedRect(x - 42, crateY - 6, 84, 30, 6);
-            crate.fillStyle(0xffffff, 0.15).fillRect(x - 42, crateY - 6, 84, 6);
-            depth = crateY + 1;
-            y = crateY - 36;
-            labelY = crateY + 28;
-          } else {
-            const top = i < 8;
-            const slot = top ? i : i - 8;
-            x = 150 + slot * 190;
-            y = top ? 225 : 705;
-            depth = top ? 275 : 795;
-            labelY = y + 38;
-          }
+        // the solid part of the shelf: you cannot walk into it
+        this.obst.push({ x: u.x, y: u.y + 108, w: UW, h: 32 });
+
+        list.forEach((item, i) => {
+          const px = u.x + (UW / (list.length + 1)) * (i + 1);
+          const baseY = u.y + 100;
           const src = sources[item.id];
           let obj;
           if (src.src) {
-            obj = this.add.image(x, y, `pr-${item.id}`);
-            obj.setScale(56 / Math.max(obj.height, 1));
+            obj = this.add.image(px, baseY, `pr-${item.id}`).setOrigin(0.5, 1);
+            obj.setScale(52 / Math.max(obj.height, 1));
           } else {
-            obj = this.add.text(x, y, src.emoji, { fontSize: '44px' }).setOrigin(0.5);
+            obj = this.add.text(px, baseY, src.emoji, { fontSize: '44px' }).setOrigin(0.5, 1);
           }
-          obj.setDepth(depth);
-          const label = this.add.text(x, labelY, `${item.name}\n${priceText(item)}`, {
-            fontSize: '13px', color: '#ffffff', align: 'center', fontStyle: 'bold',
-            stroke: '#000000', strokeThickness: 4
-          }).setOrigin(0.5, 0).setDepth(depth);
-          this.products.push({ item, obj, label, x, y, taken: false, baseScale: obj.scaleX });
+          obj.setDepth(u.y + UH + 1);
+          const label = this.add.text(px, u.y + 125, priceText(item), {
+            fontSize: '13px', color: '#ffffff', fontStyle: 'bold', stroke: '#000000', strokeThickness: 3
+          }).setOrigin(0.5).setDepth(u.y + UH + 2);
+          this.products.push({
+            item, obj, label, x: px, y: baseY - 26, sy: u.y + UH, taken: false, baseScale: obj.scaleX
+          });
         });
+      }
+
+      buildCounter() {
+        const c = COUNTER;
+        const g = this.add.graphics().setDepth(c.y + c.h);
+        g.fillStyle(0x23407a, 1).fillRect(c.x, c.y - 28, c.w, c.h + 28);
+        g.fillStyle(0xdfe7f5, 1).fillRect(c.x - 6, c.y - 40, c.w + 12, 14);
+        g.fillStyle(0x3b5ca8, 1).fillRect(c.x, c.y + c.h - 8, c.w, 8);
+        // register
+        g.fillStyle(0x0b1530, 1).fillRoundedRect(c.x + 40, c.y - 100, 90, 62, 6);
+        g.fillStyle(0x4da3ff, 1).fillRect(c.x + 48, c.y - 92, 74, 30);
+        g.fillStyle(0x0b1530, 1).fillRect(c.x + 60, c.y - 44, 50, 6);
+        // scanner
+        g.fillStyle(0x0b1530, 1).fillRoundedRect(c.x + 180, c.y - 52, 70, 12, 4);
+        g.fillStyle(0xff4d4d, 1).fillRect(c.x + 190, c.y - 49, 50, 3);
+        this.add.text(c.x + c.w / 2, c.y + 28, 'CHECKOUT', {
+          fontSize: '20px', color: '#ffffff', fontStyle: 'bold'
+        }).setOrigin(0.5).setDepth(c.y + c.h + 1);
+        this.obst.push({ x: c.x, y: c.y, w: c.w, h: c.h });
+
+        const z = this.add.graphics().setDepth(-80);
+        z.fillStyle(0x4da3ff, 0.14).fillRoundedRect(ZONE.x, ZONE.y, ZONE.w, ZONE.h, 16);
+        z.lineStyle(3, 0x4da3ff, 0.5).strokeRoundedRect(ZONE.x, ZONE.y, ZONE.w, ZONE.h, 16);
+        this.add.text(ZONE.x + ZONE.w / 2, ZONE.y + ZONE.h / 2, 'PAY HERE', {
+          fontSize: '22px', color: '#1f6feb', fontStyle: 'bold'
+        }).setOrigin(0.5).setDepth(-79);
+      }
+
+      create() {
+        this.products = [];
+        this.obst = [];
+        this.faceLeft = false;
+        this.walkFlip = false;
+        this.walkClock = 0;
+        this.makeTextures();
+
+        // floor
+        this.add.tileSprite(0, WALL_H, W, H - WALL_H, 'floor').setOrigin(0, 0).setDepth(-100);
+
+        // back wall
+        const wall = this.add.graphics().setDepth(-90);
+        wall.fillStyle(0x12203f, 1).fillRect(0, 0, W, WALL_H);
+        wall.fillStyle(0x1f6feb, 1).fillRect(0, WALL_H - 14, W, 14);
+        wall.fillStyle(0x0b1530, 1).fillRect(0, 0, 30, H).fillRect(W - 30, 0, 30, H).fillRect(0, H - 20, W, 20);
+        this.add.text(W / 2, 70, 'MIIMIID MART', {
+          fontSize: '46px', color: '#4da3ff', fontStyle: 'bold'
+        }).setOrigin(0.5).setDepth(-80);
+        this.add.text(W / 2, 120, 'Smart Choices. Brighter Tomorrows.', {
+          fontSize: '18px', color: '#9ec5ff'
+        }).setOrigin(0.5).setDepth(-80);
+
+        // entrance mat
+        const mat = this.add.graphics().setDepth(-95);
+        mat.fillStyle(0x0d1730, 1).fillRoundedRect(60, 880, 260, 90, 12);
+        mat.lineStyle(3, 0x4da3ff, 1).strokeRoundedRect(60, 880, 260, 90, 12);
+        this.add.text(190, 925, 'WELCOME', { fontSize: '22px', color: '#4da3ff', fontStyle: 'bold' })
+          .setOrigin(0.5).setDepth(-94);
+
+        // shelves, products and the counter
+        UNITS.forEach(u => this.buildUnit(u, itemsByCat[u.id] || []));
+        this.buildCounter();
 
         // player
-        const startY = hasBg ? Math.round(WORLD_H * 0.8) : 480;
-        this.shadow = this.add.ellipse(220, startY, 90, 20, 0x000000, 0.35);
-        this.player = this.add.image(220, startY, 'pl-idle').setOrigin(0.5, 1);
+        this.shadow = this.add.ellipse(START.x, START.y - 2, 90, 20, 0x000000, 0.28);
+        this.player = this.add.image(START.x, START.y, 'pl-idle').setOrigin(0.5, 1);
         this.player.setScale(130 / Math.max(this.player.height, 1));
 
         this.arm = this.add.graphics().setDepth(99999);
 
         // camera
         const cam = this.cameras.main;
-        cam.setBounds(0, 0, WORLD_W, WORLD_H);
+        cam.setBounds(0, 0, W, H);
         cam.startFollow(this.player, true, 0.12, 0.12);
-        cam.setDeadzone(110, 70);
+        cam.setDeadzone(90, 60);
+        cam.roundPixels = true;
 
         this.keys = this.input.keyboard.addKeys('W,A,S,D,UP,DOWN,LEFT,RIGHT,SPACE');
-      }
-
-      drawShelf(x, y, w, h) {
-        const g = this.add.graphics().setDepth(y + h);
-        g.fillStyle(0x3a2e24, 1).fillRoundedRect(x, y, w, h, 10);
-        g.fillStyle(0x7a5a3a, 1).fillRect(x, y + h - 14, w, 14);
-        g.fillStyle(0x7a5a3a, 1).fillRect(x, y + 38, w, 8);
       }
 
       reachAt(tx, ty) {
@@ -461,7 +501,7 @@
         this.arm.clear();
         this.arm.lineStyle(9, 0xf1b27a, 1).lineBetween(sx, sy, tx, ty);
         this.arm.fillStyle(0xf1b27a, 1).fillCircle(tx, ty, 11);
-        this.time.delayedCall(280, () => this.arm.clear());
+        this.time.delayedCall(300, () => this.arm.clear());
       }
 
       flyToCart(product) {
@@ -470,7 +510,7 @@
         this.tweens.add({
           targets: product.obj,
           x: this.player.x + dir * 55,
-          y: this.player.y - 50,
+          y: this.player.y - 45,
           scale: product.baseScale * 0.4,
           duration: 450,
           ease: 'Sine.easeInOut',
@@ -479,7 +519,6 @@
       }
 
       update(time, delta) {
-        // stop if the player left the Fun Center
         if (!document.body.contains(holder)) { destroyGame(); return; }
 
         const dt = delta / 1000;
@@ -495,10 +534,12 @@
         const moving = !S.busy && len > 0.12;
 
         if (moving) {
-          let nx = Phaser.Math.Clamp(this.player.x + ix * SPEED * dt, CORRIDOR.minX, CORRIDOR.maxX);
-          if (hitsObstacle(nx, this.player.y)) nx = this.player.x;
-          let ny = Phaser.Math.Clamp(this.player.y + iy * SPEED * 0.75 * dt, CORRIDOR.minY, CORRIDOR.maxY);
-          if (hitsObstacle(nx, ny)) ny = this.player.y;
+          const px = this.player.x;
+          const py = this.player.y;
+          let nx = Phaser.Math.Clamp(px + ix * SPEED * dt, 40, W - 40);
+          if (this.blocked(nx, py)) nx = px;
+          let ny = Phaser.Math.Clamp(py + iy * SPEED * 0.8 * dt, WALL_H + 20, H - 30);
+          if (this.blocked(nx, ny)) ny = py;
           this.player.x = nx;
           this.player.y = ny;
           if (Math.abs(ix) > 0.12) this.faceLeft = ix < 0;
@@ -516,14 +557,16 @@
 
         this.player.setFlipX(FACES_RIGHT ? this.faceLeft : !this.faceLeft);
         this.player.setDepth(this.player.y);
-        this.shadow.setPosition(this.player.x, this.player.y - 4).setDepth(this.player.y - 1);
+        this.shadow.setPosition(this.player.x, this.player.y - 2).setDepth(this.player.y - 1);
 
-        // keyboard grab
         if (Phaser.Input.Keyboard.JustDown(k.SPACE)) grabBtn.click();
 
-        // nearest product highlight + Grab button
         const near = nearestProduct(this);
-        const atCounter = !near && this.player.x > COUNTER_X;
+        const atCounter = !near && inCheckoutZone(this);
+        if (atCounter && !S.zoneHint && S.basket.length > 0) {
+          S.zoneHint = true;
+          say('Ready to pay? Tap Checkout.');
+        }
         const id = near ? near.item.id : (atCounter ? '__counter' : '');
         if (id !== S.nearId) {
           S.nearId = id;
@@ -561,3 +604,4 @@
     window.startMiimiidShop = worldEntry;
   }
 })();
+    
