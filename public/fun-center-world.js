@@ -6,7 +6,7 @@
 (function () {
   'use strict';
 
-  const PHASER_URL = '/vendor/phaser/phaser.min.js';
+  const PHASER_URL = '/vendor/phaser.min.js';
   const PHASER_CDN_FALLBACK = 'https://cdn.jsdelivr.net/npm/phaser@3.80.1/dist/phaser.min.js';
   let WORLD_W = 1800;
   const WORLD_H = 900;
