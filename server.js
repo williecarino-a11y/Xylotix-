@@ -128,8 +128,6 @@ app.get(['/', '/index.html'], (req, res, next) => {
   } catch (error) { next(error); }
 });
 
-// Phaser game engine, installed through npm and served from our own server.
-app.use('/vendor/phaser', express.static(path.join(__dirname, 'node_modules', 'phaser', 'dist')));
 app.use(express.static(path.join(__dirname, 'public'), { index: 'index.html', extensions: ['html'], fallthrough: true }));
 
 const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/miimiid';
