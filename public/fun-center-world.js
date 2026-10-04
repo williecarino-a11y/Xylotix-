@@ -10,10 +10,10 @@
 
   const PHASER_URL = '/vendor/phaser.min.js';
   const PHASER_CDN_FALLBACK = 'https://cdn.jsdelivr.net/npm/phaser@3.80.1/dist/phaser.min.js';
-  const VIEW_W = 400;
-  const VIEW_H = 520;
+  const VIEW_W = 800;
+  const VIEW_H = 1040;
   const W = 1400;
-  const H = 1000;
+  const H = 1060;
   const WALL_H = 200;
   const SPEED = 210;
   const FACES_RIGHT = true;          // set false if Miimiid walks backwards
