@@ -501,9 +501,18 @@
     });
   }
 
-  // Wrap the old entry point so ?world=1 switches to the new world.
-  window.startMiimiidShop = function () {
+  // Always route through the world switch, even if another file assigns startMiimiidShop later.
+  function worldEntry() {
     if (worldOn()) return startWorld();
     return typeof originalStart === 'function' ? originalStart.apply(this, arguments) : undefined;
-  };
+  }
+  try {
+    Object.defineProperty(window, 'startMiimiidShop', {
+      configurable: true,
+      get() { return worldEntry; },
+      set(fn) { if (typeof fn === 'function' && fn !== worldEntry) originalStart = fn; }
+    });
+  } catch (e) {
+    window.startMiimiidShop = worldEntry;
+  }
 })();
