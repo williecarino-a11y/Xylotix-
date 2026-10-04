@@ -27,12 +27,13 @@
 
   try {
     const q = new URLSearchParams(location.search).get('world');
-    if (q === '1') localStorage.setItem('miimiidWorld', '1');
-    if (q === '0') localStorage.removeItem('miimiidWorld');
+    if (q === '1') localStorage.removeItem('miimiidWorld');
+    if (q === '0') localStorage.setItem('miimiidWorld', '0');
   } catch (e) { /* ignore */ }
 
+  // The new world is ON by default. Open the site with ?world=0 to use the old Mart.
   function worldOn() {
-    try { return localStorage.getItem('miimiidWorld') === '1'; } catch (e) { return false; }
+    try { return localStorage.getItem('miimiidWorld') !== '0'; } catch (e) { return true; }
   }
 
   function esc(v) { return miimiidFunCenterEscapeHtml(v); }
