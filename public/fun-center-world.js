@@ -7,7 +7,7 @@
   'use strict';
 
   const PHASER_URL = 'https://cdn.jsdelivr.net/npm/phaser@3.80.1/dist/phaser.min.js';
-  const WORLD_W = 1800;
+  let WORLD_W = 1800;
   const WORLD_H = 900;
   const VIEW_W = 400;
   const VIEW_H = 520;
@@ -18,7 +18,11 @@
     { x: 820, y: 440, w: 220, h: 50 },    // island shelf
     { x: 1590, y: 330, w: 190, h: 120 }   // checkout counter
   ];
-  const COUNTER_X = 1560;
+  let COUNTER_X = 1560;
+  // Where the walkable floor is inside your store artwork (fraction of its height).
+  // If Miimiid walks on the shelves, raise FLOOR_TOP. If he can't reach the bottom, raise FLOOR_BOTTOM.
+  const FLOOR_TOP = 0.66;
+  const FLOOR_BOTTOM = 0.96;
   const GRAB_RANGE = 130;
 
   let originalStart = window.startMiimiidShop;
@@ -330,6 +334,8 @@
       constructor() { super('mart'); }
 
       preload() {
+        const bgUrl = MIIMIID_ASSETS.game && MIIMIID_ASSETS.game.martInterior;
+        if (bgUrl) this.load.image('mart-bg', bgUrl);
         Object.keys(frames).forEach(k => this.load.image(`pl-${k}`, frames[k]));
         items.forEach(item => {
           const src = sources[item.id];
@@ -343,34 +349,65 @@
         this.walkFlip = false;
         this.walkClock = 0;
 
-        // floor + back wall
-        const g = this.add.graphics().setDepth(-100);
-        g.fillStyle(0x17203a, 1).fillRect(0, 0, WORLD_W, WORLD_H);
-        g.fillStyle(0x1f2a4d, 1).fillRect(0, 300, WORLD_W, WORLD_H - 300);
-        g.lineStyle(1, 0x2b3862, 0.7);
-        for (let x = 0; x <= WORLD_W; x += 100) g.lineBetween(x, 300, x, WORLD_H);
-        for (let y = 300; y <= WORLD_H; y += 100) g.lineBetween(0, y, WORLD_W, y);
+        const hasBg = this.textures.exists('mart-bg');
 
-        this.add.text(WORLD_W / 2, 40, 'MIIMIID MART', { fontSize: '34px', color: '#4da3ff', fontStyle: 'bold' })
-          .setOrigin(0.5).setDepth(-50);
+        if (hasBg) {
+          // Your beautiful Miimiid Mart artwork becomes the world.
+          const bg = this.add.image(0, 0, 'mart-bg').setOrigin(0, 0).setDepth(-100);
+          bg.setScale(WORLD_H / bg.height);
+          WORLD_W = Math.round(bg.displayWidth);
+          CORRIDOR.minX = 60;
+          CORRIDOR.maxX = WORLD_W - 60;
+          CORRIDOR.minY = Math.round(WORLD_H * FLOOR_TOP);
+          CORRIDOR.maxY = Math.round(WORLD_H * FLOOR_BOTTOM);
+          OBSTACLES.length = 0;
+          COUNTER_X = Math.round(WORLD_W * 0.78);
+        } else {
+          // Backup look if the artwork can't load.
+          const g = this.add.graphics().setDepth(-100);
+          g.fillStyle(0x17203a, 1).fillRect(0, 0, WORLD_W, WORLD_H);
+          g.fillStyle(0x1f2a4d, 1).fillRect(0, 300, WORLD_W, WORLD_H - 300);
+          g.lineStyle(1, 0x2b3862, 0.7);
+          for (let x = 0; x <= WORLD_W; x += 100) g.lineBetween(x, 300, x, WORLD_H);
+          for (let y = 300; y <= WORLD_H; y += 100) g.lineBetween(0, y, WORLD_W, y);
+          this.add.text(WORLD_W / 2, 40, 'MIIMIID MART', { fontSize: '34px', color: '#4da3ff', fontStyle: 'bold' })
+            .setOrigin(0.5).setDepth(-50);
+          this.drawShelf(130, 150, 1500, 120);
+          this.drawShelf(130, 660, 1500, 130);
+          OBSTACLES.forEach((o, i) => {
+            const gg = this.add.graphics().setDepth(o.y + o.h);
+            gg.fillStyle(i === 0 ? 0x7a5a3a : 0x2d6a4f, 1).fillRoundedRect(o.x, o.y, o.w, o.h + 6, 10);
+            gg.fillStyle(0xffffff, 0.12).fillRect(o.x, o.y, o.w, 8);
+            if (i === 1) this.add.text(o.x + o.w / 2, o.y + 40, 'CHECKOUT', { fontSize: '18px', color: '#ffffff', fontStyle: 'bold' }).setOrigin(0.5).setDepth(o.y + o.h + 1);
+          });
+        }
 
-        // shelves (top row behind the player, bottom row in front)
-        this.drawShelf(130, 150, 1500, 120);
-        this.drawShelf(130, 660, 1500, 130);
-        OBSTACLES.forEach((o, i) => {
-          const gg = this.add.graphics().setDepth(o.y + o.h);
-          gg.fillStyle(i === 0 ? 0x7a5a3a : 0x2d6a4f, 1).fillRoundedRect(o.x, o.y, o.w, o.h + 6, 10);
-          gg.fillStyle(0xffffff, 0.12).fillRect(o.x, o.y, o.w, 8);
-          if (i === 1) this.add.text(o.x + o.w / 2, o.y + 40, 'CHECKOUT', { fontSize: '18px', color: '#ffffff', fontStyle: 'bold' }).setOrigin(0.5).setDepth(o.y + o.h + 1);
-        });
-
-        // products on the shelves
+        // products: on wooden display crates in two rows on the store floor
         items.forEach((item, i) => {
-          const top = i < 8;
-          const slot = top ? i : i - 8;
-          const x = 150 + slot * 190;
-          const y = top ? 225 : 705;
-          const depth = top ? 275 : 795;
+          let x;
+          let y;
+          let depth;
+          let labelY;
+          if (hasBg) {
+            const cols = Math.ceil(items.length / 2);
+            const row = i % 2;
+            const col = Math.floor(i / 2);
+            x = 130 + col * ((WORLD_W - 260) / Math.max(cols - 1, 1));
+            const crateY = Math.round(WORLD_H * (row === 0 ? 0.72 : 0.89));
+            const crate = this.add.graphics().setDepth(crateY);
+            crate.fillStyle(0x7a5a3a, 1).fillRoundedRect(x - 42, crateY - 6, 84, 30, 6);
+            crate.fillStyle(0xffffff, 0.15).fillRect(x - 42, crateY - 6, 84, 6);
+            depth = crateY + 1;
+            y = crateY - 36;
+            labelY = crateY + 28;
+          } else {
+            const top = i < 8;
+            const slot = top ? i : i - 8;
+            x = 150 + slot * 190;
+            y = top ? 225 : 705;
+            depth = top ? 275 : 795;
+            labelY = y + 38;
+          }
           const src = sources[item.id];
           let obj;
           if (src.src) {
@@ -380,15 +417,17 @@
             obj = this.add.text(x, y, src.emoji, { fontSize: '44px' }).setOrigin(0.5);
           }
           obj.setDepth(depth);
-          const label = this.add.text(x, y + 38, `${item.name}\n${priceText(item)}`, {
-            fontSize: '13px', color: '#ffffff', align: 'center', fontStyle: 'bold'
+          const label = this.add.text(x, labelY, `${item.name}\n${priceText(item)}`, {
+            fontSize: '13px', color: '#ffffff', align: 'center', fontStyle: 'bold',
+            stroke: '#000000', strokeThickness: 4
           }).setOrigin(0.5, 0).setDepth(depth);
           this.products.push({ item, obj, label, x, y, taken: false, baseScale: obj.scaleX });
         });
 
         // player
-        this.shadow = this.add.ellipse(220, 480, 90, 20, 0x000000, 0.35);
-        this.player = this.add.image(220, 480, 'pl-idle').setOrigin(0.5, 1);
+        const startY = hasBg ? Math.round(WORLD_H * 0.8) : 480;
+        this.shadow = this.add.ellipse(220, startY, 90, 20, 0x000000, 0.35);
+        this.player = this.add.image(220, startY, 'pl-idle').setOrigin(0.5, 1);
         this.player.setScale(130 / Math.max(this.player.height, 1));
 
         this.arm = this.add.graphics().setDepth(99999);
