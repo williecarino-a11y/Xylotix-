@@ -38,6 +38,42 @@
   const START = { x: 160, y: 800 };
   const GRAB_RANGE = 105;
   const ART = '/assets/fun-center/mart/';
+  const MM_SCALE = 0.143;   // puppet is about 910 art units tall, so this makes him about 130px
+  const MM_FILES = [
+    'head-blank', 'eye-open-left', 'eye-open-right', 'eye-closed-left', 'eye-closed-right',
+    'mouth-smile', 'mouth-open-medium', 'mouth-open-big',
+    'torso-front', 'leg-front-left', 'leg-front-right',
+    'arm-hanging-left', 'arm-hanging-right', 'arm-reaching-left', 'arm-reaching-right',
+    'arm-bent-front-left', 'arm-bent-front-right',
+    'head-back', 'torso-back', 'leg-back-left', 'leg-back-right',
+    'head-side', 'torso-side', 'leg-side-straight-left', 'leg-side-straight-right'
+  ];
+  // [file, pivot x fraction, pivot y fraction] for each arm pose
+  const MM_ARMS = {
+    L: { hang: ['arm-hanging-left', 0.72, 0.07], reach: ['arm-reaching-left', 0.88, 0.30], fist: ['arm-bent-front-right', 0.12, 0.12] },
+    R: { hang: ['arm-hanging-right', 0.28, 0.07], reach: ['arm-reaching-right', 0.12, 0.30], fist: ['arm-bent-front-left', 0.88, 0.12] }
+  };
+  // c = feet center; legs are [file, x, y, hip pivot x, hip pivot y]; head is [file, x, y, scale]
+  const MM_VIEWS = {
+    front: {
+      c: [360, 918], hang: true,
+      torso: ['torso-front', 175, 330], head: ['head-blank', 161, 9, 0.44],
+      legL: ['leg-front-left', 183, 590, 83, 24], legR: ['leg-front-right', 370, 590, 80, 24],
+      face: { eyeL: [196, 253], eyeR: [336, 253], mouth: [268, 306] },
+      shoulder: { L: [230, 420], R: [490, 420] }
+    },
+    back: {
+      c: [350, 911], hang: false,
+      torso: ['torso-back', 174, 330], head: ['head-back', 183, 27, 1],
+      legL: ['leg-back-left', 174, 583, 86, 24], legR: ['leg-back-right', 354, 583, 76, 24],
+      shoulder: { L: [224, 420], R: [477, 420] }
+    },
+    side: {
+      c: [350, 930],
+      torso: ['torso-side', 234, 330], head: ['head-side', 110, 36, 1],
+      legL: ['leg-side-straight-left', 277, 589, 66, 24], legR: ['leg-side-straight-right', 293, 589, 66, 24]
+    }
+  };
 
   let originalStart = window.startMiimiidShop;
   let game = null;
@@ -84,7 +120,7 @@
       .mw-leave { background: transparent; border: 1px solid #232c42; color: #9aa4bd; border-radius: 999px; padding: 6px 12px; cursor: pointer; }
       .mw-holder { position: relative; width: 100%; aspect-ratio: ${VIEW_W} / ${VIEW_H}; border-radius: 18px; overflow: hidden; background: #0d1324; border: 1px solid #232c42; }
       .mw-holder canvas { display: block; }
-      .mw-bubble { position: absolute; left: 10px; right: 10px; top: 10px; background: rgba(19, 26, 44, 0.92); border: 1px solid #232c42; color: #e6e9f0; border-radius: 14px; padding: 10px 12px; font-size: 14px; line-height: 1.35; pointer-events: none; z-index: 5; }
+      .mw-bubble { position: absolute; left: 10px; right: 10px; bottom: 10px; background: rgba(19, 26, 44, 0.92); border: 1px solid #232c42; color: #e6e9f0; border-radius: 14px; padding: 10px 12px; font-size: 14px; line-height: 1.35; pointer-events: none; z-index: 5; }
       .mw-overlay { position: absolute; inset: 0; background: rgba(8, 12, 24, 0.82); display: flex; align-items: center; justify-content: center; padding: 16px; z-index: 8; }
       .mw-card { width: 100%; background: #131a2c; border: 1px solid #232c42; border-radius: 18px; padding: 16px; color: #e6e9f0; text-align: center; }
       .mw-card h3 { margin: 0 0 8px; color: #4da3ff; }
@@ -361,6 +397,7 @@
         this.load.image('art-floor', ART + 'floor-1.png');
         this.load.image('art-shelf', ART + 'shelf.png');
         this.load.image('art-counter', ART + 'counter.png');
+        MM_FILES.forEach(n => this.load.image('mm-' + n, ART + 'miimiid/' + n + '.png'));
         Object.keys(frames).forEach(k => this.load.image(`pl-${k}`, frames[k]));
         items.forEach(item => {
           const src = sources[item.id];
@@ -403,7 +440,7 @@
         }).setOrigin(0.5).setDepth(u.y + UH + 0.5);
 
         // the solid part of the shelf: you cannot walk into it
-        this.obst.push({ x: u.x, y: u.y + 108, w: UW, h: 32 });
+        this.obst.push({ x: u.x, y: u.y - 110, w: UW, h: UH + 110 });
 
         list.forEach((item, i) => {
           const px = u.x + (UW / (list.length + 1)) * (i + 1);
@@ -493,8 +530,17 @@
 
         // player
         this.shadow = this.add.ellipse(START.x, START.y - 2, 90, 20, 0x000000, 0.28);
-        this.player = this.add.image(START.x, START.y, 'pl-idle').setOrigin(0.5, 1);
-        this.player.setScale(130 / Math.max(this.player.height, 1));
+        this.reachUntil = 0;
+        this.reachT0 = 0;
+        this.reachSide = 'L';
+        this.puppet = null;
+        try { this.puppet = this.buildPuppet(START.x, START.y); } catch (e) { console.error('puppet failed:', e); }
+        if (this.puppet) {
+          this.player = this.puppet.root;
+        } else {
+          this.player = this.add.image(START.x, START.y, 'pl-idle').setOrigin(0.5, 1);
+          this.player.setScale(130 / Math.max(this.player.height, 1));
+        }
 
         this.arm = this.add.graphics().setDepth(99999);
 
@@ -508,7 +554,128 @@
         this.keys = this.input.keyboard.addKeys('W,A,S,D,UP,DOWN,LEFT,RIGHT,SPACE');
       }
 
+      buildPuppet(x, y) {
+        if (!MM_FILES.every(n => this.textures.exists('mm-' + n))) return null;
+        const root = this.add.container(x, y).setScale(MM_SCALE);
+        const P = { root, view: 'front', phase: 0, amp: 0, nextBlink: 0, blinkUntil: 0, views: {} };
+        Object.keys(MM_VIEWS).forEach(name => {
+          const D = MM_VIEWS[name];
+          const c = D.c;
+          const box = this.add.container(0, 0);
+          const upper = this.add.container(0, 0);
+          const V = { box, upper, arms: null };
+          const put = (parent, key, ux, uy, sc, px, py) => {
+            const im = this.add.image(ux + px - c[0], uy + py - c[1], 'mm-' + key).setScale(sc);
+            im.setOrigin(px / (im.width * sc), py / (im.height * sc));
+            im.baseY = im.y;
+            parent.add(im);
+            return im;
+          };
+          V.legL = put(box, D.legL[0], D.legL[1], D.legL[2], 1, D.legL[3], D.legL[4]);
+          V.legR = put(box, D.legR[0], D.legR[1], D.legR[2], 1, D.legR[3], D.legR[4]);
+          box.add(upper);
+          put(upper, D.torso[0], D.torso[1], D.torso[2], 1, 0, 0);
+          if (D.shoulder) {
+            V.arms = { L: {}, R: {} };
+            ['L', 'R'].forEach(sd => {
+              Object.keys(MM_ARMS[sd]).forEach(pose => {
+                if (pose === 'hang' && !D.hang) return;
+                const a = MM_ARMS[sd][pose];
+                const im = this.add.image(D.shoulder[sd][0] - c[0], D.shoulder[sd][1] - c[1], 'mm-' + a[0])
+                  .setScale(0.7).setOrigin(a[1], a[2]).setVisible(pose === 'hang');
+                upper.add(im);
+                V.arms[sd][pose] = im;
+              });
+            });
+          }
+          put(upper, D.head[0], D.head[1], D.head[2], D.head[3], 0, 0);
+          if (D.face) {
+            const F = D.face;
+            const hx = D.head[1];
+            const hy = D.head[2];
+            const fp = (key, p) => {
+              const im = this.add.image(hx + p[0] - c[0], hy + p[1] - c[1], 'mm-' + key).setScale(0.44);
+              upper.add(im);
+              return im;
+            };
+            V.eyeO = [fp('eye-open-left', F.eyeL), fp('eye-open-right', F.eyeR)];
+            V.eyeC = [fp('eye-closed-left', F.eyeL), fp('eye-closed-right', F.eyeR)];
+            V.mouth = { s: fp('mouth-smile', F.mouth), m: fp('mouth-open-medium', F.mouth), b: fp('mouth-open-big', F.mouth) };
+            V.eyeC.forEach(e => e.setVisible(false));
+            V.mouth.m.setVisible(false);
+            V.mouth.b.setVisible(false);
+          }
+          box.setVisible(name === 'front');
+          root.add(box);
+          P.views[name] = V;
+        });
+        return P;
+      }
+
+      animPuppet(delta, now, moving, ix, iy) {
+        const P = this.puppet;
+        const reaching = now < this.reachUntil;
+        let view = P.view;
+        if (reaching) view = 'back';                       // he faces the shelf
+        else if (moving) view = Math.abs(iy) > Math.abs(ix) * 1.1 ? (iy > 0 ? 'front' : 'back') : 'side';
+        if (view !== P.view) {
+          P.view = view;
+          Object.keys(P.views).forEach(k => P.views[k].box.setVisible(k === view));
+        }
+        P.root.scaleX = (view === 'side' && this.faceLeft) ? -MM_SCALE : MM_SCALE;
+        const V = P.views[view];
+        P.amp += ((moving ? 1 : 0) - P.amp) * Math.min(1, delta / 90);
+        if (moving) P.phase += (delta / 1000) * (Math.PI * 2 / 0.7);
+        const s = Math.sin(P.phase);
+        const c = Math.cos(P.phase);
+        const a = P.amp;
+        const rad = Phaser.Math.DegToRad;
+        const sw = view === 'side' ? 26 : 20;
+        V.legL.setRotation(rad(sw * s * a));
+        V.legR.setRotation(rad(-sw * s * a));
+        V.legL.y = V.legL.baseY - 12 * Math.max(0, c) * a;
+        V.legR.y = V.legR.baseY - 12 * Math.max(0, -c) * a;
+        V.upper.y = -5 * Math.abs(s) * a;
+
+        if (V.arms) {
+          ['L', 'R'].forEach(sd => {
+            const A = V.arms[sd];
+            const sg = sd === 'L' ? 1 : -1;
+            let pose = 'hang';
+            let rot = (sd === 'L' ? -10 : 10) * s * a;
+            if (reaching && sd === this.reachSide) {
+              const p = (now - this.reachT0) / 900;
+              if (p < 0.55) {
+                const e = Math.min(p / 0.35, 1);
+                const k = e < 0.5 ? 2 * e * e : 1 - Math.pow(-2 * e + 2, 2) / 2;
+                pose = 'reach';
+                rot = sg * (-6 + 76 * k);
+              } else if (p < 0.8) {
+                pose = 'fist';
+                rot = 0;
+              }
+            }
+            ['hang', 'reach', 'fist'].forEach(n => {
+              if (A[n]) A[n].setVisible(n === pose).setRotation(n === pose ? rad(rot) : 0);
+            });
+          });
+        }
+
+        if (V.eyeO) {
+          if (now > P.nextBlink) { P.blinkUntil = now + 130; P.nextBlink = now + 2200 + Math.random() * 3200; }
+          const shut = now < P.blinkUntil;
+          V.eyeO.forEach(e => e.setVisible(!shut));
+          V.eyeC.forEach(e => e.setVisible(shut));
+          const m = reaching ? 'm' : 's';
+          ['s', 'm', 'b'].forEach(k => V.mouth[k].setVisible(k === m));
+        }
+      }
+
       reachAt(tx, ty) {
+        this.reachSide = tx < this.player.x ? 'L' : 'R';
+        this.reachT0 = this.time.now;
+        this.reachUntil = this.reachT0 + 900;
+        if (this.puppet) return;                            // the puppet reaches with real arms
         const dir = this.faceLeft ? -1 : 1;
         const sx = this.player.x + dir * 40;
         const sy = this.player.y - 70;
@@ -519,12 +686,12 @@
       }
 
       flyToCart(product) {
-        const dir = this.faceLeft ? -1 : 1;
         if (product.label) product.label.destroy();
+        const dir = this.faceLeft ? -1 : 1;
         this.tweens.add({
           targets: product.obj,
-          x: this.player.x + dir * 55,
-          y: this.player.y - 45,
+          x: this.puppet ? this.player.x : this.player.x + dir * 55,
+          y: this.puppet ? this.player.y - 70 : this.player.y - 45,
           scale: product.baseScale * 0.4,
           duration: 450,
           ease: 'Sine.easeInOut',
@@ -558,18 +725,21 @@
           this.player.y = ny;
           if (Math.abs(ix) > 0.12) this.faceLeft = ix < 0;
 
-          this.walkClock += delta;
-          if (this.walkClock > 260) {
-            this.walkClock = 0;
-            this.walkFlip = !this.walkFlip;
-            this.player.setTexture(this.walkFlip ? 'pl-walk2' : 'pl-walk1');
+          if (!this.puppet) {
+            this.walkClock += delta;
+            if (this.walkClock > 260) {
+              this.walkClock = 0;
+              this.walkFlip = !this.walkFlip;
+              this.player.setTexture(this.walkFlip ? 'pl-walk2' : 'pl-walk1');
+            }
           }
-        } else {
+        } else if (!this.puppet) {
           this.player.setTexture('pl-idle');
           this.walkClock = 0;
         }
 
-        this.player.setFlipX(FACES_RIGHT ? this.faceLeft : !this.faceLeft);
+        if (this.puppet) this.animPuppet(delta, this.time.now, moving, ix, iy);
+        else this.player.setFlipX(FACES_RIGHT ? this.faceLeft : !this.faceLeft);
         this.player.setDepth(this.player.y);
         this.shadow.setPosition(this.player.x, this.player.y - 2).setDepth(this.player.y - 1);
 
