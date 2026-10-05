@@ -358,7 +358,7 @@
       constructor() { super('mart'); }
 
       preload() {
-        this.load.image('art-floor', ART + 'floor.png');
+        this.load.image('art-floor', ART + 'floor-1.png');
         this.load.image('art-shelf', ART + 'shelf.png');
         this.load.image('art-counter', ART + 'counter.png');
         Object.keys(frames).forEach(k => this.load.image(`pl-${k}`, frames[k]));
