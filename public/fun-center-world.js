@@ -37,6 +37,7 @@
   const ZONE = { x: 960, y: 740, w: 380, h: 170 };
   const START = { x: 160, y: 800 };
   const GRAB_RANGE = 105;
+  const ART = '/assets/fun-center/mart/';
 
   let originalStart = window.startMiimiidShop;
   let game = null;
@@ -357,6 +358,9 @@
       constructor() { super('mart'); }
 
       preload() {
+        this.load.image('art-floor', ART + 'floor.png');
+        this.load.image('art-shelf', ART + 'shelf.png');
+        this.load.image('art-counter', ART + 'counter.png');
         Object.keys(frames).forEach(k => this.load.image(`pl-${k}`, frames[k]));
         items.forEach(item => {
           const src = sources[item.id];
@@ -380,15 +384,20 @@
       }
 
       buildUnit(u, list) {
-        const g = this.add.graphics().setDepth(u.y + UH);
-        g.fillStyle(0x0b1530, 1).fillRect(u.x, u.y, UW, UH);
-        g.fillStyle(0x1a2b52, 1).fillRect(u.x + 6, u.y + 34, UW - 12, 70);
-        g.fillStyle(0xd7deec, 1).fillRect(u.x + 6, u.y + 100, UW - 12, 8);
-        g.fillStyle(0x22386a, 1).fillRect(u.x, u.y + 108, UW, 32);
-        g.fillStyle(0x3b5ca8, 1).fillRect(u.x, u.y + 108, UW, 4);
-        g.fillStyle(0x1f6feb, 1).fillRect(u.x, u.y, UW, 30);
-        g.fillStyle(0x050a18, 1).fillRect(u.x, u.y, 3, UH);
-        g.fillRect(u.x + UW - 3, u.y, 3, UH);
+        if (this.textures.exists('art-shelf')) {
+          this.add.image(u.x, u.y, 'art-shelf').setOrigin(0, 0)
+            .setDisplaySize(UW, UH).setDepth(u.y + UH);
+        } else {
+          const g = this.add.graphics().setDepth(u.y + UH);
+          g.fillStyle(0x0b1530, 1).fillRect(u.x, u.y, UW, UH);
+          g.fillStyle(0x1a2b52, 1).fillRect(u.x + 6, u.y + 34, UW - 12, 70);
+          g.fillStyle(0xd7deec, 1).fillRect(u.x + 6, u.y + 100, UW - 12, 8);
+          g.fillStyle(0x22386a, 1).fillRect(u.x, u.y + 108, UW, 32);
+          g.fillStyle(0x3b5ca8, 1).fillRect(u.x, u.y + 108, UW, 4);
+          g.fillStyle(0x1f6feb, 1).fillRect(u.x, u.y, UW, 30);
+          g.fillStyle(0x050a18, 1).fillRect(u.x, u.y, 3, UH);
+          g.fillRect(u.x + UW - 3, u.y, 3, UH);
+        }
         this.add.text(u.x + UW / 2, u.y + 15, u.label, {
           fontSize: '14px', color: '#ffffff', fontStyle: 'bold'
         }).setOrigin(0.5).setDepth(u.y + UH + 0.5);
@@ -419,20 +428,23 @@
 
       buildCounter() {
         const c = COUNTER;
-        const g = this.add.graphics().setDepth(c.y + c.h);
-        g.fillStyle(0x23407a, 1).fillRect(c.x, c.y - 28, c.w, c.h + 28);
-        g.fillStyle(0xdfe7f5, 1).fillRect(c.x - 6, c.y - 40, c.w + 12, 14);
-        g.fillStyle(0x3b5ca8, 1).fillRect(c.x, c.y + c.h - 8, c.w, 8);
-        // register
-        g.fillStyle(0x0b1530, 1).fillRoundedRect(c.x + 40, c.y - 100, 90, 62, 6);
-        g.fillStyle(0x4da3ff, 1).fillRect(c.x + 48, c.y - 92, 74, 30);
-        g.fillStyle(0x0b1530, 1).fillRect(c.x + 60, c.y - 44, 50, 6);
-        // scanner
-        g.fillStyle(0x0b1530, 1).fillRoundedRect(c.x + 180, c.y - 52, 70, 12, 4);
-        g.fillStyle(0xff4d4d, 1).fillRect(c.x + 190, c.y - 49, 50, 3);
-        this.add.text(c.x + c.w / 2, c.y + 28, 'CHECKOUT', {
-          fontSize: '20px', color: '#ffffff', fontStyle: 'bold'
-        }).setOrigin(0.5).setDepth(c.y + c.h + 1);
+        if (this.textures.exists('art-counter')) {
+          const cart = this.add.image(c.x + c.w / 2, c.y + c.h + 4, 'art-counter').setOrigin(0.5, 1);
+          cart.setScale(340 / Math.max(cart.width, 1)).setDepth(c.y + c.h);
+        } else {
+          const g = this.add.graphics().setDepth(c.y + c.h);
+          g.fillStyle(0x23407a, 1).fillRect(c.x, c.y - 28, c.w, c.h + 28);
+          g.fillStyle(0xdfe7f5, 1).fillRect(c.x - 6, c.y - 40, c.w + 12, 14);
+          g.fillStyle(0x3b5ca8, 1).fillRect(c.x, c.y + c.h - 8, c.w, 8);
+          g.fillStyle(0x0b1530, 1).fillRoundedRect(c.x + 40, c.y - 100, 90, 62, 6);
+          g.fillStyle(0x4da3ff, 1).fillRect(c.x + 48, c.y - 92, 74, 30);
+          g.fillStyle(0x0b1530, 1).fillRect(c.x + 60, c.y - 44, 50, 6);
+          g.fillStyle(0x0b1530, 1).fillRoundedRect(c.x + 180, c.y - 52, 70, 12, 4);
+          g.fillStyle(0xff4d4d, 1).fillRect(c.x + 190, c.y - 49, 50, 3);
+          this.add.text(c.x + c.w / 2, c.y + 28, 'CHECKOUT', {
+            fontSize: '20px', color: '#ffffff', fontStyle: 'bold'
+          }).setOrigin(0.5).setDepth(c.y + c.h + 1);
+        }
         this.obst.push({ x: c.x, y: c.y, w: c.w, h: c.h });
 
         const z = this.add.graphics().setDepth(-80);
@@ -452,7 +464,9 @@
         this.makeTextures();
 
         // floor
-        this.add.tileSprite(0, WALL_H, W, H - WALL_H, 'floor').setOrigin(0, 0).setDepth(-100);
+        const floorKey = this.textures.exists('art-floor') ? 'art-floor' : 'floor';
+        const floorTiles = this.add.tileSprite(0, WALL_H, W, H - WALL_H, floorKey).setOrigin(0, 0).setDepth(-100);
+        if (floorKey === 'art-floor') floorTiles.setTileScale(0.8);
 
         // back wall
         const wall = this.add.graphics().setDepth(-90);
