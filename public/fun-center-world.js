@@ -38,7 +38,9 @@
   const START = { x: 160, y: 800 };
   const GRAB_RANGE = 105;
   const ART = '/assets/fun-center/mart/';
-  const MM_SCALE = 0.143;   // puppet is about 910 art units tall, so this makes him about 130px
+  const MM_SCALE = 0.18;    // puppet size: 910 art units tall becomes about 164px
+  const CART_W = 150;       // cart width in world pixels
+  const CART_GAP = 100;     // how far the cart sits beside him
   const MM_FILES = [
     'head-blank', 'eye-open-left', 'eye-open-right', 'eye-closed-left', 'eye-closed-right',
     'mouth-smile', 'mouth-open-medium', 'mouth-open-big',
@@ -78,6 +80,81 @@
   let originalStart = window.startMiimiidShop;
   let game = null;
   let phaserPromise = null;
+
+  // Sounds made in code, so there are no audio files to upload.
+  const SFX = {
+    ctx: null, master: null, muted: false, timer: null, beat: 0,
+    init() {
+      try {
+        if (!this.ctx) {
+          const AC = window.AudioContext || window.webkitAudioContext;
+          if (!AC) return;
+          this.ctx = new AC();
+          this.master = this.ctx.createGain();
+          this.master.gain.value = this.muted ? 0 : 0.9;
+          this.master.connect(this.ctx.destination);
+        }
+        if (this.ctx.state === 'suspended') this.ctx.resume();
+      } catch (e) { /* no audio available */ }
+    },
+    tone(f, dur, type, vol, delay) {
+      if (!this.ctx || this.ctx.state !== 'running') return;
+      const t = this.ctx.currentTime + (delay || 0);
+      const o = this.ctx.createOscillator();
+      const g = this.ctx.createGain();
+      o.type = type || 'sine';
+      o.frequency.setValueAtTime(f, t);
+      g.gain.setValueAtTime(0.0001, t);
+      g.gain.exponentialRampToValueAtTime(vol, t + 0.01);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+      o.connect(g);
+      g.connect(this.master);
+      o.start(t);
+      o.stop(t + dur + 0.02);
+    },
+    noise(dur, vol, freq) {
+      if (!this.ctx || this.ctx.state !== 'running') return;
+      const n = Math.floor(this.ctx.sampleRate * dur);
+      const buf = this.ctx.createBuffer(1, n, this.ctx.sampleRate);
+      const d = buf.getChannelData(0);
+      for (let i = 0; i < n; i++) d[i] = (Math.random() * 2 - 1) * (1 - i / n);
+      const s = this.ctx.createBufferSource();
+      s.buffer = buf;
+      const f = this.ctx.createBiquadFilter();
+      f.type = 'bandpass';
+      f.frequency.value = freq || 1200;
+      const g = this.ctx.createGain();
+      g.gain.value = vol;
+      s.connect(f);
+      f.connect(g);
+      g.connect(this.master);
+      s.start();
+    },
+    step() { this.noise(0.07, 0.09, 380 + Math.random() * 120); },
+    reach() { this.noise(0.18, 0.05, 1800); },
+    pickup() { this.tone(660, 0.09, 'triangle', 0.16); this.tone(990, 0.14, 'triangle', 0.16, 0.08); },
+    coin() { this.tone(988, 0.1, 'square', 0.08); this.tone(1319, 0.35, 'square', 0.08, 0.09); this.noise(0.12, 0.08, 5000); },
+    startMusic() {
+      if (this.timer || !this.ctx) return;
+      const chords = [[261.63, 329.63, 392.0], [220.0, 261.63, 329.63], [174.61, 220.0, 261.63], [196.0, 246.94, 293.66]];
+      const penta = [523.25, 587.33, 659.25, 783.99, 880.0];
+      this.beat = 0;
+      this.timer = setInterval(() => {
+        const b = this.beat++;
+        const ch = chords[Math.floor(b / 8) % 4];
+        const i = b % 8;
+        this.tone(ch[i % 3], 0.26, 'triangle', 0.045);
+        if (i === 0) this.tone(ch[0] / 2, 0.55, 'sine', 0.07);
+        if (i % 4 === 2 && Math.random() < 0.75) this.tone(penta[Math.floor(Math.random() * penta.length)], 0.32, 'triangle', 0.03);
+      }, 290);
+    },
+    stopMusic() { if (this.timer) { clearInterval(this.timer); this.timer = null; } },
+    toggleMute() {
+      this.muted = !this.muted;
+      if (this.master) this.master.gain.value = this.muted ? 0 : 0.9;
+      return this.muted;
+    }
+  };
 
   try {
     const q = new URLSearchParams(location.search).get('world');
@@ -193,6 +270,7 @@
   }
 
   function destroyGame() {
+    SFX.stopMusic();
     if (game) { try { game.destroy(true); } catch (e) { /* ignore */ } game = null; }
   }
 
@@ -217,6 +295,7 @@
         <div class="mw-top">
           <span class="mw-wallet">Wallet <span data-mw-wallet>$${S.budget}</span></span>
           <span class="mw-count">🛒 <span data-mw-count>0</span></span>
+          <button type="button" class="mw-leave" data-mw-mute>🔊</button>
           <button type="button" class="mw-leave" data-mw-leave>Leave</button>
         </div>
         <div class="mw-holder" data-mw-holder>
@@ -252,6 +331,14 @@
       destroyGame();
       renderMiimiidFunCenter();
     });
+
+    // sound: browsers start audio only after a tap, so wake it on the first touch
+    const muteBtn = content.querySelector('[data-mw-mute]');
+    muteBtn.textContent = SFX.muted ? '🔇' : '🔊';
+    muteBtn.addEventListener('click', () => { muteBtn.textContent = SFX.toggleMute() ? '🔇' : '🔊'; });
+    content.addEventListener('pointerdown', () => { SFX.init(); SFX.startMusic(); });
+    SFX.init();
+    SFX.startMusic();
 
     // joystick
     const joyEl = content.querySelector('[data-mw-joy]');
@@ -326,7 +413,7 @@
         }
 
         scene.reachAt(product.x, product.y);
-        if (typeof miimiidFunTone === 'function') miimiidFunTone(520, 0.05, 'sine', 0.025);
+        SFX.reach();
         await new Promise(r => setTimeout(r, 240));
 
         const result = await miimiidFunCenterRequest(
@@ -337,6 +424,7 @@
         S.basket.push(item.id);
         product.taken = true;
         scene.flyToCart(product);
+        SFX.pickup();
         hud();
 
         const left = result.remaining;
@@ -363,6 +451,7 @@
           { method: 'POST', body: JSON.stringify({}) }
         );
         const needs = Array.isArray(r.needsBought) ? r.needsBought.length : 0;
+        SFX.coin();
         const o = overlay(`
           <h3>Trip finished!</h3>
           <p>Needs covered: <strong>${needs} / ${r.totalNeeds}</strong></p>
@@ -398,6 +487,8 @@
         this.load.image('art-shelf', ART + 'shelf.png');
         this.load.image('art-counter', ART + 'counter.png');
         MM_FILES.forEach(n => this.load.image('mm-' + n, ART + 'miimiid/' + n + '.png'));
+        this.load.image('cart-left', ART + 'cart/cart-left.png');
+        this.load.image('cart-right', ART + 'cart/cart-right.png');
         Object.keys(frames).forEach(k => this.load.image(`pl-${k}`, frames[k]));
         items.forEach(item => {
           const src = sources[item.id];
@@ -503,7 +594,11 @@
         // floor
         const floorKey = this.textures.exists('art-floor') ? 'art-floor' : 'floor';
         const floorTiles = this.add.tileSprite(0, WALL_H, W, H - WALL_H, floorKey).setOrigin(0, 0).setDepth(-100);
-        if (floorKey === 'art-floor') floorTiles.setTileScale(0.8);
+        if (floorKey === 'art-floor') floorTiles.setTileScale(0.5);
+        // soft shadow under the back wall so the floor reads as a floor
+        const floorShade = this.add.graphics().setDepth(-99);
+        floorShade.fillGradientStyle(0x000000, 0x000000, 0x000000, 0x000000, 0.35, 0.35, 0, 0);
+        floorShade.fillRect(30, WALL_H, W - 60, 70);
 
         // back wall
         const wall = this.add.graphics().setDepth(-90);
@@ -529,7 +624,7 @@
         this.buildCounter();
 
         // player
-        this.shadow = this.add.ellipse(START.x, START.y - 2, 90, 20, 0x000000, 0.28);
+        this.shadow = this.add.ellipse(START.x, START.y - 2, 110, 24, 0x000000, 0.28);
         this.reachUntil = 0;
         this.reachT0 = 0;
         this.reachSide = 'L';
@@ -542,11 +637,21 @@
           this.player.setScale(130 / Math.max(this.player.height, 1));
         }
 
+        this.cartBox = null;
+        this.cartSide = 1;
+        if (this.puppet && this.textures.exists('cart-left') && this.textures.exists('cart-right')) {
+          this.cartBox = this.add.container(START.x + CART_GAP, START.y);
+          this.cartImg = this.add.image(0, 0, 'cart-right').setOrigin(0.5, 1);
+          this.cartImg.setScale(CART_W / this.cartImg.width);
+          this.cartBox.add(this.cartImg);
+        }
+
         this.arm = this.add.graphics().setDepth(99999);
 
         // camera
         const cam = this.cameras.main;
         cam.setBounds(0, 0, W, H);
+        cam.setZoom(1.2);
         cam.startFollow(this.player, true, 0.12, 0.12);
         cam.setDeadzone(90, 60);
         cam.roundPixels = true;
@@ -687,16 +792,53 @@
 
       flyToCart(product) {
         if (product.label) product.label.destroy();
-        const dir = this.faceLeft ? -1 : 1;
+        const box = this.cartBox;
+        if (!box) {
+          const dir = this.faceLeft ? -1 : 1;
+          this.tweens.add({
+            targets: product.obj,
+            x: this.puppet ? this.player.x : this.player.x + dir * 55,
+            y: this.puppet ? this.player.y - 70 : this.player.y - 45,
+            scale: product.baseScale * 0.4,
+            duration: 450,
+            ease: 'Sine.easeInOut',
+            onComplete: () => product.obj.destroy()
+          });
+          return;
+        }
+        const lx = (this.cartSide * 0.11 + (Math.random() - 0.5) * 0.28) * CART_W;
+        const ly = -CART_W * 0.76 * (0.46 + Math.random() * 0.08);
         this.tweens.add({
           targets: product.obj,
-          x: this.puppet ? this.player.x : this.player.x + dir * 55,
-          y: this.puppet ? this.player.y - 70 : this.player.y - 45,
-          scale: product.baseScale * 0.4,
+          x: box.x + lx,
+          y: box.y + ly,
+          scale: product.baseScale * 0.7,
           duration: 450,
           ease: 'Sine.easeInOut',
-          onComplete: () => product.obj.destroy()
+          onComplete: () => {
+            const src = sources[product.item.id];
+            const keep = src.src
+              ? this.add.image(lx, ly, 'pr-' + product.item.id).setOrigin(0.5, 1)
+              : this.add.text(lx, ly, src.emoji, { fontSize: '30px' }).setOrigin(0.5, 1);
+            if (src.src) keep.setScale(38 / Math.max(keep.height, 1));
+            box.addAt(keep, 0);               // goes in behind the cart front, so the mesh shows it
+            product.obj.destroy();
+          }
         });
+      }
+
+      updateCart() {
+        const dir = this.faceLeft ? -1 : 1;
+        const tx = this.player.x + dir * CART_GAP;
+        if (dir !== this.cartSide) {
+          this.cartSide = dir;
+          this.cartImg.setTexture(dir === 1 ? 'cart-right' : 'cart-left');
+          this.cartBox.list.forEach(o => { if (o !== this.cartImg) o.x = -o.x; });
+          this.cartBox.x = tx;
+        }
+        this.cartBox.x += (tx - this.cartBox.x) * 0.4;
+        this.cartBox.y = this.player.y;
+        this.cartBox.setDepth(this.player.y + 1);
       }
 
       update(time, delta) {
@@ -725,6 +867,8 @@
           this.player.y = ny;
           if (Math.abs(ix) > 0.12) this.faceLeft = ix < 0;
 
+          this.stepClock = (this.stepClock || 0) + delta;
+          if (this.stepClock > 340) { this.stepClock = 0; SFX.step(); }
           if (!this.puppet) {
             this.walkClock += delta;
             if (this.walkClock > 260) {
@@ -741,6 +885,7 @@
         if (this.puppet) this.animPuppet(delta, this.time.now, moving, ix, iy);
         else this.player.setFlipX(FACES_RIGHT ? this.faceLeft : !this.faceLeft);
         this.player.setDepth(this.player.y);
+        if (this.cartBox) this.updateCart();
         this.shadow.setPosition(this.player.x, this.player.y - 2).setDepth(this.player.y - 1);
 
         if (Phaser.Input.Keyboard.JustDown(k.SPACE)) grabBtn.click();
