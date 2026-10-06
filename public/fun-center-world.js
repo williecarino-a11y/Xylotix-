@@ -40,8 +40,8 @@
   const ART = '/assets/fun-center/mart/';
   const NO_OVERLAY = { 'X-Continue-Loading': 'false' };   // skip the global "Please wait" overlay
   const MM_SCALE = 0.18;    // puppet size: 910 art units tall becomes about 164px
-  const CART_W = 150;       // cart width in world pixels
-  const CART_GAP = 100;     // how far the cart sits beside him
+  const CART_W = 112;       // cart width in world pixels
+  const CART_GAP = 86;      // how far the cart sits beside him
   const MM_FILES = [
     'head-blank', 'eye-open-left', 'eye-open-right', 'eye-closed-left', 'eye-closed-right',
     'mouth-smile', 'mouth-open-medium', 'mouth-open-big',
@@ -709,6 +709,7 @@
         }
 
         this.arm = this.add.graphics().setDepth(99999);
+        this.grip = this.add.graphics();
 
         // camera
         const cam = this.cameras.main;
@@ -854,40 +855,53 @@
 
       flyToCart(product) {
         if (product.label) product.label.destroy();
-        const flying = product.obj;               // this copy flies away; a new one is made if put back
+        const flying = product.obj;               // this copy is carried by hand; a new one is made if put back
+        flying.setDepth(this.player.y + 3);
         const box = this.cartBox;
-        if (!box) {
-          const dir = this.faceLeft ? -1 : 1;
-          this.tweens.add({
-            targets: flying,
-            x: this.puppet ? this.player.x : this.player.x + dir * 55,
-            y: this.puppet ? this.player.y - 70 : this.player.y - 45,
-            scale: product.baseScale * 0.4,
-            duration: 450,
-            ease: 'Sine.easeInOut',
-            onComplete: () => flying.destroy()
-          });
-          return;
-        }
-        const lx = (this.cartSide * 0.11 + (Math.random() - 0.5) * 0.28) * CART_W;
-        const ly = -CART_W * 0.76 * (0.46 + Math.random() * 0.08);
+        const handX = this.player.x + (this.reachSide === 'L' ? -28 : 28);
+        const handY = this.player.y - 96;
+        // 1) the hand takes it off the shelf
         this.tweens.add({
           targets: flying,
-          x: box.x + lx,
-          y: box.y + ly,
-          scale: product.baseScale * 0.7,
-          duration: 450,
-          ease: 'Sine.easeInOut',
+          x: handX,
+          y: handY,
+          scale: product.baseScale * 0.85,
+          duration: 200,
+          ease: 'Sine.easeOut',
           onComplete: () => {
-            flying.destroy();
-            if (!product.taken) return;           // it was put back while flying
-            const src = sources[product.item.id];
-            const keep = src.src
-              ? this.add.image(lx, ly, 'pr-' + product.item.id).setOrigin(0.5, 1)
-              : this.add.text(lx, ly, src.emoji, { fontSize: '30px' }).setOrigin(0.5, 1);
-            if (src.src) keep.setScale(38 / Math.max(keep.height, 1));
-            box.addAt(keep, 0);               // goes in behind the cart front, so the mesh shows it
-            product.keep = keep;
+            if (!box) { flying.destroy(); return; }
+            // 2) carry it over the cart
+            const lx = (this.cartSide * 0.11 + (Math.random() - 0.5) * 0.28) * CART_W;
+            const ly = -CART_W * 0.76 * (0.46 + Math.random() * 0.08);
+            this.tweens.add({
+              targets: flying,
+              x: box.x + lx,
+              y: box.y + ly - 46,
+              scale: product.baseScale * 0.7,
+              duration: 260,
+              ease: 'Sine.easeInOut',
+              onComplete: () => {
+                // 3) drop it in
+                this.tweens.add({
+                  targets: flying,
+                  x: box.x + lx,
+                  y: box.y + ly,
+                  duration: 180,
+                  ease: 'Bounce.easeOut',
+                  onComplete: () => {
+                    flying.destroy();
+                    if (!product.taken) return;           // it was put back while flying
+                    const src = sources[product.item.id];
+                    const keep = src.src
+                      ? this.add.image(lx, ly, 'pr-' + product.item.id).setOrigin(0.5, 1)
+                      : this.add.text(lx, ly, src.emoji, { fontSize: '30px' }).setOrigin(0.5, 1);
+                    if (src.src) keep.setScale((CART_W * 0.26) / Math.max(keep.height, 1));
+                    box.addAt(keep, 0);               // goes in behind the cart front, so the mesh shows it
+                    product.keep = keep;
+                  }
+                });
+              }
+            });
           }
         });
       }
@@ -920,6 +934,18 @@
         this.cartBox.x += (tx - this.cartBox.x) * 0.4;
         this.cartBox.y = this.player.y;
         this.cartBox.setDepth(this.player.y + 1);
+
+        // hand on the handle (the side view has no arm art, so a sleeve and a hand are drawn)
+        this.grip.clear();
+        if (this.puppet && this.puppet.view === 'side' && this.time.now >= this.reachUntil) {
+          const hx = this.cartBox.x - dir * CART_W * 0.45;
+          const hy = this.player.y - CART_W * 0.7;
+          const sx = this.player.x + dir * 4;
+          const sy = this.player.y - 88;
+          this.grip.lineStyle(11, 0x141824, 1).lineBetween(sx, sy, hx, hy);
+          this.grip.fillStyle(0xf1b27a, 1).fillCircle(hx, hy, 6.5);
+          this.grip.setDepth(this.player.y + 2);
+        }
       }
 
       update(time, delta) {
