@@ -369,6 +369,7 @@
         SFX.tone(330, 0.35, 'triangle', 0.1);
         SFX.tone(247, 0.5, 'triangle', 0.1, 0.18);
         say('Closing time! Head to the counter to pay. You can still put things back.');
+        assistant.react('closed');
       }
     }
     // shop assistant: reacts to what you do, never says need or want
