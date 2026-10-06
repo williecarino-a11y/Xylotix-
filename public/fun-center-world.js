@@ -447,7 +447,10 @@
         hud();
 
         const left = result.remaining;
+        const todo = needItems.filter(n => !S.basket.includes(n.id)).length;
         let text = `${item.name} is in the cart.`;
+        if (todo === 0) text += ' Your list is complete! Head to the counter.';
+        else text += ` ${todo} left on your list.`;
         if (left <= 5) text += ` Whoa, only $${left} left!`;
         else if (left <= 10) text += ` $${left} left.`;
         say(text);
