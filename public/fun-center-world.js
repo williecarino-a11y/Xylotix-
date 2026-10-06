@@ -570,6 +570,7 @@
         SFX.pickup();
         hud();
         say(`${item.name} is back on the shelf. $${result.remaining} left.`);
+        assistant.react('putback');
       } catch (error) {
         console.error('world put back error:', error);
         say(error.message || 'That did not work. Try again.');
