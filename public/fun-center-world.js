@@ -1025,6 +1025,7 @@
         if (!document.body.contains(holder)) { destroyGame(); return; }
 
         const dt = delta / 1000;
+        tickClock(dt);
         let ix = S.ctl.x;
         let iy = S.ctl.y;
         const k = this.keys;
