@@ -39,6 +39,8 @@
   const GRAB_RANGE = 105;
   const ART = '/assets/fun-center/mart/';
   const NO_OVERLAY = { 'X-Continue-Loading': 'false' };   // skip the global "Please wait" overlay
+  // The shopping list. The server still decides rewards; this only draws the list.
+  const NEED_IDS = ['milk', 'bread', 'eggs', 'pasta', 'apple', 'carrot', 'water', 'medicine'];
   const MM_SCALE = 0.18;    // puppet size: 910 art units tall becomes about 164px
   const CART_W = 112;       // cart width in world pixels
   const CART_GAP = 86;      // how far the cart sits beside him
@@ -207,6 +209,13 @@
       .mw-card button.mw-alt { background: transparent; border: 1px solid #232c42; color: #9aa4bd; }
       .mw-card button:disabled { background: #232c42; color: #5d6785; opacity: .55; cursor: default; }
       .mw-opt { display: flex; justify-content: space-between; align-items: center; }
+      .mw-list { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; padding: 2px 4px 8px; }
+      .mw-list-title { width: 100%; font-size: 12px; font-weight: 800; color: #9ec5ff; letter-spacing: .04em; text-transform: uppercase; }
+      .mw-chip { font-size: 12px; font-weight: 700; color: #e6e9f0; background: #131a2c; border: 1px solid #232c42; border-radius: 999px; padding: 3px 9px; }
+      .mw-chip::before { content: '○ '; color: #6f7ba0; }
+      .mw-chip.done { color: #7ee2a8; border-color: #1f8a5b; background: rgba(31, 138, 91, 0.16); text-decoration: line-through; animation: mwPop .35s ease-out; }
+      .mw-chip.done::before { content: '✓ '; color: #7ee2a8; }
+      @keyframes mwPop { 0% { transform: scale(1); } 50% { transform: scale(1.18); } 100% { transform: scale(1); } }
       .mw-controls { display: flex; align-items: center; justify-content: space-between; padding: 12px 14px 0; }
       .mw-joy { position: relative; width: 108px; height: 108px; border-radius: 50%; background: rgba(77, 163, 255, 0.12); border: 2px solid rgba(77, 163, 255, 0.45); touch-action: none; user-select: none; }
       .mw-joy-knob { position: absolute; left: 50%; top: 50%; width: 46px; height: 46px; margin: -23px 0 0 -23px; border-radius: 50%; background: #1f6feb; box-shadow: 0 4px 12px rgba(0,0,0,.4); pointer-events: none; transition: transform .1s ease-out; }
@@ -300,8 +309,9 @@
           <button type="button" class="mw-leave" data-mw-mute>🔊</button>
           <button type="button" class="mw-leave" data-mw-leave>Leave</button>
         </div>
+        <div class="mw-list" data-mw-list></div>
         <div class="mw-holder" data-mw-holder>
-          <div class="mw-bubble" data-mw-bubble>Welcome to Miimiid Mart! Use the stick to walk to a shelf.</div>
+          <div class="mw-bubble" data-mw-bubble>Check your list! Grab what you need and keep an eye on your wallet.</div>
         </div>
         <div class="mw-controls">
           <div class="mw-joy" data-mw-joy><div class="mw-joy-knob" data-mw-knob></div></div>
@@ -317,9 +327,16 @@
     const grabBtn = content.querySelector('[data-mw-grab]');
 
     function say(text) { bubble.textContent = text; }
+    const listEl = content.querySelector('[data-mw-list]');
+    const needItems = shop.items.filter(it => NEED_IDS.includes(it.id));
+    listEl.innerHTML = '<span class="mw-list-title">🛒 Shopping list</span>' +
+      needItems.map(it => `<span class="mw-chip" data-need="${esc(it.id)}">${esc(it.name)}</span>`).join('');
     function hud() {
       walletEl.textContent = `$${S.budget - S.spent}`;
       countEl.textContent = String(S.basket.length);
+      listEl.querySelectorAll('[data-need]').forEach(chip => {
+        chip.classList.toggle('done', S.basket.includes(chip.dataset.need));
+      });
     }
     function overlay(html) {
       const o = document.createElement('div');
@@ -430,7 +447,10 @@
         hud();
 
         const left = result.remaining;
+        const todo = needItems.filter(n => !S.basket.includes(n.id)).length;
         let text = `${item.name} is in the cart.`;
+        if (todo === 0) text += ' Your list is complete! Head to the counter.';
+        else text += ` ${todo} left on your list.`;
         if (left <= 5) text += ` Whoa, only $${left} left!`;
         else if (left <= 10) text += ` $${left} left.`;
         say(text);
