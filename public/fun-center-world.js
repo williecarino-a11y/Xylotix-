@@ -240,7 +240,7 @@
     let best = null;
     let bd = GRAB_RANGE;
     scene.products.forEach(p => {
-      if (p.taken || py < p.sy + 4) return;     // must stand in front of the shelf
+      if (py < p.sy + 4) return;     // must stand in front of the shelf (empty slots count, for Put back)
       const d = Math.hypot(p.x - px, (p.sy + 14) - py);
       if (d < bd) { bd = d; best = p; }
     });
