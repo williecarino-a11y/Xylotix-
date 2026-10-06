@@ -41,6 +41,7 @@
   const NO_OVERLAY = { 'X-Continue-Loading': 'false' };   // skip the global "Please wait" overlay
   // The shopping list. The server still decides rewards; this only draws the list.
   const NEED_IDS = ['milk', 'bread', 'eggs', 'pasta', 'apple', 'carrot', 'water', 'medicine'];
+  const CLOSING_SECONDS = 150;     // how long the store stays open (it pauses in menus)
   const MM_SCALE = 0.18;    // puppet size: 910 art units tall becomes about 164px
   const CART_W = 112;       // cart width in world pixels
   const CART_GAP = 86;      // how far the cart sits beside him
