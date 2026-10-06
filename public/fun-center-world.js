@@ -461,6 +461,7 @@
 
     async function buyProduct(scene, product) {
       if (S.busy) return;
+      if (S.closed && S.basket.length > 0) { say('The store is closed! Head to the counter to pay.'); return; }
       const item = product.item;
       S.busy = true;
       try {
