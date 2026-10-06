@@ -326,6 +326,118 @@ router.get('/shop', (req, res) => {
   }
 });
 
+router.post('/shop/session/:sessionId/unbuy', funAnswerLimiter, async (req, res) => {
+  try {
+    const user = await requireFunCenterUser(req, res);
+    if (!user) return;
+
+    const { sessionId } = req.params;
+    const { itemId } = req.body;
+    const shop = getWeeklyShopDefinition();
+    const item = shop.items.find(candidate => candidate.id === itemId);
+    if (!item) return res.status(400).json({ status: 'error', message: 'That item is not in the shop.' });
+
+    const existing = await FunGameSession.findOne({ sessionId, userId: user._id, gameId: SHOP_GAME_ID });
+    if (!existing) return res.status(404).json({ status: 'error', message: 'Shopping trip not found.' });
+    if (existing.completed) return res.status(409).json({ status: 'error', code: 'SHOP_FINISHED', message: 'This shopping trip is already finished.' });
+
+    const entry = existing.purchasedItems.find(candidate => candidate.itemId === item.id);
+    if (!entry) return res.status(409).json({ status: 'error', code: 'NOT_IN_BASKET', message: `${item.name} is not in your basket.` });
+
+    // The stored price is removed in one atomic write, so a double tap cannot refund twice.
+    const updated = await FunGameSession.findOneAndUpdate(
+      {
+        sessionId,
+        userId: user._id,
+        gameId: SHOP_GAME_ID,
+        completed: false,
+        purchasedItems: { $elemMatch: { itemId: item.id, price: entry.price } }
+      },
+      {
+        $inc: { spent: -entry.price },
+        $pull: { purchasedItems: { itemId: item.id } }
+      },
+      { new: true }
+    );
+
+    if (!updated) {
+      return res.status(409).json({ status: 'error', code: 'BASKET_CHANGED', message: 'Your basket just changed. Try again.' });
+    }
+
+    return res.json({
+      status: 'success',
+      data: {
+        itemId: item.id,
+        name: item.name,
+        price: entry.price,
+        budget: shop.budget,
+        spent: updated.spent,
+        remaining: Math.max(0, shop.budget - updated.spent),
+        basketCount: updated.purchasedItems.length
+      }
+    });
+  } catch (error) {
+    console.error('Fun Center shop unbuy error:', error);
+    return res.status(500).json({ status: 'error', message: 'Unable to put that item back.' });
+  }
+});
+
+router.post('/shop/session/:sessionId/unbuy', funAnswerLimiter, async (req, res) => {
+  try {
+    const user = await requireFunCenterUser(req, res);
+    if (!user) return;
+
+    const { sessionId } = req.params;
+    const { itemId } = req.body;
+    const shop = getWeeklyShopDefinition();
+    const item = shop.items.find(candidate => candidate.id === itemId);
+    if (!item) return res.status(400).json({ status: 'error', message: 'That item is not in the shop.' });
+
+    const existing = await FunGameSession.findOne({ sessionId, userId: user._id, gameId: SHOP_GAME_ID });
+    if (!existing) return res.status(404).json({ status: 'error', message: 'Shopping trip not found.' });
+    if (existing.completed) return res.status(409).json({ status: 'error', code: 'SHOP_FINISHED', message: 'This shopping trip is already finished.' });
+
+    const entry = existing.purchasedItems.find(candidate => candidate.itemId === item.id);
+    if (!entry) return res.status(409).json({ status: 'error', code: 'NOT_IN_BASKET', message: `${item.name} is not in your basket.` });
+
+    // The stored price is removed in one atomic write, so a double tap cannot refund twice.
+    const updated = await FunGameSession.findOneAndUpdate(
+      {
+        sessionId,
+        userId: user._id,
+        gameId: SHOP_GAME_ID,
+        completed: false,
+        purchasedItems: { $elemMatch: { itemId: item.id, price: entry.price } }
+      },
+      {
+        $inc: { spent: -entry.price },
+        $pull: { purchasedItems: { itemId: item.id } }
+      },
+      { new: true }
+    );
+
+    if (!updated) {
+      return res.status(409).json({ status: 'error', code: 'BASKET_CHANGED', message: 'Your basket just changed. Try again.' });
+    }
+
+    return res.json({
+      status: 'success',
+      data: {
+        itemId: item.id,
+        name: item.name,
+        price: entry.price,
+        budget: shop.budget,
+        spent: updated.spent,
+        remaining: Math.max(0, shop.budget - updated.spent),
+        basketCount: updated.purchasedItems.length
+      }
+    });
+  } catch (error) {
+    console.error('Fun Center shop unbuy error:', error);
+    return res.status(500).json({ status: 'error', message: 'Unable to put that item back.' });
+  }
+});
+
 router.post('/shop/session', funSessionStartLimiter, async (req, res) => {
   try {
     const user = await requireFunCenterUser(req, res);

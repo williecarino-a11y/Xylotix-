@@ -240,7 +240,7 @@
     let best = null;
     let bd = GRAB_RANGE;
     scene.products.forEach(p => {
-      if (p.taken || py < p.sy + 4) return;     // must stand in front of the shelf
+      if (py < p.sy + 4) return;     // must stand in front of the shelf (empty slots count, for Put back)
       const d = Math.hypot(p.x - px, (p.sy + 14) - py);
       if (d < bd) { bd = d; best = p; }
     });
@@ -442,6 +442,33 @@
       }
     }
 
+    async function putBackProduct(scene, product) {
+      if (S.busy) return;
+      const item = product.item;
+      S.busy = true;
+      try {
+        scene.reachAt(product.x, product.y);
+        SFX.reach();
+        await new Promise(r => setTimeout(r, 240));
+
+        const result = await miimiidFunCenterRequest(
+          `/api/fun-center/shop/session/${encodeURIComponent(S.sessionId)}/unbuy`,
+          { method: 'POST', body: JSON.stringify({ itemId: item.id }), headers: NO_OVERLAY }
+        );
+        S.spent = result.spent;
+        S.basket = S.basket.filter(id => id !== item.id);
+        scene.restoreToShelf(product);
+        SFX.pickup();
+        hud();
+        say(`${item.name} is back on the shelf. $${result.remaining} left.`);
+      } catch (error) {
+        console.error('world put back error:', error);
+        say(error.message || 'That did not work. Try again.');
+      } finally {
+        S.busy = false;
+      }
+    }
+
     async function doCheckout() {
       if (S.busy) return;
       if (S.basket.length === 0) { say('Pick something up first!'); return; }
@@ -485,7 +512,8 @@
       const scene = game && game.scene.getScene('mart');
       if (!scene || S.busy) return;
       const p = nearestProduct(scene);
-      if (p) buyProduct(scene, p);
+      if (p && p.taken) putBackProduct(scene, p);
+      else if (p) buyProduct(scene, p);
       else if (inCheckoutZone(scene)) doCheckout();
       else say('Walk up to a shelf to grab something, or to the counter to pay.');
     });
@@ -826,39 +854,58 @@
 
       flyToCart(product) {
         if (product.label) product.label.destroy();
+        const flying = product.obj;               // this copy flies away; a new one is made if put back
         const box = this.cartBox;
         if (!box) {
           const dir = this.faceLeft ? -1 : 1;
           this.tweens.add({
-            targets: product.obj,
+            targets: flying,
             x: this.puppet ? this.player.x : this.player.x + dir * 55,
             y: this.puppet ? this.player.y - 70 : this.player.y - 45,
             scale: product.baseScale * 0.4,
             duration: 450,
             ease: 'Sine.easeInOut',
-            onComplete: () => product.obj.destroy()
+            onComplete: () => flying.destroy()
           });
           return;
         }
         const lx = (this.cartSide * 0.11 + (Math.random() - 0.5) * 0.28) * CART_W;
         const ly = -CART_W * 0.76 * (0.46 + Math.random() * 0.08);
         this.tweens.add({
-          targets: product.obj,
+          targets: flying,
           x: box.x + lx,
           y: box.y + ly,
           scale: product.baseScale * 0.7,
           duration: 450,
           ease: 'Sine.easeInOut',
           onComplete: () => {
+            flying.destroy();
+            if (!product.taken) return;           // it was put back while flying
             const src = sources[product.item.id];
             const keep = src.src
               ? this.add.image(lx, ly, 'pr-' + product.item.id).setOrigin(0.5, 1)
               : this.add.text(lx, ly, src.emoji, { fontSize: '30px' }).setOrigin(0.5, 1);
             if (src.src) keep.setScale(38 / Math.max(keep.height, 1));
             box.addAt(keep, 0);               // goes in behind the cart front, so the mesh shows it
-            product.obj.destroy();
+            product.keep = keep;
           }
         });
+      }
+
+      restoreToShelf(product) {
+        if (product.keep) { product.keep.destroy(); product.keep = null; }
+        const src = sources[product.item.id];
+        const baseY = product.y + 26;
+        const obj = src.src
+          ? this.add.image(product.x, baseY - 30, 'pr-' + product.item.id).setOrigin(0.5, 1)
+          : this.add.text(product.x, baseY - 30, src.emoji, { fontSize: '44px' }).setOrigin(0.5, 1);
+        obj.setScale(product.baseScale).setDepth(product.sy + 1);
+        this.tweens.add({ targets: obj, y: baseY, duration: 260, ease: 'Bounce.easeOut' });
+        product.obj = obj;
+        product.label = this.add.text(product.x, product.sy - 15, priceText(product.item), {
+          fontSize: '13px', color: '#ffffff', fontStyle: 'bold', stroke: '#000000', strokeThickness: 3
+        }).setOrigin(0.5).setDepth(product.sy + 2);
+        product.taken = false;
       }
 
       updateCart() {
@@ -930,11 +977,12 @@
           S.zoneHint = true;
           say('Ready to pay? Tap Checkout.');
         }
-        const id = near ? near.item.id : (atCounter ? '__counter' : '');
+        const id = near ? near.item.id + (near.taken ? ':back' : '') : (atCounter ? '__counter' : '');
         if (id !== S.nearId) {
           S.nearId = id;
           this.products.forEach(p => { if (!p.taken) p.obj.setScale(p.baseScale * (p === near ? 1.2 : 1)); });
-          if (near) { grabBtn.disabled = false; grabBtn.innerHTML = `✋ Grab<small>${esc(near.item.name)}</small>`; }
+          if (near && near.taken) { grabBtn.disabled = false; grabBtn.innerHTML = `↩ Put back<small>${esc(near.item.name)}</small>`; }
+          else if (near) { grabBtn.disabled = false; grabBtn.innerHTML = `✋ Grab<small>${esc(near.item.name)}</small>`; }
           else if (atCounter) { grabBtn.disabled = false; grabBtn.innerHTML = '🧾 Checkout'; }
           else { grabBtn.disabled = true; grabBtn.innerHTML = '✋ Grab'; }
         }
