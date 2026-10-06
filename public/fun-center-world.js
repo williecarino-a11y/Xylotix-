@@ -971,6 +971,14 @@
         });
       }
 
+      popText(x, y, text, color) {
+        const t = this.add.text(x, y, text, {
+          fontFamily: 'system-ui, -apple-system, "Segoe UI", Roboto, sans-serif',
+          fontSize: '26px', color, fontStyle: 'bold', stroke: '#000000', strokeThickness: 5
+        }).setOrigin(0.5).setDepth(100000);
+        this.tweens.add({ targets: t, y: y - 60, alpha: 0, duration: 900, ease: 'Sine.easeOut', onComplete: () => t.destroy() });
+      }
+
       restoreToShelf(product) {
         if (product.keep) { product.keep.destroy(); product.keep = null; }
         const src = sources[product.item.id];
