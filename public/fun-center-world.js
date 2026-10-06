@@ -327,9 +327,16 @@
     const grabBtn = content.querySelector('[data-mw-grab]');
 
     function say(text) { bubble.textContent = text; }
+    const listEl = content.querySelector('[data-mw-list]');
+    const needItems = shop.items.filter(it => NEED_IDS.includes(it.id));
+    listEl.innerHTML = '<span class="mw-list-title">🛒 Shopping list</span>' +
+      needItems.map(it => `<span class="mw-chip" data-need="${esc(it.id)}">${esc(it.name)}</span>`).join('');
     function hud() {
       walletEl.textContent = `$${S.budget - S.spent}`;
       countEl.textContent = String(S.basket.length);
+      listEl.querySelectorAll('[data-need]').forEach(chip => {
+        chip.classList.toggle('done', S.basket.includes(chip.dataset.need));
+      });
     }
     function overlay(html) {
       const o = document.createElement('div');
