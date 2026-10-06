@@ -977,11 +977,12 @@
           S.zoneHint = true;
           say('Ready to pay? Tap Checkout.');
         }
-        const id = near ? near.item.id : (atCounter ? '__counter' : '');
+        const id = near ? near.item.id + (near.taken ? ':back' : '') : (atCounter ? '__counter' : '');
         if (id !== S.nearId) {
           S.nearId = id;
           this.products.forEach(p => { if (!p.taken) p.obj.setScale(p.baseScale * (p === near ? 1.2 : 1)); });
-          if (near) { grabBtn.disabled = false; grabBtn.innerHTML = `✋ Grab<small>${esc(near.item.name)}</small>`; }
+          if (near && near.taken) { grabBtn.disabled = false; grabBtn.innerHTML = `↩ Put back<small>${esc(near.item.name)}</small>`; }
+          else if (near) { grabBtn.disabled = false; grabBtn.innerHTML = `✋ Grab<small>${esc(near.item.name)}</small>`; }
           else if (atCounter) { grabBtn.disabled = false; grabBtn.innerHTML = '🧾 Checkout'; }
           else { grabBtn.disabled = true; grabBtn.innerHTML = '✋ Grab'; }
         }
