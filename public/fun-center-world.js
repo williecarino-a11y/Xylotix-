@@ -854,39 +854,58 @@
 
       flyToCart(product) {
         if (product.label) product.label.destroy();
+        const flying = product.obj;               // this copy flies away; a new one is made if put back
         const box = this.cartBox;
         if (!box) {
           const dir = this.faceLeft ? -1 : 1;
           this.tweens.add({
-            targets: product.obj,
+            targets: flying,
             x: this.puppet ? this.player.x : this.player.x + dir * 55,
             y: this.puppet ? this.player.y - 70 : this.player.y - 45,
             scale: product.baseScale * 0.4,
             duration: 450,
             ease: 'Sine.easeInOut',
-            onComplete: () => product.obj.destroy()
+            onComplete: () => flying.destroy()
           });
           return;
         }
         const lx = (this.cartSide * 0.11 + (Math.random() - 0.5) * 0.28) * CART_W;
         const ly = -CART_W * 0.76 * (0.46 + Math.random() * 0.08);
         this.tweens.add({
-          targets: product.obj,
+          targets: flying,
           x: box.x + lx,
           y: box.y + ly,
           scale: product.baseScale * 0.7,
           duration: 450,
           ease: 'Sine.easeInOut',
           onComplete: () => {
+            flying.destroy();
+            if (!product.taken) return;           // it was put back while flying
             const src = sources[product.item.id];
             const keep = src.src
               ? this.add.image(lx, ly, 'pr-' + product.item.id).setOrigin(0.5, 1)
               : this.add.text(lx, ly, src.emoji, { fontSize: '30px' }).setOrigin(0.5, 1);
             if (src.src) keep.setScale(38 / Math.max(keep.height, 1));
             box.addAt(keep, 0);               // goes in behind the cart front, so the mesh shows it
-            product.obj.destroy();
+            product.keep = keep;
           }
         });
+      }
+
+      restoreToShelf(product) {
+        if (product.keep) { product.keep.destroy(); product.keep = null; }
+        const src = sources[product.item.id];
+        const baseY = product.y + 26;
+        const obj = src.src
+          ? this.add.image(product.x, baseY - 30, 'pr-' + product.item.id).setOrigin(0.5, 1)
+          : this.add.text(product.x, baseY - 30, src.emoji, { fontSize: '44px' }).setOrigin(0.5, 1);
+        obj.setScale(product.baseScale).setDepth(product.sy + 1);
+        this.tweens.add({ targets: obj, y: baseY, duration: 260, ease: 'Bounce.easeOut' });
+        product.obj = obj;
+        product.label = this.add.text(product.x, product.sy - 15, priceText(product.item), {
+          fontSize: '13px', color: '#ffffff', fontStyle: 'bold', stroke: '#000000', strokeThickness: 3
+        }).setOrigin(0.5).setDepth(product.sy + 2);
+        product.taken = false;
       }
 
       updateCart() {
