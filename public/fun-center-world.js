@@ -709,6 +709,7 @@
         }
 
         this.arm = this.add.graphics().setDepth(99999);
+        this.grip = this.add.graphics();
 
         // camera
         const cam = this.cameras.main;
