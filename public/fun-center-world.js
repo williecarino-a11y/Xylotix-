@@ -1177,6 +1177,7 @@
         else this.player.setFlipX(FACES_RIGHT ? this.faceLeft : !this.faceLeft);
         this.player.setDepth(this.player.y);
         if (this.cartBox) this.updateCart();
+        this.updateAssistant();
         this.shadow.setPosition(this.player.x, this.player.y - 2).setDepth(this.player.y - 1);
 
         if (Phaser.Input.Keyboard.JustDown(k.SPACE)) grabBtn.click();
