@@ -339,6 +339,36 @@
     const grabBtn = content.querySelector('[data-mw-grab]');
 
     function say(text) { bubble.textContent = text; }
+
+    // closing-time clock: gentle, pauses while a menu or payment is open
+    const clockFill = content.querySelector('[data-mw-clock]');
+    let lastPct = -1;
+    function tickClock(dt) {
+      if (S.busy || S.closed) return;
+      S.timeLeft = Math.max(0, S.timeLeft - dt);
+      const pct = Math.round((S.timeLeft / CLOSING_SECONDS) * 100);
+      if (pct !== lastPct) {
+        lastPct = pct;
+        clockFill.style.width = pct + '%';
+        clockFill.dataset.level = pct <= 15 ? 'low' : pct <= 40 ? 'mid' : 'high';
+      }
+      if (!S.warned && pct <= 25) {
+        S.warned = true;
+        say('The store closes soon! Think about what you still need.');
+      }
+      if (S.timeLeft <= 0) {
+        if (S.basket.length === 0 && !S.graceUsed) {
+          S.graceUsed = true;
+          S.timeLeft = 30;
+          say('Closing soon, and your cart is empty. Here is a little extra time!');
+          return;
+        }
+        S.closed = true;
+        SFX.tone(330, 0.35, 'triangle', 0.1);
+        SFX.tone(247, 0.5, 'triangle', 0.1, 0.18);
+        say('Closing time! Head to the counter to pay. You can still put things back.');
+      }
+    }
     const listEl = content.querySelector('[data-mw-list]');
     const needItems = shop.items.filter(it => NEED_IDS.includes(it.id));
     listEl.innerHTML = '<span class="mw-list-title">🛒 Shopping list</span>' +
