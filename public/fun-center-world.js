@@ -495,7 +495,6 @@
       constructor() { super('mart'); }
 
       preload() {
-        preload() {
         const barW = 400;
         const barX = (VIEW_W - barW) / 2;
         const barY = VIEW_H / 2;
