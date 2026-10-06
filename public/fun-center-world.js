@@ -316,6 +316,7 @@
           <button type="button" class="mw-leave" data-mw-mute>🔊</button>
           <button type="button" class="mw-leave" data-mw-leave>Leave</button>
         </div>
+        <div class="mw-clock"><span>🕒 Store closes</span><div class="mw-clock-bar"><div class="mw-clock-fill" data-mw-clock data-level="high"></div></div></div>
         <div class="mw-list" data-mw-list></div>
         <div class="mw-holder" data-mw-holder>
           <div class="mw-bubble" data-mw-bubble>Check your list! Grab what you need and keep an eye on your wallet.</div>
