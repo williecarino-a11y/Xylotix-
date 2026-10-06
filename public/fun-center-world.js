@@ -486,6 +486,7 @@
         S.basket.push(item.id);
         product.taken = true;
         scene.flyToCart(product);
+        scene.popText(scene.player.x, scene.player.y - 170, `-$${result.price}`, '#ffd34d');
         SFX.pickup();
         hud();
 
