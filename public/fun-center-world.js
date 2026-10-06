@@ -42,6 +42,7 @@
   // The shopping list. The server still decides rewards; this only draws the list.
   const NEED_IDS = ['milk', 'bread', 'eggs', 'pasta', 'apple', 'carrot', 'water', 'medicine'];
   const CLOSING_SECONDS = 150;     // how long the store stays open (it pauses in menus)
+  const ASSISTANT = { x: 1060, y: 430 };   // where the shop assistant stands
   const MM_SCALE = 0.18;    // puppet size: 910 art units tall becomes about 164px
   const CART_W = 112;       // cart width in world pixels
   const CART_GAP = 86;      // how far the cart sits beside him
