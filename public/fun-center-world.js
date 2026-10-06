@@ -209,6 +209,13 @@
       .mw-card button.mw-alt { background: transparent; border: 1px solid #232c42; color: #9aa4bd; }
       .mw-card button:disabled { background: #232c42; color: #5d6785; opacity: .55; cursor: default; }
       .mw-opt { display: flex; justify-content: space-between; align-items: center; }
+      .mw-list { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; padding: 2px 4px 8px; }
+      .mw-list-title { width: 100%; font-size: 12px; font-weight: 800; color: #9ec5ff; letter-spacing: .04em; text-transform: uppercase; }
+      .mw-chip { font-size: 12px; font-weight: 700; color: #e6e9f0; background: #131a2c; border: 1px solid #232c42; border-radius: 999px; padding: 3px 9px; }
+      .mw-chip::before { content: '○ '; color: #6f7ba0; }
+      .mw-chip.done { color: #7ee2a8; border-color: #1f8a5b; background: rgba(31, 138, 91, 0.16); text-decoration: line-through; animation: mwPop .35s ease-out; }
+      .mw-chip.done::before { content: '✓ '; color: #7ee2a8; }
+      @keyframes mwPop { 0% { transform: scale(1); } 50% { transform: scale(1.18); } 100% { transform: scale(1); } }
       .mw-controls { display: flex; align-items: center; justify-content: space-between; padding: 12px 14px 0; }
       .mw-joy { position: relative; width: 108px; height: 108px; border-radius: 50%; background: rgba(77, 163, 255, 0.12); border: 2px solid rgba(77, 163, 255, 0.45); touch-action: none; user-select: none; }
       .mw-joy-knob { position: absolute; left: 50%; top: 50%; width: 46px; height: 46px; margin: -23px 0 0 -23px; border-radius: 50%; background: #1f6feb; box-shadow: 0 4px 12px rgba(0,0,0,.4); pointer-events: none; transition: transform .1s ease-out; }
