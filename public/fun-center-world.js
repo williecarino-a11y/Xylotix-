@@ -356,6 +356,7 @@
       if (!S.warned && pct <= 25) {
         S.warned = true;
         say('The store closes soon! Think about what you still need.');
+        assistant.react('warn');
       }
       if (S.timeLeft <= 0) {
         if (S.basket.length === 0 && !S.graceUsed) {
