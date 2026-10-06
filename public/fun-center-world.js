@@ -522,6 +522,7 @@
         S.spent = result.spent;
         S.basket = S.basket.filter(id => id !== item.id);
         scene.restoreToShelf(product);
+        scene.popText(scene.player.x, scene.player.y - 170, `+$${result.price}`, '#7ee2a8');
         SFX.pickup();
         hud();
         say(`${item.name} is back on the shelf. $${result.remaining} left.`);
