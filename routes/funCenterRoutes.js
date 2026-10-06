@@ -438,7 +438,7 @@ router.post('/shop/session/:sessionId/unbuy', funAnswerLimiter, async (req, res)
   }
 });
 
-router.post('/shop/session/:sessionId/checkout', funSessionStartLimiter, async (req, res) => {
+router.post('/shop/session', funSessionStartLimiter, async (req, res) => {
   try {
     const user = await requireFunCenterUser(req, res);
     if (!user) return;
