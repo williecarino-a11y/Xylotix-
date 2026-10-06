@@ -305,7 +305,11 @@
       busy: false,
       ctl: { x: 0, y: 0 },
       nearId: null,
-      zoneHint: false
+      zoneHint: false,
+      timeLeft: CLOSING_SECONDS,
+      closed: false,
+      graceUsed: false,
+      warned: false
     };
 
     content.innerHTML = `
