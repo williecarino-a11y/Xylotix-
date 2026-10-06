@@ -442,6 +442,33 @@
       }
     }
 
+    async function putBackProduct(scene, product) {
+      if (S.busy) return;
+      const item = product.item;
+      S.busy = true;
+      try {
+        scene.reachAt(product.x, product.y);
+        SFX.reach();
+        await new Promise(r => setTimeout(r, 240));
+
+        const result = await miimiidFunCenterRequest(
+          `/api/fun-center/shop/session/${encodeURIComponent(S.sessionId)}/unbuy`,
+          { method: 'POST', body: JSON.stringify({ itemId: item.id }), headers: NO_OVERLAY }
+        );
+        S.spent = result.spent;
+        S.basket = S.basket.filter(id => id !== item.id);
+        scene.restoreToShelf(product);
+        SFX.pickup();
+        hud();
+        say(`${item.name} is back on the shelf. $${result.remaining} left.`);
+      } catch (error) {
+        console.error('world put back error:', error);
+        say(error.message || 'That did not work. Try again.');
+      } finally {
+        S.busy = false;
+      }
+    }
+
     async function doCheckout() {
       if (S.busy) return;
       if (S.basket.length === 0) { say('Pick something up first!'); return; }
