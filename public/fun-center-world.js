@@ -494,6 +494,23 @@
       constructor() { super('mart'); }
 
       preload() {
+        preload() {
+        const barW = 400;
+        const barX = (VIEW_W - barW) / 2;
+        const barY = VIEW_H / 2;
+        const barFrame = this.add.graphics();
+        barFrame.lineStyle(3, 0x4da3ff, 1).strokeRoundedRect(barX - 4, barY - 4, barW + 8, 28, 8);
+        const barFill = this.add.graphics();
+        const barTitle = this.add.text(VIEW_W / 2, barY - 50, 'Opening Miimiid Mart…', {
+          fontFamily: 'system-ui, -apple-system, "Segoe UI", Roboto, sans-serif',
+          fontSize: '28px', color: '#4da3ff', fontStyle: 'bold'
+        }).setOrigin(0.5);
+        this.load.on('progress', v => {
+          barFill.clear();
+          barFill.fillStyle(0x1f6feb, 1).fillRoundedRect(barX, barY, barW * v, 20, 6);
+        });
+        this.load.once('complete', () => { barFrame.destroy(); barFill.destroy(); barTitle.destroy(); });
+
         this.load.image('art-floor', ART + 'floor-1.png');
         this.load.image('art-shelf', ART + 'shelf.png');
         this.load.image('art-counter', ART + 'counter.png');
@@ -601,6 +618,12 @@
         this.walkFlip = false;
         this.walkClock = 0;
         this.makeTextures();
+
+        // every label in the store uses a clean font, drawn sharper
+        const addText = this.add.text.bind(this.add);
+        this.add.text = (x, y, t, style) => addText(x, y, t, Object.assign(
+          { fontFamily: 'system-ui, -apple-system, "Segoe UI", Roboto, sans-serif', resolution: 2 }, style
+        ));
 
         // floor
         const floorKey = this.textures.exists('art-floor') ? 'art-floor' : 'floor';
