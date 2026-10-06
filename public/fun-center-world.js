@@ -41,6 +41,7 @@
   const NO_OVERLAY = { 'X-Continue-Loading': 'false' };   // skip the global "Please wait" overlay
   // The shopping list. The server still decides rewards; this only draws the list.
   const NEED_IDS = ['milk', 'bread', 'eggs', 'pasta', 'apple', 'carrot', 'water', 'medicine'];
+  const CLOSING_SECONDS = 150;     // how long the store stays open (it pauses in menus)
   const MM_SCALE = 0.18;    // puppet size: 910 art units tall becomes about 164px
   const CART_W = 112;       // cart width in world pixels
   const CART_GAP = 86;      // how far the cart sits beside him
@@ -216,6 +217,12 @@
       .mw-chip.done { color: #7ee2a8; border-color: #1f8a5b; background: rgba(31, 138, 91, 0.16); text-decoration: line-through; animation: mwPop .35s ease-out; }
       .mw-chip.done::before { content: '✓ '; color: #7ee2a8; }
       @keyframes mwPop { 0% { transform: scale(1); } 50% { transform: scale(1.18); } 100% { transform: scale(1); } }
+      .mw-clock { display: flex; align-items: center; gap: 8px; padding: 0 4px 6px; font-size: 12px; font-weight: 800; color: #9aa4bd; }
+      .mw-clock-bar { flex: 1; height: 8px; border-radius: 999px; background: #131a2c; border: 1px solid #232c42; overflow: hidden; }
+      .mw-clock-fill { height: 100%; width: 100%; border-radius: 999px; background: #3fb6ff; transition: width .4s linear, background .4s; }
+      .mw-clock-fill[data-level="mid"] { background: #ffb020; }
+      .mw-clock-fill[data-level="low"] { background: #ff5d5d; animation: mwPulse .8s ease-in-out infinite; }
+      @keyframes mwPulse { 50% { opacity: .55; } }
       .mw-controls { display: flex; align-items: center; justify-content: space-between; padding: 12px 14px 0; }
       .mw-joy { position: relative; width: 108px; height: 108px; border-radius: 50%; background: rgba(77, 163, 255, 0.12); border: 2px solid rgba(77, 163, 255, 0.45); touch-action: none; user-select: none; }
       .mw-joy-knob { position: absolute; left: 50%; top: 50%; width: 46px; height: 46px; margin: -23px 0 0 -23px; border-radius: 50%; background: #1f6feb; box-shadow: 0 4px 12px rgba(0,0,0,.4); pointer-events: none; transition: transform .1s ease-out; }
@@ -298,7 +305,11 @@
       busy: false,
       ctl: { x: 0, y: 0 },
       nearId: null,
-      zoneHint: false
+      zoneHint: false,
+      timeLeft: CLOSING_SECONDS,
+      closed: false,
+      graceUsed: false,
+      warned: false
     };
 
     content.innerHTML = `
@@ -309,6 +320,7 @@
           <button type="button" class="mw-leave" data-mw-mute>🔊</button>
           <button type="button" class="mw-leave" data-mw-leave>Leave</button>
         </div>
+        <div class="mw-clock"><span>🕒 Store closes</span><div class="mw-clock-bar"><div class="mw-clock-fill" data-mw-clock data-level="high"></div></div></div>
         <div class="mw-list" data-mw-list></div>
         <div class="mw-holder" data-mw-holder>
           <div class="mw-bubble" data-mw-bubble>Check your list! Grab what you need and keep an eye on your wallet.</div>
@@ -327,6 +339,36 @@
     const grabBtn = content.querySelector('[data-mw-grab]');
 
     function say(text) { bubble.textContent = text; }
+
+    // closing-time clock: gentle, pauses while a menu or payment is open
+    const clockFill = content.querySelector('[data-mw-clock]');
+    let lastPct = -1;
+    function tickClock(dt) {
+      if (S.busy || S.closed) return;
+      S.timeLeft = Math.max(0, S.timeLeft - dt);
+      const pct = Math.round((S.timeLeft / CLOSING_SECONDS) * 100);
+      if (pct !== lastPct) {
+        lastPct = pct;
+        clockFill.style.width = pct + '%';
+        clockFill.dataset.level = pct <= 15 ? 'low' : pct <= 40 ? 'mid' : 'high';
+      }
+      if (!S.warned && pct <= 25) {
+        S.warned = true;
+        say('The store closes soon! Think about what you still need.');
+      }
+      if (S.timeLeft <= 0) {
+        if (S.basket.length === 0 && !S.graceUsed) {
+          S.graceUsed = true;
+          S.timeLeft = 30;
+          say('Closing soon, and your cart is empty. Here is a little extra time!');
+          return;
+        }
+        S.closed = true;
+        SFX.tone(330, 0.35, 'triangle', 0.1);
+        SFX.tone(247, 0.5, 'triangle', 0.1, 0.18);
+        say('Closing time! Head to the counter to pay. You can still put things back.');
+      }
+    }
     const listEl = content.querySelector('[data-mw-list]');
     const needItems = shop.items.filter(it => NEED_IDS.includes(it.id));
     listEl.innerHTML = '<span class="mw-list-title">🛒 Shopping list</span>' +
@@ -419,6 +461,7 @@
 
     async function buyProduct(scene, product) {
       if (S.busy) return;
+      if (S.closed && S.basket.length > 0) { say('The store is closed! Head to the counter to pay.'); return; }
       const item = product.item;
       S.busy = true;
       try {
@@ -443,6 +486,7 @@
         S.basket.push(item.id);
         product.taken = true;
         scene.flyToCart(product);
+        scene.popText(scene.player.x, scene.player.y - 170, `-$${result.price}`, '#ffd34d');
         SFX.pickup();
         hud();
 
@@ -478,6 +522,7 @@
         S.spent = result.spent;
         S.basket = S.basket.filter(id => id !== item.id);
         scene.restoreToShelf(product);
+        scene.popText(scene.player.x, scene.player.y - 170, `+$${result.price}`, '#7ee2a8');
         SFX.pickup();
         hud();
         say(`${item.name} is back on the shelf. $${result.remaining} left.`);
@@ -926,6 +971,14 @@
         });
       }
 
+      popText(x, y, text, color) {
+        const t = this.add.text(x, y, text, {
+          fontFamily: 'system-ui, -apple-system, "Segoe UI", Roboto, sans-serif',
+          fontSize: '26px', color, fontStyle: 'bold', stroke: '#000000', strokeThickness: 5
+        }).setOrigin(0.5).setDepth(100000);
+        this.tweens.add({ targets: t, y: y - 60, alpha: 0, duration: 900, ease: 'Sine.easeOut', onComplete: () => t.destroy() });
+      }
+
       restoreToShelf(product) {
         if (product.keep) { product.keep.destroy(); product.keep = null; }
         const src = sources[product.item.id];
@@ -972,6 +1025,7 @@
         if (!document.body.contains(holder)) { destroyGame(); return; }
 
         const dt = delta / 1000;
+        tickClock(dt);
         let ix = S.ctl.x;
         let iy = S.ctl.y;
         const k = this.keys;
