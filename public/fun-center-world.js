@@ -1016,6 +1016,70 @@
         });
       }
 
+      buildAssistant() {
+        const A = ASSISTANT;
+        this.obst.push({ x: A.x - 26, y: A.y - 8, w: 52, h: 16 });
+        this.asstShadow = this.add.ellipse(A.x, A.y - 2, 70, 16, 0x000000, 0.25).setDepth(A.y - 1);
+        const root = this.add.container(A.x, A.y).setDepth(A.y);
+        const body = this.add.container(0, 0);
+        const g = this.add.graphics();
+        g.fillStyle(0x23407a, 1).fillRect(-14, -46, 11, 44).fillRect(3, -46, 11, 44);
+        g.fillStyle(0x0b1530, 1).fillRoundedRect(-16, -6, 14, 8, 3).fillRoundedRect(2, -6, 14, 8, 3);
+        g.fillStyle(0x2f9e6b, 1).fillRoundedRect(-30, -100, 12, 46, 6).fillRoundedRect(18, -100, 12, 46, 6);
+        g.fillStyle(0xf1b27a, 1).fillCircle(-24, -52, 6).fillCircle(24, -52, 6);
+        g.fillStyle(0x2f9e6b, 1).fillRoundedRect(-22, -104, 44, 62, 10);
+        g.fillStyle(0xffffff, 1).fillRoundedRect(-14, -84, 28, 40, 6);
+        g.fillStyle(0xf1b27a, 1).fillCircle(0, -124, 22);
+        g.fillStyle(0x3a2a1e, 1).fillRoundedRect(-24, -148, 48, 22, 10);
+        g.fillStyle(0x141824, 1).fillCircle(-8, -122, 2.5).fillCircle(8, -122, 2.5);
+        g.lineStyle(2, 0x141824, 1).beginPath().arc(0, -116, 8, 0.2, Math.PI - 0.2).strokePath();
+        const tag = this.add.text(0, -64, 'STAFF', { fontSize: '10px', color: '#2f9e6b', fontStyle: 'bold' }).setOrigin(0.5);
+        body.add([g, tag]);
+        root.add(body);
+        this.asstRoot = root;
+        this.asstBody = body;
+        this.tweens.add({ targets: body, y: -3, duration: 900, yoyo: true, repeat: -1, ease: 'Sine.easeInOut' });
+
+        this.asstBubble = this.add.container(A.x, A.y - 190).setDepth(100001).setVisible(false).setAlpha(0);
+        this.asstBg = this.add.graphics();
+        this.asstText = this.add.text(0, 0, '', {
+          fontSize: '15px', color: '#1b2440', fontStyle: 'bold', align: 'center', wordWrap: { width: 210 }
+        }).setOrigin(0.5);
+        this.asstBubble.add([this.asstBg, this.asstText]);
+        this.asstTimer = null;
+      }
+
+      assistantSay(text) {
+        if (!this.asstBubble) return;
+        this.asstText.setText(text);
+        const w = this.asstText.width + 24;
+        const h = this.asstText.height + 16;
+        this.asstBg.clear();
+        this.asstBg.fillStyle(0xffffff, 0.97).fillRoundedRect(-w / 2, -h / 2, w, h, 12);
+        this.asstBg.fillTriangle(-8, h / 2 - 1, 8, h / 2 - 1, 0, h / 2 + 10);
+        this.asstBg.lineStyle(2, 0x4da3ff, 1).strokeRoundedRect(-w / 2, -h / 2, w, h, 12);
+        this.asstBubble.setPosition(ASSISTANT.x, ASSISTANT.y - 168 - h / 2);
+        this.tweens.killTweensOf(this.asstBubble);
+        this.asstBubble.setVisible(true).setAlpha(1);
+        this.tweens.add({ targets: this.asstBody, scaleY: 1.06, duration: 120, yoyo: true });
+        if (this.asstTimer) this.asstTimer.remove(false);
+        this.asstTimer = this.time.delayedCall(3800, () => {
+          this.tweens.add({
+            targets: this.asstBubble, alpha: 0, duration: 400,
+            onComplete: () => this.asstBubble.setVisible(false)
+          });
+        });
+      }
+
+      updateAssistant() {
+        if (!this.asstRoot) return;
+        const d = Math.hypot(this.player.x - ASSISTANT.x, this.player.y - ASSISTANT.y);
+        if (!assistant.greeted && d < 260) {
+          assistant.greeted = true;
+          assistant.react('greet');
+        }
+      }
+
       popText(x, y, text, color) {
         const t = this.add.text(x, y, text, {
           fontFamily: 'system-ui, -apple-system, "Segoe UI", Roboto, sans-serif',
