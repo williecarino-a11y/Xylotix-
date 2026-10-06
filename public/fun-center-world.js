@@ -428,8 +428,7 @@
         hud();
 
         const left = result.remaining;
-        let text = result.explanation || 'Added to the cart.';
-        if (result.classification !== 'need') text += ' Do we really need this?';
+        let text = `${item.name} is in the cart.`;
         if (left <= 5) text += ` Whoa, only $${left} left!`;
         else if (left <= 10) text += ` $${left} left.`;
         say(text);
@@ -450,12 +449,23 @@
           `/api/fun-center/shop/session/${encodeURIComponent(S.sessionId)}/checkout`,
           { method: 'POST', body: JSON.stringify({}) }
         );
-        const needs = Array.isArray(r.needsBought) ? r.needsBought.length : 0;
+        const list = a => (Array.isArray(a) ? a : []);
+        const row = (it, tag, note) => `
+          <div style="display:flex;justify-content:space-between;gap:8px;padding:6px 0;border-top:1px solid #232c42;font-size:13px;text-align:left">
+            <span>${tag} ${esc(it.name)}${note ? `<br><small style="color:#9aa4bd">${esc(note)}</small>` : ''}</span>
+            <strong>$${it.price}</strong>
+          </div>`;
+        const rows = [
+          ...list(r.needsBought).map(it => row(it, '✅ Need', '')),
+          ...list(r.wantsBought).map(it => row(it, '🛍️ Want', '')),
+          ...list(r.needsMissed).map(it => row(it, '❌ Missed', it.explanation || 'You still needed this.'))
+        ].join('');
         SFX.coin();
         const o = overlay(`
           <h3>Trip finished!</h3>
-          <p>Needs covered: <strong>${needs} / ${r.totalNeeds}</strong></p>
-          <p>Spent $${r.spent} &middot; Left in wallet $${r.saved}</p>
+          <p>${esc(r.message || '')}</p>
+          <p>Needs covered: <strong>${list(r.needsBought).length} / ${r.totalNeeds}</strong> &middot; Spent $${r.spent} &middot; Left $${r.saved}</p>
+          <div style="max-height:230px;overflow-y:auto;margin:6px 0">${rows}</div>
           <p>+${Number.isFinite(r.xp) ? r.xp : 0} XP &middot; +${Number.isFinite(r.coins) ? r.coins : 0} coins</p>
           <button type="button" data-again>Shop again</button>
           <button type="button" class="mw-alt" data-back>Back to Fun Center</button>
