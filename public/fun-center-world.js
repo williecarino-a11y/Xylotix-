@@ -921,6 +921,18 @@
         this.cartBox.x += (tx - this.cartBox.x) * 0.4;
         this.cartBox.y = this.player.y;
         this.cartBox.setDepth(this.player.y + 1);
+
+        // hand on the handle (the side view has no arm art, so a sleeve and a hand are drawn)
+        this.grip.clear();
+        if (this.puppet && this.puppet.view === 'side' && this.time.now >= this.reachUntil) {
+          const hx = this.cartBox.x - dir * CART_W * 0.45;
+          const hy = this.player.y - CART_W * 0.7;
+          const sx = this.player.x + dir * 4;
+          const sy = this.player.y - 88;
+          this.grip.lineStyle(11, 0x141824, 1).lineBetween(sx, sy, hx, hy);
+          this.grip.fillStyle(0xf1b27a, 1).fillCircle(hx, hy, 6.5);
+          this.grip.setDepth(this.player.y + 2);
+        }
       }
 
       update(time, delta) {
