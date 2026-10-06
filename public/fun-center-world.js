@@ -42,6 +42,7 @@
   // The shopping list. The server still decides rewards; this only draws the list.
   const NEED_IDS = ['milk', 'bread', 'eggs', 'pasta', 'apple', 'carrot', 'water', 'medicine'];
   const CLOSING_SECONDS = 150;     // how long the store stays open (it pauses in menus)
+  const ASSISTANT = { x: 1060, y: 430 };   // where the shop assistant stands
   const MM_SCALE = 0.18;    // puppet size: 910 art units tall becomes about 164px
   const CART_W = 112;       // cart width in world pixels
   const CART_GAP = 86;      // how far the cart sits beside him
@@ -355,6 +356,7 @@
       if (!S.warned && pct <= 25) {
         S.warned = true;
         say('The store closes soon! Think about what you still need.');
+        assistant.react('warn');
       }
       if (S.timeLeft <= 0) {
         if (S.basket.length === 0 && !S.graceUsed) {
@@ -367,8 +369,49 @@
         SFX.tone(330, 0.35, 'triangle', 0.1);
         SFX.tone(247, 0.5, 'triangle', 0.1, 0.18);
         say('Closing time! Head to the counter to pay. You can still put things back.');
+        assistant.react('closed');
       }
     }
+    // shop assistant: reacts to what you do, never says need or want
+    const assistant = {
+      greeted: false, lowSaid: false, tightSaid: false, lastLine: '', lastAt: 0,
+      lines: {
+        greet: ['Welcome to Miimiid Mart! Check your list and watch your wallet.', 'Hi there! Prices are on the shelves. Take your time, but not too long!'],
+        first: ['First one in the cart! Keep an eye on the total.', 'Off to a start! Remember, every dollar counts.'],
+        cheap: ['Easy on the wallet.', 'Small price, small dent.'],
+        mid: ['Good one. Keep an eye on the total.', 'That adds up. Check your wallet now and then.'],
+        pricey: ['Oof, that one costs a lot. Will you have enough left?', 'Big price tag! Make sure it fits your plan.'],
+        low: ['Your wallet is getting light. Count carefully!', 'Under $10 left. Choose wisely.'],
+        tight: ['Only a few dollars left! Be careful now.', 'Almost out of money! Think before you grab.'],
+        putback: ['Changing your mind? Thinking twice is smart.', 'Back it goes. Every dollar counts.'],
+        warn: ['We close soon! Anything you forgot?', 'Clock is ticking. Is your cart ready?'],
+        closed: ['Closing time! Please head to the counter.', 'We are closed. Time to pay at the counter.']
+      },
+      say(text) {
+        const scene = game && game.scene.getScene('mart');
+        if (scene && scene.assistantSay) scene.assistantSay(text);
+      },
+      pick(key) {
+        const list = this.lines[key];
+        let line = list[Math.floor(Math.random() * list.length)];
+        if (list.length > 1 && line === this.lastLine) line = list[(list.indexOf(line) + 1) % list.length];
+        this.lastLine = line;
+        return line;
+      },
+      react(kind, d) {
+        if (kind === 'grab') {
+          if (d.left <= 5 && !this.tightSaid) { this.tightSaid = true; kind = 'tight'; }
+          else if (d.left <= 10 && !this.lowSaid) { this.lowSaid = true; kind = 'low'; }
+          else if (d.count === 1) kind = 'first';
+          else kind = d.price <= 3 ? 'cheap' : d.price >= 12 ? 'pricey' : 'mid';
+        }
+        const now = Date.now();
+        if (now - this.lastAt < 900 && kind !== 'closed') return;
+        this.lastAt = now;
+        this.say(this.pick(kind));
+      }
+    };
+
     const listEl = content.querySelector('[data-mw-list]');
     const needItems = shop.items.filter(it => NEED_IDS.includes(it.id));
     listEl.innerHTML = '<span class="mw-list-title">🛒 Shopping list</span>' +
@@ -498,6 +541,7 @@
         if (left <= 5) text += ` Whoa, only $${left} left!`;
         else if (left <= 10) text += ` $${left} left.`;
         say(text);
+        assistant.react('grab', { price: result.price, left, count: S.basket.length });
       } catch (error) {
         console.error('world buy error:', error);
         say(error.message || 'That did not work. Try again.');
@@ -526,6 +570,7 @@
         SFX.pickup();
         hud();
         say(`${item.name} is back on the shelf. $${result.remaining} left.`);
+        assistant.react('putback');
       } catch (error) {
         console.error('world put back error:', error);
         say(error.message || 'That did not work. Try again.');
@@ -749,6 +794,7 @@
         // shelves, products and the counter
         UNITS.forEach(u => this.buildUnit(u, itemsByCat[u.id] || []));
         this.buildCounter();
+        this.buildAssistant();
 
         // player
         this.shadow = this.add.ellipse(START.x, START.y - 2, 110, 24, 0x000000, 0.28);
@@ -971,6 +1017,70 @@
         });
       }
 
+      buildAssistant() {
+        const A = ASSISTANT;
+        this.obst.push({ x: A.x - 26, y: A.y - 8, w: 52, h: 16 });
+        this.asstShadow = this.add.ellipse(A.x, A.y - 2, 70, 16, 0x000000, 0.25).setDepth(A.y - 1);
+        const root = this.add.container(A.x, A.y).setDepth(A.y);
+        const body = this.add.container(0, 0);
+        const g = this.add.graphics();
+        g.fillStyle(0x23407a, 1).fillRect(-14, -46, 11, 44).fillRect(3, -46, 11, 44);
+        g.fillStyle(0x0b1530, 1).fillRoundedRect(-16, -6, 14, 8, 3).fillRoundedRect(2, -6, 14, 8, 3);
+        g.fillStyle(0x2f9e6b, 1).fillRoundedRect(-30, -100, 12, 46, 6).fillRoundedRect(18, -100, 12, 46, 6);
+        g.fillStyle(0xf1b27a, 1).fillCircle(-24, -52, 6).fillCircle(24, -52, 6);
+        g.fillStyle(0x2f9e6b, 1).fillRoundedRect(-22, -104, 44, 62, 10);
+        g.fillStyle(0xffffff, 1).fillRoundedRect(-14, -84, 28, 40, 6);
+        g.fillStyle(0xf1b27a, 1).fillCircle(0, -124, 22);
+        g.fillStyle(0x3a2a1e, 1).fillRoundedRect(-24, -148, 48, 22, 10);
+        g.fillStyle(0x141824, 1).fillCircle(-8, -122, 2.5).fillCircle(8, -122, 2.5);
+        g.lineStyle(2, 0x141824, 1).beginPath().arc(0, -116, 8, 0.2, Math.PI - 0.2).strokePath();
+        const tag = this.add.text(0, -64, 'STAFF', { fontSize: '10px', color: '#2f9e6b', fontStyle: 'bold' }).setOrigin(0.5);
+        body.add([g, tag]);
+        root.add(body);
+        this.asstRoot = root;
+        this.asstBody = body;
+        this.tweens.add({ targets: body, y: -3, duration: 900, yoyo: true, repeat: -1, ease: 'Sine.easeInOut' });
+
+        this.asstBubble = this.add.container(A.x, A.y - 190).setDepth(100001).setVisible(false).setAlpha(0);
+        this.asstBg = this.add.graphics();
+        this.asstText = this.add.text(0, 0, '', {
+          fontSize: '15px', color: '#1b2440', fontStyle: 'bold', align: 'center', wordWrap: { width: 210 }
+        }).setOrigin(0.5);
+        this.asstBubble.add([this.asstBg, this.asstText]);
+        this.asstTimer = null;
+      }
+
+      assistantSay(text) {
+        if (!this.asstBubble) return;
+        this.asstText.setText(text);
+        const w = this.asstText.width + 24;
+        const h = this.asstText.height + 16;
+        this.asstBg.clear();
+        this.asstBg.fillStyle(0xffffff, 0.97).fillRoundedRect(-w / 2, -h / 2, w, h, 12);
+        this.asstBg.fillTriangle(-8, h / 2 - 1, 8, h / 2 - 1, 0, h / 2 + 10);
+        this.asstBg.lineStyle(2, 0x4da3ff, 1).strokeRoundedRect(-w / 2, -h / 2, w, h, 12);
+        this.asstBubble.setPosition(ASSISTANT.x, ASSISTANT.y - 168 - h / 2);
+        this.tweens.killTweensOf(this.asstBubble);
+        this.asstBubble.setVisible(true).setAlpha(1);
+        this.tweens.add({ targets: this.asstBody, scaleY: 1.06, duration: 120, yoyo: true });
+        if (this.asstTimer) this.asstTimer.remove(false);
+        this.asstTimer = this.time.delayedCall(3800, () => {
+          this.tweens.add({
+            targets: this.asstBubble, alpha: 0, duration: 400,
+            onComplete: () => this.asstBubble.setVisible(false)
+          });
+        });
+      }
+
+      updateAssistant() {
+        if (!this.asstRoot) return;
+        const d = Math.hypot(this.player.x - ASSISTANT.x, this.player.y - ASSISTANT.y);
+        if (!assistant.greeted && d < 260) {
+          assistant.greeted = true;
+          assistant.react('greet');
+        }
+      }
+
       popText(x, y, text, color) {
         const t = this.add.text(x, y, text, {
           fontFamily: 'system-ui, -apple-system, "Segoe UI", Roboto, sans-serif',
@@ -1067,6 +1177,7 @@
         else this.player.setFlipX(FACES_RIGHT ? this.faceLeft : !this.faceLeft);
         this.player.setDepth(this.player.y);
         if (this.cartBox) this.updateCart();
+        this.updateAssistant();
         this.shadow.setPosition(this.player.x, this.player.y - 2).setDepth(this.player.y - 1);
 
         if (Phaser.Input.Keyboard.JustDown(k.SPACE)) grabBtn.click();
