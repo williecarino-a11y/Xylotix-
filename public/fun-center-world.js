@@ -370,6 +370,46 @@
         say('Closing time! Head to the counter to pay. You can still put things back.');
       }
     }
+    // shop assistant: reacts to what you do, never says need or want
+    const assistant = {
+      greeted: false, lowSaid: false, tightSaid: false, lastLine: '', lastAt: 0,
+      lines: {
+        greet: ['Welcome to Miimiid Mart! Check your list and watch your wallet.', 'Hi there! Prices are on the shelves. Take your time, but not too long!'],
+        first: ['First one in the cart! Keep an eye on the total.', 'Off to a start! Remember, every dollar counts.'],
+        cheap: ['Easy on the wallet.', 'Small price, small dent.'],
+        mid: ['Good one. Keep an eye on the total.', 'That adds up. Check your wallet now and then.'],
+        pricey: ['Oof, that one costs a lot. Will you have enough left?', 'Big price tag! Make sure it fits your plan.'],
+        low: ['Your wallet is getting light. Count carefully!', 'Under $10 left. Choose wisely.'],
+        tight: ['Only a few dollars left! Be careful now.', 'Almost out of money! Think before you grab.'],
+        putback: ['Changing your mind? Thinking twice is smart.', 'Back it goes. Every dollar counts.'],
+        warn: ['We close soon! Anything you forgot?', 'Clock is ticking. Is your cart ready?'],
+        closed: ['Closing time! Please head to the counter.', 'We are closed. Time to pay at the counter.']
+      },
+      say(text) {
+        const scene = game && game.scene.getScene('mart');
+        if (scene && scene.assistantSay) scene.assistantSay(text);
+      },
+      pick(key) {
+        const list = this.lines[key];
+        let line = list[Math.floor(Math.random() * list.length)];
+        if (list.length > 1 && line === this.lastLine) line = list[(list.indexOf(line) + 1) % list.length];
+        this.lastLine = line;
+        return line;
+      },
+      react(kind, d) {
+        if (kind === 'grab') {
+          if (d.left <= 5 && !this.tightSaid) { this.tightSaid = true; kind = 'tight'; }
+          else if (d.left <= 10 && !this.lowSaid) { this.lowSaid = true; kind = 'low'; }
+          else if (d.count === 1) kind = 'first';
+          else kind = d.price <= 3 ? 'cheap' : d.price >= 12 ? 'pricey' : 'mid';
+        }
+        const now = Date.now();
+        if (now - this.lastAt < 900 && kind !== 'closed') return;
+        this.lastAt = now;
+        this.say(this.pick(kind));
+      }
+    };
+
     const listEl = content.querySelector('[data-mw-list]');
     const needItems = shop.items.filter(it => NEED_IDS.includes(it.id));
     listEl.innerHTML = '<span class="mw-list-title">🛒 Shopping list</span>' +
