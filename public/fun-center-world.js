@@ -38,6 +38,7 @@
   const START = { x: 160, y: 800 };
   const GRAB_RANGE = 105;
   const ART = '/assets/fun-center/mart/';
+  const NO_OVERLAY = { 'X-Continue-Loading': 'false' };   // skip the global "Please wait" overlay
   const MM_SCALE = 0.18;    // puppet size: 910 art units tall becomes about 164px
   const CART_W = 150;       // cart width in world pixels
   const CART_GAP = 100;     // how far the cart sits beside him
@@ -259,9 +260,9 @@
 
     try {
       await loadPhaser();
-      const shop = await miimiidFunCenterRequest('/api/fun-center/shop');
+      const shop = await miimiidFunCenterRequest('/api/fun-center/shop', { headers: NO_OVERLAY });
       const session = await miimiidFunCenterRequest('/api/fun-center/shop/session', {
-        method: 'POST', body: JSON.stringify({})
+        method: 'POST', body: JSON.stringify({}), headers: NO_OVERLAY
       });
       mountWorld(content, shop, session);
     } catch (error) {
@@ -419,7 +420,7 @@
 
         const result = await miimiidFunCenterRequest(
           `/api/fun-center/shop/session/${encodeURIComponent(S.sessionId)}/buy`,
-          { method: 'POST', body: JSON.stringify({ itemId: item.id, optionId }) }
+          { method: 'POST', body: JSON.stringify({ itemId: item.id, optionId }), headers: NO_OVERLAY }
         );
         S.spent = result.spent;
         S.basket.push(item.id);
