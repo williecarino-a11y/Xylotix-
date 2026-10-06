@@ -199,11 +199,12 @@
       .mw-holder canvas { display: block; }
       .mw-bubble { position: absolute; left: 10px; right: 10px; bottom: 10px; background: rgba(19, 26, 44, 0.92); border: 1px solid #232c42; color: #e6e9f0; border-radius: 14px; padding: 10px 12px; font-size: 14px; line-height: 1.35; pointer-events: none; z-index: 5; }
       .mw-overlay { position: absolute; inset: 0; background: rgba(8, 12, 24, 0.82); display: flex; align-items: center; justify-content: center; padding: 16px; z-index: 8; }
-      .mw-card { width: 100%; background: #131a2c; border: 1px solid #232c42; border-radius: 18px; padding: 16px; color: #e6e9f0; text-align: center; }
+      .mw-card { width: 100%; box-sizing: border-box; max-height: 100%; overflow-y: auto; background: #131a2c; border: 1px solid #232c42; border-radius: 18px; padding: 16px; color: #e6e9f0; text-align: center; }
       .mw-card h3 { margin: 0 0 8px; color: #4da3ff; }
       .mw-card p { margin: 6px 0; font-size: 14px; }
       .mw-card button { margin-top: 8px; width: 100%; border: 0; border-radius: 999px; padding: 12px; font-weight: 800; background: #1f6feb; color: #fff; cursor: pointer; }
       .mw-card button.mw-alt { background: transparent; border: 1px solid #232c42; color: #9aa4bd; }
+      .mw-card button:disabled { background: #232c42; color: #5d6785; opacity: .55; cursor: default; }
       .mw-opt { display: flex; justify-content: space-between; align-items: center; }
       .mw-controls { display: flex; align-items: center; justify-content: space-between; padding: 12px 14px 0; }
       .mw-joy { position: relative; width: 108px; height: 108px; border-radius: 50%; background: rgba(77, 163, 255, 0.12); border: 2px solid rgba(77, 163, 255, 0.45); touch-action: none; user-select: none; }
@@ -456,9 +457,9 @@
             <strong>$${it.price}</strong>
           </div>`;
         const rows = [
+          ...list(r.needsMissed).map(it => row(it, '❌ Missed', it.explanation || 'You still needed this.')),
           ...list(r.needsBought).map(it => row(it, '✅ Need', '')),
-          ...list(r.wantsBought).map(it => row(it, '🛍️ Want', '')),
-          ...list(r.needsMissed).map(it => row(it, '❌ Missed', it.explanation || 'You still needed this.'))
+          ...list(r.wantsBought).map(it => row(it, '🛍️ Want', ''))
         ].join('');
         SFX.coin();
         const o = overlay(`
