@@ -309,8 +309,9 @@
           <button type="button" class="mw-leave" data-mw-mute>🔊</button>
           <button type="button" class="mw-leave" data-mw-leave>Leave</button>
         </div>
+        <div class="mw-list" data-mw-list></div>
         <div class="mw-holder" data-mw-holder>
-          <div class="mw-bubble" data-mw-bubble>Welcome to Miimiid Mart! Use the stick to walk to a shelf.</div>
+          <div class="mw-bubble" data-mw-bubble>Check your list! Grab what you need and keep an eye on your wallet.</div>
         </div>
         <div class="mw-controls">
           <div class="mw-joy" data-mw-joy><div class="mw-joy-knob" data-mw-knob></div></div>
