@@ -40,8 +40,8 @@
   const ART = '/assets/fun-center/mart/';
   const NO_OVERLAY = { 'X-Continue-Loading': 'false' };   // skip the global "Please wait" overlay
   const MM_SCALE = 0.18;    // puppet size: 910 art units tall becomes about 164px
-  const CART_W = 150;       // cart width in world pixels
-  const CART_GAP = 100;     // how far the cart sits beside him
+  const CART_W = 112;       // cart width in world pixels
+  const CART_GAP = 86;      // how far the cart sits beside him
   const MM_FILES = [
     'head-blank', 'eye-open-left', 'eye-open-right', 'eye-closed-left', 'eye-closed-right',
     'mouth-smile', 'mouth-open-medium', 'mouth-open-big',
