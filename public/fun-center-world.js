@@ -830,7 +830,7 @@
       }
     }
 
-    async function doCheckout() {
+    async function doCheckout(forced) {
       if (S.busy) return;
       if (S.basket.length === 0) { say('Pick something up first!'); return; }
       S.busy = true;
