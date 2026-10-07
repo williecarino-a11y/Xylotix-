@@ -656,6 +656,7 @@
         else if (left <= 10) text += ` $${left} left.`;
         say(text);
         if (result.onSale) assistant.say(`Got it for $${result.price} instead of $${result.normalPrice}! A deal only saves you money if you needed the thing.`);
+        else if (result.priceUp) assistant.say(`${item.name} cost $${result.price} instead of $${result.normalPrice}. Waiting made it more expensive.`);
         else assistant.react('grab', { price: result.price, left, count: S.basket.length });
       } catch (error) {
         console.error('world buy error:', error);
