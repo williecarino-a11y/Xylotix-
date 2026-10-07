@@ -552,6 +552,51 @@ router.post('/shop/session/:sessionId/hike/start', funAnswerLimiter, async (req,
   }
 });
 
+// Starts the rival race for this trip (once). The server picks the essential and the times.
+router.post('/shop/session/:sessionId/rival/start', funAnswerLimiter, async (req, res) => {
+  try {
+    const user = await requireFunCenterUser(req, res);
+    if (!user) return;
+
+    const { sessionId } = req.params;
+    const shop = getWeeklyShopDefinition();
+    const existing = await FunGameSession.findOne({ sessionId, userId: user._id, gameId: SHOP_GAME_ID });
+    if (!existing) return res.status(404).json({ status: 'error', message: 'Shopping trip not found.' });
+    if (existing.completed) return res.status(409).json({ status: 'error', code: 'SHOP_FINISHED', message: 'This shopping trip is already finished.' });
+    if (existing.rivalItemId) return res.json({ status: 'success', data: { started: false } });
+
+    const boughtIds = new Set(existing.purchasedItems.map(entry => entry.itemId));
+    const choices = shop.items.filter(item =>
+      RIVAL_ITEMS.includes(item.id) &&
+      item.classification === 'need' &&
+      !(Array.isArray(item.options) && item.options.length > 0) &&
+      !boughtIds.has(item.id) &&
+      item.id !== existing.hikeItemId
+    );
+    if (choices.length === 0) return res.json({ status: 'success', data: { started: false } });
+
+    const item = choices[Math.floor(Math.random() * choices.length)];
+    const takesAt = new Date(Date.now() + RIVAL_SECONDS * 1000);
+    const restockAt = new Date(takesAt.getTime() + RIVAL_RESTOCK_SECONDS * 1000);
+    const restockPrice = item.price + RIVAL_MARKUP;
+
+    const updated = await FunGameSession.findOneAndUpdate(
+      { sessionId, userId: user._id, gameId: SHOP_GAME_ID, completed: false, rivalItemId: null, 'purchasedItems.itemId': { $ne: item.id } },
+      { $set: { rivalItemId: item.id, rivalTakesAt: takesAt, rivalRestockAt: restockAt, rivalPrice: restockPrice, rivalBeaten: false } },
+      { new: true }
+    );
+    if (!updated) return res.json({ status: 'success', data: { started: false } });
+
+    return res.json({
+      status: 'success',
+      data: { started: true, itemId: item.id, name: item.name, seconds: RIVAL_SECONDS, restockSeconds: RIVAL_RESTOCK_SECONDS, normalPrice: item.price, restockPrice }
+    });
+  } catch (error) {
+    console.error('Fun Center shop rival error:', error);
+    return res.status(500).json({ status: 'error', message: 'Unable to start the rival race.' });
+  }
+});
+
 router.post('/shop/session', funSessionStartLimiter, async (req, res) => {
   try {
     const user = await requireFunCenterUser(req, res);
