@@ -104,6 +104,33 @@ const funGameSessionSchema = new mongoose.Schema(
       default: null
     },
 
+    /* Rival race (one per trip): another shopper takes an essential, it comes back pricier. */
+    rivalItemId: {
+      type: String,
+      default: null
+    },
+
+    rivalTakesAt: {
+      type: Date,
+      default: null
+    },
+
+    rivalRestockAt: {
+      type: Date,
+      default: null
+    },
+
+    rivalPrice: {
+      type: Number,
+      default: null,
+      min: 0
+    },
+
+    rivalBeaten: {
+      type: Boolean,
+      default: false
+    },
+
     /* Price rise (one per trip): an essential costs more from then on. */
     hikeItemId: {
       type: String,
