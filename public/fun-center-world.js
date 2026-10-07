@@ -235,6 +235,8 @@
       .mw-asst-face { width: 34px; height: 34px; flex: none; border-radius: 50%; background: #2f9e6b; display: flex; align-items: center; justify-content: center; font-size: 20px; }
       .mw-asst b { display: block; font-size: 11px; color: #2f9e6b; text-transform: uppercase; letter-spacing: .04em; }
       @keyframes mwSlide { from { transform: translateY(-10px); opacity: 0; } to { transform: none; opacity: 1; } }
+      .mw-sale { display: none; margin: 0 4px 6px; padding: 6px 10px; border-radius: 10px; background: linear-gradient(90deg, #e0245e, #ff7a1a); color: #ffffff; font-size: 13px; font-weight: 800; text-align: center; animation: mwPulse .9s ease-in-out infinite; }
+      .mw-sale.show { display: block; }
       .mw-controls { display: flex; align-items: center; justify-content: space-between; padding: 12px 14px 0; }
       .mw-joy { position: relative; width: 108px; height: 108px; border-radius: 50%; background: rgba(77, 163, 255, 0.12); border: 2px solid rgba(77, 163, 255, 0.45); touch-action: none; user-select: none; }
       .mw-joy-knob { position: absolute; left: 50%; top: 50%; width: 46px; height: 46px; margin: -23px 0 0 -23px; border-radius: 50%; background: #1f6feb; box-shadow: 0 4px 12px rgba(0,0,0,.4); pointer-events: none; transition: transform .1s ease-out; }
