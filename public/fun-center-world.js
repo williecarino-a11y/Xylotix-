@@ -399,16 +399,16 @@
     const assistant = {
       greeted: false, lowSaid: false, tightSaid: false, lastLine: '', lastAt: 0,
       lines: {
-        greet: ['Welcome to Miimiid Mart! Check your list and watch your wallet.', 'Hi there! Prices are on the shelves. Take your time, but not too long!'],
-        first: ['First one in the cart! Keep an eye on the total.', 'Off to a start! Remember, every dollar counts.'],
-        cheap: ['Easy on the wallet.', 'Small price, small dent.'],
-        mid: ['Good one. Keep an eye on the total.', 'That adds up. Check your wallet now and then.'],
-        pricey: ['Oof, that one costs a lot. Will you have enough left?', 'Big price tag! Make sure it fits your plan.'],
-        low: ['Your wallet is getting light. Count carefully!', 'Under $10 left. Choose wisely.'],
-        tight: ['Only a few dollars left! Be careful now.', 'Almost out of money! Think before you grab.'],
-        putback: ['Changing your mind? Thinking twice is smart.', 'Back it goes. Every dollar counts.'],
-        warn: ['We close soon! Anything you forgot?', 'Clock is ticking. Is your cart ready?'],
-        closed: ['Closing time! Please head to the counter.', 'We are closed. Time to pay at the counter.']
+        greet: ['Welcome to Miimiid Mart! Check your list and watch your wallet.', 'Hi there! Prices are on the shelves. Take your time, but not too long!', 'Welcome in! Have a plan before you fill that cart.', 'Hello! Tip: the total matters more than any single price.'],
+        first: ['First one in the cart! Keep an eye on the total.', 'Off to a start! Remember, every dollar counts.', 'And we are rolling! Keep counting as you go.', 'Good start. Now keep an eye on the wallet.'],
+        cheap: ['Easy on the wallet.', 'Small price, small dent.', 'Little things add up, so keep counting.', 'Cheap is nice. Count the total anyway.', 'That one barely moves the needle.', 'Good price. How is the rest of your budget?'],
+        mid: ['Good one. Keep an eye on the total.', 'That adds up. Check your wallet now and then.', 'A fair price, but the total is growing.', 'Not tiny, not huge. Watch the wallet.', 'Fine, as long as there is room for the rest.'],
+        pricey: ['Oof, that one costs a lot. Will you have enough left?', 'Big price tag! Make sure it fits your plan.', 'That is a big bite out of the wallet.', 'Pricey! Is there enough left for the rest of the list?', 'Think about what else that money could buy.'],
+        low: ['Your wallet is getting light. Count carefully!', 'Under $10 left. Choose wisely.', 'Getting close to the bottom of the wallet.', 'Careful now, the wallet is running low.'],
+        tight: ['Only a few dollars left! Be careful now.', 'Almost out of money! Think before you grab.', 'Nearly empty. Every dollar matters now.', 'Just a few dollars left. Pick carefully.'],
+        putback: ['Changing your mind? Thinking twice is smart.', 'Back it goes. Every dollar counts.', 'Good thinking, a second look never hurts.', 'Put back and money back. Nice.', 'Better to decide now than regret it later.'],
+        warn: ['We close soon! Anything you forgot?', 'Clock is ticking. Is your cart ready?', 'Closing time is coming. Check your list!', 'Last chance to grab what you came for.'],
+        closed: ['Closing time! Please head to the counter.', 'We are closed. Time to pay at the counter.', 'That is the bell! Off to the counter.']
       },
       say(text) {
         const box = holder.querySelector('[data-mw-asst]');
