@@ -458,7 +458,7 @@
       }
     }
     function tickSale(dt) {
-      if (!saleAsked && !S.closed && !S.busy && S.timeLeft <= CLOSING_SECONDS * 0.6) {
+      if (!saleAsked && !S.closed && !S.busy && (S.basket.length >= 3 || S.timeLeft <= CLOSING_SECONDS * 0.8)) {
         saleAsked = true;
         startSale();
       }
