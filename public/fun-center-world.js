@@ -44,6 +44,11 @@
   const CLOSING_SECONDS = 150;     // how long the store stays open (it pauses in menus)
   const ASSISTANT_PATH = [[1060, 430], [1200, 320], [1240, 540], [900, 560], [720, 660], [720, 820], [720, 660], [900, 560]];   // his patrol route
   const ASSISTANT_SPEED = 62;      // how fast he walks
+  const saleNow = { cur: null };   // the running flash sale (the server decides it)
+  function nowPrice(item) {
+    const s = saleNow.cur;
+    return s && s.itemId === item.id && Date.now() < s.endsAt ? s.salePrice : item.price;
+  }
   const MM_SCALE = 0.18;    // puppet size: 910 art units tall becomes about 164px
   const CART_W = 112;       // cart width in world pixels
   const CART_GAP = 86;      // how far the cart sits beside him
