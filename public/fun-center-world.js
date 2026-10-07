@@ -512,7 +512,11 @@
         saleNow.cur = { itemId: r.itemId, name: r.name, label: r.label, normalPrice: r.normalPrice, salePrice: r.salePrice, endsAt: Date.now() + r.seconds * 1000 };
         SFX.tone(880, 0.12, 'square', 0.06);
         SFX.tone(1175, 0.2, 'square', 0.06, 0.12);
-        assistant.say(`FLASH SALE! ${r.name} is $${r.salePrice} instead of $${r.normalPrice}, but only for ${r.seconds} seconds. Is it on your list?`);
+        assistant.say(`FLASH SALE! ${r.name} is $${r.salePrice} instead of $${r.normalPrice} for ${r.seconds} seconds. Is it on your list?`, [
+          { label: 'It is on my list', answer: 'Hmm, I do not see it on your list. A deal only helps if you need the thing.' },
+          { label: 'Not on my list', answer: 'Smart! A discount on something you do not need is still spending.' },
+          { label: 'I want it!', answer: 'Fair. Treats are fine once the things you must have are covered.' }
+        ]);
         const scene = game && game.scene.getScene('mart');
         if (scene && scene.refreshSale) scene.refreshSale();
       } catch (error) {
