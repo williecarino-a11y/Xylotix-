@@ -235,6 +235,10 @@ router.post('/session/:sessionId/complete', funSessionStartLimiter, async (req, 
  * WEEKLY SHOP (server-authoritative budget)
  * ========================================================= */
 
+const RIVAL_ITEMS = ['pasta', 'apple', 'carrot', 'water', 'medicine'];   // essentials a rival can race you for
+const RIVAL_SECONDS = 14;          // time until the rival reaches the shelf
+const RIVAL_RESTOCK_SECONDS = 20;  // how long it stays sold out
+const RIVAL_MARKUP = 2;            // extra price when it comes back
 const SHOP_GAME_ID = 'weekly-shop';
 const STAR_SAVE_TARGET = 5;   // money to keep for the savings star
 
