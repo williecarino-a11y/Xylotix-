@@ -1779,6 +1779,7 @@
         if (this.cartBox) this.updateCart();
         this.updateShopkeeper(delta);
         this.updateFriend(delta);
+        this.updateCashier(delta);
         this.shadow.setPosition(this.player.x, this.player.y - 2).setDepth(this.player.y - 1);
 
         if (Phaser.Input.Keyboard.JustDown(k.SPACE)) grabBtn.click();
