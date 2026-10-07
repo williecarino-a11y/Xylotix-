@@ -353,7 +353,7 @@
         <div class="mw-hike" data-mw-hike></div>
         <div class="mw-list" data-mw-list></div>
         <div class="mw-holder" data-mw-holder>
-          <div class="mw-asst" data-mw-asst><span class="mw-asst-face">🧑‍🍳</span><div><b>Sam · Store assistant</b><span data-mw-asst-text></span></div></div>
+          <div class="mw-asst" data-mw-asst><span class="mw-asst-face">🧑‍🍳</span><div><b>Sam · Store assistant</b><span data-mw-asst-text></span><div class="mw-asst-replies" data-mw-asst-replies></div></div></div>
           <div class="mw-bubble" data-mw-bubble>Check your list! Grab what you need and keep an eye on your wallet.</div>
         </div>
         <div class="mw-controls">
