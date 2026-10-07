@@ -687,6 +687,7 @@
         S.spent = result.spent;
         S.basket = S.basket.filter(id => id !== item.id);
         scene.restoreToShelf(product);
+        if (scene.refreshSale) scene.refreshSale();
         scene.popText(scene.player.x, scene.player.y - 170, `+$${result.price}`, '#7ee2a8');
         SFX.pickup();
         hud();
