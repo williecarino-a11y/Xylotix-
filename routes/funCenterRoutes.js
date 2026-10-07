@@ -640,7 +640,16 @@ router.post('/shop/session/:sessionId/buy', funAnswerLimiter, async (req, res) =
     const saleActive = !!trip && !option && trip.saleItemId === item.id && typeof trip.salePrice === 'number' &&
       !!trip.saleEndsAt && trip.saleEndsAt.getTime() + 1500 > Date.now();
     const hikeActive = !!trip && !option && trip.hikeItemId === item.id && typeof trip.hikePrice === 'number';
-    const price = option ? option.price : (saleActive ? trip.salePrice : (hikeActive ? trip.hikePrice : item.price));
+    // Rival race: buying before he arrives beats him; after that it is sold out, then back at a higher price.
+    const nowMs = Date.now();
+    const rivalOn = !!trip && !option && trip.rivalItemId === item.id && !trip.rivalBeaten && !!trip.rivalTakesAt && !!trip.rivalRestockAt;
+    const rivalWin = rivalOn && nowMs <= trip.rivalTakesAt.getTime() + 1500;
+    const rivalSoldOut = rivalOn && !rivalWin && nowMs < trip.rivalRestockAt.getTime();
+    const rivalRestocked = rivalOn && nowMs >= trip.rivalRestockAt.getTime();
+    if (rivalSoldOut) {
+      return res.status(409).json({ status: 'error', code: 'SOLD_OUT', message: `${item.name} is sold out. Another shopper took the last one.` });
+    }
+    const price = option ? option.price : (saleActive ? trip.salePrice : (hikeActive ? trip.hikePrice : (rivalRestocked ? trip.rivalPrice : item.price)));
 
     // Price, budget and duplicate checks all happen inside one atomic write.
     const updated = await FunGameSession.findOneAndUpdate(
