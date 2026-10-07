@@ -612,7 +612,8 @@
         if (left <= 5) text += ` Whoa, only $${left} left!`;
         else if (left <= 10) text += ` $${left} left.`;
         say(text);
-        assistant.react('grab', { price: result.price, left, count: S.basket.length });
+        if (result.onSale) assistant.say(`Got it for $${result.price} instead of $${result.normalPrice}! A deal only saves you money if you needed the thing.`);
+        else assistant.react('grab', { price: result.price, left, count: S.basket.length });
       } catch (error) {
         console.error('world buy error:', error);
         say(error.message || 'That did not work. Try again.');
