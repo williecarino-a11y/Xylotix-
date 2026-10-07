@@ -44,6 +44,8 @@
   const CLOSING_SECONDS = 150;     // how long the store stays open (it pauses in menus)
   const ASSISTANT_PATH = [[1060, 430], [1200, 320], [1240, 540], [900, 560], [720, 660], [720, 820], [720, 660], [900, 560]];   // his patrol route
   const ASSISTANT_SPEED = 62;      // how fast he walks
+  const PAY_GRACE_SECONDS = 25;    // after closing, time left to reach the counter
+  const FRIEND_SPEED = 95;         // how fast Alex walks to you
   const saleNow = { cur: null };   // the running flash sale (the server decides it)
   const hikeNow = { cur: null };   // a price that went up mid-trip (the server decides it)
   function nowPrice(item) {
@@ -239,6 +241,11 @@
       .mw-asst-face { width: 34px; height: 34px; flex: none; border-radius: 50%; background: #2f9e6b; display: flex; align-items: center; justify-content: center; font-size: 20px; }
       .mw-asst b { display: block; font-size: 11px; color: #2f9e6b; text-transform: uppercase; letter-spacing: .04em; }
       @keyframes mwSlide { from { transform: translateY(-10px); opacity: 0; } to { transform: none; opacity: 1; } }
+      .mw-asst.ask { pointer-events: auto; }
+      .mw-asst-replies { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+      .mw-asst-replies:empty { display: none; }
+      .mw-reply { border: 2px solid #2f9e6b; background: #ffffff; color: #1b6b48; border-radius: 999px; padding: 6px 12px; font-size: 13px; font-weight: 800; cursor: pointer; }
+      .mw-reply:active { background: #2f9e6b; color: #ffffff; }
       .mw-sale { display: none; margin: 0 4px 6px; padding: 6px 10px; border-radius: 10px; background: linear-gradient(90deg, #e0245e, #ff7a1a); color: #ffffff; font-size: 13px; font-weight: 800; text-align: center; animation: mwPulse .9s ease-in-out infinite; }
       .mw-sale.show { display: block; }
       .mw-hike { display: none; margin: 0 4px 6px; padding: 6px 10px; border-radius: 10px; background: #3a1620; border: 1px solid #ff5d5d; color: #ffb4b4; font-size: 13px; font-weight: 800; text-align: center; }
@@ -346,7 +353,7 @@
         <div class="mw-hike" data-mw-hike></div>
         <div class="mw-list" data-mw-list></div>
         <div class="mw-holder" data-mw-holder>
-          <div class="mw-asst" data-mw-asst><span class="mw-asst-face">🧑‍🍳</span><div><b>Sam · Store assistant</b><span data-mw-asst-text></span></div></div>
+          <div class="mw-asst" data-mw-asst><span class="mw-asst-face">🧑‍🍳</span><div><b>Sam · Store assistant</b><span data-mw-asst-text></span><div class="mw-asst-replies" data-mw-asst-replies></div></div></div>
           <div class="mw-bubble" data-mw-bubble>Check your list! Grab what you need and keep an eye on your wallet.</div>
         </div>
         <div class="mw-controls">
@@ -389,9 +396,10 @@
           return;
         }
         S.closed = true;
+        S.payLeft = PAY_GRACE_SECONDS;
         SFX.tone(330, 0.35, 'triangle', 0.1);
         SFX.tone(247, 0.5, 'triangle', 0.1, 0.18);
-        say('Closing time! Head to the counter to pay. You can still put things back.');
+        say('Closing time! You have ' + PAY_GRACE_SECONDS + ' seconds to reach the counter and pay.');
         assistant.react('closed');
       }
     }
@@ -410,16 +418,50 @@
         warn: ['We close soon! Anything you forgot?', 'Clock is ticking. Is your cart ready?', 'Closing time is coming. Check your list!', 'Last chance to grab what you came for.'],
         closed: ['Closing time! Please head to the counter.', 'We are closed. Time to pay at the counter.', 'That is the bell! Off to the counter.']
       },
-      say(text) {
+      pending: false,
+      say(text, replies, who, onClose) {
+        const ask = !!(replies && replies.length);
+        if (this.pending && !ask) return;          // a question is waiting for an answer
         const box = holder.querySelector('[data-mw-asst]');
-        if (box) {
-          box.querySelector('[data-mw-asst-text]').textContent = text;
-          box.classList.add('show');
-          clearTimeout(this.hideTimer);
-          this.hideTimer = setTimeout(() => box.classList.remove('show'), 4200);
+        if (!box) return;
+        const rb = box.querySelector('[data-mw-asst-replies]');
+        const person = who || { name: 'Sam · Store assistant', face: '🧑‍🍳' };
+        box.querySelector('b').textContent = person.name;
+        box.querySelector('.mw-asst-face').textContent = person.face;
+        box.querySelector('[data-mw-asst-text]').textContent = text;
+        rb.innerHTML = '';
+        clearTimeout(this.hideTimer);
+        const close = () => {
+          this.pending = false;
+          box.classList.remove('ask');
+          rb.innerHTML = '';
+        };
+        this.pending = ask;
+        box.classList.toggle('ask', ask);
+        box.classList.add('show');
+        if (ask) {
+          replies.forEach(rp => {
+            const b = document.createElement('button');
+            b.type = 'button';
+            b.className = 'mw-reply';
+            b.textContent = rp.label;
+            b.addEventListener('click', () => {
+              close();
+              clearTimeout(this.hideTimer);
+              say('You: ' + rp.label);                 // Miimiid's own bubble
+              if (rp.action) rp.action();
+              if (onClose) onClose();
+              setTimeout(() => assistant.say(rp.answer, null, who), 600);
+            });
+            rb.appendChild(b);
+          });
         }
+        this.hideTimer = setTimeout(() => {
+          box.classList.remove('show');
+          if (ask) { close(); if (onClose) onClose(); }
+        }, ask ? 14000 : 4200);
         const scene = game && game.scene.getScene('mart');
-        if (scene && scene.shopkeeperTalk) scene.shopkeeperTalk();
+        if (!who && scene && scene.shopkeeperTalk) scene.shopkeeperTalk();
       },
       pick(key) {
         const list = this.lines[key];
@@ -429,6 +471,15 @@
         return line;
       },
       react(kind, d) {
+        if (kind === 'greet') {
+          this.lastAt = Date.now();
+          this.say(this.pick('greet'), [
+            { label: 'Hi Sam! 👋', answer: 'Hi! Nice to meet you. Shout if you need help.' },
+            { label: 'Just looking', answer: 'No problem. Take your time, but watch the clock!' },
+            { label: 'Any tips?', answer: 'Yes! Get the things you must have first, then see what money is left.' }
+          ]);
+          return;
+        }
         if (kind === 'hike') {
           this.lastAt = Date.now();
           this.say(`${d.name} just went up $${d.up}! Prices change, so buying the things you must have early can save money.`);
@@ -462,7 +513,11 @@
         saleNow.cur = { itemId: r.itemId, name: r.name, label: r.label, normalPrice: r.normalPrice, salePrice: r.salePrice, endsAt: Date.now() + r.seconds * 1000 };
         SFX.tone(880, 0.12, 'square', 0.06);
         SFX.tone(1175, 0.2, 'square', 0.06, 0.12);
-        assistant.say(`FLASH SALE! ${r.name} is $${r.salePrice} instead of $${r.normalPrice}, but only for ${r.seconds} seconds. Is it on your list?`);
+        assistant.say(`FLASH SALE! ${r.name} is $${r.salePrice} instead of $${r.normalPrice} for ${r.seconds} seconds. Is it on your list?`, [
+          { label: 'It is on my list', answer: 'Hmm, I do not see it on your list. A deal only helps if you need the thing.' },
+          { label: 'Not on my list', answer: 'Smart! A discount on something you do not need is still spending.' },
+          { label: 'I want it!', answer: 'Fair. Treats are fine once the things you must have are covered.' }
+        ]);
         const scene = game && game.scene.getScene('mart');
         if (scene && scene.refreshSale) scene.refreshSale();
       } catch (error) {
@@ -528,6 +583,80 @@
       if (hikeHideAt && Date.now() > hikeHideAt) {
         hikeHideAt = 0;
         hikeEl.classList.remove('show');
+      }
+    }
+
+    // closing rule: after the store closes, the player has PAY_GRACE_SECONDS to reach the counter.
+    const clockLabel = content.querySelector('.mw-clock span');
+    let forcedDone = false;
+    function tickClosing(dt) {
+      if (!S.closed || forcedDone || S.busy) return;
+      S.payLeft = Math.max(0, S.payLeft - dt);
+      clockLabel.textContent = `🔒 Closed: pay in ${Math.ceil(S.payLeft)}s`;
+      clockFill.style.width = Math.round((S.payLeft / PAY_GRACE_SECONDS) * 100) + '%';
+      clockFill.dataset.level = 'low';
+      if (S.payLeft <= 8 && !S.payWarned) {
+        S.payWarned = true;
+        assistant.say('Please head to the counter now! I will ring you up in a few seconds.');
+      }
+      if (S.payLeft <= 0) {
+        forcedDone = true;
+        forceCheckout();
+      }
+    }
+    function forceCheckout() {
+      if (S.basket.length === 0) { walkedOut(); return; }
+      assistant.say('Time is up! The cashier will ring you up now.');
+      doCheckout(true);
+    }
+    function walkedOut() {
+      S.busy = true;
+      SFX.tone(247, 0.5, 'triangle', 0.1);
+      const o = overlay(`
+        <h3>The store closed</h3>
+        <p>Time ran out and your cart was empty, so you left with nothing.</p>
+        <p>Your wallet is safe, but your essentials for the week are not covered.</p>
+        <button type="button" data-again>Try again</button>
+        <button type="button" class="mw-alt" data-back>Back to Fun Center</button>
+      `);
+      o.querySelector('[data-again]').addEventListener('click', () => { destroyGame(); startWorld(); });
+      o.querySelector('[data-back]').addEventListener('click', () => { destroyGame(); renderMiimiidFunCenter(); });
+    }
+
+    // friend event: Alex pops in, asks about movie night, then leaves.
+    let friendAsked = false;
+    function tickFriend() {
+      if (friendAsked || S.closed || S.busy) return;
+      const movie = shop.items.find(it => it.id === 'movie');
+      if (!movie || S.basket.includes('movie')) return;
+      if (S.basket.length < 2) return;
+      if (S.basket.length < 6 && S.timeLeft > CLOSING_SECONDS * 0.4) return;
+      if (saleNow.cur || hikeHideAt || assistant.pending) return;
+      if (S.budget - S.spent < nowPrice(movie)) return;
+      const scene = game && game.scene.getScene('mart');
+      if (!scene || scene.friend) return;
+      friendAsked = true;
+      scene.spawnFriend();
+    }
+    function friendAsk() {
+      const movie = shop.items.find(it => it.id === 'movie');
+      const price = movie ? nowPrice(movie) : 12;
+      const who = { name: 'Alex · Your friend', face: '🧑' };
+      assistant.say(`Hey! Movie night tonight? Tickets are $${price}. You in?`, [
+        { label: "I'm in! 🎬", answer: 'Yes! It is going to be fun!', action: buyMovie },
+        { label: 'Maybe next time', answer: 'No worries, we will catch the next one!' }
+      ], who, friendDone);
+    }
+    function buyMovie() {
+      const scene = game && game.scene.getScene('mart');
+      const p = scene && scene.products.find(q => q.item.id === 'movie');
+      if (p && !p.taken) buyProduct(scene, p);
+    }
+    function friendDone() {
+      const scene = game && game.scene.getScene('mart');
+      if (scene && scene.friend && scene.friend.state === 'ask') {
+        scene.friend.state = 'out';
+        scene.friend.waveUntil = scene.time.now + 1200;
       }
     }
 
@@ -701,7 +830,7 @@
       }
     }
 
-    async function doCheckout() {
+    async function doCheckout(forced) {
       if (S.busy) return;
       if (S.basket.length === 0) { say('Pick something up first!'); return; }
       S.busy = true;
@@ -724,6 +853,7 @@
         SFX.coin();
         const o = overlay(`
           <h3>Trip finished!</h3>
+          ${forced ? '<p>⏰ Time ran out, so the cashier rang you up.</p>' : ''}
           <p>${esc(r.message || '')}</p>
           <p>Needs covered: <strong>${list(r.needsBought).length} / ${r.totalNeeds}</strong> &middot; Spent $${r.spent} &middot; Left $${r.saved}</p>
           <div style="max-height:230px;overflow-y:auto;margin:6px 0">${rows}</div>
@@ -1319,6 +1449,173 @@
         });
       }
 
+      // A generic standing character (used by Alex now, and by the cashier next).
+      makeNpc(o) {
+        const skin = o.skin || 0xf1b27a;
+        const ink = 0x141824;
+        const part = (x, y) => this.add.container(x, y);
+        const root = this.add.container(o.x, o.y);
+        const legL = part(-10, -46);
+        const legR = part(10, -46);
+        [legL, legR].forEach(leg => {
+          const g = this.add.graphics();
+          g.fillStyle(o.pants, 1).fillRoundedRect(-7, 0, 14, 38, 5);
+          g.fillStyle(0x0b1530, 1).fillRoundedRect(-9, 34, 20, 12, 5);
+          leg.add(g);
+        });
+        const upper = part(0, 0);
+        const torso = this.add.graphics();
+        torso.fillStyle(o.shirt, 1).fillRoundedRect(-23, -106, 46, 64, 12);
+        torso.fillStyle(0xffffff, 0.9).fillRoundedRect(-8, -92, 16, 16, 4);
+        const armL = part(-26, -98);
+        const armR = part(26, -98);
+        [armL, armR].forEach(arm => {
+          const g = this.add.graphics();
+          g.fillStyle(o.shirt, 1).fillRoundedRect(-6, -4, 12, 34, 6);
+          g.fillStyle(skin, 1).fillCircle(0, 33, 7);
+          arm.add(g);
+        });
+        const head = part(0, -126);
+        const face = this.add.graphics();
+        face.fillStyle(skin, 1).fillCircle(-26, 5, 6).fillCircle(26, 5, 6);
+        face.fillStyle(skin, 1).fillEllipse(0, 3, 54, 50);
+        face.fillStyle(0xff8a8a, 0.35).fillCircle(-16, 14, 6).fillCircle(16, 14, 6);
+        face.fillStyle(0xd9965f, 1).fillCircle(0, 12, 2.2);
+        face.fillStyle(o.hair, 1);
+        face.beginPath();
+        face.arc(0, -6, 27, Math.PI, Math.PI * 2, false);
+        face.closePath();
+        face.fillPath();
+        const eyes = this.add.graphics();
+        eyes.fillStyle(0xffffff, 1).fillEllipse(-10, 5, 15, 17).fillEllipse(10, 5, 15, 17);
+        eyes.lineStyle(1.5, ink, 0.5).strokeEllipse(-10, 5, 15, 17).strokeEllipse(10, 5, 15, 17);
+        const pupils = this.add.graphics();
+        pupils.fillStyle(0x3a2a1e, 1).fillCircle(-10, 6, 4.6).fillCircle(10, 6, 4.6);
+        pupils.fillStyle(0xffffff, 1).fillCircle(-8.5, 4, 1.6).fillCircle(11.5, 4, 1.6);
+        const lids = this.add.graphics().setVisible(false);
+        lids.lineStyle(2.5, ink, 1);
+        lids.beginPath().arc(-10, 5, 6, 0.15, Math.PI - 0.15).strokePath();
+        lids.beginPath().arc(10, 5, 6, 0.15, Math.PI - 0.15).strokePath();
+        const mouthS = this.add.graphics();
+        mouthS.lineStyle(2.5, ink, 1).beginPath().arc(0, 14, 8, 0.25, Math.PI - 0.25).strokePath();
+        const mouthO = this.add.graphics().setVisible(false);
+        mouthO.fillStyle(0x5b1f2a, 1).fillEllipse(0, 20, 14, 11);
+        mouthO.fillStyle(0xff7a8a, 1).fillEllipse(0, 23, 9, 5);
+        head.add([face, eyes, pupils, lids, mouthS, mouthO]);
+        upper.add([torso, armL, armR, head]);
+        root.add([legL, legR, upper]);
+        return { root, legL, legR, upper, armL, armR, head, eyes, pupils, lids, mouthS, mouthO };
+      }
+
+      animNpc(N, st, now, delta, moving, look, talking, waving) {
+        st.amp += ((moving ? 1 : 0) - st.amp) * Math.min(1, delta / 90);
+        if (moving) st.phase += (delta / 1000) * Math.PI * 2 / 0.75;
+        const s = Math.sin(st.phase);
+        const a = st.amp;
+        const rad = Phaser.Math.DegToRad;
+        N.legL.rotation = rad(24 * s * a);
+        N.legR.rotation = rad(-24 * s * a);
+        N.upper.y = -4 * Math.abs(s) * a + Math.sin(now / 480) * 1.3 * (1 - a);
+        let lRot = 6 + 16 * s * a;
+        let rRot = -6 + 16 * s * a;
+        if (waving) rRot = -(140 + 18 * Math.sin(now / 80));
+        else if (talking) { rRot = -(38 + 14 * Math.sin(now / 160)); lRot = 8 + 5 * Math.sin(now / 210); }
+        N.armL.rotation = rad(lRot);
+        N.armR.rotation = rad(rRot);
+        N.head.rotation = rad(look * 3 + (talking ? Math.sin(now / 200) * 2 : 0));
+        N.pupils.x = look * 2.4;
+        if (now > st.nextBlink) { st.blinkUntil = now + 130; st.nextBlink = now + 2000 + Math.random() * 3000; }
+        const shut = now < st.blinkUntil;
+        N.eyes.setVisible(!shut);
+        N.pupils.setVisible(!shut);
+        N.lids.setVisible(shut);
+        const open = waving || (talking && Math.floor(now / 140) % 2 === 0);
+        N.mouthO.setVisible(open);
+        N.mouthS.setVisible(!open);
+      }
+
+      spawnFriend() {
+        const px = this.player.x;
+        const py = this.player.y;
+        const offs = [[-240, 40], [240, 40], [0, 220], [-170, 170], [170, 170], [0, -200]];
+        let spot = null;
+        for (const o of offs) {
+          const x = px + o[0];
+          const y = py + o[1];
+          if (x < 60 || x > W - 60 || y < WALL_H + 40 || y > H - 40) continue;
+          let free = true;
+          for (let t = 0.25; t <= 1; t += 0.25) {
+            if (this.blocked(px + o[0] * t, py + o[1] * t)) free = false;
+          }
+          if (free) { spot = [x, y]; break; }
+        }
+        if (!spot) spot = [Math.min(W - 60, px + 130), py];
+        const f = { x: spot[0], y: spot[1], origin: spot, state: 'in', phase: 0, amp: 0, nextBlink: 0, blinkUntil: 0, waveUntil: 0 };
+        this.friend = f;
+        this.friendNpc = this.makeNpc({ x: f.x, y: f.y, shirt: 0xe8772e, pants: 0x3b3f5c, hair: 0x1d1d1d, skin: 0xd9a066 });
+        this.friendShadow = this.add.ellipse(f.x, f.y - 2, 70, 16, 0x000000, 0.25);
+        this.friendNpc.root.setAlpha(0);
+        this.friendShadow.setAlpha(0);
+        this.tweens.add({ targets: [this.friendNpc.root, this.friendShadow], alpha: 1, duration: 450 });
+        SFX.tone(784, 0.12, 'sine', 0.06);
+        SFX.tone(988, 0.2, 'sine', 0.06, 0.12);
+      }
+
+      updateFriend(delta) {
+        const f = this.friend;
+        if (!f || !this.friendNpc) return;
+        const N = this.friendNpc;
+        const now = this.time.now;
+        const dt = delta / 1000;
+        const px = this.player.x;
+        const py = this.player.y;
+        let moving = false;
+        let look = 0;
+        let talking = false;
+        const waving = now < f.waveUntil;
+
+        if (f.state === 'in') {
+          const dx = px - f.x;
+          const dy = py - f.y;
+          const dist = Math.hypot(dx, dy);
+          look = Math.sign(dx);
+          if (dist > 120) {
+            const step = Math.min(dist - 120, FRIEND_SPEED * dt);
+            f.x += (dx / dist) * step;
+            f.y += (dy / dist) * step;
+            moving = true;
+          } else {
+            f.state = 'ask';
+            f.waveUntil = now + 1400;
+            friendAsk();
+          }
+        } else if (f.state === 'ask') {
+          look = Math.sign(px - f.x);
+          talking = true;
+        } else if (f.state === 'out') {
+          const dx = f.origin[0] - f.x;
+          const dy = f.origin[1] - f.y;
+          const dist = Math.hypot(dx, dy);
+          look = Math.sign(dx);
+          if (dist > 6) {
+            const step = Math.min(dist, FRIEND_SPEED * dt);
+            f.x += (dx / dist) * step;
+            f.y += (dy / dist) * step;
+            moving = true;
+          } else {
+            f.state = 'gone';
+            this.tweens.add({
+              targets: [N.root, this.friendShadow], alpha: 0, duration: 400,
+              onComplete: () => { N.root.destroy(); this.friendShadow.destroy(); this.friend = null; this.friendNpc = null; }
+            });
+          }
+        }
+
+        N.root.setPosition(f.x, f.y).setDepth(f.y);
+        this.friendShadow.setPosition(f.x, f.y - 2).setDepth(f.y - 1);
+        this.animNpc(N, f, now, delta, moving, look, talking, waving);
+      }
+
       popText(x, y, text, color) {
         const t = this.add.text(x, y, text, {
           fontFamily: 'system-ui, -apple-system, "Segoe UI", Roboto, sans-serif',
@@ -1376,6 +1673,8 @@
         tickClock(dt);
         tickSale(dt);
         tickHike();
+        tickClosing(dt);
+        tickFriend();
         let ix = S.ctl.x;
         let iy = S.ctl.y;
         const k = this.keys;
@@ -1418,6 +1717,7 @@
         this.player.setDepth(this.player.y);
         if (this.cartBox) this.updateCart();
         this.updateShopkeeper(delta);
+        this.updateFriend(delta);
         this.shadow.setPosition(this.player.x, this.player.y - 2).setDepth(this.player.y - 1);
 
         if (Phaser.Input.Keyboard.JustDown(k.SPACE)) grabBtn.click();
