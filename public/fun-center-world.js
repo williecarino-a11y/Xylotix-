@@ -470,6 +470,15 @@
         return line;
       },
       react(kind, d) {
+        if (kind === 'greet') {
+          this.lastAt = Date.now();
+          this.say(this.pick('greet'), [
+            { label: 'Hi Sam! 👋', answer: 'Hi! Nice to meet you. Shout if you need help.' },
+            { label: 'Just looking', answer: 'No problem. Take your time, but watch the clock!' },
+            { label: 'Any tips?', answer: 'Yes! Get the things you must have first, then see what money is left.' }
+          ]);
+          return;
+        }
         if (kind === 'hike') {
           this.lastAt = Date.now();
           this.say(`${d.name} just went up $${d.up}! Prices change, so buying the things you must have early can save money.`);
