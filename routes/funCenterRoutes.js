@@ -339,6 +339,8 @@ function buildShopSummary(shop, session) {
     saved,
     wantsSpent,
     score,
+    stars,
+    starRows,
     totalNeeds: totalNeeds.length,
     needsBought: needsBought.map(toPublic),
     wantsBought: wantsBought.map(toPublic),
