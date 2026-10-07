@@ -1676,6 +1676,22 @@
         this.animNpc(N, f, now, delta, moving, look, talking, waving);
       }
 
+      buildCashier() {
+        const p = CASHIER_POS;
+        this.ck = { x: p.x, y: p.y, phase: 0, amp: 0, nextBlink: 0, blinkUntil: 0, talkUntil: 0, waveUntil: 0 };
+        this.ckNpc = this.makeNpc({ x: p.x, y: p.y, shirt: 0x7a4de0, pants: 0x2a2f4a, hair: 0x5a3a22, skin: 0xe0a878 });
+        this.ckNpc.root.setDepth(p.y);       // lower than the counter art, so she stands behind it
+      }
+
+      updateCashier(delta) {
+        const c = this.ck;
+        if (!c || !this.ckNpc) return;
+        const now = this.time.now;
+        const dx = this.player.x - c.x;
+        const near = Math.hypot(dx, this.player.y - c.y) < 420;
+        this.animNpc(this.ckNpc, c, now, delta, false, near ? Math.sign(dx) : 0, now < c.talkUntil, now < c.waveUntil);
+      }
+
       popText(x, y, text, color) {
         const t = this.add.text(x, y, text, {
           fontFamily: 'system-ui, -apple-system, "Segoe UI", Roboto, sans-serif',
