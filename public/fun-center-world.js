@@ -853,6 +853,7 @@
         SFX.coin();
         const o = overlay(`
           <h3>Trip finished!</h3>
+          ${forced ? '<p>⏰ Time ran out, so the cashier rang you up.</p>' : ''}
           <p>${esc(r.message || '')}</p>
           <p>Needs covered: <strong>${list(r.needsBought).length} / ${r.totalNeeds}</strong> &middot; Spent $${r.spent} &middot; Left $${r.saved}</p>
           <div style="max-height:230px;overflow-y:auto;margin:6px 0">${rows}</div>
