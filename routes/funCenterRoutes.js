@@ -236,6 +236,7 @@ router.post('/session/:sessionId/complete', funSessionStartLimiter, async (req, 
  * ========================================================= */
 
 const SHOP_GAME_ID = 'weekly-shop';
+const STAR_SAVE_TARGET = 5;   // money to keep for the savings star
 
 function buildShopSummary(shop, session) {
   const bought = Array.isArray(session.purchasedItems) ? session.purchasedItems : [];
