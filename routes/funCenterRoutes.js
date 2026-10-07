@@ -312,7 +312,7 @@ function buildShopSummary(shop, session) {
     totalNeeds: totalNeeds.length,
     needsBought: needsBought.map(toPublic),
     wantsBought: wantsBought.map(toPublic),
-    needsMissed: needsMissed.map(item => ({ id: item.id, name: item.name, price: item.price, image: item.image, visual: item.visual, explanation: item.explanation })),
+    needsMissed: needsMissed.map(item => ({ id: item.id, name: item.name, price: (session.hikeItemId === item.id && typeof session.hikePrice === 'number') ? session.hikePrice : item.price, image: item.image, visual: item.visual, explanation: item.explanation })),
     tradeoffs
   };
 }
