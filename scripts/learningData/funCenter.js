@@ -181,5 +181,6 @@ module.exports = {
   validateFunCenterAnswer,
   getFunCenterActivities,
   getWeeklyShop,
-  getWeeklyShopDefinition
+  getWeeklyShopDefinition,
+  getFlashSales
 };
