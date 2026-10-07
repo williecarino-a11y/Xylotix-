@@ -395,8 +395,15 @@
         closed: ['Closing time! Please head to the counter.', 'We are closed. Time to pay at the counter.']
       },
       say(text) {
+        const box = holder.querySelector('[data-mw-asst]');
+        if (box) {
+          box.querySelector('[data-mw-asst-text]').textContent = text;
+          box.classList.add('show');
+          clearTimeout(this.hideTimer);
+          this.hideTimer = setTimeout(() => box.classList.remove('show'), 4200);
+        }
         const scene = game && game.scene.getScene('mart');
-        if (scene && scene.assistantSay) scene.assistantSay(text);
+        if (scene && scene.shopkeeperTalk) scene.shopkeeperTalk();
       },
       pick(key) {
         const list = this.lines[key];
