@@ -514,7 +514,11 @@ router.post('/shop/session/:sessionId/buy', funAnswerLimiter, async (req, res) =
       option = item.options.find(candidate => candidate.id === optionId);
       if (!option) return res.status(400).json({ status: 'error', message: 'Pick one of the choices for that item.' });
     }
-    const price = option ? option.price : item.price;
+    // A flash sale only applies to its own item, and only while it is running (1.5 s grace for slow phones).
+    const trip = await FunGameSession.findOne({ sessionId, userId: user._id, gameId: SHOP_GAME_ID });
+    const saleActive = !!trip && !option && trip.saleItemId === item.id && typeof trip.salePrice === 'number' &&
+      !!trip.saleEndsAt && trip.saleEndsAt.getTime() + 1500 > Date.now();
+    const price = option ? option.price : (saleActive ? trip.salePrice : item.price);
 
     // Price, budget and duplicate checks all happen inside one atomic write.
     const updated = await FunGameSession.findOneAndUpdate(
@@ -524,7 +528,8 @@ router.post('/shop/session/:sessionId/buy', funAnswerLimiter, async (req, res) =
         gameId: SHOP_GAME_ID,
         completed: false,
         spent: { $lte: shop.budget - price },
-        'purchasedItems.itemId': { $ne: item.id }
+        'purchasedItems.itemId': { $ne: item.id },
+        ...(saleActive ? { saleItemId: item.id, salePrice: price } : {})
       },
       {
         $inc: { spent: price },
