@@ -429,6 +429,11 @@
         return line;
       },
       react(kind, d) {
+        if (kind === 'hike') {
+          this.lastAt = Date.now();
+          this.say(`${d.name} just went up $${d.up}! Prices change, so buying the things you must have early can save money.`);
+          return;
+        }
         if (kind === 'grab') {
           if (d.left <= 5 && !this.tightSaid) { this.tightSaid = true; kind = 'tight'; }
           else if (d.left <= 10 && !this.lowSaid) { this.lowSaid = true; kind = 'low'; }
