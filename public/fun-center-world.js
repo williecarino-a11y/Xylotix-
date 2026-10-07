@@ -1106,6 +1106,7 @@
         UNITS.forEach(u => this.buildUnit(u, itemsByCat[u.id] || []));
         this.buildCounter();
         this.buildShopkeeper();
+        this.buildCashier();
 
         // player
         this.shadow = this.add.ellipse(START.x, START.y - 2, 110, 24, 0x000000, 0.28);
