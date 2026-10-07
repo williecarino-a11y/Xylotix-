@@ -912,6 +912,7 @@
         SFX.coin();
         const o = overlay(`
           <h3>Trip finished!</h3>
+          ${window.MiimiidMart && window.MiimiidMart.stars ? window.MiimiidMart.stars.html(r, (f, d, t, v, dl) => SFX.tone(f, d, t, v, dl)) : ''}
           ${forced ? '<p>⏰ Time ran out, so the cashier rang you up.</p>' : ''}
           <p>${esc(r.message || '')}</p>
           <p>Needs covered: <strong>${list(r.needsBought).length} / ${r.totalNeeds}</strong> &middot; Spent $${r.spent} &middot; Left $${r.saved}</p>
