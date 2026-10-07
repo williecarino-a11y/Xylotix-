@@ -6,7 +6,7 @@ const rateLimit = require('express-rate-limit');
 const { getAuthenticatedUser } = require('./authRoutes');
 const FunGameSession = require('../models/FunGameSession');
 const FunGameProfile = require('../models/FunGameProfile');
-const { getFunCenterGames, getFunCenterGame, validateFunCenterAnswer, getWeeklyShop, getWeeklyShopDefinition } = require('../scripts/learningData/funCenter');
+const { getFunCenterGames, getFunCenterGame, validateFunCenterAnswer, getWeeklyShop, getWeeklyShopDefinition, getFlashSales } = require('../scripts/learningData/funCenter');
 
 const router = express.Router();
 
@@ -438,6 +438,44 @@ router.post('/shop/session/:sessionId/unbuy', funAnswerLimiter, async (req, res)
   }
 });
 
+// Starts the flash sale for this trip (once). The server picks the item and the end time.
+router.post('/shop/session/:sessionId/sale/start', funAnswerLimiter, async (req, res) => {
+  try {
+    const user = await requireFunCenterUser(req, res);
+    if (!user) return;
+
+    const { sessionId } = req.params;
+    const shop = getWeeklyShopDefinition();
+    const existing = await FunGameSession.findOne({ sessionId, userId: user._id, gameId: SHOP_GAME_ID });
+    if (!existing) return res.status(404).json({ status: 'error', message: 'Shopping trip not found.' });
+    if (existing.completed) return res.status(409).json({ status: 'error', code: 'SHOP_FINISHED', message: 'This shopping trip is already finished.' });
+    if (existing.saleItemId) return res.json({ status: 'success', data: { started: false } });
+
+    const boughtIds = new Set(existing.purchasedItems.map(entry => entry.itemId));
+    const choices = getFlashSales().filter(sale => !boughtIds.has(sale.itemId) && shop.items.some(item => item.id === sale.itemId));
+    if (choices.length === 0) return res.json({ status: 'success', data: { started: false } });
+
+    const sale = choices[Math.floor(Math.random() * choices.length)];
+    const item = shop.items.find(candidate => candidate.id === sale.itemId);
+    const endsAt = new Date(Date.now() + sale.seconds * 1000);
+
+    const updated = await FunGameSession.findOneAndUpdate(
+      { sessionId, userId: user._id, gameId: SHOP_GAME_ID, completed: false, saleItemId: null },
+      { $set: { saleItemId: sale.itemId, salePrice: sale.salePrice, saleEndsAt: endsAt } },
+      { new: true }
+    );
+    if (!updated) return res.json({ status: 'success', data: { started: false } });
+
+    return res.json({
+      status: 'success',
+      data: { started: true, itemId: item.id, name: item.name, label: sale.label, normalPrice: item.price, salePrice: sale.salePrice, seconds: sale.seconds }
+    });
+  } catch (error) {
+    console.error('Fun Center shop sale error:', error);
+    return res.status(500).json({ status: 'error', message: 'Unable to start the sale.' });
+  }
+});
+
 router.post('/shop/session', funSessionStartLimiter, async (req, res) => {
   try {
     const user = await requireFunCenterUser(req, res);
@@ -476,7 +514,11 @@ router.post('/shop/session/:sessionId/buy', funAnswerLimiter, async (req, res) =
       option = item.options.find(candidate => candidate.id === optionId);
       if (!option) return res.status(400).json({ status: 'error', message: 'Pick one of the choices for that item.' });
     }
-    const price = option ? option.price : item.price;
+    // A flash sale only applies to its own item, and only while it is running (1.5 s grace for slow phones).
+    const trip = await FunGameSession.findOne({ sessionId, userId: user._id, gameId: SHOP_GAME_ID });
+    const saleActive = !!trip && !option && trip.saleItemId === item.id && typeof trip.salePrice === 'number' &&
+      !!trip.saleEndsAt && trip.saleEndsAt.getTime() + 1500 > Date.now();
+    const price = option ? option.price : (saleActive ? trip.salePrice : item.price);
 
     // Price, budget and duplicate checks all happen inside one atomic write.
     const updated = await FunGameSession.findOneAndUpdate(
@@ -486,7 +528,8 @@ router.post('/shop/session/:sessionId/buy', funAnswerLimiter, async (req, res) =
         gameId: SHOP_GAME_ID,
         completed: false,
         spent: { $lte: shop.budget - price },
-        'purchasedItems.itemId': { $ne: item.id }
+        'purchasedItems.itemId': { $ne: item.id },
+        ...(saleActive ? { saleItemId: item.id, salePrice: price } : {})
       },
       {
         $inc: { spent: price },
@@ -518,6 +561,8 @@ router.post('/shop/session/:sessionId/buy', funAnswerLimiter, async (req, res) =
         optionLabel: option ? option.label : null,
         name: item.name,
         price,
+        onSale: saleActive,
+        normalPrice: item.price,
         classification: item.classification,
         explanation: item.explanation,
         budget: shop.budget,

@@ -44,6 +44,11 @@
   const CLOSING_SECONDS = 150;     // how long the store stays open (it pauses in menus)
   const ASSISTANT_PATH = [[1060, 430], [1200, 320], [1240, 540], [900, 560], [720, 660], [720, 820], [720, 660], [900, 560]];   // his patrol route
   const ASSISTANT_SPEED = 62;      // how fast he walks
+  const saleNow = { cur: null };   // the running flash sale (the server decides it)
+  function nowPrice(item) {
+    const s = saleNow.cur;
+    return s && s.itemId === item.id && Date.now() < s.endsAt ? s.salePrice : item.price;
+  }
   const MM_SCALE = 0.18;    // puppet size: 910 art units tall becomes about 164px
   const CART_W = 112;       // cart width in world pixels
   const CART_GAP = 86;      // how far the cart sits beside him
@@ -230,6 +235,8 @@
       .mw-asst-face { width: 34px; height: 34px; flex: none; border-radius: 50%; background: #2f9e6b; display: flex; align-items: center; justify-content: center; font-size: 20px; }
       .mw-asst b { display: block; font-size: 11px; color: #2f9e6b; text-transform: uppercase; letter-spacing: .04em; }
       @keyframes mwSlide { from { transform: translateY(-10px); opacity: 0; } to { transform: none; opacity: 1; } }
+      .mw-sale { display: none; margin: 0 4px 6px; padding: 6px 10px; border-radius: 10px; background: linear-gradient(90deg, #e0245e, #ff7a1a); color: #ffffff; font-size: 13px; font-weight: 800; text-align: center; animation: mwPulse .9s ease-in-out infinite; }
+      .mw-sale.show { display: block; }
       .mw-controls { display: flex; align-items: center; justify-content: space-between; padding: 12px 14px 0; }
       .mw-joy { position: relative; width: 108px; height: 108px; border-radius: 50%; background: rgba(77, 163, 255, 0.12); border: 2px solid rgba(77, 163, 255, 0.45); touch-action: none; user-select: none; }
       .mw-joy-knob { position: absolute; left: 50%; top: 50%; width: 46px; height: 46px; margin: -23px 0 0 -23px; border-radius: 50%; background: #1f6feb; box-shadow: 0 4px 12px rgba(0,0,0,.4); pointer-events: none; transition: transform .1s ease-out; }
@@ -252,6 +259,7 @@
   function lowest(item) { return hasOptions(item) ? Math.min(...item.options.map(o => o.price)) : item.price; }
   function highest(item) { return hasOptions(item) ? Math.max(...item.options.map(o => o.price)) : item.price; }
   function priceText(item) {
+    if (!hasOptions(item)) return `$${nowPrice(item)}`;
     const lo = lowest(item);
     const hi = highest(item);
     return lo === hi ? `$${lo}` : `$${lo}-$${hi}`;
@@ -328,6 +336,7 @@
           <button type="button" class="mw-leave" data-mw-leave>Leave</button>
         </div>
         <div class="mw-clock"><span>🕒 Store closes</span><div class="mw-clock-bar"><div class="mw-clock-fill" data-mw-clock data-level="high"></div></div></div>
+        <div class="mw-sale" data-mw-sale></div>
         <div class="mw-list" data-mw-list></div>
         <div class="mw-holder" data-mw-holder>
           <div class="mw-asst" data-mw-asst><span class="mw-asst-face">🧑‍🍳</span><div><b>Sam · Store assistant</b><span data-mw-asst-text></span></div></div>
@@ -425,6 +434,54 @@
         this.say(this.pick(kind));
       }
     };
+
+    // flash sale: asked for once, about 40% into the trip. The server picks the item, price and end time.
+    saleNow.cur = null;
+    const saleEl = content.querySelector('[data-mw-sale]');
+    let saleAsked = false;
+    let saleTick = 0;
+    async function startSale() {
+      try {
+        const r = await miimiidFunCenterRequest(
+          `/api/fun-center/shop/session/${encodeURIComponent(S.sessionId)}/sale/start`,
+          { method: 'POST', body: JSON.stringify({}), headers: NO_OVERLAY }
+        );
+        if (!r || !r.started) return;
+        saleNow.cur = { itemId: r.itemId, name: r.name, label: r.label, normalPrice: r.normalPrice, salePrice: r.salePrice, endsAt: Date.now() + r.seconds * 1000 };
+        SFX.tone(880, 0.12, 'square', 0.06);
+        SFX.tone(1175, 0.2, 'square', 0.06, 0.12);
+        assistant.say(`FLASH SALE! ${r.name} is $${r.salePrice} instead of $${r.normalPrice}, but only for ${r.seconds} seconds. Is it on your list?`);
+        const scene = game && game.scene.getScene('mart');
+        if (scene && scene.refreshSale) scene.refreshSale();
+      } catch (error) {
+        console.error('flash sale error:', error);
+      }
+    }
+    function tickSale(dt) {
+      if (!saleAsked && !S.closed && !S.busy && S.timeLeft <= CLOSING_SECONDS * 0.6) {
+        saleAsked = true;
+        startSale();
+      }
+      const sale = saleNow.cur;
+      if (!sale) return;
+      const left = Math.max(0, Math.ceil((sale.endsAt - Date.now()) / 1000));
+      let ended = false;
+      if (left > 0) {
+        saleEl.classList.add('show');
+        saleEl.textContent = `⚡ FLASH SALE: ${sale.name} $${sale.salePrice} (was $${sale.normalPrice}) · ${left}s`;
+      } else {
+        ended = true;
+        saleNow.cur = null;
+        saleEl.classList.remove('show');
+        if (!S.basket.includes(sale.itemId)) assistant.say('The sale just ended. Prices are back to normal.');
+      }
+      saleTick += dt;
+      if (ended || saleTick > 0.5) {
+        saleTick = 0;
+        const scene = game && game.scene.getScene('mart');
+        if (scene && scene.refreshSale) scene.refreshSale();
+      }
+    }
 
     const listEl = content.querySelector('[data-mw-list]');
     const needItems = shop.items.filter(it => NEED_IDS.includes(it.id));
@@ -526,8 +583,8 @@
         if (hasOptions(item)) {
           optionId = await pickOption(item);
           if (!optionId) { say('No rush. Look around some more.'); return; }
-        } else if (item.price > S.budget - S.spent) {
-          say(`${item.name} costs $${item.price}, but you only have $${S.budget - S.spent} left.`);
+        } else if (nowPrice(item) > S.budget - S.spent) {
+          say(`${item.name} costs $${nowPrice(item)}, but you only have $${S.budget - S.spent} left.`);
           return;
         }
 
@@ -555,7 +612,8 @@
         if (left <= 5) text += ` Whoa, only $${left} left!`;
         else if (left <= 10) text += ` $${left} left.`;
         say(text);
-        assistant.react('grab', { price: result.price, left, count: S.basket.length });
+        if (result.onSale) assistant.say(`Got it for $${result.price} instead of $${result.normalPrice}! A deal only saves you money if you needed the thing.`);
+        else assistant.react('grab', { price: result.price, left, count: S.basket.length });
       } catch (error) {
         console.error('world buy error:', error);
         say(error.message || 'That did not work. Try again.');
@@ -1189,6 +1247,27 @@
         P.mouthS.setVisible(!open);
   }
 
+      refreshSale() {
+        const sale = saleNow.cur;
+        this.products.forEach(p => {
+          const on = !!sale && sale.itemId === p.item.id && !p.taken && Date.now() < sale.endsAt;
+          if (p.label && p.label.active) {
+            p.label.setText(priceText(p.item));
+            p.label.setColor(on ? '#ffd34d' : '#ffffff');
+          }
+          if (on && !p.badge) {
+            p.badge = this.add.text(p.x, p.sy - 96, sale.label, {
+              fontSize: '13px', color: '#ffffff', fontStyle: 'bold', backgroundColor: '#e0245e', padding: { x: 6, y: 2 }
+            }).setOrigin(0.5, 1).setDepth(p.sy + 3);
+            this.tweens.add({ targets: p.badge, scale: 1.18, duration: 450, yoyo: true, repeat: -1 });
+          } else if (!on && p.badge) {
+            this.tweens.killTweensOf(p.badge);
+            p.badge.destroy();
+            p.badge = null;
+          }
+        });
+      }
+
       popText(x, y, text, color) {
         const t = this.add.text(x, y, text, {
           fontFamily: 'system-ui, -apple-system, "Segoe UI", Roboto, sans-serif',
@@ -1244,6 +1323,7 @@
 
         const dt = delta / 1000;
         tickClock(dt);
+        tickSale(dt);
         let ix = S.ctl.x;
         let iy = S.ctl.y;
         const k = this.keys;
