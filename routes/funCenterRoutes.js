@@ -561,6 +561,8 @@ router.post('/shop/session/:sessionId/buy', funAnswerLimiter, async (req, res) =
         optionLabel: option ? option.label : null,
         name: item.name,
         price,
+        onSale: saleActive,
+        normalPrice: item.price,
         classification: item.classification,
         explanation: item.explanation,
         budget: shop.budget,
