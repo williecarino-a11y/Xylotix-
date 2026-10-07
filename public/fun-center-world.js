@@ -825,6 +825,7 @@
     async function buyProduct(scene, product) {
       if (S.busy) return;
       if (S.closed && S.basket.length > 0) { say('The store is closed! Head to the counter to pay.'); return; }
+      if (rivalCtl && rivalCtl.isSoldOut(product.item.id)) { say(`${product.item.name} is sold out! Another shopper took the last one.`); return; }
       const item = product.item;
       S.busy = true;
       try {
