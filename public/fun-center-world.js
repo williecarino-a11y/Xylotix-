@@ -50,6 +50,8 @@
   const saleNow = { cur: null };   // the running flash sale (the server decides it)
   const hikeNow = { cur: null };   // a price that went up mid-trip (the server decides it)
   function nowPrice(item) {
+    const rp = window.MiimiidMart && window.MiimiidMart.rivalPrice ? window.MiimiidMart.rivalPrice(item.id) : null;
+    if (rp !== null) return rp;
     const s = saleNow.cur;
     if (s && s.itemId === item.id && Date.now() < s.endsAt) return s.salePrice;
     const h = hikeNow.cur;
