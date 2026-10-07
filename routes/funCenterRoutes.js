@@ -438,6 +438,44 @@ router.post('/shop/session/:sessionId/unbuy', funAnswerLimiter, async (req, res)
   }
 });
 
+// Starts the flash sale for this trip (once). The server picks the item and the end time.
+router.post('/shop/session/:sessionId/sale/start', funAnswerLimiter, async (req, res) => {
+  try {
+    const user = await requireFunCenterUser(req, res);
+    if (!user) return;
+
+    const { sessionId } = req.params;
+    const shop = getWeeklyShopDefinition();
+    const existing = await FunGameSession.findOne({ sessionId, userId: user._id, gameId: SHOP_GAME_ID });
+    if (!existing) return res.status(404).json({ status: 'error', message: 'Shopping trip not found.' });
+    if (existing.completed) return res.status(409).json({ status: 'error', code: 'SHOP_FINISHED', message: 'This shopping trip is already finished.' });
+    if (existing.saleItemId) return res.json({ status: 'success', data: { started: false } });
+
+    const boughtIds = new Set(existing.purchasedItems.map(entry => entry.itemId));
+    const choices = getFlashSales().filter(sale => !boughtIds.has(sale.itemId) && shop.items.some(item => item.id === sale.itemId));
+    if (choices.length === 0) return res.json({ status: 'success', data: { started: false } });
+
+    const sale = choices[Math.floor(Math.random() * choices.length)];
+    const item = shop.items.find(candidate => candidate.id === sale.itemId);
+    const endsAt = new Date(Date.now() + sale.seconds * 1000);
+
+    const updated = await FunGameSession.findOneAndUpdate(
+      { sessionId, userId: user._id, gameId: SHOP_GAME_ID, completed: false, saleItemId: null },
+      { $set: { saleItemId: sale.itemId, salePrice: sale.salePrice, saleEndsAt: endsAt } },
+      { new: true }
+    );
+    if (!updated) return res.json({ status: 'success', data: { started: false } });
+
+    return res.json({
+      status: 'success',
+      data: { started: true, itemId: item.id, name: item.name, label: sale.label, normalPrice: item.price, salePrice: sale.salePrice, seconds: sale.seconds }
+    });
+  } catch (error) {
+    console.error('Fun Center shop sale error:', error);
+    return res.status(500).json({ status: 'error', message: 'Unable to start the sale.' });
+  }
+});
+
 router.post('/shop/session', funSessionStartLimiter, async (req, res) => {
   try {
     const user = await requireFunCenterUser(req, res);
