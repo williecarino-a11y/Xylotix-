@@ -848,6 +848,7 @@
         );
         S.spent = result.spent;
         S.basket.push(item.id);
+        if (rivalCtl) rivalCtl.onBought(item.id, result);
         product.taken = true;
         scene.flyToCart(product);
         scene.popText(scene.player.x, scene.player.y - 170, `-$${result.price}`, '#ffd34d');
