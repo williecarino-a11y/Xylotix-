@@ -46,6 +46,7 @@
   const ASSISTANT_SPEED = 62;      // how fast he walks
   const PAY_GRACE_SECONDS = 25;    // after closing, time left to reach the counter
   const FRIEND_SPEED = 95;         // how fast Alex walks to you
+  const CASHIER_POS = { x: 1215, y: 640 };   // where Riley stands behind the counter (tune if she looks off)
   const saleNow = { cur: null };   // the running flash sale (the server decides it)
   const hikeNow = { cur: null };   // a price that went up mid-trip (the server decides it)
   function nowPrice(item) {
@@ -660,6 +661,64 @@
       }
     }
 
+    // cashier: waves when you reach the counter, checks your cart against your list, offers to ring you up.
+    let atPay = false;
+    function tickCashier() {
+      const scene = game && game.scene.getScene('mart');
+      if (!scene || !scene.ck) return;
+      if (!inCheckoutZone(scene)) { atPay = false; return; }
+      if (atPay) return;
+      atPay = true;
+      scene.ck.waveUntil = scene.time.now + 1500;
+      if (S.busy || S.basket.length === 0 || assistant.pending || scene.friend) return;
+      cashierAsk(scene);
+    }
+    function cashierAsk(scene) {
+      const who = { name: 'Riley · Cashier', face: '🧑‍💼' };
+      const missing = needItems.filter(n => !S.basket.includes(n.id));
+      const left = S.budget - S.spent;
+      scene.ck.talkUntil = scene.time.now + 14000;
+      const done = () => { scene.ck.talkUntil = scene.time.now + 1500; };
+      const ring = { label: 'Ring me up 🧾', answer: 'Scanning now. Let us see how you did!', action: scanThenCheckout };
+      if (S.closed) {
+        const text = missing.length
+          ? `We are closed, so this is the last call. You are missing ${missing.length} from your list.`
+          : `We are closed, but you have everything on your list. Ready to pay?`;
+        assistant.say(text, [ring], who, done);
+        return;
+      }
+      if (missing.length === 0) {
+        assistant.say(`You have everything on your list, with $${left} left. Ready to pay?`, [
+          ring,
+          { label: 'One more look', answer: 'Sure, take your time.' }
+        ], who, done);
+        return;
+      }
+      const names = missing.slice(0, 2).map(m => m.name).join(' and ');
+      const more = missing.length > 2 ? ` and ${missing.length - 2} more` : '';
+      assistant.say(`Before we finish: you still need ${names}${more} from your list.`, [
+        { label: 'Let me go back', answer: 'Good idea. I will be right here.' },
+        { label: 'Ring me up anyway', answer: 'Okay. Scanning now.', action: scanThenCheckout }
+      ], who, done);
+    }
+    function scanThenCheckout() {
+      if (S.busy || S.basket.length === 0) return;
+      S.busy = true;
+      const ids = S.basket.slice(0, 10);
+      ids.forEach((id, i) => {
+        setTimeout(() => {
+          if (!document.body.contains(holder)) return;
+          const it = shop.items.find(x => x.id === id);
+          SFX.tone(1200, 0.07, 'square', 0.07);
+          say('Scanning: ' + (it ? it.name : 'item'));
+        }, i * 350);
+      });
+      setTimeout(() => {
+        S.busy = false;
+        if (document.body.contains(holder)) doCheckout();
+      }, ids.length * 350 + 300);
+    }
+
     const listEl = content.querySelector('[data-mw-list]');
     const needItems = shop.items.filter(it => NEED_IDS.includes(it.id));
     listEl.innerHTML = '<span class="mw-list-title">🛒 Shopping list</span>' +
@@ -876,7 +935,7 @@
       const p = nearestProduct(scene);
       if (p && p.taken) putBackProduct(scene, p);
       else if (p) buyProduct(scene, p);
-      else if (inCheckoutZone(scene)) doCheckout();
+      else if (inCheckoutZone(scene)) scanThenCheckout();
       else say('Walk up to a shelf to grab something, or to the counter to pay.');
     });
 
@@ -1047,6 +1106,7 @@
         UNITS.forEach(u => this.buildUnit(u, itemsByCat[u.id] || []));
         this.buildCounter();
         this.buildShopkeeper();
+        this.buildCashier();
 
         // player
         this.shadow = this.add.ellipse(START.x, START.y - 2, 110, 24, 0x000000, 0.28);
@@ -1616,6 +1676,22 @@
         this.animNpc(N, f, now, delta, moving, look, talking, waving);
       }
 
+      buildCashier() {
+        const p = CASHIER_POS;
+        this.ck = { x: p.x, y: p.y, phase: 0, amp: 0, nextBlink: 0, blinkUntil: 0, talkUntil: 0, waveUntil: 0 };
+        this.ckNpc = this.makeNpc({ x: p.x, y: p.y, shirt: 0x7a4de0, pants: 0x2a2f4a, hair: 0x5a3a22, skin: 0xe0a878 });
+        this.ckNpc.root.setDepth(p.y);       // lower than the counter art, so she stands behind it
+      }
+
+      updateCashier(delta) {
+        const c = this.ck;
+        if (!c || !this.ckNpc) return;
+        const now = this.time.now;
+        const dx = this.player.x - c.x;
+        const near = Math.hypot(dx, this.player.y - c.y) < 420;
+        this.animNpc(this.ckNpc, c, now, delta, false, near ? Math.sign(dx) : 0, now < c.talkUntil, now < c.waveUntil);
+      }
+
       popText(x, y, text, color) {
         const t = this.add.text(x, y, text, {
           fontFamily: 'system-ui, -apple-system, "Segoe UI", Roboto, sans-serif',
@@ -1675,6 +1751,7 @@
         tickHike();
         tickClosing(dt);
         tickFriend();
+        tickCashier();
         let ix = S.ctl.x;
         let iy = S.ctl.y;
         const k = this.keys;
@@ -1718,6 +1795,7 @@
         if (this.cartBox) this.updateCart();
         this.updateShopkeeper(delta);
         this.updateFriend(delta);
+        this.updateCashier(delta);
         this.shadow.setPosition(this.player.x, this.player.y - 2).setDepth(this.player.y - 1);
 
         if (Phaser.Input.Keyboard.JustDown(k.SPACE)) grabBtn.click();
