@@ -935,7 +935,7 @@
       const p = nearestProduct(scene);
       if (p && p.taken) putBackProduct(scene, p);
       else if (p) buyProduct(scene, p);
-      else if (inCheckoutZone(scene)) doCheckout();
+      else if (inCheckoutZone(scene)) scanThenCheckout();
       else say('Walk up to a shelf to grab something, or to the counter to pay.');
     });
 
