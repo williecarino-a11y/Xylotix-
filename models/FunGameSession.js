@@ -128,6 +128,13 @@ const funGameSessionSchema = new mongoose.Schema(
       min: 0
     },
 
+    stars: {
+      type: Number,
+      default: 0,
+      min: 0,
+      max: 3
+    },
+
     correctAnswers: {
       type: Number,
       default: 0,

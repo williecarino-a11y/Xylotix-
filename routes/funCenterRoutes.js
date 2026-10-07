@@ -236,6 +236,7 @@ router.post('/session/:sessionId/complete', funSessionStartLimiter, async (req, 
  * ========================================================= */
 
 const SHOP_GAME_ID = 'weekly-shop';
+const STAR_SAVE_TARGET = 5;   // money to keep for the savings star
 
 function buildShopSummary(shop, session) {
   const bought = Array.isArray(session.purchasedItems) ? session.purchasedItems : [];
@@ -285,6 +286,35 @@ function buildShopSummary(shop, session) {
   const saved = Math.max(0, shop.budget - spent);
   const score = Math.max(0, needsBought.length * 100 + saved * 5 - wantsSpent * 5);
 
+  // Star rating: one star per goal. Everything is decided here, on the server.
+  const premiumBought = bought.filter(entry => {
+    const item = byId.get(entry.itemId);
+    const option = item ? findOption(item, entry.optionId) : null;
+    return !!option && option.tier === 'premium';
+  }).length;
+  const allNeeds = needsMissed.length === 0;
+  const starRows = [
+    {
+      id: 'needs',
+      label: 'Every need covered',
+      earned: allNeeds,
+      hint: `${needsMissed.length} still missing from your list`
+    },
+    {
+      id: 'save',
+      label: `Kept at least $${STAR_SAVE_TARGET}`,
+      earned: allNeeds && saved >= STAR_SAVE_TARGET,
+      hint: allNeeds ? `You kept $${saved}. Store brands help.` : 'Cover every need first'
+    },
+    {
+      id: 'smart',
+      label: 'Smart choices',
+      earned: allNeeds && wantsBought.length === 0 && premiumBought === 0,
+      hint: !allNeeds ? 'Cover every need first' : wantsBought.length > 0 ? 'You bought a want' : 'You paid extra for a premium option'
+    }
+  ];
+  const stars = starRows.filter(row => row.earned).length;
+
   let outcome = 'missing-essentials';
   let message = 'Many essentials are still missing. Next time, cover your needs first.';
   if (needsMissed.length === 0 && saved > 0) {
@@ -309,6 +339,8 @@ function buildShopSummary(shop, session) {
     saved,
     wantsSpent,
     score,
+    stars,
+    starRows,
     totalNeeds: totalNeeds.length,
     needsBought: needsBought.map(toPublic),
     wantsBought: wantsBought.map(toPublic),
@@ -641,7 +673,7 @@ router.post('/shop/session/:sessionId/checkout', funSessionStartLimiter, async (
 
       const claimed = await FunGameSession.findOneAndUpdate(
         { sessionId, userId: user._id, gameId: SHOP_GAME_ID, completed: false, rewardGranted: false },
-        { $set: { completed: true, rewardGranted: true, score: summary.score, correctAnswers: summary.needsBought.length, roundsCompleted: existing.purchasedItems.length, xpAwarded: reward.xp, coinsAwarded: reward.coins, completedAt: new Date() } },
+        { $set: { completed: true, rewardGranted: true, score: summary.score, stars: summary.stars, correctAnswers: summary.needsBought.length, roundsCompleted: existing.purchasedItems.length, xpAwarded: reward.xp, coinsAwarded: reward.coins, completedAt: new Date() } },
         { new: true, session: mongoSession }
       );
 
