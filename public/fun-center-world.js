@@ -50,6 +50,8 @@
   const saleNow = { cur: null };   // the running flash sale (the server decides it)
   const hikeNow = { cur: null };   // a price that went up mid-trip (the server decides it)
   function nowPrice(item) {
+    const rp = window.MiimiidMart && window.MiimiidMart.rivalPrice ? window.MiimiidMart.rivalPrice(item.id) : null;
+    if (rp !== null) return rp;
     const s = saleNow.cur;
     if (s && s.itemId === item.id && Date.now() < s.endsAt) return s.salePrice;
     const h = hikeNow.cur;
@@ -577,7 +579,7 @@
       }
     }
     function tickHike() {
-      if (!hikeAsked && !S.closed && !S.busy && !saleNow.cur && (S.basket.length >= 5 || S.timeLeft <= CLOSING_SECONDS * 0.55)) {
+      if (!hikeAsked && !S.closed && !S.busy && !saleNow.cur && !(rivalCtl && rivalCtl.active()) && (S.basket.length >= 5 || S.timeLeft <= CLOSING_SECONDS * 0.55)) {
         hikeAsked = true;
         startHike();
       }
@@ -632,7 +634,7 @@
       if (!movie || S.basket.includes('movie')) return;
       if (S.basket.length < 2) return;
       if (S.basket.length < 6 && S.timeLeft > CLOSING_SECONDS * 0.4) return;
-      if (saleNow.cur || hikeHideAt || assistant.pending) return;
+      if (saleNow.cur || hikeHideAt || assistant.pending || (rivalCtl && rivalCtl.active())) return;
       if (S.budget - S.spent < nowPrice(movie)) return;
       const scene = game && game.scene.getScene('mart');
       if (!scene || scene.friend) return;
@@ -718,6 +720,17 @@
         if (document.body.contains(holder)) doCheckout();
       }, ids.length * 350 + 300);
     }
+
+    // rival shopper (code lives in public/fun-center-rival.js)
+    const rivalCtl = window.MiimiidMart && window.MiimiidMart.rival ? window.MiimiidMart.rival.create({
+      S, content, assistant, say, SFX, NO_OVERLAY, shop,
+      request: miimiidFunCenterRequest,
+      closingSeconds: CLOSING_SECONDS,
+      priceText,
+      saleActive: () => !!saleNow.cur,
+      hikeShowing: () => !!hikeHideAt,
+      getScene: () => (game && game.scene.getScene('mart'))
+    }) : null;
 
     const listEl = content.querySelector('[data-mw-list]');
     const needItems = shop.items.filter(it => NEED_IDS.includes(it.id));
@@ -812,6 +825,7 @@
     async function buyProduct(scene, product) {
       if (S.busy) return;
       if (S.closed && S.basket.length > 0) { say('The store is closed! Head to the counter to pay.'); return; }
+      if (rivalCtl && rivalCtl.isSoldOut(product.item.id)) { say(`${product.item.name} is sold out! Another shopper took the last one.`); return; }
       const item = product.item;
       S.busy = true;
       try {
@@ -834,6 +848,7 @@
         );
         S.spent = result.spent;
         S.basket.push(item.id);
+        if (rivalCtl) rivalCtl.onBought(item.id, result);
         product.taken = true;
         scene.flyToCart(product);
         scene.popText(scene.player.x, scene.player.y - 170, `-$${result.price}`, '#ffd34d');
@@ -1753,6 +1768,7 @@
         tickClosing(dt);
         tickFriend();
         tickCashier();
+        if (rivalCtl) rivalCtl.tick(dt, this, delta);
         let ix = S.ctl.x;
         let iy = S.ctl.y;
         const k = this.keys;
