@@ -1505,6 +1505,8 @@
         tickClock(dt);
         tickSale(dt);
         tickHike();
+        tickClosing(dt);
+        tickFriend();
         let ix = S.ctl.x;
         let iy = S.ctl.y;
         const k = this.keys;
