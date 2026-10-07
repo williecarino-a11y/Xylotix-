@@ -490,6 +490,42 @@
       }
     }
 
+    // price rise: one essential costs more from now on. The server decides which and by how much.
+    hikeNow.cur = null;
+    const hikeEl = content.querySelector('[data-mw-hike]');
+    let hikeAsked = false;
+    let hikeHideAt = 0;
+    async function startHike() {
+      try {
+        const r = await miimiidFunCenterRequest(
+          `/api/fun-center/shop/session/${encodeURIComponent(S.sessionId)}/hike/start`,
+          { method: 'POST', body: JSON.stringify({}), headers: NO_OVERLAY }
+        );
+        if (!r || !r.started) return;
+        hikeNow.cur = { itemId: r.itemId, name: r.name, oldPrice: r.oldPrice, newPrice: r.newPrice };
+        SFX.tone(220, 0.25, 'sawtooth', 0.05);
+        SFX.tone(165, 0.4, 'sawtooth', 0.05, 0.2);
+        hikeEl.textContent = `📈 PRICE UP: ${r.name} $${r.oldPrice} → $${r.newPrice}`;
+        hikeEl.classList.add('show');
+        hikeHideAt = Date.now() + 9000;
+        assistant.react('hike', { name: r.name, up: r.newPrice - r.oldPrice });
+        const scene = game && game.scene.getScene('mart');
+        if (scene && scene.refreshSale) scene.refreshSale();
+      } catch (error) {
+        console.error('price rise error:', error);
+      }
+    }
+    function tickHike() {
+      if (!hikeAsked && !S.closed && !S.busy && !saleNow.cur && (S.basket.length >= 5 || S.timeLeft <= CLOSING_SECONDS * 0.55)) {
+        hikeAsked = true;
+        startHike();
+      }
+      if (hikeHideAt && Date.now() > hikeHideAt) {
+        hikeHideAt = 0;
+        hikeEl.classList.remove('show');
+      }
+    }
+
     const listEl = content.querySelector('[data-mw-list]');
     const needItems = shop.items.filter(it => NEED_IDS.includes(it.id));
     listEl.innerHTML = '<span class="mw-list-title">🛒 Shopping list</span>' +
