@@ -603,6 +603,7 @@ router.post('/shop/session/:sessionId/buy', funAnswerLimiter, async (req, res) =
         name: item.name,
         price,
         onSale: saleActive,
+        priceUp: hikeActive,
         normalPrice: item.price,
         classification: item.classification,
         explanation: item.explanation,
