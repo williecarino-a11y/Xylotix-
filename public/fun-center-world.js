@@ -257,6 +257,7 @@
   function lowest(item) { return hasOptions(item) ? Math.min(...item.options.map(o => o.price)) : item.price; }
   function highest(item) { return hasOptions(item) ? Math.max(...item.options.map(o => o.price)) : item.price; }
   function priceText(item) {
+    if (!hasOptions(item)) return `$${nowPrice(item)}`;
     const lo = lowest(item);
     const hi = highest(item);
     return lo === hi ? `$${lo}` : `$${lo}-$${hi}`;
