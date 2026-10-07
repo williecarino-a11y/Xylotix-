@@ -1300,9 +1300,10 @@
         const sale = saleNow.cur;
         this.products.forEach(p => {
           const on = !!sale && sale.itemId === p.item.id && !p.taken && Date.now() < sale.endsAt;
+          const up = !!hikeNow.cur && hikeNow.cur.itemId === p.item.id && !p.taken;
           if (p.label && p.label.active) {
             p.label.setText(priceText(p.item));
-            p.label.setColor(on ? '#ffd34d' : '#ffffff');
+            p.label.setColor(on ? '#ffd34d' : (up ? '#ff6b6b' : '#ffffff'));
           }
           if (on && !p.badge) {
             p.badge = this.add.text(p.x, p.sy - 96, sale.label, {
