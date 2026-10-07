@@ -1247,6 +1247,27 @@
         P.mouthS.setVisible(!open);
   }
 
+      refreshSale() {
+        const sale = saleNow.cur;
+        this.products.forEach(p => {
+          const on = !!sale && sale.itemId === p.item.id && !p.taken && Date.now() < sale.endsAt;
+          if (p.label && p.label.active) {
+            p.label.setText(priceText(p.item));
+            p.label.setColor(on ? '#ffd34d' : '#ffffff');
+          }
+          if (on && !p.badge) {
+            p.badge = this.add.text(p.x, p.sy - 96, sale.label, {
+              fontSize: '13px', color: '#ffffff', fontStyle: 'bold', backgroundColor: '#e0245e', padding: { x: 6, y: 2 }
+            }).setOrigin(0.5, 1).setDepth(p.sy + 3);
+            this.tweens.add({ targets: p.badge, scale: 1.18, duration: 450, yoyo: true, repeat: -1 });
+          } else if (!on && p.badge) {
+            this.tweens.killTweensOf(p.badge);
+            p.badge.destroy();
+            p.badge = null;
+          }
+        });
+      }
+
       popText(x, y, text, color) {
         const t = this.add.text(x, y, text, {
           fontFamily: 'system-ui, -apple-system, "Segoe UI", Roboto, sans-serif',
