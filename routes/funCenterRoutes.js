@@ -673,7 +673,7 @@ router.post('/shop/session/:sessionId/checkout', funSessionStartLimiter, async (
 
       const claimed = await FunGameSession.findOneAndUpdate(
         { sessionId, userId: user._id, gameId: SHOP_GAME_ID, completed: false, rewardGranted: false },
-        { $set: { completed: true, rewardGranted: true, score: summary.score, correctAnswers: summary.needsBought.length, roundsCompleted: existing.purchasedItems.length, xpAwarded: reward.xp, coinsAwarded: reward.coins, completedAt: new Date() } },
+        { $set: { completed: true, rewardGranted: true, score: summary.score, stars: summary.stars, correctAnswers: summary.needsBought.length, roundsCompleted: existing.purchasedItems.length, xpAwarded: reward.xp, coinsAwarded: reward.coins, completedAt: new Date() } },
         { new: true, session: mongoSession }
       );
 
