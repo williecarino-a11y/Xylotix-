@@ -435,6 +435,54 @@
       }
     };
 
+    // flash sale: asked for once, about 40% into the trip. The server picks the item, price and end time.
+    saleNow.cur = null;
+    const saleEl = content.querySelector('[data-mw-sale]');
+    let saleAsked = false;
+    let saleTick = 0;
+    async function startSale() {
+      try {
+        const r = await miimiidFunCenterRequest(
+          `/api/fun-center/shop/session/${encodeURIComponent(S.sessionId)}/sale/start`,
+          { method: 'POST', body: JSON.stringify({}), headers: NO_OVERLAY }
+        );
+        if (!r || !r.started) return;
+        saleNow.cur = { itemId: r.itemId, name: r.name, label: r.label, normalPrice: r.normalPrice, salePrice: r.salePrice, endsAt: Date.now() + r.seconds * 1000 };
+        SFX.tone(880, 0.12, 'square', 0.06);
+        SFX.tone(1175, 0.2, 'square', 0.06, 0.12);
+        assistant.say(`FLASH SALE! ${r.name} is $${r.salePrice} instead of $${r.normalPrice}, but only for ${r.seconds} seconds. Is it on your list?`);
+        const scene = game && game.scene.getScene('mart');
+        if (scene && scene.refreshSale) scene.refreshSale();
+      } catch (error) {
+        console.error('flash sale error:', error);
+      }
+    }
+    function tickSale(dt) {
+      if (!saleAsked && !S.closed && !S.busy && S.timeLeft <= CLOSING_SECONDS * 0.6) {
+        saleAsked = true;
+        startSale();
+      }
+      const sale = saleNow.cur;
+      if (!sale) return;
+      const left = Math.max(0, Math.ceil((sale.endsAt - Date.now()) / 1000));
+      let ended = false;
+      if (left > 0) {
+        saleEl.classList.add('show');
+        saleEl.textContent = `⚡ FLASH SALE: ${sale.name} $${sale.salePrice} (was $${sale.normalPrice}) · ${left}s`;
+      } else {
+        ended = true;
+        saleNow.cur = null;
+        saleEl.classList.remove('show');
+        if (!S.basket.includes(sale.itemId)) assistant.say('The sale just ended. Prices are back to normal.');
+      }
+      saleTick += dt;
+      if (ended || saleTick > 0.5) {
+        saleTick = 0;
+        const scene = game && game.scene.getScene('mart');
+        if (scene && scene.refreshSale) scene.refreshSale();
+      }
+    }
+
     const listEl = content.querySelector('[data-mw-list]');
     const needItems = shop.items.filter(it => NEED_IDS.includes(it.id));
     listEl.innerHTML = '<span class="mw-list-title">🛒 Shopping list</span>' +
