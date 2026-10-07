@@ -634,7 +634,7 @@
       if (!movie || S.basket.includes('movie')) return;
       if (S.basket.length < 2) return;
       if (S.basket.length < 6 && S.timeLeft > CLOSING_SECONDS * 0.4) return;
-      if (saleNow.cur || hikeHideAt || assistant.pending) return;
+      if (saleNow.cur || hikeHideAt || assistant.pending || (rivalCtl && rivalCtl.active())) return;
       if (S.budget - S.spent < nowPrice(movie)) return;
       const scene = game && game.scene.getScene('mart');
       if (!scene || scene.friend) return;
