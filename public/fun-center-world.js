@@ -1449,6 +1449,173 @@
         });
       }
 
+      // A generic standing character (used by Alex now, and by the cashier next).
+      makeNpc(o) {
+        const skin = o.skin || 0xf1b27a;
+        const ink = 0x141824;
+        const part = (x, y) => this.add.container(x, y);
+        const root = this.add.container(o.x, o.y);
+        const legL = part(-10, -46);
+        const legR = part(10, -46);
+        [legL, legR].forEach(leg => {
+          const g = this.add.graphics();
+          g.fillStyle(o.pants, 1).fillRoundedRect(-7, 0, 14, 38, 5);
+          g.fillStyle(0x0b1530, 1).fillRoundedRect(-9, 34, 20, 12, 5);
+          leg.add(g);
+        });
+        const upper = part(0, 0);
+        const torso = this.add.graphics();
+        torso.fillStyle(o.shirt, 1).fillRoundedRect(-23, -106, 46, 64, 12);
+        torso.fillStyle(0xffffff, 0.9).fillRoundedRect(-8, -92, 16, 16, 4);
+        const armL = part(-26, -98);
+        const armR = part(26, -98);
+        [armL, armR].forEach(arm => {
+          const g = this.add.graphics();
+          g.fillStyle(o.shirt, 1).fillRoundedRect(-6, -4, 12, 34, 6);
+          g.fillStyle(skin, 1).fillCircle(0, 33, 7);
+          arm.add(g);
+        });
+        const head = part(0, -126);
+        const face = this.add.graphics();
+        face.fillStyle(skin, 1).fillCircle(-26, 5, 6).fillCircle(26, 5, 6);
+        face.fillStyle(skin, 1).fillEllipse(0, 3, 54, 50);
+        face.fillStyle(0xff8a8a, 0.35).fillCircle(-16, 14, 6).fillCircle(16, 14, 6);
+        face.fillStyle(0xd9965f, 1).fillCircle(0, 12, 2.2);
+        face.fillStyle(o.hair, 1);
+        face.beginPath();
+        face.arc(0, -6, 27, Math.PI, Math.PI * 2, false);
+        face.closePath();
+        face.fillPath();
+        const eyes = this.add.graphics();
+        eyes.fillStyle(0xffffff, 1).fillEllipse(-10, 5, 15, 17).fillEllipse(10, 5, 15, 17);
+        eyes.lineStyle(1.5, ink, 0.5).strokeEllipse(-10, 5, 15, 17).strokeEllipse(10, 5, 15, 17);
+        const pupils = this.add.graphics();
+        pupils.fillStyle(0x3a2a1e, 1).fillCircle(-10, 6, 4.6).fillCircle(10, 6, 4.6);
+        pupils.fillStyle(0xffffff, 1).fillCircle(-8.5, 4, 1.6).fillCircle(11.5, 4, 1.6);
+        const lids = this.add.graphics().setVisible(false);
+        lids.lineStyle(2.5, ink, 1);
+        lids.beginPath().arc(-10, 5, 6, 0.15, Math.PI - 0.15).strokePath();
+        lids.beginPath().arc(10, 5, 6, 0.15, Math.PI - 0.15).strokePath();
+        const mouthS = this.add.graphics();
+        mouthS.lineStyle(2.5, ink, 1).beginPath().arc(0, 14, 8, 0.25, Math.PI - 0.25).strokePath();
+        const mouthO = this.add.graphics().setVisible(false);
+        mouthO.fillStyle(0x5b1f2a, 1).fillEllipse(0, 20, 14, 11);
+        mouthO.fillStyle(0xff7a8a, 1).fillEllipse(0, 23, 9, 5);
+        head.add([face, eyes, pupils, lids, mouthS, mouthO]);
+        upper.add([torso, armL, armR, head]);
+        root.add([legL, legR, upper]);
+        return { root, legL, legR, upper, armL, armR, head, eyes, pupils, lids, mouthS, mouthO };
+      }
+
+      animNpc(N, st, now, delta, moving, look, talking, waving) {
+        st.amp += ((moving ? 1 : 0) - st.amp) * Math.min(1, delta / 90);
+        if (moving) st.phase += (delta / 1000) * Math.PI * 2 / 0.75;
+        const s = Math.sin(st.phase);
+        const a = st.amp;
+        const rad = Phaser.Math.DegToRad;
+        N.legL.rotation = rad(24 * s * a);
+        N.legR.rotation = rad(-24 * s * a);
+        N.upper.y = -4 * Math.abs(s) * a + Math.sin(now / 480) * 1.3 * (1 - a);
+        let lRot = 6 + 16 * s * a;
+        let rRot = -6 + 16 * s * a;
+        if (waving) rRot = -(140 + 18 * Math.sin(now / 80));
+        else if (talking) { rRot = -(38 + 14 * Math.sin(now / 160)); lRot = 8 + 5 * Math.sin(now / 210); }
+        N.armL.rotation = rad(lRot);
+        N.armR.rotation = rad(rRot);
+        N.head.rotation = rad(look * 3 + (talking ? Math.sin(now / 200) * 2 : 0));
+        N.pupils.x = look * 2.4;
+        if (now > st.nextBlink) { st.blinkUntil = now + 130; st.nextBlink = now + 2000 + Math.random() * 3000; }
+        const shut = now < st.blinkUntil;
+        N.eyes.setVisible(!shut);
+        N.pupils.setVisible(!shut);
+        N.lids.setVisible(shut);
+        const open = waving || (talking && Math.floor(now / 140) % 2 === 0);
+        N.mouthO.setVisible(open);
+        N.mouthS.setVisible(!open);
+      }
+
+      spawnFriend() {
+        const px = this.player.x;
+        const py = this.player.y;
+        const offs = [[-240, 40], [240, 40], [0, 220], [-170, 170], [170, 170], [0, -200]];
+        let spot = null;
+        for (const o of offs) {
+          const x = px + o[0];
+          const y = py + o[1];
+          if (x < 60 || x > W - 60 || y < WALL_H + 40 || y > H - 40) continue;
+          let free = true;
+          for (let t = 0.25; t <= 1; t += 0.25) {
+            if (this.blocked(px + o[0] * t, py + o[1] * t)) free = false;
+          }
+          if (free) { spot = [x, y]; break; }
+        }
+        if (!spot) spot = [Math.min(W - 60, px + 130), py];
+        const f = { x: spot[0], y: spot[1], origin: spot, state: 'in', phase: 0, amp: 0, nextBlink: 0, blinkUntil: 0, waveUntil: 0 };
+        this.friend = f;
+        this.friendNpc = this.makeNpc({ x: f.x, y: f.y, shirt: 0xe8772e, pants: 0x3b3f5c, hair: 0x1d1d1d, skin: 0xd9a066 });
+        this.friendShadow = this.add.ellipse(f.x, f.y - 2, 70, 16, 0x000000, 0.25);
+        this.friendNpc.root.setAlpha(0);
+        this.friendShadow.setAlpha(0);
+        this.tweens.add({ targets: [this.friendNpc.root, this.friendShadow], alpha: 1, duration: 450 });
+        SFX.tone(784, 0.12, 'sine', 0.06);
+        SFX.tone(988, 0.2, 'sine', 0.06, 0.12);
+      }
+
+      updateFriend(delta) {
+        const f = this.friend;
+        if (!f || !this.friendNpc) return;
+        const N = this.friendNpc;
+        const now = this.time.now;
+        const dt = delta / 1000;
+        const px = this.player.x;
+        const py = this.player.y;
+        let moving = false;
+        let look = 0;
+        let talking = false;
+        const waving = now < f.waveUntil;
+
+        if (f.state === 'in') {
+          const dx = px - f.x;
+          const dy = py - f.y;
+          const dist = Math.hypot(dx, dy);
+          look = Math.sign(dx);
+          if (dist > 120) {
+            const step = Math.min(dist - 120, FRIEND_SPEED * dt);
+            f.x += (dx / dist) * step;
+            f.y += (dy / dist) * step;
+            moving = true;
+          } else {
+            f.state = 'ask';
+            f.waveUntil = now + 1400;
+            friendAsk();
+          }
+        } else if (f.state === 'ask') {
+          look = Math.sign(px - f.x);
+          talking = true;
+        } else if (f.state === 'out') {
+          const dx = f.origin[0] - f.x;
+          const dy = f.origin[1] - f.y;
+          const dist = Math.hypot(dx, dy);
+          look = Math.sign(dx);
+          if (dist > 6) {
+            const step = Math.min(dist, FRIEND_SPEED * dt);
+            f.x += (dx / dist) * step;
+            f.y += (dy / dist) * step;
+            moving = true;
+          } else {
+            f.state = 'gone';
+            this.tweens.add({
+              targets: [N.root, this.friendShadow], alpha: 0, duration: 400,
+              onComplete: () => { N.root.destroy(); this.friendShadow.destroy(); this.friend = null; this.friendNpc = null; }
+            });
+          }
+        }
+
+        N.root.setPosition(f.x, f.y).setDepth(f.y);
+        this.friendShadow.setPosition(f.x, f.y - 2).setDepth(f.y - 1);
+        this.animNpc(N, f, now, delta, moving, look, talking, waving);
+      }
+
       popText(x, y, text, color) {
         const t = this.add.text(x, y, text, {
           fontFamily: 'system-ui, -apple-system, "Segoe UI", Roboto, sans-serif',
