@@ -583,8 +583,8 @@
         if (hasOptions(item)) {
           optionId = await pickOption(item);
           if (!optionId) { say('No rush. Look around some more.'); return; }
-        } else if (item.price > S.budget - S.spent) {
-          say(`${item.name} costs $${item.price}, but you only have $${S.budget - S.spent} left.`);
+        } else if (nowPrice(item) > S.budget - S.spent) {
+          say(`${item.name} costs $${nowPrice(item)}, but you only have $${S.budget - S.spent} left.`);
           return;
         }
 
