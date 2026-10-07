@@ -195,5 +195,6 @@ module.exports = {
   getFunCenterActivities,
   getWeeklyShop,
   getWeeklyShopDefinition,
-  getFlashSales
+  getFlashSales,
+  getPriceHikes
 };
