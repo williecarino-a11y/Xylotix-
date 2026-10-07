@@ -1734,6 +1734,7 @@
         tickHike();
         tickClosing(dt);
         tickFriend();
+        tickCashier();
         let ix = S.ctl.x;
         let iy = S.ctl.y;
         const k = this.keys;
