@@ -579,7 +579,7 @@
       }
     }
     function tickHike() {
-      if (!hikeAsked && !S.closed && !S.busy && !saleNow.cur && (S.basket.length >= 5 || S.timeLeft <= CLOSING_SECONDS * 0.55)) {
+      if (!hikeAsked && !S.closed && !S.busy && !saleNow.cur && !(rivalCtl && rivalCtl.active()) && (S.basket.length >= 5 || S.timeLeft <= CLOSING_SECONDS * 0.55)) {
         hikeAsked = true;
         startHike();
       }
