@@ -343,6 +343,7 @@
         </div>
         <div class="mw-clock"><span>🕒 Store closes</span><div class="mw-clock-bar"><div class="mw-clock-fill" data-mw-clock data-level="high"></div></div></div>
         <div class="mw-sale" data-mw-sale></div>
+        <div class="mw-hike" data-mw-hike></div>
         <div class="mw-list" data-mw-list></div>
         <div class="mw-holder" data-mw-holder>
           <div class="mw-asst" data-mw-asst><span class="mw-asst-face">🧑‍🍳</span><div><b>Sam · Store assistant</b><span data-mw-asst-text></span></div></div>
