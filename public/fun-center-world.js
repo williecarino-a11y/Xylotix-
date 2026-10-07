@@ -1804,7 +1804,7 @@
         const atCounter = !near && inCheckoutZone(this);
         if (atCounter && !S.zoneHint && S.basket.length > 0) {
           S.zoneHint = true;
-          say('Ready to pay? Tap Checkout.');
+          if (!assistant.pending) say('Ready to pay? Tap Checkout.');
         }
         const id = near ? near.item.id + (near.taken ? ':back' : '') : (atCounter ? '__counter' : '');
         if (id !== S.nearId) {
