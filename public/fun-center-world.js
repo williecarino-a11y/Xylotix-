@@ -417,16 +417,50 @@
         warn: ['We close soon! Anything you forgot?', 'Clock is ticking. Is your cart ready?', 'Closing time is coming. Check your list!', 'Last chance to grab what you came for.'],
         closed: ['Closing time! Please head to the counter.', 'We are closed. Time to pay at the counter.', 'That is the bell! Off to the counter.']
       },
-      say(text) {
+      pending: false,
+      say(text, replies, who, onClose) {
+        const ask = !!(replies && replies.length);
+        if (this.pending && !ask) return;          // a question is waiting for an answer
         const box = holder.querySelector('[data-mw-asst]');
-        if (box) {
-          box.querySelector('[data-mw-asst-text]').textContent = text;
-          box.classList.add('show');
-          clearTimeout(this.hideTimer);
-          this.hideTimer = setTimeout(() => box.classList.remove('show'), 4200);
+        if (!box) return;
+        const rb = box.querySelector('[data-mw-asst-replies]');
+        const person = who || { name: 'Sam · Store assistant', face: '🧑‍🍳' };
+        box.querySelector('b').textContent = person.name;
+        box.querySelector('.mw-asst-face').textContent = person.face;
+        box.querySelector('[data-mw-asst-text]').textContent = text;
+        rb.innerHTML = '';
+        clearTimeout(this.hideTimer);
+        const close = () => {
+          this.pending = false;
+          box.classList.remove('ask');
+          rb.innerHTML = '';
+        };
+        this.pending = ask;
+        box.classList.toggle('ask', ask);
+        box.classList.add('show');
+        if (ask) {
+          replies.forEach(rp => {
+            const b = document.createElement('button');
+            b.type = 'button';
+            b.className = 'mw-reply';
+            b.textContent = rp.label;
+            b.addEventListener('click', () => {
+              close();
+              clearTimeout(this.hideTimer);
+              say('You: ' + rp.label);                 // Miimiid's own bubble
+              if (rp.action) rp.action();
+              if (onClose) onClose();
+              setTimeout(() => assistant.say(rp.answer, null, who), 600);
+            });
+            rb.appendChild(b);
+          });
         }
+        this.hideTimer = setTimeout(() => {
+          box.classList.remove('show');
+          if (ask) { close(); if (onClose) onClose(); }
+        }, ask ? 14000 : 4200);
         const scene = game && game.scene.getScene('mart');
-        if (scene && scene.shopkeeperTalk) scene.shopkeeperTalk();
+        if (!who && scene && scene.shopkeeperTalk) scene.shopkeeperTalk();
       },
       pick(key) {
         const list = this.lines[key];
