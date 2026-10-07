@@ -558,7 +558,8 @@ router.post('/shop/session/:sessionId/buy', funAnswerLimiter, async (req, res) =
     const trip = await FunGameSession.findOne({ sessionId, userId: user._id, gameId: SHOP_GAME_ID });
     const saleActive = !!trip && !option && trip.saleItemId === item.id && typeof trip.salePrice === 'number' &&
       !!trip.saleEndsAt && trip.saleEndsAt.getTime() + 1500 > Date.now();
-    const price = option ? option.price : (saleActive ? trip.salePrice : item.price);
+    const hikeActive = !!trip && !option && trip.hikeItemId === item.id && typeof trip.hikePrice === 'number';
+    const price = option ? option.price : (saleActive ? trip.salePrice : (hikeActive ? trip.hikePrice : item.price));
 
     // Price, budget and duplicate checks all happen inside one atomic write.
     const updated = await FunGameSession.findOneAndUpdate(
