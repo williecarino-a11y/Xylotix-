@@ -152,6 +152,19 @@ function getFlashSales() {
   return flashSales.map(sale => ({ ...sale }));
 }
 
+// Price rises: only on essentials with no price options. Small enough that every essential stays affordable.
+const priceHikes = [
+  { itemId: 'pasta', newPrice: 4 },
+  { itemId: 'apple', newPrice: 5 },
+  { itemId: 'carrot', newPrice: 4 },
+  { itemId: 'water', newPrice: 4 },
+  { itemId: 'medicine', newPrice: 15 }
+];
+
+function getPriceHikes() {
+  return priceHikes.map(hike => ({ ...hike }));
+}
+
 function getWeeklyShop() {
   return {
     id: weeklyShop.id,
@@ -182,5 +195,6 @@ module.exports = {
   getFunCenterActivities,
   getWeeklyShop,
   getWeeklyShopDefinition,
-  getFlashSales
+  getFlashSales,
+  getPriceHikes
 };

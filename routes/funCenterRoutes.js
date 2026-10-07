@@ -6,7 +6,7 @@ const rateLimit = require('express-rate-limit');
 const { getAuthenticatedUser } = require('./authRoutes');
 const FunGameSession = require('../models/FunGameSession');
 const FunGameProfile = require('../models/FunGameProfile');
-const { getFunCenterGames, getFunCenterGame, validateFunCenterAnswer, getWeeklyShop, getWeeklyShopDefinition, getFlashSales } = require('../scripts/learningData/funCenter');
+const { getFunCenterGames, getFunCenterGame, validateFunCenterAnswer, getWeeklyShop, getWeeklyShopDefinition, getFlashSales, getPriceHikes } = require('../scripts/learningData/funCenter');
 
 const router = express.Router();
 
@@ -312,7 +312,7 @@ function buildShopSummary(shop, session) {
     totalNeeds: totalNeeds.length,
     needsBought: needsBought.map(toPublic),
     wantsBought: wantsBought.map(toPublic),
-    needsMissed: needsMissed.map(item => ({ id: item.id, name: item.name, price: item.price, image: item.image, visual: item.visual, explanation: item.explanation })),
+    needsMissed: needsMissed.map(item => ({ id: item.id, name: item.name, price: (session.hikeItemId === item.id && typeof session.hikePrice === 'number') ? session.hikePrice : item.price, image: item.image, visual: item.visual, explanation: item.explanation })),
     tradeoffs
   };
 }
@@ -476,6 +476,46 @@ router.post('/shop/session/:sessionId/sale/start', funAnswerLimiter, async (req,
   }
 });
 
+// Starts the price rise for this trip (once). The server picks the essential and the new price.
+router.post('/shop/session/:sessionId/hike/start', funAnswerLimiter, async (req, res) => {
+  try {
+    const user = await requireFunCenterUser(req, res);
+    if (!user) return;
+
+    const { sessionId } = req.params;
+    const shop = getWeeklyShopDefinition();
+    const existing = await FunGameSession.findOne({ sessionId, userId: user._id, gameId: SHOP_GAME_ID });
+    if (!existing) return res.status(404).json({ status: 'error', message: 'Shopping trip not found.' });
+    if (existing.completed) return res.status(409).json({ status: 'error', code: 'SHOP_FINISHED', message: 'This shopping trip is already finished.' });
+    if (existing.hikeItemId) return res.json({ status: 'success', data: { started: false } });
+
+    const boughtIds = new Set(existing.purchasedItems.map(entry => entry.itemId));
+    const choices = getPriceHikes().filter(hike => {
+      const item = shop.items.find(candidate => candidate.id === hike.itemId);
+      return item && item.classification === 'need' && !(Array.isArray(item.options) && item.options.length > 0) && !boughtIds.has(hike.itemId);
+    });
+    if (choices.length === 0) return res.json({ status: 'success', data: { started: false } });
+
+    const hike = choices[Math.floor(Math.random() * choices.length)];
+    const item = shop.items.find(candidate => candidate.id === hike.itemId);
+
+    const updated = await FunGameSession.findOneAndUpdate(
+      { sessionId, userId: user._id, gameId: SHOP_GAME_ID, completed: false, hikeItemId: null, 'purchasedItems.itemId': { $ne: hike.itemId } },
+      { $set: { hikeItemId: hike.itemId, hikePrice: hike.newPrice } },
+      { new: true }
+    );
+    if (!updated) return res.json({ status: 'success', data: { started: false } });
+
+    return res.json({
+      status: 'success',
+      data: { started: true, itemId: item.id, name: item.name, oldPrice: item.price, newPrice: hike.newPrice }
+    });
+  } catch (error) {
+    console.error('Fun Center shop price rise error:', error);
+    return res.status(500).json({ status: 'error', message: 'Unable to start the price rise.' });
+  }
+});
+
 router.post('/shop/session', funSessionStartLimiter, async (req, res) => {
   try {
     const user = await requireFunCenterUser(req, res);
@@ -518,7 +558,8 @@ router.post('/shop/session/:sessionId/buy', funAnswerLimiter, async (req, res) =
     const trip = await FunGameSession.findOne({ sessionId, userId: user._id, gameId: SHOP_GAME_ID });
     const saleActive = !!trip && !option && trip.saleItemId === item.id && typeof trip.salePrice === 'number' &&
       !!trip.saleEndsAt && trip.saleEndsAt.getTime() + 1500 > Date.now();
-    const price = option ? option.price : (saleActive ? trip.salePrice : item.price);
+    const hikeActive = !!trip && !option && trip.hikeItemId === item.id && typeof trip.hikePrice === 'number';
+    const price = option ? option.price : (saleActive ? trip.salePrice : (hikeActive ? trip.hikePrice : item.price));
 
     // Price, budget and duplicate checks all happen inside one atomic write.
     const updated = await FunGameSession.findOneAndUpdate(
@@ -562,6 +603,7 @@ router.post('/shop/session/:sessionId/buy', funAnswerLimiter, async (req, res) =
         name: item.name,
         price,
         onSale: saleActive,
+        priceUp: hikeActive,
         normalPrice: item.price,
         classification: item.classification,
         explanation: item.explanation,

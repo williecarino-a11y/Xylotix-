@@ -104,6 +104,18 @@ const funGameSessionSchema = new mongoose.Schema(
       default: null
     },
 
+    /* Price rise (one per trip): an essential costs more from then on. */
+    hikeItemId: {
+      type: String,
+      default: null
+    },
+
+    hikePrice: {
+      type: Number,
+      default: null,
+      min: 0
+    },
+
     /*
      * ---------------------------------------------------------
      * GAME PROGRESSION

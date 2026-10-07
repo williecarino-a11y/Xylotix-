@@ -45,9 +45,13 @@
   const ASSISTANT_PATH = [[1060, 430], [1200, 320], [1240, 540], [900, 560], [720, 660], [720, 820], [720, 660], [900, 560]];   // his patrol route
   const ASSISTANT_SPEED = 62;      // how fast he walks
   const saleNow = { cur: null };   // the running flash sale (the server decides it)
+  const hikeNow = { cur: null };   // a price that went up mid-trip (the server decides it)
   function nowPrice(item) {
     const s = saleNow.cur;
-    return s && s.itemId === item.id && Date.now() < s.endsAt ? s.salePrice : item.price;
+    if (s && s.itemId === item.id && Date.now() < s.endsAt) return s.salePrice;
+    const h = hikeNow.cur;
+    if (h && h.itemId === item.id) return h.newPrice;
+    return item.price;
   }
   const MM_SCALE = 0.18;    // puppet size: 910 art units tall becomes about 164px
   const CART_W = 112;       // cart width in world pixels
@@ -237,6 +241,8 @@
       @keyframes mwSlide { from { transform: translateY(-10px); opacity: 0; } to { transform: none; opacity: 1; } }
       .mw-sale { display: none; margin: 0 4px 6px; padding: 6px 10px; border-radius: 10px; background: linear-gradient(90deg, #e0245e, #ff7a1a); color: #ffffff; font-size: 13px; font-weight: 800; text-align: center; animation: mwPulse .9s ease-in-out infinite; }
       .mw-sale.show { display: block; }
+      .mw-hike { display: none; margin: 0 4px 6px; padding: 6px 10px; border-radius: 10px; background: #3a1620; border: 1px solid #ff5d5d; color: #ffb4b4; font-size: 13px; font-weight: 800; text-align: center; }
+      .mw-hike.show { display: block; }
       .mw-controls { display: flex; align-items: center; justify-content: space-between; padding: 12px 14px 0; }
       .mw-joy { position: relative; width: 108px; height: 108px; border-radius: 50%; background: rgba(77, 163, 255, 0.12); border: 2px solid rgba(77, 163, 255, 0.45); touch-action: none; user-select: none; }
       .mw-joy-knob { position: absolute; left: 50%; top: 50%; width: 46px; height: 46px; margin: -23px 0 0 -23px; border-radius: 50%; background: #1f6feb; box-shadow: 0 4px 12px rgba(0,0,0,.4); pointer-events: none; transition: transform .1s ease-out; }
@@ -337,6 +343,7 @@
         </div>
         <div class="mw-clock"><span>🕒 Store closes</span><div class="mw-clock-bar"><div class="mw-clock-fill" data-mw-clock data-level="high"></div></div></div>
         <div class="mw-sale" data-mw-sale></div>
+        <div class="mw-hike" data-mw-hike></div>
         <div class="mw-list" data-mw-list></div>
         <div class="mw-holder" data-mw-holder>
           <div class="mw-asst" data-mw-asst><span class="mw-asst-face">🧑‍🍳</span><div><b>Sam · Store assistant</b><span data-mw-asst-text></span></div></div>
@@ -392,16 +399,16 @@
     const assistant = {
       greeted: false, lowSaid: false, tightSaid: false, lastLine: '', lastAt: 0,
       lines: {
-        greet: ['Welcome to Miimiid Mart! Check your list and watch your wallet.', 'Hi there! Prices are on the shelves. Take your time, but not too long!'],
-        first: ['First one in the cart! Keep an eye on the total.', 'Off to a start! Remember, every dollar counts.'],
-        cheap: ['Easy on the wallet.', 'Small price, small dent.'],
-        mid: ['Good one. Keep an eye on the total.', 'That adds up. Check your wallet now and then.'],
-        pricey: ['Oof, that one costs a lot. Will you have enough left?', 'Big price tag! Make sure it fits your plan.'],
-        low: ['Your wallet is getting light. Count carefully!', 'Under $10 left. Choose wisely.'],
-        tight: ['Only a few dollars left! Be careful now.', 'Almost out of money! Think before you grab.'],
-        putback: ['Changing your mind? Thinking twice is smart.', 'Back it goes. Every dollar counts.'],
-        warn: ['We close soon! Anything you forgot?', 'Clock is ticking. Is your cart ready?'],
-        closed: ['Closing time! Please head to the counter.', 'We are closed. Time to pay at the counter.']
+        greet: ['Welcome to Miimiid Mart! Check your list and watch your wallet.', 'Hi there! Prices are on the shelves. Take your time, but not too long!', 'Welcome in! Have a plan before you fill that cart.', 'Hello! Tip: the total matters more than any single price.'],
+        first: ['First one in the cart! Keep an eye on the total.', 'Off to a start! Remember, every dollar counts.', 'And we are rolling! Keep counting as you go.', 'Good start. Now keep an eye on the wallet.'],
+        cheap: ['Easy on the wallet.', 'Small price, small dent.', 'Little things add up, so keep counting.', 'Cheap is nice. Count the total anyway.', 'That one barely moves the needle.', 'Good price. How is the rest of your budget?'],
+        mid: ['Good one. Keep an eye on the total.', 'That adds up. Check your wallet now and then.', 'A fair price, but the total is growing.', 'Not tiny, not huge. Watch the wallet.', 'Fine, as long as there is room for the rest.'],
+        pricey: ['Oof, that one costs a lot. Will you have enough left?', 'Big price tag! Make sure it fits your plan.', 'That is a big bite out of the wallet.', 'Pricey! Is there enough left for the rest of the list?', 'Think about what else that money could buy.'],
+        low: ['Your wallet is getting light. Count carefully!', 'Under $10 left. Choose wisely.', 'Getting close to the bottom of the wallet.', 'Careful now, the wallet is running low.'],
+        tight: ['Only a few dollars left! Be careful now.', 'Almost out of money! Think before you grab.', 'Nearly empty. Every dollar matters now.', 'Just a few dollars left. Pick carefully.'],
+        putback: ['Changing your mind? Thinking twice is smart.', 'Back it goes. Every dollar counts.', 'Good thinking, a second look never hurts.', 'Put back and money back. Nice.', 'Better to decide now than regret it later.'],
+        warn: ['We close soon! Anything you forgot?', 'Clock is ticking. Is your cart ready?', 'Closing time is coming. Check your list!', 'Last chance to grab what you came for.'],
+        closed: ['Closing time! Please head to the counter.', 'We are closed. Time to pay at the counter.', 'That is the bell! Off to the counter.']
       },
       say(text) {
         const box = holder.querySelector('[data-mw-asst]');
@@ -422,6 +429,11 @@
         return line;
       },
       react(kind, d) {
+        if (kind === 'hike') {
+          this.lastAt = Date.now();
+          this.say(`${d.name} just went up $${d.up}! Prices change, so buying the things you must have early can save money.`);
+          return;
+        }
         if (kind === 'grab') {
           if (d.left <= 5 && !this.tightSaid) { this.tightSaid = true; kind = 'tight'; }
           else if (d.left <= 10 && !this.lowSaid) { this.lowSaid = true; kind = 'low'; }
@@ -480,6 +492,42 @@
         saleTick = 0;
         const scene = game && game.scene.getScene('mart');
         if (scene && scene.refreshSale) scene.refreshSale();
+      }
+    }
+
+    // price rise: one essential costs more from now on. The server decides which and by how much.
+    hikeNow.cur = null;
+    const hikeEl = content.querySelector('[data-mw-hike]');
+    let hikeAsked = false;
+    let hikeHideAt = 0;
+    async function startHike() {
+      try {
+        const r = await miimiidFunCenterRequest(
+          `/api/fun-center/shop/session/${encodeURIComponent(S.sessionId)}/hike/start`,
+          { method: 'POST', body: JSON.stringify({}), headers: NO_OVERLAY }
+        );
+        if (!r || !r.started) return;
+        hikeNow.cur = { itemId: r.itemId, name: r.name, oldPrice: r.oldPrice, newPrice: r.newPrice };
+        SFX.tone(220, 0.25, 'sawtooth', 0.05);
+        SFX.tone(165, 0.4, 'sawtooth', 0.05, 0.2);
+        hikeEl.textContent = `📈 PRICE UP: ${r.name} $${r.oldPrice} → $${r.newPrice}`;
+        hikeEl.classList.add('show');
+        hikeHideAt = Date.now() + 9000;
+        assistant.react('hike', { name: r.name, up: r.newPrice - r.oldPrice });
+        const scene = game && game.scene.getScene('mart');
+        if (scene && scene.refreshSale) scene.refreshSale();
+      } catch (error) {
+        console.error('price rise error:', error);
+      }
+    }
+    function tickHike() {
+      if (!hikeAsked && !S.closed && !S.busy && !saleNow.cur && (S.basket.length >= 5 || S.timeLeft <= CLOSING_SECONDS * 0.55)) {
+        hikeAsked = true;
+        startHike();
+      }
+      if (hikeHideAt && Date.now() > hikeHideAt) {
+        hikeHideAt = 0;
+        hikeEl.classList.remove('show');
       }
     }
 
@@ -613,6 +661,7 @@
         else if (left <= 10) text += ` $${left} left.`;
         say(text);
         if (result.onSale) assistant.say(`Got it for $${result.price} instead of $${result.normalPrice}! A deal only saves you money if you needed the thing.`);
+        else if (result.priceUp) assistant.say(`${item.name} cost $${result.price} instead of $${result.normalPrice}. Waiting made it more expensive.`);
         else assistant.react('grab', { price: result.price, left, count: S.basket.length });
       } catch (error) {
         console.error('world buy error:', error);
@@ -638,6 +687,7 @@
         S.spent = result.spent;
         S.basket = S.basket.filter(id => id !== item.id);
         scene.restoreToShelf(product);
+        if (scene.refreshSale) scene.refreshSale();
         scene.popText(scene.player.x, scene.player.y - 170, `+$${result.price}`, '#7ee2a8');
         SFX.pickup();
         hud();
@@ -1251,9 +1301,10 @@
         const sale = saleNow.cur;
         this.products.forEach(p => {
           const on = !!sale && sale.itemId === p.item.id && !p.taken && Date.now() < sale.endsAt;
+          const up = !!hikeNow.cur && hikeNow.cur.itemId === p.item.id && !p.taken;
           if (p.label && p.label.active) {
             p.label.setText(priceText(p.item));
-            p.label.setColor(on ? '#ffd34d' : '#ffffff');
+            p.label.setColor(on ? '#ffd34d' : (up ? '#ff6b6b' : '#ffffff'));
           }
           if (on && !p.badge) {
             p.badge = this.add.text(p.x, p.sy - 96, sale.label, {
@@ -1324,6 +1375,7 @@
         const dt = delta / 1000;
         tickClock(dt);
         tickSale(dt);
+        tickHike();
         let ix = S.ctl.x;
         let iy = S.ctl.y;
         const k = this.keys;
