@@ -1031,69 +1031,163 @@
         });
       }
 
-      buildAssistant() {
-        const A = ASSISTANT;
-        this.obst.push({ x: A.x - 26, y: A.y - 8, w: 52, h: 16 });
-        this.asstShadow = this.add.ellipse(A.x, A.y - 2, 70, 16, 0x000000, 0.25).setDepth(A.y - 1);
-        const root = this.add.container(A.x, A.y).setDepth(A.y);
-        const body = this.add.container(0, 0);
-        const g = this.add.graphics();
-        g.fillStyle(0x23407a, 1).fillRect(-14, -46, 11, 44).fillRect(3, -46, 11, 44);
-        g.fillStyle(0x0b1530, 1).fillRoundedRect(-16, -6, 14, 8, 3).fillRoundedRect(2, -6, 14, 8, 3);
-        g.fillStyle(0x2f9e6b, 1).fillRoundedRect(-30, -100, 12, 46, 6).fillRoundedRect(18, -100, 12, 46, 6);
-        g.fillStyle(0xf1b27a, 1).fillCircle(-24, -52, 6).fillCircle(24, -52, 6);
-        g.fillStyle(0x2f9e6b, 1).fillRoundedRect(-22, -104, 44, 62, 10);
-        g.fillStyle(0xffffff, 1).fillRoundedRect(-14, -84, 28, 40, 6);
-        g.fillStyle(0xf1b27a, 1).fillCircle(0, -124, 22);
-        g.fillStyle(0x3a2a1e, 1).fillRoundedRect(-24, -148, 48, 22, 10);
-        g.fillStyle(0x141824, 1).fillCircle(-8, -122, 2.5).fillCircle(8, -122, 2.5);
-        g.lineStyle(2, 0x141824, 1).beginPath().arc(0, -116, 8, 0.2, Math.PI - 0.2).strokePath();
-        const tag = this.add.text(0, -64, 'STAFF', { fontSize: '10px', color: '#2f9e6b', fontStyle: 'bold' }).setOrigin(0.5);
-        body.add([g, tag]);
-        root.add(body);
-        this.asstRoot = root;
-        this.asstBody = body;
-        this.tweens.add({ targets: body, y: -3, duration: 900, yoyo: true, repeat: -1, ease: 'Sine.easeInOut' });
+      buildShopkeeper() {
+        const start = ASSISTANT_PATH[0];
+        const skin = 0xf1b27a, green = 0x2f9e6b, darkGreen = 0x237a52, navy = 0x23407a, ink = 0x141824;
+        this.sk = {
+          x: start[0], y: start[1], wp: 1, wait: 1500, phase: 0, amp: 0,
+          talkUntil: 0, waveUntil: 0, nextBlink: 0, blinkUntil: 0
+        };
+        const sk = this.sk;
+        this.skShadow = this.add.ellipse(sk.x, sk.y - 2, 70, 16, 0x000000, 0.25);
+        this.skObst = { x: sk.x - 24, y: sk.y - 8, w: 48, h: 16 };
+        this.obst.push(this.skObst);
 
-        this.asstBubble = this.add.container(A.x, A.y - 190).setDepth(100001).setVisible(false).setAlpha(0);
-        this.asstBg = this.add.graphics();
-        this.asstText = this.add.text(0, 0, '', {
-          fontSize: '15px', color: '#1b2440', fontStyle: 'bold', align: 'center', wordWrap: { width: 210 }
-        }).setOrigin(0.5);
-        this.asstBubble.add([this.asstBg, this.asstText]);
-        this.asstTimer = null;
-      }
+        const part = (x, y) => this.add.container(x, y);
+        const root = this.add.container(sk.x, sk.y);
 
-      assistantSay(text) {
-        if (!this.asstBubble) return;
-        this.asstText.setText(text);
-        const w = this.asstText.width + 24;
-        const h = this.asstText.height + 16;
-        this.asstBg.clear();
-        this.asstBg.fillStyle(0xffffff, 0.97).fillRoundedRect(-w / 2, -h / 2, w, h, 12);
-        this.asstBg.fillTriangle(-8, h / 2 - 1, 8, h / 2 - 1, 0, h / 2 + 10);
-        this.asstBg.lineStyle(2, 0x4da3ff, 1).strokeRoundedRect(-w / 2, -h / 2, w, h, 12);
-        this.asstBubble.setPosition(ASSISTANT.x, ASSISTANT.y - 168 - h / 2);
-        this.tweens.killTweensOf(this.asstBubble);
-        this.asstBubble.setVisible(true).setAlpha(1);
-        this.tweens.add({ targets: this.asstBody, scaleY: 1.06, duration: 120, yoyo: true });
-        if (this.asstTimer) this.asstTimer.remove(false);
-        this.asstTimer = this.time.delayedCall(3800, () => {
-          this.tweens.add({
-            targets: this.asstBubble, alpha: 0, duration: 400,
-            onComplete: () => this.asstBubble.setVisible(false)
-          });
+        // legs
+        const legL = part(-10, -46);
+        const legR = part(10, -46);
+        [legL, legR].forEach(leg => {
+          const g = this.add.graphics();
+          g.fillStyle(navy, 1).fillRoundedRect(-7, 0, 14, 38, 5);
+          g.fillStyle(0x0b1530, 1).fillRoundedRect(-9, 34, 20, 12, 5);
+          leg.add(g);
         });
+
+        // body and arms
+        const upper = part(0, 0);
+        const torso = this.add.graphics();
+        torso.fillStyle(green, 1).fillRoundedRect(-23, -106, 46, 64, 12);
+        torso.fillStyle(0xffffff, 1).fillRoundedRect(-15, -86, 30, 42, 7);
+        torso.fillStyle(green, 1).fillRoundedRect(-9, -80, 18, 9, 3);
+        const tag = this.add.text(0, -75.5, 'STAFF', { fontSize: '8px', color: '#ffffff', fontStyle: 'bold' }).setOrigin(0.5);
+        const armL = part(-26, -98);
+        const armR = part(26, -98);
+        [armL, armR].forEach(arm => {
+          const g = this.add.graphics();
+          g.fillStyle(green, 1).fillRoundedRect(-6, -4, 12, 34, 6);
+          g.fillStyle(skin, 1).fillCircle(0, 33, 7);
+          arm.add(g);
+        });
+
+        // head and face
+        const head = part(0, -126);
+        const face = this.add.graphics();
+        face.fillStyle(skin, 1).fillCircle(-26, 5, 6).fillCircle(26, 5, 6);
+        face.fillStyle(skin, 1).fillEllipse(0, 3, 54, 50);
+        face.fillStyle(0xff8a8a, 0.35).fillCircle(-16, 14, 6).fillCircle(16, 14, 6);
+        face.fillStyle(0xd9965f, 1).fillCircle(0, 12, 2.2);
+        face.fillStyle(green, 1);
+        face.beginPath();
+        face.arc(0, -10, 26, Math.PI, Math.PI * 2, false);
+        face.closePath();
+        face.fillPath();
+        face.fillStyle(darkGreen, 1).fillRoundedRect(-25, -12, 50, 7, 3);
+        face.fillStyle(0xffffff, 1).fillCircle(0, -24, 7);
+        const capM = this.add.text(0, -24, 'M', { fontSize: '10px', color: '#2f9e6b', fontStyle: 'bold' }).setOrigin(0.5);
+        const eyes = this.add.graphics();
+        eyes.fillStyle(0xffffff, 1).fillEllipse(-10, 5, 15, 17).fillEllipse(10, 5, 15, 17);
+        eyes.lineStyle(1.5, ink, 0.5).strokeEllipse(-10, 5, 15, 17).strokeEllipse(10, 5, 15, 17);
+        const pupils = this.add.graphics();
+        pupils.fillStyle(0x3a2a1e, 1).fillCircle(-10, 6, 4.6).fillCircle(10, 6, 4.6);
+        pupils.fillStyle(0xffffff, 1).fillCircle(-8.5, 4, 1.6).fillCircle(11.5, 4, 1.6);
+        const lids = this.add.graphics().setVisible(false);
+        lids.lineStyle(2.5, ink, 1);
+        lids.beginPath().arc(-10, 5, 6, 0.15, Math.PI - 0.15).strokePath();
+        lids.beginPath().arc(10, 5, 6, 0.15, Math.PI - 0.15).strokePath();
+        const mouthS = this.add.graphics();
+        mouthS.lineStyle(2.5, ink, 1).beginPath().arc(0, 14, 8, 0.25, Math.PI - 0.25).strokePath();
+        const mouthO = this.add.graphics().setVisible(false);
+        mouthO.fillStyle(0x5b1f2a, 1).fillEllipse(0, 20, 14, 11);
+        mouthO.fillStyle(0xff7a8a, 1).fillEllipse(0, 23, 9, 5);
+        head.add([face, capM, eyes, pupils, lids, mouthS, mouthO]);
+
+        upper.add([torso, tag, armL, armR, head]);
+        root.add([legL, legR, upper]);
+        this.skp = { root, legL, legR, upper, armL, armR, head, eyes, pupils, lids, mouthS, mouthO };
       }
 
-      updateAssistant() {
-        if (!this.asstRoot) return;
-        const d = Math.hypot(this.player.x - ASSISTANT.x, this.player.y - ASSISTANT.y);
-        if (!assistant.greeted && d < 260) {
+      shopkeeperTalk() {
+        if (!this.sk) return;
+        this.sk.talkUntil = this.time.now + 3800;
+        const ic = this.add.text(this.sk.x, this.sk.y - 190, '💬', { fontSize: '26px' }).setOrigin(0.5).setDepth(100001);
+        this.tweens.add({ targets: ic, y: ic.y - 26, alpha: 0, duration: 1300, ease: 'Sine.easeOut', onComplete: () => ic.destroy() });
+      }
+
+      updateShopkeeper(delta) {
+        const sk = this.sk;
+        const P = this.skp;
+        if (!sk || !P) return;
+        const now = this.time.now;
+        const dt = delta / 1000;
+        const dp = Math.hypot(this.player.x - sk.x, this.player.y - sk.y);
+
+        if (!assistant.greeted && dp < 260) {
           assistant.greeted = true;
+          sk.waveUntil = now + 2200;
           assistant.react('greet');
         }
-      }
+        const talking = now < sk.talkUntil;
+        const waving = now < sk.waveUntil;
+        let moving = false;
+        let look = 0;
+
+        if (talking || waving || dp < 95) {
+          look = Math.sign(this.player.x - sk.x);       // stops and faces you
+        } else if (sk.wait > 0) {
+          sk.wait -= delta;
+        } else {
+          const t = ASSISTANT_PATH[sk.wp];
+          const dx = t[0] - sk.x;
+          const dy = t[1] - sk.y;
+          const dist = Math.hypot(dx, dy);
+          if (dist < 5) {
+            sk.wp = (sk.wp + 1) % ASSISTANT_PATH.length;
+            sk.wait = Math.random() < 0.45 ? 1200 + Math.random() * 2200 : 0;
+          } else {
+            const step = Math.min(dist, ASSISTANT_SPEED * dt);
+            sk.x += (dx / dist) * step;
+            sk.y += (dy / dist) * step;
+            moving = true;
+            look = Math.sign(dx);
+          }
+        }
+
+        sk.amp += ((moving ? 1 : 0) - sk.amp) * Math.min(1, delta / 90);
+        if (moving) sk.phase += dt * Math.PI * 2 / 0.75;
+        const s = Math.sin(sk.phase);
+        const a = sk.amp;
+        const rad = Phaser.Math.DegToRad;
+
+        P.root.setPosition(sk.x, sk.y).setDepth(sk.y);
+        this.skShadow.setPosition(sk.x, sk.y - 2).setDepth(sk.y - 1);
+        this.skObst.x = sk.x - 24;
+        this.skObst.y = sk.y - 8;
+
+        P.legL.rotation = rad(24 * s * a);
+        P.legR.rotation = rad(-24 * s * a);
+        P.upper.y = -4 * Math.abs(s) * a + Math.sin(now / 480) * 1.3 * (1 - a);
+
+        let lRot = 6 + 16 * s * a;
+        let rRot = -6 + 16 * s * a;
+        if (waving) rRot = -(140 + 18 * Math.sin(now / 80));
+        else if (talking) { rRot = -(38 + 14 * Math.sin(now / 160)); lRot = 8 + 5 * Math.sin(now / 210); }
+        P.armL.rotation = rad(lRot);
+        P.armR.rotation = rad(rRot);
+
+        P.head.rotation = rad(look * 3 + (talking ? Math.sin(now / 200) * 2 : 0));
+        P.pupils.x = look * 2.4;
+        if (now > sk.nextBlink) { sk.blinkUntil = now + 130; sk.nextBlink = now + 2000 + Math.random() * 3000; }
+        const shut = now < sk.blinkUntil;
+        P.eyes.setVisible(!shut);
+        P.pupils.setVisible(!shut);
+        P.lids.setVisible(shut);
+        const open = waving || (talking && Math.floor(now / 140) % 2 === 0);
+        P.mouthO.setVisible(open);
+        P.mouthS.setVisible(!open);
+  }
 
       popText(x, y, text, color) {
         const t = this.add.text(x, y, text, {
