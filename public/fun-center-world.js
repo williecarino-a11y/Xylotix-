@@ -1766,6 +1766,7 @@
         tickClosing(dt);
         tickFriend();
         tickCashier();
+        if (rivalCtl) rivalCtl.tick(dt, this, delta);
         let ix = S.ctl.x;
         let iy = S.ctl.y;
         const k = this.keys;
