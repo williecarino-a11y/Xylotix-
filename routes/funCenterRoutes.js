@@ -695,6 +695,7 @@ router.post('/shop/session/:sessionId/buy', funAnswerLimiter, async (req, res) =
         price,
         onSale: saleActive,
         priceUp: hikeActive,
+        rivalBeaten: rivalWin,
         normalPrice: item.price,
         classification: item.classification,
         explanation: item.explanation,
