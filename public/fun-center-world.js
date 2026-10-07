@@ -241,6 +241,11 @@
       .mw-asst-face { width: 34px; height: 34px; flex: none; border-radius: 50%; background: #2f9e6b; display: flex; align-items: center; justify-content: center; font-size: 20px; }
       .mw-asst b { display: block; font-size: 11px; color: #2f9e6b; text-transform: uppercase; letter-spacing: .04em; }
       @keyframes mwSlide { from { transform: translateY(-10px); opacity: 0; } to { transform: none; opacity: 1; } }
+      .mw-asst.ask { pointer-events: auto; }
+      .mw-asst-replies { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+      .mw-asst-replies:empty { display: none; }
+      .mw-reply { border: 2px solid #2f9e6b; background: #ffffff; color: #1b6b48; border-radius: 999px; padding: 6px 12px; font-size: 13px; font-weight: 800; cursor: pointer; }
+      .mw-reply:active { background: #2f9e6b; color: #ffffff; }
       .mw-sale { display: none; margin: 0 4px 6px; padding: 6px 10px; border-radius: 10px; background: linear-gradient(90deg, #e0245e, #ff7a1a); color: #ffffff; font-size: 13px; font-weight: 800; text-align: center; animation: mwPulse .9s ease-in-out infinite; }
       .mw-sale.show { display: block; }
       .mw-hike { display: none; margin: 0 4px 6px; padding: 6px 10px; border-radius: 10px; background: #3a1620; border: 1px solid #ff5d5d; color: #ffb4b4; font-size: 13px; font-weight: 800; text-align: center; }
