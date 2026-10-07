@@ -586,6 +586,80 @@
       }
     }
 
+    // closing rule: after the store closes, the player has PAY_GRACE_SECONDS to reach the counter.
+    const clockLabel = content.querySelector('.mw-clock span');
+    let forcedDone = false;
+    function tickClosing(dt) {
+      if (!S.closed || forcedDone || S.busy) return;
+      S.payLeft = Math.max(0, S.payLeft - dt);
+      clockLabel.textContent = `🔒 Closed: pay in ${Math.ceil(S.payLeft)}s`;
+      clockFill.style.width = Math.round((S.payLeft / PAY_GRACE_SECONDS) * 100) + '%';
+      clockFill.dataset.level = 'low';
+      if (S.payLeft <= 8 && !S.payWarned) {
+        S.payWarned = true;
+        assistant.say('Please head to the counter now! I will ring you up in a few seconds.');
+      }
+      if (S.payLeft <= 0) {
+        forcedDone = true;
+        forceCheckout();
+      }
+    }
+    function forceCheckout() {
+      if (S.basket.length === 0) { walkedOut(); return; }
+      assistant.say('Time is up! The cashier will ring you up now.');
+      doCheckout(true);
+    }
+    function walkedOut() {
+      S.busy = true;
+      SFX.tone(247, 0.5, 'triangle', 0.1);
+      const o = overlay(`
+        <h3>The store closed</h3>
+        <p>Time ran out and your cart was empty, so you left with nothing.</p>
+        <p>Your wallet is safe, but your essentials for the week are not covered.</p>
+        <button type="button" data-again>Try again</button>
+        <button type="button" class="mw-alt" data-back>Back to Fun Center</button>
+      `);
+      o.querySelector('[data-again]').addEventListener('click', () => { destroyGame(); startWorld(); });
+      o.querySelector('[data-back]').addEventListener('click', () => { destroyGame(); renderMiimiidFunCenter(); });
+    }
+
+    // friend event: Alex pops in, asks about movie night, then leaves.
+    let friendAsked = false;
+    function tickFriend() {
+      if (friendAsked || S.closed || S.busy) return;
+      const movie = shop.items.find(it => it.id === 'movie');
+      if (!movie || S.basket.includes('movie')) return;
+      if (S.basket.length < 2) return;
+      if (S.basket.length < 6 && S.timeLeft > CLOSING_SECONDS * 0.4) return;
+      if (saleNow.cur || hikeHideAt || assistant.pending) return;
+      if (S.budget - S.spent < nowPrice(movie)) return;
+      const scene = game && game.scene.getScene('mart');
+      if (!scene || scene.friend) return;
+      friendAsked = true;
+      scene.spawnFriend();
+    }
+    function friendAsk() {
+      const movie = shop.items.find(it => it.id === 'movie');
+      const price = movie ? nowPrice(movie) : 12;
+      const who = { name: 'Alex · Your friend', face: '🧑' };
+      assistant.say(`Hey! Movie night tonight? Tickets are $${price}. You in?`, [
+        { label: "I'm in! 🎬", answer: 'Yes! It is going to be fun!', action: buyMovie },
+        { label: 'Maybe next time', answer: 'No worries, we will catch the next one!' }
+      ], who, friendDone);
+    }
+    function buyMovie() {
+      const scene = game && game.scene.getScene('mart');
+      const p = scene && scene.products.find(q => q.item.id === 'movie');
+      if (p && !p.taken) buyProduct(scene, p);
+    }
+    function friendDone() {
+      const scene = game && game.scene.getScene('mart');
+      if (scene && scene.friend && scene.friend.state === 'ask') {
+        scene.friend.state = 'out';
+        scene.friend.waveUntil = scene.time.now + 1200;
+      }
+    }
+
     const listEl = content.querySelector('[data-mw-list]');
     const needItems = shop.items.filter(it => NEED_IDS.includes(it.id));
     listEl.innerHTML = '<span class="mw-list-title">🛒 Shopping list</span>' +
