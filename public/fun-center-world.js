@@ -661,6 +661,64 @@
       }
     }
 
+    // cashier: waves when you reach the counter, checks your cart against your list, offers to ring you up.
+    let atPay = false;
+    function tickCashier() {
+      const scene = game && game.scene.getScene('mart');
+      if (!scene || !scene.ck) return;
+      if (!inCheckoutZone(scene)) { atPay = false; return; }
+      if (atPay) return;
+      atPay = true;
+      scene.ck.waveUntil = scene.time.now + 1500;
+      if (S.busy || S.basket.length === 0 || assistant.pending || scene.friend) return;
+      cashierAsk(scene);
+    }
+    function cashierAsk(scene) {
+      const who = { name: 'Riley · Cashier', face: '🧑‍💼' };
+      const missing = needItems.filter(n => !S.basket.includes(n.id));
+      const left = S.budget - S.spent;
+      scene.ck.talkUntil = scene.time.now + 14000;
+      const done = () => { scene.ck.talkUntil = scene.time.now + 1500; };
+      const ring = { label: 'Ring me up 🧾', answer: 'Scanning now. Let us see how you did!', action: scanThenCheckout };
+      if (S.closed) {
+        const text = missing.length
+          ? `We are closed, so this is the last call. You are missing ${missing.length} from your list.`
+          : `We are closed, but you have everything on your list. Ready to pay?`;
+        assistant.say(text, [ring], who, done);
+        return;
+      }
+      if (missing.length === 0) {
+        assistant.say(`You have everything on your list, with $${left} left. Ready to pay?`, [
+          ring,
+          { label: 'One more look', answer: 'Sure, take your time.' }
+        ], who, done);
+        return;
+      }
+      const names = missing.slice(0, 2).map(m => m.name).join(' and ');
+      const more = missing.length > 2 ? ` and ${missing.length - 2} more` : '';
+      assistant.say(`Before we finish: you still need ${names}${more} from your list.`, [
+        { label: 'Let me go back', answer: 'Good idea. I will be right here.' },
+        { label: 'Ring me up anyway', answer: 'Okay. Scanning now.', action: scanThenCheckout }
+      ], who, done);
+    }
+    function scanThenCheckout() {
+      if (S.busy || S.basket.length === 0) return;
+      S.busy = true;
+      const ids = S.basket.slice(0, 10);
+      ids.forEach((id, i) => {
+        setTimeout(() => {
+          if (!document.body.contains(holder)) return;
+          const it = shop.items.find(x => x.id === id);
+          SFX.tone(1200, 0.07, 'square', 0.07);
+          say('Scanning: ' + (it ? it.name : 'item'));
+        }, i * 350);
+      });
+      setTimeout(() => {
+        S.busy = false;
+        if (document.body.contains(holder)) doCheckout();
+      }, ids.length * 350 + 300);
+    }
+
     const listEl = content.querySelector('[data-mw-list]');
     const needItems = shop.items.filter(it => NEED_IDS.includes(it.id));
     listEl.innerHTML = '<span class="mw-list-title">🛒 Shopping list</span>' +
