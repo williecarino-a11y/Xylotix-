@@ -721,6 +721,17 @@
       }, ids.length * 350 + 300);
     }
 
+    // rival shopper (code lives in public/fun-center-rival.js)
+    const rivalCtl = window.MiimiidMart && window.MiimiidMart.rival ? window.MiimiidMart.rival.create({
+      S, content, assistant, say, SFX, NO_OVERLAY, shop,
+      request: miimiidFunCenterRequest,
+      closingSeconds: CLOSING_SECONDS,
+      priceText,
+      saleActive: () => !!saleNow.cur,
+      hikeShowing: () => !!hikeHideAt,
+      getScene: () => (game && game.scene.getScene('mart'))
+    }) : null;
+
     const listEl = content.querySelector('[data-mw-list]');
     const needItems = shop.items.filter(it => NEED_IDS.includes(it.id));
     listEl.innerHTML = '<span class="mw-list-title">🛒 Shopping list</span>' +
