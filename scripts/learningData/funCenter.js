@@ -140,6 +140,18 @@ const weeklyShop = {
   ]
 };
 
+// Flash sales: only on wants, so the discount tests self-control.
+// The server picks one that is not already in the basket.
+const flashSales = [
+  { itemId: 'headphones', salePrice: 30, label: '50% OFF', seconds: 25 },
+  { itemId: 'pizza', salePrice: 5, label: 'SALE', seconds: 25 },
+  { itemId: 'movie', salePrice: 7, label: 'SALE', seconds: 25 }
+];
+
+function getFlashSales() {
+  return flashSales.map(sale => ({ ...sale }));
+}
+
 function getWeeklyShop() {
   return {
     id: weeklyShop.id,
