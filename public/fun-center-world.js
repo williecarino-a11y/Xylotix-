@@ -241,6 +241,8 @@
       @keyframes mwSlide { from { transform: translateY(-10px); opacity: 0; } to { transform: none; opacity: 1; } }
       .mw-sale { display: none; margin: 0 4px 6px; padding: 6px 10px; border-radius: 10px; background: linear-gradient(90deg, #e0245e, #ff7a1a); color: #ffffff; font-size: 13px; font-weight: 800; text-align: center; animation: mwPulse .9s ease-in-out infinite; }
       .mw-sale.show { display: block; }
+      .mw-hike { display: none; margin: 0 4px 6px; padding: 6px 10px; border-radius: 10px; background: #3a1620; border: 1px solid #ff5d5d; color: #ffb4b4; font-size: 13px; font-weight: 800; text-align: center; }
+      .mw-hike.show { display: block; }
       .mw-controls { display: flex; align-items: center; justify-content: space-between; padding: 12px 14px 0; }
       .mw-joy { position: relative; width: 108px; height: 108px; border-radius: 50%; background: rgba(77, 163, 255, 0.12); border: 2px solid rgba(77, 163, 255, 0.45); touch-action: none; user-select: none; }
       .mw-joy-knob { position: absolute; left: 50%; top: 50%; width: 46px; height: 46px; margin: -23px 0 0 -23px; border-radius: 50%; background: #1f6feb; box-shadow: 0 4px 12px rgba(0,0,0,.4); pointer-events: none; transition: transform .1s ease-out; }
