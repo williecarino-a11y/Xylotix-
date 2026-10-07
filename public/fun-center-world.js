@@ -44,6 +44,8 @@
   const CLOSING_SECONDS = 150;     // how long the store stays open (it pauses in menus)
   const ASSISTANT_PATH = [[1060, 430], [1200, 320], [1240, 540], [900, 560], [720, 660], [720, 820], [720, 660], [900, 560]];   // his patrol route
   const ASSISTANT_SPEED = 62;      // how fast he walks
+  const PAY_GRACE_SECONDS = 25;    // after closing, time left to reach the counter
+  const FRIEND_SPEED = 95;         // how fast Alex walks to you
   const saleNow = { cur: null };   // the running flash sale (the server decides it)
   const hikeNow = { cur: null };   // a price that went up mid-trip (the server decides it)
   function nowPrice(item) {
