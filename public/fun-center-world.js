@@ -46,6 +46,7 @@
   const ASSISTANT_SPEED = 62;      // how fast he walks
   const PAY_GRACE_SECONDS = 25;    // after closing, time left to reach the counter
   const FRIEND_SPEED = 95;         // how fast Alex walks to you
+  const CASHIER_POS = { x: 1215, y: 640 };   // where Riley stands behind the counter (tune if she looks off)
   const saleNow = { cur: null };   // the running flash sale (the server decides it)
   const hikeNow = { cur: null };   // a price that went up mid-trip (the server decides it)
   function nowPrice(item) {
