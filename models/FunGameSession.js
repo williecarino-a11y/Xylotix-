@@ -85,6 +85,26 @@ const funGameSessionSchema = new mongoose.Schema(
     },
 
     /*
+     * Flash sale (one per trip). The server decides what is on sale,
+     * the sale price and when it ends. The client only displays it.
+     */
+    saleItemId: {
+      type: String,
+      default: null
+    },
+
+    salePrice: {
+      type: Number,
+      default: null,
+      min: 0
+    },
+
+    saleEndsAt: {
+      type: Date,
+      default: null
+    },
+
+    /*
      * ---------------------------------------------------------
      * GAME PROGRESSION
      * ---------------------------------------------------------
