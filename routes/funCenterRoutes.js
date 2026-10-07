@@ -664,6 +664,7 @@ router.post('/shop/session/:sessionId/buy', funAnswerLimiter, async (req, res) =
       },
       {
         $inc: { spent: price },
+        ...(rivalWin ? { $set: { rivalBeaten: true } } : {}),
         $push: { purchasedItems: { itemId: item.id, optionId: option ? option.id : null, price, classification: item.classification, correct: item.classification === 'need' } }
       },
       { new: true, runValidators: true }
