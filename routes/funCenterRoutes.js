@@ -600,7 +600,8 @@ router.post('/shop/session/:sessionId/rival/start', funAnswerLimiter, async (req
       item.classification === 'need' &&
       !(Array.isArray(item.options) && item.options.length > 0) &&
       !boughtIds.has(item.id) &&
-      item.id !== existing.hikeItemId
+      item.id !== existing.hikeItemId &&
+      !(existing.tricks || []).some(entry => entry.itemId === item.id)
     );
     if (choices.length === 0) return res.json({ status: 'success', data: { started: false } });
 
