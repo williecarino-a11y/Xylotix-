@@ -171,12 +171,13 @@ function getWeeklyShop() {
     title: weeklyShop.title,
     subtitle: weeklyShop.subtitle,
     budget: weeklyShop.budget,
-    items: weeklyShop.items.map(({ id, name, price, image, visual, options }) => ({
+    items: weeklyShop.items.map(({ id, name, price, image, visual, options, hot }) => ({
       id,
       name,
       price,
       image,
       visual,
+      hot: hot ? { tag: hot.tag, line: hot.line } : undefined,
       options: Array.isArray(options)
         ? options.map(option => ({ id: option.id, label: option.label, price: option.price, tier: option.tier, note: option.note }))
         : undefined
