@@ -751,6 +751,7 @@
     function hud() {
       walletEl.textContent = `$${S.budget - S.spent}`;
       countEl.textContent = String(S.basket.length);
+      if (weekCtl) weekCtl.update();
       listEl.querySelectorAll('[data-need]').forEach(chip => {
         chip.classList.toggle('done', S.basket.includes(chip.dataset.need));
       });
