@@ -749,6 +749,15 @@
       S, content, week: session.week
     }) : null;
 
+    // trick store scanner (code lives in public/fun-center-tricks.js)
+    const trickCtl = window.MiimiidMart && window.MiimiidMart.tricks ? window.MiimiidMart.tricks.create({
+      S, content, assistant, say, SFX, NO_OVERLAY, nearestProduct,
+      request: miimiidFunCenterRequest,
+      tricks: session.tricks || [],
+      scansLeft: typeof session.scansLeft === 'number' ? session.scansLeft : 0,
+      getScene: () => (game && game.scene.getScene('mart'))
+    }) : null;
+
     const listEl = content.querySelector('[data-mw-list]');
     const sit = session.week && session.week.situation;
     const listIds = sit ? sit.hints : NEED_IDS;
