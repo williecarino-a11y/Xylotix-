@@ -728,29 +728,6 @@ router.post('/shop/session/:sessionId/buy', funAnswerLimiter, async (req, res) =
   try {
     const user = await requireFunCenterUser(req, res);
     if (!user) return;
-    const shop = getWeeklyShopDefinition();
-    const situation = pickSituation();
-    const session = await FunGameSession.create({
-      sessionId: createSessionId(),
-      userId: user._id,
-      gameId: SHOP_GAME_ID,
-      budget: shop.budget,
-      situationId: situation.id
-    });
-    return res.status(201).json({
-      status: 'success',
-      data: { sessionId: session.sessionId, gameId: SHOP_GAME_ID, budget: shop.budget, spent: 0, remaining: shop.budget, week: getWeekSetup(situation.id) }
-    });
-  } catch (error) {
-    console.error('Fun Center shop session error:', error);
-    return res.status(500).json({ status: 'error', message: 'Unable to start the shopping trip.' });
-  }
-});
-
-router.post('/shop/session/:sessionId/buy', funAnswerLimiter, async (req, res) => {
-  try {
-    const user = await requireFunCenterUser(req, res);
-    if (!user) return;
 
     const { sessionId } = req.params;
     const { itemId, optionId } = req.body;
