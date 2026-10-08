@@ -1558,9 +1558,27 @@
             this.tweens.killTweensOf(p.badge);
             p.badge.destroy();
             p.badge = null;
-          }
-        });
-      }
+    }
+  });
+  this.refreshHot();
+}
+
+refreshHot() {
+  this.products.forEach(p => {
+    if (p.taken && p.hotBadge) {
+      this.tweens.killTweensOf(p.hotBadge);
+      p.hotBadge.destroy();
+      p.hotBadge = null;
+      return;
+    }
+    if (!p.item || !p.item.hot || p.taken || p.hotBadge) return;
+    p.hotBadge = this.add.text(p.x, p.sy - 120, p.item.hot.tag, {
+      fontSize: '12px', color: '#ffffff', backgroundColor: '#e8590c',
+      padding: { x: 6, y: 3 }, fontStyle: 'bold'
+    }).setOrigin(0.5, 1).setDepth(p.sy + 3);
+    this.tweens.add({ targets: p.hotBadge, scale: 1.12, duration: 600, yoyo: true, repeat: -1 });
+  });
+}
 
       // A generic standing character (used by Alex now, and by the cashier next).
       makeNpc(o) {
