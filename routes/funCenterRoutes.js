@@ -358,7 +358,13 @@ function buildShopSummary(shop, session) {
 
   return {
     outcome: burnedOut.length ? 'burned-out' : outcome,
-    message: burnMessage || message,
+    message: burnMessage || (meters
+      ? ({
+          3: 'Perfect balance! Every part of your life is covered and you still have savings.',
+          2: 'Nearly there! One goal slipped. Check which star is missing.',
+          1: 'You got through the day, but a meter or your savings ran short.'
+        })[stars] || message
+      : message),
     budget: shop.budget,
     spent,
     saved,
