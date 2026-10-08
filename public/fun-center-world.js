@@ -947,7 +947,8 @@
         ].join('');
         SFX.coin();
         const o = overlay(`
-          <h3>Trip finished!</h3>
+          <h3>${r.burnedOut && r.burnedOut.length ? 'You burned out' : 'Trip finished!'}</h3>
+          ${window.MiimiidMart && window.MiimiidMart.week ? window.MiimiidMart.week.resultHtml(r) : ''}
           ${window.MiimiidMart && window.MiimiidMart.stars ? window.MiimiidMart.stars.html(r, (f, d, t, v, dl) => SFX.tone(f, d, t, v, dl)) : ''}
           ${forced ? '<p>⏰ Time ran out, so the cashier rang you up.</p>' : ''}
           <p>${esc(r.message || '')}</p>
