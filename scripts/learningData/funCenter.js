@@ -257,6 +257,61 @@ function getWeekSetup(situationId) {
   };
 }
 
+// Trick Store: deals on the shelf that may be fake. The scanner (3 per trip) reveals the truth.
+const TRICK_POOL = ['chips', 'cookies', 'candy', 'pasta', 'apple', 'carrot', 'water'];
+const TRICK_KINDS = ['real-sale', 'fake-sale', 'fake-sale', 'fake-urgent'];
+const SCANS_PER_TRIP = 3;
+
+function pickTricks() {
+  const ids = TRICK_POOL.slice();
+  for (let i = ids.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [ids[i], ids[j]] = [ids[j], ids[i]];
+  }
+  return TRICK_KINDS.map((kind, i) => {
+    const item = weeklyShop.items.find(it => it.id === ids[i]);
+    const base = item.price;
+    return {
+      itemId: item.id,
+      kind,
+      price: kind === 'real-sale' ? Math.max(1, Math.round(base * 0.7)) : base,
+      claimed: kind === 'fake-sale' ? base * 2 : base,
+      scanned: false
+    };
+  });
+}
+
+// What the shelves show. The kind (fake or real) is never sent to the browser.
+function publicTricks(tricks) {
+  return (tricks || []).map(t => ({
+    itemId: t.itemId,
+    badge: t.kind === 'fake-urgent' ? 'ONLY 2 LEFT!' : (t.kind === 'fake-sale' ? '50% OFF' : 'SALE'),
+    was: t.kind === 'fake-urgent' ? null : t.claimed,
+    price: t.price,
+    urgent: t.kind === 'fake-urgent'
+  }));
+}
+
+function describeTrick(trick, item) {
+  const base = item.price;
+  if (trick.kind === 'real-sale') {
+    return {
+      verdict: 'real', itemId: item.id, name: item.name, title: 'Real deal! ✅',
+      detail: `${item.name} usually costs $${base} and today it is $${trick.price}. This discount is real.`
+    };
+  }
+  if (trick.kind === 'fake-sale') {
+    return {
+      verdict: 'fake', itemId: item.id, name: item.name, title: 'BUSTED! Fake discount 🚫',
+      detail: `The tag says "was $${trick.claimed}", but ${item.name} always costs $${base}. The old price was invented.`
+    };
+  }
+  return {
+    verdict: 'fake', itemId: item.id, name: item.name, title: 'BUSTED! Fake pressure 🚫',
+    detail: `The back room is full of ${item.name}. "Only 2 left" is just pressure to make you rush.`
+  };
+}
+
 module.exports = {
   getFunCenterGames,
   getFunCenterGame,
@@ -269,5 +324,9 @@ module.exports = {
   getWeekSetup,
   pickSituation,
   computeMeters,
-  METER_WARN
+  METER_WARN,
+  pickTricks,
+  publicTricks,
+  describeTrick,
+  SCANS_PER_TRIP
 };

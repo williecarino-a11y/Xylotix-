@@ -52,6 +52,8 @@
   function nowPrice(item) {
     const rp = window.MiimiidMart && window.MiimiidMart.rivalPrice ? window.MiimiidMart.rivalPrice(item.id) : null;
     if (rp !== null) return rp;
+    const tp = window.MiimiidMart && window.MiimiidMart.trickPrice ? window.MiimiidMart.trickPrice(item.id) : null;
+    if (tp !== null) return tp;
     const s = saleNow.cur;
     if (s && s.itemId === item.id && Date.now() < s.endsAt) return s.salePrice;
     const h = hikeNow.cur;
@@ -362,6 +364,7 @@
         </div>
         <div class="mw-controls">
           <div class="mw-joy" data-mw-joy><div class="mw-joy-knob" data-mw-knob></div></div>
+          <button type="button" class="mw-scan" data-mw-scan disabled>🔍<small>Scan</small></button>
           <button type="button" class="mw-grab" data-mw-grab disabled>✋ Grab</button>
         </div>
       </div>
@@ -746,6 +749,15 @@
       S, content, week: session.week
     }) : null;
 
+    // trick store scanner (code lives in public/fun-center-tricks.js)
+    const trickCtl = window.MiimiidMart && window.MiimiidMart.tricks ? window.MiimiidMart.tricks.create({
+      S, content, assistant, say, SFX, NO_OVERLAY, nearestProduct,
+      request: miimiidFunCenterRequest,
+      tricks: session.tricks || [],
+      scansLeft: typeof session.scansLeft === 'number' ? session.scansLeft : 0,
+      getScene: () => (game && game.scene.getScene('mart'))
+    }) : null;
+
     const listEl = content.querySelector('[data-mw-list]');
     const sit = session.week && session.week.situation;
     const listIds = sit ? sit.hints : NEED_IDS;
@@ -951,7 +963,8 @@
         const o = overlay(`
           <h3>${r.burnedOut && r.burnedOut.length ? 'You burned out' : 'Trip finished!'}</h3>
           ${window.MiimiidMart && window.MiimiidMart.week ? window.MiimiidMart.week.resultHtml(r) : ''}
-          ${window.MiimiidMart && window.MiimiidMart.stars ? window.MiimiidMart.stars.html(r, (f, d, t, v, dl) => SFX.tone(f, d, t, v, dl)) : ''}
+          window.MiimiidMart.stars.html(r, (f, d, t, v, dl) => SFX.tone(f, d, t, v, dl)) : ''}
+          ${window.MiimiidMart && window.MiimiidMart.tricks ? window.MiimiidMart.tricks.resultHtml(r) : ''}
           ${forced ? '<p>⏰ Time ran out, so the cashier rang you up.</p>' : ''}
           <p>${esc(r.message || '')}</p>
           <p>Needs covered: <strong>${list(r.needsBought).length} / ${r.totalNeeds}</strong> &middot; Spent $${r.spent} &middot; Left $${r.saved}</p>
@@ -1795,6 +1808,7 @@
         const wantMood = (S.closed || S.timeLeft <= CLOSING_SECONDS * 0.25 || (rivalCtl && rivalCtl.active())) ? 'tense' : (S.basket.length >= 3 ? 'groove' : 'calm');
         if (SFX.setMood) SFX.setMood(wantMood);
         if (rivalCtl) rivalCtl.tick(dt, this, delta);
+        if (trickCtl) trickCtl.tick(this);
         let ix = S.ctl.x;
         let iy = S.ctl.y;
         const k = this.keys;

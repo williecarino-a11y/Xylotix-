@@ -6,8 +6,7 @@ const rateLimit = require('express-rate-limit');
 const { getAuthenticatedUser } = require('./authRoutes');
 const FunGameSession = require('../models/FunGameSession');
 const FunGameProfile = require('../models/FunGameProfile');
-const { getFunCenterGames, getFunCenterGame, validateFunCenterAnswer, getWeeklyShop, getWeeklyShopDefinition, getFlashSales, getPriceHikes, getWeekSetup, pickSituation, computeMeters, METER_WARN } = require('../scripts/learningData/funCenter');
-
+const { getFunCenterGames, getFunCenterGame, validateFunCenterAnswer, getWeeklyShop, getWeeklyShopDefinition, getFlashSales, getPriceHikes, getWeekSetup, pickSituation, computeMeters, METER_WARN, pickTricks, publicTricks, describeTrick, SCANS_PER_TRIP } = require('../scripts/learningData/funCenter');
 const router = express.Router();
 
 const funSessionStartLimiter = rateLimit({
@@ -340,6 +339,19 @@ function buildShopSummary(shop, session) {
   }
   const stars = finalRows.filter(row => row.earned).length;
 
+  // Trick Store report: what each deal really was, and what you did about it.
+  const trickReport = (Array.isArray(session.tricks) ? session.tricks : []).map(t => {
+    const item = byId.get(t.itemId);
+    const isFake = t.kind !== 'real-sale';
+    const got = boughtIds.has(t.itemId);
+    const info = describeTrick(t, item);
+    let status = 'skipped';
+    if (isFake) status = got ? (t.scanned ? 'knew' : 'fell') : (t.scanned ? 'busted' : 'skipped');
+    else status = got ? 'deal' : (t.scanned ? 'missed' : 'skipped');
+    return { itemId: t.itemId, name: item.name, kind: t.kind, scanned: !!t.scanned, status, title: info.title, detail: info.detail };
+  });
+  const trickBonus = trickReport.filter(row => row.status === 'busted').length * 3;
+
   let outcome = 'missing-essentials';
   let message = 'Many essentials are still missing. Next time, cover your needs first.';
   if (needsMissed.length === 0 && saved > 0) {
@@ -373,6 +385,8 @@ function buildShopSummary(shop, session) {
     stars,
     starRows: finalRows,
     meters,
+    tricks: trickReport,
+    trickBonus,
     burnedOut,
     situationId: session.situationId || null,
     totalNeeds: totalNeeds.length,
@@ -558,7 +572,7 @@ router.post('/shop/session/:sessionId/hike/start', funAnswerLimiter, async (req,
     const boughtIds = new Set(existing.purchasedItems.map(entry => entry.itemId));
     const choices = getPriceHikes().filter(hike => {
       const item = shop.items.find(candidate => candidate.id === hike.itemId);
-      return item && item.classification === 'need' && !(Array.isArray(item.options) && item.options.length > 0) && !boughtIds.has(hike.itemId) && hike.itemId !== existing.rivalItemId;
+      return item && item.classification === 'need' && !(Array.isArray(item.options) && item.options.length > 0) && !boughtIds.has(hike.itemId) && hike.itemId !== existing.rivalItemId && !(existing.tricks || []).some(entry => entry.itemId === hike.itemId);
     });
     if (choices.length === 0) return res.json({ status: 'success', data: { started: false } });
 
@@ -601,7 +615,8 @@ router.post('/shop/session/:sessionId/rival/start', funAnswerLimiter, async (req
       item.classification === 'need' &&
       !(Array.isArray(item.options) && item.options.length > 0) &&
       !boughtIds.has(item.id) &&
-      item.id !== existing.hikeItemId
+      item.id !== existing.hikeItemId &&
+      !(existing.tricks || []).some(entry => entry.itemId === item.id)
     );
     if (choices.length === 0) return res.json({ status: 'success', data: { started: false } });
 
@@ -627,7 +642,89 @@ router.post('/shop/session/:sessionId/rival/start', funAnswerLimiter, async (req
   }
 });
 
+// The scanner: reveals whether one shelf deal is real. Costs one scan per deal; checking the same deal again is free.
+router.post('/shop/session/:sessionId/scan', funAnswerLimiter, async (req, res) => {
+  try {
+    const user = await requireFunCenterUser(req, res);
+    if (!user) return;
+
+    const { sessionId } = req.params;
+    const { itemId } = req.body;
+    const shop = getWeeklyShopDefinition();
+    const item = shop.items.find(candidate => candidate.id === itemId);
+    if (!item) return res.status(400).json({ status: 'error', message: 'That item is not in the shop.' });
+
+    const existing = await FunGameSession.findOne({ sessionId, userId: user._id, gameId: SHOP_GAME_ID });
+    if (!existing) return res.status(404).json({ status: 'error', message: 'Shopping trip not found.' });
+    if (existing.completed) return res.status(409).json({ status: 'error', code: 'SHOP_FINISHED', message: 'This shopping trip is already finished.' });
+
+    const trick = (existing.tricks || []).find(entry => entry.itemId === item.id);
+    if (!trick) return res.status(400).json({ status: 'error', code: 'NOTHING_TO_SCAN', message: 'Nothing odd about this price.' });
+
+    if (trick.scanned) {
+      return res.json({ status: 'success', data: { ...describeTrick(trick, item), scansLeft: existing.scansLeft || 0 } });
+    }
+
+    // One atomic write: a scan is only spent if one is left and this deal is not yet scanned.
+    const updated = await FunGameSession.findOneAndUpdate(
+      {
+        sessionId,
+        userId: user._id,
+        gameId: SHOP_GAME_ID,
+        completed: false,
+        scansLeft: { $gt: 0 },
+        tricks: { $elemMatch: { itemId: item.id, scanned: false } }
+      },
+      { $inc: { scansLeft: -1 }, $set: { 'tricks.$[t].scanned': true } },
+      { new: true, arrayFilters: [{ 't.itemId': item.id }] }
+    );
+    if (!updated) {
+      return res.status(409).json({ status: 'error', code: 'NO_SCANS', message: 'You are out of scans for this trip.', scansLeft: existing.scansLeft || 0 });
+    }
+
+    return res.json({ status: 'success', data: { ...describeTrick(trick, item), scansLeft: updated.scansLeft } });
+  } catch (error) {
+    console.error('Fun Center shop scan error:', error);
+    return res.status(500).json({ status: 'error', message: 'The scanner did not work. Try again.' });
+  }
+});
+
 router.post('/shop/session', funSessionStartLimiter, async (req, res) => {
+  try {
+    const user = await requireFunCenterUser(req, res);
+    if (!user) return;
+    const shop = getWeeklyShopDefinition();
+    const situation = pickSituation();
+    const tricks = pickTricks();
+    const session = await FunGameSession.create({
+      sessionId: createSessionId(),
+      userId: user._id,
+      gameId: SHOP_GAME_ID,
+      budget: shop.budget,
+      situationId: situation.id,
+      tricks,
+      scansLeft: SCANS_PER_TRIP
+    });
+    return res.status(201).json({
+      status: 'success',
+      data: {
+        sessionId: session.sessionId,
+        gameId: SHOP_GAME_ID,
+        budget: shop.budget,
+        spent: 0,
+        remaining: shop.budget,
+        week: getWeekSetup(situation.id),
+        tricks: publicTricks(tricks),
+        scansLeft: SCANS_PER_TRIP
+      }
+    });
+  } catch (error) {
+    console.error('Fun Center shop session error:', error);
+    return res.status(500).json({ status: 'error', message: 'Unable to start the shopping trip.' });
+  }
+});
+
+router.post('/shop/session/:sessionId/buy', funAnswerLimiter, async (req, res) => {
   try {
     const user = await requireFunCenterUser(req, res);
     if (!user) return;
@@ -681,7 +778,9 @@ router.post('/shop/session/:sessionId/buy', funAnswerLimiter, async (req, res) =
     if (rivalSoldOut) {
       return res.status(409).json({ status: 'error', code: 'SOLD_OUT', message: `${item.name} is sold out. Another shopper took the last one.` });
     }
-    const price = option ? option.price : (saleActive ? trip.salePrice : (hikeActive ? trip.hikePrice : (rivalRestocked ? trip.rivalPrice : item.price)));
+    const trickEntry = trip && !option ? (trip.tricks || []).find(entry => entry.itemId === item.id) : null;
+    const trickPrice = trickEntry ? trickEntry.price : null;
+    const price = option ? option.price : (saleActive ? trip.salePrice : (hikeActive ? trip.hikePrice : (rivalRestocked ? trip.rivalPrice : (trickPrice !== null ? trickPrice : item.price))));
 
     // Price, budget and duplicate checks all happen inside one atomic write.
     const updated = await FunGameSession.findOneAndUpdate(
@@ -765,6 +864,7 @@ router.post('/shop/session/:sessionId/checkout', funSessionStartLimiter, async (
         ? calculateReward(summary.stars, 3)
         : calculateReward(Math.max(0, summary.needsBought.length - summary.wantsBought.length), needsTotal);
 
+      reward.coins += summary.trickBonus || 0;
       const claimed = await FunGameSession.findOneAndUpdate(
         { sessionId, userId: user._id, gameId: SHOP_GAME_ID, completed: false, rewardGranted: false },
         { $set: { completed: true, rewardGranted: true, score: summary.score, stars: summary.stars, correctAnswers: summary.needsBought.length, roundsCompleted: existing.purchasedItems.length, xpAwarded: reward.xp, coinsAwarded: reward.coins, completedAt: new Date() } },
