@@ -316,10 +316,18 @@
 
       if (disabled) return nativeFetch(input, init);
 
+      // Requests made during a Mart trip (buy, put back, scan, checkout)
+      // must never block the screen. Starting a trip still shows the overlay.
+      const url = typeof input === 'string' ? input : (input && input.url) || '';
+      if (url.includes('/api/fun-center/shop/session/')) return nativeFetch(input, init);
+
       const handle = start({ context });
       return nativeFetch(input, init).finally(() => stop(handle));
     };
   }
+
+      const handle = start({ context });
+      return nativeFetch(input, init).finally(() => stop(handle));
 
   window.ContinueLoading = Object.freeze({
     start,
