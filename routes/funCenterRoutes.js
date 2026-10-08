@@ -760,7 +760,9 @@ router.post('/shop/session/:sessionId/buy', funAnswerLimiter, async (req, res) =
     if (rivalSoldOut) {
       return res.status(409).json({ status: 'error', code: 'SOLD_OUT', message: `${item.name} is sold out. Another shopper took the last one.` });
     }
-    const price = option ? option.price : (saleActive ? trip.salePrice : (hikeActive ? trip.hikePrice : (rivalRestocked ? trip.rivalPrice : item.price)));
+    const trickEntry = trip && !option ? (trip.tricks || []).find(entry => entry.itemId === item.id) : null;
+    const trickPrice = trickEntry ? trickEntry.price : null;
+    const price = option ? option.price : (saleActive ? trip.salePrice : (hikeActive ? trip.hikePrice : (rivalRestocked ? trip.rivalPrice : (trickPrice !== null ? trickPrice : item.price))));
 
     // Price, budget and duplicate checks all happen inside one atomic write.
     const updated = await FunGameSession.findOneAndUpdate(
