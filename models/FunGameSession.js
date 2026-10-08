@@ -166,6 +166,18 @@ const funGameSessionSchema = new mongoose.Schema(
       min: 0
     },
 
+    /* Trick Store: shelf deals that may be fake, and the scans left to check them. */
+    tricks: {
+      type: [trickSchema],
+      default: []
+    },
+
+    scansLeft: {
+      type: Number,
+      default: 0,
+      min: 0
+    },
+
     situationId: {
       type: String,
       default: null
