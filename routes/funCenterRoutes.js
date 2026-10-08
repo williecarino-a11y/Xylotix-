@@ -755,7 +755,9 @@ router.post('/shop/session/:sessionId/checkout', funSessionStartLimiter, async (
       if (!existing.purchasedItems || existing.purchasedItems.length === 0) { const error = new Error('Add at least one item to your basket first.'); error.code = 'BASKET_EMPTY'; throw error; }
 
       const summary = buildShopSummary(shop, existing);
-      const reward = calculateReward(Math.max(0, summary.needsBought.length - summary.wantsBought.length), needsTotal);
+      const reward = existing.situationId
+        ? calculateReward(summary.stars, 3)
+        : calculateReward(Math.max(0, summary.needsBought.length - summary.wantsBought.length), needsTotal);
 
       const claimed = await FunGameSession.findOneAndUpdate(
         { sessionId, userId: user._id, gameId: SHOP_GAME_ID, completed: false, rewardGranted: false },
