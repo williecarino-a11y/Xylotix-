@@ -358,7 +358,7 @@ function buildShopSummary(shop, session) {
 
   return {
     outcome: burnedOut.length ? 'burned-out' : outcome,
-    message,
+    message: burnMessage || message,
     budget: shop.budget,
     spent,
     saved,
