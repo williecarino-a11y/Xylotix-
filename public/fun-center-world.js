@@ -177,6 +177,7 @@
   };
 
   try {
+    if (window.MiimiidMart && window.MiimiidMart.audio) window.MiimiidMart.audio.upgrade(SFX);
     const q = new URLSearchParams(location.search).get('world');
     if (q === '1') localStorage.removeItem('miimiidWorld');
     if (q === '0') localStorage.setItem('miimiidWorld', '0');
@@ -946,6 +947,7 @@
           ...list(r.wantsBought).map(it => row(it, '🛍️ Want', ''))
         ].join('');
         SFX.coin();
+        if (SFX.stinger) SFX.stinger(r.burnedOut && r.burnedOut.length ? 'bad' : (r.stars >= 2 ? 'win' : 'ok'));
         const o = overlay(`
           <h3>${r.burnedOut && r.burnedOut.length ? 'You burned out' : 'Trip finished!'}</h3>
           ${window.MiimiidMart && window.MiimiidMart.week ? window.MiimiidMart.week.resultHtml(r) : ''}
@@ -1790,6 +1792,8 @@
         tickClosing(dt);
         tickFriend();
         tickCashier();
+        const wantMood = (S.closed || S.timeLeft <= CLOSING_SECONDS * 0.25 || (rivalCtl && rivalCtl.active())) ? 'tense' : (S.basket.length >= 3 ? 'groove' : 'calm');
+        if (SFX.setMood) SFX.setMood(wantMood);
         if (rivalCtl) rivalCtl.tick(dt, this, delta);
         let ix = S.ctl.x;
         let iy = S.ctl.y;
