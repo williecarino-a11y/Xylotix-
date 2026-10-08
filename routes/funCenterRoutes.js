@@ -862,6 +862,7 @@ router.post('/shop/session/:sessionId/checkout', funSessionStartLimiter, async (
         ? calculateReward(summary.stars, 3)
         : calculateReward(Math.max(0, summary.needsBought.length - summary.wantsBought.length), needsTotal);
 
+      reward.coins += summary.trickBonus || 0;
       const claimed = await FunGameSession.findOneAndUpdate(
         { sessionId, userId: user._id, gameId: SHOP_GAME_ID, completed: false, rewardGranted: false },
         { $set: { completed: true, rewardGranted: true, score: summary.score, stars: summary.stars, correctAnswers: summary.needsBought.length, roundsCompleted: existing.purchasedItems.length, xpAwarded: reward.xp, coinsAwarded: reward.coins, completedAt: new Date() } },
