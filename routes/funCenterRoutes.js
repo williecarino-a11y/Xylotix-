@@ -723,6 +723,8 @@ router.post('/shop/session', funSessionStartLimiter, async (req, res) => {
     return res.status(500).json({ status: 'error', message: 'Unable to start the shopping trip.' });
   }
 });
+
+router.post('/shop/session/:sessionId/buy', funAnswerLimiter, async (req, res) => {
   try {
     const user = await requireFunCenterUser(req, res);
     if (!user) return;
