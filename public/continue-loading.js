@@ -326,9 +326,6 @@
     };
   }
 
-      const handle = start({ context });
-      return nativeFetch(input, init).finally(() => stop(handle));
-
   window.ContinueLoading = Object.freeze({
     start,
     stop,
