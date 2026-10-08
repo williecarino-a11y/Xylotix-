@@ -155,6 +155,11 @@ const funGameSessionSchema = new mongoose.Schema(
       min: 0
     },
 
+    situationId: {
+      type: String,
+      default: null
+    },
+
     stars: {
       type: Number,
       default: 0,
