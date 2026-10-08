@@ -188,6 +188,75 @@ function getWeeklyShopDefinition() {
   return weeklyShop;
 }
 
+// Survive the Week: how items change three meters, and the day cards.
+const METER_START = 50;
+const METER_WARN = 30;
+const itemEffects = {
+  milk: { health: 6 }, bread: { health: 6 }, eggs: { health: 6 }, pasta: { health: 6 },
+  apple: { health: 6 }, carrot: { health: 6 }, water: { health: 4 }, medicine: { health: 25 },
+  chips: { happiness: 5 }, cookies: { happiness: 6 }, candy: { happiness: 5 }, pizza: { happiness: 12 },
+  movie: { happiness: 15, friends: 35 }, headphones: { happiness: 20 }, console: { happiness: 30 }, sneakers: { happiness: 20 }
+};
+const situations = [
+  {
+    id: 'sick-day', emoji: '🤒', title: 'Sick day',
+    story: 'Mom has a fever and the fridge is empty.',
+    mission: 'Look after her first, then look after yourself. $40 until payday.',
+    hints: ['medicine', 'milk', 'bread', 'pasta'],
+    drain: { health: 60, happiness: 35, friends: 20 }
+  },
+  {
+    id: 'birthday', emoji: '🎂', title: 'Birthday Friday',
+    story: "Alex's birthday night is tonight.",
+    mission: 'Show up for your friend and still eat well. $40 until payday.',
+    hints: ['movie', 'milk', 'bread', 'eggs', 'apple'],
+    drain: { health: 45, happiness: 40, friends: 50 }
+  },
+  {
+    id: 'plain-week', emoji: '🛒', title: 'Plain week',
+    story: 'Nothing special happens this week.',
+    mission: 'Keep every part of your life going. $40 until payday.',
+    hints: ['milk', 'bread', 'apple', 'carrot', 'water'],
+    drain: { health: 50, happiness: 40, friends: 20 }
+  }
+];
+
+function getSituation(id) {
+  return situations.find(s => s.id === id) || null;
+}
+
+function pickSituation() {
+  return situations[Math.floor(Math.random() * situations.length)];
+}
+
+function computeMeters(situationId, itemIds) {
+  const sit = getSituation(situationId);
+  if (!sit) return null;
+  const m = {
+    health: METER_START - sit.drain.health,
+    happiness: METER_START - sit.drain.happiness,
+    friends: METER_START - sit.drain.friends
+  };
+  (itemIds || []).forEach(id => {
+    const e = itemEffects[id];
+    if (!e) return;
+    Object.keys(e).forEach(key => { m[key] += e[key]; });
+  });
+  Object.keys(m).forEach(key => { m[key] = Math.max(0, Math.min(100, m[key])); });
+  return m;
+}
+
+function getWeekSetup(situationId) {
+  const sit = getSituation(situationId);
+  if (!sit) return null;
+  return {
+    situation: { id: sit.id, emoji: sit.emoji, title: sit.title, story: sit.story, mission: sit.mission, hints: sit.hints.slice(), drain: { ...sit.drain } },
+    effects: JSON.parse(JSON.stringify(itemEffects)),
+    meterStart: METER_START,
+    meterWarn: METER_WARN
+  };
+}
+
 module.exports = {
   getFunCenterGames,
   getFunCenterGame,
@@ -196,5 +265,9 @@ module.exports = {
   getWeeklyShop,
   getWeeklyShopDefinition,
   getFlashSales,
-  getPriceHikes
+  getPriceHikes,
+  getWeekSetup,
+  pickSituation,
+  computeMeters,
+  METER_WARN
 };
