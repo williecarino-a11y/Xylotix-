@@ -324,5 +324,9 @@ module.exports = {
   getWeekSetup,
   pickSituation,
   computeMeters,
-  METER_WARN
+  METER_WARN,
+  pickTricks,
+  publicTricks,
+  describeTrick,
+  SCANS_PER_TRIP
 };
