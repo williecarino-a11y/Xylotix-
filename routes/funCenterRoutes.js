@@ -557,7 +557,7 @@ router.post('/shop/session/:sessionId/hike/start', funAnswerLimiter, async (req,
     const boughtIds = new Set(existing.purchasedItems.map(entry => entry.itemId));
     const choices = getPriceHikes().filter(hike => {
       const item = shop.items.find(candidate => candidate.id === hike.itemId);
-      return item && item.classification === 'need' && !(Array.isArray(item.options) && item.options.length > 0) && !boughtIds.has(hike.itemId) && hike.itemId !== existing.rivalItemId;
+      return item && item.classification === 'need' && !(Array.isArray(item.options) && item.options.length > 0) && !boughtIds.has(hike.itemId) && hike.itemId !== existing.rivalItemId && !(existing.tricks || []).some(entry => entry.itemId === hike.itemId);
     });
     if (choices.length === 0) return res.json({ status: 'success', data: { started: false } });
 
