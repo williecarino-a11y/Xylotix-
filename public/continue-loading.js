@@ -314,7 +314,12 @@
         ? headers.get('X-Continue-Loading') === 'false'
         : headers && String(headers['X-Continue-Loading'] || '').toLowerCase() === 'false';
 
-      if (disabled) return nativeFetch(input, init);
+      // Requests made during a Mart trip (buy, put back, scan, checkout)
+      // must never block the screen. Starting a trip still shows the overlay.
+      const url = typeof input === 'string' ? input : (input && input.url) || '';
+      const duringTrip = url.includes('/api/fun-center/shop/session/');
+
+      if (disabled || duringTrip) return nativeFetch(input, init);
 
       const handle = start({ context });
       return nativeFetch(input, init).finally(() => stop(handle));
