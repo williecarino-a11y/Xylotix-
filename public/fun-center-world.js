@@ -1791,6 +1791,8 @@
         tickClosing(dt);
         tickFriend();
         tickCashier();
+        const wantMood = (S.closed || S.timeLeft <= CLOSING_SECONDS * 0.25 || (rivalCtl && rivalCtl.active())) ? 'tense' : (S.basket.length >= 3 ? 'groove' : 'calm');
+        if (SFX.setMood) SFX.setMood(wantMood);
         if (rivalCtl) rivalCtl.tick(dt, this, delta);
         let ix = S.ctl.x;
         let iy = S.ctl.y;
