@@ -947,6 +947,7 @@
           ...list(r.wantsBought).map(it => row(it, '🛍️ Want', ''))
         ].join('');
         SFX.coin();
+        if (SFX.stinger) SFX.stinger(r.burnedOut && r.burnedOut.length ? 'bad' : (r.stars >= 2 ? 'win' : 'ok'));
         const o = overlay(`
           <h3>${r.burnedOut && r.burnedOut.length ? 'You burned out' : 'Trip finished!'}</h3>
           ${window.MiimiidMart && window.MiimiidMart.week ? window.MiimiidMart.week.resultHtml(r) : ''}
