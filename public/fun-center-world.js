@@ -733,9 +733,16 @@
     }) : null;
 
     const listEl = content.querySelector('[data-mw-list]');
-    const needItems = shop.items.filter(it => NEED_IDS.includes(it.id));
-    listEl.innerHTML = '<span class="mw-list-title">🛒 Shopping list</span>' +
-      needItems.map(it => `<span class="mw-chip" data-need="${esc(it.id)}">${esc(it.name)}</span>`).join('');
+    const sit = session.week && session.week.situation;
+    const listIds = sit ? sit.hints : NEED_IDS;
+    const needItems = shop.items.filter(it => listIds.includes(it.id));
+    listEl.innerHTML = sit
+      ? `<span class="mw-list-title">${esc(sit.emoji)} ${esc(sit.title)}</span>` +
+        `<span style="width:100%;font-size:13px;color:#e6e9f0">${esc(sit.story)} ${esc(sit.mission)}</span>` +
+        `<span class="mw-list-title">Hints</span>` +
+        needItems.map(it => `<span class="mw-chip" data-need="${esc(it.id)}">${esc(it.visual || '')}</span>`).join('')
+      : '<span class="mw-list-title">🛒 Shopping list</span>' +
+        needItems.map(it => `<span class="mw-chip" data-need="${esc(it.id)}">${esc(it.name)}</span>`).join('');
     function hud() {
       walletEl.textContent = `$${S.budget - S.spent}`;
       countEl.textContent = String(S.basket.length);
