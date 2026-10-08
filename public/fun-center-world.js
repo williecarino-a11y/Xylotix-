@@ -364,6 +364,7 @@
         </div>
         <div class="mw-controls">
           <div class="mw-joy" data-mw-joy><div class="mw-joy-knob" data-mw-knob></div></div>
+          <button type="button" class="mw-scan" data-mw-scan disabled>🔍<small>Scan</small></button>
           <button type="button" class="mw-grab" data-mw-grab disabled>✋ Grab</button>
         </div>
       </div>
