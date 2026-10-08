@@ -317,7 +317,28 @@ function buildShopSummary(shop, session) {
       hint: !allNeeds ? 'Cover every need first' : wantsBought.length > 0 ? 'You bought a want' : 'You paid extra for a premium option'
     }
   ];
-  const stars = starRows.filter(row => row.earned).length;
+  // Survive the Week: with a day card, the stars come from the three meters.
+  let finalRows = starRows;
+  let meters = null;
+  let burnedOut = [];
+  let burnMessage = '';
+  if (session.situationId) {
+    meters = computeMeters(session.situationId, bought.map(entry => entry.itemId));
+    if (meters) {
+      const names = { health: 'Health', happiness: 'Happiness', friends: 'Friends' };
+      burnedOut = Object.keys(names).filter(key => meters[key] <= 0);
+      const weakest = Object.keys(names).reduce((a, b) => (meters[b] < meters[a] ? b : a));
+      finalRows = [
+        { id: 'survive', label: 'Survived the day', earned: burnedOut.length === 0, hint: `Your ${burnedOut.map(k => names[k]).join(' and ')} meter hit zero` },
+        { id: 'balance', label: `Every meter at ${METER_WARN} or more`, earned: meters[weakest] >= METER_WARN, hint: `${names[weakest]} is still low (${meters[weakest]})` },
+        { id: 'save', label: `Kept at least $${STAR_SAVE_TARGET}`, earned: burnedOut.length === 0 && saved >= STAR_SAVE_TARGET, hint: burnedOut.length ? 'Survive the day first' : `You kept $${saved}` }
+      ];
+      if (burnedOut.length) {
+        burnMessage = `You burned out: ${burnedOut.map(k => names[k]).join(' and ')} hit zero. Balance beats buying only one kind of thing.`;
+      }
+    }
+  }
+  const stars = finalRows.filter(row => row.earned).length;
 
   let outcome = 'missing-essentials';
   let message = 'Many essentials are still missing. Next time, cover your needs first.';
