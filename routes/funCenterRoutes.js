@@ -6,7 +6,7 @@ const rateLimit = require('express-rate-limit');
 const { getAuthenticatedUser } = require('./authRoutes');
 const FunGameSession = require('../models/FunGameSession');
 const FunGameProfile = require('../models/FunGameProfile');
-const { getFunCenterGames, getFunCenterGame, validateFunCenterAnswer, getWeeklyShop, getWeeklyShopDefinition, getFlashSales, getPriceHikes } = require('../scripts/learningData/funCenter');
+const { getFunCenterGames, getFunCenterGame, validateFunCenterAnswer, getWeeklyShop, getWeeklyShopDefinition, getFlashSales, getPriceHikes, getWeekSetup, pickSituation, computeMeters, METER_WARN } = require('../scripts/learningData/funCenter');
 
 const router = express.Router();
 
@@ -317,7 +317,28 @@ function buildShopSummary(shop, session) {
       hint: !allNeeds ? 'Cover every need first' : wantsBought.length > 0 ? 'You bought a want' : 'You paid extra for a premium option'
     }
   ];
-  const stars = starRows.filter(row => row.earned).length;
+  // Survive the Week: with a day card, the stars come from the three meters.
+  let finalRows = starRows;
+  let meters = null;
+  let burnedOut = [];
+  let burnMessage = '';
+  if (session.situationId) {
+    meters = computeMeters(session.situationId, bought.map(entry => entry.itemId));
+    if (meters) {
+      const names = { health: 'Health', happiness: 'Happiness', friends: 'Friends' };
+      burnedOut = Object.keys(names).filter(key => meters[key] <= 0);
+      const weakest = Object.keys(names).reduce((a, b) => (meters[b] < meters[a] ? b : a));
+      finalRows = [
+        { id: 'survive', label: 'Survived the day', earned: burnedOut.length === 0, hint: `Your ${burnedOut.map(k => names[k]).join(' and ')} meter hit zero` },
+        { id: 'balance', label: `Every meter at ${METER_WARN} or more`, earned: meters[weakest] >= METER_WARN, hint: `${names[weakest]} is still low (${meters[weakest]})` },
+        { id: 'save', label: `Kept at least $${STAR_SAVE_TARGET}`, earned: burnedOut.length === 0 && saved >= STAR_SAVE_TARGET, hint: burnedOut.length ? 'Survive the day first' : `You kept $${saved}` }
+      ];
+      if (burnedOut.length) {
+        burnMessage = `You burned out: ${burnedOut.map(k => names[k]).join(' and ')} hit zero. Balance beats buying only one kind of thing.`;
+      }
+    }
+  }
+  const stars = finalRows.filter(row => row.earned).length;
 
   let outcome = 'missing-essentials';
   let message = 'Many essentials are still missing. Next time, cover your needs first.';
@@ -336,15 +357,18 @@ function buildShopSummary(shop, session) {
   }
 
   return {
-    outcome,
-    message,
+    outcome: burnedOut.length ? 'burned-out' : outcome,
+    message: burnMessage || message,
     budget: shop.budget,
     spent,
     saved,
     wantsSpent,
     score,
     stars,
-    starRows,
+    starRows: finalRows,
+    meters,
+    burnedOut,
+    situationId: session.situationId || null,
     totalNeeds: totalNeeds.length,
     needsBought: needsBought.map(toPublic),
     wantsBought: wantsBought.map(toPublic),
@@ -602,15 +626,17 @@ router.post('/shop/session', funSessionStartLimiter, async (req, res) => {
     const user = await requireFunCenterUser(req, res);
     if (!user) return;
     const shop = getWeeklyShopDefinition();
+    const situation = pickSituation();
     const session = await FunGameSession.create({
       sessionId: createSessionId(),
       userId: user._id,
       gameId: SHOP_GAME_ID,
-      budget: shop.budget
+      budget: shop.budget,
+      situationId: situation.id
     });
     return res.status(201).json({
       status: 'success',
-      data: { sessionId: session.sessionId, gameId: SHOP_GAME_ID, budget: shop.budget, spent: 0, remaining: shop.budget }
+      data: { sessionId: session.sessionId, gameId: SHOP_GAME_ID, budget: shop.budget, spent: 0, remaining: shop.budget, week: getWeekSetup(situation.id) }
     });
   } catch (error) {
     console.error('Fun Center shop session error:', error);
@@ -729,7 +755,9 @@ router.post('/shop/session/:sessionId/checkout', funSessionStartLimiter, async (
       if (!existing.purchasedItems || existing.purchasedItems.length === 0) { const error = new Error('Add at least one item to your basket first.'); error.code = 'BASKET_EMPTY'; throw error; }
 
       const summary = buildShopSummary(shop, existing);
-      const reward = calculateReward(Math.max(0, summary.needsBought.length - summary.wantsBought.length), needsTotal);
+      const reward = existing.situationId
+        ? calculateReward(summary.stars, 3)
+        : calculateReward(Math.max(0, summary.needsBought.length - summary.wantsBought.length), needsTotal);
 
       const claimed = await FunGameSession.findOneAndUpdate(
         { sessionId, userId: user._id, gameId: SHOP_GAME_ID, completed: false, rewardGranted: false },

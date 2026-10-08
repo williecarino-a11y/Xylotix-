@@ -682,6 +682,14 @@
       scene.ck.talkUntil = scene.time.now + 14000;
       const done = () => { scene.ck.talkUntil = scene.time.now + 1500; };
       const ring = { label: 'Ring me up 🧾', answer: 'Scanning now. Let us see how you did!', action: scanThenCheckout };
+      const warn = weekCtl && !S.closed ? weekCtl.warning() : '';
+      if (warn) {
+        assistant.say(warn, [
+          { label: 'Let me fix that', answer: 'Good idea. I will be right here.' },
+          { label: 'Ring me up anyway', answer: 'Okay. Scanning now.', action: scanThenCheckout }
+        ], who, done);
+        return;
+      }
       if (S.closed) {
         const text = missing.length
           ? `We are closed, so this is the last call. You are missing ${missing.length} from your list.`
@@ -732,13 +740,26 @@
       getScene: () => (game && game.scene.getScene('mart'))
     }) : null;
 
+    // survive-the-week meters (code lives in public/fun-center-week.js)
+    const weekCtl = window.MiimiidMart && window.MiimiidMart.week ? window.MiimiidMart.week.create({
+      S, content, week: session.week
+    }) : null;
+
     const listEl = content.querySelector('[data-mw-list]');
-    const needItems = shop.items.filter(it => NEED_IDS.includes(it.id));
-    listEl.innerHTML = '<span class="mw-list-title">🛒 Shopping list</span>' +
-      needItems.map(it => `<span class="mw-chip" data-need="${esc(it.id)}">${esc(it.name)}</span>`).join('');
+    const sit = session.week && session.week.situation;
+    const listIds = sit ? sit.hints : NEED_IDS;
+    const needItems = shop.items.filter(it => listIds.includes(it.id));
+    listEl.innerHTML = sit
+      ? `<span class="mw-list-title">${esc(sit.emoji)} ${esc(sit.title)}</span>` +
+        `<span style="width:100%;font-size:13px;color:#e6e9f0">${esc(sit.story)} ${esc(sit.mission)}</span>` +
+        `<span class="mw-list-title">Hints</span>` +
+        needItems.map(it => `<span class="mw-chip" data-need="${esc(it.id)}">${esc(it.visual || '')}</span>`).join('')
+      : '<span class="mw-list-title">🛒 Shopping list</span>' +
+        needItems.map(it => `<span class="mw-chip" data-need="${esc(it.id)}">${esc(it.name)}</span>`).join('');
     function hud() {
       walletEl.textContent = `$${S.budget - S.spent}`;
       countEl.textContent = String(S.basket.length);
+      if (weekCtl) weekCtl.update();
       listEl.querySelectorAll('[data-need]').forEach(chip => {
         chip.classList.toggle('done', S.basket.includes(chip.dataset.need));
       });
@@ -926,7 +947,8 @@
         ].join('');
         SFX.coin();
         const o = overlay(`
-          <h3>Trip finished!</h3>
+          <h3>${r.burnedOut && r.burnedOut.length ? 'You burned out' : 'Trip finished!'}</h3>
+          ${window.MiimiidMart && window.MiimiidMart.week ? window.MiimiidMart.week.resultHtml(r) : ''}
           ${window.MiimiidMart && window.MiimiidMart.stars ? window.MiimiidMart.stars.html(r, (f, d, t, v, dl) => SFX.tone(f, d, t, v, dl)) : ''}
           ${forced ? '<p>⏰ Time ran out, so the cashier rang you up.</p>' : ''}
           <p>${esc(r.message || '')}</p>
