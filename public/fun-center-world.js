@@ -682,6 +682,14 @@
       scene.ck.talkUntil = scene.time.now + 14000;
       const done = () => { scene.ck.talkUntil = scene.time.now + 1500; };
       const ring = { label: 'Ring me up 🧾', answer: 'Scanning now. Let us see how you did!', action: scanThenCheckout };
+      const warn = weekCtl && !S.closed ? weekCtl.warning() : '';
+      if (warn) {
+        assistant.say(warn, [
+          { label: 'Let me fix that', answer: 'Good idea. I will be right here.' },
+          { label: 'Ring me up anyway', answer: 'Okay. Scanning now.', action: scanThenCheckout }
+        ], who, done);
+        return;
+      }
       if (S.closed) {
         const text = missing.length
           ? `We are closed, so this is the last call. You are missing ${missing.length} from your list.`
