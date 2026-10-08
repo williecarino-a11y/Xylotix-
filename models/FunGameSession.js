@@ -36,6 +36,17 @@ const purchasedItemSchema = new mongoose.Schema(
   }
 );
 
+const trickSchema = new mongoose.Schema(
+  {
+    itemId: { type: String, required: true, trim: true },
+    kind: { type: String, enum: ['real-sale', 'fake-sale', 'fake-urgent'], required: true },
+    price: { type: Number, required: true, min: 0 },
+    claimed: { type: Number, default: 0, min: 0 },
+    scanned: { type: Boolean, default: false }
+  },
+  { _id: false }
+);
+
 const funGameSessionSchema = new mongoose.Schema(
   {
     sessionId: {
