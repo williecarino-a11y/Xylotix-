@@ -52,6 +52,8 @@
   function nowPrice(item) {
     const rp = window.MiimiidMart && window.MiimiidMart.rivalPrice ? window.MiimiidMart.rivalPrice(item.id) : null;
     if (rp !== null) return rp;
+    const tp = window.MiimiidMart && window.MiimiidMart.trickPrice ? window.MiimiidMart.trickPrice(item.id) : null;
+    if (tp !== null) return tp;
     const s = saleNow.cur;
     if (s && s.itemId === item.id && Date.now() < s.endsAt) return s.salePrice;
     const h = hikeNow.cur;
