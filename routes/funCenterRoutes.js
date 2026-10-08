@@ -385,6 +385,8 @@ function buildShopSummary(shop, session) {
     stars,
     starRows: finalRows,
     meters,
+    tricks: trickReport,
+    trickBonus,
     burnedOut,
     situationId: session.situationId || null,
     totalNeeds: totalNeeds.length,
