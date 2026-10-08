@@ -732,6 +732,11 @@
       getScene: () => (game && game.scene.getScene('mart'))
     }) : null;
 
+    // survive-the-week meters (code lives in public/fun-center-week.js)
+    const weekCtl = window.MiimiidMart && window.MiimiidMart.week ? window.MiimiidMart.week.create({
+      S, content, week: session.week
+    }) : null;
+
     const listEl = content.querySelector('[data-mw-list]');
     const sit = session.week && session.week.situation;
     const listIds = sit ? sit.hints : NEED_IDS;
