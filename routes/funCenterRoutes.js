@@ -602,15 +602,17 @@ router.post('/shop/session', funSessionStartLimiter, async (req, res) => {
     const user = await requireFunCenterUser(req, res);
     if (!user) return;
     const shop = getWeeklyShopDefinition();
+    const situation = pickSituation();
     const session = await FunGameSession.create({
       sessionId: createSessionId(),
       userId: user._id,
       gameId: SHOP_GAME_ID,
-      budget: shop.budget
+      budget: shop.budget,
+      situationId: situation.id
     });
     return res.status(201).json({
       status: 'success',
-      data: { sessionId: session.sessionId, gameId: SHOP_GAME_ID, budget: shop.budget, spent: 0, remaining: shop.budget }
+      data: { sessionId: session.sessionId, gameId: SHOP_GAME_ID, budget: shop.budget, spent: 0, remaining: shop.budget, week: getWeekSetup(situation.id) }
     });
   } catch (error) {
     console.error('Fun Center shop session error:', error);
