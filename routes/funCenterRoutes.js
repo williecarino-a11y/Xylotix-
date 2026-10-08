@@ -339,6 +339,19 @@ function buildShopSummary(shop, session) {
   }
   const stars = finalRows.filter(row => row.earned).length;
 
+  // Trick Store report: what each deal really was, and what you did about it.
+  const trickReport = (Array.isArray(session.tricks) ? session.tricks : []).map(t => {
+    const item = byId.get(t.itemId);
+    const isFake = t.kind !== 'real-sale';
+    const got = boughtIds.has(t.itemId);
+    const info = describeTrick(t, item);
+    let status = 'skipped';
+    if (isFake) status = got ? (t.scanned ? 'knew' : 'fell') : (t.scanned ? 'busted' : 'skipped');
+    else status = got ? 'deal' : (t.scanned ? 'missed' : 'skipped');
+    return { itemId: t.itemId, name: item.name, kind: t.kind, scanned: !!t.scanned, status, title: info.title, detail: info.detail };
+  });
+  const trickBonus = trickReport.filter(row => row.status === 'busted').length * 3;
+
   let outcome = 'missing-essentials';
   let message = 'Many essentials are still missing. Next time, cover your needs first.';
   if (needsMissed.length === 0 && saved > 0) {
