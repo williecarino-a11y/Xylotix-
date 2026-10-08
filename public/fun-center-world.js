@@ -177,6 +177,7 @@
   };
 
   try {
+    if (window.MiimiidMart && window.MiimiidMart.audio) window.MiimiidMart.audio.upgrade(SFX);
     const q = new URLSearchParams(location.search).get('world');
     if (q === '1') localStorage.removeItem('miimiidWorld');
     if (q === '0') localStorage.setItem('miimiidWorld', '0');
