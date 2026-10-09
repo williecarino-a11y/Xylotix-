@@ -47,6 +47,21 @@
   const PAY_GRACE_SECONDS = 25;    // after closing, time left to reach the counter
   const FRIEND_SPEED = 95;         // how fast Alex walks to you
   const CASHIER_POS = { x: 1215, y: 640 };   // where Riley stands behind the counter (tune if she looks off)
+  const CUSTOMER_SPEED = 70;       // how fast the browsing customer walks
+  const CUSTOMER_PICKS = ['🥛', '🍞', '🍎', '🍪', '🥕', '🍝'];
+  const CUSTOMER_ROUTE = [         // his loop through the aisles (browse = stops at a shelf, pay = stops at the counter)
+    { x: 700, y: 385, browse: true },
+    { x: 450, y: 385, browse: true },
+    { x: 190, y: 385, browse: true },
+    { x: 640, y: 385 },
+    { x: 640, y: 700 },
+    { x: 450, y: 700, browse: true },
+    { x: 190, y: 700, browse: true },
+    { x: 640, y: 700 },
+    { x: 1000, y: 780, pay: true },
+    { x: 640, y: 700 },
+    { x: 640, y: 385 }
+  ];
   const saleNow = { cur: null };   // the running flash sale (the server decides it)
   const hikeNow = { cur: null };   // a price that went up mid-trip (the server decides it)
   function nowPrice(item) {
