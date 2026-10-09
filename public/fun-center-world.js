@@ -903,6 +903,7 @@
         scene.popText(scene.player.x, scene.player.y - 170, `-$${result.price}`, '#ffd34d');
         SFX.pickup();
         hud();
+        rewardFor(scene, item);
 
         const left = result.remaining;
         const todo = needItems.filter(n => !S.basket.includes(n.id)).length;
