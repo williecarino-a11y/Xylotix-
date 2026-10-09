@@ -1884,6 +1884,13 @@ refreshHot() {
         const id = near ? near.item.id + (near.taken ? ':back' : '') : (atCounter ? '__counter' : '');
         if (id !== S.nearId) {
           S.nearId = id;
+if (near && !near.taken && near.item && near.item.hot) {
+  this.hotSaid = this.hotSaid || {};
+  if (!this.hotSaid[near.item.id] && !assistant.pending) {
+    this.hotSaid[near.item.id] = true;
+    assistant.say(near.item.hot.line);
+  }
+}
           this.products.forEach(p => { if (!p.taken) p.obj.setScale(p.baseScale * (p === near ? 1.2 : 1)); });
           if (near && near.taken) { grabBtn.disabled = false; grabBtn.innerHTML = `↩ Put back<small>${esc(near.item.name)}</small>`; }
           else if (near) { grabBtn.disabled = false; grabBtn.innerHTML = `✋ Grab<small>${esc(near.item.name)}</small>`; }
