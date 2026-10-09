@@ -1917,6 +1917,24 @@ refreshHot() {
         else if (m.itemObj) N.armR.rotation = Phaser.Math.DegToRad(-40);
       }
 
+      burst(x, y, color, count) {
+        for (let i = 0; i < count; i++) {
+          const a = (Math.PI * 2 * i) / count + Math.random() * 0.4;
+          const d = 40 + Math.random() * 50;
+          const dot = this.add.circle(x, y, 4 + Math.random() * 3, color, 1).setDepth(100000);
+          this.tweens.add({
+            targets: dot,
+            x: x + Math.cos(a) * d,
+            y: y + Math.sin(a) * d - 20,
+            alpha: 0,
+            scale: 0.3,
+            duration: 500 + Math.random() * 250,
+            ease: 'Sine.easeOut',
+            onComplete: () => dot.destroy()
+          });
+        }
+      }
+
       popText(x, y, text, color) {
         const t = this.add.text(x, y, text, {
           fontFamily: 'system-ui, -apple-system, "Segoe UI", Roboto, sans-serif',
