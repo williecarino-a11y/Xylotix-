@@ -1776,7 +1776,112 @@ refreshHot() {
         const now = this.time.now;
         const dx = this.player.x - c.x;
         const near = Math.hypot(dx, this.player.y - c.y) < 420;
-        this.animNpc(this.ckNpc, c, now, delta, false, near ? Math.sign(dx) : 0, now < c.talkUntil, now < c.waveUntil);
+        const talking = now < c.talkUntil;
+        const waving = now < c.waveUntil;
+        const cu = this.cust;
+        const serving = !!cu && cu.state === 'pay';
+        if (c.nextGlance === undefined) c.nextGlance = 0;
+        if (now > c.nextGlance) {
+          c.glanceUntil = now + 1400;
+          c.glanceDir = Math.random() < 0.5 ? -1 : 1;
+          c.nextGlance = now + 4000 + Math.random() * 4000;
+        }
+        const glancing = now < (c.glanceUntil || 0);
+        let look = near ? Math.sign(dx) : 0;
+        if (serving && !near) look = Math.sign(cu.x - c.x);
+        else if (glancing && !near) look = c.glanceDir;
+        this.animNpc(this.ckNpc, c, now, delta, false, look, talking || serving, waving);
+        if (glancing && !talking && !waving && !serving) {
+          this.ckNpc.armR.rotation = Phaser.Math.DegToRad(-(30 + 6 * Math.sin(now / 110)));
+        }
+      }
+
+      buildCustomer() {
+        const r = CUSTOMER_ROUTE[0];
+        this.cust = { x: r.x, y: r.y, wp: 1, state: 'walk', until: 0, reachAt: 0, decided: false, itemObj: null, phase: 0, amp: 0, nextBlink: 0, blinkUntil: 0 };
+        this.custNpc = this.makeNpc({ x: r.x, y: r.y, shirt: 0xd9486f, pants: 0x4a3f6b, hair: 0x8a8a8a, skin: 0xc68c5a });
+        this.custShadow = this.add.ellipse(r.x, r.y - 2, 70, 16, 0x000000, 0.25);
+        this.custObst = { x: r.x - 24, y: r.y - 8, w: 48, h: 16 };
+        this.obst.push(this.custObst);
+      }
+
+      customerDrop(icon) {
+        const m = this.cust;
+        if (m.itemObj) { m.itemObj.destroy(); m.itemObj = null; }
+        this.popText(m.x, m.y - 170, icon, '#ffffff');
+      }
+
+      updateCustomer(delta) {
+        const m = this.cust;
+        const N = this.custNpc;
+        if (!m || !N) return;
+        const now = this.time.now;
+        const dt = delta / 1000;
+        const dp = Math.hypot(this.player.x - m.x, this.player.y - m.y);
+        let moving = false;
+        let look = 0;
+        let reaching = false;
+
+        if (m.state === 'walk') {
+          if (dp < 80) {
+            look = Math.sign(this.player.x - m.x);      // you are in his way: he waits
+          } else {
+            const t = CUSTOMER_ROUTE[m.wp];
+            const dx = t.x - m.x;
+            const dy = t.y - m.y;
+            const dist = Math.hypot(dx, dy);
+            if (dist < 5) {
+              if (t.pay && m.itemObj) {
+                m.state = 'pay';
+                m.until = now + 2600;
+              } else if (t.browse) {
+                m.state = 'browse';
+                m.reachAt = now + 900;
+                m.until = now + 3200 + Math.random() * 1600;
+                m.decided = false;
+              } else {
+                m.wp = (m.wp + 1) % CUSTOMER_ROUTE.length;
+              }
+            } else {
+              const step = Math.min(dist, CUSTOMER_SPEED * dt);
+              m.x += (dx / dist) * step;
+              m.y += (dy / dist) * step;
+              moving = true;
+              look = Math.sign(dx);
+            }
+          }
+        } else if (m.state === 'browse') {
+          reaching = now > m.reachAt && now < m.reachAt + 900;
+          if (!m.decided && now > m.reachAt + 450) {
+            m.decided = true;
+            if (m.itemObj) {
+              if (Math.random() < 0.35) this.customerDrop('↩');     // he changes his mind
+            } else if (Math.random() < 0.65) {
+              const e = CUSTOMER_PICKS[Math.floor(Math.random() * CUSTOMER_PICKS.length)];
+              m.itemObj = this.add.text(m.x + 20, m.y - 70, e, { fontSize: '26px' }).setOrigin(0.5, 1);
+            }
+          }
+          if (now > m.until) {
+            m.state = 'walk';
+            m.wp = (m.wp + 1) % CUSTOMER_ROUTE.length;
+          }
+        } else if (m.state === 'pay') {
+          look = 1;
+          if (now > m.until) {
+            this.customerDrop('🧾');
+            m.state = 'walk';
+            m.wp = (m.wp + 1) % CUSTOMER_ROUTE.length;
+          }
+        }
+
+        N.root.setPosition(m.x, m.y).setDepth(m.y);
+        this.custShadow.setPosition(m.x, m.y - 2).setDepth(m.y - 1);
+        this.custObst.x = m.x - 24;
+        this.custObst.y = m.y - 8;
+        if (m.itemObj) m.itemObj.setPosition(m.x + 20, m.y - 70).setDepth(m.y + 2);
+        this.animNpc(N, m, now, delta, moving, look, false, false);
+        if (reaching) N.armR.rotation = Phaser.Math.DegToRad(-(75 + 8 * Math.sin(now / 120)));
+        else if (m.itemObj) N.armR.rotation = Phaser.Math.DegToRad(-40);
       }
 
       popText(x, y, text, color) {
