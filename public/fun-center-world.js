@@ -784,6 +784,29 @@
         needItems.map(it => `<span class="mw-chip" data-need="${esc(it.id)}">?</span>`).join('')
       : '<span class="mw-list-title">🛒 Shopping list</span>' +
         needItems.map(it => `<span class="mw-chip" data-need="${esc(it.id)}">${esc(it.name)}</span>`).join('');
+    // instant rewards: sparkles, a rising chime and a combo for buying things on your list
+    S.combo = 0;
+    function rewardFor(scene, item) {
+      const onList = needItems.some(n => n.id === item.id);
+      const px = scene.player.x;
+      const py = scene.player.y - 120;
+      if (scene.cartBox) {
+        scene.tweens.add({ targets: scene.cartBox, scaleX: 1.1, scaleY: 1.1, duration: 90, yoyo: true });
+      }
+      if (onList) {
+        S.combo += 1;
+        scene.burst(px, py, 0x7ee2a8, 14);
+        const notes = [523, 659, 784, 988, 1175];
+        const n = Math.min(S.combo, notes.length) - 1;
+        SFX.tone(notes[n], 0.12, 'triangle', 0.12);
+        SFX.tone(notes[n] * 1.5, 0.2, 'triangle', 0.1, 0.08);
+        const label = S.combo >= 3 ? `Smart buy x${S.combo}! 🔥` : (S.combo === 2 ? 'Smart buy x2!' : 'Smart buy!');
+        scene.popText(px, py - 50, label, '#7ee2a8');
+      } else {
+        S.combo = 0;
+        scene.burst(px, py, 0xffd34d, 6);
+      }
+    }
     function hud() {
       walletEl.textContent = `$${S.budget - S.spent}`;
       countEl.textContent = String(S.basket.length);
