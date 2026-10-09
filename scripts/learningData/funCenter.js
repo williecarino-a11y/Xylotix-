@@ -131,12 +131,12 @@ const weeklyShop = {
     { id: 'medicine', name: 'Medicine', price: 12, visual: '💊', classification: 'need', explanation: 'Medicine is a need: your health comes first.' },
     { id: 'chips', name: 'Potato chips', price: 4, image: 'chips', visual: '🍟', classification: 'want', explanation: 'Chips are a want: tasty, but not essential.' },
     { id: 'cookies', name: 'Cookies', price: 5, visual: '🍪', classification: 'want', explanation: 'Cookies are a want: a treat, not a necessity.' },
-    { id: 'pizza', name: 'Pizza night', price: 9, visual: '🍕', classification: 'want', explanation: 'Pizza night is a want: groceries cost far less per meal.', hot: { tag: '🔥 POPULAR', line: 'Pizza night is so good. Everyone is grabbing one!' } },
+    { id: 'pizza', name: 'Pizza night', price: 9, visual: '🍕', classification: 'want', explanation: 'Pizza night is a want: groceries cost far less per meal.', hot: { tag: '🔥 HOT', line: 'Pizza night is so good. Everyone is grabbing one!' } },
     { id: 'candy', name: 'Candy', price: 3, visual: '🍬', classification: 'want', explanation: 'Candy is a want: small, but it adds up.' },
     { id: 'movie', name: 'Movie ticket', price: 12, visual: '🎬', classification: 'want', explanation: 'A movie ticket is a want: fun, but not essential.' },
-    { id: 'headphones', name: 'Headphones', price: 60, visual: '🎧', classification: 'want', explanation: 'Headphones are a want: nice, but you can wait.', hot: { tag: '🔥 LIMITED', line: 'Those headphones sound amazing. Only a few left!' } },
+    { id: 'headphones', name: 'Headphones', price: 60, visual: '🎧', classification: 'want', explanation: 'Headphones are a want: nice, but you can wait.', hot: { tag: '🔥 RARE', line: 'Those headphones sound amazing. Only a few left!' } },
     { id: 'console', name: 'Gaming console', price: 300, visual: '🎮', classification: 'want', explanation: 'A console is a want: a big purchase to save up for.', hot: { tag: '🔥 NEW', line: 'That console just came in. Everyone wants one!' } },
-    { id: 'sneakers', name: 'Designer sneakers', price: 120, visual: '👟', classification: 'want', explanation: 'Designer sneakers are a want: you need shoes, not the brand.', hot: { tag: '🔥 TRENDING', line: 'Those sneakers are trending right now.' } }
+    { id: 'sneakers', name: 'Designer sneakers', price: 120, visual: '👟', classification: 'want', explanation: 'Designer sneakers are a want: you need shoes, not the brand.', hot: { tag: '🔥 HYPE', line: 'Those sneakers are trending right now.' } }
   ]
 };
 
