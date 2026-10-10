@@ -717,7 +717,8 @@ router.post('/shop/session', funSessionStartLimiter, async (req, res) => {
         remaining: shop.budget,
         week: getWeekSetup(situation.id),
         tricks: publicTricks(tricks),
-        scansLeft: SCANS_PER_TRIP
+        scansLeft: SCANS_PER_TRIP,
+        cartSkin: skin ? { id: skin.id, color: skin.color, rainbow: !!skin.rainbow } : null
       }
     });
   } catch (error) {
