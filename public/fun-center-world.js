@@ -990,6 +990,57 @@
       }
     }
 
+    // cart shop: spend trip coins on cart skins
+    async function openCartShop() {
+      const o = overlay('<h3>Cart shop 🛒</h3><p>Loading…</p>');
+      let last = null;
+      const draw = (data, msg) => {
+        last = data;
+        const rows = data.skins.map(s => {
+          const own = data.owned.includes(s.id);
+          let action;
+          if (data.equipped === s.id) action = '<strong>Equipped ✓</strong>';
+          else if (own) action = `<button type="button" data-equip="${esc(s.id)}" style="width:auto;margin:0;padding:8px 14px">Use</button>`;
+          else action = `<button type="button" data-buy="${esc(s.id)}" ${data.totalCoins < s.price ? 'disabled' : ''} style="width:auto;margin:0;padding:8px 14px">${s.price} coins</button>`;
+          return `<div class="mw-opt" style="gap:10px;padding:6px 0"><span>${esc(s.label)}</span>${action}</div>`;
+        }).join('');
+        const plain = data.equipped
+          ? '<button type="button" data-equip="" style="width:auto;margin:0;padding:8px 14px">Use</button>'
+          : '<strong>Equipped ✓</strong>';
+        const card = o.querySelector('.mw-card');
+        card.innerHTML = `
+          <h3>Cart shop 🛒</h3>
+          <p>Your coins: <strong>${data.totalCoins}</strong></p>
+          <div class="mw-opt" style="gap:10px;padding:6px 0"><span>Plain cart</span>${plain}</div>
+          ${rows}
+          ${msg ? `<p>${esc(msg)}</p>` : '<p><small>Your new cart shows up on your next trip.</small></p>'}
+          <button type="button" class="mw-alt" data-shop-close>Close</button>
+        `;
+        card.querySelector('[data-shop-close]').addEventListener('click', () => o.remove());
+        card.querySelectorAll('[data-buy]').forEach(b => b.addEventListener('click', () => act('buy', b.dataset.buy)));
+        card.querySelectorAll('[data-equip]').forEach(b => b.addEventListener('click', () => act('equip', b.dataset.equip)));
+      };
+      const act = async (path, skinId) => {
+        try {
+          const data = await miimiidFunCenterRequest('/api/fun-center/cart-skins/' + path, {
+            method: 'POST', body: JSON.stringify({ skinId }), headers: NO_OVERLAY
+          });
+          if (path === 'buy') SFX.coin();
+          draw(data);
+        } catch (error) {
+          console.error('cart shop error:', error);
+          draw(last, error.message || 'The cart shop did not work.');
+        }
+      };
+      try {
+        draw(await miimiidFunCenterRequest('/api/fun-center/cart-skins', { headers: NO_OVERLAY }));
+      } catch (error) {
+        console.error('cart shop load error:', error);
+        o.querySelector('.mw-card').innerHTML = '<h3>Cart shop 🛒</h3><p>The cart shop is closed right now. Try again later.</p><button type="button" class="mw-alt" data-shop-close>Close</button>';
+        o.querySelector('[data-shop-close]').addEventListener('click', () => o.remove());
+      }
+    }
+
     async function doCheckout(forced) {
       if (S.busy) return;
       if (S.basket.length === 0) { say('Pick something up first!'); return; }
