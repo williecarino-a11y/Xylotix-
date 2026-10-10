@@ -1185,20 +1185,18 @@
         // the solid part of the shelf: you cannot walk into it
         this.obst.push({ x: u.x, y: u.y - 110, w: UW, h: UH + 110 });
 
-        // products stand on the two lower shelf boards, two per board
-        const cols = Math.ceil(list.length / 2);
-        const BOARDS = [u.y + 73, u.y + 105];     // height of the middle and bottom board (tune if items float or sink)
+        // products stand on the three cream boards, staggered so every item has its own spot
+        const BOARDS = [u.y + 52, u.y + 82, u.y + 112];   // measured from shelf.png (tune by 2-4px if needed)
         list.forEach((item, i) => {
-          const col = Math.floor(i / 2);
-          const px = u.x + (UW / (cols + 1)) * (col + 1);
-          const baseY = BOARDS[i % 2];
+          const px = u.x + (UW / (list.length + 1)) * (i + 1);
+          const baseY = BOARDS[i % 3];
           const src = sources[item.id];
           let obj;
           if (src.src) {
             obj = this.add.image(px, baseY, `pr-${item.id}`).setOrigin(0.5, 1);
-            obj.setScale(34 / Math.max(obj.height, 1));
+            obj.setScale(32 / Math.max(obj.height, 1));
           } else {
-            obj = this.add.text(px, baseY, src.emoji, { fontSize: '30px' }).setOrigin(0.5, 1);
+            obj = this.add.text(px, baseY, src.emoji, { fontSize: '28px' }).setOrigin(0.5, 1);
           }
           obj.setDepth(u.y + UH + 1);
           const label = this.add.text(px, u.y + 125, priceText(item), {
