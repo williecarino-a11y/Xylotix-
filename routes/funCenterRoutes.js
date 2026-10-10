@@ -696,6 +696,8 @@ router.post('/shop/session', funSessionStartLimiter, async (req, res) => {
     const shop = getWeeklyShopDefinition();
     const situation = pickSituation();
     const tricks = pickTricks();
+    const profile = await FunGameProfile.findOne({ userId: user._id }).lean();
+    const skin = profile && profile.cartSkin ? getCartSkin(profile.cartSkin) : null;
     const session = await FunGameSession.create({
       sessionId: createSessionId(),
       userId: user._id,
