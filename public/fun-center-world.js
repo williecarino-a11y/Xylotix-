@@ -1249,19 +1249,67 @@
           { fontFamily: 'system-ui, -apple-system, "Segoe UI", Roboto, sans-serif', resolution: 2 }, style
         ));
 
-        // floor
-        const floorKey = this.textures.exists('art-floor') ? 'art-floor' : 'floor';
-        const floorTiles = this.add.tileSprite(0, WALL_H, W, H - WALL_H, floorKey).setOrigin(0, 0).setDepth(-100);
-        if (floorKey === 'art-floor') floorTiles.setTileScale(0.5);
+        // floor: tiles drawn in perspective (rows get taller toward the front, columns spread out)
+        const fl = this.add.graphics().setDepth(-100);
+        const FL_TOP = WALL_H;
+        const FL_BOT = H - 20;
+        const ROWS = 16;
+        const COLS = 28;
+        const COL_W = 80;
+        const FL_X0 = -420;
+        const rowY = k => FL_TOP + (FL_BOT - FL_TOP) * Math.pow(k / ROWS, 1.3);
+        const sc = y => 0.7 + 0.3 * ((y - FL_TOP) / (FL_BOT - FL_TOP));
+        const fx = (c, y) => W / 2 + (FL_X0 + c * COL_W - W / 2) * sc(y);
+        for (let r = 0; r < ROWS; r++) {
+          const y0 = rowY(r);
+          const y1 = rowY(r + 1);
+          const shade = 0.72 + 0.28 * (r / ROWS);          // far rows a little darker
+          for (let c = 0; c < COLS; c++) {
+            const base = (r + c) % 2 === 0 ? [242, 232, 214] : [220, 205, 178];
+            const col = Phaser.Display.Color.GetColor(
+              Math.round(base[0] * shade), Math.round(base[1] * shade), Math.round(base[2] * shade)
+            );
+            fl.fillStyle(col, 1);
+            fl.lineStyle(1.5, 0xbfae8e, 0.55);
+            fl.beginPath();
+            fl.moveTo(fx(c, y0), y0);
+            fl.lineTo(fx(c + 1, y0), y0);
+            fl.lineTo(fx(c + 1, y1), y1);
+            fl.lineTo(fx(c, y1), y1);
+            fl.closePath();
+            fl.fillPath();
+            fl.strokePath();
+          }
+        }
         // soft shadow under the back wall so the floor reads as a floor
         const floorShade = this.add.graphics().setDepth(-99);
-        floorShade.fillGradientStyle(0x000000, 0x000000, 0x000000, 0x000000, 0.35, 0.35, 0, 0);
-        floorShade.fillRect(30, WALL_H, W - 60, 70);
+        floorShade.fillGradientStyle(0x000000, 0x000000, 0x000000, 0x000000, 0.4, 0.4, 0, 0);
+        floorShade.fillRect(30, WALL_H, W - 60, 90);
+        // pools of light under the ceiling lamps
+        [[330, 470], [760, 470], [1100, 470], [330, 830], [760, 860], [1100, 860]].forEach(p => {
+          this.add.ellipse(p[0], p[1], 360, 120, 0xfff6d8, 0.13).setDepth(-98);
+          this.add.ellipse(p[0], p[1], 200, 66, 0xfff6d8, 0.12).setDepth(-98);
+        });
+        // the side walls fade into shadow
+        const sideShade = this.add.graphics().setDepth(-97);
+        sideShade.fillGradientStyle(0x000000, 0x000000, 0x000000, 0x000000, 0.4, 0, 0.4, 0);
+        sideShade.fillRect(30, WALL_H, 110, H - WALL_H - 20);
+        sideShade.fillGradientStyle(0x000000, 0x000000, 0x000000, 0x000000, 0, 0.4, 0, 0.4);
+        sideShade.fillRect(W - 140, WALL_H, 110, H - WALL_H - 20);
 
-        // back wall
+        // back wall: shaded panels, ceiling strip with lamps, bright trim
         const wall = this.add.graphics().setDepth(-90);
-        wall.fillStyle(0x12203f, 1).fillRect(0, 0, W, WALL_H);
+        wall.fillGradientStyle(0x1d3d78, 0x1d3d78, 0x0e1a38, 0x0e1a38, 1, 1, 1, 1);
+        wall.fillRect(0, 0, W, WALL_H);
+        wall.lineStyle(2, 0xffffff, 0.08);
+        for (let x = 140; x < W; x += 140) wall.lineBetween(x, 22, x, WALL_H - 14);
+        wall.fillStyle(0x0b1530, 1).fillRect(0, 0, W, 22);
+        for (let x = 130; x < W; x += 220) {
+          wall.fillStyle(0xfff6d8, 0.16).fillEllipse(x, 44, 200, 46);
+          wall.fillStyle(0xffffff, 1).fillRoundedRect(x - 55, 8, 110, 8, 4);
+        }
         wall.fillStyle(0x1f6feb, 1).fillRect(0, WALL_H - 14, W, 14);
+        wall.fillStyle(0x7ab8ff, 1).fillRect(0, WALL_H - 14, W, 3);
         wall.fillStyle(0x0b1530, 1).fillRect(0, 0, 30, H).fillRect(W - 30, 0, 30, H).fillRect(0, H - 20, W, 20);
         this.add.text(W / 2, 70, 'MIIMIID MART', {
           fontSize: '46px', color: '#4da3ff', fontStyle: 'bold'
