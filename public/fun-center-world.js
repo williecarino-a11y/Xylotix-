@@ -21,7 +21,7 @@
   const UH = 140;                    // shelf unit height
   const UNITS = [
     { id: 'fresh',  label: 'FRESH FOOD',     x: 60,  y: 200 },
-    { id: 'dairy',  label: 'DAIRY & DRINKS', x: 320, y: 200 },
+    { id: 'dairy',  label: 'DAIRY & DRINKS', x: 320, y: 200, fridge: true },
     { id: 'snacks', label: 'SNACKS',         x: 580, y: 200 },
     { id: 'care',   label: 'PERSONAL CARE',  x: 60,  y: 520 },
     { id: 'fun',    label: 'FUN CORNER',     x: 320, y: 520 }
