@@ -1074,9 +1074,11 @@
           <div style="max-height:230px;overflow-y:auto;margin:6px 0">${rows}</div>
           <p>+${Number.isFinite(r.xp) ? r.xp : 0} XP &middot; +${Number.isFinite(r.coins) ? r.coins : 0} coins</p>
           <button type="button" data-again>Shop again</button>
+          <button type="button" class="mw-alt" data-cartshop>Cart shop 🛒</button>
           <button type="button" class="mw-alt" data-back>Back to Fun Center</button>
         `);
         o.querySelector('[data-again]').addEventListener('click', () => { destroyGame(); startWorld(); });
+        o.querySelector('[data-cartshop]').addEventListener('click', () => openCartShop());
         o.querySelector('[data-back]').addEventListener('click', () => { destroyGame(); renderMiimiidFunCenter(); });
       } catch (error) {
         console.error('world checkout error:', error);
