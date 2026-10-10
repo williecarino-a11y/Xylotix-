@@ -1985,6 +1985,10 @@ refreshHot() {
         this.cartBox.x += (tx - this.cartBox.x) * 0.4;
         this.cartBox.y = this.player.y;
         this.cartBox.setDepth(this.player.y + 1);
+        if (session.cartSkin && session.cartSkin.rainbow && this.cartImg) {
+          const hue = Phaser.Display.Color.HSVToRGB((this.time.now / 1500) % 1, 0.6, 1);
+          this.cartImg.setTint(Phaser.Display.Color.GetColor(hue.r, hue.g, hue.b));
+        }
 
         // hand on the handle (the side view has no arm art, so a sleeve and a hand are drawn)
         this.grip.clear();
