@@ -787,8 +787,17 @@
         needItems.map(it => `<span class="mw-chip" data-need="${esc(it.id)}">?</span>`).join('')
       : '<span class="mw-list-title">🛒 Shopping list</span>' +
         needItems.map(it => `<span class="mw-chip" data-need="${esc(it.id)}">${esc(it.name)}</span>`).join('');
-    // instant rewards: sparkles, a rising chime and a combo for buying things on your list
+    // instant rewards: sparkles, a rising chime, a combo and a streak bar for buying things on your list
     S.combo = 0;
+    const comboEl = content.querySelector('[data-mw-combo]');
+    function showCombo() {
+      if (!comboEl) return;
+      if (S.combo < 2) { comboEl.classList.remove('show'); return; }
+      comboEl.textContent = `🔥 Smart streak x${S.combo}`;
+      comboEl.classList.remove('show');
+      void comboEl.offsetWidth;
+      comboEl.classList.add('show');
+    }
     function rewardFor(scene, item) {
       const onList = needItems.some(n => n.id === item.id);
       const px = scene.player.x;
@@ -809,6 +818,7 @@
         S.combo = 0;
         scene.burst(px, py, 0xffd34d, 6);
       }
+      showCombo();
     }
     function hud() {
       walletEl.textContent = `$${S.budget - S.spent}`;
