@@ -1235,6 +1235,7 @@
           this.cartImg = this.add.image(0, 0, 'cart-right').setOrigin(0.5, 1);
           this.cartImg.setScale(CART_W / this.cartImg.width);
           this.cartBox.add(this.cartImg);
+          if (session.cartSkin && session.cartSkin.color) this.cartImg.setTint(session.cartSkin.color);
         }
 
         this.arm = this.add.graphics().setDepth(99999);
