@@ -6,7 +6,7 @@ const rateLimit = require('express-rate-limit');
 const { getAuthenticatedUser } = require('./authRoutes');
 const FunGameSession = require('../models/FunGameSession');
 const FunGameProfile = require('../models/FunGameProfile');
-const { getFunCenterGames, getFunCenterGame, validateFunCenterAnswer, getWeeklyShop, getWeeklyShopDefinition, getFlashSales, getPriceHikes, getWeekSetup, pickSituation, computeMeters, METER_WARN, pickTricks, publicTricks, describeTrick, SCANS_PER_TRIP } = require('../scripts/learningData/funCenter');
+const { getFunCenterGames, getFunCenterGame, validateFunCenterAnswer, getWeeklyShop, getWeeklyShopDefinition, getFlashSales, getPriceHikes, getWeekSetup, pickSituation, computeMeters, METER_WARN, pickTricks, publicTricks, describeTrick, SCANS_PER_TRIP, getCartSkins, getCartSkin } = require('../scripts/learningData/funCenter');
 const router = express.Router();
 
 const funSessionStartLimiter = rateLimit({
@@ -696,6 +696,8 @@ router.post('/shop/session', funSessionStartLimiter, async (req, res) => {
     const shop = getWeeklyShopDefinition();
     const situation = pickSituation();
     const tricks = pickTricks();
+    const profile = await FunGameProfile.findOne({ userId: user._id }).lean();
+    const skin = profile && profile.cartSkin ? getCartSkin(profile.cartSkin) : null;
     const session = await FunGameSession.create({
       sessionId: createSessionId(),
       userId: user._id,
@@ -715,7 +717,8 @@ router.post('/shop/session', funSessionStartLimiter, async (req, res) => {
         remaining: shop.budget,
         week: getWeekSetup(situation.id),
         tricks: publicTricks(tricks),
-        scansLeft: SCANS_PER_TRIP
+        scansLeft: SCANS_PER_TRIP,
+        cartSkin: skin ? { id: skin.id, color: skin.color, rainbow: !!skin.rainbow } : null
       }
     });
   } catch (error) {
@@ -881,6 +884,76 @@ router.post('/shop/session/:sessionId/checkout', funSessionStartLimiter, async (
     return res.status(500).json({ status: 'error', message: 'Unable to finish the shopping trip.' });
   } finally {
     await mongoSession.endSession();
+  }
+});
+
+/* =========================================================
+ * CART SKINS (bought with trip coins; the server checks every price)
+ * ========================================================= */
+
+function cartState(profile) {
+  return {
+    totalCoins: profile ? profile.totalCoins || 0 : 0,
+    owned: profile && Array.isArray(profile.ownedCarts) ? profile.ownedCarts : [],
+    equipped: profile && profile.cartSkin ? profile.cartSkin : '',
+    skins: getCartSkins().map(s => ({ id: s.id, label: s.label, price: s.price }))
+  };
+}
+
+router.get('/cart-skins', funAnswerLimiter, async (req, res) => {
+  try {
+    const user = await requireFunCenterUser(req, res);
+    if (!user) return;
+    const profile = await FunGameProfile.findOne({ userId: user._id }).lean();
+    return res.json({ status: 'success', data: cartState(profile) });
+  } catch (error) {
+    console.error('Fun Center cart skins error:', error);
+    return res.status(500).json({ status: 'error', message: 'Unable to load the cart shop.' });
+  }
+});
+
+router.post('/cart-skins/buy', funAnswerLimiter, async (req, res) => {
+  try {
+    const user = await requireFunCenterUser(req, res);
+    if (!user) return;
+    const skin = getCartSkin(req.body && req.body.skinId);
+    if (!skin) return res.status(400).json({ status: 'error', message: 'That cart is not in the shop.' });
+
+    // One atomic write: coins are only spent if there are enough and the skin is not owned yet.
+    const updated = await FunGameProfile.findOneAndUpdate(
+      { userId: user._id, totalCoins: { $gte: skin.price }, ownedCarts: { $ne: skin.id } },
+      { $inc: { totalCoins: -skin.price }, $push: { ownedCarts: skin.id }, $set: { cartSkin: skin.id } },
+      { new: true }
+    ).lean();
+
+    if (!updated) {
+      const profile = await FunGameProfile.findOne({ userId: user._id }).lean();
+      if (profile && Array.isArray(profile.ownedCarts) && profile.ownedCarts.includes(skin.id)) {
+        return res.status(409).json({ status: 'error', code: 'ALREADY_OWNED', message: 'You already own that cart.' });
+      }
+      return res.status(409).json({ status: 'error', code: 'NOT_ENOUGH_COINS', message: `You need ${skin.price} coins for that cart.` });
+    }
+    return res.json({ status: 'success', data: cartState(updated) });
+  } catch (error) {
+    console.error('Fun Center cart buy error:', error);
+    return res.status(500).json({ status: 'error', message: 'Unable to buy that cart.' });
+  }
+});
+
+router.post('/cart-skins/equip', funAnswerLimiter, async (req, res) => {
+  try {
+    const user = await requireFunCenterUser(req, res);
+    if (!user) return;
+    const skinId = req.body && typeof req.body.skinId === 'string' ? req.body.skinId : '';
+    if (skinId && !getCartSkin(skinId)) return res.status(400).json({ status: 'error', message: 'That cart is not in the shop.' });
+
+    const filter = skinId ? { userId: user._id, ownedCarts: skinId } : { userId: user._id };
+    const updated = await FunGameProfile.findOneAndUpdate(filter, { $set: { cartSkin: skinId } }, { new: true }).lean();
+    if (!updated) return res.status(409).json({ status: 'error', code: 'NOT_OWNED', message: 'You do not own that cart yet.' });
+    return res.json({ status: 'success', data: cartState(updated) });
+  } catch (error) {
+    console.error('Fun Center cart equip error:', error);
+    return res.status(500).json({ status: 'error', message: 'Unable to equip that cart.' });
   }
 });
 

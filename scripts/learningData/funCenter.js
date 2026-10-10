@@ -313,6 +313,22 @@ function describeTrick(trick, item) {
   };
 }
 
+// Cart skins: bought with trip coins. A trip earns about 5 to 25 coins, so Red takes one or two trips.
+const CART_SKINS = [
+  { id: 'red', label: 'Red cart', price: 25, color: 0xff5d5d },
+  { id: 'gold', label: 'Gold cart', price: 75, color: 0xffd34d },
+  { id: 'neon', label: 'Neon cart', price: 150, color: 0x39ff9c },
+  { id: 'rainbow', label: 'Rainbow cart', price: 300, color: 0xffffff, rainbow: true }
+];
+
+function getCartSkins() {
+  return CART_SKINS.map(s => ({ ...s }));
+}
+
+function getCartSkin(id) {
+  return CART_SKINS.find(s => s.id === id) || null;
+}
+
 module.exports = {
   getFunCenterGames,
   getFunCenterGame,
@@ -329,5 +345,7 @@ module.exports = {
   pickTricks,
   publicTricks,
   describeTrick,
-  SCANS_PER_TRIP
+  SCANS_PER_TRIP,
+  getCartSkins,
+  getCartSkin
 };

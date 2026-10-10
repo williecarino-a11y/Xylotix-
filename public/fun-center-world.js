@@ -990,6 +990,57 @@
       }
     }
 
+    // cart shop: spend trip coins on cart skins
+    async function openCartShop() {
+      const o = overlay('<h3>Cart shop 🛒</h3><p>Loading…</p>');
+      let last = null;
+      const draw = (data, msg) => {
+        last = data;
+        const rows = data.skins.map(s => {
+          const own = data.owned.includes(s.id);
+          let action;
+          if (data.equipped === s.id) action = '<strong>Equipped ✓</strong>';
+          else if (own) action = `<button type="button" data-equip="${esc(s.id)}" style="width:auto;margin:0;padding:8px 14px">Use</button>`;
+          else action = `<button type="button" data-buy="${esc(s.id)}" ${data.totalCoins < s.price ? 'disabled' : ''} style="width:auto;margin:0;padding:8px 14px">${s.price} coins</button>`;
+          return `<div class="mw-opt" style="gap:10px;padding:6px 0"><span>${esc(s.label)}</span>${action}</div>`;
+        }).join('');
+        const plain = data.equipped
+          ? '<button type="button" data-equip="" style="width:auto;margin:0;padding:8px 14px">Use</button>'
+          : '<strong>Equipped ✓</strong>';
+        const card = o.querySelector('.mw-card');
+        card.innerHTML = `
+          <h3>Cart shop 🛒</h3>
+          <p>Your coins: <strong>${data.totalCoins}</strong></p>
+          <div class="mw-opt" style="gap:10px;padding:6px 0"><span>Plain cart</span>${plain}</div>
+          ${rows}
+          ${msg ? `<p>${esc(msg)}</p>` : '<p><small>Your new cart shows up on your next trip.</small></p>'}
+          <button type="button" class="mw-alt" data-shop-close>Close</button>
+        `;
+        card.querySelector('[data-shop-close]').addEventListener('click', () => o.remove());
+        card.querySelectorAll('[data-buy]').forEach(b => b.addEventListener('click', () => act('buy', b.dataset.buy)));
+        card.querySelectorAll('[data-equip]').forEach(b => b.addEventListener('click', () => act('equip', b.dataset.equip)));
+      };
+      const act = async (path, skinId) => {
+        try {
+          const data = await miimiidFunCenterRequest('/api/fun-center/cart-skins/' + path, {
+            method: 'POST', body: JSON.stringify({ skinId }), headers: NO_OVERLAY
+          });
+          if (path === 'buy') SFX.coin();
+          draw(data);
+        } catch (error) {
+          console.error('cart shop error:', error);
+          draw(last, error.message || 'The cart shop did not work.');
+        }
+      };
+      try {
+        draw(await miimiidFunCenterRequest('/api/fun-center/cart-skins', { headers: NO_OVERLAY }));
+      } catch (error) {
+        console.error('cart shop load error:', error);
+        o.querySelector('.mw-card').innerHTML = '<h3>Cart shop 🛒</h3><p>The cart shop is closed right now. Try again later.</p><button type="button" class="mw-alt" data-shop-close>Close</button>';
+        o.querySelector('[data-shop-close]').addEventListener('click', () => o.remove());
+      }
+    }
+
     async function doCheckout(forced) {
       if (S.busy) return;
       if (S.basket.length === 0) { say('Pick something up first!'); return; }
@@ -1023,9 +1074,11 @@
           <div style="max-height:230px;overflow-y:auto;margin:6px 0">${rows}</div>
           <p>+${Number.isFinite(r.xp) ? r.xp : 0} XP &middot; +${Number.isFinite(r.coins) ? r.coins : 0} coins</p>
           <button type="button" data-again>Shop again</button>
+          <button type="button" class="mw-alt" data-cartshop>Cart shop 🛒</button>
           <button type="button" class="mw-alt" data-back>Back to Fun Center</button>
         `);
         o.querySelector('[data-again]').addEventListener('click', () => { destroyGame(); startWorld(); });
+        o.querySelector('[data-cartshop]').addEventListener('click', () => openCartShop());
         o.querySelector('[data-back]').addEventListener('click', () => { destroyGame(); renderMiimiidFunCenter(); });
       } catch (error) {
         console.error('world checkout error:', error);
@@ -1235,6 +1288,7 @@
           this.cartImg = this.add.image(0, 0, 'cart-right').setOrigin(0.5, 1);
           this.cartImg.setScale(CART_W / this.cartImg.width);
           this.cartBox.add(this.cartImg);
+          if (session.cartSkin && session.cartSkin.color) this.cartImg.setTint(session.cartSkin.color);
         }
 
         this.arm = this.add.graphics().setDepth(99999);
@@ -1984,6 +2038,10 @@ refreshHot() {
         this.cartBox.x += (tx - this.cartBox.x) * 0.4;
         this.cartBox.y = this.player.y;
         this.cartBox.setDepth(this.player.y + 1);
+        if (session.cartSkin && session.cartSkin.rainbow && this.cartImg) {
+          const hue = Phaser.Display.Color.HSVToRGB((this.time.now / 1500) % 1, 0.6, 1);
+          this.cartImg.setTint(Phaser.Display.Color.GetColor(hue.r, hue.g, hue.b));
+        }
 
         // hand on the handle (the side view has no arm art, so a sleeve and a hand are drawn)
         this.grip.clear();
