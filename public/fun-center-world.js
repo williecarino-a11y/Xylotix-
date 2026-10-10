@@ -1063,20 +1063,35 @@
         ].join('');
         SFX.coin();
         if (SFX.stinger) SFX.stinger(r.burnedOut && r.burnedOut.length ? 'bad' : (r.stars >= 2 ? 'win' : 'ok'));
+        const stat = (big, label) => `<div><div style="font-size:24px;font-weight:800;color:#e6e9f0">${big}</div><small style="color:#9aa4bd">${label}</small></div>`;
         const o = overlay(`
           <h3>${r.burnedOut && r.burnedOut.length ? 'You burned out' : 'Trip finished!'}</h3>
           ${window.MiimiidMart && window.MiimiidMart.week ? window.MiimiidMart.week.resultHtml(r) : ''}
-            ${window.MiimiidMart && window.MiimiidMart.stars ? window.MiimiidMart.stars.html(r, (f, d, t, v, dl) => SFX.tone(f, d, t, v, dl)) : ''}
+          ${window.MiimiidMart && window.MiimiidMart.stars ? window.MiimiidMart.stars.html(r, (f, d, t, v, dl) => SFX.tone(f, d, t, v, dl)) : ''}
+          <div style="display:flex;justify-content:space-around;gap:8px;margin:12px 0 6px">
+            ${stat(`${list(r.needsBought).length}/${r.totalNeeds}`, 'Needs covered')}
+            ${stat(`$${r.spent}`, 'Spent')}
+            ${stat(`$${r.saved}`, 'Left')}
+          </div>
+          <p>+${Number.isFinite(r.xp) ? r.xp : 0} XP &middot; +${Number.isFinite(r.coins) ? r.coins : 0} coins 🪙</p>
+          <div data-learn style="display:none;text-align:left">
             ${window.MiimiidMart && window.MiimiidMart.tricks ? window.MiimiidMart.tricks.resultHtml(r) : ''}
-          ${forced ? '<p>⏰ Time ran out, so the cashier rang you up.</p>' : ''}
-          <p>${esc(r.message || '')}</p>
-          <p>Needs covered: <strong>${list(r.needsBought).length} / ${r.totalNeeds}</strong> &middot; Spent $${r.spent} &middot; Left $${r.saved}</p>
-          <div style="max-height:230px;overflow-y:auto;margin:6px 0">${rows}</div>
-          <p>+${Number.isFinite(r.xp) ? r.xp : 0} XP &middot; +${Number.isFinite(r.coins) ? r.coins : 0} coins</p>
+            ${forced ? '<p>⏰ Time ran out, so the cashier rang you up.</p>' : ''}
+            <p>${esc(r.message || '')}</p>
+            <div style="max-height:230px;overflow-y:auto;margin:6px 0">${rows}</div>
+          </div>
+          <button type="button" class="mw-alt" data-learnbtn>💡 What you learned</button>
           <button type="button" data-again>Shop again</button>
           <button type="button" class="mw-alt" data-cartshop>Cart shop 🛒</button>
           <button type="button" class="mw-alt" data-back>Back to Fun Center</button>
         `);
+        o.querySelector('[data-learnbtn]').addEventListener('click', e => {
+          const learn = o.querySelector('[data-learn]');
+          learn.style.display = 'block';
+          e.currentTarget.remove();
+          SFX.tone(660, 0.1, 'triangle', 0.1);
+          learn.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
         o.querySelector('[data-again]').addEventListener('click', () => { destroyGame(); startWorld(); });
         o.querySelector('[data-cartshop]').addEventListener('click', () => openCartShop());
         o.querySelector('[data-back]').addEventListener('click', () => { destroyGame(); renderMiimiidFunCenter(); });
