@@ -1222,16 +1222,35 @@
         });
       }
 
+      drawDoor(F, t) {
+        const DW = UW - 16;
+        const DH = 82;
+        const a = t * 1.4;                         // opens to about 80 degrees, swinging out toward you
+        const s = Math.sin(a);
+        const fx = DW * Math.cos(a);               // where the free edge of the door is
+        const top = -DH * 0.07 * s;
+        const bot = DH + DH * 0.22 * s;            // the free edge grows taller because it comes closer
+        const g = F.door;
+        g.clear();
+        const pts = [{ x: 0, y: 0 }, { x: fx, y: top }, { x: fx, y: bot }, { x: 0, y: DH }];
+        g.fillStyle(0x9fe3ff, 0.3 + 0.3 * s).fillPoints(pts, true);
+        g.fillStyle(0xffffff, 0.22).fillTriangle(fx * 0.25, 0, fx * 0.65, top, 0, DH * 0.8);
+        g.lineStyle(3, 0xe6f7ff, 0.95).strokePoints(pts, true);
+        const hh = 36 * (1 + 0.22 * s);
+        g.fillStyle(0xdfe7f5, 1).fillRoundedRect(fx - 12, (top + bot) / 2 - hh / 2, 6, hh, 3);
+      }
+
       setFridge(F, open) {
         F.state = open ? 'opening' : 'closing';
         F.open = false;                                   // products cannot be grabbed while the door moves
-        this.tweens.add({
-          targets: F.door, scaleX: open ? 0.1 : 1, duration: open ? 350 : 300, ease: 'Sine.easeInOut',
-          onComplete: () => { F.state = open ? 'open' : 'closed'; F.open = open; }
+        this.tweens.addCounter({
+          from: open ? 0 : 1, to: open ? 1 : 0, duration: open ? 450 : 350, ease: 'Sine.easeInOut',
+          onUpdate: tw => this.drawDoor(F, tw.getValue()),
+          onComplete: () => { this.drawDoor(F, open ? 1 : 0); F.state = open ? 'open' : 'closed'; F.open = open; }
         });
         this.tweens.add({ targets: F.glow, alpha: open ? 0.45 : 0, duration: 350 });
         SFX.noise(open ? 0.22 : 0.12, 0.05, open ? 700 : 450);
-      }
+              }
 
       updateFridges() {
         if (!this.fridges) return;
