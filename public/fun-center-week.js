@@ -13,8 +13,10 @@
     const st = document.createElement('style');
     st.id = 'mm-week-styles';
     st.textContent = `
-      .mm-meters { margin: 0 4px 8px; padding: 8px 10px; background: #131a2c; border: 1px solid #232c42; border-radius: 12px; }
-      .mm-meters-title { font-size: 11px; font-weight: 800; color: #9ec5ff; text-transform: uppercase; letter-spacing: .04em; margin-bottom: 4px; }
+      .mm-meters { display: flex; gap: 10px; margin: 0 4px 6px; padding: 6px 10px; background: #131a2c; border: 1px solid #232c42; border-radius: 12px; }
+      .mm-meters .mm-meter { flex: 1; min-width: 0; gap: 5px; }
+      .mm-meters .mm-meter-name { width: auto; }
+      .mm-meters .mm-meter-num { width: 24px; }
       .mm-meter { display: flex; align-items: center; gap: 8px; padding: 2px 0; font-size: 12px; font-weight: 800; color: #e6e9f0; text-align: left; }
       .mm-meter-name { width: 100px; flex: none; }
       .mm-meter-bar { flex: 1; height: 10px; border-radius: 999px; background: #0d1324; border: 1px solid #232c42; overflow: hidden; }
