@@ -16,6 +16,8 @@ const funGameProfileSchema = new mongoose.Schema(
       min: 0
     },
 
+    ownedCarts: { type: [String], default: [] },
+    cartSkin: { type: String, default: '' },
     totalCoins: {
       type: Number,
       default: 0,
