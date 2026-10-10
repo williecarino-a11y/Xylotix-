@@ -1160,7 +1160,104 @@
         return this.obst.some(o => x + 20 > o.x && x - 20 < o.x + o.w && y > o.y && y - 14 < o.y + o.h);
       }
 
+      buildFridge(u, list) {
+        const sy = u.y + UH;
+        const DW = UW - 16;
+        const DH = 82;
+        const F = { u, state: 'closed', open: false, nextMist: 0, mist: 0 };
+        this.fridges = this.fridges || [];
+        this.fridges.push(F);
+
+        // floor shadow and a cold glow that shows when the door is open
+        this.add.ellipse(u.x + UW / 2, sy + 3, UW * 1.02, 26, 0x000000, 0.3).setDepth(sy - 1);
+        F.glow = this.add.ellipse(u.x + UW / 2, sy + 32, UW * 1.1, 60, 0x9fe8ff, 0.5).setDepth(-97).setAlpha(0);
+
+        // cabinet, header strip, lit interior, two shelves
+        const g = this.add.graphics().setDepth(sy);
+        g.fillStyle(0x0b1530, 1).fillRoundedRect(u.x, u.y, UW, UH, 8);
+        g.fillStyle(0x1f6feb, 1).fillRoundedRect(u.x, u.y, UW, 30, { tl: 8, tr: 8, bl: 0, br: 0 });
+        g.fillGradientStyle(0xe8fbff, 0xe8fbff, 0x8fdcf5, 0x8fdcf5, 1);
+        g.fillRect(u.x + 8, u.y + 34, DW, DH);
+        g.fillStyle(0xffffff, 0.9).fillRect(u.x + 8, u.y + 34, DW, 4);
+        g.fillStyle(0xc9d6ea, 1).fillRect(u.x + 8, u.y + 72, DW, 5);
+        g.fillStyle(0xc9d6ea, 1).fillRect(u.x + 8, u.y + 112, DW, 4);
+        g.fillStyle(0x1a2b52, 1).fillRect(u.x, u.y + 118, UW, 22);
+        g.fillStyle(0x3b5ca8, 1).fillRect(u.x, u.y + 118, UW, 3);
+
+        // glass door: hinged on the left edge, so it swings open by squeezing sideways
+        F.door = this.add.graphics({ x: u.x + 8, y: u.y + 34 }).setDepth(sy + 1.5);
+        F.door.fillStyle(0x9fe3ff, 0.32).fillRoundedRect(0, 0, DW, DH, 4);
+        F.door.fillStyle(0xffffff, 0.22).fillTriangle(30, 0, 70, 0, 0, 70);
+        F.door.lineStyle(3, 0xe6f7ff, 0.9).strokeRoundedRect(0, 0, DW, DH, 4);
+        F.door.fillStyle(0xdfe7f5, 1).fillRoundedRect(DW - 12, DH / 2 - 18, 6, 36, 3);
+
+        this.add.text(u.x + UW / 2, u.y + 15, u.label, {
+          fontSize: '14px', color: '#ffffff', fontStyle: 'bold'
+        }).setOrigin(0.5).setDepth(sy + 3);
+
+        // you cannot walk into it
+        this.obst.push({ x: u.x, y: u.y - 110, w: UW, h: UH + 110 });
+
+        // products stand on the two shelves, alternating, so every price has its own spot
+        const BOARDS = [u.y + 72, u.y + 112];
+        list.forEach((item, i) => {
+          const px = u.x + (UW / (list.length + 1)) * (i + 1);
+          const baseY = BOARDS[i % 2];
+          const src = sources[item.id];
+          let obj;
+          if (src.src) {
+            obj = this.add.image(px, baseY, `pr-${item.id}`).setOrigin(0.5, 1);
+            obj.setScale(36 / Math.max(obj.height, 1));
+          } else {
+            obj = this.add.text(px, baseY, src.emoji, { fontSize: '32px' }).setOrigin(0.5, 1);
+          }
+          obj.setDepth(sy + 1);
+          const label = this.add.text(px, u.y + 125, priceText(item), {
+            fontSize: '13px', color: '#ffffff', fontStyle: 'bold', stroke: '#000000', strokeThickness: 3
+          }).setOrigin(0.5).setDepth(sy + 2);
+          this.products.push({
+            item, obj, label, x: px, y: baseY - 26, sy, taken: false, baseScale: obj.scaleX, fridge: F
+          });
+        });
+      }
+
+      setFridge(F, open) {
+        F.state = open ? 'opening' : 'closing';
+        F.open = false;                                   // products cannot be grabbed while the door moves
+        this.tweens.add({
+          targets: F.door, scaleX: open ? 0.1 : 1, duration: open ? 350 : 300, ease: 'Sine.easeInOut',
+          onComplete: () => { F.state = open ? 'open' : 'closed'; F.open = open; }
+        });
+        this.tweens.add({ targets: F.glow, alpha: open ? 0.45 : 0, duration: 350 });
+        SFX.noise(open ? 0.22 : 0.12, 0.05, open ? 700 : 450);
+      }
+
+      updateFridges() {
+        if (!this.fridges) return;
+        const px = this.player.x;
+        const py = this.player.y;
+        const now = this.time.now;
+        this.fridges.forEach(F => {
+          const u = F.u;
+          const near = px > u.x - 30 && px < u.x + UW + 30 && py >= u.y + UH + 4 && py < u.y + UH + 130;
+          if (near && F.state === 'closed') this.setFridge(F, true);
+          else if (!near && F.state === 'open') this.setFridge(F, false);
+          // cold air sinks out of the open door (a few puffs at a time)
+          if (F.state === 'open' && now > F.nextMist && F.mist < 8) {
+            F.nextMist = now + 230;
+            F.mist++;
+            const m = this.add.circle(u.x + 20 + Math.random() * (UW - 40), u.y + 112, 5 + Math.random() * 4, 0xdff6ff, 0.5)
+              .setDepth(u.y + UH + 3);
+            this.tweens.add({
+              targets: m, y: m.y + 46, scale: 2.2, alpha: 0, duration: 1100, ease: 'Sine.easeOut',
+              onComplete: () => { m.destroy(); F.mist--; }
+            });
+          }
+        });
+      }
+
       buildUnit(u, list) {
+        if (u.fridge) { this.buildFridge(u, list); return; }
         // soft shadow on the floor under the shelf, so it looks like it stands there
         this.add.ellipse(u.x + UW / 2, u.y + UH + 3, UW * 1.02, 26, 0x000000, 0.3)
           .setDepth(u.y + UH - 1);
