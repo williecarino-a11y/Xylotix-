@@ -67,7 +67,7 @@
       const m = current();
       if (!built) {
         built = true;
-        box.innerHTML = '<div class="mm-meters-title">How you will be tonight</div>' + KEYS.map(k => rowHtml(k, m[k[0]], wk.meterWarn)).join('');
+        box.innerHTML = KEYS.map(k => rowHtml(k, m[k[0]], wk.meterWarn, true)).join('');
         return;
       }
       KEYS.forEach(k => {
