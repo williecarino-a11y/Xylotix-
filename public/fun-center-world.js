@@ -1187,10 +1187,7 @@
 
         // glass door: hinged on the left edge, so it swings open by squeezing sideways
         F.door = this.add.graphics({ x: u.x + 8, y: u.y + 34 }).setDepth(sy + 1.5);
-        F.door.fillStyle(0x9fe3ff, 0.32).fillRoundedRect(0, 0, DW, DH, 4);
-        F.door.fillStyle(0xffffff, 0.22).fillTriangle(30, 0, 70, 0, 0, 70);
-        F.door.lineStyle(3, 0xe6f7ff, 0.9).strokeRoundedRect(0, 0, DW, DH, 4);
-        F.door.fillStyle(0xdfe7f5, 1).fillRoundedRect(DW - 12, DH / 2 - 18, 6, 36, 3);
+        this.drawDoor(F, 0);
 
         this.add.text(u.x + UW / 2, u.y + 15, u.label, {
           fontSize: '14px', color: '#ffffff', fontStyle: 'bold'
