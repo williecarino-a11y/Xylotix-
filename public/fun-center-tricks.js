@@ -119,15 +119,27 @@
         scansLeft = typeof r.scansLeft === 'number' ? r.scansLeft : scansLeft;
         t.scanned = true;
         t.verdict = r.verdict;
-        await new Promise(res => setTimeout(res, 450));
+        // drum roll, then the reveal
+        [0, 140, 280].forEach((d, i) => {
+          setTimeout(() => ctx.SFX.tone(500 + i * 150, 0.08, 'square', 0.05), d);
+        });
+        await new Promise(res => setTimeout(res, 520));
+        const cam = scene.cameras.main;
         if (r.verdict === 'fake') {
+          ctx.S.busts = (ctx.S.busts || 0) + 1;
           scene.popText(p.x, p.sy - 135, 'BUSTED!', '#ff6b6b');
-          scene.cameras.main.shake(160, 0.003);
+          if (ctx.S.busts >= 2) scene.popText(p.x, p.sy - 175, `Detective x${ctx.S.busts}! 🕵️`, '#ffd34d');
+          cam.shake(240, 0.006);
+          cam.flash(180, 255, 70, 70);
+          if (scene.burst) scene.burst(p.x, p.sy - 100, 0xff6b6b, 18);
           if (ctx.SFX.stinger) ctx.SFX.stinger('alert');
           else ctx.SFX.tone(220, 0.3, 'sawtooth', 0.06);
         } else {
           scene.popText(p.x, p.sy - 135, 'REAL DEAL!', '#7ee2a8');
+          cam.flash(180, 60, 220, 140);
+          if (scene.burst) scene.burst(p.x, p.sy - 100, 0xffd34d, 18);
           ctx.SFX.coin();
+          setTimeout(() => ctx.SFX.coin(), 160);
         }
         ctx.say(`${r.title} ${r.detail}`);
         ctx.assistant.say(r.detail, null, { name: 'Scanner · ' + (r.verdict === 'fake' ? 'Fake' : 'Real'), face: '🔍' });
