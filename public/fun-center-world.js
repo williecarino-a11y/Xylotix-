@@ -1081,7 +1081,7 @@
           </div>
           <button type="button" class="mw-alt" data-learnbtn>💡 What you learned</button>
           <button type="button" data-again>Shop again</button>
-          <button type="button" class="mw-alt" data-cartshop>Cart shop 🛒</button>
+          <button type="button" class="mw-alt" data-cartshop>Spend your coins 🪙</button>
           <button type="button" class="mw-alt" data-back>Back to Fun Center</button>
         `);
         o.querySelector('[data-learnbtn]').addEventListener('click', e => {
