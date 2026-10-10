@@ -257,6 +257,8 @@
       .mw-clock-fill[data-level="mid"] { background: #ffb020; }
       .mw-clock-fill[data-level="low"] { background: #ff5d5d; animation: mwPulse .8s ease-in-out infinite; }
       @keyframes mwPulse { 50% { opacity: .55; } }
+      .mw-combo { display: none; margin: 0 4px 6px; padding: 5px 10px; border-radius: 10px; background: linear-gradient(90deg, #1f8a5b, #3fb6ff); color: #ffffff; font-size: 13px; font-weight: 800; text-align: center; }
+      .mw-combo.show { display: block; animation: mwPop .35s ease-out; }
       .mw-asst { position: absolute; left: 10px; right: 10px; top: 10px; display: none; align-items: center; gap: 10px; background: rgba(255, 255, 255, 0.96); border: 2px solid #2f9e6b; color: #1b2440; border-radius: 14px; padding: 8px 12px; font-size: 14px; line-height: 1.3; pointer-events: none; z-index: 6; }
       .mw-asst.show { display: flex; animation: mwSlide .25s ease-out; }
       .mw-asst-face { width: 34px; height: 34px; flex: none; border-radius: 50%; background: #2f9e6b; display: flex; align-items: center; justify-content: center; font-size: 20px; }
@@ -370,6 +372,7 @@
           <button type="button" class="mw-leave" data-mw-leave>Leave</button>
         </div>
         <div class="mw-clock"><span>🕒 Store closes</span><div class="mw-clock-bar"><div class="mw-clock-fill" data-mw-clock data-level="high"></div></div></div>
+        <div class="mw-combo" data-mw-combo></div>
         <div class="mw-sale" data-mw-sale></div>
         <div class="mw-hike" data-mw-hike></div>
         <div class="mw-list" data-mw-list></div>
@@ -784,8 +787,17 @@
         needItems.map(it => `<span class="mw-chip" data-need="${esc(it.id)}">?</span>`).join('')
       : '<span class="mw-list-title">🛒 Shopping list</span>' +
         needItems.map(it => `<span class="mw-chip" data-need="${esc(it.id)}">${esc(it.name)}</span>`).join('');
-    // instant rewards: sparkles, a rising chime and a combo for buying things on your list
+    // instant rewards: sparkles, a rising chime, a combo and a streak bar for buying things on your list
     S.combo = 0;
+    const comboEl = content.querySelector('[data-mw-combo]');
+    function showCombo() {
+      if (!comboEl) return;
+      if (S.combo < 2) { comboEl.classList.remove('show'); return; }
+      comboEl.textContent = `🔥 Smart streak x${S.combo}`;
+      comboEl.classList.remove('show');
+      void comboEl.offsetWidth;
+      comboEl.classList.add('show');
+    }
     function rewardFor(scene, item) {
       const onList = needItems.some(n => n.id === item.id);
       const px = scene.player.x;
@@ -806,6 +818,7 @@
         S.combo = 0;
         scene.burst(px, py, 0xffd34d, 6);
       }
+      showCombo();
     }
     function hud() {
       walletEl.textContent = `$${S.budget - S.spent}`;
