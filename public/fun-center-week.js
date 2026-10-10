@@ -31,10 +31,10 @@
     document.head.appendChild(st);
   }
 
-  function rowHtml(k, v, warn) {
+  function rowHtml(k, v, warn, compact) {
     const level = v <= 0 ? 'zero' : v < warn ? 'low' : 'ok';
     return `<div class="mm-meter" data-k="${k[0]}" data-level="${level}">
-      <span class="mm-meter-name">${k[1]} ${k[2]}</span>
+      <span class="mm-meter-name">${compact ? k[1] : k[1] + ' ' + k[2]}</span>
       <div class="mm-meter-bar"><div class="mm-meter-fill" style="width:${v}%"></div></div>
       <b class="mm-meter-num">${v}</b></div>`;
   }
