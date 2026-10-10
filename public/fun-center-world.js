@@ -1161,6 +1161,9 @@
       }
 
       buildUnit(u, list) {
+        // soft shadow on the floor under the shelf, so it looks like it stands there
+        this.add.ellipse(u.x + UW / 2, u.y + UH + 3, UW * 1.02, 26, 0x000000, 0.3)
+          .setDepth(u.y + UH - 1);
         if (this.textures.exists('art-shelf')) {
           this.add.image(u.x, u.y, 'art-shelf').setOrigin(0, 0)
             .setDisplaySize(UW, UH).setDepth(u.y + UH);
