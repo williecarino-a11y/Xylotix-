@@ -900,7 +900,7 @@ function cartState(profile) {
   };
 }
 
-router.get('/cart-skins', async (req, res) => {
+router.get('/cart-skins', funAnswerLimiter, async (req, res) => {
   try {
     const user = await requireFunCenterUser(req, res);
     if (!user) return;
