@@ -133,6 +133,8 @@ const weeklyShop = {
     { id: 'cookies', name: 'Cookies', price: 5, image: 'cookies', visual: '🍪', classification: 'want', explanation: 'Cookies are a want: a treat, not a necessity.' },
     { id: 'pizza', name: 'Pizza night', price: 9, image: 'pizza', visual: '🍕', classification: 'want', explanation: 'Pizza night is a want: groceries cost far less per meal.', hot: { tag: 'HOT', line: 'Pizza night is so good. Everyone is grabbing one!' } },
     { id: 'candy', name: 'Candy', price: 3, image: 'candy', visual: '🍬', classification: 'want', explanation: 'Candy is a want: small, but it adds up.' },
+    { id: 'icecream', name: 'Ice cream', price: 5, image: 'icecream', visual: '', classification: 'want', explanation: 'Ice cream is a want: a cold treat, not a necessity.' },
+    { id: 'frozendinner', name: 'Frozen dinner', price: 7, image: 'frozendinner', visual: '', classification: 'want', explanation: 'A frozen dinner is a want: quick, but pasta at home costs far less per meal.' },
     { id: 'movie', name: 'Movie ticket', price: 12, image: 'movie', visual: '🎬', classification: 'want', explanation: 'A movie ticket is a want: fun, but not essential.' },
     { id: 'headphones', name: 'Headphones', price: 60, image: 'headphones', visual: '🎧', classification: 'want', explanation: 'Headphones are a want: nice, but you can wait.', hot: { tag: 'RARE', line: 'Those headphones sound amazing. Only a few left!' } },
     { id: 'console', name: 'Gaming console', price: 300, image: 'console', visual: '🎮', classification: 'want', explanation: 'A console is a want: a big purchase to save up for.', hot: { tag: 'NEW', line: 'That console just came in. Everyone wants one!' } },
