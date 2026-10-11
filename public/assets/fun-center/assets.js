@@ -88,7 +88,17 @@ const MIIMIID_ASSETS = miimiidDeepFreeze({
     sugar: `${MIIMIID_ASSET_BASE}/products/sugar.png`,
     tomato: `${MIIMIID_ASSET_BASE}/products/tomato.png`,
     water: `${MIIMIID_ASSET_BASE}/products/water.png`,
-    yogurt: `${MIIMIID_ASSET_BASE}/products/yogurt.png`
+    yogurt: `${MIIMIID_ASSET_BASE}/products/yogurt.png`,
+    medicine: `${MIIMIID_ASSET_BASE}/products/medicine.png`,
+    cookies: `${MIIMIID_ASSET_BASE}/products/cookies.png`,
+    pizza: `${MIIMIID_ASSET_BASE}/products/pizza.png`,
+    candy: `${MIIMIID_ASSET_BASE}/products/candy.png`,
+    movie: `${MIIMIID_ASSET_BASE}/products/movie-ticket.png`,
+    headphones: `${MIIMIID_ASSET_BASE}/products/headphones.png`,
+    console: `${MIIMIID_ASSET_BASE}/products/console.png`,
+    sneakers: `${MIIMIID_ASSET_BASE}/products/sneakers.png`,
+    icecream: `${MIIMIID_ASSET_BASE}/products/ice-cream.png`,
+    frozendinner: `${MIIMIID_ASSET_BASE}/products/frozen-dinner.png`
   },
 
   game: {
