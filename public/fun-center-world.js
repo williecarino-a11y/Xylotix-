@@ -1870,89 +1870,337 @@ refreshHot() {
   });
 }
 
-      // A generic standing character (used by Alex now, and by the cashier next).
+      // A person with a jointed body. Thighs and shins bend at the knee, arms bend at the elbow,
+      // and there are front, back and side views. Sam, Alex, Riley, Jordan and the customers all use it.
       makeNpc(o) {
         const skin = o.skin || 0xf1b27a;
+        const skinD = 0xd9965f;
+        const hairC = o.hair || 0x1d1d1d;
+        const shoeC = o.shoes || 0x1a2038;
         const ink = 0x141824;
         const part = (x, y) => this.add.container(x, y);
         const root = this.add.container(o.x, o.y);
-        const legL = part(-10, -46);
-        const legR = part(10, -46);
-        [legL, legR].forEach(leg => {
-          const g = this.add.graphics();
-          g.fillStyle(o.pants, 1).fillRoundedRect(-7, 0, 14, 38, 5);
-          g.fillStyle(0x0b1530, 1).fillRoundedRect(-9, 34, 20, 12, 5);
-          leg.add(g);
+        const N = {
+          root, view: 'front', pend: '', pendT: 0, dir: 1, hx: 0, hy: 1, px: undefined, py: undefined,
+          legs: {}, arms: {}, bob: Math.random() * 6,
+          idleAt: (this.time ? this.time.now : 0) + 2500 + Math.random() * 6000, idleUntil: 0, idleKind: ''
+        };
+
+        // legs: a thigh, then a shin that bends at the knee, then the shoe
+        ['L', 'R'].forEach(sd => {
+          const leg = part(sd === 'L' ? -10 : 10, -46);
+          const th = this.add.graphics();
+          th.fillStyle(o.pants, 1).fillRoundedRect(-7.5, -2, 15, 26, 6);
+          const shin = part(0, 22);
+          const sg = this.add.graphics();
+          sg.fillStyle(o.pants, 1).fillRoundedRect(-6.5, -2, 13, 22, 5);
+          const foot = part(0, 19);
+          const shoeFB = this.add.graphics();
+          shoeFB.fillStyle(shoeC, 1).fillRoundedRect(-9, -4, 18, 9, 4);
+          shoeFB.fillStyle(0xffffff, 1).fillRoundedRect(-9, 2, 18, 3, 1.5);
+          const shoeS = this.add.graphics();
+          shoeS.fillStyle(shoeC, 1).fillRoundedRect(-7, -4, 22, 9, 4);
+          shoeS.fillStyle(0xffffff, 1).fillRoundedRect(-7, 2, 22, 3, 1.5);
+          foot.add([shoeFB, shoeS]);
+          shin.add([sg, foot]);
+          leg.add([th, shin]);
+          N.legs[sd] = { leg, shin, foot, shoeFB, shoeS };
         });
+
+        // body, arms and head
         const upper = part(0, 0);
         const torso = this.add.graphics();
-        torso.fillStyle(o.shirt, 1).fillRoundedRect(-23, -106, 46, 64, 12);
-        torso.fillStyle(0xffffff, 0.9).fillRoundedRect(-8, -92, 16, 16, 4);
-        const armL = part(-26, -98);
-        const armR = part(26, -98);
-        [armL, armR].forEach(arm => {
-          const g = this.add.graphics();
-          g.fillStyle(o.shirt, 1).fillRoundedRect(-6, -4, 12, 34, 6);
-          g.fillStyle(skin, 1).fillCircle(0, 33, 7);
-          arm.add(g);
+        const neck = this.add.graphics();
+        neck.fillStyle(skin, 1).fillRoundedRect(-6, -114, 12, 12, 3);
+        N.tagTxt = o.tag ? this.add.text(0, -75.5, o.tag, { fontSize: '8px', color: '#ffffff', fontStyle: 'bold' }).setOrigin(0.5) : null;
+        N.drawBody = view => {
+          const w = view === 'side' ? 30 : 46;
+          torso.clear();
+          torso.fillStyle(o.shirt, 1).fillRoundedRect(-w / 2, -106, w, 64, 12);
+          torso.fillStyle(0x0b1530, 0.55).fillRect(-w / 2, -49, w, 5);
+          if (view === 'front') {
+            if (o.apron) {
+              torso.fillStyle(0xffffff, 1).fillRoundedRect(-15, -86, 30, 40, 7);
+              torso.fillStyle(o.shirt, 1).fillRoundedRect(-9, -80, 18, 9, 3);
+            } else {
+              torso.fillStyle(0xffffff, 0.9).fillRoundedRect(-8, -92, 16, 16, 4);
+            }
+          } else if (view === 'side' && o.apron) {
+            torso.fillStyle(0xffffff, 1).fillRoundedRect(3, -86, 11, 40, 5);
+          }
+        };
+        ['L', 'R'].forEach(sd => {
+          const arm = part(sd === 'L' ? -26 : 26, -98);
+          const ua = this.add.graphics();
+          ua.fillStyle(o.shirt, 1).fillRoundedRect(-6, -5, 12, 22, 6);
+          const fore = part(0, 15);
+          const fg = this.add.graphics();
+          fg.fillStyle(skin, 1).fillRoundedRect(-5, -2, 10, 17, 5);
+          fg.fillStyle(skin, 1).fillCircle(0, 17, 6.5);
+          fg.fillStyle(skinD, 0.5).fillCircle(3.2, 14.5, 2.4);
+          fore.add(fg);
+          arm.add([ua, fore]);
+          N.arms[sd] = { arm, fore };
         });
+
         const head = part(0, -126);
-        const face = this.add.graphics();
-        face.fillStyle(skin, 1).fillCircle(-26, 5, 6).fillCircle(26, 5, 6);
-        face.fillStyle(skin, 1).fillEllipse(0, 3, 54, 50);
-        face.fillStyle(0xff8a8a, 0.35).fillCircle(-16, 14, 6).fillCircle(16, 14, 6);
-        face.fillStyle(0xd9965f, 1).fillCircle(0, 12, 2.2);
-        face.fillStyle(o.hair, 1);
-        face.beginPath();
-        face.arc(0, -6, 27, Math.PI, Math.PI * 2, false);
-        face.closePath();
-        face.fillPath();
-        const eyes = this.add.graphics();
-        eyes.fillStyle(0xffffff, 1).fillEllipse(-10, 5, 15, 17).fillEllipse(10, 5, 15, 17);
-        eyes.lineStyle(1.5, ink, 0.5).strokeEllipse(-10, 5, 15, 17).strokeEllipse(10, 5, 15, 17);
-        const pupils = this.add.graphics();
-        pupils.fillStyle(0x3a2a1e, 1).fillCircle(-10, 6, 4.6).fillCircle(10, 6, 4.6);
-        pupils.fillStyle(0xffffff, 1).fillCircle(-8.5, 4, 1.6).fillCircle(11.5, 4, 1.6);
-        const lids = this.add.graphics().setVisible(false);
-        lids.lineStyle(2.5, ink, 1);
-        lids.beginPath().arc(-10, 5, 6, 0.15, Math.PI - 0.15).strokePath();
-        lids.beginPath().arc(10, 5, 6, 0.15, Math.PI - 0.15).strokePath();
-        const mouthS = this.add.graphics();
-        mouthS.lineStyle(2.5, ink, 1).beginPath().arc(0, 14, 8, 0.25, Math.PI - 0.25).strokePath();
-        const mouthO = this.add.graphics().setVisible(false);
-        mouthO.fillStyle(0x5b1f2a, 1).fillEllipse(0, 20, 14, 11);
-        mouthO.fillStyle(0xff7a8a, 1).fillEllipse(0, 23, 9, 5);
-        head.add([face, eyes, pupils, lids, mouthS, mouthO]);
-        upper.add([torso, armL, armR, head]);
-        root.add([legL, legR, upper]);
-        return { root, legL, legR, upper, armL, armR, head, eyes, pupils, lids, mouthS, mouthO };
+        const capText = o.capText || '#2f9e6b';
+        // front of the head
+        const hf = part(0, 0);
+        const gF = this.add.graphics();
+        gF.fillStyle(skin, 1).fillCircle(-26, 5, 6).fillCircle(26, 5, 6);
+        gF.fillStyle(skin, 1).fillEllipse(0, 3, 54, 50);
+        gF.fillStyle(0xff8a8a, 0.35).fillCircle(-16, 14, 6).fillCircle(16, 14, 6);
+        gF.fillStyle(skinD, 1).fillCircle(0, 12, 2.2);
+        if (o.cap) {
+          gF.fillStyle(o.cap, 1);
+          gF.beginPath();
+          gF.arc(0, -10, 26, Math.PI, Math.PI * 2, false);
+          gF.closePath();
+          gF.fillPath();
+          gF.fillStyle(o.capDark || o.cap, 1).fillRoundedRect(-25, -12, 50, 7, 3);
+          gF.fillStyle(0xffffff, 1).fillCircle(0, -24, 7);
+        } else {
+          gF.fillStyle(hairC, 1);
+          gF.beginPath();
+          gF.arc(0, -6, 27, Math.PI, Math.PI * 2, false);
+          gF.closePath();
+          gF.fillPath();
+          gF.fillRoundedRect(-27, -8, 7, 16, 3).fillRoundedRect(20, -8, 7, 16, 3);
+        }
+        const browF = this.add.graphics();
+        browF.lineStyle(3, o.cap ? 0x3a2a1e : hairC, 1);
+        browF.lineBetween(-16, -4, -5, -5).lineBetween(5, -5, 16, -4);
+        const eyesF = this.add.graphics();
+        eyesF.fillStyle(0xffffff, 1).fillEllipse(-10, 5, 15, 17).fillEllipse(10, 5, 15, 17);
+        eyesF.lineStyle(1.5, ink, 0.5).strokeEllipse(-10, 5, 15, 17).strokeEllipse(10, 5, 15, 17);
+        const pupF = this.add.graphics();
+        pupF.fillStyle(0x3a2a1e, 1).fillCircle(-10, 6, 4.6).fillCircle(10, 6, 4.6);
+        pupF.fillStyle(0xffffff, 1).fillCircle(-8.5, 4, 1.6).fillCircle(11.5, 4, 1.6);
+        const lidF = this.add.graphics().setVisible(false);
+        lidF.lineStyle(2.5, ink, 1);
+        lidF.beginPath().arc(-10, 5, 6, 0.15, Math.PI - 0.15).strokePath();
+        lidF.beginPath().arc(10, 5, 6, 0.15, Math.PI - 0.15).strokePath();
+        const mouthSF = this.add.graphics();
+        mouthSF.lineStyle(2.5, ink, 1).beginPath().arc(0, 14, 8, 0.25, Math.PI - 0.25).strokePath();
+        const mouthOF = this.add.graphics().setVisible(false);
+        mouthOF.fillStyle(0x5b1f2a, 1).fillEllipse(0, 20, 14, 11);
+        mouthOF.fillStyle(0xff7a8a, 1).fillEllipse(0, 23, 9, 5);
+        hf.add([gF, browF, eyesF, pupF, lidF, mouthSF, mouthOF]);
+        N.capM = o.cap ? this.add.text(0, -24, 'M', { fontSize: '10px', color: capText, fontStyle: 'bold' }).setOrigin(0.5) : null;
+        if (N.capM) hf.add(N.capM);
+        N.fF = { eyes: eyesF, pupils: pupF, lids: lidF, mouthS: mouthSF, mouthO: mouthOF };
+
+        // back of the head
+        const hb = part(0, 0);
+        const gB = this.add.graphics();
+        gB.fillStyle(skin, 1).fillCircle(-26, 5, 6).fillCircle(26, 5, 6);
+        gB.fillStyle(o.cap || hairC, 1).fillEllipse(0, 2, 54, 52);
+        if (o.cap) gB.fillStyle(o.capDark || o.cap, 1).fillRoundedRect(-25, -4, 50, 7, 3);
+        else gB.fillStyle(0xffffff, 0.08).fillEllipse(-8, -8, 22, 12);
+        hb.add(gB);
+
+        // side of the head (he faces right; the whole body is mirrored to face left)
+        const hs = part(0, 0);
+        const gS = this.add.graphics();
+        gS.fillStyle(skin, 1).fillEllipse(3, 4, 46, 50);
+        gS.fillStyle(skinD, 1).fillCircle(26, 12, 2.6);
+        gS.fillStyle(0xff8a8a, 0.35).fillCircle(15, 15, 5);
+        gS.fillStyle(o.cap || hairC, 1).fillEllipse(-12, 2, 26, 40);
+        gS.fillStyle(o.cap || hairC, 1);
+        gS.beginPath();
+        gS.arc(2, -6, 26, Math.PI, Math.PI * 2, false);
+        gS.closePath();
+        gS.fillPath();
+        if (o.cap) gS.fillStyle(o.capDark || o.cap, 1).fillRoundedRect(12, -14, 28, 6, 3);
+        gS.fillStyle(skin, 1).fillCircle(-5, 7, 6);
+        gS.fillStyle(skinD, 0.6).fillCircle(-5, 7, 3);
+        const browS = this.add.graphics();
+        browS.lineStyle(3, o.cap ? 0x3a2a1e : hairC, 1);
+        browS.lineBetween(8, -3, 19, -4);
+        const eyesS = this.add.graphics();
+        eyesS.fillStyle(0xffffff, 1).fillEllipse(13, 5, 11, 15);
+        eyesS.lineStyle(1.5, ink, 0.5).strokeEllipse(13, 5, 11, 15);
+        const pupS = this.add.graphics();
+        pupS.fillStyle(0x3a2a1e, 1).fillCircle(15, 6, 4.2);
+        pupS.fillStyle(0xffffff, 1).fillCircle(16, 4, 1.5);
+        const lidS = this.add.graphics().setVisible(false);
+        lidS.lineStyle(2.5, ink, 1);
+        lidS.beginPath().arc(13, 5, 5.5, 0.15, Math.PI - 0.15).strokePath();
+        const mouthSS = this.add.graphics();
+        mouthSS.lineStyle(2.5, ink, 1).beginPath().arc(18, 13, 6, 0.25, Math.PI - 0.25).strokePath();
+        const mouthOS = this.add.graphics().setVisible(false);
+        mouthOS.fillStyle(0x5b1f2a, 1).fillEllipse(20, 20, 8, 9);
+        hs.add([gS, browS, eyesS, pupS, lidS, mouthSS, mouthOS]);
+        N.fS = { eyes: eyesS, pupils: pupS, lids: lidS, mouthS: mouthSS, mouthO: mouthOS };
+
+        head.add([hf, hb, hs]);
+        const items = [N.arms.L.arm, torso, neck];
+        if (N.tagTxt) items.push(N.tagTxt);
+        items.push(N.arms.R.arm, head);
+        upper.add(items);
+        root.add([N.legs.L.leg, N.legs.R.leg, upper]);
+
+        N.upper = upper;
+        N.head = head;
+        N.armL = N.arms.L.arm;
+        N.armR = N.arms.R.arm;
+        N.legL = N.legs.L.leg;
+        N.legR = N.legs.R.leg;
+        N.hf = hf;
+        N.hb = hb;
+        N.hs = hs;
+        this.setNpcView(N, 'front');
+        return N;
       }
 
+      // turn a person to face the camera (front), away (back) or sideways (side)
+      setNpcView(N, view) {
+        N.view = view;
+        N.drawBody(view);
+        const side = view === 'side';
+        N.legs.L.leg.x = side ? -3 : -10;
+        N.legs.R.leg.x = side ? 3 : 10;
+        N.arms.L.arm.x = side ? -2 : -26;
+        N.arms.R.arm.x = side ? 2 : 26;
+        ['L', 'R'].forEach(k => {
+          N.legs[k].shoeFB.setVisible(!side);
+          N.legs[k].shoeS.setVisible(side);
+        });
+        N.hf.setVisible(view === 'front');
+        N.hb.setVisible(view === 'back');
+        N.hs.setVisible(side);
+        if (N.tagTxt) N.tagTxt.setVisible(view === 'front');
+      }
+
+      // st keeps the walk phase, blink times and (optionally) st.face = 'back' or 'side' for when he stands still.
       animNpc(N, st, now, delta, moving, look, talking, waving) {
-        st.amp += ((moving ? 1 : 0) - st.amp) * Math.min(1, delta / 90);
-        if (moving) st.phase += (delta / 1000) * Math.PI * 2 / 0.75;
-        const s = Math.sin(st.phase);
-        const a = st.amp;
+        const dt = Math.min(delta, 100) / 1000;
         const rad = Phaser.Math.DegToRad;
-        N.legL.rotation = rad(24 * s * a);
-        N.legR.rotation = rad(-24 * s * a);
-        N.upper.y = -4 * Math.abs(s) * a + Math.sin(now / 480) * 1.3 * (1 - a);
-        let lRot = 6 + 16 * s * a;
-        let rRot = -6 + 16 * s * a;
-        if (waving) rRot = -(140 + 18 * Math.sin(now / 80));
-        else if (talking) { rRot = -(38 + 14 * Math.sin(now / 160)); lRot = 8 + 5 * Math.sin(now / 210); }
-        N.armL.rotation = rad(lRot);
-        N.armR.rotation = rad(rRot);
-        N.head.rotation = rad(look * 3 + (talking ? Math.sin(now / 200) * 2 : 0));
-        N.pupils.x = look * 2.4;
+        const root = N.root;
+        if (N.px === undefined) { N.px = root.x; N.py = root.y; }
+        const vx = root.x - N.px;
+        const vy = root.y - N.py;
+        N.px = root.x;
+        N.py = root.y;
+        const sp = Math.hypot(vx, vy);
+        if (moving && sp > 0.01) {
+          const k = Math.min(1, delta / 110);
+          N.hx += (vx / sp - N.hx) * k;
+          N.hy += (vy / sp - N.hy) * k;
+        }
+
+        // which way is the body turned
+        let want = N.view;
+        if (talking || waving) want = 'front';
+        else if (moving) want = Math.abs(N.hy) > Math.abs(N.hx) * 1.1 ? (N.hy > 0 ? 'front' : 'back') : 'side';
+        else if (st.face) want = st.face;
+        if (want !== N.view) {
+          N.pendT = (N.pend === want ? N.pendT : 0) + dt;
+          N.pend = want;
+          if (N.pendT > 0.1) { this.setNpcView(N, want); N.pendT = 0; }
+        } else {
+          N.pendT = 0;
+        }
+        const view = N.view;
+        const side = view === 'side';
+        if (side) {
+          if (moving && Math.abs(N.hx) > 0.2) N.dir = N.hx > 0 ? 1 : -1;
+          else if (!moving && look) N.dir = look > 0 ? 1 : -1;
+          root.scaleX = N.dir;
+        } else {
+          root.scaleX = 1;
+        }
+
+        // the walk: stride speed follows how fast he actually moves
+        st.amp += ((moving ? 1 : 0) - st.amp) * Math.min(1, delta / 90);
+        const pps = sp / Math.max(dt, 0.001);
+        if (moving) st.phase += dt * Math.PI * 2 * Math.max(0.9, Math.min(3.2, pps / 50));
+        const a = st.amp;
+        const s = Math.sin(st.phase);
+
+        ['L', 'R'].forEach((sd, i) => {
+          const L = N.legs[sd];
+          const p = st.phase + (i ? Math.PI : 0);
+          if (side) {
+            L.leg.rotation = -rad(30 * Math.sin(p)) * a;
+            L.shin.rotation = rad((6 + 46 * Math.max(0, Math.cos(p))) * a);
+            L.foot.rotation = -(L.leg.rotation + L.shin.rotation) * 0.7;      // the ankle keeps the foot flatter
+            L.leg.y = -46;
+            L.leg.scaleY = 1;
+          } else {
+            const lift = Math.max(0, Math.sin(p)) * a;
+            L.leg.rotation = 0;
+            L.shin.rotation = 0;
+            L.foot.rotation = 0;
+            L.leg.y = -46 - 6 * lift;
+            L.leg.scaleY = 1 - 0.08 * lift;
+          }
+        });
+        N.upper.y = Math.sin(now / 480 + N.bob) * 1.1 * (1 - a) - 4 * Math.abs(s) * a;
+        N.upper.x = side ? 0 : s * 1.6 * a;
+
+        // small idle gestures when he just stands there facing you
+        const idle = !moving && !talking && !waving && view === 'front';
+        if (idle && now > N.idleAt) {
+          N.idleKind = ['look', 'scratch', 'shrug'][Math.floor(Math.random() * 3)];
+          N.idleUntil = now + 1900 + Math.random() * 800;
+          N.idleAt = N.idleUntil + 6000 + Math.random() * 7000;
+        }
+        const gesture = idle && now < N.idleUntil ? N.idleKind : '';
+
+        ['L', 'R'].forEach((sd, i) => {
+          const A = N.arms[sd];
+          const sg = sd === 'L' ? 1 : -1;                 // +1 turns the arm outward on the left, -1 on the right
+          const pa = st.phase + (i ? 0 : Math.PI);        // arms swing against the legs
+          let rot;
+          let el;
+          if (side) {
+            rot = -rad(26 * Math.sin(pa)) * a;
+            el = -rad(6 + a * (8 + 24 * Math.max(0, Math.sin(pa))));
+          } else {
+            rot = rad(sg * (5 + 7 * Math.sin(pa) * a));
+            el = -rad(sg * (6 + 8 * a));
+          }
+          rot += rad(sg * 1.2 * Math.sin(now / 900 + N.bob + i)) * (1 - a);
+          if (waving && sd === 'R') {
+            rot = -rad(132);
+            el = rad(26 * Math.sin(now / 90));
+          } else if (talking) {
+            if (sd === 'R') {
+              rot = -rad(34 + 10 * Math.sin(now / 210));
+              el = rad(62 + 26 * Math.sin(now / 170 + 1));
+            } else {
+              rot = rad(9 + 5 * Math.sin(now / 300));
+              el = -rad(14 + 10 * Math.sin(now / 260 + 2));
+            }
+          } else if (gesture === 'scratch' && sd === 'R') {
+            rot = -rad(100);
+            el = -rad(120 + 8 * Math.sin(now / 110));
+          } else if (gesture === 'shrug') {
+            rot = rad(sg * 24);
+            el = rad(sg * 105);
+          }
+          A.arm.rotation = rot;
+          A.fore.rotation = el;
+        });
+
+        // head and face
+        const lk = look || 0;
+        let hr = lk * 3 + (talking ? Math.sin(now / 200) * 2.5 : 0);
+        if (gesture === 'look') hr += 14 * Math.sin(now / 380);
+        N.head.rotation = rad(hr);
         if (now > st.nextBlink) { st.blinkUntil = now + 130; st.nextBlink = now + 2000 + Math.random() * 3000; }
         const shut = now < st.blinkUntil;
-        N.eyes.setVisible(!shut);
-        N.pupils.setVisible(!shut);
-        N.lids.setVisible(shut);
         const open = waving || (talking && Math.floor(now / 140) % 2 === 0);
-        N.mouthO.setVisible(open);
-        N.mouthS.setVisible(!open);
+        [N.fF, N.fS].forEach(f => {
+          f.eyes.setVisible(!shut);
+          f.pupils.setVisible(!shut);
+          f.lids.setVisible(shut);
+          f.mouthO.setVisible(open);
+          f.mouthS.setVisible(!open);
+        });
+        N.fF.pupils.x = lk * 2.4;
       }
 
       spawnFriend() {
