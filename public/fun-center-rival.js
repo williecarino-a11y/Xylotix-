@@ -151,8 +151,10 @@
         }
       } else if (cur.phase === 'grab') {
         grabbing = true;
+        n.face = 'back';                       // he faces the shelf while he grabs
         if (Date.now() > cur.grabUntil) {
           cur.phase = 'leave';
+          n.face = null;
           n.leave = [cur.route[1], cur.route[0]];
           n.lp = 0;
         }
