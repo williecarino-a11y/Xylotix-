@@ -27,12 +27,13 @@
     { id: 'fun',    label: 'FUN CORNER',     x: 320, y: 520 }
   ];
   const CATS = {
-    fresh: ['apple', 'carrot', 'bread', 'pasta'],
-    dairy: ['milk', 'eggs', 'water'],
-    snacks: ['chips', 'cookies', 'candy', 'pizza'],
-    care: ['medicine'],
-    fun: ['movie', 'headphones', 'console', 'sneakers']
-  };
+fresh: ['apple', 'carrot', 'bread', 'pasta'],
+dairy: ['milk', 'eggs', 'water'],
+snacks: ['chips', 'cookies', 'candy'],
+care: ['medicine'],
+fun: ['movie', 'headphones', 'console', 'sneakers'],
+freezer: ['pizza', 'icecream', 'frozendinner']
+};
   const COUNTER = { x: 1000, y: 640, w: 300, h: 80 };
   const ZONE = { x: 960, y: 740, w: 380, h: 170 };
   const START = { x: 160, y: 800 };
