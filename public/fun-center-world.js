@@ -2243,10 +2243,10 @@ refreshHot() {
         this.obst.push(this.custObst);
       }
 
-      customerDrop(icon) {
+      customerDrop(text) {
         const m = this.cust;
         if (m.itemObj) { m.itemObj.destroy(); m.itemObj = null; }
-        this.popText(m.x, m.y - 170, icon, '#ffffff');
+        this.popText(m.x, m.y - 170, text, '#ffffff');
       }
 
       updateCustomer(delta) {
@@ -2284,8 +2284,6 @@ refreshHot() {
               const step = Math.min(dist, CUSTOMER_SPEED * dt);
               m.x += (dx / dist) * step;
               m.y += (dy / dist) * step;
-              m.dirX = dx / dist;
-              m.dirY = dy / dist;
               moving = true;
               look = Math.sign(dx);
             }
@@ -2295,11 +2293,17 @@ refreshHot() {
           if (!m.decided && now > m.reachAt + 450) {
             m.decided = true;
             if (m.itemObj) {
-              if (Math.random() < 0.35) this.customerDrop('↩');     // he changes his mind
+              if (Math.random() < 0.35) this.customerDrop('Put back');     // he changes his mind
             } else if (Math.random() < 0.65) {
-              const e = CUSTOMER_PICKS[Math.floor(Math.random() * CUSTOMER_PICKS.length)];
-              m.itemObj = this.add.text(0, 40, e, { fontSize: '22px' }).setOrigin(0.5);
-              N.armR.add(m.itemObj);                                 // held in his hand
+              // he takes a real product off the shelf and carries it in his hand
+              const pool = this.products.filter(p => this.textures.exists('pr-' + p.item.id));
+              if (pool.length) {
+                const pk = pool[Math.floor(Math.random() * pool.length)];
+                const it = this.add.image(0, 24, 'pr-' + pk.item.id).setOrigin(0.5, 0.5);
+                it.setScale(24 / Math.max(it.height, 1));
+                m.itemObj = it;
+                N.arms.R.fore.add(it);
+              }
             }
           }
           if (now > m.until) {
@@ -2309,7 +2313,7 @@ refreshHot() {
         } else if (m.state === 'pay') {
           look = 1;
           if (now > m.until) {
-            this.customerDrop('🧾');
+            this.customerDrop('Paid');
             m.state = 'walk';
             m.wp = (m.wp + 1) % CUSTOMER_ROUTE.length;
           }
@@ -2319,16 +2323,17 @@ refreshHot() {
         this.custShadow.setPosition(m.x, m.y - 2).setDepth(m.y - 1);
         this.custObst.x = m.x - 24;
         this.custObst.y = m.y - 8;
+        m.face = m.state === 'browse' ? 'back' : (m.state === 'pay' ? 'side' : null);   // faces the shelf, or the counter
         this.animNpc(N, m, now, delta, moving, look, false, false);
-
-        // fake a turn: front-only art, so squeeze and lean when he walks along the aisle
-        const sideways = moving ? Math.min(1, Math.abs(m.dirX || 0) * 1.4) : 0;
-        m.turn = (m.turn || 0) + (sideways - (m.turn || 0)) * Math.min(1, delta / 120);
-        N.root.scaleX = 1 - 0.3 * m.turn;
-        N.upper.rotation = Phaser.Math.DegToRad(Math.sign(m.dirX || 0) * 7 * m.turn);
-
-        if (reaching) N.armR.rotation = Phaser.Math.DegToRad(-(75 + 8 * Math.sin(now / 120)));
-        else if (m.itemObj) N.armR.rotation = Phaser.Math.DegToRad(-40);
+        const rad = Phaser.Math.DegToRad;
+        if (reaching) {
+          N.armR.rotation = rad(-(150 + 8 * Math.sin(now / 120)));        // reaches up to the shelf
+          N.arms.R.fore.rotation = rad(-8);
+        } else if (m.itemObj) {
+          N.armR.rotation = rad(-40);                                      // holds the product in front of him
+          N.arms.R.fore.rotation = rad(75);
+        }
+        if (m.itemObj) m.itemObj.scaleX = Math.abs(m.itemObj.scaleX) * (N.root.scaleX < 0 ? -1 : 1);
       }
 
       burst(x, y, color, count) {
