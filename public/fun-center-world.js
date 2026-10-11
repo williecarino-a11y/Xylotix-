@@ -24,7 +24,8 @@
     { id: 'dairy',  label: 'DAIRY & DRINKS', x: 320, y: 200, fridge: true },
     { id: 'snacks', label: 'SNACKS',         x: 580, y: 200 },
     { id: 'care',   label: 'PERSONAL CARE',  x: 60,  y: 520 },
-    { id: 'fun',    label: 'FUN CORNER',     x: 320, y: 520 }
+    { id: 'fun',    label: 'FUN CORNER',     x: 320, y: 520 },
+{ id: 'freezer', label: 'FREEZER',       x: 840, y: 200, fridge: true }
   ];
   const CATS = {
 fresh: ['apple', 'carrot', 'bread', 'pasta'],
