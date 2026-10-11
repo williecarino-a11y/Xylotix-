@@ -198,6 +198,7 @@ const itemEffects = {
   milk: { health: 6 }, bread: { health: 6 }, eggs: { health: 6 }, pasta: { health: 6 },
   apple: { health: 6 }, carrot: { health: 6 }, water: { health: 4 }, medicine: { health: 25 },
   chips: { happiness: 5 }, cookies: { happiness: 6 }, candy: { happiness: 5 }, pizza: { happiness: 12 },
+  icecream: { happiness: 10 }, frozendinner: { happiness: 8 },
   movie: { happiness: 15, friends: 35 }, headphones: { happiness: 20 }, console: { happiness: 30 }, sneakers: { happiness: 20 }
 };
 const situations = [
