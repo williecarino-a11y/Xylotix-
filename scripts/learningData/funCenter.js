@@ -266,10 +266,10 @@ const TRICK_POOL = ['chips', 'cookies', 'candy', 'pasta', 'apple', 'carrot', 'wa
 const TRICK_KINDS = ['real-sale', 'fake-sale', 'fake-sale', 'fake-urgent'];
 const SCANS_PER_TRIP = 3;
 
-function pickTricks() {
+function pickTricks(rng = Math.random) {
   const ids = TRICK_POOL.slice();
   for (let i = ids.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
+    const j = Math.floor(rng() * (i + 1));
     [ids[i], ids[j]] = [ids[j], ids[i]];
   }
   return TRICK_KINDS.map((kind, i) => {
