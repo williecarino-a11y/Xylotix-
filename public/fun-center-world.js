@@ -282,6 +282,26 @@ freezer: ['pizza', 'icecream', 'frozendinner']
       .mw-grab { width: 104px; height: 104px; border-radius: 50%; border: 3px solid #4da3ff; background: #1f6feb; color: #fff; font-size: 16px; font-weight: 800; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; cursor: pointer; }
       .mw-grab small { font-size: 11px; font-weight: 600; max-width: 84px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
       .mw-grab:disabled { opacity: .4; background: #232c42; border-color: #232c42; cursor: default; }
+      .mw { padding-bottom: 90px; }
+      .mw-holder { border: 0; border-radius: 22px; }
+      .mw-hud { position: absolute; left: 8px; right: 8px; top: 8px; z-index: 7; display: flex; flex-direction: column; gap: 5px; pointer-events: none; }
+      .mw-hud button, .mw-hud summary, .mw-hud details { pointer-events: auto; }
+      .mw-hud .mw-top { padding: 0; gap: 6px; font-size: 13px; }
+      .mw-hud .mw-top .mw-wallet { flex: none; font-size: 14px; background: rgba(8, 14, 30, 0.62); border-radius: 999px; padding: 5px 12px; }
+      .mw-hud .mw-count { background: rgba(8, 14, 30, 0.62); border: 0; padding: 5px 10px; font-size: 13px; }
+      .mw-hud .mw-leave { background: rgba(8, 14, 30, 0.62); border: 0; padding: 5px 10px; font-size: 13px; }
+      .mw-hud [data-mw-mute] { margin-left: auto; }
+      .mw-hud .mw-clock { padding: 3px 10px; font-size: 11px; background: rgba(8, 14, 30, 0.55); border-radius: 999px; }
+      .mw-hud .mw-clock-bar { height: 6px; }
+      .mw-hud .mw-combo, .mw-hud .mw-sale, .mw-hud .mw-hike { margin: 0; font-size: 12px; padding: 4px 10px; border-radius: 999px; }
+      .mw-hud .mw-list { padding: 0; gap: 5px; align-items: center; }
+      .mw-hud .mw-list details { width: auto !important; background: rgba(8, 14, 30, 0.62); border-radius: 12px; padding: 3px 10px; }
+      .mw-hud .mw-list-title { width: auto; font-size: 11px; }
+      .mw-hud .mw-chip { font-size: 0; width: 14px; height: 14px; padding: 0; border-radius: 50%; border: 2px solid #8fa0c8; background: rgba(8, 14, 30, 0.62); text-decoration: none; }
+      .mw-hud .mw-chip::before, .mw-hud .mw-chip.done::before { content: ''; }
+      .mw-hud .mw-chip.done { background: #2fbf7a; border-color: #7ee2a8; }
+      .mw-hud > * { margin: 0 !important; }
+      .mw-asst { top: auto; bottom: 72px; }
     `;
     document.head.appendChild(st);
   }
