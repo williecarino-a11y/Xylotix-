@@ -962,4 +962,6 @@ router.post('/cart-skins/equip', funAnswerLimiter, async (req, res) => {
   }
 });
 
+router.use('/daily', daily.router);
+
 module.exports = router;
