@@ -873,7 +873,11 @@ router.post('/shop/session/:sessionId/checkout', funSessionStartLimiter, async (
         await profile.save({ session: mongoSession });
       }
 
-      checkoutResult = { alreadyCompleted: false, ...summary, xp: reward.xp, coins: reward.coins, totalXP: profile.totalXP, totalCoins: profile.totalCoins };
+      let dailyResult = null;
+      if (existing.dailyKey) {
+        dailyResult = await daily.finishAttempt({ userId: user._id, dayKey: existing.dailyKey, sessionId, summary, mongoSession });
+      }
+      checkoutResult = { alreadyCompleted: false, ...summary, daily: dailyResult, xp: reward.xp, coins: reward.coins, totalXP: profile.totalXP, totalCoins: profile.totalCoins };
     });
 
     return res.json({ status: 'success', data: checkoutResult });
