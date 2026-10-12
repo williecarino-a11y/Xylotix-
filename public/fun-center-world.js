@@ -2702,7 +2702,7 @@ refreshHot() {
             const dx = b.x - a.x;
             const dy = b.y - a.y;
             const d = Math.hypot(dx, dy);
-            if (d >= 48) continue;
+            if (d >= 64) continue;
             const nx = d > 0.5 ? dx / d : 1;
             const ny = d > 0.5 ? dy / d : 0;
             const k = ((48 - d) / 48) * 40 * dt;
