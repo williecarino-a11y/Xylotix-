@@ -139,7 +139,7 @@ freezer: ['pizza', 'icecream', 'frozendinner']
           this.master.gain.value = this.muted ? 0 : 0.9;
           this.master.connect(this.ctx.destination);
         }
-        if (this.ctx.state === 'suspended') this.ctx.resume();
+        if (this.ctx.state === 'suspended') { const rp = this.ctx.resume(); if (rp && rp.catch) rp.catch(() => {}); }
       } catch (e) { /* no audio available */ }
     },
     tone(f, dur, type, vol, delay) {
