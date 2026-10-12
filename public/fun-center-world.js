@@ -2638,6 +2638,8 @@ refreshHot() {
           const c = { x: r[0], y: r[1], wp: 1, wait: i * 1800, phase: 0, amp: 0, nextBlink: 0, blinkUntil: 0, speed: s.speed, route: s.route };
           c.npc = this.makeNpc({ x: r[0], y: r[1], shirt: s.shirt, pants: s.pants, hair: s.hair, skin: s.skin });
           c.shadow = this.add.ellipse(r[0], r[1] - 2, 70, 16, 0x000000, 0.25);
+          c.obst = { x: r[0] - 24, y: r[1] - 8, w: 48, h: 16 };
+          this.obst.push(c.obst);
           return c;
         });
       }
