@@ -229,8 +229,8 @@ function getSituation(id) {
   return situations.find(s => s.id === id) || null;
 }
 
-function pickSituation() {
-  return situations[Math.floor(Math.random() * situations.length)];
+function pickSituation(rng = Math.random) {
+  return situations[Math.floor(rng() * situations.length)];
 }
 
 function computeMeters(situationId, itemIds) {
