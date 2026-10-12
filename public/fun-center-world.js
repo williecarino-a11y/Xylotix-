@@ -1170,7 +1170,7 @@ freezer: ['pizza', 'icecream', 'frozendinner']
       preload() {
         const barW = 400;
         const barX = (VIEW_W - barW) / 2;
-        const barY = VIEW_H / 2;
+        const barY = this.scale.height / 2;
         const barFrame = this.add.graphics();
         barFrame.lineStyle(3, 0x4da3ff, 1).strokeRoundedRect(barX - 4, barY - 4, barW + 8, 28, 8);
         const barFill = this.add.graphics();
@@ -1604,7 +1604,7 @@ freezer: ['pizza', 'icecream', 'frozendinner']
         // camera
         const cam = this.cameras.main;
         cam.setBounds(0, 0, W, H);
-        cam.setZoom(1.2);
+        cam.setZoom(Math.max(1.2, this.scale.height / H));
         cam.startFollow(this.player, true, 0.12, 0.12);
         cam.setDeadzone(90, 60);
         cam.roundPixels = true;
