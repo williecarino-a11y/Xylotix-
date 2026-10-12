@@ -2715,7 +2715,7 @@ refreshHot() {
         this.tweens.add({ targets: obj, y: baseY, duration: 260, ease: 'Bounce.easeOut' });
         product.obj = obj;
         product.label = this.add.text(product.x, product.sy - 15, priceText(product.item), {
-          fontSize: '13px', color: '#ffffff', fontStyle: 'bold', stroke: '#000000', strokeThickness: 3
+          fontSize: '16px', color: '#ffffff', fontStyle: 'bold', stroke: '#000000', strokeThickness: 4
         }).setOrigin(0.5).setDepth(product.sy + 2);
         product.taken = false;
       }
