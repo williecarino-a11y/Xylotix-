@@ -301,7 +301,22 @@ freezer: ['pizza', 'icecream', 'frozendinner']
       .mw-hud .mw-chip::before, .mw-hud .mw-chip.done::before { content: ''; }
       .mw-hud .mw-chip.done { background: #2fbf7a; border-color: #7ee2a8; }
       .mw-hud > * { margin: 0 !important; }
-      .mw-asst { top: auto; bottom: 72px; }
+      .mw-asst { top: auto; bottom: 64px; }
+      .mw { position: fixed; inset: 0; z-index: 9000; max-width: none; margin: 0; padding: 0; background: #0b1220; display: flex; flex-direction: column; }
+      .mw-holder { flex: 1 1 auto; min-height: 0; width: 100%; aspect-ratio: auto; border-radius: 0; background: #0b1220; }
+      .mw-controls { flex: none; padding: 8px 18px calc(14px + env(safe-area-inset-bottom, 0px)); background: #0b1220; }
+      .mw-hud { gap: 4px; }
+      .mw-hud .mw-clock { order: -1; font-size: 10px; padding: 2px 10px; }
+      .mw-hud .mw-top .mw-wallet { font-size: 13px; padding: 4px 10px; }
+      .mw-hud .mw-count, .mw-hud .mw-leave { font-size: 12px; padding: 4px 9px; }
+      .mw-hud .mw-combo, .mw-hud .mw-sale, .mw-hud .mw-hike { font-size: 11px; padding: 3px 10px; }
+      .mw-hud .mw-list details { padding: 2px 9px; }
+      .mw-hud .mw-list-title { font-size: 10px; }
+      .mw-asst { left: 8px; right: 8px; padding: 6px 10px; gap: 8px; font-size: 12px; line-height: 1.25; border-width: 1px; border-radius: 12px; }
+      .mw-asst-face { width: 26px; height: 26px; font-size: 15px; }
+      .mw-asst b { font-size: 10px; }
+      .mw-reply { padding: 4px 10px; font-size: 12px; border-width: 1px; }
+      .mw-bubble { left: 8px; right: 8px; bottom: 10px; padding: 6px 10px; font-size: 12px; line-height: 1.25; border: 0; border-radius: 12px; background: rgba(8, 14, 30, 0.72); }
     `;
     document.head.appendChild(st);
   }
