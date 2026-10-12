@@ -1399,10 +1399,20 @@ freezer: ['pizza', 'icecream', 'frozendinner']
         floorShade.fillGradientStyle(0x000000, 0x000000, 0x000000, 0x000000, 0.45, 0.45, 0, 0);
         floorShade.fillRect(0, WALL_H, W, 110);
 
-        // warm pools of light under the ceiling lamps
+        // warm pools of light: soft glow with no hard edges
+        if (!this.textures.exists('glow')) {
+          const gc = this.textures.createCanvas('glow', 256, 256);
+          const ctx = gc.getContext();
+          const gr = ctx.createRadialGradient(128, 128, 0, 128, 128, 128);
+          gr.addColorStop(0, 'rgba(255,238,190,0.55)');
+          gr.addColorStop(0.45, 'rgba(255,238,190,0.2)');
+          gr.addColorStop(1, 'rgba(255,238,190,0)');
+          ctx.fillStyle = gr;
+          ctx.fillRect(0, 0, 256, 256);
+          gc.refresh();
+        }
         [[330, 470], [760, 470], [1100, 470], [330, 830], [760, 860], [1100, 860]].forEach(p => {
-          this.add.ellipse(p[0], p[1], 420, 140, 0xfff2c9, 0.16).setDepth(-98).setBlendMode(Phaser.BlendModes.ADD);
-          this.add.ellipse(p[0], p[1], 220, 74, 0xfff2c9, 0.14).setDepth(-98).setBlendMode(Phaser.BlendModes.ADD);
+          this.add.image(p[0], p[1], 'glow').setDisplaySize(560, 200).setDepth(-98).setAlpha(0.65);
         });
 
         // the edges of the floor fall into shadow
