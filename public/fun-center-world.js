@@ -2684,7 +2684,7 @@ refreshHot() {
           if (Math.abs(ix) > 0.12) this.faceLeft = ix < 0;
 
           this.stepClock = (this.stepClock || 0) + delta;
-          if (this.stepClock > 340) { this.stepClock = 0; SFX.step(); }
+          if (this.stepClock > 340) { this.stepClock = 0; SFX.step(); this.dust(this.player.x, this.player.y); }
           if (!this.puppet) {
             this.walkClock += delta;
             if (this.walkClock > 260) {
