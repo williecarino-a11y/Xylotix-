@@ -324,6 +324,7 @@ freezer: ['pizza', 'icecream', 'frozendinner']
       .mw-hud [data-mw-mute] { display: inline-flex; align-items: center; justify-content: center; }
       .mw-count svg, .mw-hud [data-mw-mute] svg { display: block; }
       .mw-scan::before { content: 'Scan'; font-size: 15px; font-weight: 800; }
+      .mw-bubble { transition: opacity .4s; }
     `;
     document.head.appendChild(st);
   }
