@@ -893,8 +893,10 @@ freezer: ['pizza', 'icecream', 'frozendinner']
 
     // sound: browsers start audio only after a tap, so wake it on the first touch
     const muteBtn = content.querySelector('[data-mw-mute]');
-    muteBtn.textContent = SFX.muted ? '🔇' : '🔊';
-    muteBtn.addEventListener('click', () => { muteBtn.textContent = SFX.toggleMute() ? '🔇' : '🔊'; });
+    const ICON_ON = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z" fill="currentColor"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg>';
+    const ICON_OFF = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z" fill="currentColor"/><path d="M16 9l6 6M22 9l-6 6"/></svg>';
+    muteBtn.innerHTML = SFX.muted ? ICON_OFF : ICON_ON;
+    muteBtn.addEventListener('click', () => { muteBtn.innerHTML = SFX.toggleMute() ? ICON_OFF : ICON_ON; });
     content.addEventListener('pointerdown', () => { SFX.init(); SFX.startMusic(); });
     SFX.init();
     SFX.startMusic();
