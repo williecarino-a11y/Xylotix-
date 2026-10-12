@@ -4,7 +4,8 @@
   'use strict';
   window.MiimiidMart = window.MiimiidMart || {};
 
-  const KEYS = [['health', '❤️', 'Health'], ['happiness', '😊', 'Happiness'], ['friends', '🤝', 'Friends']];
+  // [key, unused, full name (result card), short name (live HUD)]
+  const KEYS = [['health', '', 'Health', 'Health'], ['happiness', '', 'Happiness', 'Mood'], ['friends', '', 'Friends', 'Friends']];
 
   function clamp(v) { return Math.max(0, Math.min(100, v)); }
 
@@ -13,18 +14,25 @@
     const st = document.createElement('style');
     st.id = 'mm-week-styles';
     st.textContent = `
-      .mm-meters { display: flex; gap: 10px; margin: 0 4px 6px; padding: 6px 10px; background: #131a2c; border: 1px solid #232c42; border-radius: 12px; }
-      .mm-meters .mm-meter { flex: 1; min-width: 0; gap: 5px; }
-      .mm-meters .mm-meter-name { width: auto; }
-      .mm-meters .mm-meter-num { width: 24px; }
       .mm-meter { display: flex; align-items: center; gap: 8px; padding: 2px 0; font-size: 12px; font-weight: 800; color: #e6e9f0; text-align: left; }
       .mm-meter-name { width: 100px; flex: none; }
       .mm-meter-bar { flex: 1; height: 10px; border-radius: 999px; background: #0d1324; border: 1px solid #232c42; overflow: hidden; }
       .mm-meter-fill { height: 100%; width: 0; border-radius: 999px; background: #3fd08a; transition: width .35s ease-out, background .3s; }
       .mm-meter-num { width: 28px; text-align: right; }
+      .mm-meter[data-k="health"] .mm-meter-fill { background: #ff6b81; }
+      .mm-meter[data-k="happiness"] .mm-meter-fill { background: #ffd34d; }
+      .mm-meter[data-k="friends"] .mm-meter-fill { background: #4da3ff; }
       .mm-meter[data-level="low"] .mm-meter-fill { background: #ffb020; }
       .mm-meter[data-level="zero"] .mm-meter-fill { background: #ff5d5d; }
       .mm-meter[data-level="zero"] .mm-meter-num { color: #ff5d5d; animation: mwPulse .8s ease-in-out infinite; }
+
+      /* live HUD: three small pills in one row, no card */
+      .mm-meters { display: flex; gap: 6px; margin: 0; padding: 0; background: none; border: 0; }
+      .mm-meters .mm-meter { flex: 1; min-width: 0; gap: 5px; padding: 3px 8px; font-size: 10px; background: rgba(8, 14, 30, 0.62); border-radius: 999px; }
+      .mm-meters .mm-meter-name { width: auto; }
+      .mm-meters .mm-meter-bar { height: 6px; border: 0; }
+      .mm-meters .mm-meter-num { width: auto; min-width: 16px; }
+
       .mm-result-meters { margin: 4px 0 8px; }
       .mm-burn { color: #ff8a8a; font-size: 13px; font-weight: 800; margin: 6px 0 0; }
     `;
@@ -34,7 +42,7 @@
   function rowHtml(k, v, warn, compact) {
     const level = v <= 0 ? 'zero' : v < warn ? 'low' : 'ok';
     return `<div class="mm-meter" data-k="${k[0]}" data-level="${level}">
-      <span class="mm-meter-name">${compact ? k[1] : k[1] + ' ' + k[2]}</span>
+      <span class="mm-meter-name">${compact ? k[3] : k[2]}</span>
       <div class="mm-meter-bar"><div class="mm-meter-fill" style="width:${v}%"></div></div>
       <b class="mm-meter-num">${v}</b></div>`;
   }
@@ -97,7 +105,7 @@
     const burned = Array.isArray(r.burnedOut) ? r.burnedOut : [];
     return `<div class="mm-result-meters">
       ${KEYS.map(k => rowHtml(k, clamp(Number(r.meters[k[0]]) || 0), 30)).join('')}
-      ${burned.length ? '<p class="mm-burn">🔥 You burned out. A meter hit zero.</p>' : ''}
+      ${burned.length ? '<p class="mm-burn">You burned out. A meter hit zero.</p>' : ''}
     </div>`;
   }
 
