@@ -341,6 +341,7 @@ freezer: ['pizza', 'icecream', 'frozendinner']
       .mw-hud .mm-meters .mm-meter-num { min-width: 14px; }
       .mw-hud .mm-meters .mm-meter-bar { position: absolute; left: 9px; right: 9px; bottom: 3px; height: 3px; flex: none; }
       .mw-hud .mw-sale, .mw-hud .mw-hike { font-size: 10px; padding: 2px 8px; }
+      .mw-hud .mm-meters .mm-meter, .mw-hud .mw-list details, .mw-hud .mw-top .mw-wallet, .mw-hud .mw-top .mw-count, .mw-hud .mw-top .mw-leave { background: rgba(8, 14, 30, 0.92); }
       .mw-bubble { transition: opacity .4s; }
     `;
     document.head.appendChild(st);
