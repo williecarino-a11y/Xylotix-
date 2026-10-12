@@ -1630,8 +1630,7 @@ freezer: ['pizza', 'icecream', 'frozendinner']
         sw.lineBetween(W - SIDE_BACK, 22, W - SIDE_BACK, WALL_H);
         // wall rail
         sw.lineStyle(3, 0x7ab8ff, 0.35);
-        sw.lineBetween(0, H - 120, SIDE_BACK, WALL_H - 60);
-        sw.lineBetween(W, H - 120, W - SIDE_BACK, WALL_H - 60);
+        // (slanted wall rail removed)
         // baseboards along the floor
         sw.lineStyle(10, 0x1f6feb, 1);
         sw.lineBetween(SIDE_BACK, WALL_H, SIDE_FRONT, H);
