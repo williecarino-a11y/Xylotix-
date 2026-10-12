@@ -1632,6 +1632,7 @@ freezer: ['pizza', 'icecream', 'frozendinner']
         this.buildShopkeeper();
         this.buildCashier();
         this.buildCustomer();
+        this.buildCrowd();
 
         // player
         this.shadow = this.add.ellipse(START.x, START.y - 2, 110, 24, 0x000000, 0.28);
