@@ -440,7 +440,14 @@ freezer: ['pizza', 'icecream', 'frozendinner']
     const countEl = content.querySelector('[data-mw-count]');
     const grabBtn = content.querySelector('[data-mw-grab]');
 
-    function say(text) { bubble.textContent = text; }
+    let bubbleTimer = 0;
+    function say(text) {
+      bubble.textContent = text;
+      bubble.style.opacity = '1';
+      clearTimeout(bubbleTimer);
+      bubbleTimer = setTimeout(() => { bubble.style.opacity = '0'; }, 5000);
+    }
+    say(bubble.textContent);
 
     // closing-time clock: gentle, pauses while a menu or payment is open
     const clockFill = content.querySelector('[data-mw-clock]');
