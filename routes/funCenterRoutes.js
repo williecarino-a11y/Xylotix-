@@ -536,7 +536,7 @@ router.post('/shop/session/:sessionId/sale/start', funAnswerLimiter, async (req,
     const choices = getFlashSales().filter(sale => !boughtIds.has(sale.itemId) && shop.items.some(item => item.id === sale.itemId));
     if (choices.length === 0) return res.json({ status: 'success', data: { started: false } });
 
-    const sale = choices[Math.floor(Math.random() * choices.length)];
+    const sale = daily.pickFor(existing.dailyKey, 'sale', choices, c => c.itemId);
     const item = shop.items.find(candidate => candidate.id === sale.itemId);
     const endsAt = new Date(Date.now() + sale.seconds * 1000);
 
