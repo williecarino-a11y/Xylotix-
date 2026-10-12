@@ -331,7 +331,11 @@ freezer: ['pizza', 'icecream', 'frozendinner']
       .mw-hud > .mw-list:has(details[open]) { flex: 1 1 100%; }
       .mw-hud .mw-list summary.mw-list-title { font-size: 0; }
       .mw-hud .mw-list summary.mw-list-title::after { content: 'Plan'; font-size: 10px; }
-      .mw-hud .mm-meters .mm-meter { padding: 3px 6px; gap: 4px; font-size: 9px; }
+      .mw-hud .mm-meters .mm-meter { position: relative; padding: 3px 8px 7px; gap: 5px; font-size: 10px; }
+      .mw-hud .mm-meters .mm-meter-name { flex: 1; width: auto; }
+      .mw-hud .mm-meters .mm-meter-num { min-width: 14px; }
+      .mw-hud .mm-meters .mm-meter-bar { position: absolute; left: 9px; right: 9px; bottom: 3px; height: 3px; flex: none; }
+      .mw-hud .mw-sale, .mw-hud .mw-hike { font-size: 10px; padding: 2px 8px; }
       .mw-bubble { transition: opacity .4s; }
     `;
     document.head.appendChild(st);
