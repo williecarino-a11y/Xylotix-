@@ -2714,6 +2714,15 @@ refreshHot() {
         if (Phaser.Input.Keyboard.JustDown(k.SPACE)) grabBtn.click();
 
         const near = nearestProduct(this);
+        // a little arrow bounces over the item you can grab (green when you can put it back)
+        if (!this.hint) this.hint = this.add.triangle(0, 0, 0, 0, 22, 0, 11, 16, 0xffd34d).setDepth(100002).setVisible(false);
+        if (near && !S.busy) {
+          this.hint.setVisible(true);
+          this.hint.setFillStyle(near.taken ? 0x7ee2a8 : 0xffd34d, 1);
+          this.hint.setPosition(near.x, near.y - 40 + Math.sin(time / 170) * 4);
+        } else {
+          this.hint.setVisible(false);
+        }
         const atCounter = !near && inCheckoutZone(this);
         if (atCounter && !S.zoneHint && S.basket.length > 0) {
           S.zoneHint = true;
