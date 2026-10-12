@@ -2869,6 +2869,7 @@ refreshHot() {
         }
         this.player.setDepth(this.player.y);
         if (this.cartBox) this.updateCart();
+        this.separateNpcs(dt);
         this.updateShopkeeper(delta);
         this.updateFriend(delta);
         this.updateCashier(delta);
