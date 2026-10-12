@@ -621,7 +621,7 @@ router.post('/shop/session/:sessionId/rival/start', funAnswerLimiter, async (req
     );
     if (choices.length === 0) return res.json({ status: 'success', data: { started: false } });
 
-    const item = choices[Math.floor(Math.random() * choices.length)];
+    const item = daily.pickFor(existing.dailyKey, 'rival', choices, c => c.id);
     const takesAt = new Date(Date.now() + RIVAL_SECONDS * 1000);
     const restockAt = new Date(takesAt.getTime() + RIVAL_RESTOCK_SECONDS * 1000);
     const restockPrice = item.price + RIVAL_MARKUP;
