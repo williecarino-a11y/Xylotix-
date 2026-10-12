@@ -890,7 +890,7 @@ freezer: ['pizza', 'icecream', 'frozendinner']
         const n = Math.min(S.combo, notes.length) - 1;
         SFX.tone(notes[n], 0.12, 'triangle', 0.12);
         SFX.tone(notes[n] * 1.5, 0.2, 'triangle', 0.1, 0.08);
-        const label = S.combo >= 3 ? `Smart buy x${S.combo}! 🔥` : (S.combo === 2 ? 'Smart buy x2!' : 'Smart buy!');
+        const label = S.combo >= 3 ? `Smart buy x${S.combo}!` : (S.combo === 2 ? 'Smart buy x2!' : 'Smart buy!');
         scene.popText(px, py - 50, label, '#7ee2a8');
       } else {
         S.combo = 0;
