@@ -1470,11 +1470,22 @@ freezer: ['pizza', 'icecream', 'frozendinner']
         this.walkClock = 0;
         this.makeTextures();
 
-        // every label in the store uses a clean font, drawn sharper
-        const addText = this.add.text.bind(this.add);
-        this.add.text = (x, y, t, style) => addText(x, y, t, Object.assign(
-          { fontFamily: 'system-ui, -apple-system, "Segoe UI", Roboto, sans-serif', resolution: 2 }, style
-        ));
+        // soft shadows: every black floor shadow becomes a blurred one (no hard-edged ovals)
+        if (!this.textures.exists('softshadow')) {
+          const shTex = this.textures.createCanvas('softshadow', 128, 128);
+          const shCtx = shTex.getContext();
+          const shGrad = shCtx.createRadialGradient(64, 64, 0, 64, 64, 64);
+          shGrad.addColorStop(0, 'rgba(0,0,0,0.42)');
+          shGrad.addColorStop(0.55, 'rgba(0,0,0,0.26)');
+          shGrad.addColorStop(1, 'rgba(0,0,0,0)');
+          shCtx.fillStyle = shGrad;
+          shCtx.fillRect(0, 0, 128, 128);
+          shTex.refresh();
+        }
+        const addEllipse = this.add.ellipse.bind(this.add);
+        this.add.ellipse = (x, y, w, h, color, alpha) => (color === 0x000000
+          ? this.add.image(x, y, 'softshadow').setDisplaySize(w * 1.15, h * 1.5)
+          : addEllipse(x, y, w, h, color, alpha));
 
         // ---- ROOM (three-quarter): floor, back wall, two side walls, warm lighting ----
         const FL_TOP = WALL_H;
