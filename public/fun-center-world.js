@@ -1555,9 +1555,8 @@ freezer: ['pizza', 'icecream', 'frozendinner']
         const ROWS = 14;
         const COLS = 22;
         const COL_W = 130;
-        const rowY = k => FL_TOP + (FL_BOT - FL_TOP) * Math.pow(k / ROWS, 1.45);
-        const sc = y => 0.5 + 0.5 * ((y - FL_TOP) / (FL_BOT - FL_TOP));
-        const fx = (c, y) => W / 2 + (c - COLS / 2) * COL_W * sc(y);
+        const rowY = k => FL_TOP + (FL_BOT - FL_TOP) * (k / ROWS);
+        const fx = c => (c / COLS) * W;
         fl.lineStyle(2, 0x9c8b6c, 0.2);
         for (let r = 1; r <= ROWS; r++) fl.lineBetween(0, rowY(r), W, rowY(r));
         for (let c = 0; c <= COLS; c++) fl.lineBetween(fx(c, FL_TOP), FL_TOP, fx(c, FL_BOT), FL_BOT);
