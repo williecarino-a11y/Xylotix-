@@ -2519,6 +2519,61 @@ refreshHot() {
         if (m.itemObj) m.itemObj.scaleX = Math.abs(m.itemObj.scaleX) * (N.root.scaleX < 0 ? -1 : 1);
       }
 
+      // ambient shoppers: they just walk their loops, so the store feels busy
+      buildCrowd() {
+        const specs = [
+          { shirt: 0xe8b923, pants: 0x3a4a6b, hair: 0x2a1a12, skin: 0xb98558, speed: 54, route: [[200, 430], [1150, 430], [1150, 490], [200, 490]] },
+          { shirt: 0x2fb7a6, pants: 0x4a3a5c, hair: 0x7a4a22, skin: 0xe8b88a, speed: 46, route: [[150, 820], [900, 820], [900, 900], [150, 900]] },
+          { shirt: 0xc2543c, pants: 0x2f3b52, hair: 0x1d1d1d, skin: 0xd9a066, speed: 50, route: [[730, 410], [730, 880], [800, 880], [800, 410]] }
+        ];
+        this.crowd = specs.map((s, i) => {
+          const r = s.route[0];
+          const c = { x: r[0], y: r[1], wp: 1, wait: i * 1800, phase: 0, amp: 0, nextBlink: 0, blinkUntil: 0, speed: s.speed, route: s.route };
+          c.npc = this.makeNpc({ x: r[0], y: r[1], shirt: s.shirt, pants: s.pants, hair: s.hair, skin: s.skin });
+          c.shadow = this.add.ellipse(r[0], r[1] - 2, 70, 16, 0x000000, 0.25);
+          return c;
+        });
+      }
+
+      updateCrowd(delta) {
+        if (!this.crowd) return;
+        const now = this.time.now;
+        const dt = delta / 1000;
+        this.crowd.forEach(c => {
+          const dp = Math.hypot(this.player.x - c.x, this.player.y - c.y);
+          let moving = false;
+          let look = 0;
+          if (dp < 90) {
+            look = Math.sign(this.player.x - c.x);       // you are in the way: they wait
+          } else if (c.wait > 0) {
+            c.wait -= delta;
+          } else {
+            const t = c.route[c.wp];
+            const dx = t[0] - c.x;
+            const dy = t[1] - c.y;
+            const dist = Math.hypot(dx, dy);
+            if (dist < 5) {
+              c.wp = (c.wp + 1) % c.route.length;
+              c.wait = Math.random() < 0.4 ? 800 + Math.random() * 1800 : 0;
+            } else {
+              const step = Math.min(dist, c.speed * dt);
+              c.x += (dx / dist) * step;
+              c.y += (dy / dist) * step;
+              moving = true;
+              look = Math.sign(dx);
+            }
+          }
+          c.npc.root.setPosition(c.x, c.y).setDepth(c.y);
+          c.shadow.setPosition(c.x, c.y - 2).setDepth(c.y - 1);
+          this.animNpc(c.npc, c, now, delta, moving, look, false, false);
+        });
+      }
+
+      dust(x, y) {
+        const d = this.add.circle(x + (Math.random() - 0.5) * 16, y - 3, 4 + Math.random() * 3, 0xf1e6cf, 0.45).setDepth(y - 2);
+        this.tweens.add({ targets: d, y: d.y - 8, scale: 2.2, alpha: 0, duration: 520, ease: 'Sine.easeOut', onComplete: () => d.destroy() });
+      }
+      
       burst(x, y, color, count) {
         for (let i = 0; i < count; i++) {
           const a = (Math.PI * 2 * i) / count + Math.random() * 0.4;
