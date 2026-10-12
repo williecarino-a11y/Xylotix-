@@ -126,6 +126,11 @@ freezer: ['pizza', 'icecream', 'frozendinner']
     ctx: null, master: null, muted: false, timer: null, beat: 0,
     init() {
       try {
+        if (this.ctx && this.ctx.state === 'closed') {
+          if (this.timer) { clearInterval(this.timer); this.timer = null; }
+          this.ctx = null;
+          this.master = null;
+        }
         if (!this.ctx) {
           const AC = window.AudioContext || window.webkitAudioContext;
           if (!AC) return;
