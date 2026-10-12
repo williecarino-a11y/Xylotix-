@@ -2681,6 +2681,17 @@ refreshHot() {
         });
       }
 
+      // gently nudges a shopper out of Miimiid's spot, so two people never stand on the same pixel
+      stepAside(o, dt) {
+        const dx = o.x - this.player.x;
+        const dy = o.y - this.player.y;
+        const d = Math.hypot(dx, dy) || 1;
+        if (d >= 60) return;
+        const k = (60 - d) / 60;
+        o.x = Phaser.Math.Clamp(o.x + (dx / d) * 90 * k * dt, 60, W - 60);
+        o.y = Phaser.Math.Clamp(o.y + (dy / d) * 60 * k * dt, WALL_H + 40, H - 40);
+      }
+
       dust(x, y) {
         const d = this.add.circle(x + (Math.random() - 0.5) * 16, y - 3, 4 + Math.random() * 3, 0xf1e6cf, 0.45).setDepth(y - 2);
         this.tweens.add({ targets: d, y: d.y - 8, scale: 2.2, alpha: 0, duration: 520, ease: 'Sine.easeOut', onComplete: () => d.destroy() });
