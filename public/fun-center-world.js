@@ -832,6 +832,29 @@ freezer: ['pizza', 'icecream', 'frozendinner']
     };
     keepHud();
     new MutationObserver(keepHud).observe(mwRoot, { childList: true });
+    // no emoji anywhere in the Mart: strip them from every label, button and message
+    const EMOJI = /[\p{Extended_Pictographic}\u200D\uFE0F]/u;
+    const EMOJI_ALL = /[\p{Extended_Pictographic}\u200D\uFE0F]/gu;
+    const cleanText = n => {
+      const v = n.nodeValue;
+      if (!EMOJI.test(v)) return;
+      n.nodeValue = v.replace(EMOJI_ALL, '').replace(/\s{2,}/g, ' ').trim();
+    };
+    const scrub = node => {
+      if (node.nodeType === 3) { cleanText(node); return; }
+      if (node.nodeType !== 1) return;
+      const w = document.createTreeWalker(node, NodeFilter.SHOW_TEXT);
+      const list = [];
+      while (w.nextNode()) list.push(w.currentNode);
+      list.forEach(cleanText);
+    };
+    scrub(mwRoot);
+    new MutationObserver(ms => {
+      ms.forEach(m => {
+        if (m.type === 'characterData') cleanText(m.target);
+        else m.addedNodes.forEach(scrub);
+      });
+    }).observe(mwRoot, { childList: true, subtree: true, characterData: true });
     const listEl = content.querySelector('[data-mw-list]');
     const sit = session.week && session.week.situation;
     const listIds = sit ? sit.hints : NEED_IDS;
