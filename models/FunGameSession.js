@@ -183,6 +183,13 @@ const funGameSessionSchema = new mongoose.Schema(
       default: null
     },
 
+    /* Daily Challenge: the UTC day this trip belongs to (null for practice trips). */
+    dailyKey: {
+      type: String,
+      default: null,
+      index: true
+    },
+
     stars: {
       type: Number,
       default: 0,
