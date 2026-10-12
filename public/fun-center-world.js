@@ -1543,8 +1543,8 @@ freezer: ['pizza', 'icecream', 'frozendinner']
         // ---- ROOM (three-quarter): floor, back wall, two side walls, warm lighting ----
         const FL_TOP = WALL_H;
         const FL_BOT = H;
-        const SIDE_BACK = 56;     // how far each side wall reaches in at the back wall
-        const SIDE_FRONT = 14;    // and at the front of the store
+        const SIDE_BACK = 36;     // straight side walls
+        const SIDE_FRONT = 36;
 
         // floor: cool and darker at the back, bright and warm at the front (no checkerboard)
         const fl = this.add.graphics().setDepth(-100);
