@@ -1233,6 +1233,7 @@ freezer: ['pizza', 'icecream', 'frozendinner']
         });
         o.querySelector('[data-again]').addEventListener('click', () => { destroyGame(); startWorld(); });
         o.querySelector('[data-cartshop]').addEventListener('click', () => openCartShop());
+        if (window.MiimiidMart && window.MiimiidMart.daily) window.MiimiidMart.daily.decorateResult(o, r);
         o.querySelector('[data-back]').addEventListener('click', () => { destroyGame(); renderMiimiidFunCenter(); });
       } catch (error) {
         console.error('world checkout error:', error);
