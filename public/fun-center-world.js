@@ -2029,6 +2029,7 @@ freezer: ['pizza', 'icecream', 'frozendinner']
           }
         }
 
+        this.stepAside(sk, dt);
         P.root.setPosition(sk.x, sk.y).setDepth(sk.y);
         this.skShadow.setPosition(sk.x, sk.y - 2).setDepth(sk.y - 1);
         this.skObst.x = sk.x - 24;
