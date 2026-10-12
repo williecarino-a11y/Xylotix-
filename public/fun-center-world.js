@@ -731,6 +731,25 @@ freezer: ['pizza', 'icecream', 'frozendinner']
       }
     }
 
+   // store tips: every so often a friendly announcement about money
+    const TIPS = [
+      'Tip: write your list before you shop.',
+      'Tip: compare prices on the shelf before you grab.',
+      'Tip: a sale only saves money on things you need.',
+      'Tip: the total matters more than any one price.',
+      'Tip: keep a little left over for surprises.'
+    ];
+    let tipLeft = 28;
+    function tickAmbient(dt) {
+      if (S.busy || S.closed || assistant.pending || saleNow.cur || hikeHideAt) return;
+      tipLeft -= dt;
+      if (tipLeft > 0) return;
+      tipLeft = 38 + Math.random() * 20;
+      SFX.tone(784, 0.12, 'sine', 0.05);
+      SFX.tone(659, 0.2, 'sine', 0.05, 0.12);
+      say(TIPS[Math.floor(Math.random() * TIPS.length)]);
+    }
+    
     // cashier: waves when you reach the counter, checks your cart against your list, offers to ring you up.
     let atPay = false;
     function tickCashier() {
