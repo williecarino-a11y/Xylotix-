@@ -1367,55 +1367,52 @@ freezer: ['pizza', 'icecream', 'frozendinner']
           { fontFamily: 'system-ui, -apple-system, "Segoe UI", Roboto, sans-serif', resolution: 2 }, style
         ));
 
-        // floor: tiles drawn in perspective (rows get taller toward the front, columns spread out)
-        const fl = this.add.graphics().setDepth(-100);
+        // ---- ROOM (three-quarter): floor, back wall, two side walls, warm lighting ----
         const FL_TOP = WALL_H;
-        const FL_BOT = H - 20;
-        const ROWS = 16;
-        const COLS = 28;
-        const COL_W = 80;
-        const FL_X0 = -420;
-        const rowY = k => FL_TOP + (FL_BOT - FL_TOP) * Math.pow(k / ROWS, 1.3);
-        const sc = y => 0.7 + 0.3 * ((y - FL_TOP) / (FL_BOT - FL_TOP));
-        const fx = (c, y) => W / 2 + (FL_X0 + c * COL_W - W / 2) * sc(y);
-        for (let r = 0; r < ROWS; r++) {
-          const y0 = rowY(r);
-          const y1 = rowY(r + 1);
-          const shade = 0.72 + 0.28 * (r / ROWS);          // far rows a little darker
-          for (let c = 0; c < COLS; c++) {
-            const base = (r + c) % 2 === 0 ? [242, 232, 214] : [220, 205, 178];
-            const col = Phaser.Display.Color.GetColor(
-              Math.round(base[0] * shade), Math.round(base[1] * shade), Math.round(base[2] * shade)
-            );
-            fl.fillStyle(col, 1);
-            fl.lineStyle(1.5, 0xbfae8e, 0.55);
-            fl.beginPath();
-            fl.moveTo(fx(c, y0), y0);
-            fl.lineTo(fx(c + 1, y0), y0);
-            fl.lineTo(fx(c + 1, y1), y1);
-            fl.lineTo(fx(c, y1), y1);
-            fl.closePath();
-            fl.fillPath();
-            fl.strokePath();
-          }
-        }
-        // soft shadow under the back wall so the floor reads as a floor
-        const floorShade = this.add.graphics().setDepth(-99);
-        floorShade.fillGradientStyle(0x000000, 0x000000, 0x000000, 0x000000, 0.4, 0.4, 0, 0);
-        floorShade.fillRect(30, WALL_H, W - 60, 90);
-        // pools of light under the ceiling lamps
-        [[330, 470], [760, 470], [1100, 470], [330, 830], [760, 860], [1100, 860]].forEach(p => {
-          this.add.ellipse(p[0], p[1], 360, 120, 0xfff6d8, 0.13).setDepth(-98);
-          this.add.ellipse(p[0], p[1], 200, 66, 0xfff6d8, 0.12).setDepth(-98);
-        });
-        // the side walls fade into shadow
-        const sideShade = this.add.graphics().setDepth(-97);
-        sideShade.fillGradientStyle(0x000000, 0x000000, 0x000000, 0x000000, 0.4, 0, 0.4, 0);
-        sideShade.fillRect(30, WALL_H, 110, H - WALL_H - 20);
-        sideShade.fillGradientStyle(0x000000, 0x000000, 0x000000, 0x000000, 0, 0.4, 0, 0.4);
-        sideShade.fillRect(W - 140, WALL_H, 110, H - WALL_H - 20);
+        const FL_BOT = H;
+        const SIDE_BACK = 56;     // how far each side wall reaches in at the back wall
+        const SIDE_FRONT = 14;    // and at the front of the store
 
-        // back wall: shaded panels, ceiling strip with lamps, bright trim
+        // floor: cool and darker at the back, bright and warm at the front (no checkerboard)
+        const fl = this.add.graphics().setDepth(-100);
+        fl.fillGradientStyle(0xb9ab93, 0xb9ab93, 0xf4ead6, 0xf4ead6, 1);
+        fl.fillRect(0, FL_TOP, W, FL_BOT - FL_TOP);
+
+        // faint tile joints that run toward the back wall, so the floor recedes
+        const ROWS = 14;
+        const COLS = 22;
+        const COL_W = 130;
+        const rowY = k => FL_TOP + (FL_BOT - FL_TOP) * Math.pow(k / ROWS, 1.45);
+        const sc = y => 0.5 + 0.5 * ((y - FL_TOP) / (FL_BOT - FL_TOP));
+        const fx = (c, y) => W / 2 + (c - COLS / 2) * COL_W * sc(y);
+        fl.lineStyle(2, 0x9c8b6c, 0.2);
+        for (let r = 1; r <= ROWS; r++) fl.lineBetween(0, rowY(r), W, rowY(r));
+        for (let c = 0; c <= COLS; c++) fl.lineBetween(fx(c, FL_TOP), FL_TOP, fx(c, FL_BOT), FL_BOT);
+
+        // soft light sheen across the floor
+        fl.fillStyle(0xffffff, 0.07);
+        fl.fillPoints([{ x: 180, y: FL_TOP + 60 }, { x: 420, y: FL_TOP + 60 }, { x: 260, y: FL_BOT }, { x: -40, y: FL_BOT }], true);
+        fl.fillPoints([{ x: 820, y: FL_TOP + 60 }, { x: 1020, y: FL_TOP + 60 }, { x: 1160, y: FL_BOT }, { x: 900, y: FL_BOT }], true);
+
+        // shadow where the floor meets the back wall
+        const floorShade = this.add.graphics().setDepth(-99);
+        floorShade.fillGradientStyle(0x000000, 0x000000, 0x000000, 0x000000, 0.45, 0.45, 0, 0);
+        floorShade.fillRect(0, WALL_H, W, 110);
+
+        // warm pools of light under the ceiling lamps
+        [[330, 470], [760, 470], [1100, 470], [330, 830], [760, 860], [1100, 860]].forEach(p => {
+          this.add.ellipse(p[0], p[1], 420, 140, 0xfff2c9, 0.16).setDepth(-98).setBlendMode(Phaser.BlendModes.ADD);
+          this.add.ellipse(p[0], p[1], 220, 74, 0xfff2c9, 0.14).setDepth(-98).setBlendMode(Phaser.BlendModes.ADD);
+        });
+
+        // the edges of the floor fall into shadow
+        const edge = this.add.graphics().setDepth(-97);
+        edge.fillGradientStyle(0x000000, 0x000000, 0x000000, 0x000000, 0.35, 0, 0.35, 0);
+        edge.fillRect(0, WALL_H, 150, H - WALL_H);
+        edge.fillGradientStyle(0x000000, 0x000000, 0x000000, 0x000000, 0, 0.35, 0, 0.35);
+        edge.fillRect(W - 150, WALL_H, 150, H - WALL_H);
+
+        // back wall: panels, ceiling strip with lamps, bright trim
         const wall = this.add.graphics().setDepth(-90);
         wall.fillGradientStyle(0x1d3d78, 0x1d3d78, 0x0e1a38, 0x0e1a38, 1, 1, 1, 1);
         wall.fillRect(0, 0, W, WALL_H);
@@ -1428,7 +1425,28 @@ freezer: ['pizza', 'icecream', 'frozendinner']
         }
         wall.fillStyle(0x1f6feb, 1).fillRect(0, WALL_H - 14, W, 14);
         wall.fillStyle(0x7ab8ff, 1).fillRect(0, WALL_H - 14, W, 3);
-        wall.fillStyle(0x0b1530, 1).fillRect(0, 0, 30, H).fillRect(W - 30, 0, 30, H).fillRect(0, H - 20, W, 20);
+
+        // side walls: slanted toward the back so the room has real corners
+        const sw = this.add.graphics().setDepth(-89);
+        sw.fillStyle(0x17305e, 1);
+        sw.fillPoints([{ x: 0, y: 0 }, { x: SIDE_BACK, y: 22 }, { x: SIDE_BACK, y: WALL_H }, { x: SIDE_FRONT, y: H }, { x: 0, y: H }], true);
+        sw.fillStyle(0x112347, 1);
+        sw.fillPoints([{ x: W, y: 0 }, { x: W - SIDE_BACK, y: 22 }, { x: W - SIDE_BACK, y: WALL_H }, { x: W - SIDE_FRONT, y: H }, { x: W, y: H }], true);
+        // dark line in each back corner
+        sw.lineStyle(3, 0x050a18, 0.7);
+        sw.lineBetween(SIDE_BACK, 22, SIDE_BACK, WALL_H);
+        sw.lineBetween(W - SIDE_BACK, 22, W - SIDE_BACK, WALL_H);
+        // wall rail
+        sw.lineStyle(3, 0x7ab8ff, 0.35);
+        sw.lineBetween(0, H - 120, SIDE_BACK, WALL_H - 60);
+        sw.lineBetween(W, H - 120, W - SIDE_BACK, WALL_H - 60);
+        // baseboards along the floor
+        sw.lineStyle(10, 0x1f6feb, 1);
+        sw.lineBetween(SIDE_BACK, WALL_H, SIDE_FRONT, H);
+        sw.lineBetween(W - SIDE_BACK, WALL_H, W - SIDE_FRONT, H);
+        sw.lineStyle(3, 0x7ab8ff, 1);
+        sw.lineBetween(SIDE_BACK + 5, WALL_H, SIDE_FRONT + 5, H);
+        sw.lineBetween(W - SIDE_BACK - 5, WALL_H, W - SIDE_FRONT - 5, H);
         this.add.text(W / 2, 70, 'MIIMIID MART', {
           fontSize: '46px', color: '#4da3ff', fontStyle: 'bold'
         }).setOrigin(0.5).setDepth(-80);
