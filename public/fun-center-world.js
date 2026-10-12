@@ -1631,12 +1631,92 @@ freezer: ['pizza', 'icecream', 'frozendinner']
           }).setOrigin(0.5).setDepth(-85);
         });
 
-        this.add.text(W / 2, 70, 'MIIMIID MART', {
-          fontSize: '46px', color: '#4da3ff', fontStyle: 'bold'
-        }).setOrigin(0.5).setDepth(-80);
-        this.add.text(W / 2, 120, 'Smart Choices. Brighter Tomorrows.', {
-          fontSize: '18px', color: '#9ec5ff'
-        }).setOrigin(0.5).setDepth(-80);
+        // ---- WELCOME SIGN: letter-by-letter neon heading + tagline (replaces the old static sign) ----
+        const SIGN_X = W / 2;
+        const plate = this.add.graphics().setDepth(-82);
+        plate.fillStyle(0x050b1f, 0.94).fillRoundedRect(SIGN_X - 210, 34, 420, 130, 16);
+        plate.lineStyle(3, 0x00e5ff, 0.85).strokeRoundedRect(SIGN_X - 210, 34, 420, 130, 16);
+        plate.lineStyle(1, 0xffffff, 0.45).strokeRoundedRect(SIGN_X - 206, 38, 412, 122, 13);
+        const halo = this.add.image(SIGN_X, 99, 'glow').setDisplaySize(560, 190)
+          .setTint(0x00cfff).setBlendMode(Phaser.BlendModes.ADD).setDepth(-83).setAlpha(0);
+        const lit = { v: 0 };
+        const pulse = { p: 0 };
+
+        // one text object per letter, centered on the line; spaces only add a gap
+        const buildLine = (str, cy, size, startWord) => {
+          const out = [];
+          const gap = size * 0.38;
+          const track = 3;
+          let total = 0;
+          const parts = str.split('').map(ch => {
+            if (ch === ' ') { total += gap; return { sp: true }; }
+            const t = this.add.text(0, cy, ch, {
+              fontSize: size + 'px', color: '#27d3ff', fontStyle: 'bold',
+              stroke: '#ffffff', strokeThickness: 2
+            }).setOrigin(0.5).setDepth(-79).setAlpha(0);
+            t.setShadow(0, 0, '#00e5ff', 12, true, true);
+            total += t.width + track;
+            return { t };
+          });
+          let x = SIGN_X - total / 2;
+          let word = startWord;
+          parts.forEach(p => {
+            if (p.sp) { x += gap; word++; return; }
+            x += p.t.width / 2;
+            p.t.x = x;
+            x += p.t.width / 2 + track;
+            out.push({ t: p.t, y: cy, word });
+          });
+          return out;
+        };
+        // reading order: WELCOME, TO, MIIMIID, MART
+        const letters = buildLine('WELCOME TO', 66, 28, 0).concat(buildLine('MIIMIID MART', 106, 40, 2));
+        const tag = this.add.text(SIGN_X, 146, 'Smart choice. Brighter tomorrow.', {
+          fontSize: '16px', color: '#bfefff'
+        }).setOrigin(0.5).setDepth(-79).setAlpha(0);
+        tag.setShadow(0, 0, '#00e5ff', 8, false, true);
+        const sweep = this.add.image(SIGN_X, 99, 'glow').setDisplaySize(70, 120)
+          .setTint(0xffffff).setBlendMode(Phaser.BlendModes.ADD).setDepth(-78).setAlpha(0);
+        const spark = this.add.image(SIGN_X, 99, 'glow').setScale(0.1)
+          .setTint(0xffffff).setBlendMode(Phaser.BlendModes.ADD).setDepth(-78).setAlpha(0);
+
+        // soft pulse of the neon halo (only visible while the sign is lit)
+        this.tweens.add({
+          targets: pulse, p: 1, duration: 1100, yoyo: true, repeat: -1, ease: 'Sine.easeInOut',
+          onUpdate: () => halo.setAlpha(lit.v * (0.3 + 0.25 * pulse.p))
+        });
+
+        const runSign = () => {
+          const n = letters.length;
+          // fade in, letter by letter, left to right
+          letters.forEach((L, i) => {
+            L.t.setAlpha(0).setY(L.y + 8);
+            this.tweens.add({ targets: L.t, alpha: 1, y: L.y, duration: 380, delay: i * 85 + L.word * 120, ease: 'Sine.easeOut' });
+          });
+          const tIn = n * 85 + 3 * 120 + 400;
+          this.tweens.add({ targets: lit, v: 1, duration: 900, delay: 400 });
+          this.tweens.add({ targets: tag, alpha: 1, duration: 600, delay: tIn });
+          // light sweep and sparkles while everything is showing
+          this.time.delayedCall(tIn + 600, () => {
+            sweep.setPosition(SIGN_X - 190, 99).setAlpha(0.7);
+            this.tweens.add({ targets: sweep, x: SIGN_X + 190, duration: 1000, ease: 'Sine.easeInOut', onComplete: () => sweep.setAlpha(0) });
+          });
+          [0, 1, 2].forEach(k => this.time.delayedCall(tIn + 700 + k * 500, () => {
+            const L = letters[Math.floor(Math.random() * n)];
+            spark.setPosition(L.t.x, L.y - 6);
+            this.tweens.add({ targets: spark, alpha: { from: 0, to: 1 }, scale: { from: 0.1, to: 0.28 }, duration: 260, yoyo: true });
+          }));
+          // fade out: tagline first, then letters right to left
+          const tOut = tIn + 600 + 2600;
+          this.tweens.add({ targets: tag, alpha: 0, duration: 500, delay: tOut });
+          letters.forEach((L, i) => {
+            this.tweens.add({ targets: L.t, alpha: 0, duration: 300, delay: tOut + 500 + (n - 1 - i) * 55 });
+          });
+          this.tweens.add({ targets: lit, v: 0, duration: 700, delay: tOut + 500 });
+          // short pause, then the next cycle
+          this.time.delayedCall(tOut + 500 + n * 55 + 300 + 900, runSign);
+        };
+        runSign();
 
         // entrance mat
         const mat = this.add.graphics().setDepth(-95);
