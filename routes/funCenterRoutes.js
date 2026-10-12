@@ -577,7 +577,7 @@ router.post('/shop/session/:sessionId/hike/start', funAnswerLimiter, async (req,
     });
     if (choices.length === 0) return res.json({ status: 'success', data: { started: false } });
 
-    const hike = choices[Math.floor(Math.random() * choices.length)];
+    const hike = daily.pickFor(existing.dailyKey, 'hike', choices, c => c.itemId);
     const item = shop.items.find(candidate => candidate.id === hike.itemId);
 
     const updated = await FunGameSession.findOneAndUpdate(
