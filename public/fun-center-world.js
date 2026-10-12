@@ -2705,7 +2705,7 @@ refreshHot() {
             if (d >= 64) continue;
             const nx = d > 0.5 ? dx / d : 1;
             const ny = d > 0.5 ? dy / d : 0;
-            const k = ((48 - d) / 48) * 40 * dt;
+            const k = ((64 - d) / 64) * 90 * dt;
             a.x = Phaser.Math.Clamp(a.x - nx * k, 60, W - 60);
             a.y = Phaser.Math.Clamp(a.y - ny * k * 0.6, WALL_H + 40, H - 40);
             b.x = Phaser.Math.Clamp(b.x + nx * k, 60, W - 60);
