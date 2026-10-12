@@ -1652,7 +1652,7 @@ freezer: ['pizza', 'icecream', 'frozendinner']
 
         // camera
         const cam = this.cameras.main;
-        cam.setBounds(0, 0, W, H);
+        cam.setBounds(0, -230, W, H + 230);
         cam.setZoom(Math.max(1.2, this.scale.height / H));
         cam.startFollow(this.player, true, 0.12, 0.12);
         cam.setDeadzone(90, 60);
