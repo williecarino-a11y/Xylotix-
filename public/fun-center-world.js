@@ -2676,6 +2676,7 @@ refreshHot() {
               look = Math.sign(dx);
             }
           }
+          this.stepAside(c, dt);
           c.npc.root.setPosition(c.x, c.y).setDepth(c.y);
           c.shadow.setPosition(c.x, c.y - 2).setDepth(c.y - 1);
           this.animNpc(c.npc, c, now, delta, moving, look, false, false);
