@@ -1469,7 +1469,13 @@ freezer: ['pizza', 'icecream', 'frozendinner']
         this.walkFlip = false;
         this.walkClock = 0;
         this.makeTextures();
-
+        
+        // every label in the store uses a clean font, drawn sharper
+        const addText = this.add.text.bind(this.add);
+        this.add.text = (x, y, t, style) => addText(x, y, t, Object.assign(
+          { fontFamily: 'system-ui, -apple-system, "Segoe UI", Roboto, sans-serif', resolution: 2 }, style
+        ));
+        
         // soft shadows: every black floor shadow becomes a blurred one (no hard-edged ovals)
         if (!this.textures.exists('softshadow')) {
           const shTex = this.textures.createCanvas('softshadow', 128, 128);
