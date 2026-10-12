@@ -1522,7 +1522,6 @@ freezer: ['pizza', 'icecream', 'frozendinner']
         sw.lineStyle(3, 0x7ab8ff, 1);
         sw.lineBetween(SIDE_BACK + 5, WALL_H, SIDE_FRONT + 5, H);
         sw.lineBetween(W - SIDE_BACK - 5, WALL_H, W - SIDE_FRONT - 5, H);
-        this.add.text(W / 2, 70, 'MIIMIID MART', {
         // posters with money tips, so the back wall is not empty (the big sign sits in the middle)
         const posters = [
           [150, 'NEEDS FIRST', 0x1f6feb], [290, 'WATCH THE TOTAL', 0x2f9e6b], [430, 'COMPARE PRICES', 0xe8772e],
@@ -1538,6 +1537,8 @@ freezer: ['pizza', 'icecream', 'frozendinner']
             fontSize: '11px', color: '#ffffff', fontStyle: 'bold', align: 'center', wordWrap: { width: 98 }
           }).setOrigin(0.5).setDepth(-85);
         });
+
+        this.add.text(W / 2, 70, 'MIIMIID MART', {
           fontSize: '46px', color: '#4da3ff', fontStyle: 'bold'
         }).setOrigin(0.5).setDepth(-80);
         this.add.text(W / 2, 120, 'Smart Choices. Brighter Tomorrows.', {
