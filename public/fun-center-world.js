@@ -2614,6 +2614,7 @@ refreshHot() {
           }
         }
 
+        this.stepAside(m, dt);
         N.root.setPosition(m.x, m.y).setDepth(m.y);
         this.custShadow.setPosition(m.x, m.y - 2).setDepth(m.y - 1);
         this.custObst.x = m.x - 24;
