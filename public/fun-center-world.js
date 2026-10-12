@@ -1275,7 +1275,37 @@ freezer: ['pizza', 'icecream', 'frozendinner']
         });
       }
 
+      // gives a shelf unit a visible top and side, so it reads as a box in three-quarter view
+      addBoxFaces(u) {
+        const VPX = W / 2;       // vanishing point: middle of the store, up at the back wall
+        const VPY = 60;
+        const K = 0.1;           // how strongly the box recedes (0.05 = subtle, 0.15 = strong)
+        const back = p => ({ x: p.x + (VPX - p.x) * K, y: p.y + (VPY - p.y) * K });
+        const tl = { x: u.x, y: u.y };
+        const tr = { x: u.x + UW, y: u.y };
+        const bl = { x: u.x, y: u.y + UH };
+        const br = { x: u.x + UW, y: u.y + UH };
+        const btl = back(tl);
+        const btr = back(tr);
+        const bbl = back(bl);
+        const bbr = back(br);
+        const g = this.add.graphics().setDepth(u.y + UH - 0.5);
+
+        // side face: the side that faces the middle of the store
+        const right = u.x + UW / 2 < VPX;
+        const side = right ? [tr, br, bbr, btr] : [tl, bl, bbl, btl];
+        g.fillStyle(0x0f2350, 1).fillPoints(side, true);
+        g.lineStyle(2, 0x3b5ca8, 1).strokePoints(side, true);
+
+        // top face: catches the lamp light, so it is the brightest part
+        const top = [tl, tr, btr, btl];
+        g.fillStyle(0xd7e6ff, 1).fillPoints(top, true);
+        g.fillStyle(0xffffff, 0.35).fillRect(btl.x + 6, btl.y + 1, UW - 12, 3);
+        g.lineStyle(2, 0x7ab8ff, 1).strokePoints(top, true);
+      }
+
       buildUnit(u, list) {
+        this.addBoxFaces(u);
         if (u.fridge) { this.buildFridge(u, list); return; }
         // soft shadow on the floor under the shelf, so it looks like it stands there
         this.add.ellipse(u.x + UW / 2, u.y + UH + 3, UW * 1.02, 26, 0x000000, 0.3)
