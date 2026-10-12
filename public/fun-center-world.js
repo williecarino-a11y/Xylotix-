@@ -405,9 +405,8 @@ freezer: ['pizza', 'icecream', 'frozendinner']
     content.innerHTML = `
       <div class="mw">
         <div class="mw-top">
-          <span class="mw-wallet">Wallet <span data-mw-wallet>$${S.budget}</span></span>
-          <span class="mw-count">🛒 <span data-mw-count>0</span></span>
-          <button type="button" class="mw-leave" data-mw-mute>🔊</button>
+          <span class="mw-count"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 3h3l2.5 12h11l2-8H6"/></svg><span data-mw-count>0</span></span>
+          <button type="button" class="mw-leave" data-mw-mute aria-label="Sound"></button>
           <button type="button" class="mw-leave" data-mw-leave>Leave</button>
         </div>
         <div class="mw-clock"><span>🕒 Store closes</span><div class="mw-clock-bar"><div class="mw-clock-fill" data-mw-clock data-level="high"></div></div></div>
