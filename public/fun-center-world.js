@@ -1313,7 +1313,7 @@ freezer: ['pizza', 'icecream', 'frozendinner']
           }
           obj.setDepth(sy + 1);
           const label = this.add.text(px, u.y + 125, priceText(item), {
-            fontSize: '13px', color: '#ffffff', fontStyle: 'bold', stroke: '#000000', strokeThickness: 3
+            fontSize: '16px', color: '#ffffff', fontStyle: 'bold', stroke: '#000000', strokeThickness: 4
           }).setOrigin(0.5).setDepth(sy + 2);
           this.products.push({
             item, obj, label, x: px, y: baseY - 26, sy, taken: false, baseScale: obj.scaleX, fridge: F
