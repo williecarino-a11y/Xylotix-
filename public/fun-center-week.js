@@ -5,7 +5,7 @@
   window.MiimiidMart = window.MiimiidMart || {};
 
   // [key, unused, full name (result card), short name (live HUD)]
-  const KEYS = [['health', '', 'Health', 'Health'], ['happiness', '', 'Happiness', 'Mood'], ['friends', '', 'Friends', 'Friends']];
+  const KEYS = [['health', '', 'Health', 'Health'], ['happiness', '', 'Mood', 'Mood'], ['friends', '', 'Friends', 'Friends']];
 
   function clamp(v) { return Math.max(0, Math.min(100, v)); }
 
