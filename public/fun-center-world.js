@@ -495,7 +495,7 @@ freezer: ['pizza', 'icecream', 'frozendinner']
         const rb = box.querySelector('[data-mw-asst-replies]');
         const person = who || { name: 'Sam · Store assistant', face: '🧑‍🍳' };
         box.querySelector('b').textContent = person.name;
-        box.querySelector('.mw-asst-face').textContent = person.face;
+        box.querySelector('.mw-asst-face').textContent = (person.name || 'S').trim().charAt(0);
         box.querySelector('[data-mw-asst-text]').textContent = text;
         rb.innerHTML = '';
         clearTimeout(this.hideTimer);
