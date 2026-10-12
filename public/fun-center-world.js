@@ -2400,6 +2400,10 @@ refreshHot() {
           f.mouthS.setVisible(!open);
         });
         N.fF.pupils.x = lk * 2.4;
+        // depth cue: people near the back wall look a little smaller, people near the camera a little bigger
+        const dk = 0.9 + 0.2 * Phaser.Math.Clamp((root.y - WALL_H) / (H - WALL_H), 0, 1);
+        root.scaleX *= dk;
+        root.scaleY = dk;
       }
 
       spawnFriend() {
