@@ -324,6 +324,14 @@ freezer: ['pizza', 'icecream', 'frozendinner']
       .mw-hud [data-mw-mute] { display: inline-flex; align-items: center; justify-content: center; }
       .mw-count svg, .mw-hud [data-mw-mute] svg { display: block; }
       .mw-scan::before { content: 'Scan'; font-size: 15px; font-weight: 800; }
+      .mw-hud { flex-direction: row; flex-wrap: wrap; align-items: center; gap: 4px 6px; }
+      .mw-hud > * { flex: 1 1 100%; }
+      .mw-hud > .mm-meters { flex: 1 1 0; min-width: 0; }
+      .mw-hud > .mw-list { flex: 0 0 auto; }
+      .mw-hud > .mw-list:has(details[open]) { flex: 1 1 100%; }
+      .mw-hud .mw-list summary.mw-list-title { font-size: 0; }
+      .mw-hud .mw-list summary.mw-list-title::after { content: 'Plan'; font-size: 10px; }
+      .mw-hud .mm-meters .mm-meter { padding: 3px 6px; gap: 4px; font-size: 9px; }
       .mw-bubble { transition: opacity .4s; }
     `;
     document.head.appendChild(st);
