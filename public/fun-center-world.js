@@ -1277,9 +1277,9 @@ freezer: ['pizza', 'icecream', 'frozendinner']
 
       // gives a shelf unit a visible top and side, so it reads as a box in three-quarter view
       addBoxFaces(u) {
-        const VPX = W / 2;       // vanishing point: middle of the store, up at the back wall
+        const VPX = W / 2;
         const VPY = 60;
-        const K = 0.1;           // how strongly the box recedes (0.05 = subtle, 0.15 = strong)
+        const K = 0.065;         // shallower than before (was 0.1)
         const back = p => ({ x: p.x + (VPX - p.x) * K, y: p.y + (VPY - p.y) * K });
         const tl = { x: u.x, y: u.y };
         const tr = { x: u.x + UW, y: u.y };
@@ -1291,17 +1291,18 @@ freezer: ['pizza', 'icecream', 'frozendinner']
         const bbr = back(br);
         const g = this.add.graphics().setDepth(u.y + UH - 0.5);
 
-        // side face: the side that faces the middle of the store
+        // side face (the side facing the middle of the store)
         const right = u.x + UW / 2 < VPX;
         const side = right ? [tr, br, bbr, btr] : [tl, bl, bbl, btl];
         g.fillStyle(0x0f2350, 1).fillPoints(side, true);
         g.lineStyle(2, 0x3b5ca8, 1).strokePoints(side, true);
 
-        // top face: catches the lamp light, so it is the brightest part
+        // top face: a blue-grey that matches the shelf, with a darker back edge
         const top = [tl, tr, btr, btl];
-        g.fillStyle(0xd7e6ff, 1).fillPoints(top, true);
-        g.fillStyle(0xffffff, 0.35).fillRect(btl.x + 6, btl.y + 1, UW - 12, 3);
-        g.lineStyle(2, 0x7ab8ff, 1).strokePoints(top, true);
+        g.fillStyle(0x9db9ea, 1).fillPoints(top, true);
+        g.lineStyle(2, 0x5f86cf, 1).strokePoints(top, true);
+        g.lineStyle(3, 0x3b5ca8, 1).lineBetween(btl.x, btl.y, btr.x, btr.y);
+        g.lineStyle(2, 0xdbe8ff, 0.8).lineBetween(tl.x + 2, tl.y - 1, tr.x - 2, tr.y - 1);
       }
 
       buildUnit(u, list) {
