@@ -1586,6 +1586,7 @@ freezer: ['pizza', 'icecream', 'frozendinner']
         sw.lineStyle(3, 0x7ab8ff, 1);
         sw.lineBetween(SIDE_BACK + 5, WALL_H, SIDE_FRONT + 5, H);
         sw.lineBetween(W - SIDE_BACK - 5, WALL_H, W - SIDE_FRONT - 5, H);
+        wall.fillStyle(0x0b1530, 1).fillRect(-200, -260, W + 400, 260);   // ceiling, so the camera can scroll up past the sign
         // posters with money tips, so the back wall is not empty (the big sign sits in the middle)
         const posters = [
           [150, 'NEEDS FIRST', 0x1f6feb], [290, 'WATCH THE TOTAL', 0x2f9e6b], [430, 'COMPARE PRICES', 0xe8772e],
