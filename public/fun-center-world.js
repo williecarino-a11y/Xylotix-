@@ -20,13 +20,14 @@
   const UW = 260;                    // shelf unit width
   const UH = 140;                    // shelf unit height
   const UNITS = [
-    { id: 'fresh',  label: 'FRESH FOOD',     x: 60,  y: 200 },
-    { id: 'dairy',  label: 'DAIRY & DRINKS', x: 320, y: 200, fridge: true },
-    { id: 'snacks', label: 'SNACKS',         x: 580, y: 200 },
-    { id: 'care',   label: 'PERSONAL CARE',  x: 60,  y: 520 },
-    { id: 'fun',    label: 'FUN CORNER',     x: 320, y: 520 },
-{ id: 'freezer', label: 'FREEZER',       x: 840, y: 200, fridge: true }
+    { id: 'fresh',   label: 'FRESH FOOD',     x: 80,  y: 200 },
+    { id: 'dairy',   label: 'DAIRY & DRINKS', x: 380, y: 200, fridge: true },
+    { id: 'snacks',  label: 'SNACKS',         x: 680, y: 200 },
+    { id: 'freezer', label: 'FREEZER',        x: 980, y: 200, fridge: true },
+    { id: 'care',    label: 'PERSONAL CARE',  x: 80,  y: 520 },
+    { id: 'fun',     label: 'FUN CORNER',     x: 380, y: 520 }
   ];
+    
   const CATS = {
 fresh: ['apple', 'carrot', 'bread', 'pasta'],
 dairy: ['milk', 'eggs', 'water'],
@@ -44,7 +45,7 @@ freezer: ['pizza', 'icecream', 'frozendinner']
   // The shopping list. The server still decides rewards; this only draws the list.
   const NEED_IDS = ['milk', 'bread', 'eggs', 'pasta', 'apple', 'carrot', 'water', 'medicine'];
   const CLOSING_SECONDS = 150;     // how long the store stays open (it pauses in menus)
-  const ASSISTANT_PATH = [[1060, 430], [1200, 320], [1240, 540], [900, 560], [720, 660], [720, 820], [720, 660], [900, 560]];   // his patrol route
+  const ASSISTANT_PATH = [[1060, 430], [1200, 430], [1240, 560], [900, 560], [720, 660], [720, 820], [720, 660], [900, 560]];   // his patrol route
   const ASSISTANT_SPEED = 62;      // how fast he walks
   const PAY_GRACE_SECONDS = 25;    // after closing, time left to reach the counter
   const FRIEND_SPEED = 95;         // how fast Alex walks to you
@@ -52,17 +53,17 @@ freezer: ['pizza', 'icecream', 'frozendinner']
   const CUSTOMER_SPEED = 70;       // how fast the browsing customer walks
   const CUSTOMER_PICKS = ['🥛', '🍞', '🍎', '🍪', '🥕', '🍝'];
   const CUSTOMER_ROUTE = [         // his loop through the aisles (browse = stops at a shelf, pay = stops at the counter)
-    { x: 700, y: 385, browse: true },
-    { x: 450, y: 385, browse: true },
-    { x: 190, y: 385, browse: true },
-    { x: 640, y: 385 },
-    { x: 640, y: 700 },
-    { x: 450, y: 700, browse: true },
-    { x: 190, y: 700, browse: true },
-    { x: 640, y: 700 },
+    { x: 800, y: 385, browse: true },
+    { x: 510, y: 385, browse: true },
+    { x: 210, y: 385, browse: true },
+    { x: 700, y: 385 },
+    { x: 700, y: 700 },
+    { x: 510, y: 700, browse: true },
+    { x: 210, y: 700, browse: true },
+    { x: 700, y: 700 },
     { x: 1000, y: 780, pay: true },
-    { x: 640, y: 700 },
-    { x: 640, y: 385 }
+    { x: 700, y: 700 },
+    { x: 700, y: 385 }
   ];
   const saleNow = { cur: null };   // the running flash sale (the server decides it)
   const hikeNow = { cur: null };   // a price that went up mid-trip (the server decides it)
@@ -1489,6 +1490,21 @@ freezer: ['pizza', 'icecream', 'frozendinner']
         sw.lineBetween(SIDE_BACK + 5, WALL_H, SIDE_FRONT + 5, H);
         sw.lineBetween(W - SIDE_BACK - 5, WALL_H, W - SIDE_FRONT - 5, H);
         this.add.text(W / 2, 70, 'MIIMIID MART', {
+        // posters with money tips, so the back wall is not empty (the big sign sits in the middle)
+        const posters = [
+          [150, 'NEEDS FIRST', 0x1f6feb], [290, 'WATCH THE TOTAL', 0x2f9e6b], [430, 'COMPARE PRICES', 0xe8772e],
+          [980, 'SALE IS NOT A NEED', 0xe0245e], [1120, 'PLAN YOUR LIST', 0x1f6feb], [1260, 'SAVE A LITTLE', 0x7a4de0]
+        ];
+        const pg = this.add.graphics().setDepth(-86);
+        posters.forEach(p => {
+          pg.fillStyle(0x000000, 0.3).fillRoundedRect(p[0] - 52, 66, 108, 88, 6);
+          pg.fillStyle(0xf4f8ff, 1).fillRoundedRect(p[0] - 55, 62, 110, 88, 6);
+          pg.fillStyle(p[2], 1).fillRoundedRect(p[0] - 55, 62, 110, 26, { tl: 6, tr: 6, bl: 0, br: 0 });
+          pg.fillStyle(p[2], 0.25).fillRect(p[0] - 42, 100, 84, 8).fillRect(p[0] - 42, 116, 60, 8).fillRect(p[0] - 42, 132, 72, 8);
+          this.add.text(p[0], 75, p[1], {
+            fontSize: '11px', color: '#ffffff', fontStyle: 'bold', align: 'center', wordWrap: { width: 98 }
+          }).setOrigin(0.5).setDepth(-85);
+        });
           fontSize: '46px', color: '#4da3ff', fontStyle: 'bold'
         }).setOrigin(0.5).setDepth(-80);
         this.add.text(W / 2, 120, 'Smart Choices. Brighter Tomorrows.', {
