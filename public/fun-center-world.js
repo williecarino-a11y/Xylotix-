@@ -385,19 +385,30 @@ freezer: ['pizza', 'icecream', 'frozendinner']
     return x >= ZONE.x && x <= ZONE.x + ZONE.w && y >= ZONE.y && y <= ZONE.y + ZONE.h;
   }
 
-  async function startWorld() {
+  async function startWorld(notice) {
     const content = document.getElementById('fun-center-content');
     if (!content) return;
+
+    // Daily Challenge menu (code lives in public/fun-center-daily.js)
+    let mode = 'practice';
+    try {
+      if (window.MiimiidMart && window.MiimiidMart.daily) {
+        mode = await window.MiimiidMart.daily.pickMode(content, miimiidFunCenterRequest, typeof notice === 'string' ? notice : '');
+      }
+    } catch (e) { console.error('Daily menu failed, starting a practice trip:', e); }
+    if (mode === 'back') { renderMiimiidFunCenter(); return; }
     content.innerHTML = '<div class="miimiid-fun-loading">Entering the store…</div>';
 
     try {
       await loadPhaser();
       const shop = await miimiidFunCenterRequest('/api/fun-center/shop', { headers: NO_OVERLAY });
-      const session = await miimiidFunCenterRequest('/api/fun-center/shop/session', {
-        method: 'POST', body: JSON.stringify({}), headers: NO_OVERLAY
-      });
+      const session = await miimiidFunCenterRequest(
+        mode === 'daily' ? '/api/fun-center/daily/start' : '/api/fun-center/shop/session',
+        { method: 'POST', body: JSON.stringify({}), headers: NO_OVERLAY }
+      );
       mountWorld(content, shop, session);
     } catch (error) {
+      if (mode === 'daily') { startWorld(error.message || "Could not start today's challenge."); return; }
       console.error('Miimiid world failed, using the normal Mart:', error);
       if (typeof originalStart === 'function') originalStart();
     }
