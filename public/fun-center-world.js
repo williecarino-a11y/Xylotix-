@@ -2707,6 +2707,28 @@ refreshHot() {
         o.y = Phaser.Math.Clamp(o.y + (dy / d) * 60 * k * dt, WALL_H + 40, H - 40);
       }
 
+      // keeps shoppers from standing inside each other
+      separateNpcs(dt) {
+        const list = [this.sk, this.cust, this.friend].concat(this.crowd || []).filter(Boolean);
+        for (let i = 0; i < list.length; i++) {
+          for (let j = i + 1; j < list.length; j++) {
+            const a = list[i];
+            const b = list[j];
+            const dx = b.x - a.x;
+            const dy = b.y - a.y;
+            const d = Math.hypot(dx, dy);
+            if (d >= 48) continue;
+            const nx = d > 0.5 ? dx / d : 1;
+            const ny = d > 0.5 ? dy / d : 0;
+            const k = ((48 - d) / 48) * 40 * dt;
+            a.x = Phaser.Math.Clamp(a.x - nx * k, 60, W - 60);
+            a.y = Phaser.Math.Clamp(a.y - ny * k * 0.6, WALL_H + 40, H - 40);
+            b.x = Phaser.Math.Clamp(b.x + nx * k, 60, W - 60);
+            b.y = Phaser.Math.Clamp(b.y + ny * k * 0.6, WALL_H + 40, H - 40);
+          }
+        }
+      }
+
       dust(x, y) {
         const d = this.add.circle(x + (Math.random() - 0.5) * 16, y - 3, 4 + Math.random() * 3, 0xf1e6cf, 0.45).setDepth(y - 2);
         this.tweens.add({ targets: d, y: d.y - 8, scale: 2.2, alpha: 0, duration: 520, ease: 'Sine.easeOut', onComplete: () => d.destroy() });
