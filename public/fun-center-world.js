@@ -2625,7 +2625,7 @@ if (near && !near.taken && near.item && near.item.hot) {
       type: Phaser.AUTO,
       parent: holder,
       width: VIEW_W,
-      height: VIEW_H,
+      height: Math.round(VIEW_W * (holder.clientHeight || VIEW_H) / Math.max(holder.clientWidth || VIEW_W, 1)),
       backgroundColor: '#0d1324',
       scale: { mode: Phaser.Scale.FIT, autoCenter: Phaser.Scale.CENTER_BOTH },
       scene: MartScene
