@@ -1540,9 +1540,18 @@ freezer: ['pizza', 'icecream', 'frozendinner']
           ctx.fillRect(0, 0, 256, 256);
           gc.refresh();
         }
-        [[330, 470], [760, 470], [1100, 470], [330, 830], [760, 860], [1100, 860]].forEach(p => {
-          this.add.image(p[0], p[1], 'glow').setDisplaySize(560, 200).setDepth(-98).setAlpha(0.65);
+        [[330, 470], [760, 470], [1100, 470], [330, 830], [760, 860], [1100, 860]].forEach((p, i) => {
+          const gl = this.add.image(p[0], p[1], 'glow').setDisplaySize(560, 200).setDepth(-98).setAlpha(0.65);
+          this.tweens.add({ targets: gl, alpha: 0.42, duration: 2600 + i * 450, delay: i * 380, yoyo: true, repeat: -1, ease: 'Sine.easeInOut' });
         });
+        // dust floating in the lamp light
+        for (let i = 0; i < 18; i++) {
+          const mote = this.add.circle(120 + Math.random() * 1160, 260 + Math.random() * 640, 1.5 + Math.random() * 1.5, 0xfff2c9, 0.4).setDepth(-96);
+          this.tweens.add({
+            targets: mote, y: mote.y - (40 + Math.random() * 60), x: mote.x + (Math.random() - 0.5) * 60, alpha: 0.05,
+            duration: 5000 + Math.random() * 4000, delay: Math.random() * 3000, yoyo: true, repeat: -1, ease: 'Sine.easeInOut'
+          });
+        }
 
         // the edges of the floor fall into shadow
         const edge = this.add.graphics().setDepth(-97);
