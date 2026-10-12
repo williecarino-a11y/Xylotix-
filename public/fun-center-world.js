@@ -319,6 +319,8 @@ freezer: ['pizza', 'icecream', 'frozendinner']
       .mw-bubble { left: 8px; right: 8px; bottom: 10px; padding: 6px 10px; font-size: 12px; line-height: 1.25; border: 0; border-radius: 12px; background: rgba(8, 14, 30, 0.72); }
       .mw-asst-face { color: #ffffff; font-weight: 800; font-size: 14px; }
       .mw-count { display: inline-flex; align-items: center; gap: 6px; }
+      .mw-hud .mw-top .mw-clock { flex: 1; min-width: 0; padding: 4px 10px; }
+      .mw-hud .mw-top .mw-clock span { white-space: nowrap; font-size: 10px; }
       .mw-hud [data-mw-mute] { display: inline-flex; align-items: center; justify-content: center; }
       .mw-count svg, .mw-hud [data-mw-mute] svg { display: block; }
       .mw-scan::before { content: 'Scan'; font-size: 15px; font-weight: 800; }
