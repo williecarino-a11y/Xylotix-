@@ -2804,6 +2804,11 @@ refreshHot() {
 
         if (this.puppet) this.animPuppet(delta, this.time.now, moving, ix, iy);
         else this.player.setFlipX(FACES_RIGHT ? this.faceLeft : !this.faceLeft);
+        if (this.puppet) {
+          const ps = 0.9 + 0.2 * Phaser.Math.Clamp((this.player.y - WALL_H) / (H - WALL_H), 0, 1);
+          this.player.scaleX = Math.sign(this.player.scaleX || 1) * MM_SCALE * ps;
+          this.player.scaleY = MM_SCALE * ps;
+        }
         this.player.setDepth(this.player.y);
         if (this.cartBox) this.updateCart();
         this.updateShopkeeper(delta);
