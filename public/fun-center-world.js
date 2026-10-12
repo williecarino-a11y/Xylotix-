@@ -2706,6 +2706,7 @@ refreshHot() {
         this.updateFriend(delta);
         this.updateCashier(delta);
         this.updateCustomer(delta);
+        this.updateCrowd(delta);
         this.updateFridges();
         this.shadow.setPosition(this.player.x, this.player.y - 2).setDepth(this.player.y - 1);
 
