@@ -780,6 +780,19 @@ freezer: ['pizza', 'icecream', 'frozendinner']
       getScene: () => (game && game.scene.getScene('mart'))
     }) : null;
 
+    // HUD: every top card (wallet, clock, sale, meters, list) moves onto the store as small pills
+    const mwRoot = content.querySelector('.mw');
+    const mwHud = document.createElement('div');
+    mwHud.className = 'mw-hud';
+    holder.appendChild(mwHud);
+    const keepHud = () => {
+      Array.from(mwRoot.children).forEach(ch => {
+        if (ch === holder || ch.classList.contains('mw-controls')) return;
+        mwHud.appendChild(ch);
+      });
+    };
+    keepHud();
+    new MutationObserver(keepHud).observe(mwRoot, { childList: true });
     const listEl = content.querySelector('[data-mw-list]');
     const sit = session.week && session.week.situation;
     const listIds = sit ? sit.hints : NEED_IDS;
