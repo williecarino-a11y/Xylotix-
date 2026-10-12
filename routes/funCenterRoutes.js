@@ -6,6 +6,7 @@ const rateLimit = require('express-rate-limit');
 const { getAuthenticatedUser } = require('./authRoutes');
 const FunGameSession = require('../models/FunGameSession');
 const FunGameProfile = require('../models/FunGameProfile');
+const daily = require('./funCenterDaily');
 const { getFunCenterGames, getFunCenterGame, validateFunCenterAnswer, getWeeklyShop, getWeeklyShopDefinition, getFlashSales, getPriceHikes, getWeekSetup, pickSituation, computeMeters, METER_WARN, pickTricks, publicTricks, describeTrick, SCANS_PER_TRIP, getCartSkins, getCartSkin } = require('../scripts/learningData/funCenter');
 const router = express.Router();
 
