@@ -127,22 +127,28 @@
     </div></div>`;
   }
 
-  // Shows the menu inside the Fun Center and resolves with 'daily', 'practice' or 'back'.
+ // Shows the menu inside the Fun Center and resolves with 'daily', 'practice' or 'back'.
   function pickMode(content, request, notice) {
     injectStyles();
     content.innerHTML = '<div class="miimiid-fun-loading">Loading today\'s challenge…</div>';
-    return request('/api/fun-center/daily', { headers: NO_OVERLAY })
-      .then(info => new Promise(resolve => {
-        content.innerHTML = menuHtml(info, notice);
+    return Promise.all([
+      request('/api/fun-center/daily', { headers: NO_OVERLAY }),
+      request('/api/fun-center/daily/leaderboard', { headers: NO_OVERLAY }).catch(() => null)
+    ])
+      .then(([info, board]) => new Promise(resolve => {
+        content.innerHTML = menuHtml(info, notice, board);
         const wire = (sel, fn) => { const el = content.querySelector(sel); if (el) el.addEventListener('click', fn); };
         wire('[data-mmd-play]', () => resolve('daily'));
         wire('[data-mmd-practice]', () => resolve('practice'));
         wire('[data-mmd-back]', () => resolve('back'));
-        wire('[data-mmd-share]', e => share(shareText(info.result, info.dayKey, info.streak), e.currentTarget));
+        wire('[data-mmd-share]', e => {
+          const rank = board && board.you ? board.you.rank : 0;
+          share(shareText(info.result, info.dayKey, info.streak, rank), e.currentTarget);
+        });
       }))
       .catch(error => { console.error('daily status error:', error); return 'practice'; });
-  }
-
+}
+ 
   // Adds the daily score, the streak and a Share button to the trip result card.
   function decorateResult(overlayEl, r) {
     const d = r && r.daily;
