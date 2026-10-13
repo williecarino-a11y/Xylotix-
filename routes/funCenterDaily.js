@@ -214,10 +214,10 @@ router.post('/start', dailyLimiter, async (req, res) => {
   }
 });
 
-function displayName(u) {
+function displayName(u, id) {
   const first = u && u.firstName ? String(u.firstName).trim() : '';
   const last = u && u.lastName ? String(u.lastName).trim() : '';
-  if (!first) return 'Player';
+  if (!first) return `Player ${String(id).slice(-4).toUpperCase()}`;
   return last ? `${first} ${last.charAt(0).toUpperCase()}.` : first;
 }
 
@@ -237,7 +237,7 @@ router.get('/leaderboard', dailyLimiter, async (req, res) => {
     const byId = new Map(users.map(u => [String(u._id), u]));
     const top = rows.map((row, i) => ({
       rank: i + 1,
-      name: displayName(byId.get(String(row.userId))),
+      name: displayName(byId.get(String(row.userId)), row.userId),
       score: row.score,
       stars: row.stars,
       you: String(row.userId) === String(user._id)
