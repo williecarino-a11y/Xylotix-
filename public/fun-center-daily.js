@@ -26,6 +26,11 @@
       .mmd-card button { margin-top: 10px; width: 100%; border: 0; border-radius: 999px; padding: 13px; font-weight: 800; font-size: 15px; background: #1f6feb; color: #fff; cursor: pointer; }
       .mmd-card button.mmd-alt { background: transparent; border: 1px solid #232c42; color: #9aa4bd; }
       .mmd-note { margin: 8px 0 0; font-size: 13px; color: #ffb4b4; }
+      .mmd { padding-top: 28px; }
+      .mmd-card { padding: 22px 18px; }
+      .mmd-stats { display: flex; justify-content: space-around; gap: 8px; margin: 12px 0 6px; }
+      .mmd-stats b { display: block; font-size: 20px; }
+      .mmd-stats span { font-size: 11px; color: #9aa4bd; }
       .mmd-result { text-align: center; margin: 6px 0 10px; padding: 10px; border-radius: 14px; background: rgba(31, 111, 235, .12); border: 1px solid #1f6feb; }
     `;
     document.head.appendChild(st);
