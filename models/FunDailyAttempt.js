@@ -20,4 +20,7 @@ const funDailyAttemptSchema = new mongoose.Schema(
 // one attempt per player per day, enforced by the database
 funDailyAttemptSchema.index({ userId: 1, dayKey: 1 }, { unique: true });
 
+// fast "top scores for a day" lookups
+funDailyAttemptSchema.index({ dayKey: 1, status: 1, score: -1 });
+
 module.exports = mongoose.model('FunDailyAttempt', funDailyAttemptSchema);
