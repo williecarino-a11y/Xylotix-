@@ -261,4 +261,48 @@ router.get('/leaderboard', dailyLimiter, async (req, res) => {
   }
 });
 
+// ---- nicknames ----
+const BLOCKED_WORDS = ['fuck', 'shit', 'bitch', 'dick', 'cunt', 'nigg', 'fag', 'rape', 'nazi', 'porn', 'sex', 'slut', 'whore', 'pussy', 'cock'];
+const RESERVED_WORDS = ['admin', 'miimiid', 'moderator', 'support', 'official', 'staff'];
+
+function flatten(text) {
+  return text.toLowerCase().replace(/0/g, 'o').replace(/1/g, 'i').replace(/3/g, 'e').replace(/4/g, 'a').replace(/5/g, 's').replace(/[^a-z]/g, '');
+}
+
+function cleanNickname(raw) {
+  const nick = String(raw == null ? '' : raw).replace(/\s+/g, ' ').trim();
+  if (nick.length < 3 || nick.length > 16) return { error: 'Use 3 to 16 characters.' };
+  if (!/^[A-Za-z0-9 _-]+$/.test(nick)) return { error: 'Use only letters, numbers, spaces, - and _.' };
+  const flat = flatten(nick);
+  if (BLOCKED_WORDS.some(w => flat.includes(w)) || RESERVED_WORDS.some(w => flat.includes(w))) {
+    return { error: 'Please pick a different name.' };
+  }
+  return { nick };
+}
+
+router.post('/nickname', dailyLimiter, async (req, res) => {
+  try {
+    const user = await requireUser(req, res);
+    if (!user) return;
+    const checked = cleanNickname(req.body && req.body.nickname);
+    if (checked.error) return res.status(400).json({ status: 'error', message: checked.error });
+    try {
+      await FunNickname.findOneAndUpdate(
+        { userId: user._id },
+        { $set: { nickname: checked.nick, nicknameLower: checked.nick.toLowerCase() } },
+        { upsert: true, new: true, runValidators: true }
+      );
+    } catch (error) {
+      if (error && error.code === 11000) {
+        return res.status(409).json({ status: 'error', code: 'NAME_TAKEN', message: 'That name is taken. Try another.' });
+      }
+      throw error;
+    }
+    return res.json({ status: 'success', data: { nickname: checked.nick } });
+  } catch (error) {
+    console.error('Daily nickname error:', error);
+    return res.status(500).json({ status: 'error', message: 'Unable to save your name.' });
+  }
+});
+
 module.exports = { router, pickFor, finishAttempt };
