@@ -1621,9 +1621,9 @@ freezer: ['pizza', 'icecream', 'frozendinner']
 
         // side walls: slanted toward the back so the room has real corners
         const sw = this.add.graphics().setDepth(-89);
-        sw.fillStyle(0x17305e, 1);
+        sw.fillStyle(TH.sideL, 1);
         sw.fillPoints([{ x: 0, y: 0 }, { x: SIDE_BACK, y: 22 }, { x: SIDE_BACK, y: WALL_H }, { x: SIDE_FRONT, y: H }, { x: 0, y: H }], true);
-        sw.fillStyle(0x112347, 1);
+        sw.fillStyle(TH.sideR, 1);
         sw.fillPoints([{ x: W, y: 0 }, { x: W - SIDE_BACK, y: 22 }, { x: W - SIDE_BACK, y: WALL_H }, { x: W - SIDE_FRONT, y: H }, { x: W, y: H }], true);
         // dark line in each back corner
         sw.lineStyle(3, 0x050a18, 0.7);
