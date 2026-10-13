@@ -236,6 +236,8 @@ router.get('/leaderboard', dailyLimiter, async (req, res) => {
     ]);
     const users = await User.find({ _id: { $in: rows.map(r => r.userId) } }).select('firstName lastName').lean();
     const byId = new Map(users.map(u => [String(u._id), u]));
+    const nicks = await FunNickname.find({ userId: { $in: rows.map(r => r.userId) } }).lean();
+    const nickById = new Map(nicks.map(n => [String(n.userId), n.nickname]));
     const top = rows.map((row, i) => ({
       rank: i + 1,
       name: displayName(byId.get(String(row.userId)), row.userId),
