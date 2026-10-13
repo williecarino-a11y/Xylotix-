@@ -13,7 +13,7 @@
     st.textContent = `
       .mmj-rise { animation: mmjRise .4s cubic-bezier(.2, .9, .3, 1.2); }
       @keyframes mmjRise { from { transform: translateY(24px) scale(.96); opacity: 0; } to { transform: none; opacity: 1; } }
-      .mmj-mascot { display: block; width: 88px; height: auto; margin: 0 auto 4px; }
+      .mmj-mascot { display: block; width: 64px; height: auto; margin: 0 auto 2px; }
       .mmj-bounce { animation: mmjBounce .6s ease-in-out 3; }
       @keyframes mmjBounce { 50% { transform: translateY(-14px); } }
       .mmj-perfect h3 { animation: mmjPop .7s ease-out; text-shadow: 0 0 14px rgba(77, 163, 255, .7); }
