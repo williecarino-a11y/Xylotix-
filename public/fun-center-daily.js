@@ -164,6 +164,7 @@
         wire('[data-mmd-play]', () => resolve('daily'));
         wire('[data-mmd-practice]', () => resolve('practice'));
         wire('[data-mmd-back]', () => resolve('back'));
+        wire('[data-mmd-nick]', () => saveNickname(content, request));
         wire('[data-mmd-share]', e => {
           const rank = board && board.you ? board.you.rank : 0;
           share(shareText(info.result, info.dayKey, info.streak, rank), e.currentTarget);
