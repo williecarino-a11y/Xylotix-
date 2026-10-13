@@ -36,8 +36,9 @@
     document.head.appendChild(st);
   }
 
-  function shareText(res, dayKey, streak) {
+  function shareText(res, dayKey, streak, rank) {
     const bits = [`Miimiid Mart Daily ${dayKey}: ${res.score} points, ${res.stars} of 3 stars, $${res.saved} left.`];
+    if (rank > 0) bits.push(`I'm #${rank} today.`);
     if (streak > 1) bits.push(`${streak} day streak.`);
     bits.push('Can you beat me?');
     return bits.join(' ') + ' ' + location.origin;
