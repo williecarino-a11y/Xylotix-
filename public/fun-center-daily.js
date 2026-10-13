@@ -31,6 +31,14 @@
       .mmd-stats { display: flex; justify-content: space-around; gap: 8px; margin: 12px 0 6px; }
       .mmd-stats b { display: block; font-size: 20px; }
       .mmd-stats span { font-size: 11px; color: #9aa4bd; }
+      .mmd-boardbox { margin: 14px 0 4px; padding: 12px; border-radius: 14px; background: rgba(8, 14, 30, 0.55); border: 1px solid #232c42; }
+      .mmd-boardbox .mmd-kicker { margin-bottom: 6px; }
+      .mmd-board { list-style: none; margin: 0; padding: 0; text-align: left; }
+      .mmd-row { display: flex; align-items: center; gap: 10px; padding: 6px 8px; border-radius: 10px; font-size: 14px; }
+      .mmd-row b { margin-left: auto; }
+      .mmd-rank { width: 22px; text-align: center; font-weight: 800; color: #9ec5ff; }
+      .mmd-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+      .mmd-you { background: rgba(31, 111, 235, 0.22); }
       .mmd-result { text-align: center; margin: 6px 0 10px; padding: 10px; border-radius: 14px; background: rgba(31, 111, 235, .12); border: 1px solid #1f6feb; }
     `;
     document.head.appendChild(st);
