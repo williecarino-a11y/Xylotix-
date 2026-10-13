@@ -93,19 +93,42 @@
     return `<div class="mmd-boardbox"><div class="mmd-kicker">TODAY'S TOP PLAYERS</div>${body}${count}</div>`;
   }
 
+  function starsHtml(n) {
+    const star = on => `<svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3 6.1 20.6l1.3-6.6L2.5 9.4l6.6-.8z" fill="${on ? '#ffd34d' : 'none'}" stroke="${on ? '#ffd34d' : '#3b4666'}" stroke-width="1.6" stroke-linejoin="round"/></svg>`;
+    return `<div class="mmd-starrow">${[1, 2, 3].map(i => star(i <= n)).join('')}</div>`;
+  }
+
+  function verdict(stars) {
+    if (stars >= 3) return 'A perfect day';
+    if (stars === 2) return 'A strong day';
+    if (stars === 1) return 'You got through it';
+    return 'A rough day';
+  }
+
+  function breakdownHtml(rows, total) {
+    const list = rows.map(r => `<li><span>${esc(r.label)}</span><b class="${r.points < 0 ? 'neg' : ''}">${r.points > 0 ? '+' : ''}${esc(r.points)}</b></li>`).join('');
+    return `<ul class="mmd-break">${list}<li class="mmd-total"><span>Total</span><b>${esc(total)}</b></li></ul>`;
+  }
+
   function menuHtml(info, notice, board) {
     const sit = info.situation || {};
     const res = info.result;
     let status;
     if (res) {
-      status = `<div class="mmd-score">${esc(res.score)}</div>
-        <div class="mmd-sub">Your score today</div>
-        <div class="mmd-stats">
-          <div><b>${esc(res.stars)}/3</b><span>Stars</span></div>
-          <div><b>${esc(res.needsCovered)}/${esc(res.totalNeeds)}</b><span>Needs covered</span></div>
-          <div><b>$${esc(res.saved)}</b><span>Left</span></div>
-        </div>
-        <p class="mmd-sub">Stars, needs covered, money kept and fake deals caught add to your score.</p>
+      const rank = board && board.you ? `<p class="mmd-sub">Rank today: #${esc(board.you.rank)} of ${esc(board.total)}</p>` : '';
+      const detail = Array.isArray(res.breakdown) && res.breakdown.length
+        ? breakdownHtml(res.breakdown, res.score)
+        : `<div class="mmd-stats">
+            <div><b>${esc(res.stars)}/3</b><span>Stars</span></div>
+            <div><b>${esc(res.needsCovered)}/${esc(res.totalNeeds)}</b><span>Needs covered</span></div>
+            <div><b>$${esc(res.saved)}</b><span>Left</span></div>
+          </div>`;
+      status = `${starsHtml(res.stars)}
+        <div class="mmd-verdict">${esc(verdict(res.stars))}</div>
+        <div class="mmd-score">${esc(res.score)}</div>
+        <div class="mmd-sub">Daily score</div>
+        ${rank}
+        ${detail}
         <button type="button" data-mmd-share>Share my score</button>`;
     } else if (info.locked) {
       status = '<p>Your official attempt for today has been used. A new challenge arrives every day.</p>';
