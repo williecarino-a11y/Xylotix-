@@ -12,7 +12,8 @@ const funDailyAttemptSchema = new mongoose.Schema(
     saved: { type: Number, default: 0, min: 0 },
     needsCovered: { type: Number, default: 0, min: 0 },
     totalNeeds: { type: Number, default: 0, min: 0 },
-    completedAt: { type: Date, default: null }
+    completedAt: { type: Date, default: null },
+    breakdown: { type: mongoose.Schema.Types.Mixed, default: null }
   },
   { timestamps: true }
 );
