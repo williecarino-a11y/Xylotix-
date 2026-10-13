@@ -53,25 +53,40 @@
     flash('Sharing is not available here');
   }
 
+  function milestone(streak) {
+    if (streak >= 30) return '30 days in a row. Legend!';
+    if (streak >= 7) return 'A full week in a row!';
+    if (streak >= 3) return 'Three days in a row!';
+    return '';
+  }
+
   function menuHtml(info, notice) {
     const sit = info.situation || {};
     const res = info.result;
     let status;
     if (res) {
       status = `<div class="mmd-score">${esc(res.score)}</div>
-        <div class="mmd-sub">Your score today &middot; ${esc(res.stars)} of 3 stars &middot; $${esc(res.saved)} left</div>
+        <div class="mmd-sub">Your score today</div>
+        <div class="mmd-stats">
+          <div><b>${esc(res.stars)}/3</b><span>Stars</span></div>
+          <div><b>${esc(res.needsCovered)}/${esc(res.totalNeeds)}</b><span>Needs covered</span></div>
+          <div><b>$${esc(res.saved)}</b><span>Left</span></div>
+        </div>
+        <p class="mmd-sub">Stars, needs covered, money kept and fake deals caught add to your score.</p>
         <button type="button" data-mmd-share>Share my score</button>`;
     } else if (info.locked) {
-      status = '<p>Your trip for today has been used. A new challenge arrives every day.</p>';
+      status = '<p>Your official attempt for today has been used. A new challenge arrives every day.</p>';
     } else {
       status = '<button type="button" data-mmd-play>Play today\'s challenge</button>';
     }
+    const ms = milestone(info.streak);
     return `<div class="mmd"><div class="mmd-card">
       <div class="mmd-kicker">DAILY CHALLENGE</div>
       <h3>${esc(sit.title || 'Today')}</h3>
       <p>${esc(sit.story || '')}</p>
-      <p class="mmd-sub">Everyone gets the same day. One scored try.</p>
+      <p class="mmd-sub">Same challenge for everyone. One official attempt per day. Practice trips do not count.</p>
       ${info.streak > 0 ? `<span class="mmd-streak">Day streak: ${esc(info.streak)}</span>` : ''}
+      ${ms ? `<p class="mmd-sub">${esc(ms)}</p>` : ''}
       ${notice ? `<p class="mmd-note">${esc(notice)}</p>` : ''}
       ${status}
       <button type="button" class="mmd-alt" data-mmd-practice>Practice trip</button>
