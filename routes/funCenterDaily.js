@@ -11,6 +11,7 @@ const { getAuthenticatedUser } = require('./authRoutes');
 const FunGameSession = require('../models/FunGameSession');
 const FunGameProfile = require('../models/FunGameProfile');
 const FunDailyAttempt = require('../models/FunDailyAttempt');
+const User = require('../models/User');
 const { getWeeklyShopDefinition, getWeekSetup, pickSituation, pickTricks, publicTricks, SCANS_PER_TRIP, getCartSkin } = require('../scripts/learningData/funCenter');
 
 const router = express.Router();
