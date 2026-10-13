@@ -37,6 +37,10 @@
       .mmd-rank { width: 22px; text-align: center; font-weight: 800; color: #9ec5ff; }
       .mmd-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
       .mmd-you { background: rgba(31, 111, 235, 0.22); }
+      .mmd-nick { margin: 12px 0 2px; text-align: left; }
+      .mmd-nickrow { display: flex; gap: 8px; margin-top: 4px; }
+      .mmd-nickrow input { flex: 1; min-width: 0; padding: 10px 12px; border-radius: 999px; border: 1px solid #232c42; background: #0d1324; color: #e6e9f0; font-size: 14px; }
+      .mmd-card .mmd-nickrow button { width: auto; margin-top: 0; padding: 10px 18px; }
       .mmd-result { text-align: center; margin: 6px 0 10px; padding: 10px; border-radius: 14px; background: rgba(31, 111, 235, .12); border: 1px solid #1f6feb; }
     `;
     document.head.appendChild(st);
