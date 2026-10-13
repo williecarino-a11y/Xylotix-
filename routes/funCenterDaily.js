@@ -240,7 +240,7 @@ router.get('/leaderboard', dailyLimiter, async (req, res) => {
     const nickById = new Map(nicks.map(n => [String(n.userId), n.nickname]));
     const top = rows.map((row, i) => ({
       rank: i + 1,
-      name: displayName(byId.get(String(row.userId)), row.userId),
+      name: nickById.get(String(row.userId)) || displayName(byId.get(String(row.userId)), row.userId),
       score: row.score,
       stars: row.stars,
       you: String(row.userId) === String(user._id)
