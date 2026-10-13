@@ -106,7 +106,7 @@ async function finishAttempt({ userId, dayKey, sessionId, summary, mongoSession 
     { userId, dayKey, sessionId, status: 'started' },
     {
       $set: {
-        status: 'completed', score, stars: summary.stars, spent: summary.spent, saved: summary.saved,
+        status: 'completed', score, breakdown: breakdown.rows, stars: summary.stars,
         needsCovered: summary.needsBought.length, totalNeeds: summary.totalNeeds, completedAt: new Date()
       }
     },
