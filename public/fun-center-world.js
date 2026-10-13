@@ -1533,6 +1533,9 @@ freezer: ['pizza', 'icecream', 'frozendinner']
           : addEllipse(x, y, w, h, color, alpha));
 
         // ---- ROOM (three-quarter): floor, back wall, two side walls, warm lighting ----
+        const TH = (window.MiimiidMart && window.MiimiidMart.settings)
+          ? window.MiimiidMart.settings.storeColors()
+          : { wallTop: 0x1d3d78, wallBot: 0x0e1a38, trim: 0x1f6feb, trimHi: 0x7ab8ff, sideL: 0x17305e, sideR: 0x112347, floorTop: 0xb9ab93, floorBot: 0xf4ead6 };
         const FL_TOP = WALL_H;
         const FL_BOT = H;
         const SIDE_BACK = 36;     // straight side walls
