@@ -1633,10 +1633,10 @@ freezer: ['pizza', 'icecream', 'frozendinner']
         sw.lineStyle(3, 0x7ab8ff, 0.35);
         // (slanted wall rail removed)
         // baseboards along the floor
-        sw.lineStyle(10, 0x1f6feb, 1);
+        sw.lineStyle(10, TH.trim, 1);
         sw.lineBetween(SIDE_BACK, WALL_H, SIDE_FRONT, H);
         sw.lineBetween(W - SIDE_BACK, WALL_H, W - SIDE_FRONT, H);
-        sw.lineStyle(3, 0x7ab8ff, 1);
+        sw.lineStyle(3, TH.trimHi, 1);
         sw.lineBetween(SIDE_BACK + 5, WALL_H, SIDE_FRONT + 5, H);
         sw.lineBetween(W - SIDE_BACK - 5, WALL_H, W - SIDE_FRONT - 5, H);
         wall.fillStyle(0x0b1530, 1).fillRect(-200, -260, W + 400, 260);   // ceiling, so the camera can scroll up past the sign
