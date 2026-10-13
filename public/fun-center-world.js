@@ -987,7 +987,10 @@ freezer: ['pizza', 'icecream', 'frozendinner']
       if (SFX.master) SFX.master.gain.value = SFX.muted ? 0 : 0.9;
     }
     muteBtn.innerHTML = SFX.muted ? ICON_OFF : ICON_ON;
-    muteBtn.addEventListener('click', () => { muteBtn.innerHTML = SFX.toggleMute() ? ICON_OFF : ICON_ON; });
+    muteBtn.addEventListener('click', () => {
+      muteBtn.innerHTML = SFX.toggleMute() ? ICON_OFF : ICON_ON;
+      if (window.MiimiidMart && window.MiimiidMart.settings) window.MiimiidMart.settings.setSoundOff(SFX.muted);
+    });
     content.addEventListener('pointerdown', () => { SFX.init(); SFX.startMusic(); });
     SFX.init();
     SFX.startMusic();
