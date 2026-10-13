@@ -1543,7 +1543,7 @@ freezer: ['pizza', 'icecream', 'frozendinner']
 
         // floor: cool and darker at the back, bright and warm at the front (no checkerboard)
         const fl = this.add.graphics().setDepth(-100);
-        fl.fillGradientStyle(0xb9ab93, 0xb9ab93, 0xf4ead6, 0xf4ead6, 1);
+        fl.fillGradientStyle(TH.floorTop, TH.floorTop, TH.floorBot, TH.floorBot, 1);
         fl.fillRect(0, FL_TOP, W, FL_BOT - FL_TOP);
 
         // faint tile joints that run toward the back wall, so the floor recedes
