@@ -136,8 +136,6 @@
 
       // a perfect trip gets a bigger moment
       if (perfect) {
-        const title = card.querySelector('h3');
-        if (title) title.textContent = 'Perfect trip!';
         card.classList.add('mmj-perfect');
         if (!calm) {
           setTimeout(() => { confetti(o); }, 1200);
