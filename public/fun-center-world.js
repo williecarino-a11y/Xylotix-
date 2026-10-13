@@ -1600,7 +1600,7 @@ freezer: ['pizza', 'icecream', 'frozendinner']
 
         // back wall: panels, ceiling strip with lamps, bright trim
         const wall = this.add.graphics().setDepth(-90);
-        wall.fillGradientStyle(0x1d3d78, 0x1d3d78, 0x0e1a38, 0x0e1a38, 1, 1, 1, 1);
+        wall.fillGradientStyle(TH.wallTop, TH.wallTop, TH.wallBot, TH.wallBot, 1, 1, 1, 1);
         wall.fillRect(0, 0, W, WALL_H);
         wall.lineStyle(2, 0xffffff, 0.08);
         for (let x = 140; x < W; x += 140) wall.lineBetween(x, 22, x, WALL_H - 14);
