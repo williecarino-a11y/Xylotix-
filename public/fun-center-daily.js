@@ -66,7 +66,18 @@
     return '';
   }
 
-  function menuHtml(info, notice) {
+  function boardHtml(board) {
+    if (!board) return '';
+    const top = Array.isArray(board.top) ? board.top : [];
+    const row = (rank, name, score, you) => `<li class="mmd-row${you ? ' mmd-you' : ''}"><span class="mmd-rank">${esc(rank)}</span><span class="mmd-name">${esc(name)}</span><b>${esc(score)}</b></li>`;
+    const rows = top.map(r => row(r.rank, r.you ? r.name + ' (you)' : r.name, r.score, r.you)).join('');
+    const outside = board.you && !top.some(r => r.you) ? row(board.you.rank, 'You', board.you.score, true) : '';
+    const body = rows ? `<ol class="mmd-board">${rows}${outside}</ol>` : '<p class="mmd-sub">No scores yet today. Be the first!</p>';
+    const count = board.total ? `<p class="mmd-sub">${esc(board.total)} player${board.total === 1 ? '' : 's'} so far today</p>` : '';
+    return `<div class="mmd-boardbox"><div class="mmd-kicker">TODAY'S TOP PLAYERS</div>${body}${count}</div>`;
+  }
+
+  function menuHtml(info, notice, board) {
     const sit = info.situation || {};
     const res = info.result;
     let status;
@@ -85,6 +96,22 @@
     } else {
       status = '<button type="button" data-mmd-play>Play today\'s challenge</button>';
     }
+    const ms = milestone(info.streak);
+    return `<div class="mmd"><div class="mmd-card">
+      <div class="mmd-kicker">DAILY CHALLENGE</div>
+      <h3>${esc(sit.title || 'Today')}</h3>
+      <p>${esc(sit.story || '')}</p>
+      <p class="mmd-sub">Same challenge for everyone. One official attempt per day. Practice trips do not count.</p>
+      ${info.streak > 0 ? `<span class="mmd-streak">Day streak: ${esc(info.streak)}</span>` : ''}
+      ${ms ? `<p class="mmd-sub">${esc(ms)}</p>` : ''}
+      ${notice ? `<p class="mmd-note">${esc(notice)}</p>` : ''}
+      ${status}
+      ${boardHtml(board)}
+      <button type="button" class="mmd-alt" data-mmd-practice>Practice trip</button>
+      <button type="button" class="mmd-alt" data-mmd-back>Back to Fun Center</button>
+    </div></div>`;
+  }
+    
     const ms = milestone(info.streak);
     return `<div class="mmd"><div class="mmd-card">
       <div class="mmd-kicker">DAILY CHALLENGE</div>
