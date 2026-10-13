@@ -100,7 +100,8 @@ function dailyScore(summary) {
 
 // Called from the checkout route, inside its transaction.
 async function finishAttempt({ userId, dayKey, sessionId, summary, mongoSession }) {
-  const score = dailyScore(summary);
+  const breakdown = dailyBreakdown(summary);
+  const score = breakdown.total;
   const attempt = await FunDailyAttempt.findOneAndUpdate(
     { userId, dayKey, sessionId, status: 'started' },
     {
