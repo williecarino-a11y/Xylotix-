@@ -1,5 +1,5 @@
-/* Miimiid Mart: Daily Challenge (menu and share button). The server picks the day, keeps the
- * one-attempt rule and scores the trip; this file only draws what the server sends. */
+/* Miimiid Mart: Daily Challenge (menu, leaderboard and share button). The server picks the day, keeps the
+ * one-attempt rule, scores the trip and ranks the players; this file only draws what the server sends. */
 (function () {
   'use strict';
   window.MiimiidMart = window.MiimiidMart || {};
@@ -15,8 +15,8 @@
     const st = document.createElement('style');
     st.id = 'mmd-styles';
     st.textContent = `
-      .mmd { max-width: 440px; margin: 0 auto; padding: 8px 4px 24px; }
-      .mmd-card { background: #131a2c; border: 1px solid #232c42; border-radius: 18px; padding: 18px 16px; color: #e6e9f0; text-align: center; }
+      .mmd { max-width: 440px; margin: 0 auto; padding: 28px 4px 24px; }
+      .mmd-card { background: #131a2c; border: 1px solid #232c42; border-radius: 18px; padding: 22px 18px; color: #e6e9f0; text-align: center; }
       .mmd-kicker { font-size: 11px; font-weight: 800; letter-spacing: .08em; color: #9ec5ff; }
       .mmd-card h3 { margin: 6px 0 4px; color: #4da3ff; font-size: 22px; }
       .mmd-card p { margin: 6px 0; font-size: 14px; line-height: 1.4; }
@@ -26,8 +26,6 @@
       .mmd-card button { margin-top: 10px; width: 100%; border: 0; border-radius: 999px; padding: 13px; font-weight: 800; font-size: 15px; background: #1f6feb; color: #fff; cursor: pointer; }
       .mmd-card button.mmd-alt { background: transparent; border: 1px solid #232c42; color: #9aa4bd; }
       .mmd-note { margin: 8px 0 0; font-size: 13px; color: #ffb4b4; }
-      .mmd { padding-top: 28px; }
-      .mmd-card { padding: 22px 18px; }
       .mmd-stats { display: flex; justify-content: space-around; gap: 8px; margin: 12px 0 6px; }
       .mmd-stats b { display: block; font-size: 20px; }
       .mmd-stats span { font-size: 11px; color: #9aa4bd; }
@@ -42,6 +40,13 @@
       .mmd-result { text-align: center; margin: 6px 0 10px; padding: 10px; border-radius: 14px; background: rgba(31, 111, 235, .12); border: 1px solid #1f6feb; }
     `;
     document.head.appendChild(st);
+  }
+
+  function milestone(streak) {
+    if (streak >= 30) return '30 days in a row. Legend!';
+    if (streak >= 7) return 'A full week in a row!';
+    if (streak >= 3) return 'Three days in a row!';
+    return '';
   }
 
   function shareText(res, dayKey, streak, rank) {
@@ -65,13 +70,6 @@
       return;
     }
     flash('Sharing is not available here');
-  }
-
-  function milestone(streak) {
-    if (streak >= 30) return '30 days in a row. Legend!';
-    if (streak >= 7) return 'A full week in a row!';
-    if (streak >= 3) return 'Three days in a row!';
-    return '';
   }
 
   function boardHtml(board) {
@@ -119,23 +117,8 @@
       <button type="button" class="mmd-alt" data-mmd-back>Back to Fun Center</button>
     </div></div>`;
   }
-    
-    const ms = milestone(info.streak);
-    return `<div class="mmd"><div class="mmd-card">
-      <div class="mmd-kicker">DAILY CHALLENGE</div>
-      <h3>${esc(sit.title || 'Today')}</h3>
-      <p>${esc(sit.story || '')}</p>
-      <p class="mmd-sub">Same challenge for everyone. One official attempt per day. Practice trips do not count.</p>
-      ${info.streak > 0 ? `<span class="mmd-streak">Day streak: ${esc(info.streak)}</span>` : ''}
-      ${ms ? `<p class="mmd-sub">${esc(ms)}</p>` : ''}
-      ${notice ? `<p class="mmd-note">${esc(notice)}</p>` : ''}
-      ${status}
-      <button type="button" class="mmd-alt" data-mmd-practice>Practice trip</button>
-      <button type="button" class="mmd-alt" data-mmd-back>Back to Fun Center</button>
-    </div></div>`;
-  }
 
- // Shows the menu inside the Fun Center and resolves with 'daily', 'practice' or 'back'.
+  // Shows the menu inside the Fun Center and resolves with 'daily', 'practice' or 'back'.
   function pickMode(content, request, notice) {
     injectStyles();
     content.innerHTML = '<div class="miimiid-fun-loading">Loading today\'s challenge…</div>';
@@ -155,8 +138,8 @@
         });
       }))
       .catch(error => { console.error('daily status error:', error); return 'practice'; });
-}
- 
+  }
+
   // Adds the daily score, the streak and a Share button to the trip result card.
   function decorateResult(overlayEl, r) {
     const d = r && r.daily;
@@ -172,7 +155,7 @@
       <button type="button" data-mmd-share>Share my score</button>`;
     title.insertAdjacentElement('afterend', box);
     box.querySelector('[data-mmd-share]').addEventListener('click', e => {
-      share(shareText({ score: d.score, stars: r.stars, saved: r.saved }, d.dayKey, d.streak), e.currentTarget);
+      share(shareText({ score: d.score, stars: r.stars, saved: r.saved }, d.dayKey, d.streak, 0), e.currentTarget);
     });
   }
 
