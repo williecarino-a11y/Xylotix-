@@ -171,7 +171,7 @@ router.get('/', dailyLimiter, async (req, res) => {
         dayKey,
         situation: { title: situation.title, story: situation.story },
         locked,
-        result: done ? { score: attempt.score, stars: attempt.stars, spent: attempt.spent, saved: attempt.saved, needsCovered: attempt.needsCovered, totalNeeds: attempt.totalNeeds } : null,
+        result: done ? { score: attempt.score, stars: attempt.stars, spent: attempt.spent, saved: attempt.saved, needsCovered: attempt.needsCovered, totalNeeds: attempt.totalNeeds, breakdown: Array.isArray(attempt.breakdown) ? attempt.breakdown : null } : null,
         streak: await computeStreak(user._id, dayKey),
         nickname: ((await FunNickname.findOne({ userId: user._id }).lean()) || {}).nickname || ''
         }
