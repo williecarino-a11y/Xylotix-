@@ -159,8 +159,9 @@ router.get('/', dailyLimiter, async (req, res) => {
         situation: { title: situation.title, story: situation.story },
         locked,
         result: done ? { score: attempt.score, stars: attempt.stars, spent: attempt.spent, saved: attempt.saved, needsCovered: attempt.needsCovered, totalNeeds: attempt.totalNeeds } : null,
-        streak: await computeStreak(user._id, dayKey)
-      }
+        streak: await computeStreak(user._id, dayKey),
+        nickname: ((await FunNickname.findOne({ userId: user._id }).lean()) || {}).nickname || ''
+        }
     });
   } catch (error) {
     console.error('Daily challenge status error:', error);
