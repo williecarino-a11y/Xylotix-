@@ -1609,8 +1609,8 @@ freezer: ['pizza', 'icecream', 'frozendinner']
           wall.fillStyle(0xfff6d8, 0.16).fillEllipse(x, 44, 200, 46);
           wall.fillStyle(0xffffff, 1).fillRoundedRect(x - 55, 8, 110, 8, 4);
         }
-        wall.fillStyle(0x1f6feb, 1).fillRect(0, WALL_H - 14, W, 14);
-        wall.fillStyle(0x7ab8ff, 1).fillRect(0, WALL_H - 14, W, 3);
+        wall.fillStyle(TH.trim, 1).fillRect(0, WALL_H - 14, W, 14);
+        wall.fillStyle(TH.trimHi, 1).fillRect(0, WALL_H - 14, W, 3);
 
         // side walls: slanted toward the back so the room has real corners
         const sw = this.add.graphics().setDepth(-89);
