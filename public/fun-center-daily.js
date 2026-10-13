@@ -144,7 +144,7 @@
       ${notice ? `<p class="mmd-note">${esc(notice)}</p>` : ''}
       ${status}
       ${boardHtml(board)}
-      ${nicknameHtml(info)}
+      <button type="button" class="mmd-alt" data-mmd-settings>Settings</button>
       <button type="button" class="mmd-alt" data-mmd-practice>Practice trip</button>
       <button type="button" class="mmd-alt" data-mmd-back>Back to Fun Center</button>
     </div></div>`;
