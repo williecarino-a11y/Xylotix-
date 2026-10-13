@@ -77,13 +77,25 @@ async function computeStreak(userId, dayKey, mongoSession) {
 }
 
 // ---- the daily score (decided here, never by the browser) ----
-function dailyScore(summary) {
+function dailyBreakdown(summary) {
   const tricks = Array.isArray(summary.tricks) ? summary.tricks : [];
   const caught = tricks.filter(t => t.status === 'busted' || t.status === 'knew').length;
   const fell = tricks.filter(t => t.status === 'fell').length;
   const burned = Array.isArray(summary.burnedOut) && summary.burnedOut.length > 0;
-  const raw = summary.stars * 250 + summary.needsBought.length * 40 + summary.saved * 8 + caught * 40 - fell * 30 - (burned ? 150 : 0);
-  return Math.max(0, Math.round(raw));
+  const rows = [
+    { label: `Stars (${summary.stars} of 3)`, points: summary.stars * 250 },
+    { label: `Needs covered (${summary.needsBought.length} of ${summary.totalNeeds})`, points: summary.needsBought.length * 40 },
+    { label: `Money kept ($${summary.saved})`, points: summary.saved * 8 }
+  ];
+  if (caught > 0) rows.push({ label: `Fake deals caught (${caught})`, points: caught * 40 });
+  if (fell > 0) rows.push({ label: `Fell for fakes (${fell})`, points: -fell * 30 });
+  if (burned) rows.push({ label: 'Burned out (a meter hit zero)', points: -150 });
+  const sum = rows.reduce((total, row) => total + row.points, 0);
+  return { rows, total: Math.max(0, Math.round(sum)) };
+}
+
+function dailyScore(summary) {
+  return dailyBreakdown(summary).total;
 }
 
 // Called from the checkout route, inside its transaction.
