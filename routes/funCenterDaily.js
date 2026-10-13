@@ -114,7 +114,7 @@ async function finishAttempt({ userId, dayKey, sessionId, summary, mongoSession 
   );
   if (!attempt) return null;
   const streak = await computeStreak(userId, dayKey, mongoSession);
-  return { dayKey, score, stars: summary.stars, streak };
+  return { dayKey, score, stars: summary.stars, streak, breakdown: breakdown.rows };
 }
 
 async function requireUser(req, res) {
