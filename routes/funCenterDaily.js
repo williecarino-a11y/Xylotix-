@@ -214,4 +214,47 @@ router.post('/start', dailyLimiter, async (req, res) => {
   }
 });
 
+function displayName(u) {
+  const first = u && u.firstName ? String(u.firstName).trim() : '';
+  const last = u && u.lastName ? String(u.lastName).trim() : '';
+  if (!first) return 'Player';
+  return last ? `${first} ${last.charAt(0).toUpperCase()}.` : first;
+}
+
+// Today's top 10 and this player's rank. Ties go to whoever finished first.
+router.get('/leaderboard', dailyLimiter, async (req, res) => {
+  try {
+    const user = await requireUser(req, res);
+    if (!user) return;
+    const dayKey = todayKey();
+    const filter = { dayKey, status: 'completed' };
+    const [rows, total, mine] = await Promise.all([
+      FunDailyAttempt.find(filter).sort({ score: -1, completedAt: 1 }).limit(10).lean(),
+      FunDailyAttempt.countDocuments(filter),
+      FunDailyAttempt.findOne({ ...filter, userId: user._id }).lean()
+    ]);
+    const users = await User.find({ _id: { $in: rows.map(r => r.userId) } }).select('firstName lastName').lean();
+    const byId = new Map(users.map(u => [String(u._id), u]));
+    const top = rows.map((row, i) => ({
+      rank: i + 1,
+      name: displayName(byId.get(String(row.userId))),
+      score: row.score,
+      stars: row.stars,
+      you: String(row.userId) === String(user._id)
+    }));
+    let you = null;
+    if (mine) {
+      const ahead = await FunDailyAttempt.countDocuments({
+        ...filter,
+        $or: [{ score: { $gt: mine.score } }, { score: mine.score, completedAt: { $lt: mine.completedAt } }]
+      });
+      you = { rank: ahead + 1, score: mine.score, stars: mine.stars };
+    }
+    return res.json({ status: 'success', data: { dayKey, total, top, you } });
+  } catch (error) {
+    console.error('Daily leaderboard error:', error);
+    return res.status(500).json({ status: 'error', message: 'Unable to load the leaderboard.' });
+  }
+});
+
 module.exports = { router, pickFor, finishAttempt };
