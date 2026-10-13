@@ -1234,6 +1234,7 @@ freezer: ['pizza', 'icecream', 'frozendinner']
         o.querySelector('[data-again]').addEventListener('click', () => { destroyGame(); startWorld(); });
         o.querySelector('[data-cartshop]').addEventListener('click', () => openCartShop());
         if (window.MiimiidMart && window.MiimiidMart.daily) window.MiimiidMart.daily.decorateResult(o, r);
+        if (window.MiimiidMart && window.MiimiidMart.juice) window.MiimiidMart.juice.onResult({ overlay: o, result: r, tone: (f, d, t, v, dl) => SFX.tone(f, d, t, v, dl) });
         o.querySelector('[data-back]').addEventListener('click', () => { destroyGame(); renderMiimiidFunCenter(); });
       } catch (error) {
         console.error('world checkout error:', error);
