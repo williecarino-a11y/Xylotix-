@@ -121,7 +121,7 @@
     box.className = 'mmd-result';
     box.innerHTML = `<div class="mmd-sub">DAILY CHALLENGE</div>
       <div class="mmd-score">${esc(d.score)}</div>
-      <div class="mmd-sub">${d.streak > 1 ? esc(d.streak) + ' day streak' : 'Come back tomorrow for a new day'}</div>
+      <div class="mmd-sub">${d.streak > 1 ? esc(d.streak) + ' day streak. ' + esc(milestone(d.streak)) : 'Come back tomorrow for a new challenge'}</div>
       <button type="button" data-mmd-share>Share my score</button>`;
     title.insertAdjacentElement('afterend', box);
     box.querySelector('[data-mmd-share]').addEventListener('click', e => {
