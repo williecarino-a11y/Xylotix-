@@ -37,6 +37,12 @@
       .mmd-rank { width: 22px; text-align: center; font-weight: 800; color: #9ec5ff; }
       .mmd-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
       .mmd-you { background: rgba(31, 111, 235, 0.22); }
+      .mmd-starrow { display: flex; justify-content: center; gap: 6px; margin: 12px 0 2px; }
+      .mmd-verdict { font-size: 16px; font-weight: 800; color: #ffd34d; margin-bottom: 2px; }
+      .mmd-break { list-style: none; margin: 12px 0 4px; padding: 10px 12px; border-radius: 12px; background: rgba(8, 14, 30, 0.55); border: 1px solid #232c42; text-align: left; font-size: 13px; }
+      .mmd-break li { display: flex; justify-content: space-between; gap: 10px; padding: 4px 0; }
+      .mmd-break b.neg { color: #ff8a8a; }
+      .mmd-break .mmd-total { margin-top: 4px; padding-top: 8px; border-top: 1px solid #232c42; font-size: 15px; }
       .mmd-nick { margin: 12px 0 2px; text-align: left; }
       .mmd-nickrow { display: flex; gap: 8px; margin-top: 4px; }
       .mmd-nickrow input { flex: 1; min-width: 0; padding: 10px 12px; border-radius: 999px; border: 1px solid #232c42; background: #0d1324; color: #e6e9f0; font-size: 14px; }
