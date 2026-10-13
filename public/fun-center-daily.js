@@ -87,6 +87,33 @@
     return `<div class="mmd-boardbox"><div class="mmd-kicker">TODAY'S TOP PLAYERS</div>${body}${count}</div>`;
   }
 
+  function nicknameHtml(info) {
+    return `<div class="mmd-nick">
+      <label class="mmd-sub" for="mmd-nick-input">Your name on the board</label>
+      <div class="mmd-nickrow">
+        <input id="mmd-nick-input" type="text" maxlength="16" placeholder="Pick a nickname" value="${esc(info.nickname || '')}">
+        <button type="button" data-mmd-nick>Save</button>
+      </div>
+      <p class="mmd-note" data-mmd-nick-msg style="display:none"></p>
+    </div>`;
+  }
+
+  function saveNickname(content, request) {
+    const input = content.querySelector('#mmd-nick-input');
+    const msg = content.querySelector('[data-mmd-nick-msg]');
+    if (!input || !msg) return;
+    const show = (text, ok) => { msg.style.display = 'block'; msg.style.color = ok ? '#7ee2a8' : '#ffb4b4'; msg.textContent = text; };
+    request('/api/fun-center/daily/nickname', {
+      method: 'POST', body: JSON.stringify({ nickname: input.value }), headers: NO_OVERLAY
+    }).then(data => {
+      const name = (data && data.nickname) || input.value;
+      input.value = name;
+      const mine = content.querySelector('.mmd-you .mmd-name');
+      if (mine) mine.textContent = name + ' (you)';
+      show('Saved. This is how you appear on the board.', true);
+    }).catch(error => show((error && error.message) || 'Could not save that name.', false));
+  }
+
   function menuHtml(info, notice, board) {
     const sit = info.situation || {};
     const res = info.result;
