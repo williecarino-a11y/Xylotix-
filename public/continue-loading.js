@@ -22,6 +22,9 @@
     progress: 'Saving your progress…',
     ai: 'Preparing your AI Tutor…',
     fun: 'Loading Fun Center…',
+    resetCode: 'Sending your reset code…',
+    resetVerify: 'Verifying your code…',
+    resetSave: 'Saving your new password…',
     generic: 'Please wait…'
   };
 
