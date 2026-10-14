@@ -1,6 +1,6 @@
 const express = require('express');
 const crypto = require('crypto');
-const nodemailer = require('nodemailer');
+const { getMailer } = require('../utils/mailer');
 const rateLimit = require('express-rate-limit');
 
 const User = require('../models/User');
