@@ -342,7 +342,8 @@
       ".miimiid-google-block{margin-top:18px;text-align:center}" +
       ".miimiid-google-divider{display:flex;align-items:center;gap:10px;color:#94a3b8;font-size:.85rem;margin-bottom:12px}" +
       '.miimiid-google-divider::before,.miimiid-google-divider::after{content:"";flex:1;height:1px;background:#334155}' +
-      ".miimiid-google-button{display:flex;justify-content:center;min-height:44px}" +
+      ".miimiid-google-button{display:flex;justify-content:center;min-height:44px;color-scheme:light}" +
+      ".miimiid-google-button iframe{color-scheme:light}" +
       "#" + PROFILE_FORM_ID + " select{width:100%;padding:12px;border-radius:7px;border:1px solid #475569;background:#0f172a;color:#f8fafc;font-size:1rem;box-sizing:border-box}" +
       "#" + PROFILE_FORM_ID + " input[type=date]{color-scheme:dark;box-sizing:border-box}";
     document.head.appendChild(style);
