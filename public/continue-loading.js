@@ -175,6 +175,11 @@
           overlay = makeOverlay(resolveMessage(config.context, config.message));
           document.body.appendChild(overlay);
           document.documentElement.setAttribute('aria-busy', 'true');
+          overlay.__hintTimer = window.setTimeout(() => {
+            if (!overlay) return;
+            const hint = overlay.querySelector('.continue-loading-text');
+            if (hint) hint.textContent = 'Still working… if the app was idle, it can take up to a minute to wake up.';
+          }, 7000);
         }
       }, Math.max(0, Number(config.delay) || 0));
     }
