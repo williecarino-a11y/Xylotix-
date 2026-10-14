@@ -1,0 +1,303 @@
+/* =========================================
+   MIIMIID AI TUTOR - STYLES
+   File: public/ai-tutor.css
+   Layout: a fixed full-screen chat sitting above the bottom nav.
+     [ app bar ]            fixed at top
+     [ scrolling area ]     greeting + messages (only this scrolls)
+     [ input bar ]          pinned at bottom
+   ========================================= */
+
+.miimiid-ai-tutor-view {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  /* --ait-nav-h is set by ai-tutor.js to the real bottom-nav height */
+  height: calc(100vh - var(--ait-nav-h, 64px));
+  height: calc(100dvh - var(--ait-nav-h, 64px));
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  background: #0f172a;
+  color: #e6e9f0;
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .miimiid-ai-tutor-view {
+    left: 50%;
+    right: auto;
+    width: min(680px, calc(100vw - 32px));
+    transform: translateX(-50%);
+    border-left: 1px solid #1c2438;
+    border-right: 1px solid #1c2438;
+  }
+}
+
+/* --- App bar --- */
+.miimiid-ai-tutor-appbar {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 10px;
+  border-bottom: 1px solid #1c2438;
+  background: #0f172a;
+}
+
+.miimiid-ai-tutor-appbar h1 {
+  margin: 0;
+  flex: 1;
+  text-align: center;
+  font-size: 1.05rem;
+  color: #4da3ff;
+}
+
+.ai-tutor-icon-btn {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  border-radius: 50%;
+  color: #e6e9f0;
+  cursor: pointer;
+}
+
+.ai-tutor-icon-btn:hover,
+.ai-tutor-icon-btn:focus-visible {
+  background: rgba(255, 255, 255, 0.08);
+  outline: none;
+}
+
+/* --- The only scrolling part --- */
+.miimiid-ai-tutor-scroll {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  padding: 16px 14px 8px;
+  box-sizing: border-box;
+}
+
+.miimiid-ai-tutor-greeting {
+  text-align: center;
+  margin-bottom: 14px;
+}
+
+.miimiid-ai-tutor-greeting h2 {
+  margin: 0 0 6px;
+  color: #f2f4f8;
+  font-size: 1.25rem;
+}
+
+.miimiid-ai-tutor-greeting p {
+  margin: 0 auto;
+  max-width: 420px;
+  color: #9aa4bb;
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+.miimiid-ai-tutor-context {
+  margin-bottom: 12px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  font-size: 0.88rem;
+  color: #b8c0d4;
+  overflow-wrap: anywhere;
+}
+
+.miimiid-ai-tutor-starters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.miimiid-ai-tutor-starters:empty {
+  display: none;
+}
+
+.miimiid-ai-tutor-starter {
+  border: 1px solid #2c3652;
+  background: rgba(255, 255, 255, 0.04);
+  color: #e6e9f0;
+  border-radius: 999px;
+  padding: 8px 12px;
+  font: inherit;
+  font-size: 0.88rem;
+  cursor: pointer;
+}
+
+.miimiid-ai-tutor-starter:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.miimiid-ai-tutor-day-divider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 8px 0 12px;
+  color: #6b7690;
+  font-size: 0.8rem;
+}
+
+.miimiid-ai-tutor-day-divider::before,
+.miimiid-ai-tutor-day-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #1c2438;
+}
+
+/* --- Messages --- */
+.miimiid-ai-tutor-messages {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.miimiid-ai-tutor-message-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.miimiid-ai-tutor-message-row.user {
+  flex-direction: row-reverse;
+}
+
+.miimiid-ai-tutor-avatar {
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #131a2c;
+  border: 1px solid #2c3652;
+  color: #4da3ff;
+  font-size: 0.9rem;
+}
+
+.miimiid-ai-tutor-bubble-wrap {
+  min-width: 0;
+  max-width: 80%;
+}
+
+.miimiid-ai-tutor-message {
+  padding: 10px 14px;
+  border-radius: 14px;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.miimiid-ai-tutor-message.user {
+  background: #1f6feb;
+  color: #ffffff;
+  border-bottom-right-radius: 4px;
+}
+
+.miimiid-ai-tutor-message.assistant {
+  background: rgba(255, 255, 255, 0.07);
+  color: #e6e9f0;
+  border-bottom-left-radius: 4px;
+}
+
+.miimiid-ai-tutor-timestamp {
+  margin-top: 4px;
+  font-size: 0.72rem;
+  color: #6b7690;
+}
+
+.miimiid-ai-tutor-timestamp.user {
+  text-align: right;
+}
+
+.miimiid-ai-tutor-status {
+  min-height: 20px;
+  margin: 10px 0 0;
+  font-size: 0.85rem;
+  color: #9aa4bb;
+  text-align: center;
+}
+
+/* Once the chat has started, shrink the greeting to save space */
+.miimiid-ai-tutor-view.has-chat .miimiid-ai-tutor-greeting p {
+  display: none;
+}
+
+/* --- Input bar (pinned at the bottom) --- */
+.miimiid-ai-tutor-form {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  padding: 10px 12px;
+  box-sizing: border-box;
+  border-top: 1px solid #1c2438;
+  background: #0f172a;
+}
+
+.miimiid-ai-tutor-input {
+  flex: 1;
+  min-width: 0;
+  min-height: 44px;
+  max-height: 120px;
+  resize: none;
+  box-sizing: border-box;
+  padding: 11px 16px;
+  border-radius: 22px;
+  border: 1px solid #2c3652;
+  background: rgba(255, 255, 255, 0.04);
+  color: #e6e9f0;
+  font: inherit;
+  font-size: 16px; /* 16px stops phones zooming in on focus */
+  line-height: 1.3;
+}
+
+.miimiid-ai-tutor-input:focus {
+  outline: none;
+  border-color: #4da3ff;
+}
+
+.miimiid-ai-tutor-input::placeholder {
+  color: #6b7690;
+}
+
+.miimiid-ai-tutor-send {
+  width: 44px;
+  height: 44px;
+  flex: 0 0 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: #1f6feb;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.miimiid-ai-tutor-send:hover {
+  opacity: 0.9;
+}
+
+.miimiid-ai-tutor-send:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
