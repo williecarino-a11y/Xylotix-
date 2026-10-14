@@ -177,23 +177,6 @@ function publicUser(user) {
   };
 }
 
-function getMailer() {
-  const host = process.env.SMTP_HOST;
-  const user = process.env.SMTP_USER;
-  const password = process.env.SMTP_PASSWORD;
-  const configuredPort = Number(process.env.SMTP_PORT || 465);
-  if (!host || !user || !password) return null;
-  return nodemailer.createTransport({
-    host,
-    port: configuredPort,
-    secure: configuredPort === 465,
-    auth: { user, pass: password },
-    connectionTimeout: 30000,
-    greetingTimeout: 30000,
-    socketTimeout: 30000
-  });
-}
-
 router.post('/register', registerLimiter, async (req, res) => {
   try {
     const firstName = typeof req.body.firstName === 'string' ? req.body.firstName.trim() : '';
