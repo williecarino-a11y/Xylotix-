@@ -198,6 +198,7 @@
         overlayTimer = null;
       }
       if (overlay) {
+        window.clearTimeout(overlay.__hintTimer);
         overlay.remove();
         overlay = null;
       }
