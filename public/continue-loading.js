@@ -299,6 +299,9 @@
     if (url.includes('/api/auth/verify-account')) return 'verification';
     if (url.includes('/api/auth/login')) return 'auth';
     if (url.includes('/api/auth/resend-verification')) return 'verification';
+    if (url.includes('/api/auth/forgot-password-code')) return 'resetCode';
+    if (url.includes('/api/auth/verify-reset-code')) return 'resetVerify';
+    if (url.includes('/api/auth/reset-password')) return 'resetSave';
     if (url.includes('/api/ai-tutor/')) return 'ai';
     if (url.includes('/api/fun-center/')) return 'fun';
     if (url.includes('/api/learn/')) return 'lesson';
