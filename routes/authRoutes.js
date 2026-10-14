@@ -1,6 +1,6 @@
 const express = require('express');
 const crypto = require('crypto');
-const nodemailer = require('nodemailer');
+const { getMailer } = require('../utils/mailer');
 const rateLimit = require('express-rate-limit');
 
 const User = require('../models/User');
@@ -175,23 +175,6 @@ function publicUser(user) {
     emailVerified: user.emailVerified === true,
     accountVerified: user.accountVerified === true
   };
-}
-
-function getMailer() {
-  const host = process.env.SMTP_HOST;
-  const user = process.env.SMTP_USER;
-  const password = process.env.SMTP_PASSWORD;
-  const configuredPort = Number(process.env.SMTP_PORT || 465);
-  if (!host || !user || !password) return null;
-  return nodemailer.createTransport({
-    host,
-    port: configuredPort,
-    secure: configuredPort === 465,
-    auth: { user, pass: password },
-    connectionTimeout: 30000,
-    greetingTimeout: 30000,
-    socketTimeout: 30000
-  });
 }
 
 router.post('/register', registerLimiter, async (req, res) => {
