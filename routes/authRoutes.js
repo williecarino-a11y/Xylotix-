@@ -426,4 +426,5 @@ router.post('/reset-password', resetPasswordLimiter, async (req, res) => {
   }
 });
 
+router.use(require('./passwordResetCodeRoutes'));
 module.exports = { router, getAuthenticatedUser };
