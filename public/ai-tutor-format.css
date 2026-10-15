@@ -152,3 +152,39 @@
   white-space: nowrap;
   background: rgba(255, 255, 255, 0.03);
   }
+
+/* ---------- Reply actions: Copy + follow-up chips ---------- */
+#miimiid-ai-tutor-view .mm-ait-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  animation: mmPmFade 0.3s ease backwards;
+}
+#miimiid-ai-tutor-view .mm-ait-copy,
+#miimiid-ai-tutor-view .mm-ait-chip {
+  font: inherit;
+  font-size: 0.82rem;
+  padding: 7px 13px;
+  border-radius: 999px;
+  border: 1px solid #232c42;
+  background: transparent;
+  color: #9fb0cf;
+  cursor: pointer;
+  transition: transform 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+#miimiid-ai-tutor-view .mm-ait-copy {
+  border-color: transparent;
+  padding-left: 2px;
+}
+#miimiid-ai-tutor-view .mm-ait-copy:active,
+#miimiid-ai-tutor-view .mm-ait-chip:active {
+  transform: scale(0.96);
+}
+@media (hover: hover) {
+  #miimiid-ai-tutor-view .mm-ait-chip:hover {
+    border-color: #4da3ff;
+    color: #e6e9f0;
+  }
+}
