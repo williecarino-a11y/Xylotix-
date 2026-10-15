@@ -57,9 +57,26 @@
       #${VIEW_ID} .hidden { display: none !important; }
 
       #${VIEW_ID} .miimiid-ai-tutor-send {
+        position: relative; overflow: visible;
         width: 44px; height: 44px; flex: 0 0 44px; padding: 0; border: none; border-radius: 50%;
         display: flex; align-items: center; justify-content: center;
         background: #1f6feb; color: #fff;
+      }
+      #${VIEW_ID} .miimiid-ai-tutor-send:disabled { opacity: 1; }
+      #${VIEW_ID} .ait-send-icon { display: flex; transition: opacity 0.2s ease, transform 0.2s ease; }
+      #${VIEW_ID} .miimiid-ai-tutor-send.is-loading .ait-send-icon { opacity: 0.6; transform: scale(0.9); }
+
+      /* C-shaped arc that spins around the send button while the tutor is answering */
+      #${VIEW_ID} .ait-send-arc {
+        position: absolute; left: -5px; top: -5px; width: 54px; height: 54px;
+        opacity: 0; pointer-events: none; transition: opacity 0.2s ease;
+      }
+      #${VIEW_ID} .miimiid-ai-tutor-send.is-loading .ait-send-arc {
+        opacity: 1; animation: aitSpin 0.9s linear infinite;
+      }
+      @keyframes aitSpin { to { transform: rotate(360deg); } }
+      @media (prefers-reduced-motion: reduce) {
+        #${VIEW_ID} .miimiid-ai-tutor-send.is-loading .ait-send-arc { animation-duration: 2.2s; }
       }
 
       #${VIEW_ID} .ait-mic {
@@ -286,7 +303,34 @@
 
   function upgradeSendButton() {
     const send = $("ai-tutor-send-btn");
-    if (send) send.innerHTML = ICONS.arrow;
+    if (!send) return;
+
+    send.innerHTML =
+      '<span class="ait-send-icon">' + ICONS.arrow + "</span>" +
+      '<svg class="ait-send-arc" viewBox="0 0 54 54" fill="none" aria-hidden="true">' +
+        '<defs><linearGradient id="aitArcGrad" x1="0" y1="0" x2="1" y2="1">' +
+          '<stop offset="0" stop-color="#bfe0ff"/><stop offset="1" stop-color="#3b8cff"/>' +
+        "</linearGradient></defs>" +
+        '<circle cx="27" cy="27" r="25" stroke="url(#aitArcGrad)" stroke-width="3" stroke-linecap="round" ' +
+          'stroke-dasharray="118 39"/>' +
+      "</svg>";
+
+    // ai-tutor.js disables the button while it waits for the answer: show the arc for that time
+    let shownAt = 0;
+    let hideTimer = null;
+    const MIN_VISIBLE_MS = 700;
+
+    new MutationObserver(() => {
+      if (send.disabled) {
+        clearTimeout(hideTimer);
+        shownAt = Date.now();
+        send.classList.add("is-loading");
+        return;
+      }
+      const wait = Math.max(0, MIN_VISIBLE_MS - (Date.now() - shownAt));
+      clearTimeout(hideTimer);
+      hideTimer = setTimeout(() => send.classList.remove("is-loading"), wait);
+    }).observe(send, { attributes: true, attributeFilter: ["disabled"] });
   }
 
   function upgradeAttachMenu() {
