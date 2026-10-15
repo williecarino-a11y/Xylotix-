@@ -1,0 +1,106 @@
+/* Miimiid premium loading + motion */
+
+/* Old plain "Loading..." text is replaced by the top bar and skeletons */
+#loading {
+  display: none !important;
+}
+
+/* Top progress bar */
+#miimiid-topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  z-index: 3000;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+#miimiid-topbar.on {
+  opacity: 1;
+}
+
+#miimiid-topbar span {
+  display: block;
+  height: 100%;
+  width: 0;
+  border-radius: 0 3px 3px 0;
+  background: linear-gradient(90deg, #38bdf8, #818cf8, #38bdf8);
+  background-size: 200% 100%;
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.75);
+  transition: width 0.35s ease;
+  animation: mmBarFlow 1.2s linear infinite;
+}
+
+@keyframes mmBarFlow {
+  to { background-position: -200% 0; }
+}
+
+/* Skeleton cards */
+.mm-skel-card {
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 15px;
+}
+
+.mm-skel {
+  border-radius: 8px;
+  background: linear-gradient(100deg, #243349 30%, #36496b 50%, #243349 70%);
+  background-size: 200% 100%;
+  animation: mmShimmer 1.3s ease-in-out infinite;
+}
+
+.mm-skel.h { height: 18px; width: 55%; margin-bottom: 14px; }
+.mm-skel.l { height: 12px; margin-bottom: 9px; }
+.mm-skel.l.s { width: 80%; }
+.mm-skel.b { height: 38px; margin-top: 14px; border-radius: 5px; }
+
+@keyframes mmShimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Smooth view entrance */
+#course-list-view:not(.hidden),
+#course-detail-view:not(.hidden),
+#lesson-view:not(.hidden) {
+  animation: mmViewIn 0.35s cubic-bezier(0.2, 0.8, 0.2, 1) backwards;
+}
+
+@keyframes mmViewIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* Breathing room under the status bar */
+#course-list-view,
+#course-detail-view {
+  padding-top: 10px;
+}
+
+#lesson-view {
+  margin-top: 10px;
+}
+
+/* Button press feel */
+.btn {
+  transition: transform 0.12s ease, background 0.18s ease;
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #miimiid-topbar span,
+  .mm-skel,
+  #course-list-view:not(.hidden),
+  #course-detail-view:not(.hidden),
+  #lesson-view:not(.hidden) {
+    animation: none;
+  }
+  }
