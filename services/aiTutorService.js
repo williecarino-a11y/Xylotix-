@@ -2,7 +2,7 @@ const OpenAI = require("openai");
 const {
   AI_TUTOR_PERSONALITY,
   AI_TUTOR_APP_RULES
-} = require("../scripts/aiTutorPersonality");
+} = require("./aiTutorPersonality");
 
 const DEFAULT_MODEL =
   process.env.OPENAI_AI_TUTOR_MODEL ||
