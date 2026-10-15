@@ -840,7 +840,7 @@
 
       const response = await fetch("/api/ai-tutor/chat", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", "X-Continue-Loading": "false" },
         body: JSON.stringify({
           message,
           history: apiHistory,
