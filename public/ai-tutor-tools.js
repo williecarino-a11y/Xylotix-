@@ -101,9 +101,16 @@
 
   /* ---------- small helpers ---------- */
 
+  function scrollChatToBottom() {
+    const sc = $("ai-tutor-scroll");
+    if (sc) requestAnimationFrame(() => { sc.scrollTop = sc.scrollHeight; });
+  }
+
   function setStatus(text) {
     const el = $("ai-tutor-status");
-    if (el) el.textContent = text || "";
+    if (!el) return;
+    el.textContent = text || "";
+    if (text) scrollChatToBottom();
   }
 
   function currentLang() {
@@ -132,12 +139,66 @@
     [sc, $("ai-tutor-messages"), $("ai-tutor-status")].forEach(el => {
       if (el) new ResizeObserver(toBottom).observe(el);
     });
+
+    // New messages and status lines always scroll into view
+    [$("ai-tutor-messages"), $("ai-tutor-status")].forEach(el => {
+      if (!el) return;
+      new MutationObserver(() => {
+        stick = true;
+        toBottom();
+      }).observe(el, { childList: true, characterData: true, subtree: true });
+    });
+  }
+
+  /* ---------- make the chat end exactly where the bottom nav starts ---------- */
+
+  function findNavTop() {
+    const view = $(VIEW_ID);
+    let best = null;
+
+    const consider = el => {
+      if (!el || (view && view.contains(el))) return;
+      const r = el.getBoundingClientRect();
+      if (r.height < 40 || r.height > 200) return;
+      if (r.width < window.innerWidth * 0.6) return;
+      if (r.bottom < window.innerHeight - 4) return;
+      if (best === null || r.top < best) best = r.top;
+    };
+
+    const known = document.querySelector(".miimiid-bottom-nav");
+    if (known) consider(known);
+
+    if (best === null) {
+      document.querySelectorAll('nav, footer, [class*="nav"], [class*="bottom"]').forEach(el => {
+        if (getComputedStyle(el).position === "fixed") consider(el);
+      });
+    }
+
+    return best;
+  }
+
+  function fixBottom() {
+    const view = $(VIEW_ID);
+    if (!view || view.classList.contains("hidden")) return;
+
+    const vv = window.visualViewport;
+    if (vv && window.innerHeight - vv.height > 150) return; // keyboard open: leave it alone
+
+    const navTop = findNavTop();
+    if (navTop === null) return;
+
+    const top = parseFloat(view.style.top) || 0;
+    const height = Math.floor(navTop - top);
+    if (height > 220) view.style.height = height + "px";
   }
 
   // ai-tutor.js measures the bottom nav inside layout(); re-run it whenever the tutor appears
   function nudgeLayout() {
     [0, 120, 400, 1000].forEach(ms => {
-      setTimeout(() => window.dispatchEvent(new Event("resize")), ms);
+      setTimeout(() => {
+        window.dispatchEvent(new Event("resize"));
+        fixBottom();
+      }, ms);
     });
   }
 
@@ -245,8 +306,17 @@
 
     try {
       recStream = await navigator.mediaDevices.getUserMedia({ audio: true });
-    } catch (_) {
-      setStatus("Microphone access was blocked. Allow it in your browser settings to record.");
+    } catch (error) {
+      const name = error && error.name ? error.name : "";
+      if (name === "NotFoundError" || name === "OverconstrainedError") {
+        setStatus("No microphone was found on this device.");
+      } else if (name === "NotReadableError") {
+        setStatus("The microphone is busy. Close other apps that use it and try again.");
+      } else if (name === "NotAllowedError" || name === "SecurityError") {
+        setStatus("Microphone is blocked (" + name + "). Open Miimiid in Chrome and allow Microphone for this site.");
+      } else {
+        setStatus("Couldn't start recording (" + (name || "unknown error") + ").");
+      }
       return;
     }
 
@@ -428,6 +498,15 @@
     setupScrollPin();
     watchMessages();
     watchView();
+
+    if (!window.__aitFixBottomHooked) {
+      window.__aitFixBottomHooked = true;
+      window.addEventListener("resize", () => requestAnimationFrame(fixBottom));
+      if (window.visualViewport) {
+        window.visualViewport.addEventListener("resize", () => requestAnimationFrame(fixBottom));
+      }
+    }
+    fixBottom();
 
     const view = $(VIEW_ID);
     if (view && !view.classList.contains("hidden")) nudgeLayout();
