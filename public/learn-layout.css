@@ -1,10 +1,8 @@
 /* Learn section layout fixes */
 
-/* 1. Remove the empty full-screen block above Learn.
-   The app shell keeps its 100vh height only on Home. */
-body:has(#course-list-view:not(.hidden)) .miimiid-app-shell,
-body:has(#course-detail-view:not(.hidden)) .miimiid-app-shell,
-body:has(#lesson-view:not(.hidden)) .miimiid-app-shell {
+/* 1. Remove the empty full-screen block above every screen except Home.
+   The app shell keeps its 100vh height only while the Home dashboard is showing. */
+.miimiid-app-shell:not(:has(.miimiid-dashboard.active)) {
   min-height: 0;
   padding-bottom: 0;
 }
