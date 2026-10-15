@@ -93,6 +93,64 @@
       #${VIEW_ID} .ait-rec-done { background: #1f6feb; }
       @keyframes aitPulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.25; } }
 
+      /* ----- voice typing panel ----- */
+      #${VIEW_ID} .ait-voice { display: none; }
+      #${VIEW_ID} .miimiid-ai-tutor-form.is-dictating .miimiid-ai-tutor-composer { display: none; }
+      #${VIEW_ID} .miimiid-ai-tutor-form.is-dictating .ait-voice { display: block; animation: aitRise 0.22s ease-out; }
+      @keyframes aitRise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+
+      #${VIEW_ID} .ait-voice-card {
+        padding: 14px 14px 12px; border-radius: 26px; border: 1px solid #2c3652;
+        background: linear-gradient(180deg, #17213b 0%, #111a31 100%);
+        box-shadow: 0 -10px 34px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+      }
+      #${VIEW_ID} .ait-voice-text {
+        min-height: 54px; max-height: 132px; overflow-y: auto; padding: 2px 4px 10px;
+        font-size: 1.12rem; line-height: 1.45; letter-spacing: 0.1px; color: #f2f4f8;
+        overflow-wrap: anywhere; -webkit-overflow-scrolling: touch;
+      }
+      #${VIEW_ID} .ait-interim { color: #7f8bab; }
+      #${VIEW_ID} .ait-hint { display: none; color: #6b7690; }
+      #${VIEW_ID} .ait-voice-text:not(.has-text) .ait-hint { display: inline; }
+      #${VIEW_ID} .ait-hint i { font-style: normal; animation: aitDots 1.4s infinite; }
+      #${VIEW_ID} .ait-hint i:nth-child(2) { animation-delay: 0.2s; }
+      #${VIEW_ID} .ait-hint i:nth-child(3) { animation-delay: 0.4s; }
+      @keyframes aitDots { 0%, 80%, 100% { opacity: 0.2; } 40% { opacity: 1; } }
+
+      #${VIEW_ID} .ait-voice-bar { display: flex; align-items: center; gap: 12px; }
+      #${VIEW_ID} .ait-voice-btn {
+        width: 46px; height: 46px; flex: 0 0 46px; padding: 0; border: none; border-radius: 50%;
+        display: flex; align-items: center; justify-content: center; cursor: pointer; color: #fff;
+        -webkit-tap-highlight-color: transparent;
+      }
+      #${VIEW_ID} .ait-voice-btn:active { transform: scale(0.94); }
+      #${VIEW_ID} .ait-voice-cancel { background: #26304d; color: #c3cbe0; }
+      #${VIEW_ID} .ait-voice-done {
+        background: linear-gradient(135deg, #3b8cff, #1f6feb);
+        box-shadow: 0 6px 18px rgba(31, 111, 235, 0.5);
+      }
+
+      #${VIEW_ID} .ait-wave {
+        --boost: 0.4; flex: 1; min-width: 0; height: 38px; display: flex; align-items: center;
+        justify-content: center; gap: 3px;
+      }
+      #${VIEW_ID} .ait-voice.is-hearing .ait-wave { --boost: 1; }
+      #${VIEW_ID} .ait-wave i {
+        display: block; width: 3px; height: 100%; border-radius: 3px;
+        background: linear-gradient(180deg, #7cc0ff, #1f6feb);
+        transform-origin: center; transform: scaleY(0.14);
+        animation: aitWave var(--dur, 0.9s) ease-in-out infinite; animation-delay: var(--del, 0s);
+        transition: opacity 0.3s;
+      }
+      @keyframes aitWave {
+        0%, 100% { transform: scaleY(0.14); }
+        50% { transform: scaleY(calc(var(--peak, 0.6) * var(--boost))); }
+      }
+      #${VIEW_ID} .ait-voice-time {
+        min-width: 38px; text-align: right; font-size: 0.85rem; color: #8f9ab6;
+        font-variant-numeric: tabular-nums;
+      }
+
       #${VIEW_ID} .miimiid-ai-tutor-timestamp .ait-speak {
         display: inline-flex; align-items: center; justify-content: center;
         width: 28px; height: 28px; margin-left: 6px; padding: 0; vertical-align: middle;
@@ -217,6 +275,7 @@
       if (hidden && !wasHidden) {
         stopSpeaking();
         cancelRecording();
+        cancelDictation();
       }
       if (!hidden && wasHidden) nudgeLayout();
       wasHidden = hidden;
@@ -391,7 +450,7 @@
     mic.className = "ai-tutor-icon-btn ait-mic";
     mic.setAttribute("aria-label", "Record audio");
     mic.innerHTML = ICONS.mic;
-    mic.addEventListener("click", startRecording);
+    mic.addEventListener("click", startDictation);
     composer.insertBefore(mic, send);
 
     const bar = document.createElement("div");
@@ -404,6 +463,279 @@
     bar.querySelector(".ait-rec-cancel").addEventListener("click", cancelRecording);
     bar.querySelector(".ait-rec-done").addEventListener("click", stopRecording);
     composer.appendChild(bar);
+
+    buildVoicePanel();
+  }
+
+  /* ---------- voice typing (live speech to text) ---------- */
+
+  const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition || null;
+
+  const SPEECH_LANGS = {
+    en: "en-US", es: "es-ES", fr: "fr-FR", de: "de-DE", pt: "pt-BR", it: "it-IT",
+    tl: "fil-PH", fil: "fil-PH", hi: "hi-IN", ar: "ar-SA", zh: "zh-CN", ja: "ja-JP",
+    ko: "ko-KR", ru: "ru-RU", id: "id-ID", vi: "vi-VN"
+  };
+
+  function speechLang() {
+    const code = String(currentLang() || "en");
+    if (code.indexOf("-") !== -1) return code;
+    return SPEECH_LANGS[code.toLowerCase()] || code;
+  }
+
+  function joinText(a, b) {
+    const left = String(a || "").trim();
+    const right = String(b || "").trim();
+    return left && right ? left + " " + right : left || right;
+  }
+
+  let dict = null;
+
+  function buzz(ms) {
+    try { if (navigator.vibrate) navigator.vibrate(ms); } catch (_) {}
+  }
+
+  function voiceEl(selector) {
+    const panel = $("ai-tutor-voice");
+    return panel ? panel.querySelector(selector) : null;
+  }
+
+  function setVoicePanel(open) {
+    const form = $("ai-tutor-form");
+    if (form) form.classList.toggle("is-dictating", open);
+
+    const panel = $("ai-tutor-voice");
+    if (panel && !open) panel.classList.remove("is-hearing");
+
+    const textBox = voiceEl(".ait-voice-text");
+    if (textBox) textBox.classList.remove("has-text");
+    const finalEl = voiceEl(".ait-final");
+    const interimEl = voiceEl(".ait-interim");
+    if (finalEl) finalEl.textContent = "";
+    if (interimEl) interimEl.textContent = "";
+    const time = voiceEl(".ait-voice-time");
+    if (time) time.textContent = "0:00";
+  }
+
+  function renderVoiceText() {
+    if (!dict) return;
+    const spoken = joinText(dict.base, dict.sessionFinal);
+    const finalEl = voiceEl(".ait-final");
+    const interimEl = voiceEl(".ait-interim");
+    const textBox = voiceEl(".ait-voice-text");
+    if (!finalEl || !interimEl || !textBox) return;
+
+    finalEl.textContent = spoken;
+    interimEl.textContent = dict.interim ? (spoken ? " " : "") + dict.interim : "";
+    textBox.classList.toggle("has-text", !!(spoken || dict.interim));
+    textBox.scrollTop = textBox.scrollHeight;
+  }
+
+  function setHearing(on) {
+    const panel = $("ai-tutor-voice");
+    if (panel) panel.classList.toggle("is-hearing", on);
+  }
+
+  function endDictation(state) {
+    if (!state || !state.active) return;
+    state.active = false;
+    clearInterval(state.timer);
+    clearTimeout(state.hearTimer);
+    try { state.rec && state.rec.abort(); } catch (_) {}
+    if (dict === state) dict = null;
+    setVoicePanel(false);
+  }
+
+  function commitDictation(state) {
+    if (!state || state.committed) return;
+    state.committed = true;
+
+    const text = joinText(joinText(state.base, state.sessionFinal), state.interim);
+    endDictation(state);
+    if (!text) return;
+
+    const input = $("ai-tutor-input");
+    if (!input) return;
+    input.value = joinText(input.value, text);
+    input.dispatchEvent(new Event("input", { bubbles: true }));
+    setStatus("");
+  }
+
+  function failDictation(state, message) {
+    if (!state || state.committed) return;
+    state.committed = true;
+    const keep = joinText(joinText(state.base, state.sessionFinal), state.interim);
+    endDictation(state);
+
+    if (keep) {
+      const input = $("ai-tutor-input");
+      if (input) {
+        input.value = joinText(input.value, keep);
+        input.dispatchEvent(new Event("input", { bubbles: true }));
+      }
+    }
+    if (message) setStatus(message);
+  }
+
+  function cancelDictation() {
+    if (!dict) return;
+    const state = dict;
+    state.committed = true;
+    endDictation(state);
+  }
+
+  function startDictation() {
+    if (dict) return;
+    if (!SpeechRec) {
+      startRecording();
+      return;
+    }
+
+    stopSpeaking();
+    setStatus("");
+
+    const state = {
+      rec: null, active: true, finishing: false, committed: false,
+      base: "", sessionFinal: "", interim: "", emptyRuns: 0, startedAt: Date.now(),
+      timer: null, hearTimer: null, failed: false
+    };
+    dict = state;
+
+    setVoicePanel(true);
+    buzz(12);
+
+    state.timer = setInterval(() => {
+      const time = voiceEl(".ait-voice-time");
+      if (time) time.textContent = formatClock(Math.floor((Date.now() - state.startedAt) / 1000));
+    }, 250);
+
+    const pulse = () => {
+      setHearing(true);
+      clearTimeout(state.hearTimer);
+      state.hearTimer = setTimeout(() => setHearing(false), 900);
+    };
+
+    const begin = () => {
+      if (!state.active || state.committed) return;
+
+      const rec = new SpeechRec();
+      state.rec = rec;
+      rec.lang = speechLang();
+      rec.continuous = true;
+      rec.interimResults = true;
+      rec.maxAlternatives = 1;
+
+      let gotResult = false;
+
+      rec.onspeechstart = pulse;
+
+      rec.onresult = event => {
+        gotResult = true;
+        let finals = "";
+        let interim = "";
+        for (let i = 0; i < event.results.length; i++) {
+          const result = event.results[i];
+          if (result.isFinal) finals += result[0].transcript + " ";
+          else interim += result[0].transcript;
+        }
+        state.sessionFinal = finals.trim();
+        state.interim = interim.trim();
+        pulse();
+        renderVoiceText();
+      };
+
+      rec.onerror = event => {
+        const code = event && event.error;
+        if (code === "not-allowed" || code === "service-not-allowed") {
+          state.failed = true;
+          failDictation(state, "Microphone is blocked. Allow it for this site in Chrome's site settings.");
+        } else if (code === "audio-capture") {
+          state.failed = true;
+          failDictation(state, "No microphone was found on this device.");
+        } else if (code === "network") {
+          state.failed = true;
+          failDictation(state, "Voice typing needs an internet connection.");
+        } else if (code === "language-not-supported") {
+          state.failed = true;
+          failDictation(state, "Voice typing isn't available for this language yet.");
+        }
+      };
+
+      rec.onend = () => {
+        if (!state.active || state.committed || state.failed) return;
+
+        // keep what was heard in this session, then decide what to do next
+        state.base = joinText(joinText(state.base, state.sessionFinal), state.interim);
+        state.sessionFinal = "";
+        state.interim = "";
+        renderVoiceText();
+
+        if (state.finishing) {
+          commitDictation(state);
+          return;
+        }
+
+        state.emptyRuns = gotResult ? 0 : state.emptyRuns + 1;
+        if (state.emptyRuns >= 3) {
+          failDictation(state, "I didn't catch anything. Tap the mic and try again.");
+          return;
+        }
+        setTimeout(begin, 150);
+      };
+
+      try {
+        rec.start();
+      } catch (_) {
+        setTimeout(begin, 250);
+      }
+    };
+
+    begin();
+  }
+
+  function finishDictation() {
+    if (!dict || dict.finishing) return;
+    const state = dict;
+    state.finishing = true;
+    buzz(8);
+    try { state.rec && state.rec.stop(); } catch (_) {}
+    setTimeout(() => commitDictation(state), 450);
+  }
+
+  function buildVoicePanel() {
+    const form = $("ai-tutor-form");
+    const composer = document.querySelector("#" + VIEW_ID + " .miimiid-ai-tutor-composer");
+    if (!form || !composer || $("ai-tutor-voice")) return;
+
+    let bars = "";
+    for (let i = 0; i < 28; i++) {
+      const centre = 1 - Math.abs(i - 13.5) / 14;
+      const peak = (0.3 + 0.7 * Math.random()) * (0.45 + 0.55 * centre);
+      const dur = (0.7 + Math.random() * 0.7).toFixed(2);
+      const delay = (Math.random() * -1.2).toFixed(2);
+      bars += '<i style="--peak:' + peak.toFixed(2) + ";--dur:" + dur + "s;--del:" + delay + 's"></i>';
+    }
+
+    const panel = document.createElement("div");
+    panel.id = "ai-tutor-voice";
+    panel.className = "ait-voice";
+    panel.innerHTML =
+      '<div class="ait-voice-card">' +
+        '<div class="ait-voice-text" aria-live="polite">' +
+          '<span class="ait-final"></span><span class="ait-interim"></span>' +
+          '<span class="ait-hint">Listening<i>.</i><i>.</i><i>.</i></span>' +
+        "</div>" +
+        '<div class="ait-voice-bar">' +
+          '<button type="button" class="ait-voice-btn ait-voice-cancel" aria-label="Cancel voice typing">' + ICONS.close + "</button>" +
+          '<div class="ait-wave" aria-hidden="true">' + bars + "</div>" +
+          '<span class="ait-voice-time">0:00</span>' +
+          '<button type="button" class="ait-voice-btn ait-voice-done" aria-label="Use this text">' + ICONS.check + "</button>" +
+        "</div>" +
+      "</div>";
+
+    panel.querySelector(".ait-voice-cancel").addEventListener("click", cancelDictation);
+    panel.querySelector(".ait-voice-done").addEventListener("click", finishDictation);
+    form.insertBefore(panel, composer);
   }
 
   /* ---------- text to speech ---------- */
@@ -437,7 +769,7 @@
     stopSpeaking();
 
     const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = currentLang();
+    utterance.lang = speechLang();
     utterance.rate = 1;
 
     const finish = () => {
