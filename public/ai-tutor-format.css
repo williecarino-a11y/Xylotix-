@@ -1,0 +1,154 @@
+/* =========================================================
+   MIIMIID AI TUTOR: document-style AI replies
+   Removes the box around AI answers only. User bubbles,
+   input bar, history and loading are untouched.
+   ========================================================= */
+
+/* ---------- AI row: full width, no avatar ---------- */
+#miimiid-ai-tutor-view .miimiid-ai-tutor-message-row.assistant {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  align-self: stretch;
+}
+#miimiid-ai-tutor-view .miimiid-ai-tutor-message-row.assistant .miimiid-ai-tutor-avatar {
+  display: none;
+}
+#miimiid-ai-tutor-view .miimiid-ai-tutor-message-row.assistant .miimiid-ai-tutor-bubble-wrap {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+
+/* ---------- AI message: no card, no border, no shadow ---------- */
+#miimiid-ai-tutor-view .miimiid-ai-tutor-message.assistant {
+  background: none;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 2px 2px 0;
+  width: 100%;
+  max-width: 100%;
+  color: #e6e9f0;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+#miimiid-ai-tutor-view .miimiid-ai-tutor-message.assistant::before,
+#miimiid-ai-tutor-view .miimiid-ai-tutor-message.assistant::after {
+  content: none;
+}
+
+/* thinking dots: same, no box */
+#miimiid-ai-tutor-view .miimiid-ai-tutor-message.assistant.mm-typing-bubble {
+  width: auto;
+  padding: 10px 2px;
+}
+
+/* ---------- Readable width on larger screens ---------- */
+#miimiid-ai-tutor-view .mm-md {
+  max-width: 720px;
+}
+
+/* ---------- Typography (all sizes in em so the text-size setting still works) ---------- */
+#miimiid-ai-tutor-view .mm-md > * { margin: 0; }
+#miimiid-ai-tutor-view .mm-md > * + * { margin-top: 0.9em; }
+
+#miimiid-ai-tutor-view .mm-md h2,
+#miimiid-ai-tutor-view .mm-md h3,
+#miimiid-ai-tutor-view .mm-md h4,
+#miimiid-ai-tutor-view .mm-md h5,
+#miimiid-ai-tutor-view .mm-md h6 {
+  color: #f1f5f9;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+}
+#miimiid-ai-tutor-view .mm-md h2 { font-size: 1.3em; margin-top: 1.4em; }
+#miimiid-ai-tutor-view .mm-md h3 { font-size: 1.15em; margin-top: 1.3em; }
+#miimiid-ai-tutor-view .mm-md h4 { font-size: 1.02em; margin-top: 1.2em; color: #cbd5e1; }
+#miimiid-ai-tutor-view .mm-md h5,
+#miimiid-ai-tutor-view .mm-md h6 { font-size: 0.95em; margin-top: 1.1em; color: #94a3b8; }
+#miimiid-ai-tutor-view .mm-md > h2:first-child,
+#miimiid-ai-tutor-view .mm-md > h3:first-child,
+#miimiid-ai-tutor-view .mm-md > h4:first-child { margin-top: 0; }
+
+#miimiid-ai-tutor-view .mm-md strong { color: #f8fafc; font-weight: 700; }
+#miimiid-ai-tutor-view .mm-md em { font-style: italic; }
+#miimiid-ai-tutor-view .mm-md del { opacity: 0.6; }
+
+#miimiid-ai-tutor-view .mm-md a {
+  color: #4da3ff;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-color: rgba(77, 163, 255, 0.45);
+}
+
+/* lists */
+#miimiid-ai-tutor-view .mm-md ul,
+#miimiid-ai-tutor-view .mm-md ol { padding-left: 1.4em; }
+#miimiid-ai-tutor-view .mm-md li { margin: 0.4em 0; padding-left: 0.15em; }
+#miimiid-ai-tutor-view .mm-md li::marker { color: #4da3ff; font-weight: 600; }
+#miimiid-ai-tutor-view .mm-md li > ul,
+#miimiid-ai-tutor-view .mm-md li > ol { margin-top: 0.3em; }
+
+/* quote + divider */
+#miimiid-ai-tutor-view .mm-md blockquote {
+  padding: 0 0 0 14px;
+  border-left: 3px solid rgba(77, 163, 255, 0.55);
+  color: #aab6cc;
+}
+#miimiid-ai-tutor-view .mm-md blockquote > * + * { margin-top: 0.6em; }
+#miimiid-ai-tutor-view .mm-md hr {
+  border: 0;
+  border-top: 1px solid #232c42;
+  margin: 1.4em 0;
+}
+
+/* code */
+#miimiid-ai-tutor-view .mm-md code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.9em;
+  padding: 2px 6px;
+  border-radius: 6px;
+  background: rgba(148, 163, 184, 0.14);
+}
+#miimiid-ai-tutor-view .mm-md pre.mm-md-pre {
+  padding: 12px 14px;
+  border: 1px solid #232c42;
+  border-radius: 12px;
+  background: #0b1220;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+#miimiid-ai-tutor-view .mm-md pre.mm-md-pre code {
+  padding: 0;
+  background: none;
+  font-size: 0.86em;
+  line-height: 1.55;
+  white-space: pre;
+}
+
+/* tables scroll sideways on small screens instead of breaking the page */
+#miimiid-ai-tutor-view .mm-md .mm-md-table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+#miimiid-ai-tutor-view .mm-md table {
+  border-collapse: collapse;
+  font-size: 0.92em;
+  min-width: 100%;
+}
+#miimiid-ai-tutor-view .mm-md th,
+#miimiid-ai-tutor-view .mm-md td {
+  padding: 8px 12px;
+  border-bottom: 1px solid #232c42;
+  text-align: left;
+  vertical-align: top;
+}
+#miimiid-ai-tutor-view .mm-md th {
+  color: #cbd5e1;
+  font-weight: 600;
+  white-space: nowrap;
+  background: rgba(255, 255, 255, 0.03);
+  }
