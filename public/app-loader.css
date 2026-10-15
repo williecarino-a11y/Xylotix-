@@ -104,3 +104,18 @@
     animation: none;
   }
   }
+
+/* Fun Center: top spacing, nav clearance and soft entrance */
+#miimiid-fun-center-view {
+  padding-top: 10px;
+  padding-bottom: calc(96px + env(safe-area-inset-bottom, 0px));
+}
+
+#miimiid-fun-center-view:not(.hidden) {
+  animation: mmFadeIn 0.35s ease backwards;
+}
+
+@keyframes mmFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
