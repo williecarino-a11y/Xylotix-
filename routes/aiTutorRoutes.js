@@ -5,6 +5,7 @@ const { getAuthenticatedUser } = require("./authRoutes");
 
 const router = express.Router();
 const aiTutorService = require("../services/aiTutorService");
+const aiTutorDailyCap = require("../services/aiTutorDailyCap");
 
 const aiTutorLimiter = rateLimit({
   windowMs: 60 * 1000,
