@@ -1,0 +1,166 @@
+/* =========================================================
+   MIIMIID PREMIUM MOTION
+   Orders 2-5: Home skeleton + count-up, view transitions,
+   sliding nav highlight, AI Tutor thinking dots,
+   Fun Center card effects, Fun Center spacing.
+   ========================================================= */
+
+/* ---------- 3a. Smooth view transitions (fade only) ---------- */
+#miimiid-dashboard.active,
+#miimiid-fun-center-view:not(.hidden),
+#miimiid-ai-tutor-view:not(.hidden),
+#course-list-view:not(.hidden),
+#course-detail-view:not(.hidden),
+#lesson-view:not(.hidden) {
+  animation: mmPmFade 0.3s ease backwards;
+}
+@keyframes mmPmFade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ---------- 3b. Sliding bottom-nav highlight ---------- */
+.miimiid-bottom-nav button {
+  position: relative;
+  z-index: 1;
+  transition: color 0.2s ease, background 0.2s ease;
+}
+.mm-nav-pill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 0;
+  height: 0;
+  z-index: 0;
+  border-radius: 10px;
+  background: #1e293b;
+  pointer-events: none;
+  transition:
+    transform 0.32s cubic-bezier(0.4, 0, 0.2, 1),
+    width 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.miimiid-bottom-nav.mm-has-pill button.active {
+  background: transparent;
+}
+
+/* ---------- 2a. Home skeleton cards ---------- */
+.mm-skel {
+  border-radius: 16px;
+  background: linear-gradient(90deg, #1e293b 25%, #2a3850 37%, #1e293b 63%);
+  background-size: 400% 100%;
+  animation: mmPmShimmer 1.3s ease infinite;
+}
+@keyframes mmPmShimmer {
+  0%   { background-position: 100% 50%; }
+  100% { background-position: 0 50%; }
+}
+.mm-skel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 22px;
+}
+.mm-skel-title { width: 38%; height: 30px; border-radius: 10px; }
+.mm-skel-user  { width: 26%; height: 30px; border-radius: 999px; }
+.mm-skel-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+.mm-skel-card { height: 92px; }
+@media (min-width: 640px) {
+  .mm-skel-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+
+/* ---------- 4. AI Tutor: message fade-in + thinking dots ---------- */
+.miimiid-ai-tutor-message-row {
+  animation: mmPmMsgIn 0.28s ease backwards;
+}
+@keyframes mmPmMsgIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.mm-typing-bubble {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 14px 16px;
+}
+.mm-typing-bubble i {
+  display: block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #9fb0cf;
+  animation: mmPmDot 1.1s ease-in-out infinite;
+}
+.mm-typing-bubble i:nth-child(2) { animation-delay: 0.15s; }
+.mm-typing-bubble i:nth-child(3) { animation-delay: 0.3s; }
+@keyframes mmPmDot {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.45; }
+  30%           { transform: translateY(-5px); opacity: 1; }
+}
+/* hide the plain "is thinking..." text while the dots are showing */
+#miimiid-ai-tutor-view.mm-is-thinking .miimiid-ai-tutor-status {
+  visibility: hidden;
+}
+
+/* ---------- 5. Fun Center card hover / press effects ---------- */
+.miimiid-fun-home-choice,
+.miimiid-fun-home-play,
+.miimiid-shop-entry {
+  transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease, border-color 0.18s ease;
+}
+@media (hover: hover) {
+  .miimiid-shop-entry:hover {
+    transform: translateY(-3px);
+    border-color: #4da3ff;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.38);
+  }
+  .miimiid-fun-home-choice:hover,
+  .miimiid-fun-home-play:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.1);
+  }
+}
+.miimiid-fun-home-choice:active,
+.miimiid-fun-home-play:active,
+.miimiid-shop-entry:active {
+  transform: scale(0.97);
+}
+#fun-center-content .miimiid-shop-entry {
+  animation: mmPmRise 0.4s ease 0.1s backwards;
+}
+.miimiid-fun-home-choice { animation: mmPmRise 0.4s ease backwards; }
+.miimiid-fun-home-choice:nth-child(2) { animation-delay: 0.06s; }
+.miimiid-fun-home-choice:nth-child(3) { animation-delay: 0.12s; }
+.miimiid-fun-home-choice:nth-child(4) { animation-delay: 0.18s; }
+@keyframes mmPmRise {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- Fun Center: top spacing + nav clearance (last time's Edit 2) ---------- */
+#miimiid-fun-center-view {
+  padding-top: 10px;
+  padding-bottom: calc(96px + env(safe-area-inset-bottom, 0px));
+}
+
+/* ---------- Respect "reduce motion" ---------- */
+@media (prefers-reduced-motion: reduce) {
+  #miimiid-dashboard.active,
+  #miimiid-fun-center-view,
+  #miimiid-ai-tutor-view,
+  #course-list-view,
+  #course-detail-view,
+  #lesson-view,
+  .miimiid-ai-tutor-message-row,
+  .miimiid-fun-home-choice,
+  #fun-center-content .miimiid-shop-entry,
+  .mm-typing-bubble i,
+  .mm-skel {
+    animation: none !important;
+  }
+  .mm-nav-pill { transition: none; }
+}
