@@ -489,6 +489,24 @@
     return left && right ? left + " " + right : left || right;
   }
 
+  // Android Chrome can report the same phrase again and again as it grows
+  // ("hello", "hello my", "hello my love"). These helpers keep only the newest version.
+  function normText(text) {
+    return String(text || "").toLowerCase().replace(/[^\p{L}\p{N}\s]/gu, "").replace(/\s+/g, " ").trim();
+  }
+
+  function mergeChunk(acc, chunk) {
+    const next = String(chunk || "").trim();
+    if (!acc) return next;
+    if (!next) return acc;
+    const a = normText(acc);
+    const c = normText(next);
+    if (!c) return acc;
+    if (c === a || c.indexOf(a + " ") === 0) return next;                 // new one just grew the old one
+    if (a.indexOf(c + " ") === 0 || a.endsWith(" " + c)) return acc;     // old one already contains it
+    return acc + " " + next;
+  }
+
   let dict = null;
 
   function buzz(ms) {
@@ -635,11 +653,21 @@
         let interim = "";
         for (let i = 0; i < event.results.length; i++) {
           const result = event.results[i];
-          if (result.isFinal) finals += result[0].transcript + " ";
-          else interim += result[0].transcript;
+          const heard = String(result[0].transcript || "").trim();
+          if (!heard) continue;
+          if (result.isFinal) finals = mergeChunk(finals, heard);
+          else interim = mergeChunk(interim, heard);
         }
-        state.sessionFinal = finals.trim();
-        state.interim = interim.trim();
+
+        // if the live part already repeats the finished part, show it only once
+        if (finals && interim) {
+          const f = normText(finals);
+          const t = normText(interim);
+          if (t === f || t.indexOf(f + " ") === 0) finals = "";
+        }
+
+        state.sessionFinal = finals;
+        state.interim = interim;
         pulse();
         renderVoiceText();
       };
