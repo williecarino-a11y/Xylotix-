@@ -427,7 +427,11 @@
 
     const bubble = document.createElement("div");
     bubble.className = `miimiid-ai-tutor-message ${role}`;
-    bubble.textContent = content;
+    if (role === "assistant" && window.MiimiidTutorFormat) {
+      window.MiimiidTutorFormat.render(bubble, content);
+    } else {
+      bubble.textContent = content;
+    }
 
     if (Array.isArray(opts.attachments) && opts.attachments.length) {
       bubble.appendChild(buildAttachmentChips(opts.attachments));
