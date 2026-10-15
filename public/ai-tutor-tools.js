@@ -52,6 +52,10 @@
       }
       #${VIEW_ID} .miimiid-ai-tutor-input { background: #151e33; }
 
+      /* the hidden file pickers and closed menus must never take up space under the input bar */
+      #${VIEW_ID} input[type="file"] { display: none !important; }
+      #${VIEW_ID} .hidden { display: none !important; }
+
       #${VIEW_ID} .miimiid-ai-tutor-send {
         width: 44px; height: 44px; flex: 0 0 44px; padding: 0; border: none; border-radius: 50%;
         display: flex; align-items: center; justify-content: center;
@@ -480,6 +484,20 @@
     decorateMessages();
   }
 
+  // Anything stray sitting under the input bar would show up as a blank strip
+  function hideStrays() {
+    const form = $("ai-tutor-form");
+    if (!form) return;
+    let el = form.nextElementSibling;
+    while (el) {
+      const position = getComputedStyle(el).position;
+      if (el.id !== "ai-tutor-panel" && position !== "absolute" && position !== "fixed" && el.offsetHeight > 0) {
+        el.style.display = "none";
+      }
+      el = el.nextElementSibling;
+    }
+  }
+
   /* ---------- setup ---------- */
 
   function setup() {
@@ -506,6 +524,7 @@
         window.visualViewport.addEventListener("resize", () => requestAnimationFrame(fixBottom));
       }
     }
+    hideStrays();
     fixBottom();
 
     const view = $(VIEW_ID);
