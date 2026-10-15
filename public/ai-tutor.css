@@ -1,20 +1,22 @@
 /* =========================================
    MIIMIID AI TUTOR - STYLES
    File: public/ai-tutor.css
-   Layout: a fixed full-screen chat sitting above the bottom nav.
+   Layout: a fixed full-screen chat sitting exactly above the bottom nav.
      [ app bar ]            fixed at top
      [ scrolling area ]     greeting + messages (only this scrolls)
      [ input bar ]          pinned at bottom
+   ai-tutor.js sets the top/height so it always stops at the nav
+   (and sits on top of the keyboard when it is open).
    ========================================= */
 
 .miimiid-ai-tutor-view {
+  --ait-font: 0.95rem;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  /* --ait-nav-h is set by ai-tutor.js to the real bottom-nav height */
-  height: calc(100vh - var(--ait-nav-h, 64px));
-  height: calc(100dvh - var(--ait-nav-h, 64px));
+  height: calc(100vh - 64px);
+  height: calc(100dvh - 64px);
   z-index: 1000;
   display: flex;
   flex-direction: column;
@@ -23,7 +25,11 @@
   background: #0f172a;
   color: #e6e9f0;
   overflow: hidden;
+  isolation: isolate;
 }
+
+.miimiid-ai-tutor-view.ait-text-small { --ait-font: 0.85rem; }
+.miimiid-ai-tutor-view.ait-text-large { --ait-font: 1.1rem; }
 
 @media (min-width: 768px) {
   .miimiid-ai-tutor-view {
@@ -45,6 +51,8 @@
   padding: 8px 10px;
   border-bottom: 1px solid #1c2438;
   background: #0f172a;
+  position: relative;
+  z-index: 4;
 }
 
 .miimiid-ai-tutor-appbar h1 {
@@ -58,6 +66,7 @@
 .ai-tutor-icon-btn {
   width: 40px;
   height: 40px;
+  flex: 0 0 40px;
   padding: 0;
   display: flex;
   align-items: center;
@@ -75,16 +84,62 @@
   outline: none;
 }
 
+/* --- Small pop-up menus (three dots, attach) --- */
+.miimiid-ai-tutor-popover {
+  position: absolute;
+  z-index: 30;
+  min-width: 190px;
+  padding: 6px;
+  border-radius: 14px;
+  border: 1px solid #2c3652;
+  background: #151e33;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.5);
+}
+
+.miimiid-ai-tutor-popover button {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 11px 12px;
+  border: none;
+  border-radius: 10px;
+  background: none;
+  color: #e6e9f0;
+  font: inherit;
+  font-size: 0.95rem;
+  text-align: left;
+  cursor: pointer;
+}
+
+.miimiid-ai-tutor-popover button:hover,
+.miimiid-ai-tutor-popover button:focus-visible {
+  background: rgba(255, 255, 255, 0.08);
+  outline: none;
+}
+
+.ai-tutor-menu {
+  top: calc(env(safe-area-inset-top, 0px) + 52px);
+  right: 10px;
+}
+
+.ai-tutor-attach-menu {
+  left: 12px;
+  bottom: calc(100% + 6px);
+}
+
 /* --- The only scrolling part --- */
 .miimiid-ai-tutor-scroll {
   flex: 1 1 auto;
   min-height: 0;
   overflow-y: auto;
   overflow-x: hidden;
-  overscroll-behavior: contain;
+  overscroll-behavior: none;
   -webkit-overflow-scrolling: touch;
-  padding: 16px 14px 8px;
+  padding: 16px 14px 22px; /* extra bottom space so the last message never touches the input bar */
   box-sizing: border-box;
+  position: relative;
+  z-index: 0;
+  contain: paint; /* nothing from the chat can paint outside this box */
 }
 
 .miimiid-ai-tutor-greeting {
@@ -199,7 +254,7 @@
 .miimiid-ai-tutor-message {
   padding: 10px 14px;
   border-radius: 14px;
-  font-size: 0.95rem;
+  font-size: var(--ait-font);
   line-height: 1.5;
   white-space: pre-wrap;
   overflow-wrap: anywhere;
@@ -212,9 +267,31 @@
 }
 
 .miimiid-ai-tutor-message.assistant {
-  background: rgba(255, 255, 255, 0.07);
+  background: #1b2438;
   color: #e6e9f0;
   border-bottom-left-radius: 4px;
+}
+
+.miimiid-ai-tutor-msg-attachments {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.miimiid-ai-tutor-msg-chip {
+  font-size: 0.8rem;
+  padding: 4px 8px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.18);
+  overflow-wrap: anywhere;
+}
+
+.miimiid-ai-tutor-msg-chip img {
+  display: block;
+  max-width: 160px;
+  max-height: 160px;
+  border-radius: 8px;
 }
 
 .miimiid-ai-tutor-timestamp {
@@ -243,13 +320,30 @@
 /* --- Input bar (pinned at the bottom) --- */
 .miimiid-ai-tutor-form {
   flex: 0 0 auto;
+  position: relative;
+  z-index: 3;
   display: flex;
-  align-items: flex-end;
-  gap: 10px;
+  flex-direction: column;
+  gap: 8px;
   padding: 10px 12px;
   box-sizing: border-box;
   border-top: 1px solid #1c2438;
-  background: #0f172a;
+  background: #0f172a; /* solid, so the chat never shows through */
+}
+
+.miimiid-ai-tutor-composer {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.ai-tutor-attach-btn {
+  width: 44px;
+  height: 44px;
+  flex: 0 0 44px;
+  border: 1px solid #2c3652;
+  background: rgba(255, 255, 255, 0.04);
+  color: #9aa4bb;
 }
 
 .miimiid-ai-tutor-input {
@@ -299,5 +393,197 @@
 
 .miimiid-ai-tutor-send:disabled {
   opacity: 0.5;
+  cursor: default;
+}
+
+/* --- Attachments waiting to be sent --- */
+.miimiid-ai-tutor-tray {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 2px;
+}
+
+.miimiid-ai-tutor-tray-chip {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  max-width: 220px;
+  padding: 6px 8px;
+  border-radius: 12px;
+  border: 1px solid #2c3652;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.miimiid-ai-tutor-tray-chip img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.miimiid-ai-tutor-tray-icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+}
+
+.miimiid-ai-tutor-tray-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.miimiid-ai-tutor-tray-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.82rem;
+}
+
+.miimiid-ai-tutor-tray-size {
+  font-size: 0.72rem;
+  color: #6b7690;
+}
+
+.miimiid-ai-tutor-tray-remove {
+  flex: 0 0 auto;
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  color: #e6e9f0;
+  cursor: pointer;
+}
+
+/* --- Full-screen panels (History, Settings) --- */
+.miimiid-ai-tutor-panel {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  padding-top: env(safe-area-inset-top, 0px);
+  background: #0f172a;
+}
+
+.miimiid-ai-tutor-panel-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 14px;
+}
+
+.miimiid-ai-tutor-empty {
+  margin: 18px 0 0;
+  text-align: center;
+  color: #6b7690;
+  font-size: 0.9rem;
+}
+
+.miimiid-ai-tutor-history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.miimiid-ai-tutor-history-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid #1c2438;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.miimiid-ai-tutor-history-open {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 12px 14px;
+  border: none;
+  background: none;
+  color: #e6e9f0;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.miimiid-ai-tutor-history-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.95rem;
+}
+
+.miimiid-ai-tutor-history-meta {
+  font-size: 0.78rem;
+  color: #6b7690;
+}
+
+.miimiid-ai-tutor-setting {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 4px;
+  border-bottom: 1px solid #1c2438;
+  font-size: 0.95rem;
+}
+
+.miimiid-ai-tutor-setting.column {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.miimiid-ai-tutor-setting input[type="checkbox"] {
+  width: 22px;
+  height: 22px;
+  accent-color: #1f6feb;
+}
+
+.miimiid-ai-tutor-segmented {
+  display: flex;
+  gap: 6px;
+}
+
+.miimiid-ai-tutor-segmented button {
+  flex: 1;
+  padding: 10px 0;
+  border: 1px solid #2c3652;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.04);
+  color: #e6e9f0;
+  font: inherit;
+  cursor: pointer;
+}
+
+.miimiid-ai-tutor-segmented button.active {
+  background: #1f6feb;
+  border-color: #1f6feb;
+  color: #ffffff;
+}
+
+.miimiid-ai-tutor-danger {
+  width: 100%;
+  margin-top: 18px;
+  padding: 12px;
+  border: 1px solid #7f1d1d;
+  border-radius: 12px;
+  background: rgba(239, 68, 68, 0.1);
+  color: #fca5a5;
+  font: inherit;
+  cursor: pointer;
+}
+
+.miimiid-ai-tutor-danger:disabled {
+  opacity: 0.6;
   cursor: default;
 }
