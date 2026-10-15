@@ -536,7 +536,7 @@
   // Android Chrome can report the same phrase again and again as it grows
   // ("hello", "hello my", "hello my love"). These helpers keep only the newest version.
   function normText(text) {
-    return String(text || "").toLowerCase().replace(/[^\p{L}\p{N}\s]/gu, "").replace(/\s+/g, " ").trim();
+    return String(text || "").toLowerCase().replace(/\u2063/g, " ").replace(/[^\p{L}\p{N}\s]/gu, "").replace(/\s+/g, " ").trim();
   }
 
   function mergeChunk(acc, chunk) {
@@ -548,7 +548,59 @@
     if (!c) return acc;
     if (c === a || c.indexOf(a + " ") === 0) return next;                 // new one just grew the old one
     if (a.indexOf(c + " ") === 0 || a.endsWith(" " + c)) return acc;     // old one already contains it
-    return acc + " " + next;
+    return acc + SENTENCE_BREAK + next;
+  }
+
+  /* ---------- punctuation for spoken text ---------- */
+
+  const SENTENCE_BREAK = "\u2063"; // hidden marker: "the speaker paused here"
+
+  function joinSpoken(a, b) {
+    const left = String(a || "").trim();
+    const right = String(b || "").trim();
+    return left && right ? left + SENTENCE_BREAK + right : left || right;
+  }
+
+  const LEAD_WORDS = /^(hey|hi|hello|okay|ok|yes|yeah|yep|oh|wow|alright)\s+(?!there\b)(?=\S)/i;
+  const QUESTION_START = /^(?:(?:hey|hi|hello|okay|ok|yes|yeah|yep|oh|wow|alright)(?:\s+there)?,?\s+)?(?:so\s+)?(what|what's|whats|how|how's|why|why's|when|where|where's|who|who's|whose|which|can|could|do|does|did|is|are|am|was|were|will|would|should|shall|may|might|have|has|had|isn't|aren't|don't|doesn't|didn't|won't|wouldn't|can't|couldn't|shouldn't)\b/i;
+
+  function formatSentence(raw, english) {
+    let t = String(raw || "").replace(/\s+/g, " ").trim();
+    if (!t) return "";
+
+    if (english) {
+      // spoken punctuation: "comma", "question mark", "exclamation mark", "full stop"
+      t = t
+        .replace(/\s*\bquestion mark\b/gi, "?")
+        .replace(/\s*\bexclamation (?:mark|point)\b/gi, "!")
+        .replace(/\s*\bfull stop\b/gi, ".")
+        .replace(/\s*\bcomma\b/gi, ",")
+        .replace(/([,.?!])(?=\S)/g, "$1 ");
+
+      t = t.replace(/\bi\b/g, "I");
+
+      if (!/^[^\s,]+,/.test(t)) {
+        t = t.replace(LEAD_WORDS, (match, word) => word + ", ");
+      }
+
+      if (!/[.?!…]$/.test(t)) {
+        t = t.replace(/,$/, "");
+        t += QUESTION_START.test(t) ? "?" : ".";
+      }
+    }
+
+    // capital letter at the start and after . ? !
+    t = t.replace(/(^|[.?!]\s+)(\p{Ll})/gu, (m, lead, ch) => lead + ch.toUpperCase());
+    return t;
+  }
+
+  function formatSpoken(raw) {
+    const english = String(speechLang()).toLowerCase().indexOf("en") === 0;
+    return String(raw || "")
+      .split(SENTENCE_BREAK)
+      .map(part => formatSentence(part, english))
+      .filter(Boolean)
+      .join(" ");
   }
 
   let dict = null;
@@ -581,15 +633,17 @@
 
   function renderVoiceText() {
     if (!dict) return;
-    const spoken = joinText(dict.base, dict.sessionFinal);
+    const spoken = joinSpoken(dict.base, dict.sessionFinal);
+    const shownFinal = formatSpoken(spoken);
+    const shownInterim = String(dict.interim || "").replace(/\u2063/g, " ");
     const finalEl = voiceEl(".ait-final");
     const interimEl = voiceEl(".ait-interim");
     const textBox = voiceEl(".ait-voice-text");
     if (!finalEl || !interimEl || !textBox) return;
 
-    finalEl.textContent = spoken;
-    interimEl.textContent = dict.interim ? (spoken ? " " : "") + dict.interim : "";
-    textBox.classList.toggle("has-text", !!(spoken || dict.interim));
+    finalEl.textContent = shownFinal;
+    interimEl.textContent = shownInterim ? (shownFinal ? " " : "") + shownInterim : "";
+    textBox.classList.toggle("has-text", !!(shownFinal || shownInterim));
     textBox.scrollTop = textBox.scrollHeight;
   }
 
@@ -612,7 +666,7 @@
     if (!state || state.committed) return;
     state.committed = true;
 
-    const text = joinText(joinText(state.base, state.sessionFinal), state.interim);
+    const text = formatSpoken(joinSpoken(joinSpoken(state.base, state.sessionFinal), state.interim));
     endDictation(state);
     if (!text) return;
 
@@ -626,7 +680,7 @@
   function failDictation(state, message) {
     if (!state || state.committed) return;
     state.committed = true;
-    const keep = joinText(joinText(state.base, state.sessionFinal), state.interim);
+    const keep = formatSpoken(joinSpoken(joinSpoken(state.base, state.sessionFinal), state.interim));
     endDictation(state);
 
     if (keep) {
@@ -737,7 +791,7 @@
         if (!state.active || state.committed || state.failed) return;
 
         // keep what was heard in this session, then decide what to do next
-        state.base = joinText(joinText(state.base, state.sessionFinal), state.interim);
+        state.base = joinSpoken(joinSpoken(state.base, state.sessionFinal), state.interim);
         state.sessionFinal = "";
         state.interim = "";
         renderVoiceText();
