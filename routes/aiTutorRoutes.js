@@ -45,6 +45,7 @@ router.post(
   "/chat",
   requireAuth,
   aiTutorLimiter,
+  aiTutorDailyCap,
   async (req, res) => {
     try {
       const {
