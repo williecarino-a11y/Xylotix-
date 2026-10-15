@@ -43,7 +43,7 @@ test('security headers are present on API responses', async () => {
   assert.equal(response.headers['x-content-type-options'], 'nosniff');
   assert.equal(response.headers['x-frame-options'], 'SAMEORIGIN');
   assert.equal(response.headers['referrer-policy'], 'strict-origin-when-cross-origin');
-  assert.equal(response.headers['permissions-policy'], 'camera=(), microphone=(), geolocation=()');
+  assert.equal(response.headers['permissions-policy'], 'camera=(), microphone=(self), geolocation=()');
   assert.equal(response.headers['x-powered-by'], undefined);
 });
 
