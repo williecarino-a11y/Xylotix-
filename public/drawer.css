@@ -374,3 +374,18 @@ body.mm-layer-open { overflow: hidden; }
 @media (prefers-reduced-motion: reduce) {
   .mm-layer-backdrop, .mm-drawer, .mm-sheet, .mm-switch i { transition: none !important; }
   }
+
+/* ---------- Support center: intro + commitment ---------- */
+.mm-support-hero { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 6px 0 12px; text-align: center; }
+.mm-support-hero h3 { margin: 6px 0 0; color: #f8fafc; font-size: 1.3rem; }
+.mm-support-hero p { margin: 0; max-width: 460px; color: #aab6cc; line-height: 1.6; font-size: 0.95rem; }
+.mm-support-hero p.mm-support-lead { color: #4da3ff; font-weight: 700; font-size: 1rem; }
+
+.mm-answer p { margin: 0; padding: 0 16px 12px; color: #aab6cc; line-height: 1.6; font-size: 0.95rem; }
+.mm-answer p:last-child { padding-bottom: 16px; }
+.mm-answer ul, .mm-commit ul { margin: 0; padding: 0 16px 12px 36px; color: #aab6cc; line-height: 1.6; font-size: 0.95rem; }
+
+.mm-commit { padding: 16px 0 4px; }
+.mm-commit p { margin: 0; padding: 0 16px 12px; color: #cbd5e1; line-height: 1.6; font-size: 0.95rem; }
+.mm-commit ul { color: #cbd5e1; }
+.mm-commit li { margin: 0.3em 0; }
