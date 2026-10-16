@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 
 const { getAuthenticatedUser } = require('./authRoutes');
 const learningService = require('../services/learningService');
+const missedQuestionService = require('../services/missedQuestionService');
 const { getFunCenterActivities } = require('../scripts/learningData/funCenter');
 
 const router = express.Router();
