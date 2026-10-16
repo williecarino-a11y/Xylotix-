@@ -428,4 +428,13 @@ router.post('/reset-password', resetPasswordLimiter, async (req, res) => {
 
 router.use(require('./passwordResetCodeRoutes'));
 router.use(require('./googleAuthRoutes')({ createSession, setSessionCookie, publicUser }));
+router.use(require('./accountRoutes')({
+  getAuthenticatedUser,
+  hashPassword,
+  verifyPassword,
+  publicUser,
+  createSession,
+  setSessionCookie,
+  clearSessionCookie
+}));
 module.exports = { router, getAuthenticatedUser };
