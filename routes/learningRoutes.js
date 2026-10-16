@@ -137,4 +137,6 @@ router.get('/fun-center', requireAuth, async (req, res) => {
   }
 });
 
+router.use('/review', require('./reviewRoutes')({ requireAuth }));
+
 module.exports = router;
