@@ -1,0 +1,72 @@
+/* =========================================================
+   MIIMIID LOADING: one system
+   Splash (launch) -> top bar + status pill (requests)
+   -> skeletons (screens) -> button spinners -> typing dots (AI)
+   ========================================================= */
+
+/* ---------- Requests: the blurred "Please wait" card becomes a small pill ---------- */
+html body .continue-loading-overlay {
+  background: transparent;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  align-items: flex-start;
+  justify-content: center;
+  padding: calc(env(safe-area-inset-top, 0px) + 14px) 16px 0;
+  touch-action: pan-y; /* taps stay blocked, scrolling still works */
+}
+
+html body .continue-loading-overlay .continue-loading-card {
+  min-width: 0;
+  max-width: min(92vw, 420px);
+  padding: 9px 16px;
+  gap: 10px;
+  border-radius: 16px;
+  background: rgba(30, 41, 59, 0.96);
+  border: 1px solid #334155;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  opacity: 0;
+  animation: mmLoadPillIn 0.25s ease 0.5s forwards; /* only shows if the wait is over 0.5s */
+}
+
+html body .continue-loading-overlay .continue-loading-text {
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+html body .continue-loading-overlay .continue-loading-arc {
+  width: 16px;
+  height: 16px;
+  flex-basis: 16px;
+  border-width: 2px;
+  color: #4da3ff;
+}
+
+@keyframes mmLoadPillIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- Skeletons: one look for Learn and Home ---------- */
+.mm-skel {
+  background: linear-gradient(100deg, #243349 30%, #36496b 50%, #243349 70%);
+  background-size: 200% 100%;
+  animation: mmShimmer 1.3s ease-in-out infinite;
+}
+
+.mm-skel-grid > .mm-skel.mm-skel-card {
+  height: 92px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 16px;
+  background: linear-gradient(100deg, #243349 30%, #36496b 50%, #243349 70%);
+  background-size: 200% 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html body .continue-loading-overlay .continue-loading-card {
+    animation: none;
+    opacity: 1;
+  }
+  .mm-skel { animation: none; }
+}
