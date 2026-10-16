@@ -298,8 +298,8 @@
             (emailOf(u) ? '<p>' + esc(emailOf(u)) + '</p>' : '') +
           '</div>' +
           '<div class="mm-label">Account</div>' +
-          '<div class="mm-card">' + kv('Name', displayName(u)) + (emailOf(u) ? kv('Email', emailOf(u)) : '') + '</div>' +
-          '<p class="mm-note">Editing your profile is not available yet.</p>';
+          '<div class="mm-card">' + kv('Name', displayName(u)) + (emailOf(u) ? kv('Email', emailOf(u)) : '') + '</div>';
+        if (window.MiimiidAccount) window.MiimiidAccount.mount(body);
       }
     },
 
