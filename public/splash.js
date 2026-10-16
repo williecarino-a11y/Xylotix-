@@ -76,6 +76,16 @@
   setTimeout(function () { if (!done) wake.classList.add('mm-show'); }, WAKE_MS);
   setTimeout(hide, MAX_MS);
 
-  if (document.readyState === 'complete') hide();
-  else window.addEventListener('load', hide);
+  // Leave only when the page has loaded AND the app is no longer waiting on the
+  // server (the shared loader marks <html> with aria-busy while it is).
+  var calmPolls = 0;
+  function checkReady() {
+    if (done) return;
+    var pageLoaded = document.readyState === 'complete';
+    var busy = document.documentElement.hasAttribute('aria-busy');
+    calmPolls = pageLoaded && !busy ? calmPolls + 1 : 0;
+    if (calmPolls >= 3) { hide(); return; }
+    setTimeout(checkReady, 120);
+  }
+  checkReady();
 })();
