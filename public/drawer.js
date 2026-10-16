@@ -494,5 +494,5 @@
     openDrawer();
   }, true);
 
-  window.MiimiidDrawer = { open: openDrawer, openPage: openSheet, close: closeFromUI };
+  window.MiimiidDrawer = { open: openDrawer, openPage: openSheet, close: closeFromUI, pushLayer: pushLayer };
 })();
