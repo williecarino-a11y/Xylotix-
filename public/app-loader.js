@@ -101,6 +101,31 @@
     }).observe(loadingEl, { attributes: true, attributeFilter: ["class"] });
   }
 
+  /* ---------- Follow every network request (ContinueLoading) ---------- */
+  var busyTimer = null;
+  new MutationObserver(function () {
+    var busy = document.documentElement.hasAttribute("aria-busy");
+    if (busy) {
+      if (!busyTimer && !trickle) {
+        // wait 250ms so quick requests never flash the bar
+        busyTimer = setTimeout(function () {
+          busyTimer = null;
+          if (document.documentElement.hasAttribute("aria-busy")) {
+            startBar();
+            addSkeleton();
+          }
+        }, 250);
+      }
+    } else {
+      clearTimeout(busyTimer);
+      busyTimer = null;
+      if (trickle) finishBar();
+    }
+  }).observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ["aria-busy"]
+  });
+
   /* ---------- Scroll to top whenever a Learn view opens ---------- */
   ["course-list-view", "course-detail-view", "lesson-view"].forEach(
     function (id) {
