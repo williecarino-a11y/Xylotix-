@@ -290,16 +290,14 @@
     profile: {
       title: 'Profile settings',
       render: function (body) {
+        if (window.MiimiidAccount) { window.MiimiidAccount.renderProfile(body); return; }
         var u = currentUser();
         body.innerHTML =
           '<div class="mm-profile-hero">' +
             '<span class="mm-avatar mm-avatar-lg">' + esc(initialOf(u)) + '</span>' +
             '<h3>' + esc(displayName(u)) + '</h3>' +
             (emailOf(u) ? '<p>' + esc(emailOf(u)) + '</p>' : '') +
-          '</div>' +
-          '<div class="mm-label">Account</div>' +
-          '<div class="mm-card">' + kv('Name', displayName(u)) + (emailOf(u) ? kv('Email', emailOf(u)) : '') + '</div>';
-        if (window.MiimiidAccount) window.MiimiidAccount.mount(body);
+          '</div>';
       }
     },
 
