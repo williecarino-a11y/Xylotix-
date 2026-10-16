@@ -390,27 +390,4 @@ body.mm-layer-open { overflow: hidden; }
 .mm-commit ul { color: #cbd5e1; }
 .mm-commit li { margin: 0.3em 0; }
 
-/* ---------- Account forms ---------- */
-.mm-form { display: flex; flex-direction: column; gap: 14px; padding: 16px; }
-.mm-field { display: flex; flex-direction: column; gap: 6px; }
-.mm-field span { color: #94a3b8; font-size: 0.85rem; font-weight: 600; }
-.mm-input {
-  width: 100%;
-  box-sizing: border-box;
-  min-height: 46px;
-  padding: 0 14px;
-  border: 1px solid #2a3552;
-  border-radius: 12px;
-  background: #0b1220;
-  color: #f1f5f9;
-  font-family: inherit;
-  font-size: 1rem;
-}
-.mm-input:focus { outline: none; border-color: #4da3ff; }
-.mm-form .mm-btn { margin-top: 2px; }
-.mm-btn:disabled { opacity: 0.45; cursor: not-allowed; }
-.mm-btn-danger { background: #dc2626; }
-.mm-form-note { margin: 0; color: #aab6cc; font-size: 0.9rem; line-height: 1.5; }
-.mm-form-msg { min-height: 1.2em; font-size: 0.9rem; line-height: 1.4; }
-.mm-form-msg.is-error { color: #f87171; }
-.mm-form-msg.is-ok { color: #4ade80; }
+
