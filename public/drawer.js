@@ -122,7 +122,9 @@
 
   function closeTop() {
     var name = layers.pop();
-    if (name === 'sheet') {
+    if (typeof name === 'function') {
+      name();
+    } else if (name === 'sheet') {
       root.classList.remove('mm-sheet-open');
       sheetEl.setAttribute('aria-hidden', 'true');
       clearTimeout(stashTimer);
