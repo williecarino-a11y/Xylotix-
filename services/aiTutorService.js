@@ -6,7 +6,7 @@ const {
 
 const DEFAULT_MODEL =
   process.env.OPENAI_AI_TUTOR_MODEL ||
-  "gpt-5.6";
+  "gpt-6-luna";
 
 const MAX_MESSAGE_LENGTH = 4000;
 const MAX_HISTORY_MESSAGES = 12;
