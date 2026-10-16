@@ -86,6 +86,14 @@ router.post('/quiz/submit', requireAuth, async (req, res) => {
     if (!mongoose.Types.ObjectId.isValid(lessonId)) return res.status(400).json({ status: 'error', code: 'INVALID_LESSON_ID', message: 'Invalid lesson ID.' });
     if (!Array.isArray(submittedAnswers)) return res.status(400).json({ status: 'error', code: 'INVALID_QUIZ_ANSWERS', message: 'submittedAnswers must be an array.' });
     const result = await learningService.submitQuizAnswers(lessonId, submittedAnswers);
+
+    // Remember wrong answers for Review mistakes (must never break the quiz)
+    try {
+      await missedQuestionService.recordResults(req.authUser._id, lessonId, result.results);
+    } catch (trackingError) {
+      console.error('Missed question tracking error:', trackingError);
+    }
+
     return res.status(200).json({ status: 'success', data: result });
   } catch (error) {
     console.error('Quiz submission error:', error);
