@@ -17,6 +17,29 @@ window.MIIMIID_DRAWER_PAGES = {
   ],
 
   /* ---------- Support center ---------- */
+  supportIntro: {
+    title: "Welcome to Miimiid Support",
+    lead: "We're here to help you move forward.",
+    text: `At Miimiid, we believe that learning about money should feel simple, empowering, and accessible to everyone. Whether you're exploring financial literacy for the first time, working through a lesson, using our AI Tutor, or experiencing a technical issue, we're here to help you get the most out of your experience.
+Our Support Center is your starting point for finding answers, understanding how Miimiid works, and getting assistance when you need it.
+Your questions matter. Your experience matters. And we're committed to helping you make the most of Miimiid.`
+  },
+
+  supportCommitment: {
+    title: "Our commitment to you",
+    text: `At Miimiid, we want every user to feel welcome, respected, and supported.
+We aim to:
+- Treat support requests respectfully.
+- Communicate clearly and honestly.
+- Help users understand available features.
+- Investigate reported problems.
+- Protect users' personal information.
+- Improve the platform based on useful feedback.
+Thank you for being part of Miimiid.
+Your journey toward better financial knowledge matters to us.
+Miimiid: Smart Choices. Brighter Tomorrows.`
+  },
+
   faq: [
     {
       q: "How do I contact support?",
