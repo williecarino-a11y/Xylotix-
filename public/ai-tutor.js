@@ -874,6 +874,13 @@
           return;
         }
 
+        // Rate limit or daily limit: show the server's own message in the chat
+        if (response.status === 429 && data && data.message) {
+          addMessage("assistant", data.message);
+          if (status) status.textContent = "";
+          return;
+        }
+
         throw new Error(data && data.message ? data.message : "Unable to reach Miimiid AI Tutor.");
       }
 
