@@ -266,6 +266,26 @@
     return '<div class="mm-kv"><span>' + esc(label) + '</span><strong>' + esc(value) + '</strong></div>';
   }
 
+  // Turns plain text into paragraphs. Lines starting with "- " become bullet points.
+  function richText(text) {
+    var lines = String(text == null ? '' : text).split('\n');
+    var out = '';
+    var inList = false;
+    lines.forEach(function (line) {
+      var t = line.trim();
+      if (!t) return;
+      if (t.indexOf('- ') === 0) {
+        if (!inList) { out += '<ul>'; inList = true; }
+        out += '<li>' + esc(t.slice(2)) + '</li>';
+      } else {
+        if (inList) { out += '</ul>'; inList = false; }
+        out += '<p>' + esc(t) + '</p>';
+      }
+    });
+    if (inList) out += '</ul>';
+    return out;
+  }
+
   var PAGE_DEFS = {
     profile: {
       title: 'Profile settings',
@@ -352,14 +372,35 @@
       title: 'Support center',
       render: function (body) {
         var faq = Array.isArray(PAGES.faq) ? PAGES.faq : [];
+        var intro = PAGES.supportIntro;
+        var commit = PAGES.supportCommitment;
         var u = currentUser();
-        var html =
+        var html = '';
+
+        if (intro) {
+          html +=
+            '<div class="mm-support-hero">' +
+              '<span class="mm-pro-icon">' + icon('help', 26) + '</span>' +
+              '<h3>' + esc(intro.title) + '</h3>' +
+              (intro.lead ? '<p class="mm-support-lead">' + esc(intro.lead) + '</p>' : '') +
+              richText(intro.text) +
+            '</div>';
+        }
+
+        html +=
           '<div class="mm-label">Common questions</div>' +
           '<div class="mm-card mm-faq">' +
             faq.map(function (item) {
-              return '<details><summary>' + esc(item.q) + '</summary><p>' + esc(item.a) + '</p></details>';
+              return '<details><summary>' + esc(item.q) + '</summary>' +
+                '<div class="mm-answer">' + richText(item.a) + '</div></details>';
             }).join('') +
           '</div>';
+
+        if (commit) {
+          html +=
+            '<div class="mm-label">' + esc(commit.title) + '</div>' +
+            '<div class="mm-card mm-commit">' + richText(commit.text) + '</div>';
+        }
 
         var email = typeof CFG.supportEmail === 'string' ? CFG.supportEmail.trim() : '';
         if (email) {
@@ -372,7 +413,7 @@
         body.innerHTML = html;
       }
     },
-
+    
     privacy: {
       title: 'Privacy policy',
       render: function (body) { body.innerHTML = '<div class="mm-prose">' + (PAGES.privacy || '') + '</div>'; }
