@@ -1,7 +1,7 @@
 (function () {
   var MIN_MS = 900;    // never flash: show at least this long
   var WAKE_MS = 3500;  // show the "waking up" line after this long
-  var MAX_MS = 9000;   // safety: always leave after this long
+  var MAX_MS = 20000;  // safety: always leave after this long (covers a Render cold start)
   var MASCOT = '/assets/fun-center/characters/miimiid/waving.png';
 
   // once per app open (not every reload in the same tab)
