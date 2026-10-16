@@ -51,6 +51,7 @@
   /* ---------- 2. Haptics ---------- */
   function buzz(ms) {
     try {
+      if (localStorage.getItem('mmHaptics') === 'off') return;
       if (navigator.vibrate) navigator.vibrate(ms);
     } catch (e) {}
   }
