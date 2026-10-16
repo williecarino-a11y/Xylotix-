@@ -19,40 +19,48 @@ window.MIIMIID_DRAWER_PAGES = {
   /* ---------- Support center ---------- */
   faq: [
     {
-      q: "Welcome to Miimiid Support",
-      a: "We're here to help you move forward. At Miimiid, we believe that learning about money should feel simple, empowering, and accessible to everyone. Whether you're exploring financial literacy for the first time, working through a lesson, using our AI Tutor, or experiencing a technical issue, we're here to help you get the most out of your experience. Our Support Center is your starting point for finding answers, understanding how Miimiid works, and getting assistance when you need it. Your questions matter. Your experience matters. And we're committed to helping you make the most of Miimiid."
+      q: "How do I contact support?",
+      a: "Tap Email support below. Describe what happened and what you expected to happen, and include a screenshot if you can, as long as it doesn't show private information. We will aim to respond as promptly as reasonably possible. Response times may vary depending on the nature and complexity of your request."
     },
     {
-      q: "Learning and Courses",
-      a: "Need help finding a course, understanding a lesson, or tracking your learning progress? Our learning experience is designed to help you develop practical financial knowledge at your own pace. If a lesson isn't loading correctly, your progress appears incorrect, or you need help navigating the learning experience, we're here to help. We want every learning session to bring you one step closer to making informed financial decisions."
+      q: "I forgot my password",
+      a: "On the sign-in screen, use the forgot password option. We will send a code to your email so you can set a new password. Never send your password or verification code to anyone claiming to be a support representative."
     },
     {
-      q: "Miimiid AI Tutor",
-      a: "Your AI Tutor is designed to make learning about money easier through explanations, practical examples, and interactive conversations. If you're experiencing problems with responses, conversation history, loading, or other AI Tutor features, please let us know. When contacting support, describe what happened and what you expected to happen. Please avoid including passwords, verification codes, or sensitive financial information in your message. AI-generated information can sometimes be incomplete or inaccurate. For important financial decisions, take time to verify the information and consider seeking qualified professional advice when appropriate."
+      q: "I did not receive my verification code",
+      a: "Check your spam folder and make sure your email address was typed correctly, then try again. If the code still does not arrive, contact us and tell us which email address you used."
     },
     {
-      q: "Fun Center and Interactive Games",
-      a: "Learning doesn't have to feel like studying a textbook. Miimiid's Fun Center brings interactive activities and games into your financial learning experience. If a game fails to load, a session doesn't work as expected, or your progress or rewards appear incorrect, contact us with a description of the problem. We're committed to making the experience engaging, reliable, and useful."
+      q: "My lesson or progress looks wrong",
+      a: "If a lesson isn't loading correctly or your progress appears incorrect, contact us and tell us which course and lesson you were in. We want every learning session to bring you one step closer to making informed financial decisions."
     },
     {
-      q: "Account and Profile",
-      a: "Need assistance with your account, registration, email verification, login, or profile settings? We're here to help you navigate account-related issues. For your protection, never send your password or email verification code to anyone claiming to be a support representative."
+      q: "The AI Tutor is not working or gave a wrong answer",
+      a: "Check your internet connection and try again. If it keeps happening, tell us what happened and what you expected. AI-generated information can sometimes be incomplete or inaccurate, so for important financial decisions, verify the information and consider seeking qualified professional advice. Please do not send passwords, verification codes, or sensitive financial information in the chat."
     },
     {
-      q: "Technical Issues",
-      a: "Experiencing a blank screen, unexpected error, slow loading, or a feature that isn't responding? Please tell us: what you were trying to do, what happened instead, which part of the app you were using, and whether the problem happens repeatedly. If possible, include a screenshot that doesn't expose private information. These details help us understand the issue and investigate it more effectively."
+      q: "A game will not load or my rewards look wrong",
+      a: "If a game fails to load, a session doesn't work as expected, or your progress or rewards appear incorrect, contact us with a description of the problem and which game it was."
     },
     {
-      q: "Privacy and Security",
-      a: "Your privacy and account security are important. If you have questions about how your information is handled, want to understand your privacy options, or believe you've discovered a security issue, please contact us through the appropriate support channel. Never include your password, authentication codes, or complete payment credentials in a support request."
+      q: "The app shows a blank screen or is slow",
+      a: "If the app has not been used for a while, it can take up to a minute to wake up. After that it is fast again. If you still see a blank screen, an error, or a feature that isn't responding, tell us what you were trying to do, what happened instead, and whether it happens every time."
     },
     {
-      q: "Contact Our Support Team",
-      a: "We're ready to hear from you. When contacting us, provide a clear description of your question or problem so we can better understand how to assist you. We will aim to respond as promptly as reasonably possible. Response times may vary depending on the nature and complexity of your request."
+      q: "How do I change the language?",
+      a: "Open the menu, tap Settings, then choose your language."
     },
     {
-      q: "Our Commitment to You",
-      a: "At Miimiid, we want every user to feel welcome, respected, and supported. We aim to: treat support requests respectfully, communicate clearly and honestly, help users understand available features, investigate reported problems, protect users' personal information, and improve the platform based on useful feedback. Thank you for being part of Miimiid. Your journey toward better financial knowledge matters to us. Miimiid: Smart Choices. Brighter Tomorrows."
+      q: "How do I sign out?",
+      a: "Open the menu and tap Sign out at the bottom."
+    },
+    {
+      q: "Is Miimiid financial advice?",
+      a: "No. Lessons, quizzes and the AI Tutor are for general education only. They are not personal financial, investment, tax or legal advice."
+    },
+    {
+      q: "How do I report a privacy or security problem?",
+      a: "Contact us through Email support. Never include your password, authentication codes, or complete payment credentials in a support request."
     }
   ],
 
