@@ -159,6 +159,7 @@
       var d = r.ok && r.data && r.data.data;
       if (!d) { if (row.parentNode) row.parentNode.removeChild(row); return; }
       latest = d;
+      writeCache(d);
       paintRow(row, d);
       announce(d);
     }).catch(function () {
