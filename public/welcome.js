@@ -222,6 +222,8 @@
   }
 
   function check() {
+    // Automated test browsers skip the welcome so they can reach the sign-in form
+    if (navigator.webdriver) return;
     // Anyone who is (or has been) signed in never needs the welcome
     if (userKnown()) { mark(); return; }
     if (shownThisSession || seen()) return;
