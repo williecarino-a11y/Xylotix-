@@ -197,4 +197,49 @@
   }
 
   window.MiimiidConnection = { showRetry: showRetry };
+
+  /* ---------- safety net: never show login to a signed-in phone that is just offline ---------- */
+  var HINT = 'mmSignedInHint';
+  var meFailed = false;
+
+  function setHint(on) {
+    try {
+      if (on) localStorage.setItem(HINT, '1');
+      else localStorage.removeItem(HINT);
+    } catch (e) {}
+  }
+
+  function hinted() {
+    try { return localStorage.getItem(HINT) === '1'; } catch (e) { return false; }
+  }
+
+  function authFormShowing() {
+    var view = document.getElementById('miimiid-auth-view');
+    var card = document.getElementById('miimiid-auth-card');
+    return Boolean(
+      view && !view.classList.contains('hidden') &&
+      card && !card.classList.contains('hidden')
+    );
+  }
+
+  function checkSignedInOffline() {
+    if (!authFormShowing() || !hinted()) return;
+    if (navigator.onLine === false || meFailed) showRetry();
+  }
+
+  var authView = document.getElementById('miimiid-auth-view');
+  if (authView) {
+    new MutationObserver(checkSignedInOffline).observe(authView, {
+      attributes: true,
+      attributeFilter: ['class'],
+      subtree: true
+    });
+  }
+  window.addEventListener('offline', checkSignedInOffline);
+  setTimeout(checkSignedInOffline, 600);
+
+  // A little breathing room under the red message on the sign-in form
+  var gap = document.createElement('style');
+  gap.textContent = '#miimiid-auth-status:not(:empty) { margin-bottom: 16px; }';
+  document.head.appendChild(gap);
 })();
