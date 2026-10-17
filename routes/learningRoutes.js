@@ -141,5 +141,7 @@ router.use('/review', require('./reviewRoutes')({ requireAuth }));
 router.use('/reminders', require('./reminderRoutes')({ requireAuth }));
 router.use('/notifications', require('./notificationRoutes')({ requireAuth }));
 router.use('/money', require('./moneyRoutes')({ requireAuth }));
+router.use('/progress', require('./progressRoutes')({ requireAuth }));
+router.use('/telemetry', require('./telemetryRoutes')({ requireAuth }));
 
 module.exports = router;
