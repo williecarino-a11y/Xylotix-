@@ -14,6 +14,25 @@
   var signedIn = false;
   try { signedIn = localStorage.getItem('mmSignedInHint') === '1'; } catch (e) {}
 
+  /* ---------- keep the splash a plain wordmark, whatever else writes into it ---------- */
+  function enforceSplash() {
+    var el = document.getElementById('miimiid-auth-loading');
+    if (!el) return;
+
+    function apply() {
+      if (el.querySelector('.mm-splash-word')) return;
+      el.innerHTML =
+        '<span class="mm-splash-word" aria-hidden="true">Miimiid</span>' +
+        '<span class="mm-sr-only">Checking your Miimiid session</span>';
+    }
+
+    apply();
+    new MutationObserver(apply).observe(el, { childList: true, characterData: true, subtree: true });
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', enforceSplash);
+  else enforceSplash();
+
   if (!(navigator.onLine === false && signedIn)) return;
 
   // The startup code reads this and skips the session check and loaders
