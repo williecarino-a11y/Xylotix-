@@ -7449,6 +7449,15 @@ function initializeMiimiidAuth() {
           error
         );
 
+        if (
+          error &&
+          error.connectionProblem &&
+          window.MiimiidConnection
+        ) {
+          window.MiimiidConnection.showRetry();
+          return;
+        }
+
         user = null;
       }
 
