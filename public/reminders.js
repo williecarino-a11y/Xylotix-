@@ -264,5 +264,5 @@
     });
   }
 
-  window.MiimiidReminders = { mountSettings: mountSettings };
+  window.MiimiidReminders = { mountSettings: mountSettings, openPage: openPage };
 })();
