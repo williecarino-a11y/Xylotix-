@@ -140,5 +140,6 @@ router.get('/fun-center', requireAuth, async (req, res) => {
 router.use('/review', require('./reviewRoutes')({ requireAuth }));
 router.use('/reminders', require('./reminderRoutes')({ requireAuth }));
 router.use('/notifications', require('./notificationRoutes')({ requireAuth }));
+router.use('/money', require('./moneyRoutes')({ requireAuth }));
 
 module.exports = router;
