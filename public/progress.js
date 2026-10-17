@@ -130,6 +130,15 @@ button.mm-pg-course:active { background: rgba(148, 163, 184, 0.08); }
       '</div>';
 
     body.onclick = function (event) {
+      if (event.target.closest && event.target.closest('[data-sample]')) {
+        openCertificate({
+          title: (data.courses[0] && data.courses[0].title) || 'Your course',
+          completedAt: null,
+          certificateId: 'SAMPLE',
+          sample: true
+        });
+        return;
+      }
       var btn = event.target.closest ? event.target.closest('[data-cert]') : null;
       if (!btn) return;
       var id = btn.getAttribute('data-cert');
