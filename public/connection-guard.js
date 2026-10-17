@@ -195,11 +195,19 @@
       location.reload();
     });
 
-    // The moment the phone is back online, reload and carry on
-    window.addEventListener('online', function () { location.reload(); });
+    }
+
+  // The moment the phone is back online, reload and carry on (only while the screen is showing)
+  window.addEventListener('online', function () {
+    if (document.querySelector('.mm-noconn')) location.reload();
+  });
+
+  function hideRetry() {
+    var el = document.querySelector('.mm-noconn');
+    if (el && el.parentNode) el.parentNode.removeChild(el);
   }
 
-  window.MiimiidConnection = { showRetry: showRetry };
+  window.MiimiidConnection = { showRetry: showRetry, hideRetry: hideRetry };
 
   /* ---------- safety net: never show login to a signed-in phone that is just offline ---------- */
   var HINT = 'mmSignedInHint';
