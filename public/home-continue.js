@@ -140,7 +140,7 @@
     var t = load();
     if (!t || !t.lessonId || !t.courseId) return;
 
-    var sub = [t.courseTitle, t.number && t.total ? 'Lesson ' + t.number + ' of ' + t.total : '']
+    var sub = [t.moduleTitle || t.courseTitle, t.number && t.total ? 'Lesson ' + t.number + ' of ' + t.total : '']
       .filter(Boolean).join(' \u00b7 ');
 
     var btn = document.createElement('button');
