@@ -4028,6 +4028,10 @@ body:has(#miimiid-auth-view:not(.hidden)) {
             }
           );
 
+        if (response.status >= 500) {
+          throw new Error("Miimiid server unavailable.");
+        }
+
         if (!response.ok) {
           miimiidCurrentUser = null;
           return null;
