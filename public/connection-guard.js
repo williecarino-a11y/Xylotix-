@@ -14,6 +14,7 @@
 
   var TIMEOUT_MS = 45000;
   var TIMEOUT_TUTOR_MS = 90000;
+  var TIMEOUT_ME_MS = 12000;
 
   /* ---------- turn raw network failures into clear messages ---------- */
   var baseFetch = window.fetch.bind(window);
