@@ -7,9 +7,12 @@
   style.textContent = `
 .mm-switch-row {
   display: flex; align-items: center; justify-content: space-between; gap: 12px;
-  min-height: 56px; color: #e6e9f0; font-size: 1rem; font-weight: 600;
+  min-height: 56px; padding: 8px 0; color: #e6e9f0; font-size: 1rem; font-weight: 600;
   border-top: 1px solid #1c2640; border-bottom: 1px solid #1c2640;
 }
+.mm-switch-row + .mm-switch-row { border-top: 0; }
+.mm-switch-text { display: flex; flex-direction: column; gap: 2px; }
+.mm-switch-text small { color: #94a3b8; font-size: 0.82rem; font-weight: 500; line-height: 1.4; }
 .mm-sf-link {
   min-height: 48px; border: 0; background: transparent; color: #4da3ff;
   font-family: inherit; font-size: 0.95rem; font-weight: 600; cursor: pointer;
@@ -58,6 +61,12 @@
       promise,
       new Promise(function (resolve, reject) { setTimeout(function () { reject(new Error('timeout')); }, ms); })
     ]);
+  }
+
+  function switchRow(id, title, help, on) {
+    return '<div class="mm-switch-row"><span class="mm-switch-text"><span>' + title + '</span>' +
+      (help ? '<small>' + help + '</small>' : '') + '</span>' +
+      '<button type="button" class="mm-switch" id="' + id + '" role="switch" aria-label="' + title + '" aria-checked="' + on + '"><i></i></button></div>';
   }
 
   /* ---------- settings row ---------- */
@@ -126,17 +135,22 @@
     }
 
     var wasOn = Boolean(config.enabled && Notification.permission === 'granted');
+    var streakOn = config.streakAlerts !== false;
+    var reviewOn = config.reviewNudges !== false;
 
     body.innerHTML =
       '<form class="mm-sf" novalidate>' +
         '<p class="mm-sf-help">Get one gentle nudge a day, only if you have not learned yet.</p>' +
-        '<div class="mm-switch-row"><span>Daily reminder</span>' +
-          '<button type="button" class="mm-switch" id="mm-rem-switch" role="switch" aria-label="Daily reminder" aria-checked="' + wasOn + '"><i></i></button>' +
-        '</div>' +
+        switchRow('mm-rem-switch', 'Daily reminder', '', wasOn) +
         '<label class="mm-sf-field" id="mm-rem-time-field"' + (wasOn ? '' : ' hidden') + '>' +
           '<span class="mm-sf-label">Reminder time</span>' +
           '<input class="mm-sf-input" id="mm-rem-time" type="time" value="' + pad(config.hour) + ':' + pad(config.minute) + '">' +
         '</label>' +
+        '<div id="mm-rem-extra"' + (wasOn ? '' : ' hidden') + '>' +
+          '<div class="mm-label" style="margin:6px 0 4px">Also notify me about</div>' +
+          switchRow('mm-rem-streak', 'Streak at risk', 'An evening nudge when a streak of 3 or more days is about to end.', streakOn) +
+          switchRow('mm-rem-review', 'Questions to review', 'A weekly note when 5 or more mistakes are waiting.', reviewOn) +
+        '</div>' +
         '<div class="mm-sf-msg" role="alert"></div>' +
         '<button type="submit" class="mm-sf-btn" disabled><span>Save</span></button>' +
         '<button type="button" class="mm-sf-link" id="mm-rem-test"' + (wasOn ? '' : ' hidden') + '>Send a test notification</button>' +
@@ -144,7 +158,10 @@
 
     var form = body.querySelector('form');
     var sw = form.querySelector('#mm-rem-switch');
+    var streakSw = form.querySelector('#mm-rem-streak');
+    var reviewSw = form.querySelector('#mm-rem-review');
     var timeField = form.querySelector('#mm-rem-time-field');
+    var extra = form.querySelector('#mm-rem-extra');
     var timeInput = form.querySelector('#mm-rem-time');
     var msg = form.querySelector('.mm-sf-msg');
     var save = form.querySelector('button[type="submit"]');
@@ -158,14 +175,21 @@
       save.disabled = on;
       save.querySelector('span').textContent = on ? 'Please wait...' : 'Save';
     }
-
-    sw.addEventListener('click', function () {
-      var next = sw.getAttribute('aria-checked') !== 'true';
-      sw.setAttribute('aria-checked', String(next));
-      timeField.hidden = !next;
+    function flip(button) {
+      var next = button.getAttribute('aria-checked') !== 'true';
+      button.setAttribute('aria-checked', String(next));
       save.disabled = false;
       say('');
+      return next;
+    }
+
+    sw.addEventListener('click', function () {
+      var next = flip(sw);
+      timeField.hidden = !next;
+      extra.hidden = !next;
     });
+    streakSw.addEventListener('click', function () { flip(streakSw); });
+    reviewSw.addEventListener('click', function () { flip(reviewSw); });
     timeInput.addEventListener('input', function () { save.disabled = false; });
 
     function finish(text) {
@@ -199,6 +223,9 @@
         return;
       }
 
+      var streakAlerts = streakSw.getAttribute('aria-checked') === 'true';
+      var reviewNudges = reviewSw.getAttribute('aria-checked') === 'true';
+
       busy(true);
 
       var permission = Notification.permission === 'default'
@@ -229,6 +256,8 @@
             subscription: subscription.toJSON(),
             hour: hour,
             minute: minute,
+            streakAlerts: streakAlerts,
+            reviewNudges: reviewNudges,
             timezone: (Intl.DateTimeFormat().resolvedOptions().timeZone) || 'UTC'
           })
         });
@@ -237,13 +266,19 @@
           config.enabled = true;
           config.hour = hour;
           config.minute = minute;
+          config.streakAlerts = streakAlerts;
+          config.reviewNudges = reviewNudges;
           finish('Reminder set for ' + fmt(hour, minute));
         } else {
           throw new Error((r.data && r.data.message) || 'Unable to save your reminder.');
         }
       }).catch(function (error) {
         busy(false);
-        say(error && error.message ? error.message : 'Unable to set up the reminder.');
+        var text = error && error.message ? error.message : '';
+        if (error && (error.name === 'AbortError' || /push service/i.test(text))) {
+          text = 'This phone could not connect to its notification service. Check that Google Play Services is up to date, turn off any VPN, and try again in a minute.';
+        }
+        say(text || 'Unable to set up the reminder.');
       });
     }
 
