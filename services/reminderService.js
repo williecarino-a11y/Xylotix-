@@ -3,6 +3,7 @@ const webpush = require('web-push');
 const PushConfig = require('../models/PushConfig');
 const PushSubscription = require('../models/PushSubscription');
 const ReminderSetting = require('../models/ReminderSetting');
+const InboxNotification = require('../models/InboxNotification');
 const UserProgress = require('../models/UserProgress');
 const learningService = require('./learningService');
 
