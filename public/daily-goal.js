@@ -119,7 +119,7 @@
     row.innerHTML =
       ring(46, 5, pctOf(d), met, met ? tick : '') +
       '<span class="mm-daily-text"><small>' + t('row') + '</small>' +
-        '<strong>' + t('of', { a: Math.min(d.minutesToday, 999), b: d.dailyMinutes }) + '</strong>' +
+        '<strong>' + t('of', { a: Math.min(d.minutesToday, d.dailyMinutes), b: d.dailyMinutes }) + '</strong>' +
         '<em>' + (met ? t('met') : t('left', { n: Math.max(0, d.dailyMinutes - d.minutesToday) })) + '</em></span>' +
       '<span class="mm-daily-chip" aria-label="Streak freezes">' + SNOW + d.freezes + '</span>' +
       '<span class="mm-daily-chev">' + CHEVRON + '</span>';
