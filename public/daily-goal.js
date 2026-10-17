@@ -112,6 +112,22 @@
 
   var latest = null;
 
+  // Remember today's numbers so Home can show them instantly next time
+  function cacheKey() { return 'mmDailyCache:' + uid(); }
+
+  function readCache() {
+    try {
+      var saved = JSON.parse(localStorage.getItem(cacheKey()) || 'null');
+      return saved && saved.day === new Date().toDateString() ? saved.data : null;
+    } catch (e) { return null; }
+  }
+
+  function writeCache(d) {
+    try {
+      localStorage.setItem(cacheKey(), JSON.stringify({ day: new Date().toDateString(), data: d }));
+    } catch (e) {}
+  }
+
   /* ---------- the row on Home ---------- */
   function paintRow(row, d) {
     var met = d.goalMet;
