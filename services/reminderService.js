@@ -123,7 +123,14 @@ async function learningToday(userId, timeZone, now) {
     return p.completedAt && localParts(p.completedAt, timeZone).dateKey === today;
   });
 
-  return { learned, streak: learningService.calculateStreak(progress) };
+  let streak;
+  try {
+    streak = (await streakService.evaluate(userId, timeZone)).streak;
+  } catch (error) {
+    streak = learningService.calculateStreak(progress);
+  }
+
+  return { learned, streak };
 }
 
 // The daily reminder message, or null if the user already learned today
