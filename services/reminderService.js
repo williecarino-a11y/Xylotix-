@@ -61,6 +61,20 @@ function localParts(date, timeZone) {
 async function sendToUser(userId, payload) {
   await getVapid();
   const subscriptions = await PushSubscription.find({ userId });
+
+  // Keep a copy in the in-app inbox (never allowed to break sending)
+  if (subscriptions.length) {
+    try {
+      await InboxNotification.create({
+        userId,
+        title: String(payload.title || 'Miimiid').slice(0, 120),
+        body: String(payload.body || '').slice(0, 400)
+      });
+    } catch (inboxError) {
+      console.error('Inbox save error:', inboxError);
+    }
+  }
+
   const body = JSON.stringify(payload);
   let sent = 0;
 
