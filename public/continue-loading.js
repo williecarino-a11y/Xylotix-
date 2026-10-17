@@ -164,6 +164,20 @@
     const config = { ...DEFAULTS, ...(options || {}) };
     const key = config.id || `${config.context}:${Date.now()}:${Math.random()}`;
 
+    // Quiet by default: only things the learner started themselves may cover the screen
+    const QUIET_IDS = ['auth-session-restore', 'auth-bootstrap'];
+    const LOUD_CONTEXTS = [
+      'auth', 'register', 'verification', 'resetCode', 'resetVerify',
+      'resetSave', 'quiz', 'progress', 'lesson', 'fun'
+    ];
+
+    if (
+      QUIET_IDS.indexOf(config.id) !== -1 ||
+      LOUD_CONTEXTS.indexOf(config.context) === -1
+    ) {
+      return key;
+    }
+
     if (active.has(key)) return key;
     active.set(key, config);
     overlayCount += 1;
