@@ -4067,8 +4067,12 @@ body:has(#miimiid-auth-view:not(.hidden)) {
           error
         );
 
-        miimiidCurrentUser = null;
-        return null;
+        // The user is not signed out: the app just could not reach the server
+        const connectionError =
+          new Error("Unable to reach Miimiid.");
+
+        connectionError.connectionProblem = true;
+        throw connectionError;
       }
     }
 
