@@ -42,7 +42,7 @@
 }
 .mm-daily:active { transform: scale(0.985); background: #16213a; }
 .mm-ring { position: relative; flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: center; }
-.mm-ring svg { display: block; transform: rotate(-90deg); }
+.mm-ring > svg { display: block; transform: rotate(-90deg); }
 .mm-ring-center { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: #34d399; }
 .mm-daily-text { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px; }
 .mm-daily-text small { color: #94a3b8; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; }
