@@ -339,6 +339,7 @@
       save().then(function (r) {
         if (!r.ok) throw new Error('save');
         drawer.close();
+        if (window.MiimiidDaily) window.MiimiidDaily.refresh();
         if (edit) {
           if (window.MiimiidAccount && window.MiimiidAccount.toast) window.MiimiidAccount.toast(C().updated);
           return;
