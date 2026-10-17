@@ -241,6 +241,9 @@
   window.addEventListener('offline', checkSignedInOffline);
   setTimeout(checkSignedInOffline, 600);
 
+  // The phone already knows it is offline: don't wait for the session check
+  if (navigator.onLine === false && hinted()) showRetry();
+
   // A little breathing room under the red message on the sign-in form
   var gap = document.createElement('style');
   gap.textContent = '#miimiid-auth-status:not(:empty) { margin-bottom: 16px; }';
