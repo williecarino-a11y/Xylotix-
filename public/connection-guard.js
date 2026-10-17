@@ -49,10 +49,22 @@
     return baseFetch(input, options).then(
       function (response) {
         clearTimeout(timer);
+        try {
+          if (path === '/api/auth/me') {
+            meFailed = false;
+            if (response.status === 401) setHint(false);
+            else if (response.ok) setHint(true);
+          } else if (path === '/api/auth/login' && response.ok) {
+            setHint(true);
+          } else if (path === '/api/auth/logout' && response.ok) {
+            setHint(false);
+          }
+        } catch (e) {}
         return response;
       },
       function (error) {
         clearTimeout(timer);
+        if (path === '/api/auth/me') meFailed = true;
 
         if (timedOut && error && error.name === 'AbortError') {
           throw friendly(T.slow, 'slow');
