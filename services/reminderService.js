@@ -7,6 +7,7 @@ const InboxNotification = require('../models/InboxNotification');
 const MissedQuestion = require('../models/MissedQuestion');
 const UserProgress = require('../models/UserProgress');
 const learningService = require('./learningService');
+const streakService = require('./streakService');
 
 // If the server was asleep at the exact minute, still send within this many minutes
 const LATE_WINDOW_MINUTES = 120;
