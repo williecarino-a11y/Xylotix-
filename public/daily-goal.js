@@ -174,10 +174,17 @@
     var row = document.createElement('button');
     row.type = 'button';
     row.className = 'mm-daily';
-    // Placeholder with the same height, so nothing jumps when the numbers arrive
-    paintRow(row, { dailyMinutes: 10, minutesToday: 0, goalMet: false, freezes: 1 });
-    row.querySelector('.mm-daily-text strong').textContent = '\u00a0';
-    row.querySelector('.mm-daily-text em').textContent = '\u00a0';
+    var known = latest || readCache();
+
+    if (known) {
+      latest = known;
+      paintRow(row, known);
+    } else {
+      // Placeholder with the same height, so nothing jumps when the numbers arrive
+      paintRow(row, { dailyMinutes: 10, minutesToday: 0, goalMet: false, freezes: 1 });
+      row.querySelector('.mm-daily-text strong').textContent = '\u00a0';
+      row.querySelector('.mm-daily-text em').textContent = '\u00a0';
+    }
     row.addEventListener('click', openPage);
     content.insertBefore(row, content.firstChild);
 
