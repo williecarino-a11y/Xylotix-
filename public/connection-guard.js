@@ -146,7 +146,20 @@
   /* ---------- the "No connection" screen shown at startup ---------- */
   var retryStyle = null;
 
+  function stopSpinners() {
+    try {
+      if (window.ContinueLoading && typeof window.ContinueLoading.stopAll === 'function') {
+        window.ContinueLoading.stopAll('connection');
+      }
+    } catch (e) {}
+  }
+
   function showRetry() {
+    // The loading spinner can start after this screen; stop it a few times to be sure
+    stopSpinners();
+    setTimeout(stopSpinners, 300);
+    setTimeout(stopSpinners, 1500);
+
     if (document.querySelector('.mm-noconn')) return;
 
     if (!retryStyle) {
