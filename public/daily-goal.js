@@ -226,6 +226,13 @@
     inject();
   }
 
+  window.MiimiidDaily = {
+    refresh: function () {
+      var row = document.querySelector('.mm-daily');
+      if (row) load(row);
+    }
+  };
+
   document.addEventListener('visibilitychange', function () {
     if (document.hidden) return;
     var row = document.querySelector('.mm-daily');
