@@ -761,10 +761,14 @@ class LearningService {
           )
         : 0;
 
-    const streak =
-      this.calculateStreak(
-        allProgress
-      );
+    let streak;
+
+    try {
+      streak = await require('./streakService').getStreak(userId);
+    } catch (streakError) {
+      console.error('Streak service error:', streakError);
+      streak = this.calculateStreak(allProgress);
+    }
 
     const totalXP =
       totalLessonsCompleted * 50;
