@@ -10,7 +10,8 @@
   var IGNORE = [
     /ResizeObserver loop/i,
     /^Script error\.?$/i,
-    /Failed to fetch|Load failed|NetworkError|network error/i
+    /Failed to fetch|Load failed|NetworkError|network error/i,
+    /internet connection|reach Miimiid|taking longer than usual/i
   ];
 
   var seen = {};
