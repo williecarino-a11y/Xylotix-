@@ -76,6 +76,7 @@
   var lastStats = {};
 
   function animateStats(dash) {
+    return; // show the real numbers immediately, no counting up from zero
     var cards = dash.querySelectorAll('.miimiid-dashboard-stat');
     Array.prototype.forEach.call(cards, function (card) {
       var el = card.querySelector('.miimiid-dashboard-stat-value');
