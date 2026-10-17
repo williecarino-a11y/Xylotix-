@@ -42,7 +42,9 @@
 
     if (!options.signal && typeof AbortController === 'function') {
       var controller = new AbortController();
-      var limit = /tutor/i.test(path) ? TIMEOUT_TUTOR_MS : TIMEOUT_MS;
+      var limit = path === '/api/auth/me'
+        ? TIMEOUT_ME_MS
+        : (/tutor/i.test(path) ? TIMEOUT_TUTOR_MS : TIMEOUT_MS);
       timer = setTimeout(function () { timedOut = true; controller.abort(); }, limit);
       options = Object.assign({}, options, { signal: controller.signal });
     }
