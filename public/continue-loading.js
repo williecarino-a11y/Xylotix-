@@ -325,7 +325,12 @@
     if (url.includes('/api/auth/reset-password')) return 'resetSave';
     if (url.includes('/api/ai-tutor/')) return 'ai';
     if (url.includes('/api/fun-center/')) return 'fun';
-    if (url.includes('/api/learn/')) return 'lesson';
+    if (
+      url.includes('/api/learn/lessons') ||
+      url.includes('/api/learn/courses') ||
+      url.includes('/api/learn/quiz')
+    ) return 'lesson';
+    if (url.includes('/api/learn/')) return 'generic';
     return 'generic';
   }
 
