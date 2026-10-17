@@ -21,7 +21,7 @@
 .mm-pg-day.is-future { visibility: hidden; }
 
 .mm-pg-bars { display: flex; align-items: flex-end; gap: 4px; height: 96px; }
-.mm-pg-b { flex: 1; min-height: 3px; border-radius: 3px 3px 0 0; background: #4da3ff; }
+ .mm-pg-b { flex: 1; max-width: 34px; min-height: 3px; border-radius: 4px 4px 0 0; background: #4da3ff; }
 .mm-pg-b.is-low { background: #f87171; }
 .mm-pg-cap { margin: 8px 0 0; color: #8b95ad; font-size: 0.82rem; line-height: 1.5; }
 .mm-pg-empty { padding: 14px 4px; color: #8b95ad; font-size: 0.92rem; }
