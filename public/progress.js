@@ -225,7 +225,8 @@ button.mm-pg-course:active { background: rgba(148, 163, 184, 0.08); }
       name: String(u.name || 'Miimiid Learner').trim() || 'Miimiid Learner',
       course: course.title,
       date: new Date(course.completedAt || Date.now()).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' }),
-      id: course.certificateId || ''
+      id: course.certificateId || '',
+      sample: Boolean(course.sample)
     };
 
     account.openSub('Certificate', function (body) {
