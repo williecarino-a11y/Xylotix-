@@ -320,8 +320,10 @@
             '</div>' +
           '</div>';
 
-        var slot = body.querySelector('#mm-lang-slot');
+         var slot = body.querySelector('#mm-lang-slot');
         if (slot && langSel) slot.appendChild(langSel);
+
+        if (window.MiimiidReminders) window.MiimiidReminders.mountSettings(body);
 
         var toggle = body.querySelector('#mm-haptics');
         toggle.addEventListener('click', function () {
