@@ -166,7 +166,7 @@
       retryStyle = document.createElement('style');
       retryStyle.textContent = `
 .mm-noconn {
-  position: fixed; inset: 0; z-index: 3750; display: flex; align-items: center; justify-content: center;
+  position: fixed; inset: 0; z-index: 99990; display: flex; align-items: center; justify-content: center;
   padding: 24px; box-sizing: border-box; background: #0b1220;
 }
 .mm-noconn-inner { width: 100%; max-width: 420px; display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center; }
