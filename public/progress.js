@@ -124,6 +124,9 @@ button.mm-pg-course:active { background: rgba(148, 163, 184, 0.08); }
               : '<div class="mm-pg-course">' + inner + '</div>';
           }).join('') : '<p class="mm-pg-empty">No courses available yet.</p>') +
         '</div>' +
+        (data.courses.length
+          ? '<button type="button" class="mm-lrow" data-sample="1" style="margin-top:14px;border-top:1px solid #1c2640"><span class="mm-lrow-label">Preview a certificate</span>' + CHEVRON + '</button>'
+          : '') +
       '</div>';
 
     body.onclick = function (event) {
