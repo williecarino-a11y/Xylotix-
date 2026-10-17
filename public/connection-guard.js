@@ -100,6 +100,7 @@
   }
 
   function show(text, back) {
+    return; // the app already shows its own offline bar
     var el = ensureBar();
     clearTimeout(hideTimer);
     el.className = 'mm-net' + (back ? ' is-back' : '');
