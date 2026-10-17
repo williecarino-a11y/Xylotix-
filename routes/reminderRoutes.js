@@ -56,7 +56,9 @@ module.exports = function createReminderRoutes({ requireAuth }) {
           publicKey: vapid.publicKey,
           enabled: Boolean(setting && setting.enabled),
           hour: setting ? setting.hour : 18,
-          minute: setting ? setting.minute : 0
+          minute: setting ? setting.minute : 0,
+          streakAlerts: setting ? setting.streakAlerts !== false : true,
+          reviewNudges: setting ? setting.reviewNudges !== false : true
         }
       });
     } catch (error) {
