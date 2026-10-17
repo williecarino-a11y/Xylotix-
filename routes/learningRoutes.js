@@ -143,5 +143,6 @@ router.use('/notifications', require('./notificationRoutes')({ requireAuth }));
 router.use('/money', require('./moneyRoutes')({ requireAuth }));
 router.use('/progress', require('./progressRoutes')({ requireAuth }));
 router.use('/telemetry', require('./telemetryRoutes')({ requireAuth }));
+router.use('/onboarding', require('./onboardingRoutes')({ requireAuth }));
 
 module.exports = router;
