@@ -611,7 +611,9 @@ class LearningService {
         {
           completed: true,
           quizScore:
-            quizResult.score,
+            quizResult.totalQuestions > 0
+              ? quizResult.score
+              : null,
           completedAt:
             new Date()
         },
