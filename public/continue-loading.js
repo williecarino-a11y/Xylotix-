@@ -353,7 +353,7 @@
       const url = typeof input === 'string' ? input : (input && input.url) || '';
       if (url.includes('/api/fun-center/shop/session/')) return nativeFetch(input, init);
 
-      const handle = start({ context });
+      const handle = start({ context, delay: 700 });
       return nativeFetch(input, init).finally(() => stop(handle));
     };
   }
