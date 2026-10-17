@@ -25,7 +25,7 @@
     resetCode: 'Sending your reset code…',
     resetVerify: 'Verifying your code…',
     resetSave: 'Saving your new password…',
-    generic: 'Please wait…'
+    generic: 'Loading…'
   };
 
   function installBrandAssets() {
