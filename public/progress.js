@@ -213,7 +213,12 @@ button.mm-pg-course:active { background: rgba(148, 163, 184, 0.08); }
     line(info.course, 825, 66, '700', '#e2e8f0');
     line('Completed on ' + info.date, 925, 34, '500', '#94a3b8');
     line('Certificate ID ' + info.id, 1010, 28, '600', '#64748b', '2px');
-    line('Awarded for finishing a Miimiid course. Not an accredited qualification.', 1056, 22, '500', '#475569');
+    line(
+      info.sample
+        ? 'Sample preview. Finish the course to earn your own certificate.'
+        : 'Awarded for finishing a Miimiid course. Not an accredited qualification.',
+      1056, 22, '500', '#475569'
+    );
   }
 
   function openCertificate(course) {
