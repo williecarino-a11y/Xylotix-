@@ -161,6 +161,12 @@
       return bootPromise;
     }
 
+    // Offline start: offline-first.js already shows "No connection", so do not
+    // start a session check, a spinner or the "Checking..." screen
+    if (window.__mmOfflineStart) {
+      return false;
+    }
+
     bootPromise = (async function () {
       showBootstrapView();
       loadNavigationIcons();
