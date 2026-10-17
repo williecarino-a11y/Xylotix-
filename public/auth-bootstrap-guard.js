@@ -175,12 +175,30 @@
 
       let user;
 
+      // A phone known to be signed in should never sit on a spinner:
+      // show "No connection" straight away if offline, or after 4 seconds without an answer
+      let slowTimer = null;
+
+      try {
+        if (localStorage.getItem('mmSignedInHint') === '1') {
+          slowTimer = setTimeout(function () {
+            if (window.MiimiidConnection) window.MiimiidConnection.showRetry();
+          }, navigator.onLine === false ? 0 : 4000);
+        }
+      } catch (hintError) {}
+
       try {
   user = await engine.loadCurrentUser();
+
+  clearTimeout(slowTimer);
+  if (window.MiimiidConnection && window.MiimiidConnection.hideRetry) {
+    window.MiimiidConnection.hideRetry();
+  }
 
   window.currentUser = user || null;
   window.MIIMIID_CURRENT_USER = user || null;
 } catch (error) {
+  clearTimeout(slowTimer);
   console.error(
     'Miimiid session restoration failed:',
     error
