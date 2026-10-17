@@ -2,7 +2,7 @@
   'use strict';
 
   const DEFAULTS = {
-    message: 'Please wait…',
+    message: 'Loading…',
     context: 'global',
     delay: 0
   };
