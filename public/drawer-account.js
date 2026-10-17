@@ -444,5 +444,5 @@
     };
   }
 
-  window.MiimiidAccount = { renderProfile: renderProfile };
+  window.MiimiidAccount = { renderProfile: renderProfile, openSub: openSub, toast: toast };
 })();
