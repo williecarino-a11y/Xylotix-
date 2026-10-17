@@ -117,6 +117,8 @@ module.exports = function createReminderRoutes({ requireAuth }) {
             hour,
             minute,
             timezone,
+            streakAlerts: body.streakAlerts !== false,
+            reviewNudges: body.reviewNudges !== false,
             lastSentDate: alreadyPassed ? local.dateKey : null
           }
         },
