@@ -323,6 +323,7 @@
          var slot = body.querySelector('#mm-lang-slot');
         if (slot && langSel) slot.appendChild(langSel);
 
+        if (window.MiimiidOnboarding) window.MiimiidOnboarding.mountSettings(body);
         if (window.MiimiidReminders) window.MiimiidReminders.mountSettings(body);
 
         var toggle = body.querySelector('#mm-haptics');
