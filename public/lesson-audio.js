@@ -188,7 +188,7 @@
     var style = document.createElement('style');
     style.id = 'lesson-audio-styles';
     style.textContent =
-      '.lja{display:flex;gap:8px;align-items:center;margin:4px 0 10px;padding:8px 0;position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:rgba(8,14,26,.94);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}' +
+      '.lja{display:flex;gap:8px;align-items:center;margin:4px 0 10px;padding:8px 0;position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:#0a1424}' +
       '.lja button{font:inherit;font-weight:600;font-size:.92rem;border-radius:12px;padding:10px 14px;cursor:pointer;border:1px solid #334155;background:#1e293b;color:#f8fafc}' +
       '.lja .lja-main{flex:1;text-align:left;background:#0f2a44;border-color:#1d4ed8}' +
       '.lja .lja-main.is-on{background:#1d4ed8;border-color:#1d4ed8}' +
