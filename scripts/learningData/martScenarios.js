@@ -18,7 +18,7 @@ const MART_SCENARIOS = [
     title: 'The flash sale',
     brief: 'A sale will pop up while you shop. Cover your needs first.',
     passLine: 'You covered every need and skipped the sale. A discount on a want is still spending.',
-    failNeeds: 'Some needs were missed. Cover every essential before any deal.',
+    failNeeds: 'Cover every essential before any deal.',
     failBought: 'The sale pulled you in. A discount on a want is still money you did not need to spend.'
   },
   {
@@ -30,7 +30,7 @@ const MART_SCENARIOS = [
     title: 'The price rise',
     brief: 'A price will go up while you shop. Plan around it.',
     passLine: 'The price rose and you still covered every need. Cut a want, never a need.',
-    failNeeds: 'A need slipped when the price rose. When prices go up, cut a want, not a need.'
+    failNeeds: 'When prices go up, cut a want, not a need.'
   }
 ];
 
@@ -50,7 +50,7 @@ function getMartScenarios() {
 }
 
 // The one decision, judged on the server.
-// info.needsMissed = how many essentials are not in the basket.
+// info.needsMissed = essentials not in the basket, info.totalNeeds = all essentials.
 function judgeMartScenario(id, info) {
   const scenario = getMartScenario(id);
   if (!scenario) return null;
@@ -59,7 +59,8 @@ function judgeMartScenario(id, info) {
   let reason = scenario.passLine;
   if (!info || info.needsMissed > 0) {
     passed = false;
-    reason = scenario.failNeeds;
+    const covered = info && info.totalNeeds ? (info.totalNeeds - info.needsMissed) + ' of ' + info.totalNeeds + ' needs covered. ' : 'Some needs were missed. ';
+    reason = covered + scenario.failNeeds;
   } else if (scenario.event === 'sale' && bought.has(scenario.itemId)) {
     passed = false;
     reason = scenario.failBought;
