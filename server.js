@@ -151,6 +151,9 @@ app.use('/api/learn', learningRoutes);
 const funCenterRoutes = require('./routes/funCenterRoutes');
 app.use('/api/fun-center', funCenterRoutes);
 
+const avatarRoutes = require('./routes/avatarRoutes');
+app.use('/api/profile', avatarRoutes);
+
 const aiTutorRoutes = require('./routes/aiTutorRoutes');
 app.use('/api/ai-tutor', aiTutorRoutes);
 
