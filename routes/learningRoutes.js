@@ -102,6 +102,19 @@ router.post('/quiz/submit', requireAuth, async (req, res) => {
   }
 });
 
+router.post('/quiz/check', requireAuth, async (req, res) => {
+  try {
+    const { quizId, answer } = req.body;
+    if (!mongoose.Types.ObjectId.isValid(quizId)) return res.status(400).json({ status: 'error', code: 'INVALID_QUIZ_ID', message: 'Invalid quiz ID.' });
+    const result = await learningService.checkQuizAnswer(quizId, answer);
+    return res.status(200).json({ status: 'success', data: result });
+  } catch (error) {
+    console.error('Quiz check error:', error);
+    if (error.message === 'Quiz not found') return res.status(404).json({ status: 'error', code: 'QUIZ_NOT_FOUND', message: 'Quiz not found.' });
+    return res.status(500).json({ status: 'error', code: 'QUIZ_CHECK_FAILED', message: 'Unable to check answer.' });
+  }
+});
+
 router.post('/lessons/:lessonId/complete', requireAuth, async (req, res) => {
   try {
     const { lessonId } = req.params;
