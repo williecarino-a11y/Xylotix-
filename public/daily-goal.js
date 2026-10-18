@@ -251,6 +251,7 @@
   }
 
   window.MiimiidDaily = {
+    getLatest: function () { return latest || readCache(); },
     refresh: function () {
       var row = document.querySelector('.mm-daily');
       if (row) load(row);
