@@ -43,6 +43,28 @@ const userSchema = new mongoose.Schema(
     },
 
     /*
+     * Profile photo. A small square image (about 256px, well under 200 KB)
+     * stored on the user document, so deleting the account deletes the photo.
+     * avatarData is never loaded unless a query asks for it with +avatarData.
+     */
+    avatarData: {
+      type: Buffer,
+      select: false,
+      default: undefined
+    },
+
+    avatarType: {
+      type: String,
+      enum: ['image/jpeg', 'image/png', 'image/webp'],
+      default: undefined
+    },
+
+    avatarUpdatedAt: {
+      type: Date,
+      default: undefined
+    },
+
+    /*
      * Verification lifecycle.
      *
      * Existing users receive the compatibility defaults.
