@@ -8,6 +8,7 @@ const FunGameSession = require('../models/FunGameSession');
 const FunGameProfile = require('../models/FunGameProfile');
 const daily = require('./funCenterDaily');
 const { getFunCenterGames, getFunCenterGame, validateFunCenterAnswer, getWeeklyShop, getWeeklyShopDefinition, getFlashSales, getPriceHikes, getWeekSetup, pickSituation, computeMeters, METER_WARN, pickTricks, publicTricks, describeTrick, SCANS_PER_TRIP, getCartSkins, getCartSkin } = require('../scripts/learningData/funCenter');
+const { getMartScenario, getMartScenarios, judgeMartScenario } = require('../scripts/learningData/martScenarios');
 const router = express.Router();
 
 const funSessionStartLimiter = rateLimit({
@@ -394,7 +395,10 @@ function buildShopSummary(shop, session) {
     needsBought: needsBought.map(toPublic),
     wantsBought: wantsBought.map(toPublic),
     needsMissed: needsMissed.map(item => ({ id: item.id, name: item.name, price: (session.hikeItemId === item.id && typeof session.hikePrice === 'number') ? session.hikePrice : item.price, image: item.image, visual: item.visual, explanation: item.explanation })),
-    tradeoffs
+    tradeoffs,
+    scenario: session.scenarioId
+      ? judgeMartScenario(session.scenarioId, { needsMissed: needsMissed.length, boughtIds: Array.from(boughtIds) })
+      : null
   };
 }
 
@@ -404,62 +408,6 @@ router.get('/shop', (req, res) => {
   } catch (error) {
     console.error('Fun Center shop error:', error);
     return res.status(500).json({ status: 'error', message: 'Unable to load the shop.' });
-  }
-});
-
-router.post('/shop/session/:sessionId/unbuy', funAnswerLimiter, async (req, res) => {
-  try {
-    const user = await requireFunCenterUser(req, res);
-    if (!user) return;
-
-    const { sessionId } = req.params;
-    const { itemId } = req.body;
-    const shop = getWeeklyShopDefinition();
-    const item = shop.items.find(candidate => candidate.id === itemId);
-    if (!item) return res.status(400).json({ status: 'error', message: 'That item is not in the shop.' });
-
-    const existing = await FunGameSession.findOne({ sessionId, userId: user._id, gameId: SHOP_GAME_ID });
-    if (!existing) return res.status(404).json({ status: 'error', message: 'Shopping trip not found.' });
-    if (existing.completed) return res.status(409).json({ status: 'error', code: 'SHOP_FINISHED', message: 'This shopping trip is already finished.' });
-
-    const entry = existing.purchasedItems.find(candidate => candidate.itemId === item.id);
-    if (!entry) return res.status(409).json({ status: 'error', code: 'NOT_IN_BASKET', message: `${item.name} is not in your basket.` });
-
-    // The stored price is removed in one atomic write, so a double tap cannot refund twice.
-    const updated = await FunGameSession.findOneAndUpdate(
-      {
-        sessionId,
-        userId: user._id,
-        gameId: SHOP_GAME_ID,
-        completed: false,
-        purchasedItems: { $elemMatch: { itemId: item.id, price: entry.price } }
-      },
-      {
-        $inc: { spent: -entry.price },
-        $pull: { purchasedItems: { itemId: item.id } }
-      },
-      { new: true }
-    );
-
-    if (!updated) {
-      return res.status(409).json({ status: 'error', code: 'BASKET_CHANGED', message: 'Your basket just changed. Try again.' });
-    }
-
-    return res.json({
-      status: 'success',
-      data: {
-        itemId: item.id,
-        name: item.name,
-        price: entry.price,
-        budget: shop.budget,
-        spent: updated.spent,
-        remaining: Math.max(0, shop.budget - updated.spent),
-        basketCount: updated.purchasedItems.length
-      }
-    });
-  } catch (error) {
-    console.error('Fun Center shop unbuy error:', error);
-    return res.status(500).json({ status: 'error', message: 'Unable to put that item back.' });
   }
 });
 
@@ -536,7 +484,11 @@ router.post('/shop/session/:sessionId/sale/start', funAnswerLimiter, async (req,
     const choices = getFlashSales().filter(sale => !boughtIds.has(sale.itemId) && shop.items.some(item => item.id === sale.itemId));
     if (choices.length === 0) return res.json({ status: 'success', data: { started: false } });
 
-    const sale = daily.pickFor(existing.dailyKey, 'sale', choices, c => c.itemId);
+    const saleScenario = getMartScenario(existing.scenarioId);
+    if (saleScenario && saleScenario.event !== 'sale') return res.json({ status: 'success', data: { started: false } });
+    const forcedSale = saleScenario ? choices.find(c => c.itemId === saleScenario.itemId) : null;
+    if (saleScenario && !forcedSale) return res.json({ status: 'success', data: { started: false } });
+    const sale = forcedSale || daily.pickFor(existing.dailyKey, 'sale', choices, c => c.itemId);
     const item = shop.items.find(candidate => candidate.id === sale.itemId);
     const endsAt = new Date(Date.now() + sale.seconds * 1000);
 
@@ -577,7 +529,11 @@ router.post('/shop/session/:sessionId/hike/start', funAnswerLimiter, async (req,
     });
     if (choices.length === 0) return res.json({ status: 'success', data: { started: false } });
 
-    const hike = daily.pickFor(existing.dailyKey, 'hike', choices, c => c.itemId);
+    const hikeScenario = getMartScenario(existing.scenarioId);
+    if (hikeScenario && hikeScenario.event !== 'hike') return res.json({ status: 'success', data: { started: false } });
+    const forcedHike = hikeScenario ? choices.find(c => c.itemId === hikeScenario.itemId) : null;
+    if (hikeScenario && !forcedHike) return res.json({ status: 'success', data: { started: false } });
+    const hike = forcedHike || daily.pickFor(existing.dailyKey, 'hike', choices, c => c.itemId);
     const item = shop.items.find(candidate => candidate.id === hike.itemId);
 
     const updated = await FunGameSession.findOneAndUpdate(
@@ -608,7 +564,7 @@ router.post('/shop/session/:sessionId/rival/start', funAnswerLimiter, async (req
     const existing = await FunGameSession.findOne({ sessionId, userId: user._id, gameId: SHOP_GAME_ID });
     if (!existing) return res.status(404).json({ status: 'error', message: 'Shopping trip not found.' });
     if (existing.completed) return res.status(409).json({ status: 'error', code: 'SHOP_FINISHED', message: 'This shopping trip is already finished.' });
-    if (existing.rivalItemId) return res.json({ status: 'success', data: { started: false } });
+    if (existing.rivalItemId || existing.scenarioId) return res.json({ status: 'success', data: { started: false } });
 
     const boughtIds = new Set(existing.purchasedItems.map(entry => entry.itemId));
     const choices = shop.items.filter(item =>
@@ -695,7 +651,8 @@ router.post('/shop/session', funSessionStartLimiter, async (req, res) => {
     const user = await requireFunCenterUser(req, res);
     if (!user) return;
     const shop = getWeeklyShopDefinition();
-    const situation = pickSituation();
+    const scenario = getMartScenario(req.body && req.body.scenarioId);
+    const situation = scenario ? { id: scenario.situationId } : pickSituation();
     const tricks = pickTricks();
     const profile = await FunGameProfile.findOne({ userId: user._id }).lean();
     const skin = profile && profile.cartSkin ? getCartSkin(profile.cartSkin) : null;
@@ -705,6 +662,7 @@ router.post('/shop/session', funSessionStartLimiter, async (req, res) => {
       gameId: SHOP_GAME_ID,
       budget: shop.budget,
       situationId: situation.id,
+      scenarioId: scenario ? scenario.id : null,
       tricks,
       scansLeft: SCANS_PER_TRIP
     });
@@ -719,6 +677,7 @@ router.post('/shop/session', funSessionStartLimiter, async (req, res) => {
         week: getWeekSetup(situation.id),
         tricks: publicTricks(tricks),
         scansLeft: SCANS_PER_TRIP,
+        scenario: scenario ? { id: scenario.id, title: scenario.title, brief: scenario.brief } : null,
         cartSkin: skin ? { id: skin.id, color: skin.color, rainbow: !!skin.rainbow } : null
       }
     });
@@ -961,6 +920,8 @@ router.post('/cart-skins/equip', funAnswerLimiter, async (req, res) => {
     return res.status(500).json({ status: 'error', message: 'Unable to equip that cart.' });
   }
 });
+
+router.get('/scenarios', (req, res) => res.json({ status: 'success', data: getMartScenarios() }));
 
 router.use('/daily', daily.router);
 
