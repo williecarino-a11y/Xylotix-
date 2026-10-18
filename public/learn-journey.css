@@ -414,3 +414,33 @@
 .lj-fb.is-bad .lj-fb-head { color: #f87171; }
 .lj-fb-line { color: #e2e8f0; margin-bottom: 4px; }
 .lj-fb-text { color: #e2e8f0; font-size: 0.92rem; line-height: 1.55; }
+
+/* ---------- QUIZ RESULT: XP + DAILY GOAL ---------- */
+
+.lj-reward {
+  margin-top: 22px;
+  padding: 14px 16px;
+  border: 1px solid #1f2a44;
+  border-radius: 14px;
+  background: #111a2e;
+}
+.lj-xp { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
+.lj-xp b { font-size: 1.15rem; color: #7dd3fc; }
+.lj-xp span { font-size: 0.82rem; color: #94a3b8; }
+.lj-goal { margin-top: 14px; }
+.lj-goal-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: #94a3b8;
+  margin-bottom: 8px;
+}
+.lj-goal-row .is-met { color: #34d399; font-weight: 700; }
+.lj-goal-track { height: 8px; background: #1c2640; border-radius: 4px; overflow: hidden; }
+.lj-goal-fill {
+  display: block;
+  height: 100%;
+  background: #34d399;
+  border-radius: 4px;
+  transition: width 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
