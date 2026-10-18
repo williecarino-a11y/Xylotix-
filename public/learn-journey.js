@@ -17,6 +17,7 @@
     result: null,      // last quiz result from the server
     busy: false,
     msg: "",
+    chk: [],           // per-question check results from the server
     goNext: false      // set while "complete lesson" is running
   };
 
@@ -390,6 +391,7 @@
     LJ.result = null;
     LJ.msg = "";
     LJ.busy = false;
+    LJ.chk = [];
 
     section.classList.toggle("hidden", currentQuizzes.length === 0);
     setMode("read");
@@ -419,37 +421,108 @@
     if (!box || !q) return;
 
     var type = q.questionType || "multiple-choice";
+    var chk = LJ.chk[LJ.qi] || null;
     var body = "";
 
     if (type === "multiple-choice" || type === "true-false") {
       var opts = Array.isArray(q.options) ? q.options : [];
       body = opts
         .map(function (o, oi) {
+          var cls = "lj-answer";
+          if (chk) {
+            if (oi === Number(chk.correctAnswer)) cls += " is-correct";
+            else if (selectedQuizAnswers[LJ.qi] === oi) cls += " is-wrong";
+            else cls += " is-dim";
+          } else if (selectedQuizAnswers[LJ.qi] === oi) {
+            cls += " is-selected";
+          }
           return (
-            '<button type="button" class="lj-answer' +
-            (selectedQuizAnswers[LJ.qi] === oi ? " is-selected" : "") +
-            '" data-oi="' + oi + '">' + esc(o) + "</button>"
+            '<button type="button" class="' + cls + '" data-oi="' + oi + '"' +
+            (chk ? " disabled" : "") + ">" + esc(o) + "</button>"
           );
         })
         .join("");
     } else if (type === "calculate") {
       var val = answered(LJ.qi) ? selectedQuizAnswers[LJ.qi] : "";
       body =
-        '<input type="number" step="any" inputmode="decimal" class="lj-calc" value="' +
-        esc(val) + '" placeholder="' + esc(t("enterYourAnswer", "Enter your answer")) + '">' +
-        (q.hint
+        '<input type="number" step="any" inputmode="decimal" class="lj-calc' +
+        (chk ? (chk.correct ? " is-correct" : " is-wrong") : "") + '" value="' +
+        esc(val) + '" placeholder="' + esc(t("enterYourAnswer", "Enter your answer")) + '"' +
+        (chk ? " disabled" : "") + ">" +
+        (q.hint && !chk
           ? '<p class="lj-hint">' + esc(t("hint", "Hint")) + ": " + esc(q.hint) + "</p>"
           : "");
     } else {
       body = '<p class="lj-hint">' + esc(t("unsupportedQuestionType", "Unsupported question type")) + "</p>";
     }
 
+    var fb = "";
+    if (chk) {
+      fb =
+        '<div class="lj-fb ' + (chk.correct ? "is-ok" : "is-bad") + '">' +
+        '<div class="lj-fb-head">' +
+        esc(chk.correct ? t("correctShort", "Correct") : t("incorrectShort", "Not quite")) + "</div>" +
+        (type === "calculate" && !chk.correct
+          ? '<div class="lj-fb-line">' + esc(t("correctAnswerIs", "Correct answer")) + ": " + esc(chk.correctAnswer) + "</div>"
+          : "") +
+        (chk.explanation ? '<div class="lj-fb-text">' + esc(chk.explanation) + "</div>" : "") +
+        "</div>";
+    }
+
     box.innerHTML =
       '<div class="lj-qcount">' + esc(t("question", "Question")) + " " + (LJ.qi + 1) + " / " + total + "</div>" +
       '<div class="lj-qprog"><span style="width:' + ((LJ.qi / total) * 100).toFixed(1) + '%"></span></div>' +
       '<div class="lj-qtext">' + esc(q.question || t("questionUnavailable", "Question unavailable")) + "</div>" +
-      body;
+      body + fb;
+
+    if (chk) {
+      var node = box.querySelector(".lj-fb");
+      if (node && node.scrollIntoView) node.scrollIntoView({ block: "nearest", behavior: "smooth" });
+    }
   }
+
+  // Ask the server if the chosen answer is right (instant feedback).
+  async function checkCurrent() {
+    if (LJ.busy || LJ.chk[LJ.qi]) return;
+    var q = currentQuizzes[LJ.qi];
+    if (!q || !answered(LJ.qi)) return;
+
+    LJ.busy = true;
+    LJ.msg = "";
+    renderBar();
+
+    try {
+      var ans = q.questionType === "calculate"
+        ? Number(selectedQuizAnswers[LJ.qi])
+        : selectedQuizAnswers[LJ.qi];
+
+      var res = await fetch("/api/learn/quiz/check", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ quizId: q._id, answer: ans })
+      });
+      var data = await res.json();
+
+      if (res.ok && data.status === "success" && data.data) {
+        LJ.chk[LJ.qi] = data.data;
+        LJ.busy = false;
+        renderStage();
+        renderBar();
+        return;
+      }
+
+      LJ.msg = data.message || t("unableToValidateQuiz", "Could not check your answer. Try again.");
+    } catch (e) {
+      console.error("Quiz check error:", e);
+      LJ.msg = t("unableToConnect", "No connection. Try again.");
+    }
+
+    LJ.busy = false;
+    renderBar();
+  }
+
+  var ICON_X =
+    '<svg class="lj-st lj-st-bad" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M8.5 8.5l7 7M15.5 8.5l-7 7"/></svg>';
 
   function renderResult() {
     var box = $("quiz-options");
@@ -457,12 +530,44 @@
     var pct = Number(r.score || 0);
     var passed = !!r.passed;
 
+    // The server already returns { quizId, correct } for every question.
+    var byId = {};
+    var list = Array.isArray(r.results) ? r.results : [];
+    list.forEach(function (x) { byId[String(x.quizId)] = x.correct === true; });
+
+    var review = "";
+    if (list.length) {
+      review =
+        '<div class="lj-review"><div class="lj-review-title">' +
+        esc(t("yourAnswers", "Your answers")) + "</div>" +
+        currentQuizzes
+          .map(function (q, i) {
+            var ok = byId[String(q._id)] === true;
+            var type = q.questionType || "multiple-choice";
+            var mine = type === "calculate"
+              ? selectedQuizAnswers[i]
+              : Array.isArray(q.options) ? q.options[selectedQuizAnswers[i]] : "";
+            return (
+              '<div class="lj-rev ' + (ok ? "is-ok" : "is-bad") + '">' +
+              (ok ? ICON_DONE : ICON_X) +
+              '<div class="lj-rev-body"><div class="lj-rev-q">' + esc(q.question) + "</div>" +
+              '<div class="lj-rev-a">' + esc(t("yourAnswer", "Your answer")) + ": " + esc(mine) + "</div>" +
+              (!ok && q.explanation
+                ? '<div class="lj-rev-x">' + esc(q.explanation) + "</div>"
+                : "") +
+              "</div></div>"
+            );
+          })
+          .join("") +
+        "</div>";
+    }
+
     box.innerHTML =
       '<div class="lj-result">' +
       ring(pct, 130, Math.round(pct) + "%", passed ? "lj-ring-good" : "lj-ring-warn") +
       "<h3>" + esc(passed ? t("quizPassed", "Nice work") : t("quizNotPassed", "Not quite yet")) + "</h3>" +
       "<p>" + esc(r.correctAnswers) + " / " + esc(r.totalQuestions) + " " + esc(t("correct", "correct")) + "</p>" +
-      "</div>";
+      "</div>" + review;
   }
 
   async function submitAll() {
@@ -565,14 +670,16 @@
         primary = { act: "complete", label: next ? t("nextLesson", "Next lesson") : t("finishLesson", "Finish lesson") };
       }
     } else if (LJ.mode === "quiz") {
-      primary = {
-        act: lastQ ? "submit" : "qnext",
-        label: lastQ ? t("checkAnswers", "Check answers") : t("continue", "Continue"),
-        disabled: !answered(LJ.qi)
-      };
-      ghost = LJ.qi > 0
-        ? { act: "qprev", label: t("back", "Back") }
-        : { act: "read", label: t("reviewLesson", "Review lesson") };
+      var checked = !!LJ.chk[LJ.qi];
+      if (!checked) {
+        primary = { act: "check", label: t("check", "Check"), disabled: !answered(LJ.qi) };
+        if (LJ.qi === 0) ghost = { act: "read", label: t("reviewLesson", "Review lesson") };
+      } else {
+        primary = {
+          act: lastQ ? "submit" : "qnext",
+          label: lastQ ? t("seeResults", "See results") : t("continue", "Continue")
+        };
+      }
     } else {
       var passed = !!(LJ.result && LJ.result.passed);
       if (passed) {
@@ -613,6 +720,7 @@
 
     var ans = el.closest(".lj-answer");
     if (ans) {
+      if (LJ.chk[LJ.qi]) return;
       selectedQuizAnswers[LJ.qi] = Number(ans.getAttribute("data-oi"));
       renderStage();
       renderBar();
@@ -626,12 +734,16 @@
       case "startquiz":
         LJ.qi = 0;
         selectedQuizAnswers = new Array(currentQuizzes.length);
+        LJ.chk = [];
         quizSubmitted = false;
         $("quiz-result").innerHTML = "";
         setMode("quiz");
         break;
       case "read":
         setMode("read");
+        break;
+      case "check":
+        checkCurrent();
         break;
       case "qnext":
         if (LJ.qi < currentQuizzes.length - 1) {
