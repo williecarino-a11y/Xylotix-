@@ -12,8 +12,13 @@
   margin-bottom: 14px;
 }
 #miimiid-dashboard .miimiid-dashboard-content {
+  grid-template-columns: minmax(0, 1fr);
+  box-sizing: border-box;
   padding: 0 16px;
   gap: 12px;
+}
+#miimiid-dashboard .miimiid-dashboard-content > * {
+  min-width: 0;
 }
 #miimiid-dashboard .mm-continue,
 #miimiid-dashboard .mm-review-row,
