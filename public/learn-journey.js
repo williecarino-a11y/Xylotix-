@@ -11,6 +11,9 @@
   if (window.__miimiidLearnJourney) return;
   window.__miimiidLearnJourney = true;
 
+  // Matches learningService.getUserDashboardStats: totalXP = lessons completed x 50
+  var LESSON_XP = 50;
+
   var LJ = {
     mode: "read",      // read | quiz | result
     qi: 0,             // current question index
@@ -76,6 +79,11 @@
 
   function isCompleted(id) {
     return completedIds().indexOf(String(id)) !== -1;
+  }
+
+  function lessonMinutes() {
+    var cur = allLessons().filter(function (l) { return String(l._id) === String(currentLessonId); })[0];
+    return cur ? Number(cur.estimatedDuration) || 0 : 0;
   }
 
   function ring(pct, size, label, cls) {
@@ -279,6 +287,14 @@
     if (LJ.goNext) {
       LJ.goNext = false;
       LJ.busy = false;
+
+      // Lesson saved: update the Home daily goal row (and its "goal reached" toast).
+      try {
+        if (window.MiimiidDaily && typeof window.MiimiidDaily.refresh === "function") {
+          window.MiimiidDaily.refresh();
+        }
+      } catch (e) { /* ignore */ }
+
       var next = nextLesson();
       if (next) {
         openLesson(next._id);
@@ -562,12 +578,45 @@
         "</div>";
     }
 
+    // XP and daily goal preview (only for a passed lesson not completed yet)
+    var reward = "";
+    if (passed && !isCompleted(currentLessonId)) {
+      var d = window.MiimiidDaily && typeof window.MiimiidDaily.getLatest === "function"
+        ? window.MiimiidDaily.getLatest()
+        : null;
+      var mins = lessonMinutes();
+      var goalHtml = "";
+
+      if (d && d.dailyMinutes > 0 && mins > 0) {
+        var goal = Number(d.dailyMinutes);
+        var from = Math.min(Number(d.minutesToday) || 0, goal);
+        var to = Math.min((Number(d.minutesToday) || 0) + mins, goal);
+        goalHtml =
+          '<div class="lj-goal"><div class="lj-goal-row"><span>' + esc(t("dailyGoal", "Daily goal")) + "</span>" +
+          '<span class="' + (to >= goal ? "is-met" : "") + '">' +
+          esc(to >= goal ? t("goalReached", "Goal reached") : to + " / " + goal + " min") + "</span></div>" +
+          '<div class="lj-goal-track"><span class="lj-goal-fill" style="width:' + ((from / goal) * 100).toFixed(1) +
+          '%" data-to="' + ((to / goal) * 100).toFixed(1) + '"></span></div></div>';
+      }
+
+      reward =
+        '<div class="lj-reward"><div class="lj-xp"><b>+' + LESSON_XP + " XP</b><span>" +
+        esc(t("xpWhenContinue", "Added when you continue")) + "</span></div>" + goalHtml + "</div>";
+    }
+
     box.innerHTML =
       '<div class="lj-result">' +
       ring(pct, 130, Math.round(pct) + "%", passed ? "lj-ring-good" : "lj-ring-warn") +
       "<h3>" + esc(passed ? t("quizPassed", "Nice work") : t("quizNotPassed", "Not quite yet")) + "</h3>" +
       "<p>" + esc(r.correctAnswers) + " / " + esc(r.totalQuestions) + " " + esc(t("correct", "correct")) + "</p>" +
-      "</div>" + review;
+      "</div>" + reward + review;
+
+    var fill = box.querySelector(".lj-goal-fill");
+    if (fill) {
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () { fill.style.width = fill.getAttribute("data-to") + "%"; });
+      });
+    }
   }
 
   async function submitAll() {
