@@ -183,6 +183,12 @@ const funGameSessionSchema = new mongoose.Schema(
       default: null
     },
 
+    /* Mart lesson scenario this trip belongs to (null for normal trips). */
+    scenarioId: {
+      type: String,
+      default: null
+    },
+
     /* Daily Challenge: the UTC day this trip belongs to (null for practice trips). */
     dailyKey: {
       type: String,
