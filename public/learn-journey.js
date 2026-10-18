@@ -21,6 +21,11 @@
     busy: false,
     msg: "",
     chk: [],           // per-question check results from the server
+    busyText: "",      // label shown on the button while busy
+    saving: false,     // progress is being saved after a passed quiz
+    saved: false,      // progress was saved
+    reward: null,      // XP / daily goal numbers shown on the result screen
+    rewardPlayed: false,
     goNext: false      // set while "complete lesson" is running
   };
 
@@ -417,6 +422,9 @@
     LJ.msg = "";
     LJ.busy = false;
     LJ.chk = [];
+    LJ.saved = false;
+    LJ.reward = null;
+    LJ.rewardPlayed = false;
 
     section.classList.toggle("hidden", currentQuizzes.length === 0);
     setMode("read");
@@ -530,6 +538,7 @@
     if (!q || !answered(LJ.qi)) return;
 
     LJ.busy = true;
+    LJ.busyText = t("checking", "Checking...");
     LJ.msg = "";
     renderBar();
 
@@ -540,7 +549,7 @@
 
       var res = await fetch("/api/learn/quiz/check", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", "X-Continue-Loading": "false" },
         body: JSON.stringify({ quizId: q._id, answer: ans })
       });
       var data = await res.json();
@@ -607,30 +616,43 @@
         "</div>";
     }
 
-    // XP and daily goal preview (only for a passed lesson not completed yet)
+    // XP and daily goal (only for a passed lesson that was not completed before)
     var reward = "";
-    if (passed && !isCompleted(currentLessonId)) {
+    if (passed && !LJ.reward && !isCompleted(currentLessonId)) {
       var d = window.MiimiidDaily && typeof window.MiimiidDaily.getLatest === "function"
         ? window.MiimiidDaily.getLatest()
         : null;
       var mins = lessonMinutes();
-      var goalHtml = "";
+      LJ.reward = { goal: 0, from: 0, to: 0 };
 
       if (d && d.dailyMinutes > 0 && mins > 0) {
         var goal = Number(d.dailyMinutes);
-        var from = Math.min(Number(d.minutesToday) || 0, goal);
-        var to = Math.min((Number(d.minutesToday) || 0) + mins, goal);
+        var today = Number(d.minutesToday) || 0;
+        LJ.reward = {
+          goal: goal,
+          from: Math.min(today, goal),
+          to: Math.min(today + mins, goal)
+        };
+      }
+    }
+
+    if (passed && LJ.reward) {
+      var rw = LJ.reward;
+      var goalHtml = "";
+
+      if (rw.goal > 0) {
+        var startPct = LJ.rewardPlayed ? rw.to : rw.from;
         goalHtml =
           '<div class="lj-goal"><div class="lj-goal-row"><span>' + esc(t("dailyGoal", "Daily goal")) + "</span>" +
-          '<span class="' + (to >= goal ? "is-met" : "") + '">' +
-          esc(to >= goal ? t("goalReached", "Goal reached") : to + " / " + goal + " min") + "</span></div>" +
-          '<div class="lj-goal-track"><span class="lj-goal-fill" style="width:' + ((from / goal) * 100).toFixed(1) +
-          '%" data-to="' + ((to / goal) * 100).toFixed(1) + '"></span></div></div>';
+          '<span class="' + (rw.to >= rw.goal ? "is-met" : "") + '">' +
+          esc(rw.to >= rw.goal ? t("goalReached", "Goal reached") : rw.to + " / " + rw.goal + " min") + "</span></div>" +
+          '<div class="lj-goal-track"><span class="lj-goal-fill" style="width:' + ((startPct / rw.goal) * 100).toFixed(1) +
+          '%" data-to="' + ((rw.to / rw.goal) * 100).toFixed(1) + '"></span></div></div>';
       }
 
       reward =
-        '<div class="lj-reward"><div class="lj-xp"><b>+' + LESSON_XP + " XP</b><span>" +
-        esc(t("xpWhenContinue", "Added when you continue")) + "</span></div>" + goalHtml + "</div>";
+        '<div class="lj-reward"><div class="lj-xp"><b>+' + LESSON_XP + ' XP</b><span class="lj-xp-note"></span></div>' +
+        goalHtml + "</div>";
     }
 
     box.innerHTML =
@@ -642,9 +664,73 @@
 
     var fill = box.querySelector(".lj-goal-fill");
     if (fill) {
+      LJ.rewardPlayed = true;
       requestAnimationFrame(function () {
         requestAnimationFrame(function () { fill.style.width = fill.getAttribute("data-to") + "%"; });
       });
+    }
+
+    updateXpNote();
+  }
+
+  // Small status text next to the XP: Saving / XP earned / Not saved
+  function updateXpNote() {
+    var note = document.querySelector("#quiz-options .lj-xp-note");
+    if (!note) return;
+    if (LJ.saved) note.textContent = t("xpEarned", "XP earned");
+    else if (LJ.msg && !LJ.saving) note.textContent = t("xpNotSaved", "Not saved yet");
+    else note.textContent = t("saving", "Saving...");
+    note.classList.toggle("is-ok", LJ.saved);
+  }
+
+  // Save the lesson as completed in the background (no screen change).
+  async function saveCompletion() {
+    if (LJ.saving) return;
+    var lessonId = currentLessonId;
+    LJ.saving = true;
+    LJ.saved = false;
+    LJ.msg = "";
+    updateXpNote();
+    renderBar();
+
+    try {
+      var answers = currentQuizzes.map(function (q, idx) {
+        return q.questionType === "calculate"
+          ? Number(selectedQuizAnswers[idx])
+          : selectedQuizAnswers[idx];
+      });
+
+      var res = await fetch("/api/learn/lessons/" + lessonId + "/complete", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "X-Continue-Loading": "false" },
+        body: JSON.stringify({ submittedAnswers: answers })
+      });
+      var data = await res.json();
+
+      if (res.ok && data.status === "success") {
+        if (courseDataCache) {
+          var ids = Array.isArray(courseDataCache.completedLessonIds) ? courseDataCache.completedLessonIds : [];
+          if (ids.map(String).indexOf(String(lessonId)) === -1) ids.push(String(lessonId));
+          courseDataCache.completedLessonIds = ids;
+        }
+        if (String(currentLessonId) === String(lessonId)) LJ.saved = true;
+
+        try {
+          if (window.MiimiidDaily && typeof window.MiimiidDaily.refresh === "function") window.MiimiidDaily.refresh();
+        } catch (e) { /* ignore */ }
+        try { if (typeof loadCourseProgress === "function") loadCourseProgress(currentCourseId); } catch (e) { /* ignore */ }
+      } else {
+        LJ.msg = data.message || t("failedToSaveProgress", "Could not save progress.");
+      }
+    } catch (e) {
+      console.error("Save progress error:", e);
+      LJ.msg = t("unableToConnect", "No connection. Try again.");
+    }
+
+    LJ.saving = false;
+    if (String(currentLessonId) === String(lessonId)) {
+      updateXpNote();
+      renderBar();
     }
   }
 
@@ -661,6 +747,7 @@
     }
 
     LJ.busy = true;
+    LJ.busyText = t("checking", "Checking...");
     LJ.msg = "";
     renderBar();
 
@@ -673,7 +760,7 @@
 
       var res = await fetch("/api/learn/quiz/submit", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", "X-Continue-Loading": "false" },
         body: JSON.stringify({ lessonId: currentLessonId, submittedAnswers: answers })
       });
       var data = await res.json();
@@ -683,6 +770,9 @@
         quizSubmitted = !!data.data.passed;
         LJ.busy = false;
         setMode("result");
+
+        // Passed: save the progress right away, so leaving the screen never loses it.
+        if (data.data.passed && !isCompleted(currentLessonId)) saveCompletion();
         return;
       }
 
@@ -701,6 +791,7 @@
   async function completeAndContinue() {
     if (LJ.busy) return;
     LJ.busy = true;
+    LJ.busyText = t("saving", "Saving...");
     LJ.msg = "";
     LJ.goNext = true;
     renderBar();
@@ -776,6 +867,9 @@
 
     if (LJ.busy) {
       primary.disabled = true;
+      primary.label = LJ.busyText || t("saving", "Saving...");
+    } else if (LJ.mode === "result" && LJ.saving) {
+      primary.disabled = true;
       primary.label = t("saving", "Saving...");
     }
 
@@ -813,6 +907,9 @@
         LJ.qi = 0;
         selectedQuizAnswers = new Array(currentQuizzes.length);
         LJ.chk = [];
+        LJ.saved = false;
+        LJ.reward = null;
+        LJ.rewardPlayed = false;
         quizSubmitted = false;
         $("quiz-result").innerHTML = "";
         setMode("quiz");
