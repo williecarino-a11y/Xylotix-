@@ -816,6 +816,17 @@
 
   /* ---------- BOTTOM ACTION BAR ---------- */
 
+  // "Try it in the Mart": only when this lesson has a Mart scenario (see public/mart-scenario.js).
+  function martGhost() {
+    try {
+      var cur = allLessons().filter(function (l) { return String(l._id) === String(currentLessonId); })[0];
+      var m = window.MiimiidMartScenario;
+      var sc = m && cur ? m.forLesson(cur.title) : null;
+      if (!sc) return null;
+      return { act: "mart", label: m.isDone(sc.id) ? t("martDone", "Done in the Mart") : t("tryInMart", "Try it in the Mart") };
+    } catch (e) { return null; }
+  }
+
   function renderBar() {
     if (!bar) return;
 
@@ -852,6 +863,7 @@
     } else {
       var passed = !!(LJ.result && LJ.result.passed);
       if (passed) {
+        ghost = martGhost();
         if (completed) {
           primary = next
             ? { act: "next", label: t("nextLesson", "Next lesson") }
@@ -945,6 +957,13 @@
       case "next":
         var n = nextLesson();
         if (n) openLesson(n._id);
+        break;
+      case "mart":
+        try {
+          var curLesson = allLessons().filter(function (l) { return String(l._id) === String(currentLessonId); })[0];
+          var scn = window.MiimiidMartScenario && curLesson ? window.MiimiidMartScenario.forLesson(curLesson.title) : null;
+          if (scn) window.MiimiidMartScenario.start(scn.id);
+        } catch (err) { console.error(err); }
         break;
       case "course":
         backToModules();
