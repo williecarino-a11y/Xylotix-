@@ -1,0 +1,356 @@
+/* =========================================================
+   MIIMIID LEARN JOURNEY (flat)
+   Course list -> course page -> lesson -> quiz -> result
+   Loaded after the other stylesheets, so these rules win.
+   ========================================================= */
+
+:root { --lj-nav: 64px; }
+
+/* ---------- COURSE LIST ---------- */
+
+#course-list-view > p { display: none; }
+
+.lj-list { display: flex; flex-direction: column; }
+
+.lj-course {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  padding: 14px 2px;
+  background: none;
+  border: 0;
+  border-bottom: 1px solid #1e293b;
+  color: #f8fafc;
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.lj-course:active { background: #111c33; }
+
+.lj-course-main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.lj-course-title { font-size: 1.02rem; font-weight: 600; }
+.lj-course-sub { font-size: 0.82rem; color: #94a3b8; }
+
+.lj-pill {
+  flex: none;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid #334155;
+  color: #cbd5e1;
+}
+.lj-pill.is-continue { background: #0284c7; border-color: #0284c7; color: #fff; }
+.lj-pill.is-done { color: #4ade80; border-color: #14532d; }
+
+.lj-ring { flex: none; }
+.lj-ring-bg { fill: none; stroke: #1e293b; stroke-width: 4; }
+.lj-ring-fg { fill: none; stroke: #38bdf8; stroke-width: 4; stroke-linecap: round; }
+.lj-ring text { fill: #e2e8f0; font-size: 11px; font-weight: 600; }
+.lj-ring-warn .lj-ring-fg { stroke: #f59e0b; }
+.lj-ring-good .lj-ring-fg { stroke: #4ade80; }
+
+.lj-empty { color: #94a3b8; }
+
+/* ---------- COURSE PAGE ---------- */
+
+#course-detail-view > .btn.btn-sm,
+#lesson-back-btn {
+  background: none;
+  color: #38bdf8;
+  width: auto;
+  padding: 6px 0;
+  margin: 0 0 4px;
+  border-radius: 0;
+  font-weight: 600;
+}
+
+#course-detail-view h2 { margin: 6px 0 6px; font-size: 1.5rem; }
+#detail-course-desc { color: #94a3b8; font-size: 0.9rem; margin: 0 0 14px; }
+
+#course-detail-view .course-progress-card {
+  background: none;
+  border: 0;
+  padding: 0;
+  margin: 0 0 14px;
+}
+#course-detail-view .course-progress-header strong {
+  font-size: 0.8rem;
+  color: #94a3b8;
+  font-weight: 600;
+}
+
+.lj-continue {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 14px 16px;
+  margin: 4px 0 20px;
+  border: 0;
+  border-radius: 14px;
+  background: #0284c7;
+  color: #fff;
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+}
+.lj-continue-text { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.lj-continue-label {
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+.lj-continue-title {
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.lj-chev { font-size: 1.4rem; line-height: 1; opacity: 0.85; }
+
+.lj-module { margin: 0 0 22px; }
+.lj-module-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 0 2px 8px;
+  border-bottom: 1px solid #1e293b;
+}
+.lj-module-title {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #94a3b8;
+}
+.lj-module-count { font-size: 0.78rem; color: #64748b; }
+.lj-module-count.is-done { color: #4ade80; }
+
+.lj-lesson {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  min-height: 52px;
+  padding: 10px 2px;
+  background: none;
+  border: 0;
+  border-bottom: 1px solid #1e293b;
+  color: #e2e8f0;
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.lj-lesson:active { background: #111c33; }
+.lj-lesson.is-current {
+  color: #fff;
+  background: #0c1f36;
+  box-shadow: inset 3px 0 0 #38bdf8;
+  padding-left: 12px;
+}
+.lj-lesson-title { flex: 1; min-width: 0; line-height: 1.35; }
+.lj-lesson-min { flex: none; font-size: 0.78rem; color: #64748b; }
+
+.lj-st { width: 22px; height: 22px; flex: none; fill: none; stroke-width: 1.6; }
+.lj-st-todo circle { stroke: #475569; }
+.lj-st-done circle { fill: #16a34a; stroke: #16a34a; }
+.lj-st-done path { stroke: #fff; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.lj-st-cur circle { stroke: #38bdf8; }
+.lj-st-cur path { fill: #38bdf8; stroke: none; }
+
+/* ---------- LESSON READER ---------- */
+
+#lesson-view.card {
+  background: none;
+  border: 0;
+  padding: 0 0 110px;
+  margin: 0;
+}
+#lesson-title { font-size: 1.45rem; line-height: 1.25; margin: 8px 0 10px; }
+#lesson-content { margin-top: 8px; }
+
+#lesson-content .content-text {
+  white-space: pre-line;
+  font-size: 1.04rem;
+  line-height: 1.75;
+  color: #e2e8f0;
+  margin: 0 0 18px;
+}
+#lesson-content .content-heading {
+  font-size: 1.15rem;
+  color: #f8fafc;
+  margin: 26px 0 8px;
+}
+#lesson-content .content-block > strong {
+  display: block;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #7dd3fc;
+  margin-bottom: 6px;
+}
+#lesson-content .content-block p { margin: 0; }
+#lesson-content .content-example,
+#lesson-content .content-callout,
+#lesson-content .content-summary,
+#lesson-content .content-formula { border-radius: 10px; }
+
+/* hide the old buttons, the action bar replaces them */
+#lesson-view > #complete-btn { display: none; }
+#lesson-view #next-lesson-btn { display: none !important; }
+#lesson-navigation { margin-top: 8px; }
+#previous-lesson-btn {
+  background: none;
+  color: #94a3b8;
+  width: auto;
+  padding: 6px 0;
+  margin: 0;
+}
+#lesson-view:not([data-lj-mode="read"]) #lesson-navigation { display: none !important; }
+
+/* modes */
+#lesson-view[data-lj-mode="quiz"] #lesson-content,
+#lesson-view[data-lj-mode="result"] #lesson-content,
+#lesson-view[data-lj-mode="quiz"] #lesson-meta,
+#lesson-view[data-lj-mode="result"] #lesson-meta { display: none !important; }
+#lesson-view[data-lj-mode="read"] #quiz-section { display: none !important; }
+
+/* thin reading progress bar */
+#lj-readbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  z-index: 1040;
+  pointer-events: none;
+}
+#lj-readbar > span {
+  display: block;
+  height: 100%;
+  background: #38bdf8;
+  transform-origin: left;
+  transform: scaleX(0);
+}
+
+/* ---------- QUIZ ---------- */
+
+#quiz-title, #quiz-question, #quiz-submit-btn { display: none; }
+#quiz-section { margin-top: 6px; }
+#quiz-result { text-align: center; font-size: 0.9rem; margin: 0; }
+
+.lj-qcount { font-size: 0.8rem; color: #94a3b8; font-weight: 600; }
+.lj-qprog {
+  height: 4px;
+  background: #1e293b;
+  border-radius: 2px;
+  overflow: hidden;
+  margin: 8px 0 6px;
+}
+.lj-qprog > span {
+  display: block;
+  height: 100%;
+  background: #38bdf8;
+  transition: width 0.25s ease;
+}
+.lj-qtext {
+  font-size: 1.2rem;
+  line-height: 1.4;
+  font-weight: 600;
+  margin: 16px 0 18px;
+  color: #f8fafc;
+}
+
+.lj-answer {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 16px;
+  margin: 0 0 10px;
+  background: #111c33;
+  border: 1.5px solid #243247;
+  border-radius: 14px;
+  color: #e2e8f0;
+  font: inherit;
+  font-size: 1rem;
+  line-height: 1.4;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.lj-answer.is-selected { border-color: #38bdf8; background: #0c2742; color: #fff; }
+
+.lj-calc {
+  width: 100%;
+  padding: 16px;
+  font-size: 1.2rem;
+  background: #111c33;
+  border: 1.5px solid #243247;
+  border-radius: 14px;
+  color: #fff;
+}
+.lj-hint { color: #94a3b8; font-size: 0.85rem; margin-top: 8px; }
+
+.lj-result {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 36px 8px 12px;
+}
+.lj-result h3 { font-size: 1.4rem; margin: 18px 0 6px; }
+.lj-result p { color: #94a3b8; margin: 0; }
+
+/* ---------- BOTTOM ACTION BAR ---------- */
+
+#lj-actionbar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: var(--lj-nav, 64px);
+  z-index: 1040;
+  padding: 16px 16px 10px;
+  background: linear-gradient(to top, #0f172a 70%, rgba(15, 23, 42, 0));
+}
+#lj-actionbar.hidden { display: none !important; }
+.lj-msg { text-align: center; color: #f87171; font-size: 0.85rem; margin: 0 0 8px; }
+.lj-bar-row { display: flex; gap: 10px; }
+
+.lj-btn {
+  flex: 1;
+  min-height: 50px;
+  border: 0;
+  border-radius: 14px;
+  font: inherit;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+}
+.lj-btn-primary { background: #0284c7; color: #fff; }
+.lj-btn-primary:disabled { background: #1e293b; color: #64748b; cursor: default; }
+.lj-btn-ghost {
+  flex: 0 0 auto;
+  padding: 0 18px;
+  background: #111c33;
+  color: #cbd5e1;
+  border: 1px solid #243247;
+}
+
+@media (min-width: 768px) {
+  #lj-actionbar {
+    left: 50%;
+    right: auto;
+    width: min(680px, calc(100vw - 32px));
+    transform: translateX(-50%);
+  }
+}
