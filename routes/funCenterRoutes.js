@@ -291,6 +291,11 @@ function buildShopSummary(shop, session) {
   const saved = Math.max(0, shop.budget - spent);
   const score = Math.max(0, needsBought.length * 100 + saved * 5 - wantsSpent * 5);
 
+  // Mart lesson scenario: judged here so it can count toward the stars.
+  const scenarioVerdict = session.scenarioId
+    ? judgeMartScenario(session.scenarioId, { needsMissed: needsMissed.length, totalNeeds: totalNeeds.length, boughtIds: Array.from(boughtIds) })
+    : null;
+
   // Star rating: one star per goal. Everything is decided here, on the server.
   const premiumBought = bought.filter(entry => {
     const item = byId.get(entry.itemId);
@@ -338,6 +343,11 @@ function buildShopSummary(shop, session) {
         burnMessage = `You burned out: ${burnedOut.map(k => names[k]).join(' and ')} hit zero. Balance beats buying only one kind of thing.`;
       }
     }
+  }
+  if (scenarioVerdict) {
+    finalRows = finalRows.map(row => row.id === 'save'
+      ? { id: 'scenario', label: 'Lesson challenge passed', earned: scenarioVerdict.passed && burnedOut.length === 0, hint: scenarioVerdict.reason }
+      : row);
   }
   const stars = finalRows.filter(row => row.earned).length;
 
@@ -396,9 +406,7 @@ function buildShopSummary(shop, session) {
     wantsBought: wantsBought.map(toPublic),
     needsMissed: needsMissed.map(item => ({ id: item.id, name: item.name, price: (session.hikeItemId === item.id && typeof session.hikePrice === 'number') ? session.hikePrice : item.price, image: item.image, visual: item.visual, explanation: item.explanation })),
     tradeoffs,
-    scenario: session.scenarioId
-      ? judgeMartScenario(session.scenarioId, { needsMissed: needsMissed.length, boughtIds: Array.from(boughtIds) })
-      : null
+    scenario: scenarioVerdict
   };
 }
 
