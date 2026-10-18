@@ -146,6 +146,7 @@
       );
 
       container.innerHTML =
+        '<div class="lj-page-title">' + esc(t("learn", "Learn")) + "</div>" +
         '<div class="lj-list">' +
         courses
           .map(function (c, i) {
@@ -226,7 +227,7 @@
         esc(started ? t("continue", "Continue") : t("start", "Start")) +
         '</span><span class="lj-continue-title">' +
         esc(current.title || t("untitledLesson", "Untitled lesson")) +
-        '</span></span><span class="lj-chev">&rsaquo;</span></button>';
+        '</span></span><span class="lj-continue-play"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg></span></button>';
     }
 
     modules.forEach(function (m, mi) {
@@ -339,6 +340,14 @@
         n.textContent = n.textContent.trim();
       });
 
+      // The first heading often repeats the lesson title. Drop the duplicate.
+      var firstHeading = document.querySelector("#lesson-content .content-block:first-child .content-heading");
+      var titleEl = $("lesson-title");
+      if (firstHeading && titleEl &&
+          firstHeading.textContent.trim().toLowerCase() === titleEl.textContent.trim().toLowerCase()) {
+        firstHeading.closest(".content-block").remove();
+      }
+
       setNavHeight();
       renderBar();
       window.scrollTo(0, 0);
@@ -418,7 +427,7 @@
     LJ.msg = "";
     var lv = $("lesson-view");
     if (lv) lv.setAttribute("data-lj-mode", mode);
-    if (mode === "quiz") renderStage();
+    if (mode === "quiz") renderStage(true);
     if (mode === "result") renderResult();
     renderBar();
     window.scrollTo(0, 0);
@@ -430,7 +439,12 @@
     return v !== undefined && v !== null && v !== "";
   }
 
-  function renderStage() {
+  var MARK_OK =
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+  var MARK_BAD =
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11"/></svg>';
+
+  function renderStage(animate) {
     var box = $("quiz-options");
     var total = currentQuizzes.length;
     var q = currentQuizzes[LJ.qi];
@@ -452,9 +466,15 @@
           } else if (selectedQuizAnswers[LJ.qi] === oi) {
             cls += " is-selected";
           }
+          var mark = String.fromCharCode(65 + oi);
+          if (chk) {
+            if (oi === Number(chk.correctAnswer)) mark = MARK_OK;
+            else if (selectedQuizAnswers[LJ.qi] === oi) mark = MARK_BAD;
+          }
           return (
             '<button type="button" class="' + cls + '" data-oi="' + oi + '"' +
-            (chk ? " disabled" : "") + ">" + esc(o) + "</button>"
+            (chk ? " disabled" : "") + '><span class="lj-ans-key">' + mark +
+            '</span><span class="lj-ans-text">' + esc(o) + "</span></button>"
           );
         })
         .join("");
@@ -491,6 +511,12 @@
       '<div class="lj-qtext">' + esc(q.question || t("questionUnavailable", "Question unavailable")) + "</div>" +
       body + fb;
 
+    box.classList.remove("lj-enter");
+    if (animate) {
+      void box.offsetWidth;
+      box.classList.add("lj-enter");
+    }
+
     if (chk) {
       var node = box.querySelector(".lj-fb");
       if (node && node.scrollIntoView) node.scrollIntoView({ block: "nearest", behavior: "smooth" });
@@ -522,6 +548,9 @@
       if (res.ok && data.status === "success" && data.data) {
         LJ.chk[LJ.qi] = data.data;
         LJ.busy = false;
+        try {
+          if (navigator.vibrate) navigator.vibrate(data.data.correct ? 15 : [30, 50, 30]);
+        } catch (e) { /* ignore */ }
         renderStage();
         renderBar();
         return;
@@ -797,7 +826,7 @@
       case "qnext":
         if (LJ.qi < currentQuizzes.length - 1) {
           LJ.qi++;
-          renderStage();
+          renderStage(true);
           renderBar();
           window.scrollTo(0, 0);
         }
@@ -805,7 +834,7 @@
       case "qprev":
         if (LJ.qi > 0) {
           LJ.qi--;
-          renderStage();
+          renderStage(true);
           renderBar();
           window.scrollTo(0, 0);
         }
