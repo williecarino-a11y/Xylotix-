@@ -577,6 +577,51 @@ class LearningService {
 
   /**
    * =========================================================
+   * CHECK ONE QUIZ ANSWER (instant feedback)
+   * =========================================================
+   */
+  async checkQuizAnswer(quizId, submitted) {
+    const quiz = await Quiz.findOne({
+      _id: quizId,
+      published: true
+    });
+
+    if (!quiz) {
+      throw new Error('Quiz not found');
+    }
+
+    let correct = false;
+
+    if (
+      submitted !== undefined &&
+      submitted !== null &&
+      submitted !== ''
+    ) {
+      const submittedNumber = Number(submitted);
+      const correctNumber = Number(quiz.correctAnswer);
+
+      if (quiz.questionType === 'calculate') {
+        correct =
+          Number.isFinite(submittedNumber) &&
+          Number.isFinite(correctNumber) &&
+          submittedNumber === correctNumber;
+      } else {
+        correct =
+          Number.isInteger(submittedNumber) &&
+          submittedNumber === correctNumber;
+      }
+    }
+
+    return {
+      quizId: quiz._id,
+      correct,
+      correctAnswer: quiz.correctAnswer,
+      explanation: quiz.explanation || ''
+    };
+  }
+
+  /**
+   * =========================================================
    * RECORD LESSON COMPLETION
    * =========================================================
    */
