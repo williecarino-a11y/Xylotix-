@@ -632,7 +632,6 @@
 
 /* One loading mechanism: hide the old "Loading..." pill. The app's quiet
    loader and the slow-connection overlay in continue-loading.js stay. */
-#loading { display: none !important; }
 
 .lj-xp-note.is-ok { color: #4ade80; }
 
