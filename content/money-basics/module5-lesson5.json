@@ -1,0 +1,168 @@
+{
+  "slug": "subscriptions-fees-and-auto-renewals",
+  "title": "Subscriptions, Fees and Auto-Renewals: The Charges You Forget",
+  "estimatedDuration": 30,
+  "order": 5,
+  "published": true,
+  "contentBlocks": [
+    {
+      "type": "heading",
+      "content": "The charges you never decide on"
+    },
+    {
+      "type": "text",
+      "content": "Think about the last time you bought lunch. You looked at the price, you decided, and you paid. Now think about a charge that left your account last week without you doing anything. Can you name it?"
+    },
+    {
+      "type": "text",
+      "content": "Most money lost to small costs does not leave in one big moment. It leaves quietly, on a schedule: a monthly app, a yearly renewal, a free trial that turned into a paid plan, a small bank fee. You agreed once. After that, the charge keeps coming whether or not you still use the thing."
+    },
+    {
+      "type": "interactive",
+      "title": "Think First",
+      "content": "Open your bank or payment app and look at last month. How many charges do you recognize right away? How many make you stop and think, “What is this?”"
+    },
+    {
+      "type": "heading",
+      "content": "How small charges add up"
+    },
+    {
+      "type": "example",
+      "title": "Maya’s three small plans",
+      "content": "Maya pays $9 a month for a streaming service, $6 for extra phone storage, and $12 for a gym she visited twice last month. Each charge feels small. Together they are $27 a month. Maya never decided to spend $27. She decided three separate times to spend a little, and then she stopped paying attention."
+    },
+    {
+      "type": "formula",
+      "content": "$27 x 12 = $324"
+    },
+    {
+      "type": "text",
+      "content": "That is $324 in a year, and much of it is for things Maya barely uses. If she had planned to spend $324 on one purchase, she would have thought about it carefully."
+    },
+    {
+      "type": "heading",
+      "content": "Where the leaks hide"
+    },
+    {
+      "type": "text",
+      "content": "Subscriptions are the best known. But there are others: free trials that start charging when the trial ends, yearly plans that renew by themselves, bank account fees, fees for using another provider’s cash machine, and small charges inside apps and games. None of these is a scam. They are normal. They only hurt when you stop noticing them."
+    },
+    {
+      "type": "callout",
+      "title": "Why they last",
+      "content": "Many plans work this way: doing nothing keeps you paying. Staying subscribed takes no effort. Cancelling takes a little effort and attention. That small effort is a big reason people keep paying for things they stopped using."
+    },
+    {
+      "type": "heading",
+      "content": "The 15-minute leak check"
+    },
+    {
+      "type": "text",
+      "content": "Do this every three months. Open your last two months of bank or card activity. Mark every charge that repeats. For each one, ask three questions. Did I use this in the last month? Would I sign up for it again today at this price? Is there a cheaper or free option that does the same job? Keep what passes. Cancel or downgrade what does not."
+    },
+    {
+      "type": "example",
+      "title": "Maya’s leak check",
+      "content": "Maya finds the streaming service. She watches it every week, so she keeps it. She finds the extra phone storage, which she forgot she had, and cancels it. She finds the gym she visited twice, cancels it, and decides to walk instead. Now she pays $9 a month instead of $27. That saves her $18 a month."
+    },
+    {
+      "type": "formula",
+      "content": "$18 x 12 = $216 saved in a year"
+    },
+    {
+      "type": "heading",
+      "content": "Free trials and yearly renewals"
+    },
+    {
+      "type": "text",
+      "content": "A free trial can be a fair deal if you remember it ends. Put the end date in your calendar two days early. Then you decide on purpose: keep it or cancel. Yearly plans work the same way. Note the renewal date when you sign up, because a yearly charge can arrive months after you stopped thinking about it."
+    },
+    {
+      "type": "callout",
+      "title": "A habit that helps",
+      "content": "When you sign up for anything that renews, write the cancel date in your calendar the same day. Two minutes now can save you a surprise later."
+    },
+    {
+      "type": "heading",
+      "content": "Fees at your bank"
+    },
+    {
+      "type": "text",
+      "content": "Banks and payment services sometimes charge small fees: a monthly account fee, a fee for using another provider’s cash machine, a fee for sending money quickly, or a fee when your balance gets too low. Fees differ a lot between providers and countries, so check yours. Look at your statement and find any charge with the word “fee” in it. Then ask what would avoid it. Sometimes a different account type or a different way of sending money removes the fee."
+    },
+    {
+      "type": "summary",
+      "content": "Charges that repeat on their own are easy to forget, and small ones add up over a year. A quick check every three months helps you find charges you no longer use. Free trials and yearly plans are fine when you note the end date on the day you sign up. Bank fees vary, so read your statement and look for ways to avoid them."
+    },
+    {
+      "type": "callout",
+      "title": "Remember this",
+      "content": "You are not trying to cancel everything. You are making sure every repeating charge still earns its place."
+    }
+  ],
+  "quiz": [
+    {
+      "order": 1,
+      "questionType": "multiple-choice",
+      "question": "Sam pays $8 a month for a music app, $10 for cloud storage, and $15 for a gym he does not visit. What do these three charges cost him in a year?",
+      "options": [
+        "$33",
+        "$264",
+        "$396",
+        "$198"
+      ],
+      "correctAnswer": 2,
+      "explanation": "$8 + $10 + $15 = $33 a month. $33 x 12 = $396 a year."
+    },
+    {
+      "order": 2,
+      "questionType": "multiple-choice",
+      "question": "Which question is most useful when you check a repeating charge?",
+      "options": [
+        "Is the price exactly the same as last month?",
+        "Did I use this recently, and would I sign up again today at this price?",
+        "Does the company have a good logo?",
+        "Do I remember the day I signed up?"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Use and value are what matter. If you did not use it and would not sign up again, the charge has not earned its place."
+    },
+    {
+      "order": 3,
+      "questionType": "true-false",
+      "question": "A free trial is always a trick, so you should never try one.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctAnswer": 1,
+      "explanation": "A free trial can be fair. The risk is forgetting when it ends. A calendar reminder turns an automatic charge into a choice."
+    },
+    {
+      "order": 4,
+      "questionType": "multiple-choice",
+      "question": "You start a one-month free trial today. What is the best move?",
+      "options": [
+        "Wait for the company to remind you",
+        "Remember to cancel sometime next month",
+        "Cancel the day after the trial ends",
+        "Add a reminder two days before it ends, then decide on purpose"
+      ],
+      "correctAnswer": 3,
+      "explanation": "A reminder before the end date lets you choose. Waiting, or cancelling after the trial ends, can mean you are charged first."
+    },
+    {
+      "order": 5,
+      "questionType": "multiple-choice",
+      "question": "Why do repeating charges often continue after you stop using the product?",
+      "options": [
+        "Staying subscribed takes no effort, while cancelling takes effort and attention",
+        "The law requires you to stay subscribed",
+        "Banks cancel them for you after a year",
+        "They are always cheaper than one-time purchases"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Doing nothing keeps the charge going. The small effort needed to cancel is a big reason people keep paying for things they no longer use."
+    }
+  ]
+}
