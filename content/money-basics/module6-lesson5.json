@@ -1,0 +1,156 @@
+{
+  "slug": "sharing-money-roommates-partners-and-family",
+  "title": "Sharing Money: Roommates, Partners and Family",
+  "estimatedDuration": 30,
+  "order": 5,
+  "published": true,
+  "contentBlocks": [
+    {
+      "type": "heading",
+      "content": "When your money touches someone else’s"
+    },
+    {
+      "type": "text",
+      "content": "Money gets complicated when other people are involved. You split the rent. You pay for a trip. Your partner buys the groceries and you cover the electricity. Nobody sat down and agreed how it should work, so everyone has a slightly different idea. That is where the awkward feelings start."
+    },
+    {
+      "type": "text",
+      "content": "Many arguments about shared money are not about the amount. They are about expectations that nobody said out loud."
+    },
+    {
+      "type": "interactive",
+      "title": "Think First",
+      "content": "Think of someone you share costs with: a roommate, a partner, a family member. Could you say right now who pays for what, and why? Would they give the same answer?"
+    },
+    {
+      "type": "heading",
+      "content": "Three common ways to share"
+    },
+    {
+      "type": "text",
+      "content": "There is no single right way. Three are common. An equal split means everyone pays the same amount. A split by income means each person pays a share that matches what they earn. A split by bill means each person is responsible for different bills. Each one fits some situations better than others."
+    },
+    {
+      "type": "example",
+      "title": "Two roommates, two incomes",
+      "content": "Ana earns $3,000 a month and Ben earns $2,000. Their rent is $1,000. If they split it equally, each pays $500. For Ben that is 25% of his income. For Ana it is about 17%. If they split by income, Ana pays $600 and Ben pays $400. Now each of them gives 20% of their income to rent. Neither way is wrong. The point is that they choose on purpose."
+    },
+    {
+      "type": "formula",
+      "content": "Total income $5,000. Ana earns 60%, Ben earns 40%. $1,000 x 60% = $600. $1,000 x 40% = $400."
+    },
+    {
+      "type": "heading",
+      "content": "Say the rules before the bill arrives"
+    },
+    {
+      "type": "text",
+      "content": "Money talks are easiest when nothing is wrong yet. Agree on a few simple things early. Who pays which bills? What happens if someone cannot pay one month? How do you handle shared purchases, like furniture or food? How will you keep track?"
+    },
+    {
+      "type": "callout",
+      "title": "A way to start",
+      "content": "You can start with something simple: “I want us to be on the same page about money so it never gets awkward. Can we take ten minutes for it?”"
+    },
+    {
+      "type": "heading",
+      "content": "Keep it where both of you can see it"
+    },
+    {
+      "type": "text",
+      "content": "Shared money goes wrong when it only lives in memory. “I thought you paid the electricity.” Use one shared note, a spreadsheet, or a shared-expenses app. Write each bill, the amount, who paid it, and the date. Check it on the same day each month. Five minutes is enough to stop small gaps from growing."
+    },
+    {
+      "type": "heading",
+      "content": "When someone cannot pay their share"
+    },
+    {
+      "type": "text",
+      "content": "Sooner or later, someone has a hard month. If you agreed in advance what happens, it is easier: a short delay, a smaller share for a while, or a plan to pay it back. If you did not agree, you end up guessing in the middle of stress. If you cover someone’s share, write down the amount and the date it will be repaid, just as you would with any loan, even between people who care about each other."
+    },
+    {
+      "type": "example",
+      "title": "Sam and Lee",
+      "content": "Sam pays the rent. Lee pays for food and bills. At first it feels fair to both of them. Months later, Lee’s costs have grown and Sam’s have not. Lee feels the arrangement is uneven, but never says so. Sam thinks everything is fine. A ten-minute review every few months, or whenever something changes, would have brought it up early."
+    },
+    {
+      "type": "callout",
+      "title": "When money becomes control",
+      "content": "Sharing money is meant to be teamwork. If someone takes your money, hides money from you, keeps you from reaching your own money, or pressures you with threats or guilt, that is not a budgeting problem. Talk to someone you trust or a local support service."
+    },
+    {
+      "type": "summary",
+      "content": "Shared money works best when the rules are said out loud, chosen on purpose, written where everyone can see them, and reviewed when something changes. An equal split is simple, but a split by income can feel fairer when incomes are far apart. Agree on what happens when someone cannot pay before it happens."
+    },
+    {
+      "type": "callout",
+      "title": "Remember this",
+      "content": "The goal is not to split everything to the last cent. The goal is that nobody feels surprised or resentful."
+    }
+  ],
+  "quizzes": [
+    {
+      "order": 1,
+      "questionType": "multiple-choice",
+      "question": "Ana earns $3,000 and Ben earns $2,000 a month. Their rent is $1,000. If they split the rent by income, how much does Ben pay?",
+      "options": [
+        "$500",
+        "$600",
+        "$300",
+        "$400"
+      ],
+      "correctAnswer": 3,
+      "explanation": "Their total income is $5,000. Ben earns 40% of it ($2,000 of $5,000), so he pays 40% of the rent: $400."
+    },
+    {
+      "order": 2,
+      "questionType": "multiple-choice",
+      "question": "What often causes arguments about shared money?",
+      "options": [
+        "Expectations that were never said out loud",
+        "One person earning more than the other",
+        "Using a spreadsheet to track bills",
+        "Paying bills on time"
+      ],
+      "correctAnswer": 0,
+      "explanation": "When people carry different ideas about who pays for what, small surprises turn into tension. Saying the rules out loud early prevents most of it."
+    },
+    {
+      "order": 3,
+      "questionType": "true-false",
+      "question": "An equal split is always the fairest way to share costs.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctAnswer": 1,
+      "explanation": "An equal split is simple, but when incomes are far apart the same amount can weigh very differently on each person. Both people should choose the method on purpose."
+    },
+    {
+      "order": 4,
+      "questionType": "multiple-choice",
+      "question": "Your roommate says they cannot pay their share this month. What helps most?",
+      "options": [
+        "Say nothing and quietly cover it",
+        "Ask them to move out right away",
+        "Agree on a clear plan, such as a short delay or a smaller share, and write down any amount you cover",
+        "Stop paying your own share too"
+      ],
+      "correctAnswer": 2,
+      "explanation": "A clear plan removes guessing during a stressful month. Writing down what you cover keeps both of you remembering the same thing."
+    },
+    {
+      "order": 5,
+      "questionType": "multiple-choice",
+      "question": "Why is it useful to keep shared expenses in one place that everyone can see?",
+      "options": [
+        "It lets one person make all the decisions",
+        "It prevents “I thought you paid that” problems and stops small gaps from growing",
+        "It makes the bills cheaper",
+        "Banks require it"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Shared money goes wrong when it only lives in memory. One visible record keeps everyone on the same page."
+    }
+  ]
+}
