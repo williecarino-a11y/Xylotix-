@@ -22,8 +22,9 @@
 
   /* ---------- styles ---------- */
   var CSS = '' +
-    '.mm-avatar img[data-mmp]{width:100%;height:100%;object-fit:cover;border-radius:50%;display:block}' +
-    '.mm-profile-hero .mm-avatar-lg{position:relative;cursor:pointer}' +
+    '.mm-avatar-btn,.mm-avatar{overflow:hidden}' +
+    '.mm-avatar img[data-mmp],.mm-avatar-btn img[data-mmp]{width:100%;height:100%;max-width:100%;max-height:100%;object-fit:cover;border-radius:50%;display:block}' +
+    '.mm-profile-hero .mm-avatar-lg{position:relative;cursor:pointer;overflow:visible}' +
     '.mmp-badge{position:absolute;right:-2px;bottom:-2px;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#1f6feb;border:2px solid #0b1220;color:#fff}' +
     '.mmp-wrap{max-width:560px;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:20px}' +
     '.mmp-prev{width:168px;height:168px;border-radius:50%;overflow:hidden;display:flex;align-items:center;justify-content:center;background:#1f6feb;color:#fff;font-size:3.4rem;font-weight:700}' +
@@ -75,6 +76,39 @@
   /* ---------- show the photo everywhere an avatar is drawn ---------- */
   var applying = false;
 
+  // The photo must take exactly the size of the circle it replaces.
+  function measure(el) {
+    var big = el.classList.contains('mm-avatar-lg');
+    var size = NaN;
+    try {
+      var cs = window.getComputedStyle(el);
+      size = Math.min(parseFloat(cs.width), parseFloat(cs.height));
+    } catch (e) { /* ignore */ }
+    if (!(size > 0)) {
+      var rect = el.getBoundingClientRect();
+      size = Math.min(rect.width, rect.height);
+    }
+    if (!(size > 0)) size = big ? 88 : 40;
+    return Math.round(size);
+  }
+
+  function lock(el, img, size) {
+    el.style.width = size + 'px';
+    el.style.height = size + 'px';
+    el.style.padding = '0';
+    el.style.boxSizing = 'border-box';
+    el.style.flex = '0 0 auto';
+    img.style.cssText = 'width:' + size + 'px;height:' + size + 'px;max-width:none;object-fit:cover;border-radius:50%;display:block';
+  }
+
+  function unlock(el) {
+    el.style.width = '';
+    el.style.height = '';
+    el.style.padding = '';
+    el.style.boxSizing = '';
+    el.style.flex = '';
+  }
+
   function applyAvatars() {
     if (applying) return;
     applying = true;
@@ -85,11 +119,13 @@
         if (avatarUrl) {
           if (img && img.getAttribute('src') === avatarUrl) return;
           if (!img) {
+            var size = measure(el);
             el.textContent = '';
             img = new Image();
             img.setAttribute('data-mmp', '1');
             img.alt = '';
             img.decoding = 'async';
+            lock(el, img, size);
             el.appendChild(img);
           }
           img.src = avatarUrl;
@@ -101,6 +137,7 @@
           }
         } else if (img) {
           el.textContent = initialOf(user());
+          unlock(el);
         }
         if (el.classList.contains('mm-avatar-lg') && !avatarUrl && !el.querySelector('.mmp-badge')) {
           var b2 = document.createElement('span');
