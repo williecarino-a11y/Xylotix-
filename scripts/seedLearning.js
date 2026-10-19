@@ -7,10 +7,12 @@ const Module = require('../models/Module');
 const Lesson = require('../models/Lesson');
 const Quiz = require('../models/Quiz');
 
-const learningDataSets = [
+const { mergeExtraLessons } = require('./learningData/extraLessons');
+
+const learningDataSets = mergeExtraLessons([
   require('./learningData/moneyBasics.new'),
   require('./learningData/investingFundamentals')
-];
+]);
 
 /*
  * =========================================================
