@@ -203,31 +203,90 @@ function normalizeContentBlocks(contentBlocks) {
   });
 }
 
+function describeLesson(lessonData) {
+  const own = String(lessonData.description || '').trim();
+
+  if (own) {
+    return own;
+  }
+
+  const blocks = Array.isArray(lessonData.contentBlocks)
+    ? lessonData.contentBlocks
+    : [];
+
+  for (const block of blocks) {
+    if (!block || block.type !== 'text') {
+      continue;
+    }
+
+    const raw =
+      typeof block.content === 'string'
+        ? block.content
+        : block.data &&
+          (block.data.text || block.data.content);
+
+    if (typeof raw !== 'string' || !raw.trim()) {
+      continue;
+    }
+
+    const clean = raw.trim().replace(/\s+/g, ' ');
+    const sentence = clean.match(/^(.+?[.!?])(\s|$)/);
+
+    if (sentence && sentence[1].length <= 200) {
+      return sentence[1];
+    }
+
+    if (clean.length <= 200) {
+      return clean;
+    }
+
+    return `${clean.slice(0, 197).replace(/\s+\S*$/, '')}...`;
+  }
+
+  return lessonData.title || 'Lesson';
+}
+
 async function seedLesson(moduleId, lessonData) {
+  const fields = {
+    moduleId,
+    slug: lessonData.slug,
+    title: lessonData.title,
+    learningObjectives:
+      lessonData.learningObjectives || [],
+    estimatedDuration: lessonData.estimatedDuration,
+    order: lessonData.order,
+    published:
+      lessonData.published !== undefined
+        ? lessonData.published
+        : false,
+    contentBlocks: normalizeContentBlocks(
+      lessonData.contentBlocks
+    )
+  };
+
+  const update = { $set: fields };
+
+  /*
+   * The Lesson model requires a description. If the seed data
+   * has one, keep it in sync. If not, only fill one in when a
+   * lesson is first created, so existing descriptions are never
+   * overwritten.
+   */
+
+  if (String(lessonData.description || '').trim()) {
+    fields.description = String(lessonData.description).trim();
+  } else {
+    update.$setOnInsert = {
+      description: describeLesson(lessonData)
+    };
+  }
+
   return Lesson.findOneAndUpdate(
     {
       moduleId,
       slug: lessonData.slug
     },
-    {
-      $set: {
-        moduleId,
-        slug: lessonData.slug,
-        title: lessonData.title,
-        description: lessonData.description || '',
-        learningObjectives:
-          lessonData.learningObjectives || [],
-        estimatedDuration: lessonData.estimatedDuration,
-        order: lessonData.order,
-        published:
-          lessonData.published !== undefined
-            ? lessonData.published
-            : false,
-        contentBlocks: normalizeContentBlocks(
-          lessonData.contentBlocks
-        )
-      }
-    },
+    update,
     {
       upsert: true,
       returnDocument: 'after',
