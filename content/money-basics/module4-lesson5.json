@@ -1,0 +1,443 @@
+{
+  "slug": "when-your-income-suddenly-drops",
+  "title": "When Your Income Suddenly Drops: Your First 30 Days",
+  "description": "Your hours were cut, a contract ended or a client stopped paying, and the bills didn't. A calm 30-day plan: know your runway, protect the essentials, talk to the people you owe, and bridge the gap.",
+  "estimatedDuration": 30,
+  "order": 5,
+  "published": true,
+  "contentBlocks": [
+    {
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "It usually doesn't announce itself"
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "One Monday your manager tells you your hours are being cut. Or the contract you were counting on isn't renewed. Or the client who always paid on time goes quiet. The rent, the food and the phone bill don't notice any of this. They are still due."
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Most people react in one of two ways. They freeze and hope it fixes itself, or they panic and make quick decisions they regret later. This lesson is about a third way: a calm, practical plan for the first 30 days."
+      }
+    },
+    {
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Step 1: Find out what is really changing"
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Before you change anything, get the facts. How much money is still coming in? When does the next payment actually arrive? Does this look temporary or permanent? Panic fills the gaps in your information with the worst case. Facts shrink it."
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Also check what help exists where you live. Some places offer unemployment benefits, notice pay or other support, and some of it has a deadline for applying. Ask early, because waiting can cost you."
+      }
+    },
+    {
+      "type": "interactive",
+      "data": {
+        "title": "Write down three numbers",
+        "text": "Take a piece of paper and write: (1) the money still coming in each month, (2) the savings you can reach quickly, and (3) the bills you must pay each month. They don't have to be exact yet. A rough number is far better than none."
+      }
+    },
+    {
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Step 2: Know your runway"
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Your runway is how many months you can keep going before the money runs out. It turns a vague fear into a deadline you can plan around."
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "First work out your gap: your must-pay bills minus any income that is still coming in. Then see how long your savings can cover that gap."
+      }
+    },
+    {
+      "type": "formula",
+      "data": {
+        "text": "Gap = must-pay bills − income still coming in"
+      }
+    },
+    {
+      "type": "formula",
+      "data": {
+        "text": "Runway = savings ÷ monthly gap"
+      }
+    },
+    {
+      "type": "example",
+      "data": {
+        "title": "Maya's runway",
+        "text": "Maya's hours at the café were cut. Her must-pay bills are $1,500 a month, and she still earns $600 from the shifts she has left. Her gap is $1,500 − $600 = $900 a month. She has $1,800 saved, so her runway is $1,800 ÷ $900 = 2 months."
+      }
+    },
+    {
+      "type": "callout",
+      "data": {
+        "title": "A deadline you can see",
+        "text": "A runway of 2 months is scary, but it is not a verdict. It is information. Every step in this lesson is about making that number longer."
+      }
+    },
+    {
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Step 3: Sort your bills into three groups"
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Not every bill is equally urgent. Sort them into three groups."
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Protect: the things that keep a roof over you, food on the table, the lights on and a way to earn. That means rent, groceries, utilities, medicine, transport to work, and the phone and internet you use to look for work."
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Talk first: debts and payment plans, such as loans and cards. A phone call can sometimes change the terms."
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Pause: everything else, such as subscriptions, delivery, and non-essential shopping."
+      }
+    },
+    {
+      "type": "example",
+      "data": {
+        "title": "Maya sorts her list",
+        "text": "Protect: rent $650, groceries $350, utilities $110, phone and internet $60, transport $130, medicine $70. Talk first: her minimum card payment of $130. Pause: video streaming, delivery and a gym membership. Her must-pay total is $650 + $350 + $110 + $60 + $130 + $70 + $130 = $1,500, and nothing from the Pause group is in it."
+      }
+    },
+    {
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Step 4: Cut fast, and cut the right things"
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Cancel or pause what you can in the first week, not the first month. Every day you wait costs money. Start with subscriptions, delivery and anything that renews automatically."
+      }
+    },
+    {
+      "type": "example",
+      "data": {
+        "title": "Priya's first-week cuts",
+        "text": "Priya cancels a $15 video service, a $12 music plan, a $9 app and a $28 gym membership. That is $15 + $12 + $9 + $28 = $64 a month, or $768 over a year, from about ten minutes of work."
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Be careful not to cut the things that help you earn. Mobile data for job applications, a bus pass for interviews, or the phone you rely on for work can be worth keeping, even if they feel like extras."
+      }
+    },
+    {
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Step 5: Talk to the people you owe before you miss a payment"
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Landlords, lenders, utility companies and schools often have options when they hear early: a later due date, a smaller payment for a few months, a payment plan. They have far fewer options once you have gone silent and the account is overdue. Nothing is guaranteed, but asking early gives you the best chance."
+      }
+    },
+    {
+      "type": "example",
+      "data": {
+        "title": "A short message that works",
+        "text": "\"Hi, my hours were cut and my income has dropped. I want to keep paying. I can pay $200 on the 15th, and I'd like to agree on a plan for the rest. Can we talk this week?\""
+      }
+    },
+    {
+      "type": "callout",
+      "data": {
+        "title": "Silence is the expensive choice",
+        "text": "A missed payment you warned them about is usually easier to deal with than one they discover on their own."
+      }
+    },
+    {
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Step 6: Be careful with fast money"
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "When money is tight, a quick loan can look like a lifeline. But borrowing to cover everyday costs can turn a short drop in income into a longer problem, especially with high-cost loans where a big fee is charged for a short period."
+      }
+    },
+    {
+      "type": "example",
+      "data": {
+        "title": "What a small fee really costs",
+        "text": "You take a $300 short-term loan with a $45 fee, due in two weeks. $45 ÷ $300 = 15% for just two weeks. If you can't repay on time and the loan rolls over, another $45 can be added each time."
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "If you do need to borrow, compare the full cost first, and ask whether a payment plan with the person you owe would be cheaper. The lesson \"How to Borrow Safely and Avoid Predatory Debt\" goes deeper on this."
+      }
+    },
+    {
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Step 7: Build a bridge, not a perfect job"
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Finding the right job can take months. In the meantime, bridge income buys you time, even when it is small and imperfect. That can be weekend work, temporary shifts, freelance tasks, selling things you no longer use, or asking for more hours where you already work."
+      }
+    },
+    {
+      "type": "example",
+      "data": {
+        "title": "How a small bridge stretches the runway",
+        "text": "Back to Maya. She picks up $400 a month from weekend deliveries. Her gap drops from $900 to $900 − $400 = $500. Her runway grows from 2 months to $1,800 ÷ $500 = 3.6 months. It is not a fix, but it is 1.6 more months to find something better."
+      }
+    },
+    {
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Use your savings on purpose"
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "This is exactly what savings are for, so do not feel guilty about using them. But decide how fast. Turn the monthly gap into a weekly number and treat it like a ration."
+      }
+    },
+    {
+      "type": "example",
+      "data": {
+        "title": "A weekly number",
+        "text": "Maya's gap is $900 a month, which is roughly $208 a week. That is the most she plans to take from her savings each week. Once she knows the number, every purchase gets easier to decide."
+      }
+    },
+    {
+      "type": "interactive",
+      "data": {
+        "title": "Your turn",
+        "text": "Using your own rough numbers, work out your gap and your runway. Then ask yourself two questions: what is one thing I could cut this week, and who should I talk to first?"
+      }
+    },
+    {
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Slow down on big decisions you can't undo"
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "When you are scared, big moves can feel like action. Selling your home, cashing out long-term savings that come with penalties or taxes, signing a new loan, or accepting the first offer at any price can be very hard to reverse. Give yourself a pause, and a second opinion if you can, before anything you can't undo."
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Also tell the people who share your money. A partner, family member or housemate who finds out late can't help early, and surprises make everything harder."
+      }
+    },
+    {
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "When income comes back"
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "When your income recovers, it is tempting to go straight back to your old spending. A better order: first rebuild the savings you used, then catch up on anything you delayed, and only then let spending grow again."
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Look at your cut list, too. Some of the things you cancelled during the tight months, you may not miss at all."
+      }
+    },
+    {
+      "type": "summary",
+      "data": {
+        "title": "What to remember",
+        "points": [
+          "Find out what is actually changing before you change anything.",
+          "Runway = savings ÷ monthly gap. It turns fear into a deadline you can work on.",
+          "Sort your bills into Protect, Talk first and Pause.",
+          "Cut subscriptions and extras in the first week, but keep what helps you earn.",
+          "Talk to the people you owe before you miss a payment.",
+          "Be careful with fast, high-cost borrowing.",
+          "Even small bridge income can stretch your runway a lot.",
+          "Slow down on big decisions you can't undo, and tell the people who share your money.",
+          "When income returns, rebuild savings before spending grows again."
+        ]
+      }
+    },
+    {
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "The one thing to remember"
+      }
+    },
+    {
+      "type": "callout",
+      "data": {
+        "title": "Time is what you are buying",
+        "text": "In the first 30 days, every step does the same job: it gives you more time to make good decisions instead of rushed ones."
+      }
+    }
+  ],
+  "quiz": [
+    {
+      "order": 1,
+      "questionType": "multiple-choice",
+      "question": "You have $2,400 in savings and must-pay bills of $1,200 a month. Your income has stopped completely. About how long can your savings cover your bills?",
+      "options": [
+        "1 month",
+        "2 months",
+        "3 months",
+        "12 months"
+      ],
+      "correctAnswer": 1,
+      "explanation": "$2,400 ÷ $1,200 = 2 months. That is your runway if nothing else changes.",
+      "points": 10
+    },
+    {
+      "order": 2,
+      "questionType": "multiple-choice",
+      "question": "Your must-pay bills are $1,300 a month and you still earn $500 a month. What is your monthly gap?",
+      "options": [
+        "$500",
+        "$800",
+        "$1,300",
+        "$1,800"
+      ],
+      "correctAnswer": 1,
+      "explanation": "The gap is the must-pay bills minus the income still coming in: $1,300 − $500 = $800.",
+      "points": 10
+    },
+    {
+      "order": 3,
+      "questionType": "multiple-choice",
+      "question": "Your gap is $800 a month and you have $3,000 saved. You find $200 a month of bridge income, so your gap becomes $600. How long do your savings last now?",
+      "options": [
+        "3 months",
+        "4 months",
+        "5 months",
+        "6 months"
+      ],
+      "correctAnswer": 2,
+      "explanation": "$800 − $200 = $600 gap. $3,000 ÷ $600 = 5 months, compared with 3.75 months before the bridge income.",
+      "points": 10
+    },
+    {
+      "order": 4,
+      "questionType": "multiple-choice",
+      "question": "You won't be able to pay your full rent next month. What is usually the best first move?",
+      "options": [
+        "Say nothing and hope it works out",
+        "Contact your landlord before the due date, explain, and suggest a plan",
+        "Take a high-cost short-term loan without comparing costs",
+        "Move out without telling anyone"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Landlords and lenders usually have more options when they hear early. Staying silent removes most of them.",
+      "points": 10
+    },
+    {
+      "order": 5,
+      "questionType": "multiple-choice",
+      "question": "Which of these is usually a good first thing to cut when your income drops?",
+      "options": [
+        "Video and music subscriptions you can pause",
+        "The phone data you use to apply for jobs",
+        "Your rent",
+        "The transport you need to reach work"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Subscriptions and extras can be paused quickly. Cutting the things that help you earn can make the problem worse.",
+      "points": 10
+    },
+    {
+      "order": 6,
+      "questionType": "true-false",
+      "question": "A high-cost short-term loan is a safe way to cover groceries during a temporary drop in income.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctAnswer": 1,
+      "explanation": "High fees on a short loan can be very expensive, and rollovers can make it grow. Compare the full cost and look at cheaper options first.",
+      "points": 10
+    },
+    {
+      "order": 7,
+      "questionType": "multiple-choice",
+      "question": "Your income has come back after three tight months. What makes the most sense to do first?",
+      "options": [
+        "Go back to your old spending straight away",
+        "Buy something to celebrate",
+        "Rebuild the savings you used and catch up on anything you delayed",
+        "Ignore the bills you delayed"
+      ],
+      "correctAnswer": 2,
+      "explanation": "Rebuilding savings and catching up first protects you if income drops again. Spending can grow after that.",
+      "points": 10
+    },
+    {
+      "order": 8,
+      "questionType": "true-false",
+      "question": "Telling the people you owe about your situation before you miss a payment can open options that staying silent closes off.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Early contact gives lenders, landlords and others room to offer a plan. Nothing is guaranteed, but silence usually makes it harder.",
+      "points": 10
+    }
+  ]
+}
