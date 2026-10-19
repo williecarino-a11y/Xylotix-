@@ -1,0 +1,363 @@
+{
+  "slug": "scam-calls-texts-and-messages",
+  "title": "Scam Calls, Texts and Messages: Stop, Check, Then Decide",
+  "description": "Fake bank texts, delivery fees, \"Mum, I lost my phone\" messages and easy online jobs. The five signs that show up in almost every scam, and a pause-and-check habit that works even when you're stressed.",
+  "estimatedDuration": 30,
+  "order": 6,
+  "published": true,
+  "contentBlocks": [
+    {
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "It's rarely a clever hacker. It's usually a normal-looking message."
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Most money scams don't need technical skill. They need one thing: you acting before you think. A text from your \"bank\". A call from \"your child\" on a new number. A buyer who sends too much money by mistake. They look ordinary, and they arrive when you're busy, tired or worried."
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Anyone can get caught, including smart, careful people. Scammers do this for a living, all day. This lesson isn't about being perfect. It's about a few habits that still work when you're stressed."
+      }
+    },
+    {
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "What almost every scam has in common"
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "The story changes, but the pattern rarely does. Look for these five signs."
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "1. Urgency. \"Act now.\" \"Within 10 minutes.\" \"Your account will be closed.\" Urgency is there to stop you thinking."
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "2. Secrecy. \"Don't tell anyone.\" \"Don't tell the bank.\" Secrecy stops other people from spotting the scam."
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "3. Unusual payment. Gift cards, crypto, a transfer to a \"safe account\", or a payment app to a stranger. These are hard to get back."
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "4. They contacted you first. A real bank or delivery company can wait while you check. A call or message you didn't ask for deserves extra suspicion."
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "5. Too good, or too scary. Free money, prizes, huge returns, or threats of arrest or a frozen account."
+      }
+    },
+    {
+      "type": "callout",
+      "data": {
+        "title": "One sign is enough to pause",
+        "text": "You don't need to see all five. One is a good reason to stop and check before you click, reply or pay."
+      }
+    },
+    {
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "The scams people actually meet"
+      }
+    },
+    {
+      "type": "example",
+      "data": {
+        "title": "The \"your account is locked\" text",
+        "text": "A text says: \"Your bank account has been locked. Verify within 10 minutes.\" The link opens a page that looks exactly like your bank. You type your username and password, and now the scammer has them. A real bank doesn't ask you to log in through a link in a text."
+      }
+    },
+    {
+      "type": "example",
+      "data": {
+        "title": "The delivery fee",
+        "text": "A message says: \"Your parcel is waiting. Pay a $2.99 re-delivery fee.\" The fee is so small you don't think twice. But the page collects your card details, and later $480 is charged to your card. The small fee was the bait."
+      }
+    },
+    {
+      "type": "example",
+      "data": {
+        "title": "The \"Mum, I lost my phone\" message",
+        "text": "A message from an unknown number: \"Hi Mum, I dropped my phone, this is my new number. Can you send $300 urgently? I'll explain later.\" It's built to hit you where you care most. Call the person on the number you already have, or ask a question only they could answer."
+      }
+    },
+    {
+      "type": "example",
+      "data": {
+        "title": "The buyer who pays too much",
+        "text": "You sell something for $800. The \"buyer\" sends $1,200 and says it was a mistake, so please refund the extra $400. A few days later the original payment bounces or is reversed. The $400 you sent is real, and it's gone."
+      }
+    },
+    {
+      "type": "example",
+      "data": {
+        "title": "The easy online job",
+        "text": "You're offered $8 for liking some videos, and it really pays. Then you're told to deposit $150 to unlock a \"bonus level\", then $600 more. You've put in $150 + $600 = $750 and taken out $8. The first small payment was there to earn your trust."
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "One more thing about codes. The one-time code sent to your phone is a key to your account. Anyone who asks you to read it out, including someone who says they're from your bank, is trying to get in. A real bank will not ask for your PIN, your password or a one-time code."
+      }
+    },
+    {
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Your pause-and-check habit"
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Whatever the story is, the moves are the same."
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Stop. Don't click, reply or pay yet. A few minutes costs you nothing."
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Leave. Close the message or hang up."
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Check another way. Use the number on the back of your card, your bank's official app, or a number you already have for the person. Never use the number or link they gave you."
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Ask someone. Tell a friend or family member. Scammers need you to be alone with it."
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Then decide."
+      }
+    },
+    {
+      "type": "interactive",
+      "data": {
+        "title": "Practice it",
+        "text": "Think of the last urgent message you got about money. Which of the five signs did it have? What would you do differently now?"
+      }
+    },
+    {
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Set up your money so one mistake costs less"
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Turn on two-step verification for your bank and your email. Keep savings in an account that isn't linked to your everyday card or payment app. If your bank lets you, set a daily transfer limit. And look through your statements regularly, especially for small charges you don't recognise."
+      }
+    },
+    {
+      "type": "example",
+      "data": {
+        "title": "Why a transfer limit helps",
+        "text": "Daniel's banking app has a daily transfer limit of $500. A scammer gets into his account and tries to move $3,000, but only $500 goes through. That's $500 ÷ $3,000, one sixth of what they tried to take, and it gave Daniel time to notice and call his bank."
+      }
+    },
+    {
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "If you've been scammed"
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Move fast, because speed matters. Contact your bank or payment provider right away and tell them exactly what happened. Change the passwords for any account the scammer could have reached. Report it to the relevant authority where you live."
+      }
+    },
+    {
+      "type": "callout",
+      "data": {
+        "title": "Watch out for the second scam",
+        "text": "After a scam, some people are contacted by someone offering to get the money back for an upfront fee. That is usually a second scam, aimed at the same person."
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Tell someone you trust. Many people stay quiet out of embarrassment, and that silence helps the scammer. Being targeted doesn't mean you were careless. It means someone worked at it."
+      }
+    },
+    {
+      "type": "summary",
+      "data": {
+        "title": "What to remember",
+        "points": [
+          "Urgency, secrecy, unusual payment, unexpected contact, and too good or too scary are the five common signs.",
+          "One sign is enough to pause.",
+          "Stop, leave, check another way, ask someone, then decide.",
+          "Never use the number or link the message gave you. Find the real one yourself.",
+          "Nobody real needs your PIN, password or one-time code.",
+          "Two-step verification, separate savings and transfer limits make one mistake cost less.",
+          "If you're scammed, call your bank right away and be wary of anyone offering to recover the money for a fee.",
+          "Tell someone. Silence helps scammers."
+        ]
+      }
+    },
+    {
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "The one thing to remember"
+      }
+    },
+    {
+      "type": "callout",
+      "data": {
+        "title": "Slow is safe",
+        "text": "Every scam needs you to hurry. Taking five minutes to check another way is the most powerful thing you can do."
+      }
+    }
+  ],
+  "quiz": [
+    {
+      "order": 1,
+      "questionType": "multiple-choice",
+      "question": "A text says your bank account is locked and you must click a link within 10 minutes. What is the best response?",
+      "options": [
+        "Click the link quickly so the account isn't closed",
+        "Reply to the text to ask if it's real",
+        "Ignore the link and contact your bank using the number on your card or its official app",
+        "Forward the text to friends"
+      ],
+      "correctAnswer": 2,
+      "explanation": "Never use the link in the message. Contacting your bank through a number or app you already trust lets you check without being rushed.",
+      "points": 10
+    },
+    {
+      "order": 2,
+      "questionType": "multiple-choice",
+      "question": "Which combination is the strongest warning sign of a scam?",
+      "options": [
+        "The message uses your name",
+        "Pressure to act fast, a request to keep it secret, and payment by gift card or crypto",
+        "The message comes during the day",
+        "The message is polite"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Urgency, secrecy and unusual payment methods are the classic signs. Scammers use names and polite language, so those alone prove nothing.",
+      "points": 10
+    },
+    {
+      "order": 3,
+      "questionType": "true-false",
+      "question": "A real bank employee may ask you to read out the one-time code sent to your phone.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctAnswer": 1,
+      "explanation": "One-time codes are keys to your account. A real bank will not ask you for your PIN, password or one-time code.",
+      "points": 10
+    },
+    {
+      "order": 4,
+      "questionType": "multiple-choice",
+      "question": "You sell an item for $800. The buyer sends $1,200 and asks you to refund the extra $400. Later, the $1,200 payment bounces. What have you lost?",
+      "options": [
+        "Nothing",
+        "The $400 you refunded, and possibly the item",
+        "Only the item",
+        "$1,200"
+      ],
+      "correctAnswer": 1,
+      "explanation": "The refund you sent was real money. The original payment was not. This is why you should wait until payments have fully cleared before refunding anything.",
+      "points": 10
+    },
+    {
+      "order": 5,
+      "questionType": "multiple-choice",
+      "question": "You get a message: \"Hi, it's your son, I lost my phone, please send $300 now.\" It's from an unknown number. What is the best first step?",
+      "options": [
+        "Send the money, then ask questions",
+        "Reply asking for more details by text",
+        "Send half the amount to be safe",
+        "Call your son on the number you already have, or ask a question only he could answer"
+      ],
+      "correctAnswer": 3,
+      "explanation": "Check using a number you already trust. A scammer can't answer a personal question or pick up your son's real phone.",
+      "points": 10
+    },
+    {
+      "order": 6,
+      "questionType": "multiple-choice",
+      "question": "You realize you just sent money to a scammer. What should you do first?",
+      "options": [
+        "Wait a few days to see if it comes back",
+        "Feel embarrassed and say nothing",
+        "Contact your bank or payment provider right away",
+        "Send the scammer a message asking for it back"
+      ],
+      "correctAnswer": 2,
+      "explanation": "Speed matters. Your bank may be able to stop or recall a payment if you report it quickly.",
+      "points": 10
+    },
+    {
+      "order": 7,
+      "questionType": "true-false",
+      "question": "Someone contacts you after a scam and offers to recover your money for an upfront fee. This is usually trustworthy.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Upfront-fee recovery offers are often a second scam aimed at someone who has already been targeted.",
+      "points": 10
+    },
+    {
+      "order": 8,
+      "questionType": "multiple-choice",
+      "question": "An online job pays you $8 for easy tasks, then asks you to deposit $150, then $600, to \"unlock\" more earnings. What is most likely happening?",
+      "options": [
+        "A normal training fee",
+        "A scam that uses a small first payment to build trust before taking larger deposits",
+        "A bank error",
+        "A temporary promotion"
+      ],
+      "correctAnswer": 1,
+      "explanation": "The small early payment builds trust. Then the deposits keep growing and you never get them back: $750 in and $8 out.",
+      "points": 10
+    }
+  ]
+}
