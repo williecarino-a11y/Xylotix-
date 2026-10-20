@@ -339,39 +339,14 @@
     theme: {
       title: 'App theme',
       render: function (body) {
-        var T = window.MiimiidTheme;
-        var options = [
-          { id: 'dark', label: 'Dark', ic: 'moon' },
-          { id: 'light', label: 'Light', ic: 'sun' },
-          { id: 'system', label: 'Match device', ic: 'phone' }
-        ];
-
-        function draw() {
-          var current = T ? T.get() : 'dark';
-          body.innerHTML =
-            '<div class=\"mm-label\">Appearance</div>' +
-            '<div class=\"mm-card\">' +
-              options.map(function (o) {
-                return '<div class=\"mm-option' + (o.id === current ? ' is-selected' : '') + '\" data-theme-choice=\"' + o.id + '\" role=\"radio\" tabindex=\"0\" aria-checked=\"' + (o.id === current) + '\" style=\"cursor:pointer\">' +
-                  icon(o.ic, 20) + '<span>' + o.label + '</span>' + (o.id === current ? icon('check', 20) : '') +
-                '</div>';
-              }).join('') +
-            '</div>' +
-            '<p class=\"mm-note\">' + (current === 'system' ? 'Miimiid follows the light or dark setting of your device.' : 'Choose how Miimiid looks on this device.') + '</p>';
-
-          body.querySelectorAll('[data-theme-choice]').forEach(function (el) {
-            function pick() {
-              if (T) T.set(el.getAttribute('data-theme-choice'));
-              draw();
-            }
-            el.addEventListener('click', pick);
-            el.addEventListener('keydown', function (e) {
-              if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick(); }
-            });
-          });
-        }
-
-        draw();
+        body.innerHTML =
+          '<div class="mm-label">Appearance</div>' +
+          '<div class="mm-card">' +
+            '<div class="mm-option is-selected">' + icon('moon', 20) + '<span>Dark</span>' + icon('check', 20) + '</div>' +
+            '<div class="mm-option is-disabled">' + icon('sun', 20) + '<span>Light</span><span class="mm-badge">Coming soon</span></div>' +
+            '<div class="mm-option is-disabled">' + icon('phone', 20) + '<span>Match device</span><span class="mm-badge">Coming soon</span></div>' +
+          '</div>' +
+          '<p class="mm-note">Miimiid uses the dark theme everywhere for now.</p>';
       }
     },
 
