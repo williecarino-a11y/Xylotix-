@@ -1,0 +1,386 @@
+{
+  "slug": "how-to-negotiate-your-bills",
+  "title": "How to Negotiate Your Bills: What to Say and When to Ask",
+  "description": "Phone plans, rent, insurance, medical bills and credit card interest are often more flexible than they look. How to prepare, what to say, and the traps to avoid.",
+  "estimatedDuration": 30,
+  "order": 6,
+  "published": true,
+  "contentBlocks": [
+    {
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Most people never ask"
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Many bills feel fixed. The phone company sends a price, the landlord sends a renewal, the insurer sends a premium, and we pay. But more of them are flexible than most people think, and the people who ask often pay less than the people who don't."
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "There's no guarantee. Sometimes the answer is no. But asking costs you about 15 minutes and a little courage, and a yes can save you money every month for a year or more."
+      }
+    },
+    {
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Why asking can work"
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Companies and landlords usually prefer to keep a customer or tenant rather than lose one. Replacing you costs them time and money: advertising, empty months, setting up a new account. That gives them a reason to find a smaller price for someone reliable who asks politely."
+      }
+    },
+    {
+      "type": "example",
+      "data": {
+        "title": "Small savings add up",
+        "text": "Ravi calls about his three biggest bills. His phone plan drops from $55 to $40, a saving of $15 a month. His internet drops from $60 to $45, saving $15. His renter's insurance drops from $22 to $17 after he asks about discounts, saving $5. That is $15 + $15 + $5 = $35 a month, or $35 × 12 = $420 a year, for one afternoon of calls."
+      }
+    },
+    {
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Prepare before you ask"
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Five minutes of preparation changes the whole conversation."
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Know your bill. Read it line by line. Look for extras you don't use, fees you don't recognise and mistakes."
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Know your options. Look up what a similar plan costs elsewhere. Use a real offer. Never invent one."
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Know your number. Decide what price you'd be happy with before you call."
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Know your leverage. Years as a customer, on-time payments and a willingness to switch all matter."
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Pick a calm moment. Don't call when you're stressed or in a hurry."
+      }
+    },
+    {
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "What to say"
+      }
+    },
+    {
+      "type": "example",
+      "data": {
+        "title": "A call to a phone or internet provider",
+        "text": "\"Hi, I've been with you for four years and I'm reviewing my bills. My plan is $55 a month, and I've seen a similar plan for $40 from another provider. I'd prefer to stay. Is there anything you can do on the price?\" Then stop talking and let them answer."
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "If the answer is no, stay polite and try a second question: \"Are there any loyalty or retention offers I might be eligible for?\" Or ask for someone who can review your account. The person on the phone didn't set the prices, so there's no need to be aggressive."
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "If you get a better price, ask for it in writing or by email. Then ask two more questions: when does this price end, and what will I pay afterwards?"
+      }
+    },
+    {
+      "type": "callout",
+      "data": {
+        "title": "Stay honest",
+        "text": "Only mention an offer that really exists. Being polite, prepared and truthful works better than bluffing, and it keeps your word good."
+      }
+    },
+    {
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Different bills, different approaches"
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Phone and internet. Ask about loyalty offers, switch to a cheaper plan, and remove extras you don't use. Compare with other providers once a year."
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Rent. Before your lease renews, ask whether the rent can stay the same. Landlords value tenants who pay on time, because an empty home costs them a full month's rent or more. Offering a longer lease can help."
+      }
+    },
+    {
+      "type": "example",
+      "data": {
+        "title": "A rent conversation",
+        "text": "Amara's rent is due to rise by $100 a month. She says: \"I've lived here two years and always paid on time. I'd like to renew for another year. I've seen similar places nearby for less. Would you consider a smaller increase?\" The landlord agrees to $40. Amara saves $100 − $40 = $60 a month, or $60 × 12 = $720 over the year."
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Insurance. Compare quotes once a year, and ask about discounts for bundling policies, a higher deductible or a clean record."
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Medical bills. Ask for an itemized bill and check it for errors. Ask about discounts, financial help or an interest-free payment plan. Don't ignore it."
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Debt. If you've paid on time, ask your lender whether a lower interest rate is possible. A lower rate saves real money."
+      }
+    },
+    {
+      "type": "example",
+      "data": {
+        "title": "What a lower rate is worth",
+        "text": "Jo owes $3,000 on a credit card at 24% a year. That is $3,000 × 0.24 = $720 of interest a year. After calling, the rate drops to 18%, which is $3,000 × 0.18 = $540 a year. Jo saves $720 − $540 = $180 a year, if the balance stays the same."
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Subscriptions. If you cancel, you may be offered a discount. Only accept it if you would genuinely keep using the service."
+      }
+    },
+    {
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Watch out for these traps"
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Promotional prices that jump. A low price for 12 months is only a deal if you know what it becomes afterwards."
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Long contracts. Don't lock yourself into two years for a small saving. Check the cancellation cost."
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Hidden fees. Ask whether the new price includes everything."
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Paid negotiators. A company that asks for a large upfront fee to negotiate your bills for you deserves extra caution. You can usually do it yourself for free."
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Calls you didn't start. Never give card details to someone who phoned you offering a better deal. Call the company yourself, using the number on your bill or their official site."
+      }
+    },
+    {
+      "type": "callout",
+      "data": {
+        "title": "Never threaten to miss payments",
+        "text": "Falling behind can bring fees, credit damage and a harder conversation. Negotiate while your account is in good standing."
+      }
+    },
+    {
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Make it a yearly habit"
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Prices creep up quietly, and promotional deals end. A bill check-up once a year keeps your costs honest."
+      }
+    },
+    {
+      "type": "interactive",
+      "data": {
+        "title": "Your bill check-up",
+        "text": "List your three biggest regular bills. For each one, write today's price, a price you'd be happy with, and one action: compare, call or cancel. Put the renewal dates in your calendar so you remember to ask again."
+      }
+    },
+    {
+      "type": "summary",
+      "data": {
+        "title": "What to remember",
+        "points": [
+          "Many bills are more flexible than they look, but there's no guarantee.",
+          "Prepare: know your bill, your options, your number and your leverage.",
+          "Be polite, honest and clear, then stop talking and listen.",
+          "Ask for the new price in writing, and find out when it ends.",
+          "Ask about rent, insurance, medical bills and interest rates, not just phone plans.",
+          "Watch out for promotional prices that jump, long contracts and hidden fees.",
+          "Don't pay big upfront fees to negotiators, and never give card details to people who called you.",
+          "Do a bill check-up once a year."
+        ]
+      }
+    },
+    {
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "The one thing to remember"
+      }
+    },
+    {
+      "type": "callout",
+      "data": {
+        "title": "Ask once, save all year",
+        "text": "A 15-minute call can lower a bill for a year or more. The only price you pay for trying is a little discomfort."
+      }
+    }
+  ],
+  "quiz": [
+    {
+      "order": 1,
+      "questionType": "multiple-choice",
+      "question": "What is the best first step before calling to negotiate a bill?",
+      "options": [
+        "Threaten to cancel immediately",
+        "Read your bill and find out what similar plans cost elsewhere",
+        "Wait until you miss a payment",
+        "Pay extra so they like you"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Preparation gives you facts and confidence. Know your bill, your options and the number you'd be happy with.",
+      "points": 10
+    },
+    {
+      "order": 2,
+      "questionType": "multiple-choice",
+      "question": "Your phone plan drops from $55 to $40 a month. How much do you save in a year?",
+      "options": [
+        "$15",
+        "$90",
+        "$180",
+        "$660"
+      ],
+      "correctAnswer": 2,
+      "explanation": "$55 − $40 = $15 a month, and $15 × 12 = $180 a year.",
+      "points": 10
+    },
+    {
+      "order": 3,
+      "questionType": "true-false",
+      "question": "If you ask politely, you are guaranteed a lower price.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Nothing is guaranteed. But asking costs very little, and many people do get a better price or a useful offer.",
+      "points": 10
+    },
+    {
+      "order": 4,
+      "questionType": "multiple-choice",
+      "question": "You owe $3,000 on a credit card at 24% a year. After a call, the rate drops to 18%. About how much interest do you save in a year if the balance doesn't change?",
+      "options": [
+        "$540",
+        "$720",
+        "$60",
+        "$180"
+      ],
+      "correctAnswer": 3,
+      "explanation": "At 24%: $3,000 × 0.24 = $720. At 18%: $3,000 × 0.18 = $540. The difference is $180 a year.",
+      "points": 10
+    },
+    {
+      "order": 5,
+      "questionType": "multiple-choice",
+      "question": "Your rent is due to rise by $100 a month. You negotiate it down to a $40 rise. How much do you save over 12 months?",
+      "options": [
+        "$720",
+        "$60",
+        "$1,200",
+        "$100"
+      ],
+      "correctAnswer": 0,
+      "explanation": "$100 − $40 = $60 a month, and $60 × 12 = $720 over the year.",
+      "points": 10
+    },
+    {
+      "order": 6,
+      "questionType": "multiple-choice",
+      "question": "A medical bill arrives that is higher than you expected. What is a sensible first move?",
+      "options": [
+        "Pay it immediately without reading it",
+        "Ignore it until it goes away",
+        "Ask for an itemized bill, check it for errors, and ask about discounts or a payment plan",
+        "Put it on a credit card with a high interest rate"
+      ],
+      "correctAnswer": 2,
+      "explanation": "Medical bills often have errors, and many providers offer discounts or payment plans. Ignoring a bill usually makes things worse.",
+      "points": 10
+    },
+    {
+      "order": 7,
+      "questionType": "true-false",
+      "question": "A company that demands a large upfront fee to negotiate your bills for you deserves extra caution.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctAnswer": 0,
+      "explanation": "You can usually make these calls yourself for free. Large upfront fees are a warning sign.",
+      "points": 10
+    },
+    {
+      "order": 8,
+      "questionType": "multiple-choice",
+      "question": "You get a lower price for 12 months. What should you check?",
+      "options": [
+        "Nothing, a lower price is a lower price",
+        "Only the agent's name",
+        "Whether the company has a nice logo",
+        "When the lower price ends and what you'll pay afterwards"
+      ],
+      "correctAnswer": 3,
+      "explanation": "A promotional price can jump after the offer ends. Ask when it ends, what it becomes, and whether there is a contract or cancellation cost.",
+      "points": 10
+    }
+  ]
+}
