@@ -201,6 +201,21 @@
 }
 .mm-help-group-list { background: #111a2e; border: 1px solid #1f2a44; border-radius: 16px; overflow: hidden; }
 
+/* Covers the in-between screens while the lesson opens */
+.mm-help-opening {
+  position: fixed; inset: 0; z-index: 9500; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 16px;
+  background: #0a1120; color: #cbd5e1; font-size: 0.95rem;
+  animation: mm-help-fade 0.15s ease-out;
+}
+.mm-help-opening .mm-help-spin { width: 28px; height: 28px; border-width: 3px; }
+.mm-help-opening.is-leaving { opacity: 0; transition: opacity 0.18s ease-in; }
+@keyframes mm-help-fade { from { opacity: 0; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) {
+  .mm-help-opening { animation: none; }
+  .mm-help-opening.is-leaving { transition: none; }
+}
+
 .mm-help-toast {
   position: fixed; left: 16px; right: 16px; bottom: calc(84px + env(safe-area-inset-bottom, 0px)); z-index: 9100;
   padding: 13px 16px; border-radius: 14px; background: #1e293b; border: 1px solid #334155;
@@ -319,46 +334,75 @@
 
   /* ---------- open the lesson (same steps as the Continue learning card) ---------- */
   var busy = false;
+  var overlay = null;
+  var overlayTimer = null;
+
+  function showOpening() {
+    hideOpening(true);
+    overlay = document.createElement('div');
+    overlay.className = 'mm-help-opening';
+    overlay.setAttribute('role', 'status');
+    overlay.setAttribute('aria-live', 'polite');
+    overlay.innerHTML = '<span class="mm-help-spin"></span><span>' + esc(t('helpNowOpening', 'Opening your lesson')) + '\u2026</span>';
+    document.body.appendChild(overlay);
+    // Never leave the screen covered if something hangs.
+    clearTimeout(overlayTimer);
+    overlayTimer = setTimeout(function () { hideOpening(true); }, 12000);
+  }
+
+  function hideOpening(immediate) {
+    clearTimeout(overlayTimer);
+    var el = overlay;
+    overlay = null;
+    if (!el) return;
+    if (immediate) {
+      if (el.parentNode) el.parentNode.removeChild(el);
+      return;
+    }
+    el.classList.add('is-leaving');
+    setTimeout(function () { if (el.parentNode) el.parentNode.removeChild(el); }, 200);
+  }
+
+  function afterPaint() {
+    return new Promise(function (resolve) {
+      requestAnimationFrame(function () { setTimeout(resolve, 120); });
+    });
+  }
 
   async function go(situation, row) {
     if (busy) return;
     busy = true;
-
-    var chev = row && row.querySelector('.mm-help-chev');
-    var spin = null;
-    if (row) {
-      row.disabled = true;
-      if (chev) {
-        spin = document.createElement('span');
-        spin.className = 'mm-help-spin';
-        chev.replaceWith(spin);
-      }
-    }
+    if (row) row.disabled = true;
+    showOpening();
+    closeSheet(true);
 
     try {
-      var courseId = await findCourseId();
+      // Find the course and switch to Learn at the same time.
+      var results = await Promise.all([
+        findCourseId(),
+        typeof miimiidNavigate === 'function' ? miimiidNavigate('learn') : null
+      ]);
+      var courseId = results[0];
       if (!courseId) throw new Error('course not found');
 
-      closeSheet(true);
-
-      if (typeof miimiidNavigate === 'function') await miimiidNavigate('learn');
       if (typeof openCourse === 'function') await openCourse(courseId);
 
       var lesson = findLesson(situation);
       if (lesson && typeof openLesson === 'function') {
         openLesson(lesson._id);
+        await afterPaint();
+        hideOpening();
       } else {
+        hideOpening(true);
         toast(t('helpNowNotFound', 'We could not open that lesson. Find it in the list.'));
       }
     } catch (e) {
       console.error('Help now error:', e);
+      hideOpening(true);
       toast(t('helpNowFailed', 'Could not open the lesson. Check your connection and try again.'));
     } finally {
       busy = false;
-      if (row && row.isConnected) {
-        row.disabled = false;
-        if (spin && spin.isConnected && chev) spin.replaceWith(chev);
-      }
+      if (row && row.isConnected) row.disabled = false;
     }
   }
 
@@ -462,6 +506,8 @@
   if (dash) {
     new MutationObserver(render).observe(dash, { childList: true });
     render();
+    // Look the course up in the background so the first tap is faster.
+    setTimeout(function () { findCourseId(); }, 1500);
   }
 
   // Small surface for tests and for opening the full list from elsewhere.
