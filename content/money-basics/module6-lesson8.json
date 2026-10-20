@@ -1,0 +1,333 @@
+{
+  "slug": "weddings-funerals-and-big-family-events-without-debt",
+  "title": "Weddings, Funerals and Big Family Events Without Debt",
+  "description": "Social pressure, short deadlines and strong emotions make big family events budget-breakers. How to set the budget first, price it properly, save ahead, and mark the moment without borrowing against your future.",
+  "estimatedDuration": 30,
+  "order": 8,
+  "published": true,
+  "contentBlocks": [
+    {
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "The event lasts a day. The debt can last years."
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "A wedding. A funeral. A baby naming. A graduation party. A big family gathering. These moments matter, and they come with pressure: “What will people say?” “We have to do it properly.” “Everyone will be there.” Many families borrow to meet that pressure, and then spend years paying for one day."
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "This lesson is about marking big moments well without wrecking your finances."
+      }
+    },
+    {
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Why these events break budgets"
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Several things pile up at once: other people's expectations, strong emotions, a fixed date, a long list of costs nobody has priced, and no practice, because most of us only do this a few times in life. In that situation, spending feels like love, and saying no feels like failing."
+      }
+    },
+    {
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Step 1: Set the budget first, then plan the event"
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Don't plan the dream event and then look at the price. Decide first how much you can afford, including who is contributing, then design the event to fit inside it."
+      }
+    },
+    {
+      "type": "formula",
+      "data": {
+        "text": "Total cost = (cost per guest × number of guests) + fixed costs"
+      }
+    },
+    {
+      "type": "example",
+      "data": {
+        "title": "Guest count is the biggest lever",
+        "text": "Nadia's wedding costs $20 per guest for food and drinks, plus $1,000 in fixed costs for the venue, music and outfits. For 100 guests: $20 × 100 + $1,000 = $3,000. For 60 guests: $20 × 60 + $1,000 = $2,200. Cutting 40 guests saves $800, without changing anything else."
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Ask: which two or three things matter most to us? Spend on those. Cut quietly on the rest."
+      }
+    },
+    {
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Step 2: Price it properly"
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Ask for itemized quotes and compare at least two or three. Ask what's included, what's extra, and what happens if you cancel. Get everything in writing. And add a buffer for the things people forget: transport, extra guests, tips, clean-up, last-minute extras."
+      }
+    },
+    {
+      "type": "example",
+      "data": {
+        "title": "The 10% buffer",
+        "text": "Nadia's plan is $3,000. With a 10% buffer, she plans for $3,000 × 1.10 = $3,300. If she doesn't use it, that's a bonus. If she does, there's no scramble."
+      }
+    },
+    {
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Step 3: Save for events you know are coming"
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Some events you can see coming for months. Others come every year, like invitations to other people's weddings, funerals, graduations and parties, where you're expected to give something."
+      }
+    },
+    {
+      "type": "example",
+      "data": {
+        "title": "A year of invitations",
+        "text": "Omar expects about 10 invitations a year and gives around $40 each: 10 × $40 = $400. That's about $33 a month. If he puts $33 a month into an “events pot”, contributions no longer come out of his rent money."
+      }
+    },
+    {
+      "type": "example",
+      "data": {
+        "title": "A 12-month wedding fund",
+        "text": "A couple plans a $2,400 wedding a year from now. Saving $2,400 ÷ 12 = $200 a month does it. If family contributes $800, they only need $1,600, which is about $133 a month."
+      }
+    },
+    {
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "The debt trap"
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Borrowing for a one-day event is tempting because it solves the problem today. But high-interest loans, credit cards and informal lenders turn a party into a long bill."
+      }
+    },
+    {
+      "type": "example",
+      "data": {
+        "title": "What borrowing really costs",
+        "text": "Omar borrows $4,000 for his brother's wedding at 24% a year. While most of the balance is still owing, interest alone costs roughly $4,000 × 0.24 = $960 in the first year. That's $960 for nothing but the cost of borrowing. A smaller event, a later date, or family sharing the cost could save it."
+      }
+    },
+    {
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "When it's a funeral"
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Funerals come suddenly, in grief, and often with a short deadline. Money decisions are hard then, so a few rules help."
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Ask for an itemized price list in writing. Compare two or three providers if you can. Don't be pressured into extras. A simple, dignified service isn't disrespect."
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Check for funeral cover, employer benefits, burial societies or community schemes that might help. Agree one budget with the family before spending, and let one trusted person keep a written list of who contributed what and what was spent."
+      }
+    },
+    {
+      "type": "callout",
+      "data": {
+        "title": "Love isn't measured in dollars",
+        "text": "Presence, time, food and memories show love. A smaller event is not a smaller love."
+      }
+    },
+    {
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Saying no to the expectations"
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Clear, kind lines make this easier. “We've set a budget and we're planning around it.” “We'd rather start our marriage without debt.” “We can contribute $50 this time.” People often respect clear limits more than you expect."
+      }
+    },
+    {
+      "type": "interactive",
+      "data": {
+        "title": "Plan one event",
+        "text": "Pick one coming event. Write the total you can afford, the three things that matter most, and two things you're willing to cut. Then add a 10% buffer."
+      }
+    },
+    {
+      "type": "summary",
+      "data": {
+        "title": "What to remember",
+        "points": [
+          "Set the budget first, then design the event to fit.",
+          "Guest count is usually the biggest lever.",
+          "Get itemized quotes and add a 10% buffer.",
+          "Save monthly for events you can see coming, including invitations you'll accept.",
+          "Borrowing for one day can cost you for years.",
+          "For funerals, ask for written prices and don't be pressured into extras.",
+          "Check for funeral cover, employer benefits or community schemes.",
+          "A smaller event is not a smaller love."
+        ]
+      }
+    },
+    {
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "The one thing to remember"
+      }
+    },
+    {
+      "type": "callout",
+      "data": {
+        "title": "Honour the moment, protect the future",
+        "text": "You can do both. A clear budget lets you celebrate or grieve without borrowing against your future."
+      }
+    }
+  ],
+  "quiz": [
+    {
+      "order": 1,
+      "questionType": "multiple-choice",
+      "question": "What is the best first step in planning a big family event?",
+      "options": [
+        "Wait until guests tell you what they expect",
+        "Choose the biggest venue",
+        "Set the budget first, then plan the event to fit it",
+        "Borrow enough to cover everything"
+      ],
+      "correctAnswer": 2,
+      "explanation": "Planning the dream first and pricing it later is how budgets break. Start with what you can afford.",
+      "points": 10
+    },
+    {
+      "order": 2,
+      "questionType": "multiple-choice",
+      "question": "A wedding costs $20 per guest plus $1,000 in fixed costs. How much do you save by inviting 60 guests instead of 100?",
+      "options": [
+        "$400",
+        "$600",
+        "$800",
+        "$1,000"
+      ],
+      "correctAnswer": 2,
+      "explanation": "40 fewer guests × $20 = $800 saved. The fixed costs stay the same.",
+      "points": 10
+    },
+    {
+      "order": 3,
+      "questionType": "multiple-choice",
+      "question": "You expect about 10 invitations a year and give around $40 for each. About how much should you set aside each month?",
+      "options": [
+        "$10",
+        "$33",
+        "$67",
+        "$400"
+      ],
+      "correctAnswer": 1,
+      "explanation": "10 × $40 = $400 a year, and $400 ÷ 12 is about $33 a month.",
+      "points": 10
+    },
+    {
+      "order": 4,
+      "questionType": "multiple-choice",
+      "question": "Omar borrows $4,000 at 24% a year. Roughly how much interest does he pay in the first year if the balance stays high?",
+      "options": [
+        "$96",
+        "$240",
+        "$960",
+        "$4,000"
+      ],
+      "correctAnswer": 2,
+      "explanation": "$4,000 × 0.24 = $960. That's what the borrowing costs, before he repays a cent of the $4,000.",
+      "points": 10
+    },
+    {
+      "order": 5,
+      "questionType": "true-false",
+      "question": "When arranging a funeral, you can ask for an itemized price list in writing and compare providers.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Asking for itemized prices and comparing is reasonable. A simple service isn't disrespect.",
+      "points": 10
+    },
+    {
+      "order": 6,
+      "questionType": "multiple-choice",
+      "question": "What helps keep invitation contributions from eating into rent money?",
+      "options": [
+        "Borrowing each time",
+        "Giving less than you planned without telling anyone",
+        "Ignoring invitations",
+        "An “events pot” you fund monthly"
+      ],
+      "correctAnswer": 3,
+      "explanation": "A small monthly events pot turns a lumpy cost into a steady, planned one.",
+      "points": 10
+    },
+    {
+      "order": 7,
+      "questionType": "true-false",
+      "question": "A smaller event means you love the person less.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Love shows in presence, time and care, not in the size of the bill.",
+      "points": 10
+    },
+    {
+      "order": 8,
+      "questionType": "multiple-choice",
+      "question": "Why add a 10% buffer to an event budget?",
+      "options": [
+        "To spend more than planned",
+        "Because extra costs nearly always appear and a buffer avoids a scramble",
+        "To impress guests",
+        "So you can skip getting quotes"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Transport, extra guests, tips and extras nearly always appear. A buffer keeps one surprise from becoming a debt.",
+      "points": 10
+    }
+  ]
+}
