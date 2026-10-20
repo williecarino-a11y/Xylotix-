@@ -1,0 +1,403 @@
+{
+  "slug": "insurance-in-plain-words",
+  "title": "Insurance in Plain Words: Paying a Little to Avoid a Big Loss",
+  "description": "Premiums, deductibles and exclusions explained without the jargon. What is worth insuring, what isn't, and how to check the numbers before you buy.",
+  "estimatedDuration": 30,
+  "order": 6,
+  "published": true,
+  "contentBlocks": [
+    {
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "The one big bill that can undo years of saving"
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Imagine you've saved carefully for three years. Then a car accident, a house fire or a hospital stay produces a bill of $20,000 or more. Most people can't pay that from savings, and without protection, one bad day can wipe out years of progress."
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Insurance exists for exactly this. It isn't an investment and it isn't a way to make money. It's a way to swap a big, unpredictable loss for a small, predictable cost."
+      }
+    },
+    {
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "How insurance works, in plain words"
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "You pay an insurance company a regular amount. If one of the rare, expensive things you're covered for happens, the company pays most or all of the cost. Thousands of people pay in, and the few who have a loss get paid from the shared pot."
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "You will meet five words again and again. Learn these and most policies stop looking scary."
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Premium: the regular price you pay to keep the insurance, monthly or yearly."
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Deductible (called an excess in some countries): the part of a loss you pay yourself before the insurer pays anything."
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Coverage limit: the most the insurer will pay."
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Claim: your request to be paid after a loss."
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Exclusions: the things the policy does not cover. This is the part people skip, and the part that matters most when something goes wrong."
+      }
+    },
+    {
+      "type": "example",
+      "data": {
+        "title": "A car repair",
+        "text": "Sam's car is damaged in an accident and the repair costs $3,000. His policy covers it and has a $500 deductible. Sam pays $500 and the insurer pays $3,000 − $500 = $2,500. His premium is $60 a month, which is $60 × 12 = $720 a year."
+      }
+    },
+    {
+      "type": "callout",
+      "data": {
+        "title": "Insurance is a trade",
+        "text": "You pay $720 a year with certainty, so you don't have to risk a $3,000 bill, or much worse, with no protection."
+      }
+    },
+    {
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "What is worth insuring, and what isn't"
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "A simple rule: insure what would wreck you, not what would annoy you. Ask yourself, \"If this happened tomorrow, could I pay for it from my savings?\""
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "If the answer is no, such as a serious illness, a car accident that injures someone, a house fire, or the death of someone whose income your family depends on, insurance is usually worth considering. If the answer is yes, such as a cracked phone screen, you may be better off keeping the money."
+      }
+    },
+    {
+      "type": "example",
+      "data": {
+        "title": "Is phone insurance worth it?",
+        "text": "Lena is offered phone insurance for $12 a month, with a $75 deductible per claim. Her phone costs $300 to replace. Over 3 years she pays 36 × $12 = $432 in premiums. If she makes one claim, she pays another $75, so $432 + $75 = $507 in total. If she had skipped the insurance and bought a new $300 phone, she would have spent $300. For a small risk she could cover herself, the insurance cost her $207 more."
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "This doesn't mean small-item insurance is always a bad deal. It means to check the numbers before you say yes."
+      }
+    },
+    {
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "The common types, without the jargon"
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Health insurance covers medical costs. What it covers and what you pay depends a lot on where you live."
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Car insurance often includes liability cover, which pays for harm you cause to other people or their property. In many places a basic version is required by law."
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Home or renters insurance covers your belongings and, in many policies, damage you accidentally cause to others. Renters often skip it, even though their belongings are theirs to replace."
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Life insurance pays your family if you die. It matters most when someone depends on your income, such as children or a partner."
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Disability or income protection pays part of your income if illness or injury stops you working. It is often forgotten, even though losing the ability to work can be one of the largest risks of all."
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Rules and products differ a lot between countries, so check what is required and available where you live."
+      }
+    },
+    {
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "The deductible trade-off"
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "A higher deductible usually means a lower premium. You're agreeing to carry more of the small risk yourself in return for a cheaper price. That can be smart, but only if you can actually pay the deductible when the time comes."
+      }
+    },
+    {
+      "type": "example",
+      "data": {
+        "title": "Two policies for the same car",
+        "text": "Option A: premium $90 a month, deductible $250. Option B: premium $60 a month, deductible $1,000. Per year, A costs $90 × 12 = $1,080 and B costs $60 × 12 = $720, so B saves $360 a year. But each time you claim, B costs $1,000 − $250 = $750 more. B comes out ahead unless you claim roughly once every two years or more often ($750 ÷ $360 is about 2.1)."
+      }
+    },
+    {
+      "type": "callout",
+      "data": {
+        "title": "Match the deductible to your savings",
+        "text": "If you have $400 saved, a $1,000 deductible isn't a saving, it's a trap. Your emergency fund and your insurance work as a team: insurance handles the big blows, and your savings handle the deductible and the gaps."
+      }
+    },
+    {
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Where people go wrong"
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Too little cover. Skipping insurance on the risks that could really wreck you, because the premium feels like wasted money."
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Too much cover. Paying for small-item plans, extended warranties and overlapping policies for things you could replace yourself."
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Not reading the exclusions. Finding out after a loss that this specific situation wasn't covered."
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Letting it lapse. Missing payments and discovering the policy ended before the accident."
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Never comparing. Staying with the first price for years, while the same cover could cost less elsewhere."
+      }
+    },
+    {
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "How to buy insurance sensibly"
+      }
+    },
+    {
+      "type": "interactive",
+      "data": {
+        "title": "A 10-minute insurance check",
+        "text": "List the three biggest risks to your finances (for example: a medical bill, losing the ability to work, a car accident). For each one, ask: could I pay this from savings? If not, do I have protection for it? What is the deductible, and could I pay it tomorrow?"
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "When you compare policies, compare the same cover. A cheaper premium may hide a higher deductible, a lower limit or more exclusions."
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Read the exclusions before you buy, not after. Set a yearly reminder to review your cover and compare prices, because the right amount of insurance changes when your life does."
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "If you ever need to claim, keep records: photos, receipts and dates. Report the loss quickly and be honest, because the paperwork decides what gets paid."
+      }
+    },
+    {
+      "type": "summary",
+      "data": {
+        "title": "What to remember",
+        "points": [
+          "Insurance swaps a big, unpredictable loss for a small, predictable cost.",
+          "Premium is what you pay regularly. Deductible is what you pay first when you claim.",
+          "Insure what would wreck you, not what would annoy you.",
+          "Check the numbers before buying small-item insurance. It's often a worse deal.",
+          "A higher deductible lowers the premium, but only works if you can pay the deductible.",
+          "Read the exclusions before you buy, not after.",
+          "Don't let policies lapse, and review your cover and prices once a year.",
+          "Insurance and an emergency fund work together."
+        ]
+      }
+    },
+    {
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "The one thing to remember"
+      }
+    },
+    {
+      "type": "callout",
+      "data": {
+        "title": "Protect against the big loss",
+        "text": "You can't predict which bad day will arrive, but you can decide whether it would be a setback or a disaster."
+      }
+    }
+  ],
+  "quiz": [
+    {
+      "order": 1,
+      "questionType": "multiple-choice",
+      "question": "What is an insurance premium?",
+      "options": [
+        "The amount you pay first before the insurer pays anything",
+        "The regular price you pay to keep the insurance",
+        "The most the insurer will pay",
+        "The money you receive after a claim"
+      ],
+      "correctAnswer": 1,
+      "explanation": "The premium is the regular price of the insurance. The deductible is what you pay first when you claim.",
+      "points": 10
+    },
+    {
+      "order": 2,
+      "questionType": "multiple-choice",
+      "question": "Sam's car repair costs $3,000. His policy covers it and has a $500 deductible. How much does the insurer pay?",
+      "options": [
+        "$3,000",
+        "$2,500",
+        "$500",
+        "$0"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Sam pays the $500 deductible, and the insurer pays the rest: $3,000 − $500 = $2,500, as long as the damage is covered and within the policy limit.",
+      "points": 10
+    },
+    {
+      "order": 3,
+      "questionType": "multiple-choice",
+      "question": "Which of these risks is the most worth insuring?",
+      "options": [
+        "A cracked phone screen",
+        "A $40 pair of earbuds",
+        "A $15 toaster",
+        "A serious accident or illness that could cost far more than your savings"
+      ],
+      "correctAnswer": 3,
+      "explanation": "Insure what would wreck you financially. Small items you could replace yourself usually aren't worth a monthly premium.",
+      "points": 10
+    },
+    {
+      "order": 4,
+      "questionType": "multiple-choice",
+      "question": "Phone insurance costs $12 a month with a $75 deductible. You keep it for 3 years and make one claim. How much do you pay in total?",
+      "options": [
+        "$144",
+        "$300",
+        "$507",
+        "$75"
+      ],
+      "correctAnswer": 2,
+      "explanation": "36 months × $12 = $432 in premiums, plus the $75 deductible = $507. That is more than the $300 phone would have cost to replace yourself.",
+      "points": 10
+    },
+    {
+      "order": 5,
+      "questionType": "true-false",
+      "question": "A higher deductible usually means a lower premium.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctAnswer": 0,
+      "explanation": "You take on more of the small risk, so the insurer charges less. But you need to be able to pay that deductible when you claim.",
+      "points": 10
+    },
+    {
+      "order": 6,
+      "questionType": "multiple-choice",
+      "question": "Where do you look to find out what a policy does NOT cover?",
+      "options": [
+        "The company's advertisement",
+        "The premium price",
+        "The exclusions listed in the policy",
+        "The claim form"
+      ],
+      "correctAnswer": 2,
+      "explanation": "Exclusions list what isn't covered. Reading them before you buy avoids unpleasant surprises after a loss.",
+      "points": 10
+    },
+    {
+      "order": 7,
+      "questionType": "true-false",
+      "question": "Buying insurance for every small item you own is the best way to protect your finances.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Small-item plans often cost more than the item is worth. Put your insurance money toward the big risks you couldn't cover from savings.",
+      "points": 10
+    },
+    {
+      "order": 8,
+      "questionType": "multiple-choice",
+      "question": "You have $400 saved. Option A has a $90 monthly premium and a $250 deductible. Option B has a $60 premium and a $1,000 deductible. Which is the better fit for you?",
+      "options": [
+        "Option B, because the premium is lower",
+        "Option A, because you could pay the $250 deductible but not the $1,000",
+        "Neither, because you should never buy insurance",
+        "Either one, because the deductible doesn't matter"
+      ],
+      "correctAnswer": 1,
+      "explanation": "B saves money each month, but if you had to claim you couldn't pay the $1,000. A deductible should be an amount you can actually cover from savings.",
+      "points": 10
+    }
+  ]
+}
