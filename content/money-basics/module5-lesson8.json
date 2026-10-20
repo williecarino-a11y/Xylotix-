@@ -1,0 +1,319 @@
+{
+  "slug": "betting-gambling-and-get-rich-apps",
+  "title": "Betting, Gambling and Get-Rich Apps: Why “One More Try” Costs So Much",
+  "description": "How the house edge works, why chasing losses makes things worse, how bonuses and apps pull you in, the warning signs, and practical ways to protect your money or get help.",
+  "estimatedDuration": 30,
+  "order": 8,
+  "published": true,
+  "contentBlocks": [
+    {
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "It usually starts as a bit of fun"
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "A free bet from a friend. A tip about a match. A game on your phone that takes real money. A trading app that feels like a game. For many people it stays small. For some, it grows quietly into rent money, borrowed money and secrets."
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "This lesson isn't about shame. It's about how these products work, how to spot trouble early, and how to protect your money."
+      }
+    },
+    {
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "How the house always wins"
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Betting is built so the business wins over time. Each bet is priced so that, on average, you get back less than you put in. The gap is called the house edge. You can win today. But across thousands of bets, the math is on their side, not yours."
+      }
+    },
+    {
+      "type": "formula",
+      "data": {
+        "text": "Expected loss = total amount bet × house edge"
+      }
+    },
+    {
+      "type": "example",
+      "data": {
+        "title": "A small habit, a big cost",
+        "text": "Kwame bets $50 a day. In a month he bets $50 × 30 = $1,500. If the house edge is 8%, his expected loss is $1,500 × 0.08 = $120 a month. Over a year that is $120 × 12 = $1,440, even with no bad luck at all."
+      }
+    },
+    {
+      "type": "callout",
+      "data": {
+        "title": "A winning streak is not a skill",
+        "text": "Some people win for a while. It feels like proof of skill, and it makes them bet more. A few wins don't change the math."
+      }
+    },
+    {
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "The trap: chasing losses"
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "The most dangerous thought in gambling is “I'll win it back.” Losing makes people bet bigger to recover. It feels logical every time, and the hole gets deeper."
+      }
+    },
+    {
+      "type": "example",
+      "data": {
+        "title": "Chasing",
+        "text": "Tomás loses $100. To win it back, he bets $200 and loses. Then he bets $400 and loses again. After three losses in a row, which is not rare, he has lost $100 + $200 + $400 = $700. To try to win everything back, he would now have to bet $800."
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Losses don't need to be recovered. They need to be stopped."
+      }
+    },
+    {
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Why the apps make it so easy"
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "One-tap deposits. Saved cards. Notifications that pull you back. Near-wins that feel like almost. “Free bets” and bonuses with conditions in the small print."
+      }
+    },
+    {
+      "type": "example",
+      "data": {
+        "title": "A bonus with strings",
+        "text": "“Deposit $100, get a $100 bonus!” The small print says you must bet 30 times the bonus before withdrawing: 30 × $100 = $3,000 of betting. At a 5% house edge, betting $3,000 is expected to cost about $3,000 × 0.05 = $150. The $100 bonus costs you more than it gives."
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Be careful with “get-rich” apps too. High-leverage trading, binary options, crypto casinos and paid “signal” groups are often gambling dressed up as investing."
+      }
+    },
+    {
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Warning signs"
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Betting more than you planned. Trying to win back a loss. Hiding it from people. Using rent or bill money, or borrowing to bet. Thinking about it all the time. Feeling restless or irritable when you can't bet. Saying “this is the last time” and then not stopping."
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "If several of these fit, treat it as a signal, not as a flaw in your character."
+      }
+    },
+    {
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Protect your money before you start"
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "If you bet at all, decide the amount in advance, an amount you could lose completely without it affecting your bills, and treat it as already spent. Then protect it."
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Use deposit limits and time limits. Use self-exclusion tools, offered by betting sites, some banks and blocking software. Delete saved cards. Keep betting money in a separate account. Never bet with borrowed money, and never bet to fix a money problem."
+      }
+    },
+    {
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "If it's already a problem"
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Tell someone you trust. Consider asking them to help you manage your accounts for a while. Free, confidential help exists in many countries, including helplines and counselling, so search for a gambling support service where you live. If you owe money, talk to the people you owe early and ask for a payment plan."
+      }
+    },
+    {
+      "type": "callout",
+      "data": {
+        "title": "You're not alone",
+        "text": "If you feel hopeless, reach out to someone you trust or a local helpline today. Gambling problems are common, and people do recover."
+      }
+    },
+    {
+      "type": "interactive",
+      "data": {
+        "title": "An honest check",
+        "text": "In the last three months, did I bet more than I planned, or try to win back a loss? If yes, which one change can I make this week: a limit, removing saved cards, or telling one person?"
+      }
+    },
+    {
+      "type": "summary",
+      "data": {
+        "title": "What to remember",
+        "points": [
+          "The house edge means betting costs you money over time, however lucky a day feels.",
+          "Chasing losses makes everything worse.",
+          "Bonuses usually come with conditions that cost more than they give.",
+          "Get-rich apps can be gambling in disguise.",
+          "Warning signs include hiding it, borrowing to bet and trying to win back losses.",
+          "Set a limit in advance, use limits and self-exclusion, and remove saved cards.",
+          "Never bet borrowed money or bill money.",
+          "Free, confidential help exists. Asking for it works."
+        ]
+      }
+    },
+    {
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "The one thing to remember"
+      }
+    },
+    {
+      "type": "callout",
+      "data": {
+        "title": "Stop the loss. Don't chase it.",
+        "text": "The way to recover from a bad bet isn't another bet. It's stopping."
+      }
+    }
+  ],
+  "quiz": [
+    {
+      "order": 1,
+      "questionType": "multiple-choice",
+      "question": "Kwame bets $1,500 in a month at an 8% house edge. What is his expected loss for the month?",
+      "options": [
+        "$8",
+        "$80",
+        "$120",
+        "$1,500"
+      ],
+      "correctAnswer": 2,
+      "explanation": "$1,500 × 0.08 = $120. This is the expected loss even without bad luck.",
+      "points": 10
+    },
+    {
+      "order": 2,
+      "questionType": "multiple-choice",
+      "question": "At that rate, about how much is the expected loss over a year?",
+      "options": [
+        "$120",
+        "$600",
+        "$1,440",
+        "$15,000"
+      ],
+      "correctAnswer": 2,
+      "explanation": "$120 × 12 = $1,440.",
+      "points": 10
+    },
+    {
+      "order": 3,
+      "questionType": "true-false",
+      "question": "After losing, betting a bigger amount is a reliable way to win your money back.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Betting bigger after a loss usually increases the loss. The house edge applies to every bet.",
+      "points": 10
+    },
+    {
+      "order": 4,
+      "questionType": "multiple-choice",
+      "question": "Tomás loses $100, then $200, then $400 while chasing losses. How much has he lost in total?",
+      "options": [
+        "$400",
+        "$600",
+        "$700",
+        "$1,500"
+      ],
+      "correctAnswer": 2,
+      "explanation": "$100 + $200 + $400 = $700, and he would now need to bet $800 to try to win it back.",
+      "points": 10
+    },
+    {
+      "order": 5,
+      "questionType": "multiple-choice",
+      "question": "A site offers a $100 bonus if you bet $3,000 first. At a 5% house edge, what is the expected cost of that betting?",
+      "options": [
+        "$15",
+        "$100",
+        "$150",
+        "$3,000"
+      ],
+      "correctAnswer": 2,
+      "explanation": "$3,000 × 0.05 = $150. That's more than the $100 bonus, so the bonus costs you money.",
+      "points": 10
+    },
+    {
+      "order": 6,
+      "questionType": "multiple-choice",
+      "question": "Which of these is a warning sign of a gambling problem?",
+      "options": [
+        "Stopping when you reach your limit",
+        "Talking openly about it",
+        "Betting only the amount you planned",
+        "Hiding betting from people and borrowing money to bet"
+      ],
+      "correctAnswer": 3,
+      "explanation": "Hiding it, borrowing to bet and chasing losses are common signs. They are signals to get support.",
+      "points": 10
+    },
+    {
+      "order": 7,
+      "questionType": "multiple-choice",
+      "question": "Which step best protects your money before you bet?",
+      "options": [
+        "Deciding a limit in advance and using deposit limits and self-exclusion tools",
+        "Keeping your card saved to bet faster",
+        "Betting more when you're winning",
+        "Using bill money so you can win it back"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Limits made in advance, when you're calm, work better than decisions made in the middle of a bet.",
+      "points": 10
+    },
+    {
+      "order": 8,
+      "questionType": "true-false",
+      "question": "Trading apps that promise fast riches with high leverage are always safe investments.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctAnswer": 1,
+      "explanation": "They are often closer to gambling than investing, and many people lose money fast.",
+      "points": 10
+    }
+  ]
+}
