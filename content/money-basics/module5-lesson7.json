@@ -1,0 +1,316 @@
+{
+  "slug": "your-wallet-or-phone-is-stolen-the-first-hour",
+  "title": "Your Wallet or Phone Is Stolen: The First Hour",
+  "description": "Your phone holds your bank, email and payment apps. The order to follow in the first hour after a theft, how to spot the aftermath scams, and ten minutes of preparation that makes it easier.",
+  "estimatedDuration": 30,
+  "order": 7,
+  "published": true,
+  "contentBlocks": [
+    {
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "The moment your stomach drops"
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "A crowded market. A bus. A café table. You reach for your phone or wallet and it isn't there. In the first hour, what you do can decide whether this is an annoying day or a long financial mess."
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Your phone is more than a phone. It holds your banking apps, your email, your payment apps, and the codes that unlock them. That's why speed matters, and so does order."
+      }
+    },
+    {
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "The first hour, in order"
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Don't try to remember everything while you're panicking. Follow the order. Use someone else's phone or a computer if you need to."
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "1. Lock your cards. Use your bank's app on another device or call your bank to freeze or block your cards. Cash is gone, but cards can be stopped right now."
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "2. Lock or erase the phone. Use the find-my-device service from another device to lock the phone, show a message, or erase it. Don't go after the thief."
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "3. Call your mobile provider. Ask them to block the SIM and move your number to a new one. Many accounts send one-time codes by text. Whoever holds your SIM can use those codes to reset your passwords."
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "4. Secure your email. From another device, change your email password and sign out of all devices. Email is the master key, because most accounts let you reset your password through it."
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "5. Then your bank and payment apps. Change passwords, sign out everywhere, and check recent activity. If you use mobile money, call the provider to lock your wallet."
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "6. Then everything else. Social media, shopping accounts, cloud storage. Turn on two-step verification as you go."
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "7. Report it. A police report may be needed by your bank or insurer, and to replace documents. Report stolen ID cards to the issuer."
+      }
+    },
+    {
+      "type": "callout",
+      "data": {
+        "title": "Email first, always",
+        "text": "If a thief gets into your email, they can reset almost every other account you own. Locking cards stops the spending. Securing email stops the takeover."
+      }
+    },
+    {
+      "type": "example",
+      "data": {
+        "title": "Two different hours",
+        "text": "Jo's phone is stolen at 6:00 PM. By 6:15 her bank has frozen her cards, and the thief's two attempted payments, $380 in total, are declined. Arun's phone is stolen at the same time, but he waits until the next morning. By then $1,150 has been spent. Arun lost $1,150 − $380 = $770 more than Jo. In many places banks limit your loss if you report quickly, and the rules vary, which is one more reason to call fast."
+      }
+    },
+    {
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Watch for the aftermath"
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "For the next few weeks, check your statements often and watch for unexpected password-reset emails or codes. Be careful with messages that seem helpful."
+      }
+    },
+    {
+      "type": "example",
+      "data": {
+        "title": "The “we found your phone” text",
+        "text": "A text arrives: “We found your phone! Log in here to see where it is.” The link opens a page that asks for your password. It's a trap. Only use the official find-my-device site, typed in yourself."
+      }
+    },
+    {
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "If your ID was taken too"
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Replace your ID documents and tell your bank. Keep a note of everything that was in the wallet. Where it's available, consider a fraud alert or a credit freeze, and watch for new accounts or loans in your name. Rules vary by country."
+      }
+    },
+    {
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Set it up before it happens"
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Ten minutes now makes the worst day much easier."
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Use a strong screen lock, not 1234 or your birth year. Turn on remote find, lock and erase. Use an authenticator app instead of text codes for your most important accounts where possible. Set a PIN on your SIM."
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Keep PINs and passwords out of your wallet and out of your phone's notes. Don't carry every card; leave a spare at home. Save your bank's lost-card number and your carrier's number somewhere other than your phone. Set transfer limits in your banking app."
+      }
+    },
+    {
+      "type": "interactive",
+      "data": {
+        "title": "Your 10-minute check",
+        "text": "On your phone, check three things today: is there a strong screen lock, is find-my-device on, and do you have your bank's lost-card number saved somewhere else?"
+      }
+    },
+    {
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "A small emergency kit"
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Keep a small amount of emergency cash and a spare card at home. If your wallet is stolen, you can still get home, buy food and make calls while you sort everything out."
+      }
+    },
+    {
+      "type": "summary",
+      "data": {
+        "title": "What to remember",
+        "points": [
+          "Lock your cards first.",
+          "Lock or erase the phone from another device.",
+          "Call your mobile provider to block the SIM.",
+          "Secure your email before everything else, because it's the master key.",
+          "Then change bank and payment app passwords and turn on two-step verification.",
+          "Report the theft, and replace ID documents.",
+          "Beware of “we found your phone” links.",
+          "Prepare in advance: screen lock, remote erase, saved numbers and a spare card."
+        ]
+      }
+    },
+    {
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "The one thing to remember"
+      }
+    },
+    {
+      "type": "callout",
+      "data": {
+        "title": "Speed and order",
+        "text": "Cards first, email next. Minutes matter more than perfection."
+      }
+    }
+  ],
+  "quiz": [
+    {
+      "order": 1,
+      "questionType": "multiple-choice",
+      "question": "Your wallet and phone are both stolen. What should you do first?",
+      "options": [
+        "Wait to see if anything is spent",
+        "Search the area for the thief",
+        "Freeze your cards through your bank",
+        "Post about it on social media"
+      ],
+      "correctAnswer": 2,
+      "explanation": "Freezing cards stops spending right away. Everything else follows.",
+      "points": 10
+    },
+    {
+      "order": 2,
+      "questionType": "multiple-choice",
+      "question": "Why should you call your mobile provider to block the SIM?",
+      "options": [
+        "Because thieves can use text codes sent to your number to reset passwords",
+        "To cancel your contract",
+        "To stop receiving messages from friends",
+        "To get a new phone for free"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Many accounts use text-message codes for resets. Whoever has your SIM can receive them.",
+      "points": 10
+    },
+    {
+      "order": 3,
+      "questionType": "multiple-choice",
+      "question": "Which account is the master key to most of your other accounts?",
+      "options": [
+        "Your music app",
+        "Your calendar",
+        "Your photo gallery",
+        "Your email"
+      ],
+      "correctAnswer": 3,
+      "explanation": "Most accounts let you reset your password by email, so email must be secured early.",
+      "points": 10
+    },
+    {
+      "order": 4,
+      "questionType": "true-false",
+      "question": "It is a good idea to go after a thief to get your phone back.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Don't confront a thief. Lock the phone remotely and report it.",
+      "points": 10
+    },
+    {
+      "order": 5,
+      "questionType": "multiple-choice",
+      "question": "A text says “We found your phone! Log in here to see where it is.” What is it most likely?",
+      "options": [
+        "An advertisement",
+        "A helpful message from the police",
+        "A phishing trap to steal your password",
+        "A message from your bank"
+      ],
+      "correctAnswer": 2,
+      "explanation": "It asks for your password on a fake page. Use the official find-my-device site, typed in yourself.",
+      "points": 10
+    },
+    {
+      "order": 6,
+      "questionType": "multiple-choice",
+      "question": "Jo's cards were frozen within 15 minutes and the thief's attempts totalled $380. Arun waited until morning and $1,150 was spent. How much more did Arun lose?",
+      "options": [
+        "$380",
+        "$770",
+        "$1,150",
+        "$1,530"
+      ],
+      "correctAnswer": 1,
+      "explanation": "$1,150 − $380 = $770. Speed matters.",
+      "points": 10
+    },
+    {
+      "order": 7,
+      "questionType": "true-false",
+      "question": "In many places, banks may limit your losses if you report fraud quickly.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Rules vary, but reporting quickly usually helps. Call your bank right away.",
+      "points": 10
+    },
+    {
+      "order": 8,
+      "questionType": "multiple-choice",
+      "question": "Which preparation helps most before a theft happens?",
+      "options": [
+        "Writing your PIN on your card",
+        "A strong screen lock, remote lock and erase turned on, and your bank's emergency number saved elsewhere",
+        "Using the same password everywhere",
+        "Keeping all your cards together in your wallet"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Preparation turns a crisis into a checklist. Your PIN belongs in your head, not your wallet.",
+      "points": 10
+    }
+  ]
+}
