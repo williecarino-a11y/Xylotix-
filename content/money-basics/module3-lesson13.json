@@ -1,0 +1,361 @@
+{
+  "slug": "a-debt-collector-is-calling",
+  "title": "A Debt Collector Is Calling: What to Do and What Not to Do",
+  "description": "An unknown number says you owe money and must pay today. How to stay calm, get the facts in writing, check the debt is real, agree a plan you can afford, and spot collectors who are really scammers.",
+  "estimatedDuration": 30,
+  "order": 13,
+  "published": true,
+  "contentBlocks": [
+    {
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "That call can make your stomach drop"
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "An unknown number. A voice says you owe money and it needs to be paid today. Many people panic and pay on the spot. Others hang up and ignore everything, including the letters that follow. Both reactions can cost you."
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Some debt collectors are real and follow rules. Some callers are scammers pretending to be collectors. Your first job is to stay calm and find out which one you're dealing with."
+      }
+    },
+    {
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Step 1: Don't pay or give details on the first call"
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "You don't yet know whether the debt is real, whether the amount is right, or whether you're even talking to the right company. So don't pay, don't confirm your bank or card details, and don't agree to anything yet."
+      }
+    },
+    {
+      "type": "example",
+      "data": {
+        "title": "A calm script",
+        "text": "“I'd like to deal with this properly. Please send me the details in writing: who you are, who the debt is owed to, the original amount, and how you calculated what you say I owe now. I'll respond once I've checked it.” Then end the call politely. You don't have to argue."
+      }
+    },
+    {
+      "type": "callout",
+      "data": {
+        "title": "Pressure is a tactic",
+        "text": "“Pay today or else” is designed to stop you from checking. A real debt will still be real tomorrow. Checking first protects you either way."
+      }
+    },
+    {
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Step 2: Get the facts in writing"
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Ask for the name of the company, the creditor (who you originally owed), the original amount, the date the debt started, and a breakdown of any fees or interest added. In many places collectors must give you this information. Rules vary, but you can always ask."
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Then compare it with your own records: old statements, receipts, emails, and your credit report if you can get one."
+      }
+    },
+    {
+      "type": "example",
+      "data": {
+        "title": "$1,500 became $1,800",
+        "text": "A collector says Nadia owes $1,800. She asks for an itemized statement. It shows the original debt was $1,500, plus $300 in fees and interest. She now has two questions: is the $1,500 really hers, and are the $300 charges allowed and fair? Without writing it down, she'd never have known."
+      }
+    },
+    {
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Step 3: Is it really yours, and is it still valid?"
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Debts get mixed up more often than you'd think. It could be someone with a similar name, a debt you already paid, a result of identity theft, or an old debt passed between companies with errors."
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Very old debts are a special case. In some places, after a certain number of years a debt can no longer be pursued through the courts. In some of those places, making a small payment or admitting the debt can restart the clock. So before you pay an old debt, find out the rules where you live."
+      }
+    },
+    {
+      "type": "callout",
+      "data": {
+        "title": "Never ignore court papers",
+        "text": "Ignoring a letter is risky. Ignoring court papers is much riskier, because a court can decide against you when you don't respond. If you receive them, act quickly and get free advice from a legal aid or debt advice service in your area."
+      }
+    },
+    {
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Step 4: Work out what you can really pay"
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "A collector's pressure doesn't make their debt more important than your rent, food, power or transport. Protect those first. Then see what's left."
+      }
+    },
+    {
+      "type": "formula",
+      "data": {
+        "text": "Offer = money left after essentials − a small buffer"
+      }
+    },
+    {
+      "type": "example",
+      "data": {
+        "title": "Nadia's numbers",
+        "text": "After rent, food, utilities and transport, Nadia has $200 left each month. She keeps a $50 buffer for surprises, so she can offer $200 − $50 = $150 a month. A payment plan on a $1,800 debt at $75 a month would take $1,800 ÷ $75 = 24 months."
+      }
+    },
+    {
+      "type": "example",
+      "data": {
+        "title": "A settlement offer",
+        "text": "Some creditors will accept less than the full amount to close the debt. Suppose they agree to $900 on an $1,800 debt, paid as 6 payments of $150. $150 × 6 = $900, half the original amount. But only agree if it's confirmed in writing that the debt will be treated as fully settled."
+      }
+    },
+    {
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Step 5: Get every agreement in writing before you pay"
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Before you send money, make sure the agreement says the amount, the payment dates, who gets paid, and what happens when you finish (the debt is cleared). Pay by a method you can trace, like a bank transfer or a card payment you start yourself. Keep proof of every payment. When you finish, ask for a letter confirming the balance is zero."
+      }
+    },
+    {
+      "type": "callout",
+      "data": {
+        "title": "Never pay with gift cards or crypto",
+        "text": "Real collectors don't ask for gift cards, crypto, or transfers to a personal account. Those methods are hard to trace and hard to reverse, and they're the favourite of scammers."
+      }
+    },
+    {
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Know what's not okay"
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "In many places collectors aren't allowed to harass you, threaten you, lie about what they can do, call at unreasonable hours, or tell your employer or neighbours about your debt. The rules differ by country, so look up the rules where you live or ask a consumer advice service."
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Keep a simple log: date, time, name, company and what was said. Keep letters, emails and voicemails."
+      }
+    },
+    {
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "When the “collector” is a scam"
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Watch for these signs: threats of arrest or jail over an ordinary unpaid bill, a demand for gift cards or crypto, refusal to send anything in writing, not knowing who the original creditor is, and being told not to tell anyone."
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "If you suspect a scam, hang up. If you want to check whether a debt exists, contact the original creditor using a number from your own records, not the one the caller gave you."
+      }
+    },
+    {
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "Look after yourself"
+      }
+    },
+    {
+      "type": "text",
+      "data": {
+        "text": "Debt can feel shameful, and collectors count on that. But owing money is a problem to solve, not a verdict on who you are. Free, confidential debt advice exists in many countries. Asking for it is a smart move."
+      }
+    },
+    {
+      "type": "interactive",
+      "data": {
+        "title": "Prepare before they call",
+        "text": "Write your calm script on a card. List your essentials and how much you could realistically pay each month. Decide now that you won't pay or give details on a first call."
+      }
+    },
+    {
+      "type": "summary",
+      "data": {
+        "title": "What to remember",
+        "points": [
+          "Don't pay or give details on the first call. Ask for everything in writing.",
+          "Check that the debt is yours, the amount is right, and the debt is still valid.",
+          "Never ignore court papers.",
+          "Protect your essentials, then offer what you can really afford.",
+          "Get every agreement in writing before you pay, and a zero-balance letter after.",
+          "Never pay with gift cards, crypto or transfers to personal accounts.",
+          "Threats of arrest over an ordinary debt are a scam sign.",
+          "Free debt advice exists. Use it."
+        ]
+      }
+    },
+    {
+      "type": "heading",
+      "data": {
+        "level": 2,
+        "text": "The one thing to remember"
+      }
+    },
+    {
+      "type": "callout",
+      "data": {
+        "title": "Slow down, get it in writing",
+        "text": "Pressure is the collector's tool. Paperwork and time are yours."
+      }
+    }
+  ],
+  "quiz": [
+    {
+      "order": 1,
+      "questionType": "multiple-choice",
+      "question": "A collector calls and demands payment today. What is the best first response?",
+      "options": [
+        "Give your card number to make it stop",
+        "Say you'll pay tomorrow",
+        "Ask them to send the details in writing and say you'll respond after checking",
+        "Hang up and never think about it again"
+      ],
+      "correctAnswer": 2,
+      "explanation": "You don't yet know whether the debt or amount is right. Asking for details in writing gives you time to check without being pressured.",
+      "points": 10
+    },
+    {
+      "order": 2,
+      "questionType": "multiple-choice",
+      "question": "A caller says you'll be arrested today unless you pay $600 in gift cards. What is this most likely?",
+      "options": [
+        "A scam",
+        "A court order",
+        "A bank error",
+        "A normal debt collection"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Threats of arrest over an ordinary unpaid bill and demands for gift cards are classic scam signs.",
+      "points": 10
+    },
+    {
+      "order": 3,
+      "questionType": "multiple-choice",
+      "question": "You agree to a payment plan of $75 a month on a $1,800 debt. How many months will it take?",
+      "options": [
+        "12 months",
+        "18 months",
+        "24 months",
+        "30 months"
+      ],
+      "correctAnswer": 2,
+      "explanation": "$1,800 ÷ $75 = 24 months.",
+      "points": 10
+    },
+    {
+      "order": 4,
+      "questionType": "multiple-choice",
+      "question": "You're offered a settlement of $900 on an $1,800 debt. What should you do before paying?",
+      "options": [
+        "Pay immediately before they change their mind",
+        "Get the agreement in writing, including that the debt will be treated as fully settled",
+        "Pay half now and the rest later without any paperwork",
+        "Ask for the offer to be sent by text only"
+      ],
+      "correctAnswer": 1,
+      "explanation": "A written agreement protects you. Without it, you could pay and still be told you owe the rest.",
+      "points": 10
+    },
+    {
+      "order": 5,
+      "questionType": "true-false",
+      "question": "Ignoring court papers about a debt is safe because collectors can't do anything without your reply.",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correctAnswer": 1,
+      "explanation": "A court can decide against you if you don't respond. Act quickly and get free advice.",
+      "points": 10
+    },
+    {
+      "order": 6,
+      "questionType": "multiple-choice",
+      "question": "After essentials you have $200 left each month and want a $50 buffer. What monthly payment can you safely offer?",
+      "options": [
+        "$200",
+        "$150",
+        "$100",
+        "$250"
+      ],
+      "correctAnswer": 1,
+      "explanation": "$200 − $50 = $150 a month. Keeping a buffer helps you keep your promise.",
+      "points": 10
+    },
+    {
+      "order": 7,
+      "questionType": "multiple-choice",
+      "question": "Before paying a very old debt, what is wise to do?",
+      "options": [
+        "Find out the rules where you live, because in some places a small payment or admission can restart the clock",
+        "Pay with a gift card to be safe",
+        "Pay immediately because old debts never expire",
+        "Admit the debt on the phone to be polite"
+      ],
+      "correctAnswer": 0,
+      "explanation": "Rules about old debts differ by place. Check before you pay or admit anything.",
+      "points": 10
+    },
+    {
+      "order": 8,
+      "questionType": "multiple-choice",
+      "question": "Which is the safest way to pay a debt once you've agreed a plan in writing?",
+      "options": [
+        "Crypto",
+        "A traceable bank transfer or card payment you start yourself",
+        "Cash handed to a stranger",
+        "Gift cards"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Traceable payments leave proof. Gift cards and crypto are favourites of scammers because they are hard to reverse.",
+      "points": 10
+    }
+  ]
+}
