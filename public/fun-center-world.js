@@ -1745,10 +1745,13 @@ freezer: ['pizza', 'icecream', 'frozendinner']
 
         // entrance mat
         const mat = this.add.graphics().setDepth(-95);
-        mat.fillStyle(0x1b2a4a, 0.55).fillRoundedRect(60, 880, 260, 90, 12);
-        mat.lineStyle(2, 0x4da3ff, 0.35).strokeRoundedRect(60, 880, 260, 90, 12);
-        this.add.text(190, 925, 'WELCOME', { fontSize: '20px', color: '#8fb4f0', fontStyle: 'bold' })
-          .setOrigin(0.5).setDepth(-94).setAlpha(0.8);
+        mat.fillStyle(0x000000, 0.16).fillRoundedRect(66, 890, 250, 84, 12);
+        mat.fillStyle(0x2b3a5c, 1).fillRoundedRect(62, 884, 250, 82, 10);
+        mat.lineStyle(2, 0x56709f, 1).strokeRoundedRect(72, 893, 230, 64, 7);
+        mat.lineStyle(1, 0x3d5282, 1);
+        for (let mx = 84; mx < 300; mx += 12) mat.lineBetween(mx, 897, mx, 903).lineBetween(mx, 947, mx, 953);
+        this.add.text(187, 925, 'WELCOME', { fontSize: '18px', color: '#b9c9e8', fontStyle: 'bold' })
+          .setOrigin(0.5).setDepth(-94);
 
         // shelves, products and the counter
         UNITS.forEach(u => this.buildUnit(u, itemsByCat[u.id] || []));
