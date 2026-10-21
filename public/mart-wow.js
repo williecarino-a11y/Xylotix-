@@ -4,12 +4,13 @@
  * Started once from mart-polish.js (MiimiidMartWow.start) after the store is built.
  *   1. "Lights on" opening: the store flickers on like a real shop, then settles.
  *   2. A mood that follows the closing clock: bright and clean at the start, golden hour as closing nears.
- *   3. Soft screen edges that react: green while your smart streak is alive, red when money or time is tight,
+ *   3. Soft screen edges that react: green while your smart streak is alive, red when money is under $5 or time is nearly up,
  *      gold when your list is complete.
  *   4. A slow sunbeam that drifts across the screen and across the glossy floor.
  *   5. A cool rim of light under Miimiid so the character pops, and a clean ring at every pickup.
  *   6. When the list is complete: a chime and a golden beacon on the checkout area.
  *   7. A more premium look for the buttons and the trip result card.
+ *   8. Flash sale: a siren edge and a spotlight on the discounted product. Closing time: the counter lights up. A green sparkle trail while your streak lives.
  * If anything fails, the store simply looks as it did before.
  */
 (function () {
@@ -26,11 +27,12 @@
       '.mw-atmo { position: absolute; inset: 0; z-index: 5; pointer-events: none; overflow: hidden; border-radius: inherit; --warm: 0; --vig: .26; --vig2: .09; }' +
       '.mw-atmo-grade { position: absolute; inset: 0; transition: background .6s linear;' +
       '  background: radial-gradient(ellipse 78% 64% at 50% 46%, rgba(3,7,18,0) 0%, rgba(3,7,18,var(--vig2)) 62%, rgba(3,7,18,var(--vig)) 100%),' +
-      '              linear-gradient(rgba(255,150,50,var(--warm)), rgba(255,110,40,var(--warm))); }' +
+      '              linear-gradient(rgba(255,176,80,var(--warm)), rgba(255,160,70,var(--warm))); }' +
       '.mw-atmo-edge { position: absolute; inset: 0; opacity: 0; transition: opacity .6s ease; border-radius: inherit; }' +
-      '.mw-atmo.streak .mw-atmo-edge.e-streak { opacity: 1; animation: mwEdgeBreath 2.4s ease-in-out infinite; box-shadow: inset 0 0 70px 8px rgba(63,214,140,.34); }' +
-      '.mw-atmo.tight .mw-atmo-edge.e-tight { opacity: 1; animation: mwEdgeBreath 1.3s ease-in-out infinite; box-shadow: inset 0 0 70px 10px rgba(255,80,80,.38); }' +
-      '.mw-atmo.done .mw-atmo-edge.e-done { opacity: 1; animation: mwEdgeBreath 1.8s ease-in-out infinite; box-shadow: inset 0 0 80px 12px rgba(255,205,90,.42); }' +
+      '.mw-atmo.streak .mw-atmo-edge.e-streak { opacity: 1; animation: mwEdgeBreath 2.4s ease-in-out infinite; box-shadow: inset 0 0 56px 2px rgba(63,214,140,.2); }' +
+      '.mw-atmo.tight .mw-atmo-edge.e-tight { opacity: 1; animation: mwEdgeBreath 1.3s ease-in-out infinite; box-shadow: inset 0 0 54px 2px rgba(255,84,84,.22); }' +
+      '.mw-atmo.done .mw-atmo-edge.e-done { opacity: 1; animation: mwEdgeBreath 1.8s ease-in-out infinite; box-shadow: inset 0 0 64px 4px rgba(255,205,90,.28); }' +
+      '.mw-atmo.sale .mw-atmo-edge.e-sale { opacity: 1; animation: mwEdgeBreath .9s ease-in-out infinite; box-shadow: inset 0 0 54px 2px rgba(255,92,70,.26); }' +
       '@keyframes mwEdgeBreath { 0%, 100% { filter: brightness(.7); } 50% { filter: brightness(1.15); } }' +
       '.mw-atmo-sweep { position: absolute; top: -10%; bottom: -10%; left: -60%; width: 55%; transform: translateX(0) skewX(-16deg);' +
       '  background: linear-gradient(90deg, rgba(255,246,220,0) 0%, rgba(255,246,220,.075) 50%, rgba(255,246,220,0) 100%);' +
@@ -114,6 +116,37 @@
       });
     }
 
+    // flash sale: a pulsing spotlight on the discounted product, so the deal pulls your eye (is it on your list?)
+    var spot = null, spotFor = null;
+    if (hasGlow) {
+      spot = scene.add.image(0, 0, 'glow').setDisplaySize(150, 130).setTint(0xff4d6d).setBlendMode(ADD).setAlpha(0).setVisible(false);
+      scene.tweens.add({ targets: spot, scaleX: spot.scaleX * 1.18, scaleY: spot.scaleY * 1.18, duration: 520, yoyo: true, repeat: -1, ease: 'Sine.easeInOut' });
+    }
+    state.setSale = function (p) {
+      if (!spot || !spot.scene) return;
+      if (!p) { if (spotFor) { spotFor = null; spot.setVisible(false); spot.setAlpha(0); } return; }
+      if (spotFor === p) return;
+      spotFor = p;
+      var o = p.obj;
+      spot.setPosition(o.x, o.y - o.displayHeight * 0.5).setDepth(o.depth - 0.1).setVisible(true).setAlpha(0.75);
+    };
+
+    // while your smart streak is alive, Miimiid leaves a green sparkle trail
+    var lastTrail = 0, lx = 0, ly = 0;
+    scene.events.on('update', function (time) {
+      try {
+        if (!state.streak || !scene.player) return;
+        var px = scene.player.x, py = scene.player.y;
+        var moved = Math.hypot(px - lx, py - ly);
+        lx = px; ly = py;
+        if (moved < 1.2 || time - lastTrail < 60) return;
+        lastTrail = time;
+        var d = scene.add.circle(px - 6 + Math.random() * 12, py - 4, 3 + Math.random() * 2, 0x7ee2a8, 0.8)
+          .setDepth((scene.player.depth || py) - 0.8);
+        scene.tweens.add({ targets: d, alpha: 0, scale: 0.2, y: d.y - 14, duration: 520, onComplete: function () { try { d.destroy(); } catch (e) {} } });
+      } catch (e) {}
+    });
+
     // checkout beacon, shown once the list is complete
     var beacon = [];
     if (hasGlow) {
@@ -171,6 +204,7 @@
         '<div class="mw-atmo-sweep"></div>' +
         '<div class="mw-atmo-edge e-streak"></div>' +
         '<div class="mw-atmo-edge e-tight"></div>' +
+        '<div class="mw-atmo-edge e-sale"></div>' +
         '<div class="mw-atmo-edge e-done"></div>' +
         '<div class="mw-atmo-intro"></div>';
       holder.appendChild(atmo);
@@ -195,21 +229,37 @@
           var pct = clockEl ? parseFloat(clockEl.style.width) : 100;
           if (!isFinite(pct)) pct = 100;
           var p = Math.max(0, Math.min(1, (60 - pct) / 60));        // 0 until 60% left, then rises to 1
-          var warm = Math.round(p * 0.2 * 100) / 100;
+          var warm = Math.round(p * 0.07 * 100) / 100;
           if (warm !== lastWarm) {
             lastWarm = warm;
             atmo.style.setProperty('--warm', String(warm));
-            atmo.style.setProperty('--vig', String(Math.round((0.26 + p * 0.22) * 100) / 100));
-            atmo.style.setProperty('--vig2', String(Math.round((0.09 + p * 0.08) * 100) / 100));
+            atmo.style.setProperty('--vig', String(Math.round((0.24 + p * 0.14) * 100) / 100));
+            atmo.style.setProperty('--vig2', String(Math.round((0.08 + p * 0.05) * 100) / 100));
           }
 
           // streak alive
           var streak = !!(comboEl && comboEl.classList.contains('show') && num(comboEl.textContent) >= 2);
           atmo.classList.toggle('streak', streak);
+          state.streak = streak;
+
+          // flash sale on: siren edge and a spotlight on the discounted product
+          var saleEl = document.querySelector('[data-mw-sale]');
+          var saleOn = !!(saleEl && saleEl.classList.contains('show'));
+          atmo.classList.toggle('sale', saleOn);
+          if (state.setSale) {
+            var sp = null;
+            if (saleOn) {
+              var stxt = saleEl.textContent || '';
+              (scene.products || []).forEach(function (pr) {
+                if (!sp && pr.item && !pr.taken && stxt.indexOf(pr.item.name) !== -1) sp = pr;
+              });
+            }
+            state.setSale(sp);
+          }
 
           // money or time is tight
           var wallet = walletEl ? num(walletEl.textContent) : NaN;
-          var tight = (isFinite(wallet) && wallet <= 5) || pct <= 15;
+          var tight = (isFinite(wallet) && wallet < 5) || pct <= 15;   // under $5 = below the keep-$5 line
           atmo.classList.toggle('tight', tight);
 
           // pickups
@@ -231,7 +281,9 @@
           if (!allDone) doneFired = false;
           var showDone = allDone && !resultOpen;
           atmo.classList.toggle('done', showDone);
-          if (state.setBeacon) state.setBeacon(showDone);
+          var payNow = pct <= 0 && lastCount > 0 && !resultOpen;      // store closed: the way to the counter lights up
+          if (payNow) atmo.classList.add('tight');
+          if (state.setBeacon) state.setBeacon(showDone || payNow);
         } catch (e) {}
       }, 160);
 
