@@ -6,6 +6,7 @@
  *   2. Puts a soft glow under the products you can really grab, so they stand out from the stock.
  *   3. Removes the square tap highlight behind the Grab / Scan buttons.
  *   4. Makes the sale / streak banners at the top smaller, so the store sign stays visible.
+ *   5. Adds life to the empty floor: plants that sway, a basket stack and a restock pallet by the walls.
  * If anything fails, the store simply looks as it did before.
  */
 (function () {
@@ -115,6 +116,80 @@
     return count;
   }
 
+
+  // ---------- props along the walls (they sit in the empty margins and block a little, like real furniture) ----------
+  function plantTexture(scene) {
+    if (scene.textures.exists('pp-plant')) return;
+    var g = scene.make.graphics({ x: 0, y: 0, add: false });
+    g.fillStyle(0x23805a, 1);
+    g.fillTriangle(24, 62, 32, 62, 4, 22).fillTriangle(24, 62, 34, 62, 14, 4);
+    g.fillStyle(0x2f9e6b, 1);
+    g.fillTriangle(22, 62, 36, 62, 28, 0).fillTriangle(26, 62, 38, 62, 48, 10);
+    g.fillStyle(0x3fb97f, 1);
+    g.fillTriangle(28, 62, 40, 62, 56, 28).fillTriangle(20, 62, 30, 62, 8, 38);
+    g.fillStyle(0xb5654a, 1).fillTriangle(14, 94, 42, 94, 10, 66).fillTriangle(42, 94, 46, 66, 10, 66);
+    g.fillStyle(0xc9755a, 1).fillRoundedRect(8, 58, 40, 10, 3);
+    g.fillStyle(0x000000, 0.12).fillRect(14, 82, 28, 3);
+    g.generateTexture('pp-plant', 56, 94);
+    g.destroy();
+  }
+
+  function basketTexture(scene) {
+    if (scene.textures.exists('pp-baskets')) return;
+    var g = scene.make.graphics({ x: 0, y: 0, add: false });
+    var cols = [0xe0245e, 0xc41d52, 0xe0245e, 0xc41d52];
+    for (var i = 0; i < 4; i++) {
+      var y = 34 - i * 8;
+      g.fillStyle(cols[i], 1).fillRoundedRect(2 + i, y, 40 - i * 2, 12, 3);
+      g.fillStyle(0xff6f98, 1).fillRoundedRect(2 + i, y, 40 - i * 2, 3, 2);
+      g.lineStyle(1, 0x7a0f30, 0.5);
+      for (var x = 8 + i; x < 38 - i; x += 6) g.lineBetween(x, y + 4, x, y + 10);
+    }
+    g.generateTexture('pp-baskets', 46, 48);
+    g.destroy();
+  }
+
+  function palletTexture(scene) {
+    if (scene.textures.exists('pp-pallet')) return;
+    var g = scene.make.graphics({ x: 0, y: 0, add: false });
+    // pallet
+    g.fillStyle(0x8a6a44, 1).fillRect(2, 66, 82, 5).fillRect(2, 73, 82, 5);
+    g.fillStyle(0x6b4f2f, 1).fillRect(6, 71, 10, 3).fillRect(38, 71, 10, 3).fillRect(70, 71, 10, 3);
+    // boxes
+    g.fillStyle(0xc9a06a, 1).fillRoundedRect(4, 42, 36, 24, 2).fillRoundedRect(44, 42, 36, 24, 2).fillRoundedRect(22, 20, 40, 22, 2);
+    g.fillStyle(0xdcb682, 1).fillRect(4, 42, 36, 4).fillRect(44, 42, 36, 4).fillRect(22, 20, 40, 4);
+    g.fillStyle(0xe8d3a8, 1).fillRect(20, 42, 4, 24).fillRect(60, 42, 4, 24).fillRect(40, 20, 4, 22);
+    g.fillStyle(0x1f6feb, 1).fillRoundedRect(10, 52, 12, 8, 2).fillRoundedRect(50, 52, 12, 8, 2).fillRoundedRect(46, 29, 12, 8, 2);
+    g.generateTexture('pp-pallet', 86, 80);
+    g.destroy();
+  }
+
+  function addProp(scene, key, x, y, w, obstacle, sway) {
+    // soft shadow first, then the prop (depth follows its feet, so Miimiid walks in front or behind correctly)
+    if (scene.textures.exists('softshadow')) {
+      scene.add.image(x, y - 2, 'softshadow').setDisplaySize(w * 1.2, 20).setDepth(y - 1);
+    }
+    var img = scene.add.image(x, y, key).setOrigin(0.5, 1).setDepth(y);
+    if (obstacle && scene.obst) scene.obst.push(obstacle);
+    if (sway && scene.tweens) {
+      scene.tweens.add({
+        targets: img, angle: { from: -1.1, to: 1.1 }, duration: 2600 + Math.random() * 1200,
+        yoyo: true, repeat: -1, ease: 'Sine.easeInOut'
+      });
+    }
+    return img;
+  }
+
+  function addProps(scene) {
+    plantTexture(scene);
+    basketTexture(scene);
+    palletTexture(scene);
+    addProp(scene, 'pp-plant', 66, 760, 56, { x: 38, y: 738, w: 56, h: 24 }, true);
+    addProp(scene, 'pp-baskets', 66, 396, 46, { x: 40, y: 380, w: 50, h: 18 }, false);
+    addProp(scene, 'pp-pallet', 1316, 336, 86, { x: 1274, y: 314, w: 86, h: 24 }, false);
+    addProp(scene, 'pp-plant', 1322, 486, 56, { x: 1294, y: 464, w: 56, h: 24 }, true);
+  }
+
   // a soft glow under every product you can really grab
   function markReal(scene) {
     if (!scene.textures.exists('glow')) return;
@@ -135,6 +210,7 @@
   function decorate(scene, ctx) {
     try {
       try { markReal(scene); } catch (e) { console.error('mart glow failed:', e); }
+      try { addProps(scene); } catch (e) { console.error('mart props failed:', e); }
       // make sure the extra pictures are loaded, then build
       var extraKeys = {};
       var toLoad = [];
