@@ -1746,15 +1746,18 @@ freezer: ['pizza', 'icecream', 'frozendinner']
         };
         runSign();
 
-        // entrance mat
+        // entrance mat: a woven rug with a fringe (no frame, so it does not look like a button)
         const mat = this.add.graphics().setDepth(-95);
-        mat.fillStyle(0x000000, 0.16).fillRoundedRect(66, 890, 250, 84, 12);
-        mat.fillStyle(0x2b3a5c, 1).fillRoundedRect(62, 884, 250, 82, 10);
-        mat.lineStyle(2, 0x56709f, 1).strokeRoundedRect(72, 893, 230, 64, 7);
-        mat.lineStyle(1, 0x3d5282, 1);
-        for (let mx = 84; mx < 300; mx += 12) mat.lineBetween(mx, 897, mx, 903).lineBetween(mx, 947, mx, 953);
-        this.add.text(187, 925, 'WELCOME', { fontSize: '18px', color: '#b9c9e8', fontStyle: 'bold' })
-          .setOrigin(0.5).setDepth(-94);
+        mat.fillStyle(0x000000, 0.2).fillRoundedRect(64, 892, 250, 78, 6);
+        mat.fillStyle(0x3a3946, 1).fillRoundedRect(60, 886, 250, 76, 5);
+        for (let ry = 890; ry < 958; ry += 8) {
+          mat.fillStyle((ry / 8) % 2 ? 0x45444f : 0x33323e, 1).fillRect(64, ry, 242, 4);
+        }
+        mat.fillStyle(0x6a5a3c, 1).fillRect(60, 886, 250, 3).fillRect(60, 959, 250, 3);
+        mat.lineStyle(2, 0x8a7a58, 0.9);
+        for (let fx = 64; fx <= 306; fx += 8) mat.lineBetween(fx, 962, fx - 1, 969).lineBetween(fx, 886, fx - 1, 880);
+        this.add.text(185, 924, 'WELCOME', { fontSize: '15px', color: '#9a96ab', fontStyle: 'bold' })
+          .setOrigin(0.5).setAlpha(0.85).setDepth(-94);
 
         // shelves, products and the counter
         UNITS.forEach(u => this.buildUnit(u, itemsByCat[u.id] || []));
@@ -2072,8 +2075,8 @@ freezer: ['pizza', 'icecream', 'frozendinner']
             p.label.setColor(on ? '#ffd34d' : (up ? '#ff6b6b' : '#ffffff'));
           }
           if (on && !p.badge) {
-            p.badge = this.add.text(p.x, p.sy - 96, sale.label, {
-              fontSize: '13px', color: '#ffffff', fontStyle: 'bold', backgroundColor: '#e0245e', padding: { x: 6, y: 2 }
+            p.badge = this.add.text(p.x, p.sy - 64, sale.label, {
+              fontSize: '11px', color: '#ffffff', fontStyle: 'bold', backgroundColor: '#e0245e', padding: { x: 6, y: 2 }
             }).setOrigin(0.5, 1).setDepth(p.sy + 3);
             this.tweens.add({ targets: p.badge, scale: 1.18, duration: 450, yoyo: true, repeat: -1 });
           } else if (!on && p.badge) {
@@ -2094,8 +2097,8 @@ refreshHot() {
       return;
     }
     if (!p.item || !p.item.hot || p.taken || p.hotBadge) return;
-    p.hotBadge = this.add.text(p.x, p.sy - 120, p.item.hot.tag, {
-      fontSize: '11px', color: '#ffffff', backgroundColor: '#e8590c',
+    p.hotBadge = this.add.text(p.x, p.sy - 84, p.item.hot.tag, {
+      fontSize: '10px', color: '#ffffff', backgroundColor: '#e8590c',
       padding: { x: 4, y: 2 }, fontStyle: 'bold'
     }).setOrigin(0.5, 1).setDepth(p.sy + 3);
     this.tweens.add({ targets: p.hotBadge, scale: 1.12, duration: 600, yoyo: true, repeat: -1 });
@@ -2661,7 +2664,7 @@ refreshHot() {
       buildCrowd() {
         const specs = [
           { shirt: 0xe8b923, pants: 0x3a4a6b, hair: 0x2a1a12, skin: 0xb98558, speed: 54, route: [[200, 430], [1150, 430], [1150, 490], [200, 490]] },
-          { shirt: 0x2fb7a6, pants: 0x4a3a5c, hair: 0x7a4a22, skin: 0xe8b88a, speed: 46, route: [[150, 820], [900, 820], [900, 900], [150, 900]] },
+          { shirt: 0x2fb7a6, pants: 0x4a3a5c, hair: 0x7a4a22, skin: 0xe8b88a, speed: 46, route: [[480, 820], [900, 820], [900, 900], [480, 900]] },
           { shirt: 0xc2543c, pants: 0x2f3b52, hair: 0x1d1d1d, skin: 0xd9a066, speed: 50, route: [[730, 410], [730, 880], [800, 880], [800, 410]] }
         ];
         this.crowd = specs.map((s, i) => {
