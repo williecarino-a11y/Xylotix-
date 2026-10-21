@@ -208,261 +208,172 @@ async function miimiidFunCenterRequest(url, options = {}) {
 
 
 /* =========================================================
- * LOAD GAME CATALOG
+ * FUN CENTER HOME (Daily Challenge, Miimiid Mart, coming soon)
+ * The old Needs vs Wants card game is gone: the Mart already teaches it.
  * ========================================================= */
 
-async function loadMiimiidFunCenter() {
-  const content = document.getElementById('fun-center-content');
-  if (!content) return;
+function miimiidFunHomeStyles() {
+  if (document.getElementById('mfh-styles')) return;
+  const st = document.createElement('style');
+  st.id = 'mfh-styles';
+  st.textContent = `
+    .mfh { max-width: 460px; margin: 0 auto; padding: 14px 2px 28px; color: #e6e9f0; }
+    .mfh button { -webkit-tap-highlight-color: transparent; font-family: inherit; }
+    .mfh-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 4px 4px 16px; }
+    .mfh-title { font-size: 30px; font-weight: 800; line-height: 1.05; letter-spacing: -.01em; }
+    .mfh-title span { color: #e6e9f0; }
+    .mfh-title strong { color: #4da3ff; }
+    .mfh-tag { margin: 6px 0 0; font-size: 13px; color: #9aa4bd; line-height: 1.35; }
+    .mfh-robot { width: 76px; height: 76px; flex-shrink: 0; object-fit: contain; }
+    .mfh-robot-fallback { flex-shrink: 0; }
+    .mfh-label { margin: 18px 4px 8px; font-size: 11px; font-weight: 800; letter-spacing: .09em; color: #7f8bab; }
 
-  content.innerHTML = `<div class="miimiid-fun-loading">Loading games…</div>`;
+    .mfh-daily { display: block; width: 100%; text-align: left; border: 1px solid #232c42; border-radius: 20px; padding: 16px; cursor: pointer; color: inherit;
+      background: linear-gradient(160deg, #16213d 0%, #131a2c 70%); position: relative; overflow: hidden; }
+    .mfh-daily:active { transform: scale(.99); }
+    .mfh-daily-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+    .mfh-kicker { font-size: 11px; font-weight: 800; letter-spacing: .09em; color: #9ec5ff; }
+    .mfh-streak { display: inline-flex; align-items: center; gap: 5px; padding: 4px 10px; border-radius: 999px; font-size: 12px; font-weight: 800;
+      background: rgba(255, 160, 60, .14); border: 1px solid rgba(255, 160, 60, .5); color: #ffc27a; }
+    .mfh-daily h3 { margin: 10px 0 2px; font-size: 20px; line-height: 1.2; color: #fff; }
+    .mfh-daily p { margin: 0; font-size: 13px; color: #9aa4bd; line-height: 1.4; }
+    .mfh-daily-foot { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 14px; }
+    .mfh-cta { display: inline-flex; align-items: center; gap: 6px; padding: 10px 18px; border-radius: 999px; background: #1f6feb; color: #fff; font-weight: 800; font-size: 14px; }
+    .mfh-cta.is-done { background: rgba(31, 111, 235, .16); color: #9ec5ff; border: 1px solid #1f6feb; }
+    .mfh-reset { font-size: 12px; color: #7f8bab; }
+    .mfh-skel { height: 14px; border-radius: 7px; background: linear-gradient(90deg, #1b2440, #26325a, #1b2440); background-size: 200% 100%; animation: mfhShimmer 1.3s linear infinite; }
+    @keyframes mfhShimmer { to { background-position: -200% 0; } }
 
-  try {
-    const games = await miimiidFunCenterRequest('/api/fun-center/games');
-    if (!Array.isArray(games)) throw new Error('Fun Center games response was invalid.');
+    .mfh-mart { display: block; position: relative; width: 100%; min-height: 168px; padding: 0; border: 1px solid #232c42; border-radius: 20px; overflow: hidden; cursor: pointer; text-align: left; background: #131a2c; color: inherit; }
+    .mfh-mart:active { transform: scale(.99); }
+    .mfh-mart img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .mfh-mart::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(8, 14, 30, .05) 25%, rgba(8, 14, 30, .88) 100%); }
+    .mfh-mart-body { position: absolute; left: 0; right: 0; bottom: 0; z-index: 1; padding: 16px; display: flex; align-items: flex-end; justify-content: space-between; gap: 10px; }
+    .mfh-mart-body strong { display: block; font-size: 20px; color: #fff; }
+    .mfh-mart-body span.mfh-sub { display: block; margin-top: 2px; font-size: 13px; color: #c9d3ea; }
+    .mfh-go { width: 38px; height: 38px; border-radius: 50%; background: #1f6feb; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .mfh-mart.no-photo { background: linear-gradient(160deg, #1a2b55, #131a2c); }
+    .mfh-mart.no-photo .mfh-mart-body { position: relative; min-height: 168px; }
 
-    miimiidFunCenterGames = games;
-    miimiidFunCenterState = null;
-
-    renderMiimiidFunCenter();
-
-  } catch (error) {
-    console.error('Miimiid Fun Center loading error:', error);
-    miimiidFunCenterGames = [];
-    miimiidFunCenterState = null;
-
-    content.innerHTML = `
-      <div class="miimiid-fun-error">
-        <p>Unable to load the Fun Center right now.</p>
-        <button type="button" class="miimiid-fun-btn" data-fun-center-retry>Try again</button>
-      </div>
-    `;
-
-    const retryButton = content.querySelector('[data-fun-center-retry]');
-    if (retryButton) retryButton.addEventListener('click', () => loadMiimiidFunCenter());
-  }
+    .mfh-soon { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .mfh-tile { border: 1px dashed #2c3756; border-radius: 16px; padding: 14px; background: rgba(19, 26, 44, .6); }
+    .mfh-tile svg { opacity: .7; }
+    .mfh-tile b { display: block; margin-top: 8px; font-size: 14px; color: #c9d3ea; }
+    .mfh-tile span { display: block; margin-top: 2px; font-size: 11px; font-weight: 800; letter-spacing: .06em; color: #7f8bab; }
+    @media (prefers-reduced-motion: reduce) { .mfh-skel { animation: none; } }
+  `;
+  document.head.appendChild(st);
 }
 
+const MIIMIID_FUN_ICONS = {
+  flame: '<svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M12 2.5c.6 3.2-1.4 4.6-2.8 6.4C7.7 10.8 7 12.4 7 14.2A5 5 0 0 0 12 19a5 5 0 0 0 5-4.8c0-2-1-3.4-2-4.6-.2 1.2-.8 2-1.7 2.4.5-2.8-.2-6.2-1.3-9.5z" fill="#ffb347"/></svg>',
+  arrow: '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  lock: '<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><rect x="5" y="10.5" width="14" height="9.5" rx="2.5" fill="none" stroke="#9aa4bd" stroke-width="1.8"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5" fill="none" stroke="#9aa4bd" stroke-width="1.8" stroke-linecap="round"/></svg>'
+};
 
-/* =========================================================
- * FUN CENTER HOME - hero card + mascot + level track
- * ========================================================= */
+function miimiidFunHomeDailyInner(info) {
+  const esc = miimiidFunCenterEscapeHtml;
+  if (!info) {
+    return `<div class="mfh-daily-top"><span class="mfh-kicker">DAILY CHALLENGE</span></div>
+      <h3>A new challenge every day</h3>
+      <p>Same shopping trip for everyone. Open it to see today's challenge.</p>
+      <div class="mfh-daily-foot"><span class="mfh-cta">Open ${MIIMIID_FUN_ICONS.arrow}</span></div>`;
+  }
+  const sit = info.situation || {};
+  const res = info.result;
+  const streak = Number(info.streak) > 0 ? Number(info.streak) : 0;
+  const resetAt = info.resetsAt || info.resetAt || info.nextResetAt || null;
+  let reset = '';
+  if (resetAt) {
+    const ms = new Date(resetAt).getTime() - Date.now();
+    if (Number.isFinite(ms) && ms > 0) {
+      const h = Math.floor(ms / 3600000);
+      const m = Math.floor((ms % 3600000) / 60000);
+      reset = `<span class="mfh-reset">New one in ${h}h ${m}m</span>`;
+    }
+  }
+  if (!reset) reset = '<span class="mfh-reset">New one every day</span>';
+  let cta;
+  if (res) cta = `<span class="mfh-cta is-done">Score ${esc(res.score)}</span>`;
+  else if (info.locked) cta = '<span class="mfh-cta is-done">Attempt used</span>';
+  else cta = `<span class="mfh-cta">Play now ${MIIMIID_FUN_ICONS.arrow}</span>`;
+  return `<div class="mfh-daily-top">
+      <span class="mfh-kicker">DAILY CHALLENGE</span>
+      ${streak > 0 ? `<span class="mfh-streak">${MIIMIID_FUN_ICONS.flame}${esc(streak)} day streak</span>` : ''}
+    </div>
+    <h3>${esc(sit.title || 'Today\'s challenge')}</h3>
+    <p>${esc(sit.story || 'Same shopping trip for everyone. One official attempt a day.')}</p>
+    <div class="mfh-daily-foot">${cta}${reset}</div>`;
+}
 
- function renderMiimiidFunCenter() {
+function renderMiimiidFunCenter() {
   const title = document.getElementById('fun-center-title');
   const subtitle = document.getElementById('fun-center-subtitle');
   const content = document.getElementById('fun-center-content');
-
   if (!title || !subtitle || !content) return;
 
   title.textContent = '';
   subtitle.textContent = '';
+  miimiidFunHomeStyles();
 
-  if (
-    !Array.isArray(miimiidFunCenterGames) ||
-    miimiidFunCenterGames.length === 0
-  ) {
-    content.innerHTML = `
-      <div class="miimiid-fun-empty">
-        <p>No games are available right now.</p>
-      </div>
-    `;
-    return;
-  }
-
-  const completed = miimiidFunGetCompletedGames();
-
-  const heroGame =
-    miimiidFunCenterGames.find(
-      game => !completed.includes(game.id)
-    ) || miimiidFunCenterGames[0];
-
-  const rounds = Array.isArray(heroGame.rounds) ? heroGame.rounds : [];
-  const firstRound = rounds.length > 0 ? rounds[0] : null;
-
-  const gameTitle = typeof heroGame.title === 'string' ? heroGame.title : 'Fun Center';
-  const gameSubtitle = typeof heroGame.subtitle === 'string' ? heroGame.subtitle : 'Build smarter money habits through play.';
-  const visual = firstRound && typeof firstRound.visual === 'string' ? firstRound.visual : '';
-
-  const totalRounds = rounds.length > 0 ? rounds.length : 10;
-
-  const displayedProgress =
-    miimiidFunCenterState && miimiidFunCenterState.gameId === heroGame.id
-      ? Math.min(miimiidFunCenterState.roundIndex, totalRounds)
-      : 0;
-
-  const progressPercent = Math.max(0, Math.min(100, Math.round((displayedProgress / totalRounds) * 100)));
+  const storefront = MIIMIID_ASSETS.game && MIIMIID_ASSETS.game.martStorefront;
+  const robot = MIIMIID_ASSETS.funCenter && MIIMIID_ASSETS.funCenter.heroRobot;
 
   content.innerHTML = `
-    <section class="miimiid-fun-page">
-
-      <div class="miimiid-fun-hero-visual">
-
-        <div class="miimiid-fun-hero-copy">
-          <div class="miimiid-fun-title">
-            <span>Fun</span>
-            <strong>Center</strong>
-          </div>
-          <p class="miimiid-fun-tagline">
-            Play. Learn. Build your<br>financial superpowers!
-          </p>
+    <section class="mfh">
+      <div class="mfh-head">
+        <div>
+          <div class="mfh-title"><span>Fun</span> <strong>Center</strong></div>
+          <p class="mfh-tag">Play. Learn. Build your financial superpowers.</p>
         </div>
-
-        <div class="miimiid-fun-hero-decoration decoration-one">&#10022;</div>
-        <div class="miimiid-fun-hero-decoration decoration-two">&#10022;</div>
-        <div class="miimiid-fun-hero-decoration decoration-three">&#10022;</div>
-
-        <div class="miimiid-fun-hero-coins">
-          <span class="fun-coin coin-one">$</span>
-          <span class="fun-coin coin-two">$</span>
-        </div>
-
-        <div class="miimiid-fun-hero-mascot">
-     <img
-     src="${MIIMIID_ASSETS.funCenter.heroRobot}"
-      alt=""
-      aria-hidden="true"
-       onerror="miimiidFunHeroImageError(this)"
-        >
-          <div class="miimiid-fun-hero-mascot-fallback" hidden>
-            ${miimiidFunMascot('idle', 150)}
-          </div>
-        </div>
-
+        ${robot ? `<img class="mfh-robot" src="${robot}" alt="" aria-hidden="true" onerror="this.style.display='none';this.nextElementSibling.hidden=false">` : ''}
+        <div class="mfh-robot-fallback" ${robot ? 'hidden' : ''}>${miimiidFunMascot('idle', 64)}</div>
       </div>
 
-      <section class="miimiid-fun-game-card">
+      <div class="mfh-label">TODAY</div>
+      <button type="button" class="mfh-daily" data-mfh-daily>
+        <div class="mfh-skel" style="width:40%"></div>
+        <div class="mfh-skel" style="width:75%;height:20px;margin-top:12px"></div>
+        <div class="mfh-skel" style="width:90%;margin-top:10px"></div>
+      </button>
 
-        <div class="miimiid-fun-progress-header">
-          <div class="miimiid-fun-progress-title">
-            <span class="miimiid-fun-progress-icon" aria-hidden="true">&#9678;</span>
-            <span>YOUR PROGRESS</span>
-          </div>
-          <span class="miimiid-fun-progress-count">${displayedProgress} / ${totalRounds}</span>
-        </div>
+      <div class="mfh-label">PLAY</div>
+      <button type="button" class="mfh-mart${storefront ? '' : ' no-photo'}" data-mfh-mart>
+        ${storefront ? `<img src="${storefront}" alt="" onerror="this.parentNode.classList.add('no-photo');this.remove()">` : ''}
+        <span class="mfh-mart-body">
+          <span><strong>Miimiid Mart</strong><span class="mfh-sub">You have $40. Shop wisely and survive the week.</span></span>
+          <span class="mfh-go">${MIIMIID_FUN_ICONS.arrow}</span>
+        </span>
+      </button>
 
-        <div class="miimiid-fun-progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="${totalRounds}" aria-valuenow="${displayedProgress}">
-          <div class="miimiid-fun-progress-fill" style="width:${progressPercent}%"></div>
-        </div>
-
-        <div class="miimiid-fun-game-divider"></div>
-
-        <div class="miimiid-fun-current-game">
-
-          <div class="miimiid-fun-game-visual">
-            ${miimiidFunMascot('idle', 82)}
-            ${visual ? `<div class="miimiid-fun-round-icon">${miimiidFunCenterEscapeHtml(visual)}</div>` : ''}
-          </div>
-
-          <h2 class="miimiid-fun-current-title">${miimiidFunCenterEscapeHtml(gameTitle)}</h2>
-          <p class="miimiid-fun-current-subtitle">${miimiidFunCenterEscapeHtml(gameSubtitle)}</p>
-
-          ${
-            firstRound && Array.isArray(firstRound.choices) && firstRound.choices.length > 0
-              ? `
-                <div class="miimiid-fun-home-choices">
-                  ${firstRound.choices.map(choice => {
-                    const label = typeof choice.label === 'string' ? choice.label : '';
-                    const isWant = /want/i.test(label);
-                    return `
-                      <button
-                        type="button"
-                        class="miimiid-fun-home-choice ${isWant ? 'is-want' : 'is-need'}"
-                        data-fun-home-answer="${miimiidFunCenterEscapeHtml(choice.id)}"
-                        data-fun-home-game="${miimiidFunCenterEscapeHtml(heroGame.id)}"
-                      >
-                        <span>${miimiidFunCenterEscapeHtml(label)}</span>
-                        <span class="miimiid-fun-choice-arrow" aria-hidden="true">&#8594;</span>
-                      </button>
-                    `;
-                  }).join('')}
-                </div>
-              `
-              : `
-                <button type="button" class="miimiid-fun-home-play" data-fun-home-play="${miimiidFunCenterEscapeHtml(heroGame.id)}">
-                  Play now <span aria-hidden="true">&#8594;</span>
-                </button>
-              `
-          }
-
-        </div>
-
-      </section>
-
+      <div class="mfh-label">COMING SOON</div>
+      <div class="mfh-soon">
+        <div class="mfh-tile">${MIIMIID_FUN_ICONS.lock}<b>Budget Rush</b><span>SOON</span></div>
+        <div class="mfh-tile">${MIIMIID_FUN_ICONS.lock}<b>Scam Alert</b><span>SOON</span></div>
+      </div>
     </section>
   `;
 
-  content.querySelectorAll('[data-fun-home-answer]').forEach(button => {
-    button.addEventListener('click', async () => {
-      miimiidFunPlayTap();
-      button.disabled = true;
+  const open = () => { miimiidFunPlayTap(); startMiimiidShop(); };
+  const daily = content.querySelector('[data-mfh-daily]');
+  const mart = content.querySelector('[data-mfh-mart]');
+  if (daily) daily.addEventListener('click', open);
+  if (mart) mart.addEventListener('click', open);
 
-      const gameId = button.dataset.funHomeGame;
-      const answerId = button.dataset.funHomeAnswer;
-
-      if (!miimiidFunCenterState || miimiidFunCenterState.gameId !== gameId) {
-        await startMiimiidFunGame(gameId);
-      }
-
-      if (!miimiidFunCenterState || miimiidFunCenterState.gameId !== gameId) {
-        return;
-      }
-
-      const content = document.getElementById('fun-center-content');
-      const roundAnswerButton = content
-        ? content.querySelector(`[data-fun-answer="${CSS.escape(answerId)}"]`)
-        : null;
-
-      if (roundAnswerButton) {
-        await submitMiimiidFunAnswer(roundAnswerButton);
-      }
-    });
-  });
-
-  const playButton = content.querySelector('[data-fun-home-play]');
-  if (playButton) {
-    playButton.addEventListener('click', () => {
-      miimiidFunPlayTap();
-      startMiimiidFunGame(playButton.dataset.funHomePlay);
-    });
-  }
-  const shopEntry = document.createElement('button');
-  shopEntry.type = 'button';
-  const storefront = MIIMIID_ASSETS.game && MIIMIID_ASSETS.game.martStorefront;
-  shopEntry.className = 'miimiid-shop-entry' + (storefront ? ' has-storefront' : '');
-  shopEntry.innerHTML = storefront
-    ? `
-      <img class="miimiid-shop-entry-photo" src="${storefront}" alt="" onerror="this.parentNode.classList.remove('has-storefront');this.remove()">
-      <span class="miimiid-shop-entry-label">
-        <strong>Miimiid Mart</strong>
-        <span>You have $40. Tap to go shopping &#8594;</span>
-      </span>
-    `
-    : `
-      <span aria-hidden="true">🛒</span>
-      <span class="miimiid-shop-entry-copy">
-        <strong>Miimiid Mart</strong>
-        <span>You have $40. Fill your basket wisely.</span>
-      </span>
-      <span aria-hidden="true">&#8594;</span>
-    `;
-  const funPage = content.querySelector('.miimiid-fun-page');
-  if (funPage) {
-    funPage.appendChild(shopEntry);
-    shopEntry.addEventListener('click', () => {
-      miimiidFunPlayTap();
-      startMiimiidShop();
-    });
-  }
+  // the daily card fills in once the server answers; if it fails the card still opens the challenge
+  miimiidFunCenterRequest('/api/fun-center/daily', { headers: { 'X-Continue-Loading': 'false' } })
+    .then(info => { if (daily && daily.isConnected) daily.innerHTML = miimiidFunHomeDailyInner(info); })
+    .catch(() => { if (daily && daily.isConnected) daily.innerHTML = miimiidFunHomeDailyInner(null); });
 }
 
-function miimiidFunHeroImageError(img) {
-  img.style.display = 'none';
-  const wrapper = img.closest('.miimiid-fun-hero-mascot');
-  const fallback = wrapper ? wrapper.querySelector('.miimiid-fun-hero-mascot-fallback') : null;
-  if (fallback) fallback.hidden = false;
-  }
-  
+async function loadMiimiidFunCenter() {
+  const content = document.getElementById('fun-center-content');
+  if (!content) return;
+  miimiidFunCenterGames = [];
+  miimiidFunCenterState = null;
+  renderMiimiidFunCenter();
+}
+
 /* =========================================================
  * START GAME
  * ========================================================= */
