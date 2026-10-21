@@ -212,6 +212,13 @@
     try {
       // the top bar gets its own strip: the store view starts below it, so nothing hides the neon sign
       try { reserveHud(scene); } catch (e) { console.error('mart hud strip failed:', e); }
+      // at the start the camera is pressed against the bottom of the store; nudge it up so the whole neon sign shows
+      try {
+        scene.events.once('update', function () {
+          var c = scene.cameras && scene.cameras.main;
+          if (c && c.followOffset && c.followOffset.set) c.followOffset.set(0, 60);
+        });
+      } catch (e) {}
       try { markReal(scene); } catch (e) { console.error('mart glow failed:', e); }
       try { addProps(scene); } catch (e) { console.error('mart props failed:', e); }
       // make sure the extra pictures are loaded, then build
@@ -261,7 +268,7 @@
       '.mw .mw-hud > .mw-top { order: 0 !important; }' +
       '.mw .mw-hud > .mm-meters { order: 1 !important; }' +
       '.mw .mw-hud > .mw-list { order: 2 !important; }' +
-      '.mw .mw-hud > :not(.mw-top):not(.mm-meters):not(.mw-list) { order: 5 !important; flex: 0 0 100% !important; max-width: fit-content !important; margin: 0 auto !important; font-size: 10px !important; padding: 2px 9px !important; line-height: 1.25; animation: none !important; opacity: .95; }' +
+      '.mw .mw-hud > :not(.mw-top):not(.mm-meters):not(.mw-list) { order: 5 !important; flex: 0 0 76% !important; margin: 0 12% !important; box-sizing: border-box; text-align: center; font-size: 10px !important; padding: 2px 9px !important; line-height: 1.25; animation: none !important; opacity: .95; }' +
       // top bar, round 2: tighter, and the meters row loses its pills so the sign and shelves read clearly
       '.mw .mw-hud { top: calc(4px + env(safe-area-inset-top, 0px)) !important; gap: 2px 5px !important; }' +
       '.mw .mw-hud .mw-clock span { font-size: 9px !important; opacity: .85; }' +
@@ -318,8 +325,26 @@
         cam.setViewport(0, px, gw, gh - px);
       } catch (e) {}
     }
+    function stackBanners() {
+      try {
+        var hud = document.querySelector('.mw-hud');
+        if (!hud) return;
+        var base = 0;
+        ['.mw-top', '.mm-meters'].forEach(function (sel) {
+          var el = hud.querySelector(':scope > ' + sel);
+          if (el && el.offsetHeight) base = Math.max(base, el.offsetTop + el.offsetHeight);
+        });
+        var y = base + 3;
+        Array.prototype.forEach.call(hud.children, function (el) {
+          if (el.matches('.mw-top, .mm-meters, .mw-list')) return;
+          if (!el.offsetHeight) return;                    // hidden banners take no space
+          el.style.top = y + 'px';
+          y += el.offsetHeight + 3;
+        });
+      } catch (e) {}
+    }
     scene.events.once('update', measure);
-    if (scene.time && scene.time.addEvent) scene.time.addEvent({ delay: 350, loop: true, callback: measure });
+    if (scene.time && scene.time.addEvent) scene.time.addEvent({ delay: 200, loop: true, callback: function () { measure(); stackBanners(); } });
     window.addEventListener('resize', measure);
   }
 
