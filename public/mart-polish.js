@@ -7,7 +7,7 @@
  *   3. Removes the square tap highlight behind the Grab / Scan buttons.
  *   4. Makes the sale / streak banners at the top smaller, so the store sign stays visible.
  *   5. Adds life to the empty floor: plants that sway, a basket stack and a restock pallet by the walls.
- *   6. Calmer top bar, camera that keeps the neon sign visible, and a smooth floating joystick (MiimiidMartControls).
+ *   6. Calmer top bar with its own strip above the store view, banners that stack below it, and a smooth floating joystick (MiimiidMartControls).
  * If anything fails, the store simply looks as it did before.
  */
 (function () {
@@ -210,13 +210,8 @@
 
   function decorate(scene, ctx) {
     try {
-      // sit the player a little lower on screen, so the top of the store (neon sign) is not hidden behind the top bar
-      try {
-        scene.events.once('update', function () {
-          var c = scene.cameras && scene.cameras.main;
-          if (c && c.followOffset && c.followOffset.set) c.followOffset.set(0, 72);
-        });
-      } catch (e) {}
+      // the top bar gets its own strip: the store view starts below it, so nothing hides the neon sign
+      try { reserveHud(scene); } catch (e) { console.error('mart hud strip failed:', e); }
       try { markReal(scene); } catch (e) { console.error('mart glow failed:', e); }
       try { addProps(scene); } catch (e) { console.error('mart props failed:', e); }
       // make sure the extra pictures are loaded, then build
@@ -263,7 +258,10 @@
       '.mw .mw-hud .mw-clock-bar { height: 4px !important; }' +
       '.mw .mw-hud .mm-meters .mm-meter { padding: 2px 7px 6px !important; font-size: 9px !important; }' +
       '.mw .mw-hud .mw-list details { padding: 2px 8px !important; }' +
-      '.mw .mw-hud > .mw-sale, .mw .mw-hud > .mw-hike, .mw .mw-hud > .mw-combo { flex: 0 0 auto !important; align-self: center; margin: 0 auto !important; max-width: 92%; font-size: 10px !important; padding: 2px 9px !important; line-height: 1.25; animation: none !important; opacity: .92; }' +
+      '.mw .mw-hud > .mw-top { order: 0 !important; }' +
+      '.mw .mw-hud > .mm-meters { order: 1 !important; }' +
+      '.mw .mw-hud > .mw-list { order: 2 !important; }' +
+      '.mw .mw-hud > :not(.mw-top):not(.mm-meters):not(.mw-list) { order: 5 !important; flex: 0 0 100% !important; max-width: fit-content !important; margin: 0 auto !important; font-size: 10px !important; padding: 2px 9px !important; line-height: 1.25; animation: none !important; opacity: .95; }' +
       // top bar, round 2: tighter, and the meters row loses its pills so the sign and shelves read clearly
       '.mw .mw-hud { top: calc(4px + env(safe-area-inset-top, 0px)) !important; gap: 2px 5px !important; }' +
       '.mw .mw-hud .mw-clock span { font-size: 9px !important; opacity: .85; }' +
@@ -273,7 +271,7 @@
       '.mw .mw-hud .mw-list details { background: none !important; -webkit-backdrop-filter: none !important; backdrop-filter: none !important; text-shadow: 0 1px 3px rgba(0,0,0,.95); }' +
       // joystick: floating ring, bigger, eased (see attachStick)
       '.mw-controls { position: relative; }' +
-      '.mw-joypad { position: absolute; left: 0; top: -28px; bottom: 0; width: 52%; touch-action: none; z-index: 1; -webkit-tap-highlight-color: transparent; }' +
+      '.mw-joypad { position: absolute; left: 0; top: -28px; bottom: 0; width: 46%; touch-action: none; z-index: 1; -webkit-tap-highlight-color: transparent; }' +
       '.mw-scan, .mw-grab { position: relative; z-index: 3; }' +
       // bottom messages: one calm dark card for Sam, and the small status line hides while Sam is talking
       '.mw .mw-asst { top: auto !important; bottom: 10px !important; left: 10px !important; right: 10px !important; background: rgba(8, 14, 30, 0.86) !important; border: 1px solid rgba(95, 211, 160, 0.55) !important; color: #e6e9f0 !important; border-radius: 14px !important; padding: 7px 11px !important; -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }' +
@@ -290,6 +288,40 @@
   }
   try { styles(); } catch (e) {}
 
+
+
+  // ---------- top bar strip: the camera only draws below the top bar ----------
+  function reserveHud(scene) {
+    var cam = scene.cameras && scene.cameras.main;
+    if (!cam || !cam.setViewport) return;
+    var applied = 0;
+    function measure() {
+      try {
+        var hud = document.querySelector('.mw-hud');
+        var canvas = scene.sys && scene.sys.game && scene.sys.game.canvas;
+        if (!hud || !canvas || !scene.scale || !scene.scale.gameSize) return;
+        var cr = canvas.getBoundingClientRect();
+        if (!cr.height) return;
+        var bottom = 0;
+        ['.mw-top', '.mm-meters'].forEach(function (sel) {
+          var el = hud.querySelector(':scope > ' + sel);
+          if (!el) return;
+          var r = el.getBoundingClientRect();
+          if (r.height) bottom = Math.max(bottom, r.bottom);
+        });
+        if (!bottom) return;
+        var gh = scene.scale.gameSize.height, gw = scene.scale.gameSize.width;
+        var px = Math.round((bottom - cr.top + 3) * gh / cr.height);
+        px = Math.max(0, Math.min(px, Math.round(gh * 0.2)));
+        if (Math.abs(px - applied) < 3) return;
+        applied = px;
+        cam.setViewport(0, px, gw, gh - px);
+      } catch (e) {}
+    }
+    scene.events.once('update', measure);
+    if (scene.time && scene.time.addEvent) scene.time.addEvent({ delay: 350, loop: true, callback: measure });
+    window.addEventListener('resize', measure);
+  }
 
   // ---------- joystick: floating ring under your thumb, longer travel, soft start and stop ----------
   function attachStick(joyEl, knob, ctl) {
