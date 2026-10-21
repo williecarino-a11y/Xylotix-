@@ -3,7 +3,9 @@
  * Visual-only extras for the Mart. Nothing here can be grabbed or bought,
  * and nothing blocks the player. Called once from fun-center-world.js after the shelves are built.
  *   1. Fills every empty spot on the shelves and fridges with stock.
- *   2. Removes the square tap highlight behind the Grab / Scan buttons.
+ *   2. Puts a soft glow under the products you can really grab, so they stand out from the stock.
+ *   3. Removes the square tap highlight behind the Grab / Scan buttons.
+ *   4. Makes the sale / streak banners at the top smaller, so the store sign stays visible.
  * If anything fails, the store simply looks as it did before.
  */
 (function () {
@@ -113,8 +115,26 @@
     return count;
   }
 
+  // a soft glow under every product you can really grab
+  function markReal(scene) {
+    if (!scene.textures.exists('glow')) return;
+    var marks = (scene.products || []).map(function (p) {
+      var o = p.obj;
+      var g = scene.add.image(o.x, o.y - o.displayHeight * 0.5, 'glow')
+        .setDisplaySize(66, 58).setTint(0xfff0a8).setAlpha(0.6).setDepth(o.depth - 0.2);
+      return { p: p, g: g };
+    });
+    scene.events.on('update', function () {
+      marks.forEach(function (m) {
+        var show = !m.p.taken && (!m.p.fridge || m.p.fridge.open);
+        if (m.g.visible !== show) m.g.setVisible(show);
+      });
+    });
+  }
+
   function decorate(scene, ctx) {
     try {
+      try { markReal(scene); } catch (e) { console.error('mart glow failed:', e); }
       // make sure the extra pictures are loaded, then build
       var extraKeys = {};
       var toLoad = [];
@@ -148,7 +168,8 @@
     st.id = 'mart-polish-css';
     st.textContent =
       '.mw-grab, .mw-scan, .mw-leave, .mw-joy { -webkit-tap-highlight-color: transparent; }' +
-      '.mw-grab:focus, .mw-scan:focus, .mw-leave:focus { outline: none; }';
+      '.mw-grab:focus, .mw-scan:focus, .mw-leave:focus { outline: none; }' +
+      '.mw-hud > .mw-sale, .mw-hud > .mw-hike, .mw-hud > .mw-combo { flex: 0 0 auto !important; align-self: center; margin: 0 auto !important; max-width: 92%; font-size: 10px !important; padding: 2px 9px !important; line-height: 1.25; }';
     document.head.appendChild(st);
   }
   try { styles(); } catch (e) {}
