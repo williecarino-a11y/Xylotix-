@@ -87,44 +87,20 @@ test.describe('Miimiid browser application flows', () => {
       });
     });
 
-    await page.route('**/api/fun-center/games', async route => {
+    // The Fun Center home now shows the Daily Challenge card, which asks the server for today's challenge.
+    await page.route('**/api/fun-center/daily', async route => {
       await route.fulfill({
         status: 200,
         contentType: 'application/json',
         body: JSON.stringify({
           status: 'success',
-          data: [{
-            id: 'needs-vs-wants',
-            type: 'classification',
-            title: 'Needs vs Wants',
-            subtitle: 'Sort everyday spending into needs and wants.',
-            resultTitle: 'Round complete',
-            resultMessage: 'You are learning to separate needs from wants.',
-            answers: [
-              { id: 'need', label: 'Need' },
-              { id: 'want', label: 'Want' }
-            ],
-            rounds: [
-              {
-                id: 'rent',
-                prompt: 'Rent',
-                category: 'housing',
-                visual: '🏠'
-              },
-              {
-                id: 'groceries',
-                prompt: 'Groceries',
-                category: 'food',
-                visual: '🛒'
-              },
-              {
-                id: 'concert',
-                prompt: 'Concert tickets',
-                category: 'entertainment',
-                visual: '🎵'
-              }
-            ]
-          }]
+          data: {
+            dayKey: '2026-10-21',
+            streak: 3,
+            locked: false,
+            result: null,
+            situation: { title: 'Test challenge', story: 'A short test situation.' }
+          }
         })
       });
     });
@@ -177,14 +153,18 @@ test.describe('Miimiid browser application flows', () => {
     const funCenterView = page.locator('.miimiid-fun-center-view');
     await expect(funCenterView).toBeVisible();
 
-    const funCenterPage = page.locator('.miimiid-fun-page');
-    await expect(funCenterPage).toBeVisible();
+    // new Fun Center home: header, Daily Challenge card and the Miimiid Mart card
+    const funCenterHome = page.locator('.mfh');
+    await expect(funCenterHome).toBeVisible();
+    await expect(funCenterHome.locator('.mfh-title')).toContainText('Center');
 
-    const currentGameTitle = funCenterPage.locator('.miimiid-fun-current-title');
-    await expect(currentGameTitle).toContainText('Needs vs Wants');
+    const dailyCard = funCenterHome.locator('[data-mfh-daily]');
+    await expect(dailyCard).toBeVisible();
+    await expect(dailyCard).toContainText('Test challenge');
 
-    const playButton = funCenterPage.locator('[data-fun-home-play="needs-vs-wants"]');
-    await expect(playButton).toBeVisible();
+    const martCard = funCenterHome.locator('[data-mfh-mart]');
+    await expect(martCard).toBeVisible();
+    await expect(martCard).toContainText('Miimiid Mart');
   });
 
   test('Fun Center games endpoint returns server-owned game data without answer leakage', async ({ request }) => {
