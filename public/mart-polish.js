@@ -245,7 +245,17 @@
     st.textContent =
       '.mw-grab, .mw-scan, .mw-leave, .mw-joy { -webkit-tap-highlight-color: transparent; }' +
       '.mw-grab:focus, .mw-scan:focus, .mw-leave:focus { outline: none; }' +
-      '.mw-hud > .mw-sale, .mw-hud > .mw-hike, .mw-hud > .mw-combo { flex: 0 0 auto !important; align-self: center; margin: 0 auto !important; max-width: 92%; font-size: 10px !important; padding: 2px 9px !important; line-height: 1.25; }';
+      // calmer top bar: one soft, slim glass look instead of heavy dark blocks, so the store sign shows through
+      '.mw .mw-hud { gap: 3px 5px !important; top: calc(6px + env(safe-area-inset-top, 0px)) !important; }' +
+      '.mw .mw-hud .mw-top .mw-wallet, .mw .mw-hud .mw-top .mw-count, .mw .mw-hud .mw-top .mw-leave, .mw .mw-hud .mw-top .mw-clock,' +
+      ' .mw .mw-hud .mm-meters .mm-meter, .mw .mw-hud .mw-list details { background: rgba(8, 14, 30, 0.5) !important; -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); border: 0 !important; box-shadow: none !important; }' +
+      '.mw .mw-hud .mw-top .mw-wallet { font-size: 12px !important; padding: 3px 10px !important; }' +
+      '.mw .mw-hud .mw-top .mw-count, .mw .mw-hud .mw-top .mw-leave { font-size: 11px !important; padding: 3px 9px !important; }' +
+      '.mw .mw-hud .mw-clock { padding: 3px 9px !important; }' +
+      '.mw .mw-hud .mw-clock-bar { height: 4px !important; }' +
+      '.mw .mw-hud .mm-meters .mm-meter { padding: 2px 7px 6px !important; font-size: 9px !important; }' +
+      '.mw .mw-hud .mw-list details { padding: 2px 8px !important; }' +
+      '.mw .mw-hud > .mw-sale, .mw .mw-hud > .mw-hike, .mw .mw-hud > .mw-combo { flex: 0 0 auto !important; align-self: center; margin: 0 auto !important; max-width: 92%; font-size: 10px !important; padding: 2px 9px !important; line-height: 1.25; animation: none !important; opacity: .92; }';
     document.head.appendChild(st);
   }
   try { styles(); } catch (e) {}
