@@ -214,7 +214,7 @@
       try {
         scene.events.once('update', function () {
           var c = scene.cameras && scene.cameras.main;
-          if (c && c.followOffset && c.followOffset.set) c.followOffset.set(0, 58);
+          if (c && c.followOffset && c.followOffset.set) c.followOffset.set(0, 72);
         });
       } catch (e) {}
       try { markReal(scene); } catch (e) { console.error('mart glow failed:', e); }
@@ -275,6 +275,14 @@
       '.mw-controls { position: relative; }' +
       '.mw-joypad { position: absolute; left: 0; top: -28px; bottom: 0; width: 52%; touch-action: none; z-index: 1; -webkit-tap-highlight-color: transparent; }' +
       '.mw-scan, .mw-grab { position: relative; z-index: 3; }' +
+      // bottom messages: one calm dark card for Sam, and the small status line hides while Sam is talking
+      '.mw .mw-asst { top: auto !important; bottom: 10px !important; left: 10px !important; right: 10px !important; background: rgba(8, 14, 30, 0.86) !important; border: 1px solid rgba(95, 211, 160, 0.55) !important; color: #e6e9f0 !important; border-radius: 14px !important; padding: 7px 11px !important; -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }' +
+      '.mw .mw-asst b { color: #5fd3a0 !important; }' +
+      '.mw .mw-asst-face { background: #2f9e6b !important; color: #fff !important; }' +
+      '.mw .mw-reply { background: transparent !important; border: 1px solid #5fd3a0 !important; color: #b4f0d3 !important; padding: 5px 11px !important; }' +
+      '.mw .mw-reply:active { background: #2f9e6b !important; color: #fff !important; }' +
+      '.mw .mw-asst.show ~ .mw-bubble { opacity: 0 !important; }' +
+      '.mw .mw-bubble { bottom: 10px !important; background: rgba(8, 14, 30, 0.78) !important; }' +
       '.mw-joy.mw-joy-float { width: 124px; height: 124px; pointer-events: none; opacity: .6; background: rgba(77, 163, 255, 0.10); transition: transform .16s ease-out, opacity .2s; }' +
       '.mw-joy.mw-joy-float.on { opacity: 1; background: rgba(77, 163, 255, 0.16); transition: opacity .12s; }' +
       '.mw-joy-float .mw-joy-knob { width: 52px; height: 52px; margin: -26px 0 0 -26px; transition: none !important; background: radial-gradient(circle at 35% 30%, #5aa2ff, #1f6feb 70%); box-shadow: 0 4px 14px rgba(0,0,0,.45), 0 0 14px rgba(77,163,255,.35); }';
