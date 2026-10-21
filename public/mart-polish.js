@@ -8,6 +8,7 @@
  *   4. Makes the sale / streak banners at the top smaller, so the store sign stays visible.
  *   5. Adds life to the empty floor: plants that sway, a basket stack and a restock pallet by the walls.
  *   6. Calmer top bar with its own strip above the store view, banners that stack below it, and a smooth floating joystick (MiimiidMartControls).
+ * 7. Starts public/mart-wow.js (atmosphere, mood and reward moments) if it is loaded.
  * If anything fails, the store simply looks as it did before.
  */
 (function () {
@@ -221,6 +222,8 @@
       } catch (e) {}
       try { markReal(scene); } catch (e) { console.error('mart glow failed:', e); }
       try { addProps(scene); } catch (e) { console.error('mart props failed:', e); }
+      // atmosphere, mood and reward moments live in mart-wow.js
+      try { if (window.MiimiidMartWow) window.MiimiidMartWow.start(scene, ctx); } catch (e) { console.error('mart wow failed:', e); }
       // make sure the extra pictures are loaded, then build
       var extraKeys = {};
       var toLoad = [];
