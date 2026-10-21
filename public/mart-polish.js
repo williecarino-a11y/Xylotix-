@@ -7,6 +7,7 @@
  *   3. Removes the square tap highlight behind the Grab / Scan buttons.
  *   4. Makes the sale / streak banners at the top smaller, so the store sign stays visible.
  *   5. Adds life to the empty floor: plants that sway, a basket stack and a restock pallet by the walls.
+ *   6. Calmer top bar, camera that keeps the neon sign visible, and a smooth floating joystick (MiimiidMartControls).
  * If anything fails, the store simply looks as it did before.
  */
 (function () {
@@ -209,6 +210,13 @@
 
   function decorate(scene, ctx) {
     try {
+      // sit the player a little lower on screen, so the top of the store (neon sign) is not hidden behind the top bar
+      try {
+        scene.events.once('update', function () {
+          var c = scene.cameras && scene.cameras.main;
+          if (c && c.followOffset && c.followOffset.set) c.followOffset.set(0, 58);
+        });
+      } catch (e) {}
       try { markReal(scene); } catch (e) { console.error('mart glow failed:', e); }
       try { addProps(scene); } catch (e) { console.error('mart props failed:', e); }
       // make sure the extra pictures are loaded, then build
@@ -255,10 +263,112 @@
       '.mw .mw-hud .mw-clock-bar { height: 4px !important; }' +
       '.mw .mw-hud .mm-meters .mm-meter { padding: 2px 7px 6px !important; font-size: 9px !important; }' +
       '.mw .mw-hud .mw-list details { padding: 2px 8px !important; }' +
-      '.mw .mw-hud > .mw-sale, .mw .mw-hud > .mw-hike, .mw .mw-hud > .mw-combo { flex: 0 0 auto !important; align-self: center; margin: 0 auto !important; max-width: 92%; font-size: 10px !important; padding: 2px 9px !important; line-height: 1.25; animation: none !important; opacity: .92; }';
+      '.mw .mw-hud > .mw-sale, .mw .mw-hud > .mw-hike, .mw .mw-hud > .mw-combo { flex: 0 0 auto !important; align-self: center; margin: 0 auto !important; max-width: 92%; font-size: 10px !important; padding: 2px 9px !important; line-height: 1.25; animation: none !important; opacity: .92; }' +
+      // top bar, round 2: tighter, and the meters row loses its pills so the sign and shelves read clearly
+      '.mw .mw-hud { top: calc(4px + env(safe-area-inset-top, 0px)) !important; gap: 2px 5px !important; }' +
+      '.mw .mw-hud .mw-clock span { font-size: 9px !important; opacity: .85; }' +
+      '.mw .mw-hud .mw-clock-bar { height: 3px !important; }' +
+      '.mw .mw-hud .mm-meters .mm-meter { background: none !important; -webkit-backdrop-filter: none !important; backdrop-filter: none !important; padding: 0 6px 5px !important; text-shadow: 0 1px 3px rgba(0,0,0,.95); }' +
+      '.mw .mw-hud .mm-meters .mm-meter-bar { height: 2px !important; bottom: 1px !important; }' +
+      '.mw .mw-hud .mw-list details { background: none !important; -webkit-backdrop-filter: none !important; backdrop-filter: none !important; text-shadow: 0 1px 3px rgba(0,0,0,.95); }' +
+      // joystick: floating ring, bigger, eased (see attachStick)
+      '.mw-controls { position: relative; }' +
+      '.mw-joypad { position: absolute; left: 0; top: -28px; bottom: 0; width: 52%; touch-action: none; z-index: 1; -webkit-tap-highlight-color: transparent; }' +
+      '.mw-scan, .mw-grab { position: relative; z-index: 3; }' +
+      '.mw-joy.mw-joy-float { width: 124px; height: 124px; pointer-events: none; opacity: .6; background: rgba(77, 163, 255, 0.10); transition: transform .16s ease-out, opacity .2s; }' +
+      '.mw-joy.mw-joy-float.on { opacity: 1; background: rgba(77, 163, 255, 0.16); transition: opacity .12s; }' +
+      '.mw-joy-float .mw-joy-knob { width: 52px; height: 52px; margin: -26px 0 0 -26px; transition: none !important; background: radial-gradient(circle at 35% 30%, #5aa2ff, #1f6feb 70%); box-shadow: 0 4px 14px rgba(0,0,0,.45), 0 0 14px rgba(77,163,255,.35); }';
     document.head.appendChild(st);
   }
   try { styles(); } catch (e) {}
 
+
+  // ---------- joystick: floating ring under your thumb, longer travel, soft start and stop ----------
+  function attachStick(joyEl, knob, ctl) {
+    try {
+      var zone = joyEl && joyEl.parentNode;
+      if (!zone || !knob || !ctl) return false;
+      if (joyEl.getAttribute('data-stick')) return true;
+      joyEl.setAttribute('data-stick', '1');
+      var pad = document.createElement('div');
+      pad.className = 'mw-joypad';
+      zone.insertBefore(pad, zone.firstChild);
+      joyEl.classList.add('mw-joy-float');
+
+      var R = 54, DEAD = 0.1, CURVE = 1.35;
+      var target = { x: 0, y: 0 }, cur = { x: 0, y: 0 };
+      var raf = 0, activeId = null, cx = 0, cy = 0;
+
+      function clamp(v, lo, hi) { return hi < lo ? (lo + hi) / 2 : Math.max(lo, Math.min(hi, v)); }
+
+      function loop() {
+        raf = 0;
+        var tm = Math.hypot(target.x, target.y), cm = Math.hypot(cur.x, cur.y);
+        var f = tm >= cm ? 0.34 : 0.55;          // gentle start, quicker stop
+        cur.x += (target.x - cur.x) * f;
+        cur.y += (target.y - cur.y) * f;
+        if (tm === 0 && Math.hypot(cur.x, cur.y) < 0.03) { cur.x = 0; cur.y = 0; }
+        ctl.x = cur.x; ctl.y = cur.y;
+        if (tm !== 0 || cur.x !== 0 || cur.y !== 0) raf = requestAnimationFrame(loop);
+      }
+      function kick() { if (!raf) raf = requestAnimationFrame(loop); }
+
+      function place(e) {
+        joyEl.style.transform = '';
+        var home = joyEl.getBoundingClientRect();
+        var hx = home.left + home.width / 2, hy = home.top + home.height / 2;
+        var pr = pad.getBoundingClientRect();
+        var half = home.width / 2;
+        cx = clamp(e.clientX, pr.left + half, pr.right - half);
+        cy = clamp(e.clientY, pr.top + half + 28, pr.bottom - half);
+        joyEl.style.transform = 'translate(' + (cx - hx) + 'px,' + (cy - hy) + 'px)';
+      }
+
+      function move(e) {
+        var dx = e.clientX - cx, dy = e.clientY - cy;
+        var len = Math.hypot(dx, dy);
+        var k = len > R ? R / len : 1;
+        knob.style.transform = 'translate(' + (dx * k) + 'px,' + (dy * k) + 'px)';
+        var v = Math.min(1, len / R);
+        if (v < DEAD) { target.x = 0; target.y = 0; kick(); return; }
+        var m = Math.pow((v - DEAD) / (1 - DEAD), CURVE);   // small pushes = slow and precise
+        target.x = (dx / len) * m;
+        target.y = (dy / len) * m;
+        kick();
+      }
+
+      function end(e) {
+        if (e && activeId !== null && e.pointerId !== undefined && e.pointerId !== activeId) return;
+        activeId = null;
+        target.x = 0; target.y = 0;
+        knob.style.transform = '';
+        joyEl.style.transform = '';
+        joyEl.classList.remove('on');
+        kick();
+      }
+
+      pad.addEventListener('pointerdown', function (e) {
+        if (activeId !== null) return;
+        activeId = e.pointerId;
+        try { pad.setPointerCapture(e.pointerId); } catch (err) {}
+        place(e);
+        joyEl.classList.add('on');
+        move(e);
+        try { if (navigator.vibrate) navigator.vibrate(6); } catch (err) {}
+        e.preventDefault();
+      });
+      pad.addEventListener('pointermove', function (e) { if (e.pointerId === activeId) { move(e); e.preventDefault(); } });
+      pad.addEventListener('pointerup', end);
+      pad.addEventListener('pointercancel', end);
+      pad.addEventListener('lostpointercapture', end);
+      pad.addEventListener('contextmenu', function (e) { e.preventDefault(); });
+      return true;
+    } catch (e) {
+      console.error('mart joystick failed:', e);
+      return false;
+    }
+  }
+
+  window.MiimiidMartControls = { attach: attachStick };
   window.MiimiidMartPolish = { decorate: decorate };
 })();
