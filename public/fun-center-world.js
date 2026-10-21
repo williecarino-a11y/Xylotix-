@@ -1745,13 +1745,14 @@ freezer: ['pizza', 'icecream', 'frozendinner']
 
         // entrance mat
         const mat = this.add.graphics().setDepth(-95);
-        mat.fillStyle(0x0d1730, 1).fillRoundedRect(60, 880, 260, 90, 12);
-        mat.lineStyle(3, 0x4da3ff, 1).strokeRoundedRect(60, 880, 260, 90, 12);
-        this.add.text(190, 925, 'WELCOME', { fontSize: '22px', color: '#4da3ff', fontStyle: 'bold' })
-          .setOrigin(0.5).setDepth(-94);
+        mat.fillStyle(0x1b2a4a, 0.55).fillRoundedRect(60, 880, 260, 90, 12);
+        mat.lineStyle(2, 0x4da3ff, 0.35).strokeRoundedRect(60, 880, 260, 90, 12);
+        this.add.text(190, 925, 'WELCOME', { fontSize: '20px', color: '#8fb4f0', fontStyle: 'bold' })
+          .setOrigin(0.5).setDepth(-94).setAlpha(0.8);
 
         // shelves, products and the counter
         UNITS.forEach(u => this.buildUnit(u, itemsByCat[u.id] || []));
+        try { if (window.MiimiidMartPolish) window.MiimiidMartPolish.decorate(this, { UNITS, UW, UH, itemsByCat }); } catch (e) { console.error('mart polish failed:', e); }
         this.buildCounter();
         this.buildShopkeeper();
         this.buildCashier();
