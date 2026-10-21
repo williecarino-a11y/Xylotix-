@@ -998,23 +998,26 @@ freezer: ['pizza', 'icecream', 'frozendinner']
     // joystick
     const joyEl = content.querySelector('[data-mw-joy]');
     const knob = content.querySelector('[data-mw-knob]');
-    const R = 36;
-    const joyMove = e => {
-      const r = joyEl.getBoundingClientRect();
-      let dx = e.clientX - (r.left + r.width / 2);
-      let dy = e.clientY - (r.top + r.height / 2);
-      const len = Math.hypot(dx, dy);
-      const k = len > R ? R / len : 1;
-      dx *= k; dy *= k;
-      knob.style.transform = `translate(${dx}px, ${dy}px)`;
-      S.ctl.x = dx / R; S.ctl.y = dy / R;
-    };
-    const joyEnd = () => { S.ctl.x = 0; S.ctl.y = 0; knob.style.transform = ''; };
-    joyEl.addEventListener('pointerdown', e => { joyEl.setPointerCapture(e.pointerId); joyMove(e); e.preventDefault(); });
-    joyEl.addEventListener('pointermove', e => { if (joyEl.hasPointerCapture(e.pointerId)) joyMove(e); });
-    joyEl.addEventListener('pointerup', joyEnd);
-    joyEl.addEventListener('pointercancel', joyEnd);
-    joyEl.addEventListener('lostpointercapture', joyEnd);
+    // the smooth floating stick lives in mart-polish.js; the old fixed stick below is only the fallback
+    if (!(window.MiimiidMartControls && window.MiimiidMartControls.attach(joyEl, knob, S.ctl))) {
+      const R = 36;
+      const joyMove = e => {
+        const r = joyEl.getBoundingClientRect();
+        let dx = e.clientX - (r.left + r.width / 2);
+        let dy = e.clientY - (r.top + r.height / 2);
+        const len = Math.hypot(dx, dy);
+        const k = len > R ? R / len : 1;
+        dx *= k; dy *= k;
+        knob.style.transform = `translate(${dx}px, ${dy}px)`;
+        S.ctl.x = dx / R; S.ctl.y = dy / R;
+      };
+      const joyEnd = () => { S.ctl.x = 0; S.ctl.y = 0; knob.style.transform = ''; };
+      joyEl.addEventListener('pointerdown', e => { joyEl.setPointerCapture(e.pointerId); joyMove(e); e.preventDefault(); });
+      joyEl.addEventListener('pointermove', e => { if (joyEl.hasPointerCapture(e.pointerId)) joyMove(e); });
+      joyEl.addEventListener('pointerup', joyEnd);
+      joyEl.addEventListener('pointercancel', joyEnd);
+      joyEl.addEventListener('lostpointercapture', joyEnd);
+    }
 
     // art for Phaser
     const cartArt = MIIMIID_ASSETS.characters.miimiidCart;
