@@ -44,7 +44,7 @@ freezer: ['pizza', 'icecream', 'frozendinner']
   const NO_OVERLAY = { 'X-Continue-Loading': 'false' };   // skip the global "Please wait" overlay
   // The shopping list. The server still decides rewards; this only draws the list.
   const NEED_IDS = ['milk', 'bread', 'eggs', 'pasta', 'apple', 'carrot', 'water', 'medicine'];
-  const CLOSING_SECONDS = 150;     // how long the store stays open (it pauses in menus)
+  let CLOSING_SECONDS = 150;       // how long the store stays open (it pauses in menus); a Mart Level can set its own
   const ASSISTANT_PATH = [[1060, 430], [1200, 430], [1240, 560], [900, 560], [720, 660], [720, 820], [720, 660], [900, 560]];   // his patrol route
   const ASSISTANT_SPEED = 62;      // how fast he walks
   const PAY_GRACE_SECONDS = 25;    // after closing, time left to reach the counter
@@ -391,11 +391,24 @@ freezer: ['pizza', 'icecream', 'frozendinner']
 
     // Daily Challenge menu (code lives in public/fun-center-daily.js)
     let mode = 'practice';
-    try {
+    let levelId = null;
+    const noticeText = typeof notice === 'string' ? notice : '';
+    const pickDaily = async () => {
       if (window.MiimiidMart && window.MiimiidMart.daily) {
-        mode = await window.MiimiidMart.daily.pickMode(content, miimiidFunCenterRequest, typeof notice === 'string' ? notice : '');
+        return window.MiimiidMart.daily.pickMode(content, miimiidFunCenterRequest, noticeText);
       }
-    } catch (e) { console.error('Daily menu failed, starting a practice trip:', e); }
+      return 'practice';
+    };
+    try {
+      if (window.MiimiidMart && window.MiimiidMart.levels) {
+        // Mart Levels map (code lives in public/fun-center-levels.js); it opens the daily menu from its own button
+        const picked = await window.MiimiidMart.levels.pick(content, miimiidFunCenterRequest, noticeText, pickDaily);
+        mode = picked.mode;
+        levelId = picked.levelId || null;
+      } else {
+        mode = await pickDaily();
+      }
+    } catch (e) { console.error('Menu failed, starting a practice trip:', e); }
     if (mode === 'back') { renderMiimiidFunCenter(); return; }
     content.innerHTML = '<div class="miimiid-fun-loading">Entering the store…</div>';
 
@@ -404,14 +417,20 @@ freezer: ['pizza', 'icecream', 'frozendinner']
       const shop = await miimiidFunCenterRequest('/api/fun-center/shop', { headers: NO_OVERLAY });
       const session = await miimiidFunCenterRequest(
         mode === 'daily' ? '/api/fun-center/daily/start' : '/api/fun-center/shop/session',
-        { method: 'POST', body: JSON.stringify({}), headers: NO_OVERLAY }
+        { method: 'POST', body: JSON.stringify(mode === 'level' && levelId ? { levelId } : {}), headers: NO_OVERLAY }
       );
       mountWorld(content, shop, session);
     } catch (error) {
       if (mode === 'daily') { startWorld(error.message || "Could not start today's challenge."); return; }
+      if (mode === 'level') { startWorld(error.message || 'Could not start that level.'); return; }
       console.error('Miimiid world failed, using the normal Mart:', error);
       if (typeof originalStart === 'function') originalStart();
     }
+  }
+
+  // a piece of the result card that fails must not stop the whole checkout screen
+  function safeHtml(fn) {
+    try { return fn() || ''; } catch (e) { console.error('result section failed:', e); return ''; }
   }
 
   function destroyGame() {
@@ -422,6 +441,7 @@ freezer: ['pizza', 'icecream', 'frozendinner']
   function mountWorld(content, shop, session) {
     injectStyles();
     destroyGame();
+    CLOSING_SECONDS = (session.level && session.level.seconds) || 150;
 
     const S = {
       shop,
@@ -1216,7 +1236,7 @@ freezer: ['pizza', 'icecream', 'frozendinner']
         const stat = (big, label) => `<div><div style="font-size:24px;font-weight:800;color:#e6e9f0">${big}</div><small style="color:#9aa4bd">${label}</small></div>`;
         const o = overlay(`
           <h3>${r.burnedOut && r.burnedOut.length ? 'You burned out' : 'Trip finished!'}</h3>
-          ${window.MiimiidMart && window.MiimiidMart.week ? window.MiimiidMart.week.resultHtml(r) : ''}
+          ${safeHtml(() => (window.MiimiidMart && window.MiimiidMart.week ? window.MiimiidMart.week.resultHtml(r) : ''))}
           ${window.MiimiidMart && window.MiimiidMart.stars ? window.MiimiidMart.stars.html(r, (f, d, t, v, dl) => SFX.tone(f, d, t, v, dl)) : ''}
           <div style="display:flex;justify-content:space-around;gap:8px;margin:12px 0 6px">
             ${stat(`${list(r.needsBought).length}/${r.totalNeeds}`, 'Needs covered')}
@@ -1245,6 +1265,7 @@ freezer: ['pizza', 'icecream', 'frozendinner']
         o.querySelector('[data-again]').addEventListener('click', () => { destroyGame(); startWorld(); });
         o.querySelector('[data-cartshop]').addEventListener('click', () => openCartShop());
         if (window.MiimiidMart && window.MiimiidMart.daily) window.MiimiidMart.daily.decorateResult(o, r);
+        if (window.MiimiidMart && window.MiimiidMart.levels) window.MiimiidMart.levels.decorateResult(o, r);
         if (window.MiimiidMart && window.MiimiidMart.juice) window.MiimiidMart.juice.onResult({ overlay: o, result: r, tone: (f, d, t, v, dl) => SFX.tone(f, d, t, v, dl) });
         o.querySelector('[data-back]').addEventListener('click', () => { destroyGame(); renderMiimiidFunCenter(); });
       } catch (error) {
