@@ -9,8 +9,7 @@ const FunGameProfile = require('../models/FunGameProfile');
 const daily = require('./funCenterDaily');
 const { getFunCenterGames, getFunCenterGame, validateFunCenterAnswer, getWeeklyShop, getWeeklyShopDefinition, getFlashSales, getPriceHikes, getWeekSetup, pickSituation, computeMeters, METER_WARN, pickTricks, publicTricks, describeTrick, SCANS_PER_TRIP, getCartSkins, getCartSkin } = require('../scripts/learningData/funCenter');
 const { getMartScenario, getMartScenarios, judgeMartScenario } = require('../scripts/learningData/martScenarios');
-const martLevels = require('../scripts/learningData/martLevels');
-const martLevelRoutes = require('./martLevelRoutes');
+const levels = require('../scripts/learningData/martLevels');
 const router = express.Router();
 
 const funSessionStartLimiter = rateLimit({
@@ -245,15 +244,7 @@ const RIVAL_MARKUP = 2;            // extra price when it comes back
 const SHOP_GAME_ID = 'weekly-shop';
 const STAR_SAVE_TARGET = 5;   // money to keep for the savings star
 
-// Level trips have their own budget; every other trip uses the shop's.
-function tripBudget(shop, session) {
-  const level = session && session.levelId ? martLevels.getMartLevel(session.levelId) : null;
-  return level ? level.budget : shop.budget;
-}
-
 function buildShopSummary(shop, session) {
-  const level = session.levelId ? martLevels.getMartLevel(session.levelId) : null;
-  const budget = tripBudget(shop, session);
   const bought = Array.isArray(session.purchasedItems) ? session.purchasedItems : [];
   const boughtIds = new Set(bought.map(entry => entry.itemId));
   const byId = new Map(shop.items.map(item => [item.id, item]));
@@ -298,6 +289,7 @@ function buildShopSummary(shop, session) {
   const spent = session.spent || 0;
   const wantsSpent = wantsBought.reduce((sum, entry) => sum + entry.price, 0);
   const needsSpent = spent - wantsSpent;
+  const budget = session.budget || shop.budget;
   const saved = Math.max(0, budget - spent);
   const score = Math.max(0, needsBought.length * 100 + saved * 5 - wantsSpent * 5);
 
@@ -305,6 +297,19 @@ function buildShopSummary(shop, session) {
   const scenarioVerdict = session.scenarioId
     ? judgeMartScenario(session.scenarioId, { needsMissed: needsMissed.length, totalNeeds: totalNeeds.length, boughtIds: Array.from(boughtIds) })
     : null;
+
+  // Trick Store report: what each deal really was, and what you did about it.
+  const trickReport = (Array.isArray(session.tricks) ? session.tricks : []).map(t => {
+    const item = byId.get(t.itemId);
+    const isFake = t.kind !== 'real-sale';
+    const got = boughtIds.has(t.itemId);
+    const info = describeTrick(t, item);
+    let status = 'skipped';
+    if (isFake) status = got ? (t.scanned ? 'knew' : 'fell') : (t.scanned ? 'busted' : 'skipped');
+    else status = got ? 'deal' : (t.scanned ? 'missed' : 'skipped');
+    return { itemId: t.itemId, name: item.name, kind: t.kind, scanned: !!t.scanned, status, title: info.title, detail: info.detail };
+  });
+  const trickBonus = trickReport.filter(row => row.status === 'busted').length * 3;
 
   // Star rating: one star per goal. Everything is decided here, on the server.
   const premiumBought = bought.filter(entry => {
@@ -339,7 +344,8 @@ function buildShopSummary(shop, session) {
   let burnedOut = [];
   let burnMessage = '';
   if (session.situationId) {
-    meters = computeMeters(session.situationId, bought.map(entry => entry.itemId));
+    const levelDef = session.levelId ? levels.getLevel(session.levelId) : null;
+    meters = levelDef ? levels.computeLevelMeters(levelDef, bought.map(entry => entry.itemId)) : computeMeters(session.situationId, bought.map(entry => entry.itemId));
     if (meters) {
       const names = { health: 'Health', happiness: 'Happiness', friends: 'Friends' };
       burnedOut = Object.keys(names).filter(key => meters[key] <= 0);
@@ -354,52 +360,23 @@ function buildShopSummary(shop, session) {
       }
     }
   }
+  if (session.levelId) {
+    const levelRows = levels.judgeLevel(session.levelId, {
+      boughtIds, bought, meters, burnedOut, saved, spent,
+      wantsCount: wantsBought.length,
+      trickReport,
+      rivalItemId: session.rivalItemId || null,
+      rivalBeaten: !!session.rivalBeaten,
+      saleItemId: session.saleItemId || null
+    });
+    if (levelRows) finalRows = levelRows;
+  }
   if (scenarioVerdict) {
     finalRows = finalRows.map(row => row.id === 'save'
       ? { id: 'scenario', label: 'Lesson challenge passed', earned: scenarioVerdict.passed && burnedOut.length === 0, hint: scenarioVerdict.reason }
       : row);
   }
-  let stars = finalRows.filter(row => row.earned).length;
-
-  // Trick Store report: what each deal really was, and what you did about it.
-  const trickReport = (Array.isArray(session.tricks) ? session.tricks : []).map(t => {
-    const item = byId.get(t.itemId);
-    const isFake = t.kind !== 'real-sale';
-    const got = boughtIds.has(t.itemId);
-    const info = describeTrick(t, item);
-    let status = 'skipped';
-    if (isFake) status = got ? (t.scanned ? 'knew' : 'fell') : (t.scanned ? 'busted' : 'skipped');
-    else status = got ? 'deal' : (t.scanned ? 'missed' : 'skipped');
-    return { itemId: t.itemId, name: item.name, kind: t.kind, scanned: !!t.scanned, status, title: info.title, detail: info.detail };
-  });
-  const trickBonus = trickReport.filter(row => row.status === 'busted').length * 3;
-
-  // Level trip: the level's own three goals decide the stars.
-  let levelMessage = '';
-  if (level) {
-    const levelNames = { health: 'Health', happiness: 'Happiness', friends: 'Friends' };
-    meters = martLevels.computeLevelMeters(level, bought.map(entry => entry.itemId));
-    burnedOut = Object.keys(levelNames).filter(key => meters[key] <= 0);
-    finalRows = martLevels.judgeLevel(level, {
-      meters,
-      saved,
-      wantsCount: wantsBought.length,
-      boughtIds: Array.from(boughtIds),
-      tricks: trickReport,
-      rivalStarted: !!session.rivalItemId,
-      rivalBeaten: !!session.rivalBeaten
-    });
-    stars = finalRows.filter(row => row.earned).length;
-    levelMessage = ({
-      3: `${level.title} cleared with every goal. That was real planning.`,
-      2: 'Level passed! One goal slipped. Replay for all 3 stars.',
-      1: `Not quite. Earn ${martLevels.UNLOCK_STARS} stars to open the next level. Check which goals slipped.`,
-      0: 'This week got away from you. Plan first, then shop.'
-    })[stars];
-    if (burnedOut.length) {
-      levelMessage = `You burned out: ${burnedOut.map(k => levelNames[k]).join(' and ')} hit zero. Balance beats buying only one kind of thing.`;
-    }
-  }
+  const stars = finalRows.filter(row => row.earned).length;
 
   let outcome = 'missing-essentials';
   let message = 'Many essentials are still missing. Next time, cover your needs first.';
@@ -419,7 +396,7 @@ function buildShopSummary(shop, session) {
 
   return {
     outcome: burnedOut.length ? 'burned-out' : outcome,
-    message: burnMessage || levelMessage || (meters
+    message: burnMessage || (meters
       ? ({
           3: 'Perfect balance! Every part of your life is covered and you still have savings.',
           2: 'Nearly there! One goal slipped. Check which star is missing.',
@@ -438,13 +415,13 @@ function buildShopSummary(shop, session) {
     trickBonus,
     burnedOut,
     situationId: session.situationId || null,
+    levelId: session.levelId || null,
     totalNeeds: totalNeeds.length,
     needsBought: needsBought.map(toPublic),
     wantsBought: wantsBought.map(toPublic),
     needsMissed: needsMissed.map(item => ({ id: item.id, name: item.name, price: (session.hikeItemId === item.id && typeof session.hikePrice === 'number') ? session.hikePrice : item.price, image: item.image, visual: item.visual, explanation: item.explanation })),
     tradeoffs,
-    scenario: scenarioVerdict,
-    level: level ? { id: level.id, number: level.number, title: level.title, boss: !!level.boss, unlockStars: martLevels.UNLOCK_STARS } : null
+    scenario: scenarioVerdict
   };
 }
 
@@ -501,9 +478,9 @@ router.post('/shop/session/:sessionId/unbuy', funAnswerLimiter, async (req, res)
         itemId: item.id,
         name: item.name,
         price: entry.price,
-        budget: tripBudget(shop, existing),
+        budget: updated.budget || shop.budget,
         spent: updated.spent,
-        remaining: Math.max(0, tripBudget(shop, existing) - updated.spent),
+        remaining: Math.max(0, (updated.budget || shop.budget) - updated.spent),
         basketCount: updated.purchasedItems.length
       }
     });
@@ -530,15 +507,16 @@ router.post('/shop/session/:sessionId/sale/start', funAnswerLimiter, async (req,
     const choices = getFlashSales().filter(sale => !boughtIds.has(sale.itemId) && shop.items.some(item => item.id === sale.itemId));
     if (choices.length === 0) return res.json({ status: 'success', data: { started: false } });
 
-    // Level trips: the level decides which sale (if any) happens.
-    const saleLevel = martLevels.getMartLevel(existing.levelId);
-    const levelSale = saleLevel ? choices.find(c => c.itemId === saleLevel.events.sale) : null;
-    if (saleLevel && !levelSale) return res.json({ status: 'success', data: { started: false } });
     const saleScenario = getMartScenario(existing.scenarioId);
     if (saleScenario && saleScenario.event !== 'sale') return res.json({ status: 'success', data: { started: false } });
-    const forcedSale = saleScenario ? choices.find(c => c.itemId === saleScenario.itemId) : null;
+    const saleLevel = levels.getLevel(existing.levelId);
+    if (saleLevel && !saleLevel.events.sale) return res.json({ status: 'success', data: { started: false } });
+    const forcedSale = saleScenario
+      ? choices.find(c => c.itemId === saleScenario.itemId)
+      : (saleLevel && saleLevel.saleItem ? choices.find(c => c.itemId === saleLevel.saleItem) : null);
     if (saleScenario && !forcedSale) return res.json({ status: 'success', data: { started: false } });
-    const sale = forcedSale || levelSale || daily.pickFor(existing.dailyKey, 'sale', choices, c => c.itemId);
+    if (saleLevel && saleLevel.saleItem && !forcedSale) return res.json({ status: 'success', data: { started: false } });
+    const sale = forcedSale || daily.pickFor(existing.dailyKey, 'sale', choices, c => c.itemId);
     const item = shop.items.find(candidate => candidate.id === sale.itemId);
     const endsAt = new Date(Date.now() + sale.seconds * 1000);
 
@@ -579,15 +557,16 @@ router.post('/shop/session/:sessionId/hike/start', funAnswerLimiter, async (req,
     });
     if (choices.length === 0) return res.json({ status: 'success', data: { started: false } });
 
-    // Level trips: the level decides which price rise (if any) happens.
-    const hikeLevel = martLevels.getMartLevel(existing.levelId);
-    const levelHike = hikeLevel ? choices.find(c => c.itemId === hikeLevel.events.hike) : null;
-    if (hikeLevel && !levelHike) return res.json({ status: 'success', data: { started: false } });
     const hikeScenario = getMartScenario(existing.scenarioId);
     if (hikeScenario && hikeScenario.event !== 'hike') return res.json({ status: 'success', data: { started: false } });
-    const forcedHike = hikeScenario ? choices.find(c => c.itemId === hikeScenario.itemId) : null;
+    const hikeLevel = levels.getLevel(existing.levelId);
+    if (hikeLevel && !hikeLevel.events.hike) return res.json({ status: 'success', data: { started: false } });
+    const forcedHike = hikeScenario
+      ? choices.find(c => c.itemId === hikeScenario.itemId)
+      : (hikeLevel && hikeLevel.hikeItem ? choices.find(c => c.itemId === hikeLevel.hikeItem) : null);
     if (hikeScenario && !forcedHike) return res.json({ status: 'success', data: { started: false } });
-    const hike = forcedHike || levelHike || daily.pickFor(existing.dailyKey, 'hike', choices, c => c.itemId);
+    if (hikeLevel && hikeLevel.hikeItem && !forcedHike) return res.json({ status: 'success', data: { started: false } });
+    const hike = forcedHike || daily.pickFor(existing.dailyKey, 'hike', choices, c => c.itemId);
     const item = shop.items.find(candidate => candidate.id === hike.itemId);
 
     const updated = await FunGameSession.findOneAndUpdate(
@@ -619,6 +598,8 @@ router.post('/shop/session/:sessionId/rival/start', funAnswerLimiter, async (req
     if (!existing) return res.status(404).json({ status: 'error', message: 'Shopping trip not found.' });
     if (existing.completed) return res.status(409).json({ status: 'error', code: 'SHOP_FINISHED', message: 'This shopping trip is already finished.' });
     if (existing.rivalItemId || existing.scenarioId) return res.json({ status: 'success', data: { started: false } });
+    const rivalLevel = levels.getLevel(existing.levelId);
+    if (rivalLevel && !rivalLevel.events.rival) return res.json({ status: 'success', data: { started: false } });
 
     const boughtIds = new Set(existing.purchasedItems.map(entry => entry.itemId));
     const choices = shop.items.filter(item =>
@@ -631,11 +612,7 @@ router.post('/shop/session/:sessionId/rival/start', funAnswerLimiter, async (req
     );
     if (choices.length === 0) return res.json({ status: 'success', data: { started: false } });
 
-    // Level trips: the level decides whether a rival appears and which item he wants.
-    const rivalLevel = martLevels.getMartLevel(existing.levelId);
-    const levelRival = rivalLevel ? choices.find(c => c.id === rivalLevel.events.rival) : null;
-    if (rivalLevel && !levelRival) return res.json({ status: 'success', data: { started: false } });
-    const item = levelRival || daily.pickFor(existing.dailyKey, 'rival', choices, c => c.id);
+    const item = (rivalLevel && rivalLevel.rivalItem ? choices.find(c => c.id === rivalLevel.rivalItem) : null) || daily.pickFor(existing.dailyKey, 'rival', choices, c => c.id);
     const takesAt = new Date(Date.now() + RIVAL_SECONDS * 1000);
     const restockAt = new Date(takesAt.getTime() + RIVAL_RESTOCK_SECONDS * 1000);
     const restockPrice = item.price + RIVAL_MARKUP;
@@ -704,38 +681,83 @@ router.post('/shop/session/:sessionId/scan', funAnswerLimiter, async (req, res) 
   }
 });
 
+// Best stars per level for one player (levels unlock from these).
+async function levelProgressRows(userId) {
+  return FunGameSession.aggregate([
+    { $match: { userId: new mongoose.Types.ObjectId(String(userId)), gameId: SHOP_GAME_ID, completed: true, levelId: { $ne: null } } },
+    { $group: { _id: '$levelId', best: { $max: '$stars' }, plays: { $sum: 1 } } }
+  ]);
+}
+
+// Level trips never put a fake-deal shelf on the item their event needs (price rise or rival).
+function pickLevelTricks(level) {
+  const avoid = new Set([level.hikeItem, level.rivalItem].filter(Boolean));
+  for (let i = 0; i < 40; i++) {
+    const candidate = pickTricks();
+    if (!candidate.some(entry => avoid.has(entry.itemId))) return candidate;
+  }
+  return pickTricks();
+}
+
+router.get('/levels', funAnswerLimiter, async (req, res) => {
+  try {
+    const user = await requireFunCenterUser(req, res);
+    if (!user) return;
+    const rows = await levelProgressRows(user._id);
+    return res.json({ status: 'success', data: { levels: levels.levelsForUser(rows), unlockStars: levels.UNLOCK_STARS } });
+  } catch (error) {
+    console.error('Fun Center levels error:', error);
+    return res.status(500).json({ status: 'error', message: 'Unable to load the levels.' });
+  }
+});
+
 router.post('/shop/session', funSessionStartLimiter, async (req, res) => {
   try {
     const user = await requireFunCenterUser(req, res);
     if (!user) return;
     const shop = getWeeklyShopDefinition();
-    const scenario = getMartScenario(req.body && req.body.scenarioId);
-    const situation = scenario ? { id: scenario.situationId } : pickSituation();
-    const tricks = pickTricks();
+    const requestedLevel = req.body && req.body.levelId ? String(req.body.levelId) : '';
+    const level = requestedLevel ? levels.getLevel(requestedLevel) : null;
+    if (requestedLevel && !level) {
+      return res.status(400).json({ status: 'error', code: 'LEVEL_UNKNOWN', message: 'That level does not exist.' });
+    }
+    if (level) {
+      const progress = await levelProgressRows(user._id);
+      if (!levels.isUnlocked(level, progress)) {
+        return res.status(403).json({ status: 'error', code: 'LEVEL_LOCKED', message: `Earn ${levels.UNLOCK_STARS} stars on level ${level.n - 1} first.` });
+      }
+    }
+    const scenario = level ? null : getMartScenario(req.body && req.body.scenarioId);
+    const situation = level ? { id: level.id } : (scenario ? { id: scenario.situationId } : pickSituation());
+    const tripBudget = level ? level.budget : shop.budget;
+    const tripScans = level ? level.scans : SCANS_PER_TRIP;
+    const tricks = level ? pickLevelTricks(level) : pickTricks();
     const profile = await FunGameProfile.findOne({ userId: user._id }).lean();
     const skin = profile && profile.cartSkin ? getCartSkin(profile.cartSkin) : null;
     const session = await FunGameSession.create({
       sessionId: createSessionId(),
       userId: user._id,
       gameId: SHOP_GAME_ID,
-      budget: shop.budget,
+      budget: tripBudget,
       situationId: situation.id,
       scenarioId: scenario ? scenario.id : null,
+      levelId: level ? level.id : null,
       tricks,
-      scansLeft: SCANS_PER_TRIP
+      scansLeft: tripScans
     });
     return res.status(201).json({
       status: 'success',
       data: {
         sessionId: session.sessionId,
         gameId: SHOP_GAME_ID,
-        budget: shop.budget,
+        budget: tripBudget,
         spent: 0,
-        remaining: shop.budget,
-        week: getWeekSetup(situation.id),
+        remaining: tripBudget,
+        week: level ? levels.levelWeekSetup(level) : getWeekSetup(situation.id),
         tricks: publicTricks(tricks),
-        scansLeft: SCANS_PER_TRIP,
+        scansLeft: tripScans,
         scenario: scenario ? { id: scenario.id, title: scenario.title, brief: scenario.brief } : null,
+        level: level ? levels.publicLevel(level) : null,
         cartSkin: skin ? { id: skin.id, color: skin.color, rainbow: !!skin.rainbow } : null
       }
     });
@@ -764,7 +786,7 @@ router.post('/shop/session/:sessionId/buy', funAnswerLimiter, async (req, res) =
     }
     // A flash sale only applies to its own item, and only while it is running (1.5 s grace for slow phones).
     const trip = await FunGameSession.findOne({ sessionId, userId: user._id, gameId: SHOP_GAME_ID });
-    const budgetNow = tripBudget(shop, trip);
+    const tripBudget = trip && trip.budget ? trip.budget : shop.budget;
     const saleActive = !!trip && !option && trip.saleItemId === item.id && typeof trip.salePrice === 'number' &&
       !!trip.saleEndsAt && trip.saleEndsAt.getTime() + 1500 > Date.now();
     const hikeActive = !!trip && !option && trip.hikeItemId === item.id && typeof trip.hikePrice === 'number';
@@ -788,7 +810,7 @@ router.post('/shop/session/:sessionId/buy', funAnswerLimiter, async (req, res) =
         userId: user._id,
         gameId: SHOP_GAME_ID,
         completed: false,
-        spent: { $lte: budgetNow - price },
+        spent: { $lte: tripBudget - price },
         'purchasedItems.itemId': { $ne: item.id },
         ...(saleActive ? { saleItemId: item.id, salePrice: price } : {})
       },
@@ -811,7 +833,7 @@ router.post('/shop/session/:sessionId/buy', funAnswerLimiter, async (req, res) =
         status: 'error',
         code: 'INSUFFICIENT_FUNDS',
         message: `Not enough money left for ${item.name}.`,
-        remaining: Math.max(0, budgetNow - (existing.spent || 0))
+        remaining: Math.max(0, (existing.budget || shop.budget) - (existing.spent || 0))
       });
     }
 
@@ -829,9 +851,9 @@ router.post('/shop/session/:sessionId/buy', funAnswerLimiter, async (req, res) =
         normalPrice: item.price,
         classification: item.classification,
         explanation: item.explanation,
-        budget: budgetNow,
+        budget: updated.budget || shop.budget,
         spent: updated.spent,
-        remaining: Math.max(0, budgetNow - updated.spent),
+        remaining: Math.max(0, (updated.budget || shop.budget) - updated.spent),
         basketCount: updated.purchasedItems.length,
         needsLeft: shop.items.filter(candidate => candidate.classification === 'need' && !updated.purchasedItems.some(entry => entry.itemId === candidate.id)).length
       }
@@ -859,16 +881,33 @@ router.post('/shop/session/:sessionId/checkout', funSessionStartLimiter, async (
       if (!existing.purchasedItems || existing.purchasedItems.length === 0) { const error = new Error('Add at least one item to your basket first.'); error.code = 'BASKET_EMPTY'; throw error; }
 
       const summary = buildShopSummary(shop, existing);
-      const reward = (existing.situationId || existing.levelId)
+      const reward = existing.situationId
         ? calculateReward(summary.stars, 3)
         : calculateReward(Math.max(0, summary.needsBought.length - summary.wantsBought.length), needsTotal);
 
       reward.coins += summary.trickBonus || 0;
-      // Level trips pay a bonus for every star you never had on this level before.
-      let levelEval = null;
+
+      // Mart Levels: first clear and first perfect pay a bonus; the result tells the browser what unlocked.
+      let levelInfo = null;
       if (existing.levelId) {
-        levelEval = await martLevelRoutes.evaluateLevelResult({ userId: user._id, levelId: existing.levelId, stars: summary.stars, mongoSession });
-        reward.coins += levelEval.bonusCoins;
+        const lvl = levels.getLevel(existing.levelId);
+        if (lvl) {
+          const prevDoc = await FunGameSession.findOne({ userId: user._id, gameId: SHOP_GAME_ID, levelId: lvl.id, completed: true, sessionId: { $ne: sessionId } })
+            .sort({ stars: -1 }).select('stars').session(mongoSession).lean();
+          const prevBest = prevDoc ? prevDoc.stars || 0 : 0;
+          const firstClear = summary.stars >= levels.UNLOCK_STARS && prevBest < levels.UNLOCK_STARS;
+          const firstPerfect = summary.stars === 3 && prevBest < 3;
+          const levelBonus = (firstClear ? lvl.bonusCoins : 0) + (firstPerfect ? levels.PERFECT_BONUS : 0);
+          reward.coins += levelBonus;
+          const next = levels.getNextLevel(lvl);
+          levelInfo = {
+            id: lvl.id, n: lvl.n, title: lvl.title, stars: summary.stars,
+            firstClear, firstPerfect, bonusCoins: levelBonus,
+            next: next ? { id: next.id, n: next.n, title: next.title } : null,
+            nextUnlocked: !!next && Math.max(prevBest, summary.stars) >= levels.UNLOCK_STARS,
+            finalLevel: !next
+          };
+        }
       }
       const claimed = await FunGameSession.findOneAndUpdate(
         { sessionId, userId: user._id, gameId: SHOP_GAME_ID, completed: false, rewardGranted: false },
@@ -897,23 +936,11 @@ router.post('/shop/session/:sessionId/checkout', funSessionStartLimiter, async (
         await profile.save({ session: mongoSession });
       }
 
-      let levelResult = null;
-      if (existing.levelId) {
-        levelResult = await martLevelRoutes.commitLevelResult({
-          userId: user._id,
-          levelId: existing.levelId,
-          stars: summary.stars,
-          score: summary.score,
-          mongoSession,
-          previousStars: levelEval ? levelEval.previousStars : 0
-        });
-      }
-
       let dailyResult = null;
       if (existing.dailyKey) {
         dailyResult = await daily.finishAttempt({ userId: user._id, dayKey: existing.dailyKey, sessionId, summary, mongoSession });
       }
-      checkoutResult = { alreadyCompleted: false, ...summary, daily: dailyResult, levelProgress: levelResult, levelBonus: levelEval ? levelEval.bonusCoins : 0, xp: reward.xp, coins: reward.coins, totalXP: profile.totalXP, totalCoins: profile.totalCoins };
+      checkoutResult = { alreadyCompleted: false, ...summary, daily: dailyResult, level: levelInfo, xp: reward.xp, coins: reward.coins, totalXP: profile.totalXP, totalCoins: profile.totalCoins };
     });
 
     return res.json({ status: 'success', data: checkoutResult });
@@ -1001,6 +1028,5 @@ router.post('/cart-skins/equip', funAnswerLimiter, async (req, res) => {
 router.get('/scenarios', (req, res) => res.json({ status: 'success', data: getMartScenarios() }));
 
 router.use('/daily', daily.router);
-router.use('/levels', martLevelRoutes.createRouter({ requireFunCenterUser, funSessionStartLimiter, funAnswerLimiter, createSessionId }));
 
 module.exports = router;
