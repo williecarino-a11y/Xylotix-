@@ -189,6 +189,12 @@ const funGameSessionSchema = new mongoose.Schema(
       default: null
     },
 
+    /* Mart level this trip belongs to (null for normal trips). */
+    levelId: {
+      type: String,
+      default: null
+    },
+
     /* Daily Challenge: the UTC day this trip belongs to (null for practice trips). */
     dailyKey: {
       type: String,
@@ -280,3 +286,4 @@ module.exports = mongoose.model(
   'FunGameSession',
   funGameSessionSchema
 );
+    
