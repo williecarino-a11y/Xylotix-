@@ -991,7 +991,8 @@ freezer: ['pizza', 'icecream', 'frozendinner']
       muteBtn.innerHTML = SFX.toggleMute() ? ICON_OFF : ICON_ON;
       if (window.MiimiidMart && window.MiimiidMart.settings) window.MiimiidMart.settings.setSoundOff(SFX.muted);
     });
-    content.addEventListener('pointerdown', () => { SFX.init(); SFX.startMusic(); });
+    // only wake the sound while the Mart is on screen (this listener lives on the whole app content, so without the check every tap in other sections restarted the music)
+    content.addEventListener('pointerdown', () => { if (!document.body.contains(holder)) return; SFX.init(); SFX.startMusic(); });
     SFX.init();
     SFX.startMusic();
 
