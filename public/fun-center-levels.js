@@ -12,7 +12,15 @@
   window.MiimiidMart = window.MiimiidMart || {};
 
   var NO_OVERLAY = { 'X-Continue-Loading': 'false' };
-  var nextPreset = null;       // set by the result screen: open this level's briefing straight away
+  var nextPreset = null;
+  var API = {};                // becomes MiimiidMart.levels; API.current is the level being played (read by mart-themes.js)
+
+  function accent(n) {
+    try { return (window.MiimiidMartThemes && window.MiimiidMartThemes.accent(n)) || ''; } catch (e) { return ''; }
+  }
+  function setCurrent(level) {
+    API.current = level ? { id: level.id, n: level.n, title: level.title, mission: level.mission } : null;
+  }       // set by the result screen: open this level's briefing straight away
 
   var ITEM_NAMES = {
     milk: 'Milk', bread: 'Bread', eggs: 'Eggs', pasta: 'Pasta', apple: 'Apples', carrot: 'Carrots',
@@ -98,6 +106,11 @@
       '.mlv-res-goals div { padding: 4px 0; border-top: 1px solid rgba(255,255,255,.06); }' +
       '.mlv-res-goals small { display: block; color: #9aa4bd; }' +
       '.mlv-res-bonus { margin-top: 8px; color: #ffd34d; font-size: 13px; font-weight: 700; }' +
+      '.mlv-node:not(.locked) .mlv-tag { color: var(--acc, #8cc4ff); }' +
+      '.mlv-node:not(.locked):not(.next):not(.cleared) .mlv-num { border-color: var(--acc, #2d3a63); }' +
+      '.mlv-hero .mlv-emoji { filter: drop-shadow(0 6px 18px var(--acc, rgba(61,137,255,.35))); }' +
+      '.mlv-hero .mlv-kicker { color: var(--acc, #8cc4ff); }' +
+      '.mlv-mission { border-left: 3px solid var(--acc, #263150); }' +
       '@keyframes mlvIn { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }' +
       '@media (prefers-reduced-motion: reduce) { .mlv-node { animation: none; } }';
     document.head.appendChild(st);
@@ -126,8 +139,9 @@
       });
       var nodes = levels.map(function (l, i) {
         var cls = 'mlv-node' + (l.unlocked ? '' : ' locked') + ((l.bestStars || 0) >= 2 ? ' cleared' : '') + (l.id === nextId ? ' next' : '');
+        var acc = accent(l.n);
         var sub = l.unlocked ? esc(l.story) : '🔒 ' + esc(l.unlockHint);
-        return '<button type="button" class="' + cls + '" data-lv="' + esc(l.id) + '" style="animation-delay:' + (i * 70) + 'ms">' +
+        return '<button type="button" class="' + cls + '" data-lv="' + esc(l.id) + '" style="animation-delay:' + (i * 70) + 'ms' + (acc ? ';--acc:' + acc : '') + '">' +
           '<span class="mlv-num">' + l.n + '</span>' +
           '<span class="mlv-body">' + (l.id === nextId ? '<span class="mlv-tag">PLAY NEXT</span>' : '') +
           '<b>' + esc(l.emoji) + ' ' + esc(l.title) + '</b><small>' + sub + '</small>' + (l.unlocked ? stars(l.bestStars || 0) : '') + '</span>' +
@@ -164,7 +178,7 @@
       content.innerHTML =
         '<div class="mlv">' +
         '<div class="mlv-top"><button type="button" class="mlv-back" data-back>‹ Levels</button></div>' +
-        '<div class="mlv-hero"><div class="mlv-emoji">' + esc(level.emoji) + '</div>' +
+        '<div class="mlv-hero"' + (accent(level.n) ? ' style="--acc:' + accent(level.n) + '"' : '') + '><div class="mlv-emoji">' + esc(level.emoji) + '</div>' +
         '<div class="mlv-kicker">LEVEL ' + level.n + '</div><h2>' + esc(level.title) + '</h2><p>' + esc(level.story) + '</p></div>' +
         '<div class="mlv-mission">🎯 ' + esc(level.mission) + '</div>' +
         '<div class="mlv-chips">' + chipsFor(level) + '</div>' +
@@ -180,6 +194,7 @@
 
   async function pick(content, request, notice, dailyPick) {
     css();
+    setCurrent(null);            // practice trips and the Daily Challenge get no level theme
     var levels = null;
     try {
       var data = await request('/api/fun-center/levels', { headers: NO_OVERLAY });
@@ -198,7 +213,7 @@
       var preset = levels.filter(function (l) { return l.id === presetId; })[0];
       if (preset && preset.unlocked) {
         var go = await showBrief(content, preset);
-        if (go) return { mode: 'level', levelId: preset.id };
+        if (go) { setCurrent(preset); return { mode: 'level', levelId: preset.id }; }
       }
     }
 
@@ -213,7 +228,7 @@
         return { mode: mode, levelId: null };
       }
       var ok = await showBrief(content, choice.level);
-      if (ok) return { mode: 'level', levelId: choice.level.id };
+      if (ok) { setCurrent(choice.level); return { mode: 'level', levelId: choice.level.id }; }
     }
   }
 
@@ -236,6 +251,7 @@
 
       var banner = document.createElement('div');
       banner.className = 'mlv-res' + (cleared ? '' : ' no');
+      if (cleared && accent(L.n)) banner.style.borderColor = accent(L.n);
       banner.innerHTML =
         '<div class="mlv-res-top">LEVEL ' + L.n + ' · ' + esc(L.title).toUpperCase() + '</div>' +
         '<div class="mlv-res-title">' + title + '</div>' + stars(L.stars, true) +
@@ -269,5 +285,7 @@
     }
   }
 
-  window.MiimiidMart.levels = { pick: pick, decorateResult: decorateResult };
+  API.pick = pick;
+  API.decorateResult = decorateResult;
+  window.MiimiidMart.levels = API;
 })();
