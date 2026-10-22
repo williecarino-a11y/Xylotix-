@@ -9,6 +9,8 @@ const FunGameProfile = require('../models/FunGameProfile');
 const daily = require('./funCenterDaily');
 const { getFunCenterGames, getFunCenterGame, validateFunCenterAnswer, getWeeklyShop, getWeeklyShopDefinition, getFlashSales, getPriceHikes, getWeekSetup, pickSituation, computeMeters, METER_WARN, pickTricks, publicTricks, describeTrick, SCANS_PER_TRIP, getCartSkins, getCartSkin } = require('../scripts/learningData/funCenter');
 const { getMartScenario, getMartScenarios, judgeMartScenario } = require('../scripts/learningData/martScenarios');
+const martLevels = require('../scripts/learningData/martLevels');
+const martLevelRoutes = require('./martLevelRoutes');
 const router = express.Router();
 
 const funSessionStartLimiter = rateLimit({
@@ -243,7 +245,15 @@ const RIVAL_MARKUP = 2;            // extra price when it comes back
 const SHOP_GAME_ID = 'weekly-shop';
 const STAR_SAVE_TARGET = 5;   // money to keep for the savings star
 
+// Level trips have their own budget; every other trip uses the shop's.
+function tripBudget(shop, session) {
+  const level = session && session.levelId ? martLevels.getMartLevel(session.levelId) : null;
+  return level ? level.budget : shop.budget;
+}
+
 function buildShopSummary(shop, session) {
+  const level = session.levelId ? martLevels.getMartLevel(session.levelId) : null;
+  const budget = tripBudget(shop, session);
   const bought = Array.isArray(session.purchasedItems) ? session.purchasedItems : [];
   const boughtIds = new Set(bought.map(entry => entry.itemId));
   const byId = new Map(shop.items.map(item => [item.id, item]));
@@ -288,7 +298,7 @@ function buildShopSummary(shop, session) {
   const spent = session.spent || 0;
   const wantsSpent = wantsBought.reduce((sum, entry) => sum + entry.price, 0);
   const needsSpent = spent - wantsSpent;
-  const saved = Math.max(0, shop.budget - spent);
+  const saved = Math.max(0, budget - spent);
   const score = Math.max(0, needsBought.length * 100 + saved * 5 - wantsSpent * 5);
 
   // Mart lesson scenario: judged here so it can count toward the stars.
@@ -349,7 +359,7 @@ function buildShopSummary(shop, session) {
       ? { id: 'scenario', label: 'Lesson challenge passed', earned: scenarioVerdict.passed && burnedOut.length === 0, hint: scenarioVerdict.reason }
       : row);
   }
-  const stars = finalRows.filter(row => row.earned).length;
+  let stars = finalRows.filter(row => row.earned).length;
 
   // Trick Store report: what each deal really was, and what you did about it.
   const trickReport = (Array.isArray(session.tricks) ? session.tricks : []).map(t => {
@@ -363,6 +373,33 @@ function buildShopSummary(shop, session) {
     return { itemId: t.itemId, name: item.name, kind: t.kind, scanned: !!t.scanned, status, title: info.title, detail: info.detail };
   });
   const trickBonus = trickReport.filter(row => row.status === 'busted').length * 3;
+
+  // Level trip: the level's own three goals decide the stars.
+  let levelMessage = '';
+  if (level) {
+    const levelNames = { health: 'Health', happiness: 'Happiness', friends: 'Friends' };
+    meters = martLevels.computeLevelMeters(level, bought.map(entry => entry.itemId));
+    burnedOut = Object.keys(levelNames).filter(key => meters[key] <= 0);
+    finalRows = martLevels.judgeLevel(level, {
+      meters,
+      saved,
+      wantsCount: wantsBought.length,
+      boughtIds: Array.from(boughtIds),
+      tricks: trickReport,
+      rivalStarted: !!session.rivalItemId,
+      rivalBeaten: !!session.rivalBeaten
+    });
+    stars = finalRows.filter(row => row.earned).length;
+    levelMessage = ({
+      3: `${level.title} cleared with every goal. That was real planning.`,
+      2: 'Level passed! One goal slipped. Replay for all 3 stars.',
+      1: `Not quite. Earn ${martLevels.UNLOCK_STARS} stars to open the next level. Check which goals slipped.`,
+      0: 'This week got away from you. Plan first, then shop.'
+    })[stars];
+    if (burnedOut.length) {
+      levelMessage = `You burned out: ${burnedOut.map(k => levelNames[k]).join(' and ')} hit zero. Balance beats buying only one kind of thing.`;
+    }
+  }
 
   let outcome = 'missing-essentials';
   let message = 'Many essentials are still missing. Next time, cover your needs first.';
@@ -382,14 +419,14 @@ function buildShopSummary(shop, session) {
 
   return {
     outcome: burnedOut.length ? 'burned-out' : outcome,
-    message: burnMessage || (meters
+    message: burnMessage || levelMessage || (meters
       ? ({
           3: 'Perfect balance! Every part of your life is covered and you still have savings.',
           2: 'Nearly there! One goal slipped. Check which star is missing.',
           1: 'You got through the day, but a meter or your savings ran short.'
         })[stars] || message
       : message),
-    budget: shop.budget,
+    budget,
     spent,
     saved,
     wantsSpent,
@@ -406,7 +443,8 @@ function buildShopSummary(shop, session) {
     wantsBought: wantsBought.map(toPublic),
     needsMissed: needsMissed.map(item => ({ id: item.id, name: item.name, price: (session.hikeItemId === item.id && typeof session.hikePrice === 'number') ? session.hikePrice : item.price, image: item.image, visual: item.visual, explanation: item.explanation })),
     tradeoffs,
-    scenario: scenarioVerdict
+    scenario: scenarioVerdict,
+    level: level ? { id: level.id, number: level.number, title: level.title, boss: !!level.boss, unlockStars: martLevels.UNLOCK_STARS } : null
   };
 }
 
@@ -463,9 +501,9 @@ router.post('/shop/session/:sessionId/unbuy', funAnswerLimiter, async (req, res)
         itemId: item.id,
         name: item.name,
         price: entry.price,
-        budget: shop.budget,
+        budget: tripBudget(shop, existing),
         spent: updated.spent,
-        remaining: Math.max(0, shop.budget - updated.spent),
+        remaining: Math.max(0, tripBudget(shop, existing) - updated.spent),
         basketCount: updated.purchasedItems.length
       }
     });
@@ -492,11 +530,15 @@ router.post('/shop/session/:sessionId/sale/start', funAnswerLimiter, async (req,
     const choices = getFlashSales().filter(sale => !boughtIds.has(sale.itemId) && shop.items.some(item => item.id === sale.itemId));
     if (choices.length === 0) return res.json({ status: 'success', data: { started: false } });
 
+    // Level trips: the level decides which sale (if any) happens.
+    const saleLevel = martLevels.getMartLevel(existing.levelId);
+    const levelSale = saleLevel ? choices.find(c => c.itemId === saleLevel.events.sale) : null;
+    if (saleLevel && !levelSale) return res.json({ status: 'success', data: { started: false } });
     const saleScenario = getMartScenario(existing.scenarioId);
     if (saleScenario && saleScenario.event !== 'sale') return res.json({ status: 'success', data: { started: false } });
     const forcedSale = saleScenario ? choices.find(c => c.itemId === saleScenario.itemId) : null;
     if (saleScenario && !forcedSale) return res.json({ status: 'success', data: { started: false } });
-    const sale = forcedSale || daily.pickFor(existing.dailyKey, 'sale', choices, c => c.itemId);
+    const sale = forcedSale || levelSale || daily.pickFor(existing.dailyKey, 'sale', choices, c => c.itemId);
     const item = shop.items.find(candidate => candidate.id === sale.itemId);
     const endsAt = new Date(Date.now() + sale.seconds * 1000);
 
@@ -537,11 +579,15 @@ router.post('/shop/session/:sessionId/hike/start', funAnswerLimiter, async (req,
     });
     if (choices.length === 0) return res.json({ status: 'success', data: { started: false } });
 
+    // Level trips: the level decides which price rise (if any) happens.
+    const hikeLevel = martLevels.getMartLevel(existing.levelId);
+    const levelHike = hikeLevel ? choices.find(c => c.itemId === hikeLevel.events.hike) : null;
+    if (hikeLevel && !levelHike) return res.json({ status: 'success', data: { started: false } });
     const hikeScenario = getMartScenario(existing.scenarioId);
     if (hikeScenario && hikeScenario.event !== 'hike') return res.json({ status: 'success', data: { started: false } });
     const forcedHike = hikeScenario ? choices.find(c => c.itemId === hikeScenario.itemId) : null;
     if (hikeScenario && !forcedHike) return res.json({ status: 'success', data: { started: false } });
-    const hike = forcedHike || daily.pickFor(existing.dailyKey, 'hike', choices, c => c.itemId);
+    const hike = forcedHike || levelHike || daily.pickFor(existing.dailyKey, 'hike', choices, c => c.itemId);
     const item = shop.items.find(candidate => candidate.id === hike.itemId);
 
     const updated = await FunGameSession.findOneAndUpdate(
@@ -585,7 +631,11 @@ router.post('/shop/session/:sessionId/rival/start', funAnswerLimiter, async (req
     );
     if (choices.length === 0) return res.json({ status: 'success', data: { started: false } });
 
-    const item = daily.pickFor(existing.dailyKey, 'rival', choices, c => c.id);
+    // Level trips: the level decides whether a rival appears and which item he wants.
+    const rivalLevel = martLevels.getMartLevel(existing.levelId);
+    const levelRival = rivalLevel ? choices.find(c => c.id === rivalLevel.events.rival) : null;
+    if (rivalLevel && !levelRival) return res.json({ status: 'success', data: { started: false } });
+    const item = levelRival || daily.pickFor(existing.dailyKey, 'rival', choices, c => c.id);
     const takesAt = new Date(Date.now() + RIVAL_SECONDS * 1000);
     const restockAt = new Date(takesAt.getTime() + RIVAL_RESTOCK_SECONDS * 1000);
     const restockPrice = item.price + RIVAL_MARKUP;
@@ -714,6 +764,7 @@ router.post('/shop/session/:sessionId/buy', funAnswerLimiter, async (req, res) =
     }
     // A flash sale only applies to its own item, and only while it is running (1.5 s grace for slow phones).
     const trip = await FunGameSession.findOne({ sessionId, userId: user._id, gameId: SHOP_GAME_ID });
+    const budgetNow = tripBudget(shop, trip);
     const saleActive = !!trip && !option && trip.saleItemId === item.id && typeof trip.salePrice === 'number' &&
       !!trip.saleEndsAt && trip.saleEndsAt.getTime() + 1500 > Date.now();
     const hikeActive = !!trip && !option && trip.hikeItemId === item.id && typeof trip.hikePrice === 'number';
@@ -737,7 +788,7 @@ router.post('/shop/session/:sessionId/buy', funAnswerLimiter, async (req, res) =
         userId: user._id,
         gameId: SHOP_GAME_ID,
         completed: false,
-        spent: { $lte: shop.budget - price },
+        spent: { $lte: budgetNow - price },
         'purchasedItems.itemId': { $ne: item.id },
         ...(saleActive ? { saleItemId: item.id, salePrice: price } : {})
       },
@@ -760,7 +811,7 @@ router.post('/shop/session/:sessionId/buy', funAnswerLimiter, async (req, res) =
         status: 'error',
         code: 'INSUFFICIENT_FUNDS',
         message: `Not enough money left for ${item.name}.`,
-        remaining: Math.max(0, shop.budget - (existing.spent || 0))
+        remaining: Math.max(0, budgetNow - (existing.spent || 0))
       });
     }
 
@@ -778,9 +829,9 @@ router.post('/shop/session/:sessionId/buy', funAnswerLimiter, async (req, res) =
         normalPrice: item.price,
         classification: item.classification,
         explanation: item.explanation,
-        budget: shop.budget,
+        budget: budgetNow,
         spent: updated.spent,
-        remaining: Math.max(0, shop.budget - updated.spent),
+        remaining: Math.max(0, budgetNow - updated.spent),
         basketCount: updated.purchasedItems.length,
         needsLeft: shop.items.filter(candidate => candidate.classification === 'need' && !updated.purchasedItems.some(entry => entry.itemId === candidate.id)).length
       }
@@ -808,11 +859,17 @@ router.post('/shop/session/:sessionId/checkout', funSessionStartLimiter, async (
       if (!existing.purchasedItems || existing.purchasedItems.length === 0) { const error = new Error('Add at least one item to your basket first.'); error.code = 'BASKET_EMPTY'; throw error; }
 
       const summary = buildShopSummary(shop, existing);
-      const reward = existing.situationId
+      const reward = (existing.situationId || existing.levelId)
         ? calculateReward(summary.stars, 3)
         : calculateReward(Math.max(0, summary.needsBought.length - summary.wantsBought.length), needsTotal);
 
       reward.coins += summary.trickBonus || 0;
+      // Level trips pay a bonus for every star you never had on this level before.
+      let levelEval = null;
+      if (existing.levelId) {
+        levelEval = await martLevelRoutes.evaluateLevelResult({ userId: user._id, levelId: existing.levelId, stars: summary.stars, mongoSession });
+        reward.coins += levelEval.bonusCoins;
+      }
       const claimed = await FunGameSession.findOneAndUpdate(
         { sessionId, userId: user._id, gameId: SHOP_GAME_ID, completed: false, rewardGranted: false },
         { $set: { completed: true, rewardGranted: true, score: summary.score, stars: summary.stars, correctAnswers: summary.needsBought.length, roundsCompleted: existing.purchasedItems.length, xpAwarded: reward.xp, coinsAwarded: reward.coins, completedAt: new Date() } },
@@ -840,11 +897,23 @@ router.post('/shop/session/:sessionId/checkout', funSessionStartLimiter, async (
         await profile.save({ session: mongoSession });
       }
 
+      let levelResult = null;
+      if (existing.levelId) {
+        levelResult = await martLevelRoutes.commitLevelResult({
+          userId: user._id,
+          levelId: existing.levelId,
+          stars: summary.stars,
+          score: summary.score,
+          mongoSession,
+          previousStars: levelEval ? levelEval.previousStars : 0
+        });
+      }
+
       let dailyResult = null;
       if (existing.dailyKey) {
         dailyResult = await daily.finishAttempt({ userId: user._id, dayKey: existing.dailyKey, sessionId, summary, mongoSession });
       }
-      checkoutResult = { alreadyCompleted: false, ...summary, daily: dailyResult, xp: reward.xp, coins: reward.coins, totalXP: profile.totalXP, totalCoins: profile.totalCoins };
+      checkoutResult = { alreadyCompleted: false, ...summary, daily: dailyResult, levelProgress: levelResult, levelBonus: levelEval ? levelEval.bonusCoins : 0, xp: reward.xp, coins: reward.coins, totalXP: profile.totalXP, totalCoins: profile.totalCoins };
     });
 
     return res.json({ status: 'success', data: checkoutResult });
@@ -932,5 +1001,6 @@ router.post('/cart-skins/equip', funAnswerLimiter, async (req, res) => {
 router.get('/scenarios', (req, res) => res.json({ status: 'success', data: getMartScenarios() }));
 
 router.use('/daily', daily.router);
+router.use('/levels', martLevelRoutes.createRouter({ requireFunCenterUser, funSessionStartLimiter, funAnswerLimiter, createSessionId }));
 
 module.exports = router;
