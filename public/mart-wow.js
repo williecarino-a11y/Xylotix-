@@ -32,7 +32,7 @@
       '.mw-atmo.streak .mw-atmo-edge.e-streak { opacity: 1; animation: mwEdgeBreath 2.4s ease-in-out infinite; box-shadow: inset 0 0 56px 2px rgba(63,214,140,.2); }' +
       '.mw-atmo.tight .mw-atmo-edge.e-tight { opacity: 1; animation: mwEdgeBreath 1.3s ease-in-out infinite; box-shadow: inset 0 0 54px 2px rgba(255,84,84,.22); }' +
       '.mw-atmo.done .mw-atmo-edge.e-done { opacity: 1; animation: mwEdgeBreath 1.8s ease-in-out infinite; box-shadow: inset 0 0 64px 4px rgba(255,205,90,.28); }' +
-      '.mw-atmo.sale .mw-atmo-edge.e-sale { opacity: 1; animation: mwEdgeBreath .9s ease-in-out infinite; box-shadow: inset 0 0 54px 2px rgba(255,92,70,.26); }' +
+      '.mw-atmo.sale .mw-atmo-edge.e-sale { opacity: 1; animation: mwEdgeBreath .9s ease-in-out infinite; box-shadow: inset 0 0 60px 4px rgba(255,92,70,.4); }' +
       '@keyframes mwEdgeBreath { 0%, 100% { filter: brightness(.7); } 50% { filter: brightness(1.15); } }' +
       '.mw-atmo-sweep { position: absolute; top: -10%; bottom: -10%; left: -60%; width: 55%; transform: translateX(0) skewX(-16deg);' +
       '  background: linear-gradient(90deg, rgba(255,246,220,0) 0%, rgba(255,246,220,.075) 50%, rgba(255,246,220,0) 100%);' +
@@ -115,6 +115,14 @@
         scene.tweens.add({ targets: beam, x: 1750, duration: b[2], delay: b[3], repeat: -1, ease: 'Sine.easeInOut' });
       });
     }
+
+    // the camera was allowed to scroll 230px above the store wall, which showed a big empty dark area when you walk the top aisle; keep only a thin margin
+    scene.events.once('update', function () {
+      try {
+        var cam = scene.cameras && scene.cameras.main;
+        if (cam && cam.setBounds) cam.setBounds(0, -70, 1400, 1130);
+      } catch (e) {}
+    });
 
     // flash sale: a pulsing spotlight on the discounted product, so the deal pulls your eye (is it on your list?)
     var spot = null, spotFor = null;
