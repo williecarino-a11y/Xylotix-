@@ -189,10 +189,11 @@ const funGameSessionSchema = new mongoose.Schema(
       default: null
     },
 
-    /* Mart level this trip belongs to (null for normal trips). */
+    /* Mart Level (campaign) this trip belongs to, for example 'lvl-3' (null for other trips). */
     levelId: {
       type: String,
-      default: null
+      default: null,
+      index: true
     },
 
     /* Daily Challenge: the UTC day this trip belongs to (null for practice trips). */
@@ -286,4 +287,3 @@ module.exports = mongoose.model(
   'FunGameSession',
   funGameSessionSchema
 );
-    
