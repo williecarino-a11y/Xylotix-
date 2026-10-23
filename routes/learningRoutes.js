@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const { getAuthenticatedUser } = require('./authRoutes');
 const learningService = require('../services/learningService');
 const missedQuestionService = require('../services/missedQuestionService');
+const analytics = require('../services/analyticsService');
 const { getFunCenterActivities } = require('../scripts/learningData/funCenter');
 
 const router = express.Router();
@@ -94,6 +95,11 @@ router.post('/quiz/submit', requireAuth, async (req, res) => {
       console.error('Missed question tracking error:', trackingError);
     }
 
+    // Count the quiz for the private analytics dashboard (never waits, never breaks the quiz)
+    try {
+      analytics.logLearning(Object.assign({ userId: req.authUser._id, type: 'quiz_submitted', lessonId }, analytics.scoreFromResults(result.results)));
+    } catch (analyticsError) { /* ignore */ }
+
     return res.status(200).json({ status: 'success', data: result });
   } catch (error) {
     console.error('Quiz submission error:', error);
@@ -122,6 +128,12 @@ router.post('/lessons/:lessonId/complete', requireAuth, async (req, res) => {
     if (!mongoose.Types.ObjectId.isValid(lessonId)) return res.status(400).json({ status: 'error', code: 'INVALID_LESSON_ID', message: 'Invalid lesson ID.' });
     if (submittedAnswers !== undefined && !Array.isArray(submittedAnswers)) return res.status(400).json({ status: 'error', code: 'INVALID_QUIZ_ANSWERS', message: 'submittedAnswers must be an array.' });
     const result = await learningService.recordLessonProgress(req.authUser._id.toString(), lessonId, submittedAnswers || []);
+
+    // Count the finished lesson for the private analytics dashboard (never waits, never breaks the lesson)
+    try {
+      analytics.logLearning({ userId: req.authUser._id, type: 'lesson_completed', lessonId });
+    } catch (analyticsError) { /* ignore */ }
+
     return res.status(200).json({ status: 'success', data: result });
   } catch (error) {
     console.error('Record lesson progress error:', error);
