@@ -2,8 +2,9 @@
  * MIIMIID MART FEEL
  * 1. In-store goal tracker (level trips): a small "Goals" tab under the top meters. It opens by itself for a few seconds
  *    after the level intro, then folds away. Tap it any time to see the star goals.
- * 2. Sound: short, quiet synth cues for pickup, scan, flash sale, money/time running low, a heartbeat in the last moments,
- *    level intro, trip result (clear / not cleared / paid). Respects the Mart sound setting and stays silent when the app is hidden.
+ * 2. Sound: only cues your audio file does not already have: a whoosh at the level intro, a low-money/low-time cue and a heartbeat in the
+ *    last moments. Pickup, coin, win/ok/bad and alert sounds stay with mart-audio.js. Uses the same mixer when it can find it, respects the
+ *    Mart sound setting and stays silent when the app is hidden.
  * 3. Touch: matching short vibrations on phones that support it.
  * Visual/audio only: it never changes prices, items, scores or rules. If anything fails, the store plays as before.
  *
@@ -41,12 +42,24 @@
   function soundOff() {
     try { return !!(window.MiimiidMart && window.MiimiidMart.settings && window.MiimiidMart.settings.soundOff()); } catch (e) { return false; }
   }
+  function shared() {
+    var M = window.MiimiidMart || {};
+    var s = M.sfx || M.SFX || window.SFX || null;
+    return (s && s.ctx && typeof s.ctx.createGain === 'function') ? s : null;
+  }
   function ctx() {
+    var s = shared();
+    if (s) return s.ctx.state === 'running' ? s.ctx : null;   // same rule as the Mart sounds: only after the first tap
     var AC = window.AudioContext || window.webkitAudioContext;
     if (!AC) return null;
     if (!actx) actx = new AC();
     if (actx.state === 'suspended') actx.resume();
     return actx;
+  }
+  function dest(a) {
+    var s = shared();
+    if (s && s.ctx === a) return (s.fx && s.fx.sfxBus) || s.master || a.destination;
+    return a.destination;
   }
   function canPlay() { return API.sounds && !document.hidden && !soundOff(); }
 
@@ -59,7 +72,7 @@
     g.gain.setValueAtTime(0.0001, t0);
     g.gain.exponentialRampToValueAtTime(vol, t0 + 0.012);
     g.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
-    o.connect(g); g.connect(a.destination);
+    o.connect(g); g.connect(dest(a));
     o.start(t0); o.stop(t0 + dur + 0.03);
   }
   function whoosh(at) {
@@ -72,20 +85,14 @@
     bp.frequency.setValueAtTime(260, t0); bp.frequency.exponentialRampToValueAtTime(2600, t0 + 0.6);
     var g = a.createGain();
     g.gain.setValueAtTime(0.0001, t0); g.gain.exponentialRampToValueAtTime(0.07, t0 + 0.25); g.gain.exponentialRampToValueAtTime(0.0001, t0 + 0.68);
-    src.connect(bp); bp.connect(g); g.connect(a.destination);
+    src.connect(bp); bp.connect(g); g.connect(dest(a));
     src.start(t0);
   }
 
   var CUE = {
-    pop: function () { tone(880, 0, 0.09, 'sine', 0.07, 1180); },
-    scan: function () { tone(1250, 0, 0.06, 'triangle', 0.05); tone(1750, 0.07, 0.08, 'triangle', 0.05); },
-    sale: function () { tone(740, 0, 0.12, 'square', 0.03); tone(988, 0.15, 0.16, 'square', 0.03); },
     low: function () { tone(220, 0, 0.22, 'sine', 0.08, 150); },
     beat: function () { tone(95, 0, 0.14, 'sine', 0.12, 60); tone(80, 0.17, 0.16, 'sine', 0.09, 52); },
-    intro: function () { whoosh(0.35); },
-    win: function () { [523, 659, 784, 1047].forEach(function (f, i) { tone(f, i * 0.09, 0.28, 'triangle', 0.08); }); tone(1568, 0.4, 0.4, 'sine', 0.05); },
-    fail: function () { tone(392, 0, 0.22, 'sine', 0.07, 370); tone(311, 0.22, 0.36, 'sine', 0.07, 280); },
-    paid: function () { tone(1318, 0, 0.1, 'triangle', 0.07); tone(1760, 0.09, 0.3, 'triangle', 0.07); }
+    intro: function () { whoosh(0.35); }
   };
   function cue(name) {
     try { if (canPlay() && CUE[name]) CUE[name](); } catch (e) {}
@@ -158,7 +165,7 @@
         var b = e.target && e.target.closest ? e.target.closest('button') : null;
         if (!b || !holder.contains(b)) return;
         var label = (b.textContent || '').trim();
-        if (/scan/i.test(label)) { cue('scan'); haptic(8); }
+        if (/scan/i.test(label)) { haptic(8); }
         else if (b.classList.contains('mw-grab') || /grab/i.test(label)) { haptic(6); }
       } catch (err) {}
     }
@@ -182,9 +189,9 @@
           setTimeout(function () {
             var res = document.querySelector('.mlv-res');
             if (res) {
-              if (res.classList.contains('no')) { cue('fail'); haptic(45); }
-              else { cue('win'); haptic([30, 40, 30, 40, 70]); }
-            } else { cue('paid'); haptic(20); }
+              if (res.classList.contains('no')) { haptic(45); }
+              else { haptic([30, 40, 30, 40, 70]); }
+            } else { haptic(20); }
           }, 180);
         }
         wasResult = resultOpen;
@@ -196,13 +203,13 @@
 
         var count = countEl ? num(countEl.textContent) : lastCount;
         if (isFinite(count)) {
-          if (count > lastCount) { cue('pop'); haptic(12); }
+          if (count > lastCount) { haptic(12); }
           lastCount = count;
         }
 
         var saleEl = document.querySelector('[data-mw-sale]');
         var saleOn = !!(saleEl && saleEl.classList.contains('show'));
-        if (saleOn && !wasSale) { cue('sale'); haptic([20, 40, 20]); }
+        if (saleOn && !wasSale) { haptic([20, 40, 20]); }
         wasSale = saleOn;
 
         var tight = (isFinite(wallet) && wallet < 5) || pct <= 15;
