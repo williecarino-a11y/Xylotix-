@@ -90,7 +90,7 @@ Miimiid: Smart Choices. Brighter Tomorrows.`
   /* ---------- Privacy policy ---------- */
   privacy: `
 <h2>Your Privacy Matters to Us</h2>
-<p class="mm-updated">Effective date: October 16, 2026</p>
+<p class="mm-updated">Effective date: October 23, 2026</p>
 <p>At Miimiid Financial Academy ("Miimiid," "we," "our," or "us"), we respect your privacy and are committed to handling personal information responsibly.</p>
 <p>This Privacy Policy explains what information we may collect, how we use it, when we may share it, how we protect it, and what choices may be available to you when you use our website, mobile application, learning services, AI Tutor, and interactive features.</p>
 <p>We believe you should understand how your information is handled without needing to interpret complicated legal language.</p>
@@ -141,7 +141,10 @@ Miimiid: Smart Choices. Brighter Tomorrows.`
 </ul>
 <p>We use relevant technical information to operate the platform, troubleshoot problems, protect accounts, and improve reliability.</p>
 
-<p><strong>1.5 Information We Do Not Automatically Assume We Collect</strong></p>
+<p><strong>1.5 Anonymous Usage Statistics</strong></p>
+<p>We keep an anonymous, secret-keyed code for each account to understand how often people return and which lessons they finish. It contains no name or email.</p>
+
+<p><strong>1.6 Information We Do Not Automatically Assume We Collect</strong></p>
 <p>Miimiid does not need unrestricted access to your personal life to provide financial education.</p>
 <p>Whether we collect additional information, such as payment details, location information, or information from third-party accounts, depends on the features actually implemented and the permissions or integrations you use.</p>
 <p>We will not describe information as collected or protected by a particular mechanism unless that description reflects our actual practices.</p>
@@ -152,7 +155,7 @@ Miimiid: Smart Choices. Brighter Tomorrows.`
 <li><strong>Account management:</strong> Creating accounts, authenticating users, maintaining sessions, and providing account-related features.</li>
 <li><strong>Learning services:</strong> Delivering lessons, recording progress, calculating results, and supporting educational activities.</li>
 <li><strong>AI Tutor functionality:</strong> Processing questions and relevant context to generate responses.</li>
-<li><strong>Application improvement:</strong> Diagnosing errors, improving performance, and evaluating the reliability of features.</li>
+<li><strong>Application improvement:</strong> Diagnosing errors, improving performance, evaluating the reliability of features, and understanding how often people return and which lessons they finish.</li>
 <li><strong>Security:</strong> Detecting suspicious activity, preventing abuse, protecting accounts, and maintaining platform integrity.</li>
 <li><strong>Support:</strong> Responding to inquiries, investigating reported problems, and communicating about support requests.</li>
 <li><strong>Legal compliance:</strong> Meeting applicable legal obligations and responding to lawful requests where required.</li>
